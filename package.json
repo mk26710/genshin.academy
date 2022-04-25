@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "gh-pages": "vue-tsc --noEmit && vite build --base=/trying-vue",
+    "gh-pages": "vue-tsc --noEmit && vite build --base=/trying-vue/",
     "preview": "vite preview"
   },
   "dependencies": {
