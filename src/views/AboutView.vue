@@ -8,6 +8,7 @@ const target = ref(160);
 
 <template>
   <h1>yoo we're very cool company did you know that?</h1>
+  <p>summertime is very soon finally</p>
   <p>you can calculate resin here btw</p>
   <input v-model="current" placeholder="your current resin"/>
   <input v-model="target" placeholder="you need resin"/>
