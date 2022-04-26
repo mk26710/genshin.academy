@@ -12,5 +12,8 @@ const target = ref(160);
   <p>you can calculate resin here btw</p>
   <input v-model="current" placeholder="your current resin"/>
   <input v-model="target" placeholder="you need resin"/>
-  <ResinCalculated :current="current" :target="target"/>
+  <div>
+    <ResinCalculated :current="current" :target="target"/>
+  </div>
+  <p>here's another commit and now that will trigger the deployment</p>
 </template>
