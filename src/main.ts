@@ -1,9 +1,9 @@
-import { createApp } from "vue";
+import {createApp} from "vue";
 import App from "./App.vue";
 import router from "./router";
-import { store, key as InjectionKey } from "./store";
+import {createPinia} from 'pinia'
 
 createApp(App)
-    .use(store, InjectionKey)
+    .use(createPinia())
     .use(router)
     .mount("#app");
