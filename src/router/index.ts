@@ -1,6 +1,4 @@
-// might have to use createWebHashHistory if we're gonna use github pages
-
-import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "../views/HomeView.vue"
 import AboutView from "../views/AboutView.vue"
 
