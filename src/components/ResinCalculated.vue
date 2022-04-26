@@ -1,15 +1,12 @@
 <script setup lang="ts">
-import { unixToDate, calculateResinTime } from "../lib"
+import {unixToDate, calculateResinTime} from "../lib"
+import {useCalcStoreRefs} from "../stores/CalculatorStore";
 
-defineProps<{
-    current: number,
-    target: number
-}>()
-
+const {resin} = useCalcStoreRefs()
 </script>
 
 <template>
-    {{ unixToDate(calculateResinTime(current, target)) }}
+  {{ unixToDate(calculateResinTime(resin.current, resin.needed)) }}
 </template>
 
 <style>
