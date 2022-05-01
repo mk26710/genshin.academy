@@ -8,7 +8,7 @@ const { resin } = useCalcStoreRefs();
 <template>
   <div class="flex flex-col grow mx-auto container justify-center items-center">
     <div>
-      <h1 class="text-white font-bold text-4xl">Useless resin calculator</h1>
+      <h1 class="dark:text-white font-bold text-4xl">Useless resin calculator</h1>
       <p>summertime is very soon finally</p>
       <p>you can calculate resin here btw</p>
       <div class="flex flex-row gap-2 my-2">
