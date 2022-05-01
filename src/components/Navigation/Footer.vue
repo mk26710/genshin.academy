@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { CodeIcon } from "@heroicons/vue/solid";
 </script>
 
