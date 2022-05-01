@@ -1,7 +1,12 @@
+<script setup>
+import Nav from "./components/Navigation/Navbar.vue";
+import Footer from "./components/Navigation/Footer.vue";
+</script>
+
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <div class="flex flex-col h-screen">
+    <Nav />
+    <router-view />
+    <Footer />
+  </div>
 </template>
