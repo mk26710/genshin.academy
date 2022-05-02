@@ -6,7 +6,11 @@ import Footer from "./components/Navigation/Footer.vue";
 <template>
   <div class="flex flex-col h-screen">
     <Nav />
-    <router-view />
+
+    <Suspense>
+      <router-view />
+    </Suspense>
+
     <Footer />
   </div>
 </template>
