@@ -28,7 +28,9 @@ async function fetchData() {
     return;
   }
 
-  const data = await import(`../data/articles/${route.params.id}.json`);
+  // straight up some weird shit
+  const raw = await import(`../data/articles/${route.params.id}.json?raw`);
+  const data = JSON.parse(raw?.default)
 
   article.id = data.id;
   article.name = data.name;
