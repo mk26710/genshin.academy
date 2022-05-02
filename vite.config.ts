@@ -5,7 +5,6 @@ import path from "path";
 // noinspection JSUnusedGlobalSymbols
 export default defineConfig({
   base: "/trying-vue/",
-  assetsInclude: ["**/*.json"],
   plugins: [vue()],
   resolve: {
     alias: {
