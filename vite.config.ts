@@ -1,14 +1,15 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import * as path from "path";
+import eslintPlugin from "vite-plugin-eslint";
+import { fileURLToPath, URL } from "url";
 
 // noinspection JSUnusedGlobalSymbols
 export default defineConfig({
   base: "/trying-vue/",
-  plugins: [vue()],
+  plugins: [vue(), eslintPlugin()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
 });
