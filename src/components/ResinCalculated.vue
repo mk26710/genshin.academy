@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { unixToDate, calculateResinTime } from "../lib";
-import { useCalcStoreRefs } from "../stores/CalculatorStore";
+  import { unixToDate, calculateResinTime } from "../lib";
+  import { useCalcStoreRefs } from "../stores/CalculatorStore";
 
-const { resin } = useCalcStoreRefs();
+  const { resin } = useCalcStoreRefs();
 </script>
 
 <template>
