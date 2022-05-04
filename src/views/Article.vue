@@ -28,7 +28,7 @@ async function fetchData() {
     return;
   }
 
-  const data = await import(`../assets/data/articles/${route.params.id}.json`)
+  const data = await import(`../data/articles/${route.params.id}.json`)
 
   article.id = data.id;
   article.name = data.name;
