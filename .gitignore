@@ -1,3 +1,7 @@
+.nuxt
+.output
+build
+
 # Logs
 logs
 *.log
