@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import ResinCalculated from "../components/ResinCalculated.vue";
-  import { useCalcStoreRefs } from "../stores/CalculatorStore";
+  import ResinCalculated from "@/components/ResinCalculated.vue";
+  import { useCalcStoreRefs } from "@/stores/CalculatorStore";
 
   const { resin } = useCalcStoreRefs();
 </script>
