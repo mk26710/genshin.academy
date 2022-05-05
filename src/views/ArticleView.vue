@@ -10,10 +10,11 @@
 </template>
 
 <script setup lang="ts">
-  import { useRoute } from "vue-router";
+  import { useRoute, useRouter } from "vue-router";
   import { reactive, watchEffect } from "vue";
 
   const route = useRoute();
+  const router = useRouter();
 
   let article = reactive({
     id: "",
@@ -22,21 +23,21 @@
   });
 
   async function fetchData() {
-    if (!Object.hasOwn(route.params, "id")) {
-      return;
-    }
-
     if (route.params?.id === undefined) {
       return;
     }
 
-    const data = await import(`../data/articles/${route.params.id}.json`);
+    try {
+      const data = await import(`../data/articles/${route.params.id}.json`);
 
-    article.id = data.id;
-    article.name = data.name;
-    article.text = data.text;
+      article.id = data.id;
+      article.name = data.name;
+      article.text = data.text;
 
-    console.log(`[FETCH] Reactive data was set ${route.params.id}`);
+      console.log(`[DYN IMPORT] Reactive data was set ${route.params.id}`);
+    } catch (_err) {
+      router.push("/404");
+    }
   }
 
   watchEffect(fetchData);
