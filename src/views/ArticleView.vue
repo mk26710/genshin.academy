@@ -1,12 +1,12 @@
 <template>
-  <div class="flex flex-grow">
+  <main class="grow">
     <div class="container mx-auto px-2 max-w-4xl space-y-2">
       <h1 class="dark:text-white font-bold text-4xl text-center capitalize">
         {{ article.name }}
       </h1>
       <p>{{ article.text }}</p>
     </div>
-  </div>
+  </main>
 </template>
 
 <script setup lang="ts">

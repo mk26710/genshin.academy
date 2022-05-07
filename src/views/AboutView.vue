@@ -6,7 +6,7 @@
 </script>
 
 <template>
-  <div class="flex flex-col grow mx-auto container justify-center items-center">
+  <main class="flex flex-col grow mx-auto container justify-center items-center">
     <div>
       <h1 class="dark:text-white font-bold text-4xl">Useless resin calculator</h1>
       <p>you can calculate resin here btw</p>
@@ -28,5 +28,5 @@
         <ResinCalculated />
       </div>
     </div>
-  </div>
+  </main>
 </template>

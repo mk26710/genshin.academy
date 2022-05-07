@@ -1,5 +1,5 @@
 <template>
-  <div class="flex grow justify-center text-center items-center">
+  <main class="flex grow justify-center text-center items-center">
     <div class="container mx-auto max-w-xl">
       <h1 class="dark:text-white font-bold text-5xl mb-2">404: Not Found</h1>
       <p>You are trying to visit a non existing page :(</p>
@@ -14,5 +14,5 @@
         </router-link>
       </div>
     </div>
-  </div>
+  </main>
 </template>
