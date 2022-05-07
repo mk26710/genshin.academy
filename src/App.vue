@@ -4,7 +4,7 @@
 </script>
 
 <template>
-  <div class="flex flex-col h-screen gap-2">
+  <div class="flex flex-col min-h-screen">
     <Nav />
 
     <Suspense>
