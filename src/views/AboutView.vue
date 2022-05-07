@@ -6,20 +6,20 @@
 </script>
 
 <template>
-  <main class="flex flex-col grow mx-auto container justify-center items-center">
+  <main-container :verticalCenter="true">
     <div>
-      <h1 class="dark:text-white font-bold text-4xl">Useless resin calculator</h1>
-      <p>you can calculate resin here btw</p>
-      <div class="flex flex-row gap-2 my-2">
+      <h1 class="dark:text-white font-bold text-4xl md:text-5xl">Useless resin calculator</h1>
+      <p class="mb-6">you can calculate resin here btw</p>
+      <div class="w-full flex flex-col sm:flex-row gap-2 mb-2">
         <input
           v-model="resin.current"
-          class="text-sm leading-6 text-slate-400 rounded-md ring-1 ring-slate-900/10 shadow-sm py-1.5 pl-2 pr-3 dark:bg-slate-800 dark:highlight-white/5 dark:hover:bg-slate-700"
+          class="grow text-sm leading-6 text-slate-400 rounded-md ring-1 ring-slate-900/10 shadow-sm py-1.5 pl-2 pr-3 dark:bg-slate-800 dark:highlight-white/5 dark:hover:bg-slate-700"
           type="number"
           placeholder="your current resin"
         />
         <input
           v-model="resin.needed"
-          class="text-sm leading-6 text-slate-400 rounded-md ring-1 ring-slate-900/10 shadow-sm py-1.5 pl-2 pr-3 dark:bg-slate-800 dark:highlight-white/5 dark:hover:bg-slate-700"
+          class="grow text-sm leading-6 text-slate-400 rounded-md ring-1 ring-slate-900/10 shadow-sm py-1.5 pl-2 pr-3 dark:bg-slate-800 dark:highlight-white/5 dark:hover:bg-slate-700"
           type="number"
           placeholder="you need resin"
         />
@@ -28,5 +28,5 @@
         <ResinCalculated />
       </div>
     </div>
-  </main>
+  </main-container>
 </template>
