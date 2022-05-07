@@ -3,6 +3,7 @@ import HomeView from "@/views/HomeView.vue";
 import AboutView from "@/views/AboutView.vue";
 import Article from "@/views/ArticleView.vue";
 import NotFound from "@/views/NotFound.vue";
+import GuideHomeView from "@/views/GuideHomeView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -14,6 +15,10 @@ const routes: Array<RouteRecordRaw> = [
     path: "/about",
     name: "AboutView",
     component: AboutView,
+  },
+  {
+    path: "/guide",
+    component: GuideHomeView,
   },
   {
     path: "/article/:id",
