@@ -1,5 +1,5 @@
 <template>
-  <main class="grow mx-auto container max-w-xl">
+  <main-container>
     <h1 class="font-bold dark:text-white text-4xl text-center">some good guides</h1>
-  </main>
+  </main-container>
 </template>
