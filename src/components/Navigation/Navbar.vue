@@ -4,6 +4,6 @@
     |
     <router-link to="/about">About </router-link>
     |
-    <router-link to="/guide">Guides</router-link>
+    <router-link to="/guides">Guides</router-link>
   </div>
 </template>

@@ -17,7 +17,8 @@ const routes: Array<RouteRecordRaw> = [
     component: AboutView,
   },
   {
-    path: "/guide",
+    path: "/guides",
+    alias: "/guide",
     component: GuideHomeView,
   },
   {
