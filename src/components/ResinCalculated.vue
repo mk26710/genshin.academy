@@ -8,5 +8,3 @@
 <template>
   {{ unixToDate(calculateResinTime(resin.current, resin.needed)) }}
 </template>
-
-<style></style>
