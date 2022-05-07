@@ -7,17 +7,17 @@ import NotFound from "@/views/NotFound.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "home",
+    name: "HomeView",
     component: HomeView,
   },
   {
     path: "/about",
-    name: "about",
+    name: "AboutView",
     component: AboutView,
   },
   {
     path: "/article/:id",
-    name: "article",
+    name: "Article",
     component: Article,
   },
   {
