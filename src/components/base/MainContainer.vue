@@ -12,7 +12,7 @@
   const boundClasses = () => {
     return [
       ...(props.grow ? ["grow"] : []),
-      ...(props.verticalCenter ? ["flex", "flex-col", "justify-center"] : []),
+      ...(props.verticalCenter ? ["flex", "flex-col", "justify-center", "items-center"] : []),
     ];
   };
 </script>
