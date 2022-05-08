@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@heroicons/vue": "^1.0.6",
+    "dayjs": "^1.11.2",
     "pinia": "^2.0.14",
     "vue": "^3.2.25",
     "vue-router": "^4.0.14"
