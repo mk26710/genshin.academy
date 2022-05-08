@@ -5,5 +5,8 @@
   "printWidth": 100,
   "tabWidth": 2,
   "useTabs": false,
-  "vueIndentScriptAndStyle": true
+  "vueIndentScriptAndStyle": true,
+  "importOrder": ["^@/components/(.*)$", "^@/(.*)$", "^[./]", "^(.css)$" ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }
