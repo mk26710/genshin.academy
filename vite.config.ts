@@ -5,7 +5,7 @@ import { fileURLToPath, URL } from "url";
 
 // noinspection JSUnusedGlobalSymbols
 export default defineConfig({
-  base: "/trying-vue/",
+  base: "/gvp/",
   plugins: [vue(), eslintPlugin()],
   resolve: {
     alias: {
