@@ -1,10 +1,13 @@
-import { createApp } from "vue";
-import App from "@/App.vue";
-import router from "@/router";
 import { createPinia } from "pinia";
-import "@/index.css";
+import { createApp } from "vue";
+
 import MainContainer from "@/components/base/MainContainer.vue";
+
+import App from "@/App.vue";
 import dayjs from "@/plugins/dayjs";
+import router from "@/router";
+
+import "./index.css";
 
 createApp(App)
   .component("MainContainer", MainContainer)

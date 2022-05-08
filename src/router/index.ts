@@ -1,9 +1,10 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-import HomeView from "@/views/HomeView.vue";
+import { RouteRecordRaw, createRouter, createWebHashHistory } from "vue-router";
+
 import AboutView from "@/views/AboutView.vue";
-import Article from "@/views/ArticleView.vue";
-import NotFound from "@/views/NotFound.vue";
+import ArticleView from "@/views/ArticleView.vue";
 import GuideHomeView from "@/views/GuideHomeView.vue";
+import HomeView from "@/views/HomeView.vue";
+import NotFound from "@/views/NotFound.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -24,7 +25,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/article/:id",
     name: "Article",
-    component: Article,
+    component: ArticleView,
   },
   {
     path: "/:pathMatch(.*)*",
