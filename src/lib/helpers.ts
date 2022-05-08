@@ -1,3 +1,5 @@
+export type Nullable<T> = T | null;
+
 export const unixNow = () => Math.floor(Date.now() / 1000);
 export const unixToDate = (seconds: number) => new Date(seconds * 1000);
 
