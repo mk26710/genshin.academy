@@ -1,10 +1,15 @@
 <script setup lang="ts">
-  import { unixToDate, calculateResinTime } from "../lib/helpers";
-  import { useCalcStoreRefs } from "../stores/CalculatorStore";
+  import { useCalculatorStore } from "@/stores/CalculatorStore";
 
-  const { resin } = useCalcStoreRefs();
+  const { resin } = useCalculatorStore();
+
+  const calculateMinutes = () => {
+    return (resin.needed - resin.current) * 8;
+  };
 </script>
 
 <template>
-  {{ unixToDate(calculateResinTime(resin.current, resin.needed)) }}
+  <span class="font-bold text-pink-500 dark:text-pink-300">
+    {{ $dayjs().add(calculateMinutes(), "m").format("HH:mm:ss, DD.MM.YYYY") }}
+  </span>
 </template>

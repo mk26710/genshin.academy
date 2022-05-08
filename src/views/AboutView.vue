@@ -24,9 +24,7 @@
           placeholder="you need resin"
         />
       </div>
-      <div class="font-bold text-pink-500 dark:text-pink-300">
-        <ResinCalculated />
-      </div>
+      <div>Resin refills at <ResinCalculated /></div>
     </div>
   </main-container>
 </template>
