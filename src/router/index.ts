@@ -9,12 +9,10 @@ import NotFound from "@/views/NotFound.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "HomeView",
     component: HomeView,
   },
   {
     path: "/about",
-    name: "AboutView",
     component: AboutView,
   },
   {
@@ -24,12 +22,10 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/article/:id",
-    name: "Article",
     component: ArticleView,
   },
   {
     path: "/:pathMatch(.*)*",
-    name: "NotFound",
     component: NotFound,
   },
 ];
