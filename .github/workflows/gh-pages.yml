@@ -6,7 +6,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    if: startsWith(github.event.head_commit.message, '[Deploy]')
+    if: contains(github.event.head_commit.message, 'deploy')
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.1
