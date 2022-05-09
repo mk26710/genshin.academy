@@ -14,13 +14,13 @@
       <div class="w-full flex flex-col sm:flex-row gap-2 mb-2">
         <input
           v-model="resin.current"
-          class="grow text-sm leading-6 text-slate-400 rounded-md ring-1 ring-slate-900/10 shadow-sm py-1.5 pl-2 pr-3 dark:bg-slate-800 dark:highlight-white/5 dark:hover:bg-slate-700"
+          class="grow text-sm leading-6 text-neutral-400 rounded-md ring-1 ring-neutral-900/10 shadow-sm py-1.5 pl-2 pr-3 dark:bg-neutral-900 dark:highlight-white/5 dark:hover:bg-neutral-700"
           type="number"
           placeholder="your current resin"
         />
         <input
           v-model="resin.needed"
-          class="grow text-sm leading-6 text-slate-400 rounded-md ring-1 ring-slate-900/10 shadow-sm py-1.5 pl-2 pr-3 dark:bg-slate-800 dark:highlight-white/5 dark:hover:bg-slate-700"
+          class="grow text-sm leading-6 text-neutral-400 rounded-md ring-1 ring-neutral-900/10 shadow-sm py-1.5 pl-2 pr-3 dark:bg-neutral-900 dark:highlight-white/5 dark:hover:bg-neutral-700"
           type="number"
           placeholder="you need resin"
         />
