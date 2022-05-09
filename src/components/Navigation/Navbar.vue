@@ -1,5 +1,5 @@
 <template>
-  <header class="self-center my-2">
+  <header class="block lg:hidden self-center my-2">
     <router-link to="/">Home </router-link>
     |
     <router-link to="/about">About </router-link>
