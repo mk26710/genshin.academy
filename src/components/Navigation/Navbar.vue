@@ -1,7 +1,5 @@
 <template>
-  <nav
-    class="col-span-2 row-span-1 grid place-content-center lg:hidden py-4 bg-neutral-900 font-semibold"
-  >
+  <nav class="navbar grid place-content-center lg:hidden py-4 bg-neutral-900 font-semibold">
     <span>
       <router-link to="/">Home </router-link>
       |
