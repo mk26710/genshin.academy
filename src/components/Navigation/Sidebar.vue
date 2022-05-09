@@ -23,7 +23,9 @@
 </script>
 
 <template>
-  <aside class="fixed h-full hidden lg:flex flex-col items-center p-4 w-48 dark:bg-neutral-900">
+  <aside
+    class="hidden lg:row-span-3 lg:col-span-1 h-full lg:flex flex-col items-center p-4 w-48 dark:bg-neutral-900"
+  >
     <h1 class="dark:text-white font-bold text-4xl pt-4 pb-6">GVP</h1>
 
     <hr class="w-full mb-6 dark:border-neutral-800" />

@@ -4,8 +4,20 @@
   import Sidebar from "@/components/Navigation/Sidebar.vue";
 </script>
 
+<!-- 
+  Grid Layout - grid-rows-[auto_1fr_auto] grid-cols-[auto_1fr]
+
+  +---+------+
+  |   |      |
+  +---+------+
+  |   |      |
+  +---+------+
+  |   |      |
+  +---+------+
+ -->
+
 <template>
-  <div class="flex flex-col min-h-screen">
+  <div class="grid grid-rows-[auto_1fr_auto] grid-cols-[auto_1fr] min-h-screen">
     <Navbar />
     <Sidebar />
 
