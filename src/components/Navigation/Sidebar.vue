@@ -23,7 +23,7 @@
 </script>
 
 <template>
-  <aside class="sidebar hidden h-full lg:flex flex-col items-center p-4 w-48 dark:bg-neutral-900">
+  <aside class="sidebar hidden h-full lg:flex flex-col items-center p-4 w-56 dark:bg-neutral-900">
     <h1 class="dark:text-white font-bold text-4xl pt-4 pb-6">GVP</h1>
 
     <hr class="w-full mb-6 dark:border-neutral-800" />
