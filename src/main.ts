@@ -7,7 +7,7 @@ import App from "@/App.vue";
 import dayjs from "@/plugins/dayjs";
 import router from "@/router";
 
-import "./index.css";
+import "./styles/main.scss";
 
 createApp(App)
   .component("MainContainer", MainContainer)

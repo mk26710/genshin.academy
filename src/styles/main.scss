@@ -1,0 +1,38 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.app-container {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "navbar"
+    "main"
+    "footer";
+
+  @media (min-width: theme('screens.lg')) {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+      "sidebar main"
+      "sidebar footer";
+  }
+
+  .sidebar {
+    grid-area: sidebar;
+  }
+
+  .navbar {
+    grid-area: navbar;
+  }
+
+  .main {
+    grid-area: main;
+  }
+
+  .footer {
+    grid-area: footer;
+  }
+}
