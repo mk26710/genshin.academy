@@ -18,7 +18,9 @@
 </script>
 
 <template>
-  <main class="flex justify-center lg:ml-48 px-4" :class="boundClasses()">
-    <slot></slot>
+  <main class="flex justify-center lg:ml-48 px-4 pt-0 lg:pt-4" :class="boundClasses()">
+    <div>
+      <slot></slot>
+    </div>
   </main>
 </template>
