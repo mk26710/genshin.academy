@@ -17,12 +17,16 @@ const menuElement = [
   "font-semibold",
   "text-lg",
   "transition-all",
-  "duration-200",
-  "hover:text-neutral-200",
+  "duration-75",
   "cursor-pointer",
+  "border-2",
+  "border-neutral-100",
+  "dark:border-neutral-900",
+  "hover:border-pink-300",
+  "dark:hover:border-neutral-800",
 ];
 
-const activeElement = ["bg-neutral-800"];
+const activeElement = ["bg-pink-300", "!border-neutral-100", "dark:bg-neutral-800", "dark:!border-neutral-800"];
 
 const hyperlinks = computed(() => {
   return router.options.routes
@@ -39,7 +43,7 @@ const hyperlinks = computed(() => {
 </script>
 
 <template>
-  <aside class="sidebar hidden h-full lg:flex flex-col items-center p-4 w-56 dark:bg-neutral-900">
+  <aside class="sidebar hidden h-full lg:flex flex-col items-center p-4 w-56 bg-neutral-100 dark:bg-neutral-900">
     <h1 class="dark:text-white font-bold text-4xl pt-4 pb-6">GVP</h1>
 
     <hr class="w-full mb-6 dark:border-neutral-800" />
