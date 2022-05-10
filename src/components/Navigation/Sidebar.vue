@@ -1,41 +1,41 @@
 <script setup lang="ts">
-  import { computed } from "vue";
-  import { useRouter } from "vue-router";
+import { computed } from "vue";
+import { useRouter } from "vue-router";
 
-  const router = useRouter();
+const router = useRouter();
 
-  const menuElement = [
-    "w-full",
-    "flex",
-    "flex-row",
-    "items-center",
-    "mb-2",
-    "gap-2",
-    "px-3",
-    "py-2",
-    "rounded-lg",
-    "font-semibold",
-    "text-lg",
-    "transition-all",
-    "duration-200",
-    "hover:text-neutral-200",
-    "cursor-pointer",
-  ];
+const menuElement = [
+  "w-full",
+  "flex",
+  "flex-row",
+  "items-center",
+  "mb-2",
+  "gap-2",
+  "px-3",
+  "py-2",
+  "rounded-lg",
+  "font-semibold",
+  "text-lg",
+  "transition-all",
+  "duration-200",
+  "hover:text-neutral-200",
+  "cursor-pointer",
+];
 
-  const activeElement = ["bg-neutral-800"];
+const activeElement = ["bg-neutral-800"];
 
-  const hyperlinks = computed(() => {
-    return router.options.routes
-      .filter((r) => r.meta && r.meta.navigation)
-      .map((r) => {
-        return {
-          // never undefined, filter above
-          name: r.meta?.navigation?.name,
-          icon: r.meta?.navigation?.icon,
-          path: r.path,
-        };
-      });
-  });
+const hyperlinks = computed(() => {
+  return router.options.routes
+    .filter((r) => r.meta && r.meta.navigation)
+    .map((r) => {
+      return {
+        // never undefined, filter above
+        name: r.meta?.navigation?.name,
+        icon: r.meta?.navigation?.icon,
+        path: r.path,
+      };
+    });
+});
 </script>
 
 <template>

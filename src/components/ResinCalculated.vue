@@ -1,11 +1,11 @@
 <script setup lang="ts">
-  import { useCalculatorStore } from "@/stores/CalculatorStore";
+import { useCalculatorStore } from "@/stores/CalculatorStore";
 
-  const { resin } = useCalculatorStore();
+const { resin } = useCalculatorStore();
 
-  const calculateMinutes = () => {
-    return (resin.needed - resin.current) * 8;
-  };
+const calculateMinutes = () => {
+  return (resin.needed - resin.current) * 8;
+};
 </script>
 
 <template>

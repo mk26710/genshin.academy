@@ -1,9 +1,9 @@
 <script setup lang="ts">
-  import ResinCalculated from "@/components/ResinCalculated.vue";
+import ResinCalculated from "@/components/ResinCalculated.vue";
 
-  import { useCalcStoreRefs } from "@/stores/CalculatorStore";
+import { useCalcStoreRefs } from "@/stores/CalculatorStore";
 
-  const { resin } = useCalcStoreRefs();
+const { resin } = useCalcStoreRefs();
 </script>
 
 <template>
@@ -25,7 +25,9 @@
           placeholder="you need resin"
         />
       </div>
-      <div>Resin refills at <ResinCalculated /></div>
+      <div>Resin refills at
+        <ResinCalculated />
+      </div>
     </div>
   </main-container>
 </template>

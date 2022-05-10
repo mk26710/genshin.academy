@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  import { MenuIcon } from "@heroicons/vue/solid";
-  import { ref } from "vue";
+import { MenuIcon } from "@heroicons/vue/solid";
+import { ref } from "vue";
 
-  const isOpen = ref(false);
+const isOpen = ref(false);
 </script>
 
 <template>

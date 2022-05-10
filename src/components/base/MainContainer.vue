@@ -1,11 +1,11 @@
 <script setup lang="ts">
-  interface Props {
-    verticalCenter?: boolean;
-  }
+interface Props {
+  verticalCenter?: boolean;
+}
 
-  const props = withDefaults(defineProps<Props>(), {
-    verticalCenter: false,
-  });
+const props = withDefaults(defineProps<Props>(), {
+  verticalCenter: false,
+});
 </script>
 
 <template>

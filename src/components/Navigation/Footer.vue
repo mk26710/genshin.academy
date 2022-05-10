@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { CodeIcon } from "@heroicons/vue/solid";
+import { CodeIcon } from "@heroicons/vue/solid";
 </script>
 
 <template>
