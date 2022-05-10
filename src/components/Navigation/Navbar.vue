@@ -15,7 +15,7 @@ const isOpen = ref(false);
   </div>
 
   <nav
-    class="navbar lg:hidden p-4 bg-neutral-900 font-semibold h-16 grid grid-rows-1 grid-cols-[1fr_auto]"
+    class="navbar lg:hidden p-4 bg-neutral-100 dark:bg-neutral-900 font-semibold h-16 grid grid-rows-1 grid-cols-[1fr_auto]"
   >
     <div class="self-center justify-self-center">
       <span>
