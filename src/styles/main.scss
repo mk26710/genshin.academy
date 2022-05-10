@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+::selection {
+  background: theme("colors.pink.300")
+}
+
 .app-container {
   min-height: 100vh;
   display: grid;
