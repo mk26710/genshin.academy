@@ -1,5 +1,8 @@
 <script setup lang="ts">
-  import { BeakerIcon, HomeIcon, InformationCircleIcon as InfoIcon } from "@heroicons/vue/solid";
+  import { computed } from "vue";
+  import { useRouter } from "vue-router";
+
+  const router = useRouter();
 
   const menuElement = [
     "w-full",
@@ -20,6 +23,19 @@
   ];
 
   const activeElement = ["bg-neutral-800"];
+
+  const hyperlinks = computed(() => {
+    return router.options.routes
+      .filter((r) => r.meta && r.meta.navigation)
+      .map((r) => {
+        return {
+          // never undefined, filter above
+          name: r.meta?.navigation?.name,
+          icon: r.meta?.navigation?.icon,
+          path: r.path,
+        };
+      });
+  });
 </script>
 
 <template>
@@ -28,25 +44,16 @@
 
     <hr class="w-full mb-6 dark:border-neutral-800" />
 
-    <RouterLink to="/" :class="[menuElement, $route.path === '/' ? activeElement : '']">
+    <RouterLink
+      v-for="record in hyperlinks"
+      :key="record.name"
+      :to="record.path"
+      :class="[menuElement, $route.path === record.path ? activeElement : '']"
+    >
       <div>
-        <HomeIcon class="h-7 w-7 p-0" />
+        <component :is="record.icon" class="h-7 w-7 p-0"></component>
       </div>
-      <span>Home</span>
-    </RouterLink>
-
-    <RouterLink to="/guides" :class="[menuElement, $route.path === '/guides' ? activeElement : '']">
-      <div>
-        <BeakerIcon class="h-7 w-7 p-0" />
-      </div>
-      <span>Guides</span>
-    </RouterLink>
-
-    <RouterLink to="/about" :class="[menuElement, $route.path === '/about' ? activeElement : '']">
-      <div>
-        <InfoIcon class="h-7 w-7 p-0" />
-      </div>
-      <span>About</span>
+      <span>{{ record.name }}</span>
     </RouterLink>
   </aside>
 </template>
