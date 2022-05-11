@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
+const { t } = useI18n();
 
 const menuElement = [
   "w-full",
@@ -55,7 +57,7 @@ const hyperlinks = computed(() => {
       <div>
         <component :is="record.icon" class="h-7 w-7 p-0"></component>
       </div>
-      <span>{{ record.name }}</span>
+      <span>{{ t(`generic.${record.name!.toLocaleLowerCase()}`) }}</span>
     </RouterLink>
   </aside>
 </template>
