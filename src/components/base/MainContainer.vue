@@ -10,7 +10,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <main
-    class="main px-4 pt-0 lg:pt-4 grid"
+    class="main p-4 grid"
     :class="props.verticalCenter ? 'place-content-center' : ''"
   >
     <div id="content">
