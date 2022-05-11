@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { MenuIcon } from "@heroicons/vue/solid";
 import { ref } from "vue";
-import { useI18n } from "vue-i18n";
 
 const isOpen = ref(false);
-const { t } = useI18n();
 </script>
 
 <template>
@@ -21,11 +19,11 @@ const { t } = useI18n();
   >
     <div class="self-center justify-self-center">
       <span>
-        <router-link to="/">{{ t("generic.home") }} </router-link>
+        <router-link to="/">Home </router-link>
         |
-        <router-link to="/guides">{{ t("generic.guides") }} </router-link>
+        <router-link to="/guides">Guides </router-link>
         |
-        <router-link to="/about">{{ t("generic.about") }} </router-link>
+        <router-link to="/about">About </router-link>
       </span>
     </div>
 
