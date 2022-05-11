@@ -9,7 +9,7 @@ const calculateMinutes = () => {
 </script>
 
 <template>
-  <span class="font-bold text-pink-500 dark:text-pink-300">
+  <span class="font-bold text-pink-500">
     {{ $dayjs().add(calculateMinutes(), "m").format("HH:mm:ss, DD.MM.YYYY") }}
   </span>
 </template>

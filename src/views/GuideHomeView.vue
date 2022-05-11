@@ -1,6 +1,6 @@
 <template>
   <main-container>
-    <h1 class="font-bold dark:text-white text-4xl text-center mb-4">some good guides</h1>
+    <h1 class="font-bold text-4xl text-center mb-4">some good guides</h1>
     <p class="text-justify">
       Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde blanditiis totam similique
       soluta officiis fuga tempore tenetur voluptatem. Ipsa qui, assumenda sunt nihil sapiente,

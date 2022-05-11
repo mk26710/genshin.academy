@@ -21,12 +21,10 @@ const menuElement = [
   "cursor-pointer",
   "border-2",
   "border-neutral-100",
-  "dark:border-neutral-900",
   "hover:border-pink-300",
-  "dark:hover:border-neutral-800",
 ];
 
-const activeElement = ["bg-pink-300", "!border-neutral-100", "dark:bg-neutral-800", "dark:!border-neutral-800"];
+const activeElement = ["bg-pink-300", "!border-neutral-100"];
 
 const hyperlinks = computed(() => {
   return router.options.routes
@@ -43,10 +41,10 @@ const hyperlinks = computed(() => {
 </script>
 
 <template>
-  <aside class="sidebar hidden h-full lg:flex flex-col items-center p-4 w-56 bg-neutral-100 dark:bg-neutral-900">
-    <h1 class="dark:text-white font-bold text-4xl pt-4 pb-6">GVP</h1>
+  <aside class="sidebar hidden h-full lg:flex flex-col items-center p-4 w-56 bg-neutral-100">
+    <h1 class="font-bold text-4xl pt-4 pb-6">GVP</h1>
 
-    <hr class="w-full mb-6 dark:border-neutral-800" />
+    <hr class="w-full mb-6" />
 
     <RouterLink
       v-for="record in hyperlinks"

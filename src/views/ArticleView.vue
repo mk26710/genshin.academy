@@ -35,7 +35,7 @@ watchEffect(fetchData);
 <template>
   <main-container>
     <div class="space-y-2 text-justify">
-      <h1 class="dark:text-white font-bold text-4xl text-center capitalize">
+      <h1 class="font-bold text-4xl text-center capitalize">
         {{ article.name }}
       </h1>
       <p>{{ article.text }}</p>
