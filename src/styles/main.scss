@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 ::selection {
-  background: theme("colors.pink.300")
+  background: theme("colors.pink.300");
 }
 
 .app-container {
@@ -16,7 +16,7 @@
     "main"
     "footer";
 
-  @media (min-width: theme('screens.lg')) {
+  @media (min-width: theme("screens.lg")) {
     grid-template-columns: auto 1fr;
     grid-template-rows: 1fr auto;
     grid-template-areas:
