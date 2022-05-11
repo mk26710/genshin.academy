@@ -11,7 +11,7 @@ let article = reactive({
   text: "",
 });
 
-async function fetchData() {
+const fetchData = async () => {
   if (route.params?.id === undefined) {
     return;
   }
@@ -25,7 +25,7 @@ async function fetchData() {
 
     console.log(`[DYN IMPORT] Reactive data was set ${route.params.id}`);
   } catch (_err) {
-    router.push("/404");
+    await router.push("/404");
   }
 }
 
