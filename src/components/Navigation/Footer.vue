@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { CodeIcon } from "@heroicons/vue/solid";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 </script>
 
 <template>
@@ -7,7 +10,7 @@ import { CodeIcon } from "@heroicons/vue/solid";
     <span class="transition-colors duration-300 ease-in-out hover:text-pink-300">
       <a href="https://github.com/kitsune-guuji/trying-vue" target="_blank">
         <CodeIcon class="h-5 w-5 inline" />
-        <span class="font-bold"> source code</span>
+        <span class="font-bold">&nbsp;{{ t("generic.sourceCode") }}</span>
       </a>
     </span>
   </footer>
