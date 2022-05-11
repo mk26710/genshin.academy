@@ -1,7 +1,7 @@
 import { createPinia } from "pinia";
 import { createApp } from "vue";
 
-import MainContainer from "@/components/base/MainContainer.vue";
+import MainContainer from "@/components/MainContainer.vue";
 
 import App from "@/App.vue";
 import dayjs from "@/plugins/dayjs";

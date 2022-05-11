@@ -1,4 +1,4 @@
-import MainContainer from "./base/MainContainer.vue";
+import MainContainer from "./MainContainer.vue";
 
 declare module "@vue/runtime-core" {
   export interface GlobalComponents {
