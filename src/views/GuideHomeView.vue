@@ -11,7 +11,7 @@ const ayakaAvatarHeader = new URL(
   <main-container>
     <h1 class="font-bold text-4xl text-center mb-4">some good guides</h1>
     <div
-      class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2"
     >
       <Card
         v-for="i in 50"
