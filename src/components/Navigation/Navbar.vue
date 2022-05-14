@@ -67,7 +67,7 @@ const hyperlinks = computed(() => {
   </div>
 
   <nav
-    class="navbar lg:hidden p-4 bg-neutral-100 font-semibold h-16 grid grid-rows-1 grid-cols-[1fr_auto]"
+    class="navbar lg:hidden p-4 border-b font-semibold h-16 grid grid-rows-1 grid-cols-[1fr_auto]"
   >
     <div>
       <MenuIcon @click="isOpen = !isOpen" class="h-8 w-8 cursor-pointer float-right" />
