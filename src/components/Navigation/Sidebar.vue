@@ -39,7 +39,7 @@ const hyperlinks = computed(() => {
 </script>
 
 <template>
-  <aside class="sidebar hidden h-full lg:flex flex-col items-center p-4 w-56 border-r">
+  <aside class="sidebar hidden h-full lg:flex flex-col items-center p-4 w-60 border-r">
     <h1 class="font-bold text-4xl pt-4 pb-4 mb-4 border-b">GVP</h1>
 
     <RouterLink
