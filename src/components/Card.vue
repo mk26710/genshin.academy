@@ -14,8 +14,8 @@ withDefaults(defineProps<Props>(), {});
 
 <template>
   <div-or-link :to="to" class="flex flex-col border rounded-xl">
-    <div>
-      <img v-if="!!thumbnail" :src="thumbnail" class="object-fill object-top" />
+    <div class="min-h-[10rem] lg:min-h-[20rem] bg-neutral-200">
+      <img v-if="!!thumbnail" :src="thumbnail" loading="lazy" class="object-fill object-top" />
     </div>
     <div class="p-6 space-y-2">
       <div v-if="!!publishedAt" class="font-medium text-sm leading-6 text-pink-500">
