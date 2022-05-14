@@ -16,6 +16,7 @@ const ayakaAvatarHeader = new URL(
       <Card
         v-for="i in 50"
         :key="i"
+        to="/guides/kamisato_ayaka"
         title="Kamisato Ayaka"
         :thumbnail="ayakaAvatarHeader.href"
         :published-at="new Date()"
