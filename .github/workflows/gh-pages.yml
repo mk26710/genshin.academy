@@ -15,6 +15,9 @@ jobs:
         run: |
           npm install
           npm run build
+          cd dist
+          touch CNAME
+          echo "genshin.zenless.org" > CNAME
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.5
