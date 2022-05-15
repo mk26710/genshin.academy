@@ -6,7 +6,6 @@ import eslintPlugin from "vite-plugin-eslint";
 
 // noinspection JSUnusedGlobalSymbols
 export default defineConfig({
-  base: "/gvp/",
   plugins: [vue(), eslintPlugin(), vueI18n()],
   resolve: {
     alias: {
