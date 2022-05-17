@@ -22,7 +22,7 @@ const menuElement = [
   "hover:bg-neutral-200",
 ];
 
-const activeElement = ["!bg-pink-300"];
+const activeElement = ["!bg-pink-300", "shadow-lg", "shadow-pink-300/50"];
 
 const hyperlinks = computed(() => {
   return router.options.routes
@@ -46,6 +46,7 @@ const hyperlinks = computed(() => {
       v-for="record in hyperlinks"
       :key="record.name"
       :to="record.path"
+      class=""
       :class="[menuElement, $route.path === record.path ? activeElement : '']"
     >
       <div>
