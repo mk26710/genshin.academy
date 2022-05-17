@@ -1,9 +1,6 @@
 import { BeakerIcon, HomeIcon, InformationCircleIcon as InfoIcon } from "@heroicons/vue/solid";
 import { RouteRecordRaw, createRouter, createWebHashHistory } from "vue-router";
 
-import AboutView from "@/views/AboutView.vue";
-import ArticleView from "@/views/ArticleView.vue";
-import GuideHomeView from "@/views/GuideHomeView.vue";
 import HomeView from "@/views/HomeView.vue";
 import NotFound from "@/views/NotFound.vue";
 
@@ -20,7 +17,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/about",
-    component: AboutView,
+    component: () => import("@/views/AboutView.vue"),
     meta: {
       navigation: {
         name: "About",
@@ -30,7 +27,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/guides",
-    component: GuideHomeView,
+    component: () => import("@/views/GuideHomeView.vue"),
     meta: {
       navigation: {
         name: "Guides",
@@ -40,7 +37,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/article/:id",
-    component: ArticleView,
+    component: () => import("@/views/ArticleView.vue"),
   },
   {
     path: "/:pathMatch(.*)*",
