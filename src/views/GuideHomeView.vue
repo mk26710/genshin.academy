@@ -3,7 +3,7 @@ import { ref } from "vue";
 
 import Card from "@/components/Card.vue";
 
-import { data as publishedCharacters } from "@/data/guides/published.json";
+import { data as publishedCharacters } from "@/data/guides/.published.json";
 
 const query = ref("");
 
