@@ -12,8 +12,8 @@ const characterAvatar = (id: string) =>
 
 const search = (name: string) =>
   publishedCharacters
-    .sort((a, b) => b.publishedAt - a.publishedAt)
-    .filter((c) => c.title.toLowerCase().includes(name.toLowerCase()));
+    .filter((c) => c.title.toLowerCase().includes(name.toLowerCase()))
+    .sort((a, b) => b.publishedAt - a.publishedAt);
 </script>
 
 <template>
