@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { MenuIcon } from "@heroicons/vue/solid";
 import { computed, ref } from "vue";
