@@ -1,5 +1,6 @@
 import { BeakerIcon, HomeIcon, InformationCircleIcon as InfoIcon } from "@heroicons/vue/solid";
-import { RouteRecordRaw, createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
+import type { RouteRecordRaw } from "vue-router";
 
 import HomeView from "@/views/HomeView.vue";
 import NotFound from "@/views/NotFound.vue";

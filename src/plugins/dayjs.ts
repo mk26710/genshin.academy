@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { App, InjectionKey } from "vue";
+import type { App, InjectionKey } from "vue";
 
 export const dayjsKey: InjectionKey<typeof dayjs> = Symbol("dayjs");
 
