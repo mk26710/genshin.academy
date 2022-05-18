@@ -10,10 +10,13 @@ import router from "@/router";
 
 import "./styles/main.scss";
 
-createApp(App)
-  .component("MainContainer", MainContainer)
-  .use(createPinia())
-  .use(router)
-  .use(dayjs)
-  // .use(i18n)
-  .mount("#app");
+const app = createApp(App);
+
+app.component("MainContainer", MainContainer);
+
+app.use(createPinia());
+app.use(router);
+app.use(dayjs);
+// .use(i18n)
+
+app.mount("#app");
