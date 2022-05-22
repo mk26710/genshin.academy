@@ -12,7 +12,9 @@ const characterAvatar = (id: string) =>
   new URL(`../assets/characters/${id}/avatar_header.png`, import.meta.url).href;
 
 const search = (name: string) =>
-  publishedCharacters
+  Array(20)
+    .fill(publishedCharacters)
+    .flat()
     .filter((c) => c.title.toLowerCase().includes(name.toLowerCase()))
     .sort((a, b) => b.publishedAt - a.publishedAt);
 </script>
