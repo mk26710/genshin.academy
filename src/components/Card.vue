@@ -14,9 +14,14 @@ withDefaults(defineProps<Props>(), {});
 </script>
 
 <template>
-  <div-or-link :to="to" class="flex flex-col border rounded-md">
-    <div class="min-h-[10rem] lg:min-h-[20rem] bg-neutral-200">
-      <img v-if="!!thumbnail" :src="thumbnail" loading="lazy" class="object-fill object-top" />
+  <div-or-link :to="to" class="flex flex-col border rounded-lg">
+    <div class="min-h-[10rem] lg:min-h-[20rem]">
+      <img
+        v-if="!!thumbnail"
+        :src="thumbnail"
+        loading="lazy"
+        class="object-fill object-top rounded-t-lg"
+      />
     </div>
     <div class="px-6 py-4 space-y-2">
       <div v-if="!!publishedAt" class="font-medium text-sm leading-6 text-pink-500">
