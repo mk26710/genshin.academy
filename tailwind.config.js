@@ -9,6 +9,9 @@ module.exports = {
       colors: {
         primary: colors.pink,
       },
+      screens: {
+        xmd: "896px",
+      },
     },
   },
   plugins: [],
