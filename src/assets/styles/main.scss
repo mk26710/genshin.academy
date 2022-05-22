@@ -10,11 +10,11 @@
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 1fr auto;
   grid-template-areas:
-    "navbar"
     "main"
     "footer";
+  margin-bottom: theme("height.14");
 
   @media (min-width: theme("screens.lg")) {
     grid-template-columns: auto 1fr;
@@ -22,14 +22,11 @@
     grid-template-areas:
       "sidebar main"
       "sidebar footer";
+    margin-bottom: 0;
   }
 
   .sidebar {
     grid-area: sidebar;
-  }
-
-  .navbar {
-    grid-area: navbar;
   }
 
   .main {

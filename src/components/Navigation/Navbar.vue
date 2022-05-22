@@ -1,8 +1,10 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import { MenuIcon } from "@heroicons/vue/solid";
 import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
+
+import { MenuIcon } from "@heroicons/vue/outline";
+import { XCircleIcon } from "@heroicons/vue/solid";
 
 const router = useRouter();
 
@@ -49,12 +51,12 @@ const hyperlinks = computed(() => {
 <template>
   <div
     :class="isOpen ? 'fixed' : 'hidden'"
-    class="w-full h-full bg-neutral-100 lg:!hidden grid grid-rows-1 grid-cols-1 place-items-center z-50 p-4"
-    @click="isOpen = false"
+    class="w-full h-full bg-neutral-100 grid grid-rows-1 grid-cols-1 place-items-center z-50 p-4"
   >
     <div class="grid grid-rows[auto] grid-cols-[auto] place-items-center w-full">
       <RouterLink
         v-for="record in hyperlinks"
+        @click="isOpen = false"
         :key="record.name"
         :to="record.path"
         :class="[menuElement, $route.path === record.path ? activeElement : '']"
@@ -64,14 +66,20 @@ const hyperlinks = computed(() => {
         </div>
         <span>{{ record.name }}</span>
       </RouterLink>
+
+      <div class="mt-16 cursor-pointer" @click="isOpen = false">
+        <XCircleIcon class="fill-neutral-300 w-12 h-12" />
+      </div>
     </div>
   </div>
 
   <nav
-    class="navbar lg:hidden p-4 border-b font-semibold h-16 grid grid-rows-1 grid-cols-[1fr_auto]"
+    class="fixed z-10 lg:hidden bottom-0 h-14 w-full flex flex-row justify-center items-center select-none bg-white border-t border-neutral-300 shadow-[0_10px_50px_-21px_#000000]"
   >
-    <div>
-      <MenuIcon @click="isOpen = !isOpen" class="h-8 w-8 cursor-pointer float-right" />
+    <div class="px-4 font-bold flex-grow">GVP</div>
+
+    <div @click="isOpen = true" class="cursor-pointer h-full flex items-center px-6">
+      <MenuIcon class="h-6 w-6" />
     </div>
   </nav>
 </template>
