@@ -60,10 +60,13 @@ const endpoints = computed(() => {
     </div>
   </div>
 
-  <!-- Mobile Navbar -->
+  <!-- 
+    Mobile Navbar
+    Note: select-none on nav is actually needed here otherwise it does some weird stuff on mobile firefox lol idk why
+  -->
   <nav
     data-description="Mobile Bottom Navigation"
-    class="fixed lg:hidden bottom-0 h-14 w-full flex flex-row bg-neutral-50 border-t border-neutral-300 z-10"
+    class="fixed lg:hidden bottom-0 h-14 w-full flex flex-row bg-neutral-50 border-t border-neutral-300 select-none z-10"
   >
     <div class="flex-grow self-center pl-6">
       <h1 class="font-extrabold text-lg">GVP</h1>
