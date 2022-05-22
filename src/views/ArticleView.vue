@@ -2,6 +2,8 @@
 import { reactive, watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
+import MainContainer from "@/components/MainContainer.vue";
+
 const route = useRoute();
 const router = useRouter();
 
@@ -27,18 +29,18 @@ const fetchData = async () => {
   } catch (_err) {
     await router.push("/404");
   }
-}
+};
 
 watchEffect(fetchData);
 </script>
 
 <template>
-  <main-container>
+  <MainContainer>
     <div class="space-y-2 text-justify">
       <h1 class="font-bold text-4xl text-center capitalize">
         {{ article.name }}
       </h1>
       <p>{{ article.text }}</p>
     </div>
-  </main-container>
+  </MainContainer>
 </template>

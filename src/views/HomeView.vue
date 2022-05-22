@@ -1,6 +1,10 @@
+<script setup lang="ts">
+import MainContainer from "@/components/MainContainer.vue";
+</script>
+
 <template>
-  <main-container :vertical-center="true">
+  <MainContainer :vertical-center="true">
     <h1 class="font-bold text-4xl">Hello, user!</h1>
     <p>fun fact: i don't touch grass</p>
-  </main-container>
+  </MainContainer>
 </template>

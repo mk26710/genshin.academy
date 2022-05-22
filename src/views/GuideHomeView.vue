@@ -2,6 +2,7 @@
 import { ref } from "vue";
 
 import Card from "@/components/Card.vue";
+import MainContainer from "@/components/MainContainer.vue";
 
 import { data as publishedCharacters } from "@/data/guides/.published.json";
 
@@ -17,7 +18,7 @@ const search = (name: string) =>
 </script>
 
 <template>
-  <main-container>
+  <MainContainer>
     <input
       placeholder="Search by title"
       v-model="query"
@@ -37,5 +38,5 @@ const search = (name: string) =>
         :description="character.brief"
       />
     </div>
-  </main-container>
+  </MainContainer>
 </template>

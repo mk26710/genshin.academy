@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import MainContainer from "@/components/MainContainer.vue";
 import ResinCalculated from "@/components/ResinCalculated.vue";
 
 import { useCalcStoreRefs } from "@/stores/CalculatorStore";
@@ -7,7 +8,7 @@ const { resin } = useCalcStoreRefs();
 </script>
 
 <template>
-  <main-container :verticalCenter="true">
+  <MainContainer :verticalCenter="true">
     <div>
       <h1 class="font-bold text-4xl md:text-5xl">Useless resin calculator</h1>
       <p class="mb-6">you can calculate resin here btw</p>
@@ -27,5 +28,5 @@ const { resin } = useCalcStoreRefs();
       </div>
       <div>Resin refills at <ResinCalculated /></div>
     </div>
-  </main-container>
+  </MainContainer>
 </template>
