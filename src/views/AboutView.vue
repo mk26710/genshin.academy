@@ -25,9 +25,7 @@ const { resin } = useCalcStoreRefs();
           placeholder="you need resin"
         />
       </div>
-      <div>Resin refills at
-        <ResinCalculated />
-      </div>
+      <div>Resin refills at <ResinCalculated /></div>
     </div>
   </main-container>
 </template>
