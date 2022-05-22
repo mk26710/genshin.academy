@@ -8,9 +8,26 @@ import Footer from "@/components/Footer.vue";
     <Navigation />
 
     <Suspense>
-      <router-view />
+      <RouterView />
+      <!-- <router-view v-slot="{ Component }">
+        <transition name="fade">
+          <component :is="Component" />
+        </transition>
+      </router-view> -->
     </Suspense>
 
     <Footer />
   </div>
 </template>
+
+<style lang="scss">
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
