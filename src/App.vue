@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import Footer from "@/components/Navigation/Footer.vue";
-import Navbar from "@/components/Navigation/Navbar.vue";
-import Sidebar from "@/components/Navigation/Sidebar.vue";
+import Navigation from "./components/Navigation.vue";
+import Footer from "@/components/Footer.vue";
 </script>
 
 <template>
   <div class="app-container">
-    <Navbar />
-    <Sidebar />
+    <Navigation />
 
     <Suspense>
       <router-view />
