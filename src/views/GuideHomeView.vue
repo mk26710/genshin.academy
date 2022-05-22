@@ -12,7 +12,7 @@ const characterAvatar = (id: string) =>
   new URL(`../assets/characters/${id}/avatar_header.png`, import.meta.url).href;
 
 const search = (name: string) =>
-  Array(20)
+  Array(10)
     .fill(publishedCharacters)
     .flat()
     .filter((c) => c.title.toLowerCase().includes(name.toLowerCase()))
