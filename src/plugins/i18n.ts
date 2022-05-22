@@ -1,8 +1,8 @@
 import { createI18n } from "vue-i18n";
 
-import genericDE from "@/lang/de/generic.json";
-import genericEN from "@/lang/en/generic.json";
-import genericRU from "@/lang/ru/generic.json";
+import genericDE from "@/assets/lang/de/generic.json";
+import genericEN from "@/assets/lang/en/generic.json";
+import genericRU from "@/assets/lang/ru/generic.json";
 
 const messages = {
   en: {
