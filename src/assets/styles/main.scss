@@ -7,14 +7,12 @@
 }
 
 .app-container {
-  min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr auto;
   grid-template-areas:
     "main"
     "footer";
-  margin-bottom: theme("height.14");
 
   @media (min-width: theme("screens.lg")) {
     grid-template-columns: auto 1fr;
@@ -31,9 +29,15 @@
 
   .main {
     grid-area: main;
+    min-height: 100vh;
   }
 
   .footer {
     grid-area: footer;
+    margin-bottom: theme("height.14");
+
+    @media (min-width: theme("screens.lg")) {
+      margin-bottom: 0;
+    }
   }
 }
