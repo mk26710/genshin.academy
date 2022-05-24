@@ -10,8 +10,8 @@ const { resin } = useCalcStoreRefs();
 <template>
   <MainContainer :verticalCenter="true">
     <div>
-      <h1 class="font-bold text-4xl md:text-5xl">Useless resin calculator</h1>
-      <p class="mb-6">you can calculate resin here btw</p>
+      <h1 class="font-bold text-4xl md:text-5xl">Resin calculator</h1>
+      <p class="mb-6">Provide this calculator with your own values.</p>
       <div class="w-full flex flex-col sm:flex-row gap-2 mb-2">
         <input
           v-model="resin.current"
@@ -26,7 +26,10 @@ const { resin } = useCalcStoreRefs();
           placeholder="you need resin"
         />
       </div>
-      <div>Resin refills at <ResinCalculated /></div>
+      <div>
+        You will have <span class="text-primary-500 font-bold">{{ resin.needed }}</span> at
+        <ResinCalculated />
+      </div>
     </div>
   </MainContainer>
 </template>
