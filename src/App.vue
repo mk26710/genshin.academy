@@ -8,12 +8,7 @@ import Navigation from "@/components/Navigation.vue";
     <Navigation />
 
     <Suspense>
-      <router-view v-slot="{ Component }">
-        <!-- We want to preserve guides home page state -->
-        <KeepAlive include="guide-home-view">
-          <component :is="Component" />
-        </KeepAlive>
-      </router-view>
+      <router-view />
     </Suspense>
 
     <Footer />
