@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Navigation from "./components/Navigation.vue";
 import Footer from "@/components/Footer.vue";
+import Navigation from "@/components/Navigation.vue";
 </script>
 
 <template>
@@ -8,12 +8,12 @@ import Footer from "@/components/Footer.vue";
     <Navigation />
 
     <Suspense>
-      <RouterView />
-      <!-- <router-view v-slot="{ Component }">
-        <transition name="fade">
+      <router-view v-slot="{ Component }">
+        <!-- We want to preserve guides home page state -->
+        <KeepAlive include="guide-home-view">
           <component :is="Component" />
-        </transition>
-      </router-view> -->
+        </KeepAlive>
+      </router-view>
     </Suspense>
 
     <Footer />

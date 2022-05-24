@@ -1,22 +1,36 @@
+<script lang="ts">
+export default {
+  name: "guide-home-view",
+};
+</script>
+
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
 
 import Card from "@/components/Card.vue";
 import MainContainer from "@/components/MainContainer.vue";
 
-import { data as publishedCharacters } from "@/data/guides/.published.json";
+import type { PublishedItem } from "@/@types/custom";
 
 const query = ref("");
+const characters = reactive<Array<PublishedItem>>([]);
 
 const characterAvatar = (id: string) =>
   new URL(`../assets/characters/${id}/avatar_header.png`, import.meta.url).href;
 
 const search = (name: string) =>
-  Array(10)
-    .fill(publishedCharacters)
-    .flat()
+  characters
     .filter((c) => c.title.toLowerCase().includes(name.toLowerCase()))
     .sort((a, b) => b.publishedAt - a.publishedAt);
+
+onMounted(async () => {
+  try {
+    const json = await import("@/data/guides/.published.json");
+    characters.push(...json.data);
+  } catch (e) {
+    console.error(e);
+  }
+});
 </script>
 
 <template>
