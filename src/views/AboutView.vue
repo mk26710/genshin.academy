@@ -1,10 +1,19 @@
 <script setup lang="ts">
+import { isNumber } from "lodash";
+
 import MainContainer from "@/components/MainContainer.vue";
-import ResinCalculated from "@/components/ResinCalculated.vue";
 
-import { useCalcStoreRefs } from "@/stores/CalculatorStore";
+import { useCalcStore } from "@/stores/calc";
 
-const { resin } = useCalcStoreRefs();
+const { resin } = useCalcStore();
+
+const calculateMinutes = () => {
+  if (isNumber(resin.current) && isNumber(resin.needed)) {
+    return (resin.needed - resin.current) * 8;
+  }
+
+  return -1;
+};
 </script>
 
 <template>
@@ -28,7 +37,9 @@ const { resin } = useCalcStoreRefs();
       </div>
       <div>
         You will have <span class="text-primary-500 font-bold">{{ resin.needed }}</span> at
-        <ResinCalculated />
+        <span class="font-bold text-primary-500">
+          {{ $dayjs().add(calculateMinutes(), "m").format("HH:mm:ss, DD.MM.YYYY") }}
+        </span>
       </div>
     </div>
   </MainContainer>
