@@ -48,7 +48,7 @@ const endpoints = computed(() => {
         :key="endpoint.name"
         :to="endpoint.path"
         class="flex flex-col items-center p-6 m-2 rounded-lg"
-        :class="$route.path === endpoint.path && '!bg-primary-300 shadow-lg shadow-primary-300/500'"
+        active-class="!bg-primary-300 shadow-lg shadow-primary-300/500"
       >
         <component :is="endpoint.icon" class="w-8 h-8" />
         <h1 class="font-semibold text-lg">{{ endpoint.name }}</h1>
@@ -95,7 +95,7 @@ const endpoints = computed(() => {
         :key="endpoint.name"
         :to="endpoint.path"
         class="w-full flex flex-row items-center gap-x-2 px-3 py-2 rounded-lg font-semibold text-lg transition-all duration-75 cursor-pointer hover:bg-neutral-100"
-        :class="$route.path === endpoint.path && '!bg-primary-300 shadow-lg shadow-primary-300/500'"
+        active-class="!bg-primary-300 shadow-lg shadow-primary-300/500"
       >
         <component :is="endpoint.icon" class="h-7 w-7 p-0" />
         <h1>{{ endpoint.name }}</h1>
