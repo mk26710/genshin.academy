@@ -21,7 +21,7 @@ export const useGuidesStore = defineStore({
   state: stateFactory,
   actions: {
     async lazyPublished() {
-      const json = await import("@/data/guides/.published.json");
+      const json = await import("@/data/guides/published.json");
 
       this.published.data = json.data;
       this.published.isImported = true;
