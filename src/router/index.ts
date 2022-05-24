@@ -1,9 +1,9 @@
-import { BeakerIcon, HomeIcon, InformationCircleIcon as InfoIcon } from "@heroicons/vue/solid";
 import { createRouter, createWebHashHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
 
 import HomeView from "@/views/HomeView.vue";
 import NotFound from "@/views/NotFound.vue";
+import { BeakerIcon, CalculatorIcon, HomeIcon } from "@heroicons/vue/outline";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -17,17 +17,8 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: "/about",
-    component: () => import("@/views/AboutView.vue"),
-    meta: {
-      navigation: {
-        name: "About",
-        icon: InfoIcon,
-      },
-    },
-  },
-  {
     path: "/guides",
+    alias: "/guide",
     component: () => import("@/views/GuideHomeView.vue"),
     meta: {
       navigation: {
@@ -37,8 +28,15 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: "/article/:id",
-    component: () => import("@/views/ArticleView.vue"),
+    path: "/calc",
+    alias: "/calculations",
+    component: () => import("@/views/CalcView.vue"),
+    meta: {
+      navigation: {
+        name: "Calculate",
+        icon: CalculatorIcon,
+      },
+    },
   },
   {
     path: "/:pathMatch(.*)*",
