@@ -10,7 +10,7 @@ interface State {
 const stateFactory = (): State => ({
   resin: {
     current: "",
-    needed: "",
+    needed: 160,
   },
 });
 
