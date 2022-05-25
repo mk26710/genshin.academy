@@ -3,8 +3,7 @@
 import { computed, reactive } from "vue";
 import { RouterLink, useRouter } from "vue-router";
 
-import { MenuIcon } from "@heroicons/vue/outline";
-import { XCircleIcon } from "@heroicons/vue/solid";
+import { MenuIcon, XCircleIcon } from "@heroicons/vue/outline";
 
 const router = useRouter();
 
@@ -47,16 +46,16 @@ const endpoints = computed(() => {
         v-for="endpoint in endpoints"
         :key="endpoint.name"
         :to="endpoint.path"
-        class="flex flex-col items-center p-6 m-2 rounded-lg"
-        active-class="!bg-primary-300 shadow-lg shadow-primary-300/500"
+        class="flex flex-col justify-center items-center p-6 m-2 rounded-lg aspect-square w-32"
+        active-class="!bg-primary-300 shadow-lg shadow-primary-300/50"
       >
         <component :is="endpoint.icon" class="w-8 h-8" />
         <h1 class="font-semibold text-lg">{{ endpoint.name }}</h1>
       </RouterLink>
     </div>
 
-    <div @click="closeModal" class="self-center mt-16">
-      <XCircleIcon class="h-12 w-12 fill-neutral-300" />
+    <div @click="closeModal" class="self-center mt-16 cursor-pointer">
+      <XCircleIcon class="h-12 w-12 text-neutral-700" />
     </div>
   </div>
 
