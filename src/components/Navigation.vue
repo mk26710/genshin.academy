@@ -38,7 +38,7 @@ const endpoints = computed(() => {
   <div
     data-description="Mobile Navigation Modal"
     :class="store.isOpen ? 'visible opacity-100' : 'invisible opacity-0'"
-    class="fixed flex flex-col gap-y-4 justify-center h-screen w-screen bg-neutral-50 z-50"
+    class="fixed flex flex-col gap-y-4 justify-center h-screen w-screen overflow-hidden bg-neutral-50 z-50"
   >
     <div class="mt-64 w-full flex flex-wrap justify-evenly">
       <RouterLink
@@ -55,7 +55,7 @@ const endpoints = computed(() => {
     </div>
 
     <div @click="closeModal" class="self-center mt-16 cursor-pointer">
-      <XCircleIcon class="h-12 w-12 text-neutral-700" />
+      <XCircleIcon class="h-10 w-10 text-neutral-700" />
     </div>
   </div>
 
