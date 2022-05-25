@@ -38,8 +38,8 @@ const endpoints = computed(() => {
   <!-- Mobile Modal Menu -->
   <div
     data-description="Mobile Navigation Modal"
-    :class="store.isOpen ? 'fixed' : 'hidden'"
-    class="flex flex-col gap-y-4 justify-center h-screen w-screen bg-neutral-50 z-50"
+    :class="store.isOpen ? 'visible opacity-100' : 'invisible opacity-0'"
+    class="fixed flex flex-col gap-y-4 justify-center h-screen w-screen bg-neutral-50 z-50"
   >
     <div class="mt-64 w-full flex flex-wrap justify-evenly">
       <RouterLink
