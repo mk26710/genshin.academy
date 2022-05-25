@@ -12,10 +12,15 @@ const store = useGuidesStore();
 const characterAvatar = (id: string) =>
   new URL(`../assets/characters/${id}/avatar_header.png`, import.meta.url).href;
 
-const search = (name: string) =>
-  store.multipliedPublished
+const search = (name: string) => {
+  if (store.published.isImported !== true) {
+    return [];
+  }
+
+  return store.published.data
     .filter((c) => c.title.toLowerCase().includes(name.toLowerCase()))
     .sort((a, b) => b.publishedAt - a.publishedAt);
+};
 
 onMounted(async () => {
   if (store.published.isImported === false) {
