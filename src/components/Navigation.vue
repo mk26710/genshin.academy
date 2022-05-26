@@ -82,7 +82,7 @@ const endpoints = computed(() => {
   <!-- Desktop Sidebard -->
   <aside
     data-description="Desktop Sidebar Navigation"
-    class="sidebar hidden lg:flex flex-col w-64 border-r border-neutral-200 h-full"
+    class="sidebar hidden lg:flex flex-col w-64 border-r border-neutral-200 bg-neutral-100 h-full"
   >
     <div class="flex flex-col gap-y-2 sticky top-0 p-4 w-full">
       <div class="self-center py-4 mb-2 border-b border-neutral-200">
@@ -93,8 +93,8 @@ const endpoints = computed(() => {
         v-for="endpoint in endpoints"
         :key="endpoint.name"
         :to="endpoint.path"
-        class="w-full flex flex-row items-center gap-x-2 px-3 py-2 rounded-lg font-semibold text-lg transition-all duration-75 cursor-pointer hover:bg-neutral-100"
-        active-class="!bg-primary-300 shadow-lg shadow-primary-300/500"
+        class="w-full flex flex-row items-center gap-x-2 px-3 py-2 rounded-lg font-semibold text-lg transition-all duration-75 cursor-pointer hover:bg-primary-50/50"
+        active-class="!bg-primary-500 text-white shadow-lg shadow-primary-300/50"
       >
         <component :is="endpoint.icon" class="h-7 w-7 p-0" />
         <h1>{{ endpoint.name }}</h1>
