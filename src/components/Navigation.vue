@@ -3,7 +3,13 @@
 import { computed } from "vue";
 import { RouterLink, useRouter } from "vue-router";
 
-import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
+import {
+  Popover,
+  PopoverButton,
+  PopoverPanel,
+  TransitionChild,
+  TransitionRoot,
+} from "@headlessui/vue";
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 
 const router = useRouter();
@@ -40,28 +46,39 @@ const endpoints = computed(() => {
         <component :is="open ? XIcon : MenuIcon" class="w-6 h-6" />
       </PopoverButton>
 
-      <PopoverPanel as="div" class="fixed bottom-14 mb-4 mr-4 right-0 z-50">
-        <div class="bg-neutral-100 border border-neutral-200 rounded-lg p-2">
-          <div class="flex flex-col gap-y-2 text-lg font-semibold">
-            <RouterLink
-              v-for="endpoint in [...endpoints].reverse()"
-              :key="endpoint.name"
-              :to="endpoint.path"
-              class="px-3 py-2 rounded-lg"
-              active-class="bg-primary-500 text-white shadow-sm shadow-primary-300/50"
-            >
-              <div class="flex flex-row items-center gap-x-2">
-                <div class="flex-grow text-right">
-                  {{ endpoint.name }}
-                </div>
-                <div>
-                  <component :is="endpoint.icon" class="w-6 h-6" />
-                </div>
+      <TransitionRoot as="template">
+        <PopoverPanel class="fixed bottom-14 mb-4 mr-4 right-0 z-50" key="popover-panel">
+          <TransitionChild
+            enter="transition ease-out duration-200"
+            enter-from="opacity-0 translate-y-1"
+            enter-to="opacity-100 translate-y-0"
+            leave="transition ease-in duration-150"
+            leave-from="opacity-100 translate-y-0"
+            leave-to="opacity-0 translate-y-1"
+          >
+            <div class="bg-neutral-100 border border-neutral-200 rounded-lg p-2">
+              <div class="flex flex-col gap-y-2 text-lg font-semibold">
+                <RouterLink
+                  v-for="endpoint in [...endpoints].reverse()"
+                  :key="endpoint.name"
+                  :to="endpoint.path"
+                  class="px-3 py-2 rounded-lg"
+                  active-class="bg-primary-500 text-white shadow-sm shadow-primary-300/50"
+                >
+                  <div class="flex flex-row items-center gap-x-2">
+                    <div class="flex-grow text-right">
+                      {{ endpoint.name }}
+                    </div>
+                    <div>
+                      <component :is="endpoint.icon" class="w-6 h-6" />
+                    </div>
+                  </div>
+                </RouterLink>
               </div>
-            </RouterLink>
-          </div>
-        </div>
-      </PopoverPanel>
+            </div>
+          </TransitionChild>
+        </PopoverPanel>
+      </TransitionRoot>
     </Popover>
   </nav>
 
