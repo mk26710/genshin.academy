@@ -17,7 +17,6 @@
     "vue-router": "^4.0.15"
   },
   "devDependencies": {
-    "@headlessui/vue": "1.6.1",
     "@intlify/vite-plugin-vue-i18n": "^3.4.0",
     "@rushstack/eslint-patch": "^1.1.0",
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
