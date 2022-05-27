@@ -34,10 +34,5 @@
 
   .footer {
     grid-area: footer;
-    margin-bottom: theme("height.14");
-
-    @media (min-width: theme("screens.lg")) {
-      margin-bottom: 0;
-    }
   }
 }
