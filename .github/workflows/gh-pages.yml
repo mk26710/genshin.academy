@@ -14,11 +14,16 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+          
+      - name: Install Yarn
+        run: |
+          npm install -g yarn@1.22.18
+          yarn --version
 
       - name: Install and Build
         run: |
-          npm install
-          npm run build
+          yarn install
+          yarn build
           cd dist
           touch CNAME
           echo "genshin.zenless.club" > CNAME
