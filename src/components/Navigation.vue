@@ -1,13 +1,12 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-// import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { RouterLink, useRouter } from "vue-router";
 
+import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 
 const router = useRouter();
-const isOpen = ref(false);
 
 const endpoints = computed(() => {
   return router.options.routes
@@ -24,43 +23,13 @@ const endpoints = computed(() => {
 </script>
 
 <template>
-  <transition
-    enter-active-class="transition duration-100 ease-out"
-    enter-from-class="translate-y-4 opacity-0"
-    enter-to-class="translate-y-0 opacity-100"
-    leave-active-class="transition duration-150 ease-in"
-    leave-from-class="translate-y-0 opacity-100"
-    leave-to-class="translate-y-4 opacity-0"
-  >
-    <aside v-show="isOpen" class="fixed lg:hidden bottom-14 mb-4 mr-4 right-0 z-50">
-      <div class="bg-neutral-100 border border-neutral-200 rounded-lg p-2">
-        <div class="flex flex-col gap-y-2 text-lg font-semibold">
-          <RouterLink
-            v-for="endpoint in [...endpoints].reverse()"
-            :key="endpoint.name"
-            :to="endpoint.path"
-            class="px-3 py-2 rounded-lg"
-            active-class="bg-primary-500 text-white shadow-sm shadow-primary-300/50"
-          >
-            <div class="flex flex-row items-center gap-x-2">
-              <div class="flex-grow text-right">
-                {{ endpoint.name }}
-              </div>
-              <div>
-                <component :is="endpoint.icon" class="w-6 h-6" />
-              </div>
-            </div>
-          </RouterLink>
-        </div>
-      </div>
-    </aside>
-  </transition>
-
   <!-- 
     Mobile Navbar
     Note: select-none on nav is actually needed here otherwise it does some weird stuff on mobile firefox lol idk why
   -->
-  <nav
+  <popover
+    as="nav"
+    v-slot="{ open }"
     data-description="Mobile Bottom Navigation"
     class="fixed lg:hidden bottom-0 h-14 w-full flex flex-row flex-wrap bg-neutral-100 border-t border-neutral-200 select-none z-10"
   >
@@ -68,10 +37,45 @@ const endpoints = computed(() => {
       <h1 class="font-extrabold text-lg">GENSHIN.ZENLESS</h1>
     </div>
 
-    <div class="flex items-center cursor-pointer" @click="isOpen = !isOpen">
-      <component :is="isOpen ? XIcon : MenuIcon" class="w-6 h-6 mx-8" />
-    </div>
-  </nav>
+    <popover-button as="div" class="flex items-center cursor-pointer">
+      <component :is="open ? XIcon : MenuIcon" class="w-6 h-6 mx-8" />
+    </popover-button>
+
+    <!-- @headlessui/vue must be 1.6.1 or transition doesn't work -->
+    <transition
+      enter-active-class="transition duration-100 ease-out"
+      enter-from-class="translate-y-4 opacity-0"
+      enter-to-class="translate-y-0 opacity-100"
+      leave-active-class="transition duration-150 ease-in"
+      leave-from-class="translate-y-0 opacity-100"
+      leave-to-class="translate-y-4 opacity-0"
+    >
+      <popover-panel>
+        <aside v-show="open" class="fixed lg:hidden bottom-14 mb-4 mr-4 right-0 z-50">
+          <div class="bg-neutral-100 border border-neutral-200 rounded-lg p-2">
+            <div class="flex flex-col gap-y-2 text-lg font-semibold">
+              <RouterLink
+                v-for="endpoint in [...endpoints].reverse()"
+                :key="endpoint.name"
+                :to="endpoint.path"
+                class="px-3 py-2 rounded-lg"
+                active-class="bg-primary-500 text-white shadow-sm shadow-primary-300/50"
+              >
+                <div class="flex flex-row items-center gap-x-2">
+                  <div class="flex-grow text-right">
+                    {{ endpoint.name }}
+                  </div>
+                  <div>
+                    <component :is="endpoint.icon" class="w-6 h-6" />
+                  </div>
+                </div>
+              </RouterLink>
+            </div>
+          </div>
+        </aside>
+      </popover-panel>
+    </transition>
+  </popover>
 
   <!-- Desktop Sidebard -->
   <aside
