@@ -3,7 +3,7 @@ import type { RouteRecordRaw } from "vue-router";
 
 import HomeView from "@/views/HomeView.vue";
 import NotFound from "@/views/NotFound.vue";
-import { BeakerIcon, CalculatorIcon, HomeIcon } from "@heroicons/vue/outline";
+import { BeakerIcon, CalculatorIcon, HomeIcon, StarIcon } from "@heroicons/vue/outline";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -24,6 +24,17 @@ const routes: Array<RouteRecordRaw> = [
       navigation: {
         name: "Guides",
         icon: BeakerIcon,
+      },
+    },
+  },
+  {
+    path: "/character",
+    alias: "/characters",
+    component: () => import("@/views/CharactersView.vue"),
+    meta: {
+      navigation: {
+        name: "Characters",
+        icon: StarIcon,
       },
     },
   },
