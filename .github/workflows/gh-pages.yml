@@ -11,7 +11,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       
-      - uses: actions/setup-node@v3
+      - name: Install Node 16
+        uses: actions/setup-node@v3
         with:
           node-version: 16
           
@@ -19,11 +20,15 @@ jobs:
         run: |
           npm install -g yarn@1.22.18
           yarn --version
+          
+      - name: Install dependencies
+        run: yarn install
+      
+      - name: Build
+        run: yarn build
 
-      - name: Install and Build
+      - name: Create CNAME
         run: |
-          yarn install
-          yarn build
           cd dist
           touch CNAME
           echo "genshin.zenless.club" > CNAME
