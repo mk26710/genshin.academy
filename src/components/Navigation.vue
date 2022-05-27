@@ -95,7 +95,7 @@ const endpoints = computed(() => {
   >
     <aside
       v-show="!isOpen"
-      class="fixed lg:hidden select-none rounded-lg bg-neutral-100 border border-neutral-200 cursor-pointer mr-5 bottom-0 right-0 z-40"
+      class="fixed lg:hidden select-none rounded-lg bg-neutral-100 border border-neutral-200 shadow-lg cursor-pointer mr-5 bottom-0 right-0 z-40"
       :class="firefoxMarginBottomClass"
       @click="isOpen = true"
     >
