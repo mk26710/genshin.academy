@@ -24,7 +24,7 @@ withDefaults(defineProps<Props>(), {});
       />
     </div>
     <div class="px-6 py-4 space-y-2">
-      <div v-if="!!publishedAt" class="font-medium text-sm leading-6 text-pink-500">
+      <div v-if="!!publishedAt" class="font-medium text-sm leading-6 text-primary-500">
         {{ $dayjs(publishedAt).format("HH:mm on DD.MM.YYYY") }}
       </div>
       <p class="block font-semibold text-base text-slate-900 leading-6">
