@@ -15,6 +15,14 @@ onClickOutside(popover, () => {
   isOpen.value = false;
 });
 
+// thanks firefox for being great
+const firefoxMarginBottomClass = computed(() => {
+  if (navigator.userAgent.toLowerCase().includes("firefox")) {
+    return "mb-10";
+  }
+  return "mb-8";
+});
+
 const endpoints = computed(() => {
   return router.options.routes
     .filter((r) => r.meta && r.meta.navigation)
@@ -39,7 +47,11 @@ const endpoints = computed(() => {
     leave-from-class="translate-y-0 opacity-100"
     leave-to-class="-translate-y-4 opacity-0"
   >
-    <aside v-show="isOpen" class="fixed lg:hidden select-none mb-8 mr-5 bottom-0 right-0 z-50">
+    <aside
+      v-show="isOpen"
+      :class="firefoxMarginBottomClass"
+      class="fixed lg:hidden select-none mr-5 bottom-0 right-0 z-50"
+    >
       <div class="bg-neutral-100 border border-neutral-200 rounded-lg p-2" ref="popover">
         <div class="flex flex-col gap-y-2 text-lg font-semibold">
           <RouterLink
@@ -72,26 +84,22 @@ const endpoints = computed(() => {
     </aside>
   </transition>
 
-  <!-- 
-    Mobile Navbar
-    Note: select-none on nav is actually needed here otherwise it does some weird stuff on mobile firefox lol idk why
-  -->
+  <!-- Mobile navigation menu button -->
   <transition
-    enter-active-class="transition duration-200 ease-out"
-    enter-from-class="translate-y-6 opacity-0"
+    enter-active-class="transition duration-100 ease-out"
+    enter-from-class="-translate-y-4 opacity-0"
     enter-to-class="translate-y-0 opacity-100"
     leave-active-class="transition duration-150 ease-in"
-    leave-from-class="translate-y-0 opacity-200"
-    leave-to-class="translate-y-6 opacity-0"
+    leave-from-class="translate-y-0 opacity-100"
+    leave-to-class="-translate-y-4 opacity-0"
   >
     <aside
       v-show="!isOpen"
-      class="fixed lg:hidden select-none rounded-[50%] bg-neutral-100 border border-neutral-200 cursor-pointer mb-8 mr-5 bottom-0 right-0 z-40"
+      class="fixed lg:hidden select-none rounded-lg bg-neutral-100 border border-neutral-200 cursor-pointer mr-5 bottom-0 right-0 z-40"
+      :class="firefoxMarginBottomClass"
       @click="isOpen = true"
     >
-      <div class="rounded-[50%] p-3">
-        <MenuIcon class="w-6 h-6" />
-      </div>
+      <MenuIcon class="w-6 h-6 m-3" />
     </aside>
   </transition>
 
