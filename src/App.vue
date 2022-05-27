@@ -8,7 +8,11 @@ import Navigation from "@/components/Navigation.vue";
     <Navigation />
 
     <Suspense>
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <transition name="fade">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </Suspense>
 
     <Footer />
