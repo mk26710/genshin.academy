@@ -1,15 +1,54 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
+import type { Dayjs } from "dayjs";
+import dayjs from "dayjs";
+import { ref } from "vue";
+
 import DiscordLogo from "@/components/icons/DiscordLogo.vue";
 import GitHubLogo from "@/components/icons/GitHubLogo.vue";
+import { useCounter } from "@vueuse/shared";
+
+import type { Nullable } from "@/lib/helpers";
+
+// all of that just for a small easter egg :D
+// users should click on website title
+// 20 times in 15 seconds to find it
+const { count, inc, reset } = useCounter();
+
+let lastSecretClickAt = ref<Nullable<Dayjs>>(null);
+
+const secretClick = () => {
+  let now = dayjs();
+  if (now.diff(lastSecretClickAt.value, "seconds") > 15) {
+    reset();
+  }
+
+  inc();
+  lastSecretClickAt.value = now;
+};
 </script>
 
 <template>
+  <div
+    v-if="count >= 20"
+    class="fixed flex w-full h-full items-center justify-center top-0 left-0 bg-black/70 z-[9999]"
+  >
+    <a
+      @click="reset()"
+      target="_blank"
+      href="https://youtube.com/shorts/pnMiV2Ykw9E"
+      class="bg-primary text-white px-3 py-2 rounded-lg"
+    >
+      CLICK TO LEARN THE SECRET ART
+    </a>
+  </div>
+
   <footer
     class="footer grid grid-cols-1 lg:grid-cols-[1fr_auto] grid-rows-[auto_auto] lg:grid-rows-1 py-4 mx-4 border-t border-neutral-200"
   >
     <p class="text-sm text-neutral-400">
-      genshin.zenless.club is not affiliated with
+      <span class="cursor-pointer" @click="secretClick">genshin.zenless.club</span> is not
+      affiliated with
       <a
         class="text-primary-400 hover:text-primary-600 transition-colors ease-in-out duration-200"
         target="_blank"
