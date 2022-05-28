@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isError } from "lodash";
+import { isError } from "lodash-es";
 import { storeToRefs } from "pinia";
 import { onMounted, watch } from "vue";
 import { useRoute } from "vue-router";

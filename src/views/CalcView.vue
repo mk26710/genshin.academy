@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isNumber } from "lodash";
+import { isNumber } from "lodash-es";
 
 import MainContainer from "@/components/MainContainer.vue";
 
