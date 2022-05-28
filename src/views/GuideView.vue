@@ -1,38 +1,61 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from "vue";
+import { isError } from "lodash";
+import { storeToRefs } from "pinia";
+import { onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 
+import Error from "@/components/Error.vue";
 import MainContainer from "@/components/MainContainer.vue";
 
+import { useGuidesStore } from "@/stores/guides";
+
 const route = useRoute();
+const store = useGuidesStore();
 
-/**
- * So I came up with some weird shit and basically
- * we are going to store all artcles as Vue SFCs
- * in order to reduce the headache with parser and etc.
- *
- * Here's a function that returns the component, but
- * in order for it to work properly with vue-router
- * `:key` directive was used, so it rerenders and
- * imports fresh content, which is needed in situations
- * like this, for example:
- *
- *   User is at `/guides/kamsiato_ayaka`, they change the url to
- *   `/guides/yae_miko`, if there was no `:key` - the content
- *   would stay the same and Vue wouldn't rerender the component
- *
- * This could probably be achieved with `reactive()` or `ref()`
- * but according to Vue communities it's not the best idea.
- */
+const { setSelected, resetSelected, setSelectedError } = store;
+const { selected } = storeToRefs(store);
 
-const guideContent = () => {
-  console.log(`loading guide for ${route.params.id}`);
-  return defineAsyncComponent(() => import(`../data/guides/characters/${route.params.id}.vue`));
+const fetchData = async () => {
+  if (route.params?.id === undefined) {
+    return;
+  }
+
+  if (route.params.id === selected.value.id) {
+    console.info(`${route.params.id} was selected already, no need to refetch`);
+    return;
+  }
+
+  resetSelected();
+
+  try {
+    const data = await import(`../data/guides/characters/${route.params.id}.json`);
+    setSelected({ id: data.id, html: data.html });
+    console.info(`Selected guide was set to - ${route.params.id}`);
+  } catch (err) {
+    if (isError(err)) {
+      setSelectedError(err);
+    }
+  }
 };
+
+// We have to go with this approach to trigger Suspense fallback if needed
+onMounted(async () => {
+  window.scrollTo({ top: 0 });
+  await fetchData();
+});
+
+watch(() => route.params.id, fetchData);
 </script>
 
 <template>
   <MainContainer>
-    <component :is="guideContent()" :key="$route.params.id" />
+    <section v-if="selected.html !== null" v-html="selected.html" />
+    <Error
+      v-if="selected.error !== null"
+      title="Hey, this guide doesn't exist!"
+      :description="selected.error.message"
+      button-title="Back to Guides"
+      button-href="/guides"
+    />
   </MainContainer>
 </template>
