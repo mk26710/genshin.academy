@@ -28,6 +28,11 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: "/guides/:id",
+    alias: "/guide/:id",
+    component: () => import("@/views/GuideView.vue"),
+  },
+  {
     path: "/character",
     alias: "/characters",
     component: () => import("@/views/CharactersView.vue"),
