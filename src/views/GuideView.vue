@@ -26,7 +26,7 @@ const route = useRoute();
  */
 
 const guideContent = () => {
-  console.log(`loading guide for ${route.params.id}`)
+  console.log(`loading guide for ${route.params.id}`);
   return defineAsyncComponent(() => import(`../data/guides/characters/${route.params.id}.vue`));
 };
 </script>
