@@ -1,28 +1,38 @@
 <script setup lang="ts">
 import Footer from "@/components/Footer.vue";
 import Navigation from "@/components/Navigation.vue";
+import SuspenseFallback from "@/components/SuspenseFallback.vue";
 </script>
 
 <template>
   <div class="app-container">
     <Navigation />
 
-    <Suspense>
-      <router-view v-slot="{ Component }">
-        <transition name="fade">
-          <component :is="Component" />
-        </transition>
-      </router-view>
-    </Suspense>
+    <RouterView v-slot="{ Component }">
+      <template v-if="Component">
+        <!-- transitions cause weird exception when spamming mouse navigation buttons -->
+        <!-- <Transition name="fade" mode="out-in"> -->
+        <Suspense timeout="200">
+          <template #default>
+            <component :is="Component" />
+          </template>
 
-    <Footer />
+          <template #fallback>
+            <SuspenseFallback />
+          </template>
+        </Suspense>
+        <!-- </Transition> -->
+
+        <Footer />
+      </template>
+    </RouterView>
   </div>
 </template>
 
 <style lang="scss">
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.2s ease;
+  transition: opacity 0.1s ease;
 }
 
 .fade-enter-from,
