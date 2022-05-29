@@ -36,20 +36,19 @@ export const useGuidesStore = defineStore({
   actions: {
     async lazyPublished() {
       const json = await import("@/data/guides/published.json");
-
       this.published.data = json.data;
       this.published.isImported = true;
-      console.log("imported guides data");
+
+      console.info("Imported published guides list");
     },
     resetSelected() {
-      this.selected = stateFactory().selected;
+      this.selected = { ...stateFactory().selected };
     },
     setSelected(payload: Omit<Selected, "error">) {
-      this.selected.id = payload.id;
-      this.selected.html = payload.html;
+      this.selected = { ...payload, error: null };
     },
     setSelectedError(payload: Error) {
-      this.selected.error = payload;
+      this.selected = { ...stateFactory().selected, error: payload };
     },
   },
   getters: {
