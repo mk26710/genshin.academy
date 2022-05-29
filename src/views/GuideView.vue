@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { isError } from "lodash-es";
 import { storeToRefs } from "pinia";
 import { onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 
-import Error from "@/components/Error.vue";
+import ErrorComponent from "@/components/Error.vue";
 import MainContainer from "@/components/MainContainer.vue";
 
+import { injectStrict } from "@/lib/utils";
+import { markedKey } from "@/plugins/symbols";
 import { useGuidesStore } from "@/stores/guides";
+
+const md = injectStrict(markedKey);
 
 const route = useRoute();
 const store = useGuidesStore();
@@ -27,14 +30,17 @@ const fetchData = async () => {
 
   resetSelected();
 
-  try {
-    const data = await import(`../data/guides/characters/${route.params.id}.json`);
-    setSelected({ id: data.id, html: data.html });
+  const resp = await fetch(`/articles/guides/characters/${route.params.id}.md`, {
+    cache: "no-store",
+  });
+
+  if (resp.ok) {
+    const data = await resp.text();
+    setSelected({ id: route.params.id.toString(), html: md.parse(data) });
     console.info(`Selected guide was set to - ${route.params.id}`);
-  } catch (err) {
-    if (isError(err)) {
-      setSelectedError(err);
-    }
+  } else {
+    const err = new Error(`Not found ${resp.url}`);
+    setSelectedError(err);
   }
 };
 
@@ -50,7 +56,7 @@ watch(() => route.params.id, fetchData);
 <template>
   <MainContainer>
     <section v-if="selected.html !== null" v-html="selected.html" />
-    <Error
+    <ErrorComponent
       v-if="selected.error !== null"
       title="Hey, this guide doesn't exist!"
       :description="selected.error.message"
