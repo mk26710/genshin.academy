@@ -15,7 +15,7 @@ withDefaults(defineProps<Props>(), {});
 
 <template>
   <div-or-link :to="to" class="flex flex-col border rounded-lg">
-    <div class="min-h-[10rem] lg:min-h-[20rem]">
+    <div class="min-h-[10rem] lg:min-h-[20rem] w-full aspect-[9/16] bg-neutral-200">
       <img
         v-if="!!thumbnail"
         :src="thumbnail"
