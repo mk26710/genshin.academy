@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { isError } from "lodash-es";
 import { storeToRefs } from "pinia";
 import { onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
@@ -6,11 +7,7 @@ import { useRoute } from "vue-router";
 import ErrorComponent from "@/components/Error.vue";
 import MainContainer from "@/components/MainContainer.vue";
 
-import { injectStrict } from "@/lib/utils";
-import { markedKey } from "@/plugins/symbols";
 import { useGuidesStore } from "@/stores/guides";
-
-const md = injectStrict(markedKey);
 
 const route = useRoute();
 const store = useGuidesStore();
@@ -30,17 +27,17 @@ const fetchData = async () => {
 
   resetSelected();
 
-  const resp = await fetch(`/articles/guides/characters/${route.params.id}.md`, {
-    cache: "no-store",
-  });
+  try {
+    let data: { id: string; nodes: string[] } = await import(
+      `../data/guides/characters/${route.params.id}.json`
+    );
 
-  if (resp.ok) {
-    const data = await resp.text();
-    setSelected({ id: route.params.id.toString(), html: md.parse(data) });
-    console.info(`Selected guide was set to - ${route.params.id}`);
-  } else {
-    const err = new Error(`Not found ${resp.url}`);
-    setSelectedError(err);
+    let { id, nodes } = data;
+    let html = nodes.join("");
+
+    setSelected({ id, html });
+  } catch (error) {
+    if (isError(error)) setSelectedError(error);
   }
 };
 
