@@ -30,6 +30,19 @@ const myColors = {
     800: "#47107A",
     900: "#2A0A48",
   },
+  "dove-gray": {
+    DEFAULT: "#6E6E6E",
+    50: "#D1D1D1",
+    100: "#C0C0C0",
+    200: "#ABABAB",
+    300: "#979797",
+    400: "#828282",
+    500: "#6E6E6E",
+    600: "#525252",
+    700: "#363636",
+    800: "#1C1C1C",
+    900: "#000000",
+  },
 };
 
 const myScreens = {
@@ -44,6 +57,7 @@ module.exports = {
       colors: {
         ...myColors,
         primary: myColors["medium-purple"],
+        dark: myColors["dove-gray"],
       },
       screens: {
         ...myScreens,
