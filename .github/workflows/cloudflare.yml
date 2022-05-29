@@ -1,9 +1,8 @@
 name: CloudFlare Deploy Hook
-
 on:
   push:
     branches:
-      - nuxt-v3
+      - main
 jobs:
   trigger-cloudflare-hook:
     runs-on: ubuntu-latest
