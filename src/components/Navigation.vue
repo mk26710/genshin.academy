@@ -4,12 +4,17 @@ import { computed, ref } from "vue";
 import { RouterLink, useRouter } from "vue-router";
 
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
+import { MoonIcon, SunIcon } from "@heroicons/vue/solid";
 import { onClickOutside } from "@vueuse/core";
+import { useDark, useToggle } from "@vueuse/core";
 
 const router = useRouter();
 
 const isOpen = ref(false);
 const popover = ref(null);
+
+const isDark = useDark({ storageKey: "theme" });
+const toggleDark = useToggle(isDark);
 
 onClickOutside(popover, () => {
   isOpen.value = false;
@@ -54,6 +59,15 @@ const endpoints = computed(() => {
     >
       <div class="bg-neutral-100 border border-neutral-200 rounded-lg p-2" ref="popover">
         <div class="flex flex-col gap-y-2 text-lg font-semibold">
+          <div @click="toggleDark()" class="px-3 py-2 border-b border-neutral-200 cursor-pointer">
+            <div class="flex flex-row items-center gap-x-2">
+              <div class="flex-grow text-right">{{ isDark ? "Light" : "Dark" }}</div>
+              <div>
+                <component :is="isDark ? SunIcon : MoonIcon" class="w-6 h-6" />
+              </div>
+            </div>
+          </div>
+
           <RouterLink
             v-for="endpoint in [...endpoints].reverse()"
             :key="endpoint.name"
@@ -123,6 +137,15 @@ const endpoints = computed(() => {
         <component :is="endpoint.icon" class="h-7 w-7 p-0" />
         <h1>{{ endpoint.name }}</h1>
       </RouterLink>
+    </div>
+
+    <div class="fixed bottom-4 left-4">
+      <div
+        @click="toggleDark()"
+        class="transition-all duration-75 bg-neutral-200 rounded-lg flex items-center justify-center aspect-square h-8 cursor-pointer"
+      >
+        <component :is="isDark ? SunIcon : MoonIcon" class="w-5 h-5" />
+      </div>
     </div>
   </aside>
 </template>
