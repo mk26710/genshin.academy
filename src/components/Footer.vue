@@ -1,12 +1,16 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import type { Dayjs } from "dayjs";
-import dayjs from "dayjs";
 import { ref } from "vue";
 
 import DiscordLogo from "@/components/icons/DiscordLogo.vue";
 import GitHubLogo from "@/components/icons/GitHubLogo.vue";
 import { useCounter } from "@vueuse/shared";
+
+import { injectStrict } from "@/lib/utils";
+import { dayjsKey } from "@/plugins/symbols";
+
+const dayjs = injectStrict(dayjsKey);
 
 // all of that just for a small easter egg :D
 // users should click on website title
