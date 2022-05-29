@@ -1,0 +1,16 @@
+name: CloudFlare Deploy Hook
+
+on:
+  push:
+    branches:
+      - nuxt-v3
+jobs:
+  trigger-cloudflare-hook:
+    runs-on: ubuntu-latest
+    if: startsWith(github.event.head_commit.message, '(cloudflare)')
+    
+    steps:
+      - name: Trigger CloudFlare Deployment 
+        uses: joelwmale/webhook-action@master
+        with:
+          url: ${{ secrets.CF_DEPLOY_HOOK }}
