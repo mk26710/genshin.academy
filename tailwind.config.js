@@ -17,6 +17,19 @@ const myColors = {
     800: "#340C59",
     900: "#170527",
   },
+  "medium-purple": {
+    DEFAULT: "#9C4BE7",
+    50: "#F5EDFD",
+    100: "#EBDBFA",
+    200: "#D7B7F5",
+    300: "#C493F1",
+    400: "#B06FEC",
+    500: "#9C4BE7",
+    600: "#811DDD",
+    700: "#6417AB",
+    800: "#47107A",
+    900: "#2A0A48",
+  },
 };
 
 const myScreens = {
@@ -30,7 +43,7 @@ module.exports = {
     extend: {
       colors: {
         ...myColors,
-        primary: myColors["purple-heart"],
+        primary: myColors["medium-purple"],
       },
       screens: {
         ...myScreens,
