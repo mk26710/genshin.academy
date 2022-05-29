@@ -8,14 +8,12 @@ import DiscordLogo from "@/components/icons/DiscordLogo.vue";
 import GitHubLogo from "@/components/icons/GitHubLogo.vue";
 import { useCounter } from "@vueuse/shared";
 
-import type { Nullable } from "@/lib/helpers";
-
 // all of that just for a small easter egg :D
 // users should click on website title
 // 20 times in 15 seconds to find it
 const { count, inc, reset } = useCounter();
 
-let lastSecretClickAt = ref<Nullable<Dayjs>>(null);
+let lastSecretClickAt = ref<Dayjs | null>(null);
 
 const secretClick = () => {
   let now = dayjs();
