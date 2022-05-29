@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
-import type { App, InjectionKey } from "vue";
+import type { App } from "vue";
 
-export const dayjsKey: InjectionKey<typeof dayjs> = Symbol("dayjs");
+import { dayjsKey } from "@/plugins/symbols";
 
 export default {
   install: (app: App) => {
