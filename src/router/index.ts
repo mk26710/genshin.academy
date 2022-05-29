@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
 
+import CalcView from "@/views/CalcView.vue";
+import CharactersView from "@/views/CharactersView.vue";
 import HomeView from "@/views/HomeView.vue";
 import NotFound from "@/views/NotFound.vue";
 import { BeakerIcon, CalculatorIcon, HomeIcon, StarIcon } from "@heroicons/vue/outline";
@@ -35,7 +37,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/character",
     alias: "/characters",
-    component: () => import("@/views/CharactersView.vue"),
+    component: CharactersView,
     meta: {
       navigation: {
         name: "Characters",
@@ -46,7 +48,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/calc",
     alias: "/calculations",
-    component: () => import("@/views/CalcView.vue"),
+    component: CalcView,
     meta: {
       navigation: {
         name: "Calculate",
