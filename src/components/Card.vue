@@ -16,7 +16,7 @@ withDefaults(defineProps<Props>(), {});
 <template>
   <div-or-link
     :to="to"
-    class="flex flex-col border border-neutral-200 dark:border-neutral-800 rounded-lg"
+    class="flex flex-col bg-neutral-100/30 dark:bg-neutral-800/40 border border-neutral-200 dark:border-neutral-800 rounded-lg"
   >
     <div class="min-h-[10rem] lg:min-h-[20rem] w-full aspect-[9/16]">
       <img
