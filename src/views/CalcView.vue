@@ -21,16 +21,16 @@ const calculateMinutes = () => {
     <div>
       <h1 class="font-bold text-4xl md:text-5xl">Resin calculator</h1>
       <p class="mb-6">Provide this calculator with your own values.</p>
-      <div class="w-full flex flex-col sm:flex-row gap-2 mb-2">
+      <div class="w-full flex flex-col sm:flex-row gap-2 mb-4">
         <input
           v-model="resin.current"
-          class="grow accent-primary-300 text-sm leading-6 text-neutral-600 rounded-md ring-1 ring-neutral-900/10 shadow-sm py-1.5 pl-2 pr-3"
+          class="grow leading-6 dark:text-neutral-300 placeholder:text-neutral-600 accent-primary-500 rounded-md ring-1 dark:bg-neutral-800 ring-neutral-900/10 dark:ring-neutral-50/10 shadow-sm py-1.5 pl-2 pr-3"
           type="number"
           placeholder="your current resin"
         />
         <input
           v-model="resin.needed"
-          class="grow accent-primary-300 text-sm leading-6 text-neutral-600 rounded-md ring-1 ring-neutral-900/10 shadow-sm py-1.5 pl-2 pr-3"
+          class="grow leading-6 dark:text-neutral-300 placeholder:text-neutral-600 accent-primary-500 rounded-md ring-1 dark:bg-neutral-800 ring-neutral-900/10 dark:ring-neutral-50/10 shadow-sm py-1.5 pl-2 pr-3"
           type="number"
           placeholder="you need resin"
         />

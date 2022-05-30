@@ -14,7 +14,10 @@ withDefaults(defineProps<Props>(), {});
 </script>
 
 <template>
-  <div-or-link :to="to" class="flex flex-col border rounded-lg">
+  <div-or-link
+    :to="to"
+    class="flex flex-col border border-neutral-200 dark:border-neutral-800 rounded-lg"
+  >
     <div class="min-h-[10rem] lg:min-h-[20rem] w-full aspect-[9/16]">
       <img
         v-if="!!thumbnail"
@@ -27,10 +30,13 @@ withDefaults(defineProps<Props>(), {});
       <div v-if="!!publishedAt" class="font-medium text-sm leading-6 text-primary-500">
         {{ $dayjs(publishedAt).format("HH:mm on DD.MM.YYYY") }}
       </div>
-      <p class="block font-semibold text-base text-slate-900 leading-6">
+      <p class="block font-semibold text-base text-neutral-900 dark:text-neutral-200 leading-6">
         {{ title }}
       </p>
-      <p v-if="!!description" class="text-sm text-justify text-slate-600 leading-6">
+      <p
+        v-if="!!description"
+        class="text-sm text-justify text-neutral-600 dark:text-neutral-400 leading-6"
+      >
         {{ description }}
       </p>
     </div>

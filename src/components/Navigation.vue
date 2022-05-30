@@ -57,9 +57,15 @@ const endpoints = computed(() => {
       :class="firefoxMarginBottomClass"
       class="fixed lg:hidden select-none mr-5 bottom-0 right-0 z-50"
     >
-      <div class="bg-neutral-100 border border-neutral-200 rounded-lg p-2" ref="popover">
+      <div
+        class="bg-neutral-100 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-lg p-2"
+        ref="popover"
+      >
         <div class="flex flex-col gap-y-2 text-lg font-semibold">
-          <div @click="toggleDark()" class="px-3 py-2 border-b border-neutral-200 cursor-pointer">
+          <div
+            @click="toggleDark()"
+            class="px-3 py-2 border-b border-neutral-200 dark:border-neutral-800 cursor-pointer"
+          >
             <div class="flex flex-row items-center gap-x-2">
               <div class="flex-grow text-right">{{ isDark ? "Light" : "Dark" }}</div>
               <div>
@@ -85,7 +91,10 @@ const endpoints = computed(() => {
             </div>
           </RouterLink>
 
-          <div @click="isOpen = false" class="px-3 py-2 border-t border-neutral-200 cursor-pointer">
+          <div
+            @click="isOpen = false"
+            class="px-3 py-2 border-t border-neutral-200 dark:border-neutral-800 cursor-pointer"
+          >
             <div class="flex flex-row items-center gap-x-2">
               <div class="flex-grow text-right">Close</div>
               <div>
@@ -109,7 +118,7 @@ const endpoints = computed(() => {
   >
     <aside
       v-show="!isOpen"
-      class="fixed lg:hidden select-none rounded-lg bg-neutral-100 border border-neutral-200 shadow-lg cursor-pointer mr-5 bottom-0 right-0 z-40"
+      class="fixed lg:hidden select-none rounded-lg dark:text-neutral-300/80 bg-neutral-100 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 shadow-lg cursor-pointer mr-5 bottom-0 right-0 z-40"
       :class="firefoxMarginBottomClass"
       @click="isOpen = true"
     >
@@ -120,10 +129,10 @@ const endpoints = computed(() => {
   <!-- Desktop Sidebard -->
   <aside
     data-description="Desktop Sidebar Navigation"
-    class="sidebar hidden lg:flex flex-col w-64 border-r border-neutral-200 bg-neutral-100 h-full"
+    class="sidebar hidden lg:flex flex-col w-64 border-r border-neutral-200 dark:border-neutral-800 dark:bg-neutral-950 bg-neutral-100 h-full"
   >
     <div class="flex flex-col gap-y-2 sticky top-0 p-4 w-full">
-      <div class="self-center py-4 mb-2 border-b border-neutral-200">
+      <div class="self-center py-4 mb-2 border-b-2 border-neutral-200 dark:border-neutral-800">
         <h1 class="font-extrabold text-xl">GENSHIN.ZENLESS</h1>
       </div>
 
@@ -131,8 +140,8 @@ const endpoints = computed(() => {
         v-for="endpoint in endpoints"
         :key="endpoint.name"
         :to="endpoint.path"
-        class="w-full flex flex-row items-center gap-x-2 px-3 py-2 rounded-lg font-semibold text-lg transition-all duration-75 cursor-pointer hover:bg-primary-50/50"
-        active-class="!bg-primary-500 text-white shadow-lg shadow-primary-300/50"
+        class="w-full flex flex-row items-center gap-x-2 px-3 py-2 rounded-lg font-semibold text-lg transition-all duration-75 cursor-pointer hover:bg-primary-50/50 dark:hover:bg-primary-900/40"
+        active-class="!bg-primary-500 text-white shadow-lg shadow-primary-300/50 dark:shadow-primary-500/40"
       >
         <component :is="endpoint.icon" class="h-7 w-7 p-0" />
         <h1>{{ endpoint.name }}</h1>
@@ -142,7 +151,7 @@ const endpoints = computed(() => {
     <div class="fixed bottom-4 left-4">
       <div
         @click="toggleDark()"
-        class="transition-all duration-75 bg-neutral-200 rounded-lg flex items-center justify-center aspect-square h-8 cursor-pointer"
+        class="transition-all duration-75 bg-neutral-200 dark:bg-neutral-1000 dark:text-neutral-300 rounded-lg flex items-center justify-center aspect-square h-8 cursor-pointer"
       >
         <component :is="isDark ? SunIcon : MoonIcon" class="w-5 h-5" />
       </div>

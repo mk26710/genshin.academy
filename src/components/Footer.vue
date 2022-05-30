@@ -46,20 +46,20 @@ const secretClick = () => {
   </div>
 
   <footer
-    class="footer grid grid-cols-1 lg:grid-cols-[1fr_auto] grid-rows-[auto_auto] lg:grid-rows-1 py-4 mx-4 border-t border-neutral-200"
+    class="footer grid grid-cols-1 lg:grid-cols-[1fr_auto] grid-rows-[auto_auto] lg:grid-rows-1 py-4 mx-4 border-t border-neutral-200 dark:border-neutral-800"
   >
-    <p class="text-sm text-neutral-400">
-      <span class="cursor-pointer" @click="secretClick">genshin.zenless.club</span> is not
-      affiliated with
+    <p class="text-sm text-neutral-400 dark:text-neutral-700">
+      <span class="cursor-pointer select-none" @click="secretClick">genshin.zenless.club</span> is
+      not affiliated with
       <a
-        class="text-primary-400 hover:text-primary-600 transition-colors ease-in-out duration-200"
+        class="text-primary-400 dark:text-primary-500 hover:text-primary-600 dark:hover:text-primary-700 transition-colors ease-in-out duration-200"
         target="_blank"
         href="https://www.mihoyo.com/"
         >miHoYo</a
       >. <br />
       All in-game content is the property of
       <a
-        class="text-primary-400 hover:text-primary-600 transition-colors ease-in-out duration-200"
+        class="text-primary-400 dark:text-primary-500 hover:text-primary-600 dark:hover:text-primary-700 transition-colors ease-in-out duration-200"
         target="_blank"
         href="https://www.mihoyo.com/"
         >miHoYo Co., Ltd</a
@@ -72,7 +72,7 @@ const secretClick = () => {
       <a
         href="https://github.com/kitsune-guuji/gvp"
         target="_blank"
-        class="hover:text-neutral-700 transition-colors ease-in-out duration-200"
+        class="dark:text-neutral-700 hover:text-neutral-700 dark:hover:text-neutral-500 transition-colors ease-in-out duration-200"
       >
         <div class="flex flex-row gap-x-2 items-center">
           <GitHubLogo class="w-4 h-auto inline-block" />
@@ -80,7 +80,10 @@ const secretClick = () => {
         </div>
       </a>
 
-      <a href="#" class="hover:text-neutral-700 transition-colors ease-in-out duration-200">
+      <a
+        href="#"
+        class="dark:text-neutral-700 hover:text-neutral-700 dark:hover:text-neutral-500 transition-colors ease-in-out duration-200"
+      >
         <div class="flex flex-row gap-x-2 items-center">
           <DiscordLogo class="w-4 h-auto inline-block" />
           <p>Discord</p>
