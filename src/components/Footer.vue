@@ -1,65 +1,24 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import type { Dayjs } from "dayjs";
-import { ref } from "vue";
-
 import DiscordLogo from "@/components/icons/DiscordLogo.vue";
 import GitHubLogo from "@/components/icons/GitHubLogo.vue";
-import { useCounter } from "@vueuse/shared";
-
-import { injectStrict } from "@/lib/utils";
-import { dayjsKey } from "@/plugins/symbols";
-
-const dayjs = injectStrict(dayjsKey);
-
-// all of that just for a small easter egg :D
-// users should click on website title
-// 20 times in 15 seconds to find it
-const { count, inc, reset } = useCounter();
-
-let lastSecretClickAt = ref<Dayjs | null>(null);
-
-const secretClick = () => {
-  let now = dayjs();
-  if (now.diff(lastSecretClickAt.value, "seconds") > 15) {
-    reset();
-  }
-
-  inc();
-  lastSecretClickAt.value = now;
-};
 </script>
 
 <template>
-  <div
-    v-if="count >= 20"
-    class="fixed flex w-full h-full items-center justify-center top-0 left-0 bg-black/70 z-[9999]"
-  >
-    <a
-      @click="reset()"
-      target="_blank"
-      href="https://youtube.com/shorts/pnMiV2Ykw9E"
-      class="bg-primary text-white px-3 py-2 rounded-lg"
-    >
-      CLICK TO LEARN THE SECRET ART
-    </a>
-  </div>
-
   <footer
-    class="footer grid grid-cols-1 lg:grid-cols-[1fr_auto] grid-rows-[auto_auto] lg:grid-rows-1 py-4 mx-4 border-t border-neutral-200 dark:border-neutral-800"
+    class="footer grid grid-cols-1 lg:grid-cols-[1fr_auto] grid-rows-[auto_auto] lg:grid-rows-1 py-4 mx-4 text-neutral-400 dark:text-dark-600 border-t border-neutral-200 dark:border-neutral-200/10"
   >
-    <p class="text-sm text-neutral-400 dark:text-neutral-700">
-      <span class="cursor-pointer select-none" @click="secretClick">genshin.zenless.club</span> is
-      not affiliated with
+    <p>
+      genshin.zenless.club is not affiliated with
       <a
-        class="text-primary-400 dark:text-primary-500 hover:text-primary-600 dark:hover:text-primary-700 transition-colors ease-in-out duration-200"
+        class="hover:text-primary-500 transition-colors ease-in-out duration-200"
         target="_blank"
         href="https://www.mihoyo.com/"
         >miHoYo</a
       >. <br />
       All in-game content is the property of
       <a
-        class="text-primary-400 dark:text-primary-500 hover:text-primary-600 dark:hover:text-primary-700 transition-colors ease-in-out duration-200"
+        class="hover:text-primary-500 transition-colors ease-in-out duration-200"
         target="_blank"
         href="https://www.mihoyo.com/"
         >miHoYo Co., Ltd</a
@@ -67,12 +26,12 @@ const secretClick = () => {
     </p>
 
     <div
-      class="place-self-start lg:place-self-center flex flex-col lg:flex-row gap-x-6 gap-y-2 mt-6 lg:mt-0 font-bold text-sm text-neutral-400"
+      class="place-self-start lg:place-self-center flex flex-col lg:flex-row gap-x-6 gap-y-2 mt-6 lg:mt-0 font-bold"
     >
       <a
         href="https://github.com/kitsune-guuji/gvp"
         target="_blank"
-        class="dark:text-neutral-700 hover:text-neutral-700 dark:hover:text-neutral-500 transition-colors ease-in-out duration-200"
+        class="hover:text-primary-500 ransition-colors ease-in-out duration-200"
       >
         <div class="flex flex-row gap-x-2 items-center">
           <GitHubLogo class="w-4 h-auto inline-block" />
@@ -81,8 +40,8 @@ const secretClick = () => {
       </a>
 
       <a
-        href="#"
-        class="dark:text-neutral-700 hover:text-neutral-700 dark:hover:text-neutral-500 transition-colors ease-in-out duration-200"
+        href="https://discord.gg/TgyFNhthCK"
+        class="hover:text-primary-500 transition-colors ease-in-out duration-200"
       >
         <div class="flex flex-row gap-x-2 items-center">
           <DiscordLogo class="w-4 h-auto inline-block" />
