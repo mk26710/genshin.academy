@@ -55,16 +55,16 @@ const endpoints = computed(() => {
     <aside
       v-show="isOpen"
       :class="firefoxMarginBottomClass"
-      class="fixed lg:hidden select-none mr-5 bottom-0 right-0 z-50"
+      class="fixed lg:hidden select-none mr-5 bottom-0 right-0 z-20"
     >
       <div
-        class="bg-neutral-100 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-lg p-2"
+        class="bg-neutral-100 dark:bg-dark-900 border border-neutral-200 dark:border-dark-200/10 rounded-lg p-2"
         ref="popover"
       >
         <div class="flex flex-col gap-y-2 text-lg font-semibold">
           <div
             @click="toggleDark()"
-            class="px-3 py-2 border-b border-neutral-200 dark:border-neutral-800 cursor-pointer"
+            class="px-3 py-2 border-b border-neutral-200 dark:border-dark-200/10 cursor-pointer"
           >
             <div class="flex flex-row items-center gap-x-2">
               <div class="flex-grow text-right">{{ isDark ? "Light" : "Dark" }}</div>
@@ -93,7 +93,7 @@ const endpoints = computed(() => {
 
           <div
             @click="isOpen = false"
-            class="px-3 py-2 border-t border-neutral-200 dark:border-neutral-800 cursor-pointer"
+            class="px-3 py-2 border-t border-neutral-200 dark:border-dark-200/10 cursor-pointer"
           >
             <div class="flex flex-row items-center gap-x-2">
               <div class="flex-grow text-right">Close</div>
@@ -110,15 +110,15 @@ const endpoints = computed(() => {
   <!-- Mobile navigation menu button -->
   <transition
     enter-active-class="transition duration-100 ease-out"
-    enter-from-class="-translate-y-4 opacity-0"
-    enter-to-class="translate-y-0 opacity-100"
+    enter-from-class="translate-x-4 opacity-0"
+    enter-to-class="-translate-x-0 opacity-100"
     leave-active-class="transition duration-150 ease-in"
-    leave-from-class="translate-y-0 opacity-100"
-    leave-to-class="-translate-y-4 opacity-0"
+    leave-from-class="-translate-x-0 opacity-100"
+    leave-to-class="translate-x-4 opacity-0"
   >
     <aside
       v-show="!isOpen"
-      class="fixed lg:hidden select-none rounded-lg dark:text-neutral-300/80 bg-neutral-100 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 shadow-lg cursor-pointer mr-5 bottom-0 right-0 z-40"
+      class="fixed lg:hidden select-none rounded-lg dark:text-dark-200/50 bg-neutral-100 dark:bg-dark-900 outline outline-1 outline-neutral-200 dark:outline-dark-200/10 shadow-lg cursor-pointer mr-4 bottom-0 right-0 z-10"
       :class="firefoxMarginBottomClass"
       @click="isOpen = true"
     >
@@ -129,10 +129,10 @@ const endpoints = computed(() => {
   <!-- Desktop Sidebard -->
   <aside
     data-description="Desktop Sidebar Navigation"
-    class="sidebar hidden lg:flex flex-col w-64 border-r border-neutral-200 dark:border-neutral-800 dark:bg-neutral-950 bg-neutral-100 h-full"
+    class="sidebar hidden lg:flex flex-col w-64 border-r border-neutral-200 dark:border-dark-200/10 dark:bg-dark-850 bg-neutral-100 h-full"
   >
     <div class="flex flex-col gap-y-2 sticky top-0 p-4 w-full">
-      <div class="self-center py-4 mb-2 border-b-2 border-neutral-200 dark:border-neutral-800">
+      <div class="self-center py-4 mb-2 border-b border-neutral-200 dark:border-dark-200/10">
         <h1 class="font-extrabold text-xl">GENSHIN.ZENLESS</h1>
       </div>
 
@@ -140,8 +140,8 @@ const endpoints = computed(() => {
         v-for="endpoint in endpoints"
         :key="endpoint.name"
         :to="endpoint.path"
-        class="w-full flex flex-row items-center gap-x-2 px-3 py-2 rounded-lg font-semibold text-lg transition-all duration-75 cursor-pointer hover:bg-primary-50/50 dark:hover:bg-primary-900/40"
-        active-class="!bg-primary-500 text-white shadow-lg shadow-primary-300/50 dark:shadow-primary-500/40"
+        class="w-full flex flex-row items-center gap-x-2 px-3 py-2 rounded-lg font-semibold text-lg transition-all duration-75 cursor-pointer"
+        active-class="!bg-primary-500 text-white shadow-lg dark:shadow-md shadow-primary-300/50 dark:shadow-primary-500/50"
       >
         <component :is="endpoint.icon" class="h-7 w-7 p-0" />
         <h1>{{ endpoint.name }}</h1>
@@ -151,7 +151,7 @@ const endpoints = computed(() => {
     <div class="fixed bottom-4 left-4">
       <div
         @click="toggleDark()"
-        class="transition-all duration-75 bg-neutral-200 dark:bg-neutral-1000 dark:text-neutral-300 rounded-lg flex items-center justify-center aspect-square h-8 cursor-pointer"
+        class="transition-all duration-75 bg-neutral-200 dark:bg-dark-900 dark:text-neutral-300 rounded-lg flex items-center justify-center aspect-square h-8 cursor-pointer"
       >
         <component :is="isDark ? SunIcon : MoonIcon" class="w-5 h-5" />
       </div>
