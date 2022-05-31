@@ -1,6 +1,8 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import DivOrLink from "./DivOrLink.vue";
+import { isString } from "lodash-es";
+import { computed, h } from "vue";
+import { RouterLink } from "vue-router";
 
 interface Props {
   title: string;
@@ -10,13 +12,17 @@ interface Props {
   to?: string;
 }
 
-withDefaults(defineProps<Props>(), {});
+const props = withDefaults(defineProps<Props>(), {});
+
+const rootComponent = computed(() => (isString(props.to) ? RouterLink : h("div")));
+const rootProps = computed(() => (isString(props.to) ? { to: props.to } : {}));
 </script>
 
 <template>
-  <div-or-link
-    :to="to"
-    class="flex flex-col bg-neutral-100/30 dark:bg-neutral-800/40 border border-neutral-200 dark:border-neutral-800 rounded-lg"
+  <component
+    :is="rootComponent"
+    v-bind="rootProps"
+    class="flex flex-col bg-neutral-100/30 dark:bg-dark-900/40 border border-neutral-200 dark:border-dark-200/10 rounded-lg"
   >
     <div class="min-h-[10rem] lg:min-h-[20rem] w-full aspect-[9/16]">
       <img
@@ -40,5 +46,5 @@ withDefaults(defineProps<Props>(), {});
         {{ description }}
       </p>
     </div>
-  </div-or-link>
+  </component>
 </template>
