@@ -30,12 +30,12 @@ withDefaults(defineProps<Props>(), {});
       <div v-if="!!publishedAt" class="font-medium text-sm leading-6 text-primary-500">
         {{ $dayjs(publishedAt).format("HH:mm on DD.MM.YYYY") }}
       </div>
-      <p class="block font-semibold text-base text-neutral-900 dark:text-neutral-200 leading-6">
+      <p class="block font-semibold text-base text-neutral-900 dark:text-dark-200 leading-6">
         {{ title }}
       </p>
       <p
         v-if="!!description"
-        class="text-sm text-justify text-neutral-600 dark:text-neutral-400 leading-6"
+        class="text-sm text-justify text-neutral-600 dark:text-dark-400 leading-6"
       >
         {{ description }}
       </p>
