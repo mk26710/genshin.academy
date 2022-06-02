@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { isError } from "lodash-es";
 import { storeToRefs } from "pinia";
-import { onMounted, watch } from "vue";
+import { onBeforeMount, watch } from "vue";
 import { useRoute } from "vue-router";
 
 import ErrorComponent from "@/components/Error.vue";
@@ -42,7 +42,7 @@ const fetchData = async () => {
 };
 
 // We have to go with this approach to trigger Suspense fallback if needed
-onMounted(async () => {
+onBeforeMount(async () => {
   window.scrollTo({ top: 0 });
   await fetchData();
 });
