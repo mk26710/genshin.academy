@@ -6,7 +6,7 @@ import characters from "@/data/characters";
 </script>
 
 <template>
-  <main-container>
+  <MainContainer>
     <CharacterCard v-for="character in characters" :key="character.id" v-bind="character" />
-  </main-container>
+  </MainContainer>
 </template>
