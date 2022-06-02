@@ -4,13 +4,11 @@ import { onMounted, ref } from "vue";
 import Card from "@/components/Card.vue";
 import MainContainer from "@/components/MainContainer.vue";
 
+import { avatarHeaderPath } from "@/lib/helpers";
 import { useGuidesStore } from "@/stores/guides";
 
 const query = ref("");
 const store = useGuidesStore();
-
-const characterAvatar = (id: string) =>
-  new URL(`../assets/characters/${id}/avatar_header.png`, import.meta.url).href;
 
 const search = (name: string) => {
   if (store.published.isImported !== true) {
@@ -47,7 +45,7 @@ onMounted(async () => {
         :key="character.id"
         :to="`/guides/${character.id}`"
         :title="character.title"
-        :thumbnail="characterAvatar(character.id)"
+        :thumbnail="avatarHeaderPath(character.id)"
         :published-at="new Date(character.publishedAt * 1000)"
         :description="character.brief"
       />
