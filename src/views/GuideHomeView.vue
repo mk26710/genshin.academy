@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 
-import Card from "@/components/Card.vue";
+import GuideCard from "@/components/Cards/GuideCard.vue";
 import MainContainer from "@/components/MainContainer.vue";
 
 import { avatarHeaderPath } from "@/lib/helpers";
@@ -40,7 +40,7 @@ onMounted(async () => {
     <div
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2"
     >
-      <Card
+      <GuideCard
         v-for="character in search(query)"
         :key="character.id"
         :to="`/guides/${character.id}`"
