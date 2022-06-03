@@ -22,7 +22,7 @@ const viewKey = computed(() =>
       <template v-if="Component">
         <!-- transitions cause weird exception when spamming mouse navigation buttons -->
         <!-- <Transition name="fade" mode="out-in"> -->
-        <Suspense timeout="100">
+        <Suspense timeout="200">
           <template #default>
             <component :is="Component" />
           </template>
