@@ -1,36 +1,24 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 
 import GuideCard from "@/components/Cards/GuideCard.vue";
 import MainContainer from "@/components/MainContainer.vue";
 
+import { data as published } from "@/data/guides/published.json";
 import { avatarHeaderPath } from "@/lib/helpers";
-import { useGuidesStore } from "@/stores/guides";
 
 const query = ref("");
-const store = useGuidesStore();
 
 const search = (name: string) => {
-  if (store.published.isImported !== true) {
-    return [];
-  }
-
-  return store.published.data
+  return published
     .filter((c) => c.title.toLowerCase().includes(name.toLowerCase()))
     .sort((a, b) => b.publishedAt - a.publishedAt);
 };
-
-onMounted(async () => {
-  if (store.published.isImported === false) {
-    await store.lazyPublished();
-  }
-});
 </script>
 
 <template>
   <MainContainer>
     <input
-      :disabled="store.published.isImported === false"
       v-model="query"
       type="text"
       placeholder="Search by title"
