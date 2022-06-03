@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import MainContainer from "./components/MainContainer.vue";
 import Footer from "@/components/Footer.vue";
 import Navigation from "@/components/Navigation.vue";
 import SuspenseFallback from "@/components/SuspenseFallback.vue";
@@ -18,7 +19,9 @@ import SuspenseFallback from "@/components/SuspenseFallback.vue";
           </template>
 
           <template #fallback>
-            <SuspenseFallback />
+            <MainContainer>
+              <SuspenseFallback />
+            </MainContainer>
           </template>
         </Suspense>
         <!-- </Transition> -->
