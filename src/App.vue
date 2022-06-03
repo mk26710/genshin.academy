@@ -1,15 +1,24 @@
 <script setup lang="ts">
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+
 import MainContainer from "./components/MainContainer.vue";
 import Footer from "@/components/Footer.vue";
 import Navigation from "@/components/Navigation.vue";
 import SuspenseFallback from "@/components/SuspenseFallback.vue";
+
+const route = useRoute();
+
+const viewKey = computed(() =>
+  route.meta?.dynamicKey === true ? route.fullPath : "non-dynamic-route",
+);
 </script>
 
 <template>
   <div class="app-container">
     <Navigation />
 
-    <RouterView v-slot="{ Component }">
+    <RouterView v-slot="{ Component }" :key="viewKey">
       <template v-if="Component">
         <!-- transitions cause weird exception when spamming mouse navigation buttons -->
         <!-- <Transition name="fade" mode="out-in"> -->

@@ -33,6 +33,9 @@ const routes: Array<RouteRecordRaw> = [
     path: "/guides/:id",
     alias: "/guide/:id",
     component: () => import("@/views/GuideView.vue"),
+    meta: {
+      dynamicKey: true,
+    },
   },
   {
     path: "/character",
