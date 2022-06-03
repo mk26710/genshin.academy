@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { isError } from "lodash-es";
 import { storeToRefs } from "pinia";
-import { onBeforeMount, watch } from "vue";
+import { watch } from "vue";
 import { useRoute } from "vue-router";
 
 import ErrorComponent from "@/components/Error.vue";
@@ -12,42 +11,12 @@ import { useGuidesStore } from "@/stores/guides";
 const route = useRoute();
 const store = useGuidesStore();
 
-const { setSelected, resetSelected, setSelectedError } = store;
+const { importGuide } = store;
 const { selected } = storeToRefs(store);
 
-const fetchData = async () => {
-  if (route.params?.id === undefined) {
-    return;
-  }
-
-  if (route.params.id === selected.value.id) {
-    console.info(`${route.params.id} was selected already, no need to refetch`);
-    return;
-  }
-
-  resetSelected();
-
-  try {
-    let data: { id: string; nodes: string[] } = await import(
-      `../data/guides/characters/${route.params.id}.json`
-    );
-
-    let { id, nodes } = data;
-    let html = nodes.join("");
-
-    setSelected({ id, html });
-  } catch (error) {
-    if (isError(error)) setSelectedError(error);
-  }
-};
-
 // We have to go with this approach to trigger Suspense fallback if needed
-onBeforeMount(async () => {
-  window.scrollTo({ top: 0 });
-  await fetchData();
-});
-
-watch(() => route.params.id, fetchData);
+window.scrollTo({ top: 0 });
+await importGuide(`${route.params.id}`);
 </script>
 
 <template>
