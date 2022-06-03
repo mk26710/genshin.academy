@@ -20,7 +20,6 @@
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^3.4.0",
     "@rushstack/eslint-patch": "^1.1.0",
-    "@trivago/prettier-plugin-sort-imports": "^3.2.0",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "^16.11.27",
     "@vitejs/plugin-vue": "^2.3.1",

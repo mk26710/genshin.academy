@@ -6,7 +6,4 @@
   "tabWidth": 2,
   "useTabs": false,
   "vueIndentScriptAndStyle": false,
-  "importOrder": [".vue", "@/", ".(css|scss|sass|json)"],
-  "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true
 }
