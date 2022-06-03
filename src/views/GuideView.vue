@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import { watch } from "vue";
 import { useRoute } from "vue-router";
 
 import ErrorComponent from "@/components/Error.vue";

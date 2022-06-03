@@ -30,12 +30,6 @@ export const useGuidesStore = defineStore({
     async importGuide(id: string) {
       this.selected = stateFactory().selected;
 
-      await new Promise((res) => {
-        setTimeout(() => {
-          res(null);
-        }, 2000);
-      });
-
       try {
         const data: Guide = await import(`../data/guides/characters/${id}.json`);
 
