@@ -12,7 +12,7 @@ import { charactersArray } from "@/data/characters";
         Characters
       </h1>
     </div>
-    <div class="flex flex-row flex-wrap gap-4">
+    <div class="flex flex-row flex-wrap gap-4 justify-evenly md:justify-start">
       <CharacterCard v-for="character in charactersArray" :key="character.id" v-bind="character" />
     </div>
   </MainContainer>
