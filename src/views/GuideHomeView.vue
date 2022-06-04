@@ -9,10 +9,8 @@ import { avatarHeaderPath } from "@/lib/helpers";
 
 const query = ref("");
 
-const search = (name: string) => {
-  return published
-    .filter((c) => c.title.toLowerCase().includes(name.toLowerCase()))
-    .sort((a, b) => b.publishedAt - a.publishedAt);
+const isShown = (title: string) => {
+  return title.toLowerCase().includes(query.value.toLowerCase());
 };
 </script>
 
@@ -29,7 +27,8 @@ const search = (name: string) => {
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2"
     >
       <GuideCard
-        v-for="character in search(query)"
+        v-for="character in published"
+        v-show="isShown(character.title)"
         :key="character.id"
         :to="`/guides/${character.id}`"
         :title="character.title"
