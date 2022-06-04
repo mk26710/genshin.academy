@@ -2,11 +2,18 @@
 import CharacterCard from "../components/Cards/CharacterCard.vue";
 import MainContainer from "@/components/MainContainer.vue";
 
-import characters from "@/data/characters";
+import { charactersArray } from "@/data/characters";
 </script>
 
 <template>
   <MainContainer>
-    <CharacterCard v-for="character in characters" :key="character.id" v-bind="character" />
+    <div class="w-full mb-4">
+      <h1 class="w-fit pb-2 text-4xl font-bold border-b border-neutral-200 dark:border-dark-200/10">
+        Characters
+      </h1>
+    </div>
+    <div class="flex flex-row flex-wrap gap-4">
+      <CharacterCard v-for="character in charactersArray" :key="character.id" v-bind="character" />
+    </div>
   </MainContainer>
 </template>
