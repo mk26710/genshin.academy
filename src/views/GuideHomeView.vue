@@ -4,8 +4,10 @@ import { ref } from "vue";
 import GuideCard from "@/components/Cards/GuideCard.vue";
 import MainContainer from "@/components/MainContainer.vue";
 
-import { data as published } from "@/data/guides/published.json";
+import jsonData from "@/data/guides/published.json";
 import { avatarHeaderPath } from "@/lib/helpers";
+
+const published = jsonData.data;
 
 const query = ref("");
 
