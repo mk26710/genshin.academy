@@ -18,7 +18,7 @@ const icon = characterIcon(props.id);
 <template>
   <RouterLink :to="`/character/${id}`">
     <div>
-      <img :src="icon" />
+      <img :src="icon" :alt="`${id} icon`" />
     </div>
     <div>{{ name }}</div>
   </RouterLink>
