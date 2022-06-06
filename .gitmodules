@@ -1,4 +1,4 @@
 [submodule "src/data/guides/compiled"]
 	path = src/data/guides/compiled
-	url = https://github.com/kitsune-guuji/gvp-guides-characters.git
+	url = https://github.com/kitsune-guuji/gvp-guides.git
 	branch = guides-compiled
