@@ -9,7 +9,7 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <main class="main p-4 xl:p-8 grid" :class="verticalCenter ? 'place-content-center' : ''">
+  <main class="main p-4 lg:p-6 grid" :class="verticalCenter ? 'place-content-center' : ''">
     <div id="content">
       <slot></slot>
     </div>
