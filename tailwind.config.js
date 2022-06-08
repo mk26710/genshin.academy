@@ -1,4 +1,5 @@
 /* eslint-env node */
+const colors = require("tailwindcss/colors");
 
 // https://www.tailwindshades.com/
 
@@ -73,6 +74,26 @@ const myColors = {
 
     1000: "#0d0d0d",
   },
+  black: {
+    50: "#ADADAD",
+    100: "#A3A3A3",
+    150: "#999999",
+    200: "#8F8F8F",
+    250: "#858585",
+    300: "#7A7A7A",
+    350: "#707070",
+    400: "#666666",
+    450: "#5c5c5c",
+    500: "#525252",
+    550: "#474747",
+    600: "#3D3D3D",
+    650: "#333333",
+    700: "#292929",
+    750: "#1f1f1f",
+    800: "#141414",
+    850: "#0a0a0a",
+    900: "#000000",
+  },
 };
 
 const myScreens = {
@@ -86,8 +107,8 @@ module.exports = {
     extend: {
       colors: {
         ...myColors,
-        primary: { ...myColors["medium-purple"] },
-        dark: { ...myColors["neutral"] },
+        primary: { ...colors.blue },
+        dark: { ...myColors["black"] },
       },
       screens: {
         ...myScreens,
