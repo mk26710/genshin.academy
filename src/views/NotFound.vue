@@ -11,7 +11,7 @@ import MainContainer from "@/components/MainContainer.vue";
       <div class="mt-12">
         <router-link to="/">
           <button
-            class="py-2 px-3 transition-colors duration-300 ease-in-out font-bold bg-rose-500 hover:bg-rose-400 text-rose-200 hover:text-sky-100 shadow-lg shadow-rose-500/50 hover:shadow-rose-400/50 rounded"
+            class="rounded-lg bg-primary-600 hover:shadow-lg hover:shadow-primary-600/30 text-neutral-100 py-2 px-3 transition-all duration-200 ease-in-out font-bold"
           >
             Click to go home
           </button>

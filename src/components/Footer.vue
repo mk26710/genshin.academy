@@ -6,7 +6,7 @@ import GitHubLogo from "@/components/icons/GitHubLogo.vue";
 
 <template>
   <footer
-    class="footer grid grid-cols-1 lg:grid-cols-[1fr_auto] grid-rows-[auto_auto] lg:grid-rows-1 py-4 mx-4 text-neutral-400 dark:text-dark-600 border-t border-neutral-200 dark:border-neutral-200/10"
+    class="footer grid grid-cols-1 lg:grid-cols-[1fr_auto] grid-rows-[auto_auto] lg:grid-rows-1 py-4 mx-4 text-neutral-400 dark:text-neutral-600 border-t border-neutral-200 dark:border-neutral-200/10"
   >
     <p>
       genshin.zenless.club is not affiliated with

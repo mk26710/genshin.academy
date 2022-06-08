@@ -22,7 +22,7 @@ const rootProps = computed(() => (isString(props.to) ? { to: props.to } : {}));
   <component
     :is="rootComponent"
     v-bind="rootProps"
-    class="flex flex-col bg-neutral-100/30 dark:bg-dark-900/40 border border-neutral-200 dark:border-dark-200/10 rounded-lg"
+    class="flex flex-col text-neutral-900 dark:text-neutral-300 bg-neutral-100 dark:bg-dark-850 border border-neutral-200 dark:border-neutral-200/10 rounded-lg"
   >
     <div class="min-h-[10rem] lg:min-h-[20rem] w-full aspect-[9/16]">
       <img
@@ -36,13 +36,10 @@ const rootProps = computed(() => (isString(props.to) ? { to: props.to } : {}));
       <div v-if="!!publishedAt" class="font-medium text-sm leading-6 text-primary-500">
         {{ $dayjs(publishedAt).format("HH:mm on DD.MM.YYYY") }}
       </div>
-      <p class="block font-semibold text-base text-neutral-900 dark:text-dark-200 leading-6">
+      <p class="block font-semibold text-base leading-6">
         {{ title }}
       </p>
-      <p
-        v-if="!!description"
-        class="text-sm text-justify text-neutral-600 dark:text-dark-400 leading-6"
-      >
+      <p v-if="!!description" class="text-sm text-justify leading-6">
         {{ description }}
       </p>
     </div>

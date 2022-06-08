@@ -4,7 +4,7 @@
       <div>
         <div
           style="border-top-color: transparent"
-          class="w-16 h-16 border-8 border-primary-500 dark:border-dark-200 border-solid rounded-full animate-spin"
+          class="w-16 h-16 border-[6px] border-primary-500 dark:border-primary-400 border-solid rounded-full animate-spin"
         ></div>
       </div>
     </div>
