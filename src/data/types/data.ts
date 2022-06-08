@@ -1,4 +1,4 @@
 export interface Guide {
   id: string;
-  nodes: string[];
+  html: string;
 }

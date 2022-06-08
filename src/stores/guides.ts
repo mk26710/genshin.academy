@@ -31,10 +31,10 @@ export const useGuidesStore = defineStore({
       this.selected = stateFactory().selected;
 
       try {
-        const data: Guide = await import(`../data/guides/characters/${id}.json`);
+        const data: Guide = await import(`../data/guides/compiled/characters/${id}.json`);
 
         this.selected.id = data.id;
-        this.selected.html = data.nodes.join("");
+        this.selected.html = data.html;
       } catch (error) {
         if (isError(error)) {
           this.selected.error = error;
