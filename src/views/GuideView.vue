@@ -20,7 +20,7 @@ await importGuide(`${route.params.id}`);
 
 <template>
   <MainContainer>
-    <section v-if="selected.html !== null" v-html="selected.html" />
+    <section class="md-body" v-if="selected.html !== null" v-html="selected.html" />
     <ErrorComponent
       v-if="selected.error !== null"
       title="Hey, this guide doesn't exist!"
