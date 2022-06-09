@@ -1,11 +1,11 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, RouterView } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
 
+import { BeakerIcon, CalculatorIcon, HomeIcon, StarIcon } from "@heroicons/vue/outline";
+
 import CalcView from "@/views/CalcView.vue";
-import CharactersView from "@/views/CharactersView.vue";
 import HomeView from "@/views/HomeView.vue";
 import NotFound from "@/views/NotFound.vue";
-import { BeakerIcon, CalculatorIcon, HomeIcon, StarIcon } from "@heroicons/vue/outline";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -21,7 +21,20 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/guides",
     alias: "/guide",
-    component: () => import("@/views/GuideHomeView.vue"),
+    component: RouterView,
+    children: [
+      {
+        path: "",
+        component: () => import("@/views/GuideHomeView.vue"),
+      },
+      {
+        path: ":id",
+        component: () => import("@/views/GuideView.vue"),
+        meta: {
+          dynamicKey: true,
+        },
+      },
+    ],
     meta: {
       navigation: {
         name: "Guides",
@@ -30,17 +43,15 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: "/guides/:id",
-    alias: "/guide/:id",
-    component: () => import("@/views/GuideView.vue"),
-    meta: {
-      dynamicKey: true,
-    },
-  },
-  {
-    path: "/character",
-    alias: "/characters",
-    component: CharactersView,
+    path: "/characters",
+    alias: "/character",
+    component: RouterView,
+    children: [
+      {
+        path: "",
+        component: () => import("@/views/CharactersView.vue"),
+      },
+    ],
     meta: {
       navigation: {
         name: "Characters",
