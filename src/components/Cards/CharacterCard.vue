@@ -33,7 +33,11 @@ const iconBg = computed(() => {
     class="w-[calc(33.33%-0.75rem)] md:w-32 rounded-lg bg-neutral-100 dark:bg-dark-850 border border-neutral-200 dark:border-dark-200/10"
   >
     <div class="w-full aspect-square rounded-t-lg bg-gradient-to-b">
-      <img class="aspect-square w-full text-transparent" :src="icon" :alt="`${id} icon`" />
+      <img
+        class="aspect-square w-full text-transparent select-none"
+        :src="icon"
+        :alt="`${id} icon`"
+      />
     </div>
     <div class="w-full">
       <p class="p-1 text-sm text-center">{{ name }}</p>
