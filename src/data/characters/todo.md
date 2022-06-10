@@ -12,7 +12,7 @@ List of characters that require data gathering (except for story lines)
 - [ ] Diona
 - [ ] Eula
 - [ ] Fischl
-- [ ] Ganyu
+- [x] Ganyu
 - [ ] Gorou
 - [ ] Hu Tao
 - [ ] Jean
