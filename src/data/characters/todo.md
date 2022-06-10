@@ -1,0 +1,50 @@
+List of characters that require data gathering (except for story lines)
+
+- [ ] Albedo
+- [ ] Aloy
+- [ ] Amber
+- [ ] Arataki Itto
+- [ ] Barbara
+- [ ] Beidou
+- [ ] Bennett
+- [ ] Chongyun
+- [ ] Diluc
+- [ ] Diona
+- [ ] Eula
+- [ ] Fischl
+- [ ] Ganyu
+- [ ] Gorou
+- [ ] Hu Tao
+- [ ] Jean
+- [ ] Kaedehara Kazuha
+- [ ] Kaeya
+- [x] Kamisato Ayaka
+- [ ] Kamisato Ayato
+- [ ] Keqing
+- [ ] Klee
+- [ ] Kujou Sara
+- [ ] Lisa
+- [ ] Mona
+- [ ] Ningguang
+- [ ] Noelle
+- [ ] Qiqi
+- [ ] Raiden Shogun
+- [ ] Razor
+- [ ] Rosaria
+- [ ] Sangonomiya Kokomi
+- [ ] Sayu
+- [ ] Shenhe
+- [ ] Sucrose
+- [ ] Tartaglia
+- [ ] Thoma
+- [ ] Venti
+- [ ] Xiangling
+- [ ] Xiao
+- [ ] Xingqiu
+- [ ] Xinyan
+- [x] Yae Miko
+- [ ] Yanfei
+- [x] Yelan
+- [ ] Yoimiya
+- [ ] Yun Jin
+- [ ] Zhongli
