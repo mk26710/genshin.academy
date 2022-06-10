@@ -5,8 +5,9 @@ import kamisato_ayaka from "./kamisato_ayaka";
 import yelan from "./yelan";
 import kamisato_ayato from "./kamisato_ayato";
 import qiqi from "./qiqi";
+import shenhe from "./shenhe";
 
-const _array = [yae_miko, kamisato_ayaka, yelan, kamisato_ayato, qiqi];
+const _array = [yae_miko, kamisato_ayaka, yelan, kamisato_ayato, qiqi, shenhe];
 
 export const charactersArray = [..._array].sort(
   (a, b) => a.name.localeCompare(b.name) || b.rarity - a.rarity,

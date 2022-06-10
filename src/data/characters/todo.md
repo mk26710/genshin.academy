@@ -33,7 +33,7 @@ List of characters that require data gathering (except for story lines)
 - [ ] Rosaria
 - [ ] Sangonomiya Kokomi
 - [ ] Sayu
-- [ ] Shenhe
+- [x] Shenhe
 - [ ] Sucrose
 - [ ] Tartaglia
 - [ ] Thoma
