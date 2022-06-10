@@ -3,8 +3,9 @@ import type { Character } from "@/data/types/character";
 import yae_miko from "./yae_miko";
 import kamisato_ayaka from "./kamisato_ayaka";
 import yelan from "./yelan";
+import kamisato_ayato from "./kamisato_ayato";
 
-const _array = [yae_miko, kamisato_ayaka, yelan];
+const _array = [yae_miko, kamisato_ayaka, yelan, kamisato_ayato];
 
 export const charactersArray = [..._array].sort(
   (a, b) => a.name.localeCompare(b.name) || b.rarity - a.rarity,
