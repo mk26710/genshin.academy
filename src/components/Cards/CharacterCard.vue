@@ -28,7 +28,7 @@ const iconBg = computed(() => {
 
 <template>
   <RouterLink
-    :to="`/character/${id}`"
+    :to="`/characters/${id}`"
     :class="iconBg"
     class="w-[calc(33.33%-0.75rem)] md:w-32 rounded-lg bg-neutral-100 dark:bg-dark-850 border border-neutral-200 dark:border-dark-200/10"
   >
