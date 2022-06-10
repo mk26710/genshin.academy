@@ -1,29 +1,20 @@
-import type { BirthdayDate, Character, Constellation, StoryEntry } from "@/data/types/character";
-import { Rarity, Vision, WeaponType } from "@/data/types/genshin";
+import type { Character } from "@/data/types/character";
+import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 
-const id = "kamisato_ayaka";
-const name = "Kamisato Ayaka";
+const kamisato_ayaka: Character = {
+  id: "kamisato_ayaka",
 
-const description = `Daughter of the Yashiro Commission's Kamisato Clan from Inazuma. Dignified and elegant, wise and determined. Sincere and pleasant to others. Universally loved by the Inazuma people, she has earned the title of Shirasagi Himegimi.`;
+  name: "Kamisato Ayaka",
+  description: `Daughter of the Yashiro Commission's Kamisato Clan from Inazuma. Dignified and elegant, wise and determined. Sincere and pleasant to others. Universally loved by the Inazuma people, she has earned the title of Shirasagi Himegimi.`,
+  birthday: [28, 9],
 
-const birthday: BirthdayDate = [28, 9];
+  rarity: Rarity.FIVE_STAR,
+  vision: Vision.CRYO,
+  weapon: Weapon.SWORD,
 
-const rarity = Rarity.FIVE_STAR;
-const vision = Vision.CRYO;
-const weapon = WeaponType.SWORD;
+  constellations: [],
 
-const constellations: Constellation[] = [];
+  story: [],
+};
 
-const story: StoryEntry[] = [];
-
-export default {
-  id,
-  name,
-  description,
-  birthday,
-  rarity,
-  vision,
-  weapon,
-  constellations,
-  story,
-} as Character;
+export default kamisato_ayaka;

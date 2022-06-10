@@ -7,13 +7,17 @@ export enum Rarity {
   ZERO_STAR = 0,
 }
 
-export enum WeaponType {
+export type RarityType = 5 | 4 | 3 | 2 | 1 | 0;
+
+export enum Weapon {
   SWORD = "SWORD",
   CLAYMORE = "CLAYMORE",
   POLEARM = "POLEARM",
   CATALYST = "CATALYST",
   BOW = "BOW",
 }
+
+export type WeaponType = "SWORD" | "CLAYMORE" | "POLEARM" | "CATALYST" | "BOW";
 
 export enum Vision {
   CRYO = "CRYO",
@@ -23,3 +27,5 @@ export enum Vision {
   HYDRO = "HYDRO",
   GEO = "GEO",
 }
+
+export type VisionType = "CRYO" | "ELECTRO" | "PYRO" | "ANEMO" | "HYDRO" | "GEO";

@@ -1,6 +1,6 @@
 import type { Component } from "vue";
 
-import type { Rarity, Vision, WeaponType } from "@/data/types/genshin";
+import type { Rarity, Vision, Weapon } from "@/data/types/genshin";
 
 /**
  * Represents day and month of character's birthday
@@ -16,8 +16,7 @@ export interface Constellation {
 
 export interface StoryEntry {
   title: string;
-  requirement: string;
-  content: string;
+  description: string;
 }
 
 /**
@@ -40,7 +39,7 @@ export interface Character {
   story: StoryEntry[];
 
   rarity: Rarity;
-  weapon: WeaponType;
+  weapon: Weapon;
   vision: Vision;
   birthday: BirthdayDate;
 }
