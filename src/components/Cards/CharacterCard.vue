@@ -24,13 +24,21 @@ const iconBg = computed(() => {
 
   return "from-[#6A6D74] to-[#868586]";
 });
+
+const fontSize = computed(() => {
+  if (/\s+/.test(props.name) && props.name.length > 10) {
+    return "long-title";
+  }
+
+  return null;
+});
 </script>
 
 <template>
   <RouterLink
     :to="`/characters/${id}`"
     :class="iconBg"
-    class="w-[calc(33.33%-0.75rem)] md:w-32 rounded-lg bg-neutral-100 dark:bg-dark-850 border border-neutral-200 dark:border-dark-200/10"
+    class="w-[calc(33.33%-0.75rem)] md:w-28 rounded-lg bg-neutral-100 dark:bg-dark-850 border border-neutral-200 dark:border-dark-200/10"
   >
     <div class="w-full aspect-square rounded-t-lg bg-gradient-to-b">
       <img
@@ -39,8 +47,16 @@ const iconBg = computed(() => {
         :alt="`${id} icon`"
       />
     </div>
-    <div class="w-full">
-      <p class="p-1 text-sm text-center">{{ name }}</p>
+    <div class="w-full h-8 flex items-center justify-center">
+      <p class="p-1 text-[.9rem] text-center" :class="fontSize">{{ name }}</p>
     </div>
   </RouterLink>
 </template>
+
+<style lang="scss" scoped>
+.long-title {
+  word-spacing: 600px;
+  line-height: 1;
+  font-size: 0.8125rem;
+}
+</style>
