@@ -19,7 +19,7 @@ List of characters that require data gathering (except for story lines)
 - [ ] Kaedehara Kazuha
 - [ ] Kaeya
 - [x] Kamisato Ayaka
-- [ ] Kamisato Ayato
+- [x] Kamisato Ayato
 - [ ] Keqing
 - [ ] Klee
 - [ ] Kujou Sara
