@@ -2,7 +2,7 @@
 import { computed } from "vue";
 import { useRoute, RouterView } from "vue-router";
 
-import MainContainer from "./components/MainContainer.vue";
+import MainContainer from "@/components/MainContainer.vue";
 import Footer from "@/components/Footer.vue";
 import Navigation from "@/components/Navigation.vue";
 import SuspenseFallback from "@/components/SuspenseFallback.vue";
