@@ -1,46 +1,50 @@
 <script setup lang="ts">
-import { isNumber } from "lodash-es";
+import { computed, ref } from "vue";
+import { isNil } from "lodash-es";
 
 import MainContainer from "@/components/MainContainer.vue";
 
-import { useCalcStore } from "@/stores/calc";
+import CalculatorRoot from "../components/Calculators/CalculatorRoot.vue";
+import CalculatorTitle from "../components/Calculators/CalculatorTitle.vue";
+import CalculatorDetails from "../components/Calculators/CalculatorDetails.vue";
+import CalculatorInput from "../components/Calculators/CalculatorInput.vue";
+import CalculatorResult from "../components/Calculators/CalculatorResult.vue";
 
-const { resin } = useCalcStore();
+const critRate = ref<number | undefined>(undefined);
+const critDamage = ref<number | undefined>(undefined);
 
-const calculateMinutes = () => {
-  if (isNumber(resin.current) && isNumber(resin.needed)) {
-    return (resin.needed - resin.current) * 8;
+const critValue = computed(() => {
+  if (isNil(critRate.value) || isNil(critDamage.value)) {
+    return null;
   }
 
-  return -1;
-};
+  return critDamage.value + critRate.value * 2;
+});
 </script>
 
 <template>
-  <MainContainer :verticalCenter="true">
-    <div>
-      <h1 class="font-bold text-4xl md:text-5xl">Resin calculator</h1>
-      <p class="mb-6">Provide this calculator with your own values.</p>
-      <div class="w-full flex flex-col sm:flex-row gap-2 mb-4">
-        <input
-          v-model="resin.current"
-          class="grow leading-6 dark:text-neutral-300 placeholder:text-neutral-600 accent-primary-500 rounded-md ring-1 dark:bg-neutral-800 ring-neutral-900/10 dark:ring-neutral-50/10 shadow-sm py-1.5 pl-2 pr-3"
-          type="number"
-          placeholder="your current resin"
-        />
-        <input
-          v-model="resin.needed"
-          class="grow leading-6 dark:text-neutral-300 placeholder:text-neutral-600 accent-primary-500 rounded-md ring-1 dark:bg-neutral-800 ring-neutral-900/10 dark:ring-neutral-50/10 shadow-sm py-1.5 pl-2 pr-3"
-          type="number"
-          placeholder="you need resin"
-        />
-      </div>
-      <div>
-        You will have <span class="text-primary-500 font-bold">{{ resin.needed }}</span> at
-        <span class="font-bold text-primary-500">
-          {{ $dayjs().add(calculateMinutes(), "m").format("HH:mm:ss, DD.MM.YYYY") }}
-        </span>
-      </div>
-    </div>
+  <MainContainer>
+    <CalculatorRoot>
+      <CalculatorTitle>Artifact Crit Value</CalculatorTitle>
+      <CalculatorDetails class="mb-2">
+        Enter your artifact's crit rate and crit damage
+      </CalculatorDetails>
+      <CalculatorInput
+        class="mb-2"
+        v-model="critRate"
+        type="number"
+        :step="0.1"
+        placeholder="Artifact's crit rate"
+      />
+      <CalculatorInput
+        v-model="critDamage"
+        type="number"
+        :step="0.1"
+        placeholder="Artifact's crit damage"
+      />
+      <CalculatorResult v-if="!isNil(critValue)">
+        Crit Value is <span class="text-primary-500">{{ critValue }}</span>
+      </CalculatorResult>
+    </CalculatorRoot>
   </MainContainer>
 </template>
