@@ -129,7 +129,7 @@ const endpoints = computed(() => {
   <!-- Desktop Sidebard -->
   <aside
     data-description="Desktop Sidebar Navigation"
-    class="sidebar hidden lg:flex flex-col w-64 border-r border-neutral-200 dark:border-neutral-200/10 dark:bg-neutral-850 bg-white h-full"
+    class="sidebar hidden lg:flex flex-col w-64 border-r border-neutral-200 dark:border-neutral-200/10 dark:bg-neutral-800 bg-white h-full"
   >
     <div class="flex flex-col gap-y-2 sticky top-0 p-4 w-full">
       <div class="self-center py-4 mb-2 border-b border-neutral-200 dark:border-dark-200/10">
@@ -151,7 +151,7 @@ const endpoints = computed(() => {
     <div class="fixed bottom-4 left-4">
       <div
         @click="toggleDark()"
-        class="transition-all duration-75 bg-neutral-200 dark:bg-dark-900 dark:text-neutral-300 rounded-lg flex items-center justify-center aspect-square h-8 cursor-pointer"
+        class="transition-all duration-75 bg-neutral-200 dark:bg-dark-800 dark:text-neutral-300 rounded-lg flex items-center justify-center aspect-square h-8 cursor-pointer"
       >
         <component :is="isDark ? SunIcon : MoonIcon" class="w-5 h-5" />
       </div>

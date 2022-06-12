@@ -1,5 +1,5 @@
 .calculator {
-  @apply bg-white dark:bg-neutral-850 rounded-lg box-border border border-neutral-200 dark:border-neutral-200/10 p-4 flex flex-col;
+  @apply bg-white dark:bg-neutral-800 rounded-lg box-border border border-neutral-200 dark:border-neutral-200/10 p-4 flex flex-col;
 
   &-title {
     @apply font-semibold text-3xl;
