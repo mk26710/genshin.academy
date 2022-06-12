@@ -1,18 +1,36 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 import GuideCard from "@/components/Cards/GuideCard.vue";
 import MainContainer from "@/components/MainContainer.vue";
 
 import jsonData from "@/data/guides/published.json";
 import { avatarHeaderPath } from "@/lib/helpers";
+import { useRoute, useRouter } from "vue-router";
 
 const published = jsonData.data;
 
-const query = ref("");
+const router = useRouter();
+const route = useRoute();
+
+const searchValue = ref(route.query.q?.toString() ?? "");
+
+const query = computed({
+  get() {
+    return searchValue.value;
+  },
+
+  set(value) {
+    searchValue.value = value;
+
+    const toPush = { query: { q: value } };
+
+    router.push(toPush);
+  },
+});
 
 const isShown = (title: string) => {
-  return title.toLowerCase().includes(query.value.toLowerCase());
+  return title.toLowerCase().includes(searchValue.value.toLowerCase());
 };
 </script>
 
@@ -30,6 +48,7 @@ const isShown = (title: string) => {
     >
       <GuideCard
         v-for="character in published"
+        :id="character.id"
         v-show="isShown(character.title)"
         :key="character.id"
         :to="`/guides/${character.id}`"
