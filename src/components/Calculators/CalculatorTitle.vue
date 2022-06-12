@@ -1,5 +1,5 @@
 <template>
-  <h1 class="font-semibold text-3xl mb-2">
+  <h1 class="calculator-title">
     <slot />
   </h1>
 </template>

@@ -8,6 +8,7 @@ import router from "@/router";
 
 import "@/assets/styles/main.scss";
 import "@/assets/styles/markdown.scss";
+import "@/assets/styles/calculator.scss";
 
 const app = createApp(App);
 

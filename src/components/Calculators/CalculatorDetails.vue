@@ -1,5 +1,5 @@
 <template>
-  <p class="">
+  <p class="calculator-details">
     <slot />
   </p>
 </template>

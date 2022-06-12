@@ -1,0 +1,19 @@
+.calculator {
+  @apply rounded-lg border border-neutral-200 p-4 flex flex-col;
+
+  &-title {
+    @apply font-semibold text-3xl;
+  }
+
+  &-title + &-input, &-details + &-input {
+    @apply mt-2;
+  } 
+
+  &-input {
+    @apply leading-6 dark:text-neutral-300 placeholder:text-neutral-400 accent-primary-500 rounded-md ring-1 dark:bg-neutral-800 ring-neutral-900/10 dark:ring-neutral-50/10 shadow-sm py-1.5 pl-2 pr-3;
+  }
+
+  &-input + &-input {
+    @apply mt-2;
+  }
+}
