@@ -129,7 +129,7 @@ const endpoints = computed(() => {
   <!-- Desktop Sidebard -->
   <aside
     data-description="Desktop Sidebar Navigation"
-    class="sidebar hidden lg:flex flex-col w-64 border-r border-neutral-200 dark:border-dark-200/10 dark:bg-dark-850 bg-neutral-100 h-full"
+    class="sidebar hidden lg:flex flex-col w-64 border-r border-neutral-200 dark:border-dark-200/10 dark:bg-neutral-950 bg-white h-full"
   >
     <div class="flex flex-col gap-y-2 sticky top-0 p-4 w-full">
       <div class="self-center py-4 mb-2 border-b border-neutral-200 dark:border-dark-200/10">

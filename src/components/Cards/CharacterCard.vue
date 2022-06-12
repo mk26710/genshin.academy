@@ -35,18 +35,11 @@ const fontSize = computed(() => {
 </script>
 
 <template>
-  <RouterLink
-    :to="`/characters/${id}`"
-    :class="iconBg"
-    class="w-[calc(33.33%-0.75rem)] md:w-28 rounded-lg bg-neutral-100 dark:bg-dark-850 border border-neutral-200 dark:border-dark-200/10"
-  >
-    <div class="w-full aspect-square rounded-t-lg bg-gradient-to-b">
-      <img
-        class="aspect-square w-full text-transparent select-none"
-        :src="icon"
-        :alt="`${id} icon`"
-      />
+  <RouterLink :to="`/characters/${id}`" class="card card-vertical w-[calc(33.33%-0.75rem)] md:w-28">
+    <div class="w-full aspect-square rounded-t-lg bg-gradient-to-b" :class="iconBg">
+      <img class="card-thumbnail" :src="icon" :alt="`${id} icon`" />
     </div>
+
     <div class="w-full h-8 flex items-center justify-center">
       <p class="p-1 text-[.9rem] text-center" :class="fontSize">{{ name }}</p>
     </div>
