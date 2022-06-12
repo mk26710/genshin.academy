@@ -20,12 +20,9 @@ const query = computed({
     return searchValue.value;
   },
 
-  set(value) {
+  set(value: string) {
     searchValue.value = value;
-
-    const toPush = { query: { q: value } };
-
-    router.push(toPush);
+    router.push({ query: { q: value } });
   },
 });
 
