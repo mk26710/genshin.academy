@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 ::selection {
-  background: theme("colors.primary.300");
+  background: theme("colors.primary.500");
+  color: white;
 }
 
 .app-container {
