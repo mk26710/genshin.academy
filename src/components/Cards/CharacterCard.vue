@@ -40,7 +40,7 @@ const fontSize = computed(() => {
       <img class="card-thumbnail" :src="icon" :alt="`${id} icon`" />
     </div>
 
-    <div class="w-full h-8 flex items-center justify-center">
+    <div class="w-full h-8 flex items-center justify-center font-semibold">
       <p class="p-1 text-[.9rem] text-center" :class="fontSize">{{ name }}</p>
     </div>
   </RouterLink>
