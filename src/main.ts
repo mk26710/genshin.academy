@@ -16,8 +16,8 @@ import "@/assets/styles/nprogress.scss";
 const app = createApp(App);
 
 app.use(createPinia());
-app.use(nprogress);
 app.use(router);
 app.use(dayjs);
+app.use(nprogress);
 
 app.mount("#app");
