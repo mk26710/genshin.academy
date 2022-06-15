@@ -50,7 +50,7 @@ const isShown = (title: string) => {
         :key="character.id"
         :to="{ name: 'guide', params: { id: character.id } }"
         :title="character.title"
-        :thumbnail="avatarHeaderPath(character.id)"
+        :thumbnail="avatarHeaderPath(character.id, 'webp')"
         :published-at="new Date(character.publishedAt * 1000)"
         :description="character.brief"
       />

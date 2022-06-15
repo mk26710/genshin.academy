@@ -13,7 +13,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const icon = characterIcon(props.id);
+const icon = characterIcon(props.id, "webp");
 
 const iconBg = computed(() => {
   if (props.rarity === Rarity.FIVE_STAR) {
@@ -35,7 +35,10 @@ const fontSize = computed(() => {
 </script>
 
 <template>
-  <RouterLink :to="`/characters/${id}`" class="card card-vertical w-[calc(33.33%-0.75rem)] md:w-28">
+  <RouterLink
+    :to="{ name: 'character', params: { id: id } }"
+    class="card card-vertical w-[calc(33.33%-0.75rem)] md:w-28"
+  >
     <div class="w-full aspect-square rounded-t-lg bg-gradient-to-b" :class="iconBg">
       <img class="card-thumbnail" :src="icon" :alt="`${id} icon`" />
     </div>
