@@ -1,7 +1,5 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import { isString } from "lodash-es";
-import { computed, h } from "vue";
 import { RouterLink } from "vue-router";
 
 interface Props {
@@ -9,17 +7,19 @@ interface Props {
   description?: string;
   publishedAt?: Date;
   thumbnail?: string;
-  to?: string;
+  to?: {
+    name: string;
+    params: {
+      id: string;
+    };
+  };
 }
 
-const props = withDefaults(defineProps<Props>(), {});
-
-const rootComponent = computed(() => (isString(props.to) ? RouterLink : h("div")));
-const rootProps = computed(() => (isString(props.to) ? { to: props.to } : {}));
+withDefaults(defineProps<Props>(), {});
 </script>
 
 <template>
-  <component :is="rootComponent" v-bind="rootProps" class="card card-vertical">
+  <RouterLink :to="to ?? '#'" class="card card-vertical">
     <img
       v-if="!!thumbnail"
       :src="thumbnail"
@@ -43,5 +43,5 @@ const rootProps = computed(() => (isString(props.to) ? { to: props.to } : {}));
         {{ description }}
       </p>
     </div>
-  </component>
+  </RouterLink>
 </template>

@@ -48,7 +48,7 @@ const isShown = (title: string) => {
         :id="character.id"
         v-show="isShown(character.title)"
         :key="character.id"
-        :to="`/guides/${character.id}`"
+        :to="{ name: 'guide', params: { id: character.id } }"
         :title="character.title"
         :thumbnail="avatarHeaderPath(character.id)"
         :published-at="new Date(character.publishedAt * 1000)"

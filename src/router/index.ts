@@ -10,6 +10,7 @@ import NotFound from "@/views/NotFound.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
+    name: "home",
     component: HomeView,
     meta: {
       navigation: {
@@ -20,15 +21,16 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/guides",
-    alias: "/guide",
     component: RouterView,
     children: [
       {
         path: "",
+        name: "guides",
         component: () => import("@/views/GuideHomeView.vue"),
       },
       {
         path: ":id",
+        name: "guide",
         component: () => import("@/views/GuideView.vue"),
         meta: {
           dynamicKey: true,
@@ -44,15 +46,16 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/characters",
-    alias: "/character",
     component: RouterView,
     children: [
       {
         path: "",
+        name: "characters",
         component: () => import("@/views/characters/CharactersIndex.vue"),
       },
       {
         path: ":id",
+        name: "character",
         component: () => import("@/views/characters/CharactersId.vue"),
       },
     ],
@@ -65,7 +68,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/calc",
-    alias: "/calculations",
+    name: "calc",
     component: CalcView,
     meta: {
       navigation: {
