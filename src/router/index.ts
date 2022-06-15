@@ -49,7 +49,11 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: "",
-        component: () => import("@/views/CharactersView.vue"),
+        component: () => import("@/views/characters/CharactersIndex.vue"),
+      },
+      {
+        path: ":id",
+        component: () => import("@/views/characters/CharactersId.vue"),
       },
     ],
     meta: {

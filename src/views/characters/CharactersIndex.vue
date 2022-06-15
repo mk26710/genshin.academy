@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CharacterCard from "../components/Cards/CharacterCard.vue";
+import CharacterCard from "../../components/Cards/CharacterCard.vue";
 import MainContainer from "@/components/MainContainer.vue";
 
 import { charactersArray } from "@/data/characters";
