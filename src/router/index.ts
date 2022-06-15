@@ -57,6 +57,9 @@ const routes: Array<RouteRecordRaw> = [
         path: ":id",
         name: "character",
         component: () => import("@/views/characters/CharactersId.vue"),
+        meta: {
+          dynamicKey: true,
+        },
       },
     ],
     meta: {
@@ -79,6 +82,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/:pathMatch(.*)*",
+    name: "NotFound",
     component: NotFound,
   },
 ];
