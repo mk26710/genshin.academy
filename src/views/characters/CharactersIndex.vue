@@ -7,11 +7,8 @@ import { charactersArray } from "@/data/characters";
 
 <template>
   <MainContainer>
-    <div class="w-full mb-4">
-      <h1 class="w-fit pb-2 text-4xl font-bold border-b border-neutral-200 dark:border-dark-200/10">
-        Characters
-      </h1>
-    </div>
+    <h1 class="font-semibold text-4xl mb-4 mt-6">Characters</h1>
+
     <div class="flex flex-row flex-wrap gap-2 justify-evenly md:justify-start">
       <CharacterCard
         v-for="character in charactersArray"
