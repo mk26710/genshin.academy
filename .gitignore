@@ -26,3 +26,6 @@ coverage
 *.njsproj
 *.sln
 *.sw?
+
+# webps are now beng automatically generated with a script
+public/**/*.webp
