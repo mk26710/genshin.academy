@@ -26,12 +26,12 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "",
         name: "guides",
-        component: () => import("@/views/GuideHomeView.vue"),
+        component: () => import("@/views/guides/GuideHomeView.vue"),
       },
       {
         path: ":id",
         name: "guide",
-        component: () => import("@/views/GuideView.vue"),
+        component: () => import("@/views/guides/GuideView.vue"),
         meta: {
           dynamicKey: true,
         },
