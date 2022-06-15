@@ -8,6 +8,6 @@ export const avatarHeaderPath = (id: string, extension = "png") => {
 /**
  * Builds url to character's icon
  */
-export const characterIcon = (id: string) => {
-  return `/img/characters/${id}/icon.png`;
+export const characterIcon = (id: string, ext = "png") => {
+  return `/img/characters/${id}/icon.${ext}`;
 };
