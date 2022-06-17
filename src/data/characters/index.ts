@@ -1,4 +1,4 @@
-import type { Character } from "@/data/types/character";
+import type { Character } from "@/data/character";
 
 import yae_miko from "./yae_miko";
 import kamisato_ayaka from "./kamisato_ayaka";

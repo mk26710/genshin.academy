@@ -1,4 +1,4 @@
-import type { Character } from "../types/character";
+import type { Character } from "../character";
 import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const shenhe: Character = {

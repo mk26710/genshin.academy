@@ -1,5 +1,5 @@
 import { Rarity, Vision, Weapon } from "@/data/types/genshin";
-import type { Character } from "@/data/types/character";
+import type { Character } from "@/data/character";
 
 const yelan: Character = {
   id: "yelan",
