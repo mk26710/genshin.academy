@@ -1,5 +1,6 @@
 import { createPinia } from "pinia";
 import { createApp } from "vue";
+import piniaPluginPersistedState from "pinia-plugin-persistedstate";
 
 import App from "@/App.vue";
 
@@ -14,8 +15,11 @@ import "@/assets/styles/cards.scss";
 import "@/assets/styles/nprogress.scss";
 
 const app = createApp(App);
+const pinia = createPinia();
 
-app.use(createPinia());
+pinia.use(piniaPluginPersistedState);
+
+app.use(pinia);
 app.use(router);
 app.use(dayjs);
 app.use(nprogress);
