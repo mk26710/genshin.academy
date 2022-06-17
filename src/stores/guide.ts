@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { defineStore } from "pinia";
+import { uniq } from "lodash-es";
 
 import publishedCharactersGuides from "@/data/guides/compiled/characters/published.json";
 
@@ -39,7 +40,7 @@ export const useGuideStore = defineStore({
         }),
       );
 
-      this.all = [...guides];
+      this.all = uniq(guides);
       this.isUpdated = true;
 
       console.log("Guides data is now fresh!");
