@@ -14,9 +14,11 @@
     "dayjs": "^1.11.2",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.14",
+    "pinia-plugin-persistedstate": "^1.6.1",
     "vue": "^3.2.37",
     "vue-i18n": "^9.1.10",
-    "vue-router": "^4.0.16"
+    "vue-router": "^4.0.16",
+    "zod": "^3.17.3"
   },
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^3.4.0",
