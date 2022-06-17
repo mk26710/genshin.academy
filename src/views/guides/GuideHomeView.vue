@@ -4,14 +4,18 @@ import { computed, ref } from "vue";
 import GuideCard from "@/components/Cards/GuideCard.vue";
 import MainContainer from "@/components/MainContainer.vue";
 
-import jsonData from "@/data/guides/published.json";
 import { avatarHeaderPath } from "@/lib/helpers";
 import { useRoute, useRouter } from "vue-router";
 
-const published = jsonData.data;
+import { charactersArray } from "@/data/characters";
+import published from "@/data/guides/compiled/characters/published.json";
 
 const router = useRouter();
 const route = useRoute();
+
+const publishedCharacters = computed(() => {
+  return charactersArray.filter(({ id }) => published.includes(id));
+});
 
 const searchValue = ref(route.query.q?.toString() ?? "");
 
@@ -44,15 +48,14 @@ const isShown = (title: string) => {
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4"
     >
       <GuideCard
-        v-for="character in published"
-        :id="character.id"
-        v-show="isShown(character.title)"
-        :key="character.id"
-        :to="{ name: 'guide', params: { id: character.id } }"
-        :title="character.title"
-        :thumbnail="avatarHeaderPath(character.id, 'webp')"
-        :published-at="new Date(character.publishedAt * 1000)"
-        :description="character.brief"
+        v-for="c in publishedCharacters"
+        :id="c.id"
+        v-show="isShown(c.name)"
+        :key="c.id"
+        :to="{ name: 'guide', params: { id: c.id } }"
+        :title="c.name"
+        :thumbnail="avatarHeaderPath(c.id, 'webp')"
+        :description="c.description"
       />
     </div>
   </MainContainer>

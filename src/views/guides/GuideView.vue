@@ -1,30 +1,32 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
+import { onBeforeMount } from "vue";
 import { useRoute } from "vue-router";
+import { isNil } from "lodash-es";
 
-import ErrorComponent from "@/components/Error.vue";
 import MainContainer from "@/components/MainContainer.vue";
+import ErrorComponent from "@/components/Error.vue";
 
-import { useGuidesStore } from "@/stores/guides";
+import { useGuideStore } from "@/stores/guide";
 
 const route = useRoute();
-const store = useGuidesStore();
+const id = route.params.id.toString();
 
-const { importGuide } = store;
-const { selected } = storeToRefs(store);
+const { getGuideById } = useGuideStore();
+const guide = getGuideById(id);
 
 // We have to go with this approach to trigger Suspense fallback if needed
-window.scrollTo({ top: 0 });
-await importGuide(`${route.params.id}`);
+onBeforeMount(() => {
+  window.scrollTo({ top: 0 });
+});
 </script>
 
 <template>
   <MainContainer>
-    <section class="md-body" v-if="selected.html !== null" v-html="selected.html" />
+    <section class="md-body" v-if="!isNil(guide)" v-html="guide.html" />
     <ErrorComponent
-      v-if="selected.error !== null"
+      v-else
       title="Hey, this guide doesn't exist!"
-      :description="selected.error.message"
+      :description="`Guide for ${id} was not found.`"
       button-title="Back to Guides"
       button-href="/guides"
     />
