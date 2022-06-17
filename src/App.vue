@@ -1,17 +1,26 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, onBeforeMount } from "vue";
 import { useRoute, RouterView } from "vue-router";
 
 import MainContainer from "@/components/MainContainer.vue";
 import Footer from "@/components/Footer.vue";
 import Navigation from "@/components/Navigation.vue";
 import SuspenseFallback from "@/components/SuspenseFallback.vue";
+import { useGuideStore } from "@/stores/guide";
 
 const route = useRoute();
+
+const store = useGuideStore();
 
 const viewKey = computed(() =>
   route.meta?.dynamicKey === true ? route.fullPath : "non-dynamic-route",
 );
+
+onBeforeMount(async () => {
+  if (store.isUpdated !== true) {
+    await store.update();
+  }
+});
 </script>
 
 <template>
