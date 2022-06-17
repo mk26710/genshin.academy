@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { isNil } from "lodash-es";
 
@@ -6,12 +7,17 @@ import MainContainer from "@/components/MainContainer.vue";
 
 import { avatarPath } from "@/lib/helpers";
 import { charactersMap } from "@/data/characters";
+import { Character, type Character as CharacterType } from "@/data/character";
 
 const router = useRouter();
 const route = useRoute();
 
-const character = charactersMap.get(`${route.params.id}`);
-if (isNil(character)) {
+const character = ref<CharacterType>();
+
+try {
+  character.value = await Character.parseAsync(charactersMap.get(`${route.params.id}`));
+} catch (e) {
+  console.error(e);
   router.push("/404");
 }
 </script>
