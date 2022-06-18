@@ -28,7 +28,7 @@ List of characters that require data gathering (except for story lines)
 - [ ] Ningguang
 - [ ] Noelle
 - [x] Qiqi
-- [ ] Raiden Shogun
+- [x] Raiden Shogun
 - [ ] Razor
 - [ ] Rosaria
 - [ ] Sangonomiya Kokomi

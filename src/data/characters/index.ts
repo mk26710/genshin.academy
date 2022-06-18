@@ -8,8 +8,19 @@ import qiqi from "./qiqi";
 import shenhe from "./shenhe";
 import ganyu from "./ganyu";
 import eula from "@/data/characters/eula";
+import raiden_shogun from "@/data/characters/raiden_shogun";
 
-const _array = [yae_miko, kamisato_ayaka, yelan, kamisato_ayato, qiqi, shenhe, ganyu, eula];
+const _array = [
+  yae_miko,
+  kamisato_ayaka,
+  yelan,
+  kamisato_ayato,
+  qiqi,
+  shenhe,
+  ganyu,
+  eula,
+  raiden_shogun,
+];
 
 export const charactersArray = [..._array].sort(
   (a, b) => a.name.localeCompare(b.name) || b.rarity - a.rarity,
