@@ -2,6 +2,7 @@ import { z } from "zod";
 import type { Component } from "vue";
 
 import { Rarity, Vision, Weapon } from "@/data/types/genshin";
+import { deepFreezeTranformer } from "@/lib/utils";
 
 export const BirthdayDate = z.tuple([
   z.number().int().min(1).max(31),
@@ -26,26 +27,35 @@ export const StoryEntry = z.object({
 
 export type StoryEntry = z.infer<typeof StoryEntry>;
 
-export const Character = z.object({
-  /** Name of the character that is used for filenames, paths etc. rlated to the character */
-  id: z.string().regex(/[a-z_]+/g),
+export const Character = z
+  .object({
+    /** Name of the character that is used for filenames, paths etc. rlated to the character */
+    id: z.string().regex(/[a-z_]+/g),
 
-  /** Human readable name of the character */
-  name: z.string(),
+    /** Human readable name of the character */
+    name: z.string(),
 
-  /** Official description of the character from the game */
-  description: z.string(),
+    /** Official description of the character from the game */
+    description: z.string(),
 
-  /** An array of data related to constellations */
-  constellations: Constellation.array().length(6),
+    /** An array of data related to constellations */
+    constellations: z.tuple([
+      Constellation,
+      Constellation,
+      Constellation,
+      Constellation,
+      Constellation,
+      Constellation,
+    ]),
 
-  /** Storylines from the game (character -> profile -> story) */
-  story: StoryEntry.array(),
+    /** Storylines from the game (character -> profile -> story) */
+    story: StoryEntry.array(),
 
-  rarity: z.nativeEnum(Rarity),
-  weapon: z.nativeEnum(Weapon),
-  vision: z.nativeEnum(Vision),
-  birthday: BirthdayDate,
-});
+    rarity: z.nativeEnum(Rarity),
+    weapon: z.nativeEnum(Weapon),
+    vision: z.nativeEnum(Vision),
+    birthday: BirthdayDate,
+  })
+  .transform(deepFreezeTranformer);
 
 export type Character = z.infer<typeof Character>;
