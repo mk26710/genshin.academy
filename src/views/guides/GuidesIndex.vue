@@ -4,7 +4,7 @@ import { useRoute } from "vue-router";
 import { isNil } from "lodash-es";
 
 import MainContainer from "@/components/MainContainer.vue";
-import ErrorComponent from "@/components/Error.vue";
+import ErrorDisplay from "@/components/ErrorDisplay.vue";
 
 import { useGuideStore } from "@/stores/guide";
 
@@ -23,7 +23,7 @@ onBeforeMount(() => {
 <template>
   <MainContainer>
     <section class="md-body" v-if="!isNil(guide)" v-html="guide.html" />
-    <ErrorComponent
+    <ErrorDisplay
       v-else
       title="Hey, this guide doesn't exist!"
       :description="`Guide for ${id} was not found.`"
