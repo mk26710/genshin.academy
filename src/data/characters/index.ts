@@ -1,10 +1,10 @@
-import yae_miko from "./yae_miko";
-import kamisato_ayaka from "./kamisato_ayaka";
-import yelan from "./yelan";
-import kamisato_ayato from "./kamisato_ayato";
-import qiqi from "./qiqi";
-import shenhe from "./shenhe";
-import ganyu from "./ganyu";
+import yae_miko from "@/data/characters/yae_miko";
+import kamisato_ayaka from "@/data/characters/kamisato_ayaka";
+import yelan from "@/data/characters/yelan";
+import kamisato_ayato from "@/data/characters/kamisato_ayato";
+import qiqi from "@/data/characters/qiqi";
+import shenhe from "@/data/characters/shenhe";
+import ganyu from "@/data/characters/ganyu";
 import eula from "@/data/characters/eula";
 import raiden_shogun from "@/data/characters/raiden_shogun";
 
