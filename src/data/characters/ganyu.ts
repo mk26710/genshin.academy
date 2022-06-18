@@ -1,3 +1,5 @@
+import deepFreeze from "deep-freeze";
+
 import type { Character } from "@/data/character";
 import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 
@@ -49,4 +51,4 @@ const ganyu: Character = {
   story: [],
 };
 
-export default ganyu;
+export default deepFreeze(ganyu);

@@ -1,3 +1,5 @@
+import deepFreeze from "deep-freeze";
+
 import type { Character } from "@/data/character";
 import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 
@@ -18,4 +20,4 @@ const eula: Character = {
   story: [],
 };
 
-export default eula;
+export default deepFreeze(eula);

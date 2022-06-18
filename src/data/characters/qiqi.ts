@@ -1,3 +1,5 @@
+import deepFreeze from "deep-freeze";
+
 import type { Character } from "@/data/character";
 import { Rarity, Vision, Weapon } from "../types/genshin";
 
@@ -49,4 +51,4 @@ const qiqi: Character = {
   story: [],
 };
 
-export default qiqi;
+export default deepFreeze(qiqi);

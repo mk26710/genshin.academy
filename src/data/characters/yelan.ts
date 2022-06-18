@@ -1,3 +1,5 @@
+import deepFreeze from "deep-freeze";
+
 import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 import type { Character } from "@/data/character";
 
@@ -52,4 +54,4 @@ const yelan: Character = {
   story: [],
 };
 
-export default yelan;
+export default deepFreeze(yelan);
