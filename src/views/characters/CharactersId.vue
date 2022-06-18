@@ -6,18 +6,17 @@ import { isNil } from "lodash-es";
 import MainContainer from "@/components/MainContainer.vue";
 
 import { avatarPath } from "@/lib/helpers";
-import { charactersMap } from "@/data/characters";
-import { Character, type Character as CharacterType } from "@/data/character";
+import { getCharacterById } from "@/data/characters";
+import type { Character } from "@/data/character";
 
 const router = useRouter();
 const route = useRoute();
 
-const character = ref<CharacterType>();
+const id = route.params.id.toString();
+const character = ref<Character | undefined>(getCharacterById(id));
 
-try {
-  character.value = await Character.parseAsync(charactersMap.get(`${route.params.id}`));
-} catch (e) {
-  console.error(e);
+if (isNil(character.value)) {
+  console.warn(`Could not find a character with id ${id}`);
   router.replace({ name: "NotFound" });
 }
 </script>
