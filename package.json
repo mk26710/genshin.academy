@@ -23,6 +23,7 @@
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^3.4.0",
     "@rushstack/eslint-patch": "^1.1.0",
+    "@types/deep-freeze": "^0.1.2",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "^16.11.27",
     "@types/nprogress": "^0.2.0",
@@ -35,6 +36,7 @@
     "@vueuse/head": "^0.7.6",
     "autoprefixer": "^10.4.7",
     "commander": "^9.3.0",
+    "deep-freeze": "^0.0.1",
     "eslint": "^8.5.0",
     "eslint-plugin-vue": "^8.2.0",
     "globby": "^13.1.2",
