@@ -1,7 +1,8 @@
-// very useful article on type safe injection - https://logaretm.com/blog/type-safe-provide-inject/
 import { inject } from "vue";
 import type { InjectionKey } from "vue";
+import deepFreeze from "deep-freeze";
 
+// very useful article on type safe injection - https://logaretm.com/blog/type-safe-provide-inject/
 export const injectStrict = <T>(key: InjectionKey<T>, fallback?: T) => {
   const resolved = inject(key, fallback);
   if (!resolved) {
@@ -9,4 +10,11 @@ export const injectStrict = <T>(key: InjectionKey<T>, fallback?: T) => {
   }
 
   return resolved;
+};
+
+/**
+ * Tranform function for zod `.transform()` that makes an object deeply frozen
+ */
+export const deepFreezeTranformer = <T>(val: T) => {
+  return deepFreeze(val);
 };
