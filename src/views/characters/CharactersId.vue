@@ -18,7 +18,7 @@ try {
   character.value = await Character.parseAsync(charactersMap.get(`${route.params.id}`));
 } catch (e) {
   console.error(e);
-  router.push("/404");
+  router.replace({ name: "NotFound" });
 }
 </script>
 
