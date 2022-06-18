@@ -29,10 +29,10 @@ export type StoryEntry = z.infer<typeof StoryEntry>;
 
 export const Character = z
   .object({
-    /** Name of the character that is used for filenames, paths etc. rlated to the character */
+    /** Name of the character that is used for filenames, paths etc. related to the character */
     id: z.string().regex(/[a-z_]+/g),
 
-    /** Human readable name of the character */
+    /** Human-readable name of the character */
     name: z.string(),
 
     /** Official description of the character from the game */
