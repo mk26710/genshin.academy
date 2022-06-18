@@ -1,9 +1,7 @@
-import deepFreeze from "deep-freeze";
-
-import type { Character } from "@/data/character";
+import { Character } from "@/data/character";
 import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 
-const yae_miko: Character = {
+const yae_miko = Character.parse({
   id: "yae_miko",
 
   name: "Yae Miko",
@@ -49,6 +47,6 @@ const yae_miko: Character = {
   ],
 
   story: [],
-};
+});
 
-export default deepFreeze(yae_miko);
+export default yae_miko;

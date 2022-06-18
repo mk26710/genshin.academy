@@ -1,9 +1,7 @@
-import deepFreeze from "deep-freeze";
-
-import type { Character } from "@/data/character";
+import { Character } from "@/data/character";
 import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 
-const raiden_shogun: Character = {
+const raiden_shogun = Character.parse({
   id: "raiden_shogun",
 
   name: "Raiden Shogun",
@@ -49,6 +47,6 @@ const raiden_shogun: Character = {
   ],
 
   story: [],
-};
+});
 
-export default deepFreeze(raiden_shogun);
+export default raiden_shogun;

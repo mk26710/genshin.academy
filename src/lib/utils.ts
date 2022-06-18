@@ -15,6 +15,10 @@ export const injectStrict = <T>(key: InjectionKey<T>, fallback?: T) => {
 /**
  * Tranform function for zod `.transform()` that makes an object deeply frozen
  */
-export const deepFreezeTranformer = <T>(val: T) => {
+export const deepFreezeTransform = <T>(val: T) => {
   return deepFreeze(val);
+};
+
+export const freezeTransform = <T>(val: T) => {
+  return Object.freeze(val);
 };

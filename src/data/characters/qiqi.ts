@@ -1,9 +1,7 @@
-import deepFreeze from "deep-freeze";
-
-import type { Character } from "@/data/character";
+import { Character } from "@/data/character";
 import { Rarity, Vision, Weapon } from "../types/genshin";
 
-const qiqi: Character = {
+const qiqi = Character.parse({
   id: "qiqi",
 
   name: "Qiqi",
@@ -49,6 +47,6 @@ const qiqi: Character = {
   ],
 
   story: [],
-};
+});
 
-export default deepFreeze(qiqi);
+export default qiqi;

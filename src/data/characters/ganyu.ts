@@ -1,9 +1,7 @@
-import deepFreeze from "deep-freeze";
-
-import type { Character } from "@/data/character";
+import { Character } from "@/data/character";
 import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 
-const ganyu: Character = {
+const ganyu = Character.parse({
   id: "ganyu",
 
   name: "Ganyu",
@@ -49,6 +47,6 @@ const ganyu: Character = {
   ],
 
   story: [],
-};
+});
 
-export default deepFreeze(ganyu);
+export default ganyu;

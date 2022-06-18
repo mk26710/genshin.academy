@@ -1,9 +1,7 @@
-import deepFreeze from "deep-freeze";
-
 import { Rarity, Vision, Weapon } from "@/data/types/genshin";
-import type { Character } from "@/data/character";
+import { Character } from "@/data/character";
 
-const yelan: Character = {
+const yelan = Character.parse({
   id: "yelan",
 
   name: "Yelan",
@@ -52,6 +50,6 @@ const yelan: Character = {
   ],
 
   story: [],
-};
+});
 
-export default deepFreeze(yelan);
+export default yelan;

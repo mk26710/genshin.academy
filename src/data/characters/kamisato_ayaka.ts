@@ -1,9 +1,7 @@
-import deepFreeze from "deep-freeze";
-
-import type { Character } from "@/data/character";
+import { Character } from "@/data/character";
 import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 
-const kamisato_ayaka: Character = {
+const kamisato_ayaka = Character.parse({
   id: "kamisato_ayaka",
 
   name: "Kamisato Ayaka",
@@ -49,6 +47,6 @@ const kamisato_ayaka: Character = {
   ],
 
   story: [],
-};
+});
 
-export default deepFreeze(kamisato_ayaka);
+export default kamisato_ayaka;

@@ -1,9 +1,7 @@
-import deepFreeze from "deep-freeze";
-
-import type { Character } from "../character";
+import { Character } from "../character";
 import { Rarity, Vision, Weapon } from "../types/genshin";
 
-const shenhe: Character = {
+const shenhe = Character.parse({
   id: "shenhe",
 
   name: "Shenhe",
@@ -49,6 +47,6 @@ const shenhe: Character = {
   ],
 
   story: [],
-};
+});
 
-export default deepFreeze(shenhe);
+export default shenhe;
