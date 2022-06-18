@@ -24,7 +24,7 @@ defineProps<Props>();
 
       <RouterLink
         :to="buttonHref"
-        class="mt-8 px-3 py-2 bg-primary-500 shadow-lg shadow-primary-500/50 text-white text-lg font-bold rounded-lg flex flex-row justify-center items-center gap-x-2"
+        class="mt-8 px-3 py-2 bg-primary-600 shadow-lg text-white text-lg font-bold rounded-lg flex flex-row justify-center items-center gap-x-2"
       >
         <ChevronDoubleLeftIcon class="w-5 h-5" />
         <span>{{ buttonTitle }}</span>
