@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
+import { debouncedRef } from "@vueuse/core";
 
 import GuideCard from "@/components/Cards/GuideCard.vue";
 import MainContainer from "@/components/MainContainer.vue";
@@ -17,28 +18,22 @@ const publishedCharacters = computed(() => {
   return charactersArray.filter(({ id }) => published.includes(id));
 });
 
-const searchValue = ref(route.query.q?.toString() ?? "");
+const search = ref(route.query.q?.toString() ?? "");
+const debouncedSearch = debouncedRef(search, 500);
 
-const query = computed({
-  get() {
-    return searchValue.value;
-  },
-
-  set(value: string) {
-    searchValue.value = value;
-    router.push({ query: { q: value } });
-  },
+watch(debouncedSearch, () => {
+  router.push({ query: { q: search.value } });
 });
 
 const isShown = (title: string) => {
-  return title.toLowerCase().includes(searchValue.value.toLowerCase());
+  return title.toLowerCase().includes(debouncedSearch.value.toLowerCase());
 };
 </script>
 
 <template>
   <MainContainer>
     <input
-      v-model="query"
+      v-model="search"
       type="text"
       placeholder="Search by title"
       class="w-full mb-4 lg:mb-8 leading-6 dark:text-neutral-300 placeholder:text-neutral-600 accent-primary-500 rounded-md ring-1 bg-white dark:bg-neutral-800 ring-neutral-900/10 dark:ring-neutral-50/10 shadow-sm py-1.5 pl-2 pr-3"
