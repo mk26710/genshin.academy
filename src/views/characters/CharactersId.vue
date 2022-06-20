@@ -5,6 +5,7 @@ import { isNil } from "lodash-es";
 
 import MainContainer from "@/components/MainContainer.vue";
 import ErrorDisplay from "@/components/ErrorDisplay.vue";
+import Image from "@/components/Image.vue";
 
 import { avatarPath } from "@/lib/helpers";
 import { getCharacterById } from "@/data/characters";
@@ -21,7 +22,8 @@ const character = ref<Character | undefined>(getCharacterById(id));
     <template v-if="!isNil(character)">
       <h1 class="font-semibold text-4xl mb-4 mt-6">{{ character.name }}</h1>
       <p>{{ character.description }}</p>
-      <img :src="avatarPath(character.id, 'webp')" />
+
+      <Image :src="avatarPath(character.id)" />
     </template>
     <ErrorDisplay
       v-else

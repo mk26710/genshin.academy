@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import { RouterLink } from "vue-router";
 
 import { Rarity } from "@/data/types/genshin";
-import { characterIcon } from "@/lib/helpers";
-import { computed } from "vue";
+
+import Image from "@/components/Image.vue";
 
 interface Props {
   id: string;
@@ -13,7 +14,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const icon = characterIcon(props.id, "webp");
+const icon = computed(() => `/img/characters/${props.id}/icon.png`);
 
 const iconBg = computed(() => {
   if (props.rarity === Rarity.FIVE_STAR) {
@@ -40,7 +41,7 @@ const fontSize = computed(() => {
     class="card card-vertical w-[calc(33.33%-0.75rem)] md:w-28"
   >
     <div class="w-full aspect-square rounded-t-lg bg-gradient-to-b" :class="iconBg">
-      <img class="card-thumbnail" :src="icon" :alt="`${id} icon`" />
+      <Image class="card-thumbnail" :src="icon" :alt="`${name} icon`" lazy />
     </div>
 
     <div class="w-full h-8 flex items-center justify-center font-semibold">
