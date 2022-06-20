@@ -14,7 +14,6 @@ const id = route.params.id.toString();
 const { getGuideById } = useGuideStore();
 const guide = getGuideById(id);
 
-// We have to go with this approach to trigger Suspense fallback if needed
 onBeforeMount(() => {
   window.scrollTo({ top: 0 });
 });
