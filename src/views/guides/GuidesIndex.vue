@@ -19,7 +19,7 @@ const publishedCharacters = computed(() => {
 });
 
 const search = ref(route.query.q?.toString() ?? "");
-const debouncedSearch = debouncedRef(search, 500);
+const debouncedSearch = debouncedRef(search, 300);
 
 watch(debouncedSearch, () => {
   router.push({ query: { q: search.value } });
