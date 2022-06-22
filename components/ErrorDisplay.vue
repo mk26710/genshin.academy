@@ -1,7 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { isString } from "lodash-es";
-import { RouterLink } from "vue-router";
 
 import { ChevronDoubleLeftIcon } from "@heroicons/vue/solid";
 
@@ -22,13 +21,13 @@ defineProps<Props>();
 
       <p v-if="isString(description)">{{ description }}</p>
 
-      <RouterLink
+      <NuxtLink
         :to="buttonHref"
         class="mt-8 px-3 py-2 bg-primary-600 shadow-lg text-white text-lg font-bold rounded-lg flex flex-row justify-center items-center gap-x-2"
       >
         <ChevronDoubleLeftIcon class="w-5 h-5" />
         <span>{{ buttonTitle }}</span>
-      </RouterLink>
+      </NuxtLink>
     </div>
   </div>
 </template>

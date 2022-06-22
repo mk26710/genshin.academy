@@ -1,7 +1,5 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import { RouterLink } from "vue-router";
-
 interface Props {
   title: string;
   description?: string;
@@ -19,7 +17,7 @@ withDefaults(defineProps<Props>(), {});
 </script>
 
 <template>
-  <RouterLink :to="to ?? '#'" class="card card-vertical">
+  <NuxtLink :to="to ?? '#'" class="card card-vertical">
     <img
       v-if="!!thumbnail"
       :src="thumbnail"
@@ -43,5 +41,5 @@ withDefaults(defineProps<Props>(), {});
         {{ description }}
       </p>
     </div>
-  </RouterLink>
+  </NuxtLink>
 </template>

@@ -1,7 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { RouterLink, useRouter } from "vue-router";
 
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 import { MoonIcon, SunIcon } from "@heroicons/vue/solid";
@@ -30,12 +29,12 @@ const firefoxMarginBottomClass = computed(() => {
 
 const endpoints = computed(() => {
   return router.options.routes
-    .filter((r) => r.meta && r.meta.navigation)
+    .filter((r) => r.meta && r.meta.navbar)
     .map((r) => {
       return {
         // never undefined, filter above
-        name: r.meta?.navigation?.name,
-        icon: r.meta?.navigation?.icon,
+        name: r.meta?.name,
+        icon: r.meta?.icon,
         path: r.path,
       };
     });
@@ -74,7 +73,7 @@ const endpoints = computed(() => {
             </div>
           </div>
 
-          <RouterLink
+          <NuxtLink
             v-for="endpoint in [...endpoints].reverse()"
             :key="endpoint.name"
             :to="endpoint.path"
@@ -89,7 +88,7 @@ const endpoints = computed(() => {
                 <component :is="endpoint.icon" class="w-6 h-6" />
               </div>
             </div>
-          </RouterLink>
+          </NuxtLink>
 
           <div
             @click="isOpen = false"
@@ -136,7 +135,7 @@ const endpoints = computed(() => {
         <h1 class="font-extrabold text-xl">GENSHIN.ZENLESS</h1>
       </div>
 
-      <RouterLink
+      <NuxtLink
         v-for="endpoint in endpoints"
         :key="endpoint.name"
         :to="endpoint.path"
@@ -145,7 +144,7 @@ const endpoints = computed(() => {
       >
         <component :is="endpoint.icon" class="h-7 w-7 p-0" />
         <h1>{{ endpoint.name }}</h1>
-      </RouterLink>
+      </NuxtLink>
     </div>
 
     <div class="fixed bottom-4 left-4">
