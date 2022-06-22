@@ -5,7 +5,7 @@ interface Props {
   description?: string;
   publishedAt?: Date;
   thumbnail?: string;
-  to?: {
+  to?: string | {
     name: string;
     params: {
       id: string;
@@ -17,7 +17,7 @@ withDefaults(defineProps<Props>(), {});
 </script>
 
 <template>
-  <NuxtLink :to="to ?? '#'" class="card card-vertical">
+  <NuxtLink :to="to ?? '#'" as="div" class="card card-vertical">
     <img
       v-if="!!thumbnail"
       :src="thumbnail"
@@ -30,7 +30,7 @@ withDefaults(defineProps<Props>(), {});
         v-if="!!publishedAt"
         class="card-text-container-item font-medium text-sm leading-6 text-primary-500"
       >
-        {{ $dayjs(publishedAt).format("lll") }}
+        <!-- {{ $dayjs(publishedAt).format("lll") }} --> FOO
       </div>
 
       <p class="card-text-container-item block font-semibold text-base leading-6">
