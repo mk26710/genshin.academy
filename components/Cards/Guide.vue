@@ -5,15 +5,19 @@ interface Props {
   description?: string;
   publishedAt?: Date;
   thumbnail?: string;
-  to?: string | {
-    name: string;
-    params: {
-      id: string;
-    };
-  };
+  to?:
+    | string
+    | {
+        name: string;
+        params: {
+          id: string;
+        };
+      };
 }
 
 withDefaults(defineProps<Props>(), {});
+
+const { $dayjs } = useNuxtApp();
 </script>
 
 <template>
@@ -30,7 +34,7 @@ withDefaults(defineProps<Props>(), {});
         v-if="!!publishedAt"
         class="card-text-container-item font-medium text-sm leading-6 text-primary-500"
       >
-        <!-- {{ $dayjs(publishedAt).format("lll") }} --> FOO
+        {{ $dayjs(publishedAt).format("lll") }}
       </div>
 
       <p class="card-text-container-item block font-semibold text-base leading-6">
