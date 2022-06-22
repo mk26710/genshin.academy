@@ -1,14 +1,42 @@
-# GVP
+# Nuxt 3 Minimal Starter
 
-Small project related to Genshin Impact
+Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
 
-## Before Contributing
+## Setup
 
-⚠️ **This repository contains [git submodules](https://github.blog/2016-02-01-working-with-submodules/)** ⚠️
+Make sure to install the dependencies:
 
-Make sure to understand how this feature works, it might be confusing, but anyone should be able to figure it out.
-I have decided to use submodules to make it easier for people to write guides that will be published on the website.
-The project is essentially a statically generated website, so it had to be done in order to avoid use of cloud 
-compute services
+```bash
+# yarn
+yarn install
 
-Please, see [gvp-guides](https://github.com/kitsune-guuji/gvp-guides), if you would like to publish something! 
+# npm
+npm install
+
+# pnpm
+pnpm install --shamefully-hoist
+```
+
+## Development Server
+
+Start the development server on http://localhost:3000
+
+```bash
+npm run dev
+```
+
+## Production
+
+Build the application for production:
+
+```bash
+npm run build
+```
+
+Locally preview production build:
+
+```bash
+npm run preview
+```
+
+Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.

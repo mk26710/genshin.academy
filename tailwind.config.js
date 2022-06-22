@@ -1,7 +1,6 @@
-/* eslint-env node */
-const colors = require("tailwindcss/colors");
+/** @type {import('tailwindcss').Config} */
 
-// https://www.tailwindshades.com/
+const colors = require("tailwindcss/colors");
 
 const myColors = {
   "purple-heart": {
@@ -101,7 +100,16 @@ const myScreens = {
 };
 
 module.exports = {
-  content: ["./index.html", "./src/**/*.vue"],
+  content: [
+    `components/**/*.{vue,js}`,
+    `layouts/**/*.vue`,
+    `pages/**/*.vue`,
+    `composables/**/*.{js,ts}`,
+    `plugins/**/*.{js,ts}`,
+    `App.{js,ts,vue}`,
+    `app.{js,ts,vue}`,
+    `./base/**/*.vue`,
+  ],
   darkMode: "class",
   theme: {
     extend: {
