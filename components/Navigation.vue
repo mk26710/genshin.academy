@@ -37,7 +37,9 @@ const endpoints = computed(() => {
         icon: r.meta?.icon,
         path: r.path,
       };
-    });
+    })
+    .sort((a, b) => a.path.length - b.path.length)
+    ;
 });
 </script>
 
