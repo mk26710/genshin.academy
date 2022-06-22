@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   typescript: {
     shim: false,
   },
-  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt", "@nuxtjs/color-mode"],
+  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt"],
   css: ["@/assets/styles/main.scss"],
   ssr: false,
   target: "static",
