@@ -22,6 +22,7 @@
     "@heroicons/vue": "^1.0.6",
     "@pinia/nuxt": "^0.1.9",
     "pinia": "^2.0.14",
+    "pinia-plugin-persistedstate": "^1.6.1",
     "vue": "^3.2.37",
     "zod": "^3.17.3"
   }
