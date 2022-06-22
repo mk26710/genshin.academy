@@ -1,8 +1,10 @@
 {
   "private": true,
   "scripts": {
+    "prebuild": "node generatePublicWebpImages.mjs -r",
     "build": "nuxt build",
     "dev": "nuxt dev",
+    "pregenerate": "node generatePublicWebpImages.mjs -r",
     "generate": "nuxt generate",
     "preview": "nuxt preview"
   },
