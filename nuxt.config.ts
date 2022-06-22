@@ -7,6 +7,6 @@ export default defineNuxtConfig({
   },
   modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt", "@nuxtjs/color-mode"],
   css: ["@/assets/styles/main.scss"],
-  ssr: false,
-  target: "static",
+  // ssr: false,
+  // target: "static",
 });
