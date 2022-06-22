@@ -1,0 +1,4 @@
+[submodule "assets/data/guides/compiled"]
+	path = assets/data/guides/compiled
+	url = https://github.com/kitsune-guuji/gvp-guides.git
+	branch = guides-compiled
