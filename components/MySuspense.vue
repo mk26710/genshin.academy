@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import SuspenseFallback from "./SuspenseFallback.vue";
-
 interface Props {
   value: boolean;
 }

@@ -6,3 +6,13 @@
     </div>
   </MainContainer>
 </template>
+
+<script setup lang="ts">
+import { HomeIcon } from "@heroicons/vue/outline";
+
+definePageMeta({
+  name: "Home",
+  icon: HomeIcon,
+  navbar: true,
+});
+</script>

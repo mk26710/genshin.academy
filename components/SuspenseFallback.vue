@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
   <Transition name="fade" mode="out-in" appear>
     <div class="flex flex-col items-center justify-center w-full h-full">

@@ -1,5 +1,5 @@
-import { Character } from "@/data/character";
-import { Rarity, Vision, Weapon } from "@/data/types/genshin";
+import { Character } from "~~/data/character";
+import { Rarity, Vision, Weapon } from "~~/data/types/genshin";
 
 const yae_miko = Character.parse({
   id: "yae_miko",

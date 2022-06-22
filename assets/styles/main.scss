@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::selection {
+  background: theme("colors.primary.500");
+  color: white;
+}
+
+.app-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "main"
+    "footer";
+
+  @media (min-width: theme("screens.lg")) {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+      "sidebar main"
+      "sidebar footer";
+    margin-bottom: 0;
+  }
+
+  .sidebar {
+    grid-area: sidebar;
+  }
+
+  .main {
+    grid-area: main;
+    min-height: 100vh;
+  }
+
+  .footer {
+    grid-area: footer;
+  }
+}

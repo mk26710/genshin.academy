@@ -2,7 +2,6 @@
 interface Props {
   verticalCenter?: boolean;
 }
-
 withDefaults(defineProps<Props>(), {
   verticalCenter: false,
 });

@@ -1,5 +1,5 @@
-import { Character } from "@/data/character";
-import { Rarity, Vision, Weapon } from "@/data/types/genshin";
+import { Character } from "~~/data/character";
+import { Rarity, Vision, Weapon } from "~~/data/types/genshin";
 
 const raiden_shogun = Character.parse({
   id: "raiden_shogun",

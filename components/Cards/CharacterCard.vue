@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { RouterLink } from "vue-router";
 
-import { Rarity } from "@/data/types/genshin";
-
-import Image from "@/components/Image.vue";
+import { Rarity } from "~/data/types/genshin";
 
 interface Props {
   id: string;
@@ -36,7 +33,7 @@ const fontSize = computed(() => {
 </script>
 
 <template>
-  <RouterLink
+  <NuxtLink
     :to="{ name: 'character', params: { id: id } }"
     class="card card-vertical w-[calc(33.33%-0.75rem)] md:w-28"
   >
@@ -47,7 +44,7 @@ const fontSize = computed(() => {
     <div class="w-full h-8 flex items-center justify-center font-semibold">
       <p class="p-1 text-[.9rem] text-center" :class="fontSize">{{ name }}</p>
     </div>
-  </RouterLink>
+  </NuxtLink>
 </template>
 
 <style lang="scss" scoped>
