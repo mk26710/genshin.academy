@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("./cards.scss");
+@import url("./calculator.scss");
+@import url("./markdown.scss");
+
 ::selection {
   background: theme("colors.primary.500");
   color: white;
