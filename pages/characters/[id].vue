@@ -28,4 +28,20 @@ const route = useRoute();
 
 const id = route.params.id.toString();
 const character = ref<Character | undefined>(getCharacterById(id));
+
+const meta = isNil(character)
+  ? []
+  : [
+      { name: "description", content: character.value?.description },
+      { property: "og:description", content: character.value?.description },
+      {
+        property: "og:image",
+        content: `https://genshin.zenless.club/img/characters/${character.value.id}/icon.png`,
+      },
+    ];
+
+useHead({
+  title: `${character.value.name ?? "Not found"}`,
+  meta,
+});
 </script>
