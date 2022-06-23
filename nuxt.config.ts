@@ -12,5 +12,5 @@ export default defineNuxtConfig({
   },
   css: ["@/assets/styles/main.scss", "@/assets/styles/nprogress.scss"],
   // ssr: false,
-  // target: "static",
+  target: "static",
 });
