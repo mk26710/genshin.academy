@@ -23,4 +23,17 @@ definePageMeta({
   icon: StarIcon,
   navbar: true,
 });
+
+useHead(() => {
+  const description = "List of all playable Genshin Impact characters."
+  
+  return {
+    title: "Characters",
+    meta: [
+      { property: "og:title", content: "Characters" },
+      { name: "description", content: description },
+      { property: "og:description", content: description },
+    ],
+  };
+});
 </script>
