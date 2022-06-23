@@ -5,15 +5,29 @@ import { computed, ref } from "vue";
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 import { MoonIcon, SunIcon } from "@heroicons/vue/solid";
 import { onClickOutside } from "@vueuse/core";
-import { useDark, useToggle } from "@vueuse/core";
 
 const router = useRouter();
 
 const isOpen = ref(false);
 const popover = ref(null);
 
-const isDark = useDark({ storageKey: "theme" });
-const toggleDark = useToggle(isDark);
+const colorMode = useColorMode();
+
+const isDark = computed(() => {
+  if (colorMode.unknown) {
+    return false;
+  }
+
+  return colorMode.value === "dark";
+});
+
+const toggleDark = () => {
+  if (colorMode.value === "dark") {
+    colorMode.preference = "light";
+  } else {
+    colorMode.preference = "dark";
+  }
+};
 
 onClickOutside(popover, () => {
   isOpen.value = false;
@@ -21,7 +35,7 @@ onClickOutside(popover, () => {
 
 // thanks firefox for being great
 const firefoxMarginBottomClass = computed(() => {
-  if (navigator.userAgent.toLowerCase().includes("firefox")) {
+  if (process.client && navigator.userAgent.toLowerCase().includes("firefox")) {
     return "mb-10";
   }
   return "mb-8";
@@ -38,8 +52,7 @@ const endpoints = computed(() => {
         path: r.path,
       };
     })
-    .sort((a, b) => a.path.length - b.path.length)
-    ;
+    .sort((a, b) => a.path.length - b.path.length);
 });
 </script>
 
