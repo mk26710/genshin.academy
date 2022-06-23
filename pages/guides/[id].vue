@@ -42,7 +42,7 @@ useHead(() => {
   return {
     title: `${character.name} Guide`,
     meta: [
-      { property: "og:title", content: character.name },
+      { property: "og:title", content: `${character.name} Guide` },
       { name: "description", content: character.description },
       { property: "og:description", content: character.description },
       {
