@@ -15,4 +15,8 @@ definePageMeta({
   icon: HomeIcon,
   navbar: true,
 });
+
+useHead({
+  title: "Home",
+})
 </script>
