@@ -55,4 +55,17 @@ watch(debouncedSearch, () => {
 const isShown = (title: string) => {
   return title.toLowerCase().includes(debouncedSearch.value.toLowerCase());
 };
+
+useHead(() => {
+  const description = "Place for Genshin Impact characters guides."
+
+  return {
+    title: "Guides",
+    meta: [
+      { property: "og:title", content: "Guides" },
+      { name: "description", content: description },
+      { property: "og:description", content: description },
+    ],
+  };
+});
 </script>
