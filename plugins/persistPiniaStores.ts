@@ -11,5 +11,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   }
 
   pinia.use(createNuxtPersistedState(useCookie));
-  console.log("Persisted Pinia store plugin has been applied");
+  if (process.client) console.log("Persisted Pinia store plugin has been applied");
 });
