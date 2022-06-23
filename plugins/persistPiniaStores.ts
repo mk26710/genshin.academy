@@ -1,5 +1,6 @@
-import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
+import { createNuxtPersistedState } from "pinia-plugin-persistedstate";
 import { Pinia } from "pinia";
+import { defineNuxtPlugin, useCookie } from "#app";
 
 export default defineNuxtPlugin((nuxtApp) => {
   const pinia: Pinia = nuxtApp.$pinia;
@@ -9,6 +10,6 @@ export default defineNuxtPlugin((nuxtApp) => {
     return;
   }
 
-  pinia.use(piniaPluginPersistedstate);
+  pinia.use(createNuxtPersistedState(useCookie));
   console.log("Persisted Pinia store plugin has been applied");
 });
