@@ -15,7 +15,7 @@ const description = `Genshin Impact chracters, calculators, guides and more!`;
 
 useHead({
   titleTemplate: (titleChunk) => {
-    return titleChunk ? `${titleChunk} - GENSHIN.ZENLESS` : "GENSHIN.ZENLESS.CLUB";
+    return titleChunk ? `${titleChunk} - GVP` : "GENSHIN.ZENLESS.CLUB";
   },
   meta: [
     { property: "og:title", content: "GENSHIN.ZENLESS.CLUB" },
