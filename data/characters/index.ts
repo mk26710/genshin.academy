@@ -1,12 +1,12 @@
-import yae_miko from "~~/data/characters/yae_miko";
-import kamisato_ayaka from "~~/data/characters/kamisato_ayaka";
-import yelan from "~~/data/characters/yelan";
-import kamisato_ayato from "~~/data/characters/kamisato_ayato";
-import qiqi from "~~/data/characters/qiqi";
-import shenhe from "~~/data/characters/shenhe";
-import ganyu from "~~/data/characters/ganyu";
-import eula from "~~/data/characters/eula";
-import raiden_shogun from "~~/data/characters/raiden_shogun";
+import yae_miko from "@/data/characters/yae_miko";
+import kamisato_ayaka from "@/data/characters/kamisato_ayaka";
+import yelan from "@/data/characters/yelan";
+import kamisato_ayato from "@/data/characters/kamisato_ayato";
+import qiqi from "@/data/characters/qiqi";
+import shenhe from "@/data/characters/shenhe";
+import ganyu from "@/data/characters/ganyu";
+import eula from "@/data/characters/eula";
+import raiden_shogun from "@/data/characters/raiden_shogun";
 
 const _array = Object.freeze([
   yae_miko,

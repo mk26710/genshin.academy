@@ -1,4 +1,4 @@
-import { Character } from "~~/data/character";
+import { Character } from "@/data/character";
 import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const qiqi = Character.parse({

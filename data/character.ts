@@ -1,7 +1,7 @@
 import { z } from "zod";
-import type { Component } from "vue";
+import type { Component } from "react";
 
-import { Rarity, Vision, Weapon } from "~/data/types/genshin";
+import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 import { freezeTransform } from "@/lib/utils";
 
 export const BirthdayDate = z
