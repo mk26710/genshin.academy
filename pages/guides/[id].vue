@@ -1,6 +1,7 @@
 <template>
   <MainContainer>
     <section class="md-body" v-if="!isNil(guide)" v-html="guide.html" />
+    <SuspenseFallback v-else-if="isNil(guide) && !isUpdated" />
     <ErrorDisplay
       v-else
       title="Hey, this guide doesn't exist!"
@@ -11,7 +12,6 @@
   </MainContainer>
 </template>
 
-
 <script setup lang="ts">
 import { onBeforeMount } from "vue";
 import { useRoute } from "vue-router";
@@ -19,14 +19,16 @@ import { isNil } from "lodash-es";
 
 import { useGuideStore } from "@/stores/guide";
 import { getCharacterById } from "~~/data/characters";
+import { storeToRefs } from "pinia";
 
 const route = useRoute();
 const id = route.params.id.toString();
 
-const { getGuideById } = useGuideStore();
+const store = useGuideStore();
+const { all, isUpdated } = storeToRefs(store);
 
 const character = getCharacterById(id);
-const guide = getGuideById(id);
+const guide = computed(() => all.value.find((g) => g.id === id))
 
 onBeforeMount(() => {
   window.scrollTo({ top: 0 });
