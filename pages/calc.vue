@@ -85,4 +85,17 @@ const fullResinAt = computed(() => {
 
   return refillsAt.format("LLL");
 });
+
+useHead(() => {
+  const description = "Genshin Impact calculators such as crit value, resin, etc.";
+
+  return {
+    title: "Calculators",
+    meta: [
+      { property: "og:title", content: "Calculators" },
+      { name: "description", content: description },
+      { property: "og:description", content: description },
+    ],
+  };
+});
 </script>
