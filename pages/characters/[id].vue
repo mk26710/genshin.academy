@@ -22,26 +22,28 @@ import { isNil } from "lodash-es";
 
 import { avatarPath } from "@/lib/helpers";
 import { getCharacterById } from "@/data/characters";
-import type { Character } from "@/data/character";
 
 const route = useRoute();
 
 const id = route.params.id.toString();
-const character = ref<Character | undefined>(getCharacterById(id));
+const character = ref(getCharacterById(id));
 
-const meta = isNil(character)
-  ? []
-  : [
-      { name: "description", content: character.value?.description },
-      { property: "og:description", content: character.value?.description },
+useHead(() => {
+  if (character.value == null) {
+    return {};
+  }
+
+  return {
+    title: character.value.name,
+    meta: [
+      { property: "og:title", content: character.value.name },
+      { name: "description", content: character.value.description },
+      { property: "og:description", content: character.value.description },
       {
         property: "og:image",
         content: `https://genshin.zenless.club/img/characters/${character.value.id}/icon.png`,
       },
-    ];
-
-useHead({
-  title: `${character.value.name ?? "Not found"}`,
-  meta,
+    ],
+  };
 });
 </script>
