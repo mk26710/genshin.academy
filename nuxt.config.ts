@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     classSuffix: "",
     storageKey: "theme",
   },
-  css: ["@/assets/styles/main.scss"],
+  css: ["@/assets/styles/main.scss", "@/assets/styles/nprogress.scss"],
   // ssr: false,
   // target: "static",
 });
