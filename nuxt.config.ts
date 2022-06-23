@@ -13,4 +13,9 @@ export default defineNuxtConfig({
   css: ["@/assets/styles/main.scss", "@/assets/styles/nprogress.scss"],
   // ssr: false,
   // target: "static",
+  nitro: {
+    prerender: {
+      routes: ['/404', '/guides/yae_miko', '/characters/yae_miko']
+    }
+  }
 });
