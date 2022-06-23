@@ -10,6 +10,6 @@ export default defineNuxtPlugin((nuxtApp) => {
     return;
   }
 
-  pinia.use(createNuxtPersistedState(useCookie));
+  pinia.use(createNuxtPersistedState(useCookie, { cookieOptions: { sameSite: "strict" } }));
   if (process.client) console.log("Persisted Pinia store plugin has been applied");
 });
