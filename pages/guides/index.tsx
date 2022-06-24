@@ -38,6 +38,7 @@ const GuidesIndex: NextPage = () => {
           {publishedCharacters.map((character) => (
             <GuideCard
               key={character.id}
+              href={`/guides/${character.id}`}
               title={character.name}
               description={character.description}
               thumbnail={`/img/characters/${character.id}/avatar_header.webp`}

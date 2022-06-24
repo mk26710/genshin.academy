@@ -26,7 +26,7 @@ export const GuideCard: FC<Props> = ({
   }, []);
 
   return (
-    <NextLink href={href}>
+    <NextLink href={href} prefetch={false}>
       <a className={`card card-vertical ${className}`}>
         {thumbnail && (
           <img
