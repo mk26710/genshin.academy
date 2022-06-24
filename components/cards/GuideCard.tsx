@@ -31,6 +31,7 @@ export const GuideCard: FC<Props> = ({
         {thumbnail && (
           <img
             src={thumbnail}
+            alt="character icon"
             loading="lazy"
             className="card-thumbnail min-h-[10rem] lg:min-h-[20rem] aspect-[9/16]"
           />
