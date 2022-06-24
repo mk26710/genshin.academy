@@ -46,6 +46,7 @@ const GuidesId = ({ html, character }: InferGetStaticPropsType<typeof getStaticP
   return (
     <Layout
       title={`${character.name} Guide`}
+      color={`${character.accentColor}`}
       description={`Builds and playstyle for ${character.name}`}
       iconURL={characterIcon(character.id)}
     >

@@ -37,6 +37,7 @@ const CharactersId = ({ character }: StaticProps) => {
   return (
     <Layout
       title={`${character.name}`}
+      color={`${character.accentColor}`}
       description={`${character.description}`}
       iconURL={characterIcon(character.id)}
     >
