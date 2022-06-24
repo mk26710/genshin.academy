@@ -1,5 +1,6 @@
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
+import { ThemeProvider } from "next-themes";
 
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
@@ -26,13 +27,15 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   }, []);
 
   return (
-    <div className="app-container">
-      <Navigation />
+    <ThemeProvider attribute="class">
+      <div className="app-container">
+        <Navigation />
 
-      <Component {...pageProps} />
+        <Component {...pageProps} />
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </ThemeProvider>
   );
 };
 
