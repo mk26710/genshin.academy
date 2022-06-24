@@ -10,6 +10,7 @@ export const Footer: FC = () => {
         <a
           className="hover:text-primary-500 transition-colors ease-in-out duration-200"
           target="_blank"
+          rel="noreferrer"
           href="https://www.mihoyo.com/"
         >
           miHoYo
@@ -20,6 +21,7 @@ export const Footer: FC = () => {
         <a
           className="hover:text-primary-500 transition-colors ease-in-out duration-200"
           target="_blank"
+          rel="noreferrer"
           href="https://www.mihoyo.com/"
         >
           miHoYo Co., Ltd
@@ -31,6 +33,7 @@ export const Footer: FC = () => {
         <a
           href="https://github.com/kitsune-guuji/gvp"
           target="_blank"
+          rel="noreferrer"
           className="hover:text-primary-500 ransition-colors ease-in-out duration-200"
         >
           <div className="flex flex-row gap-x-2 items-center">
@@ -41,6 +44,8 @@ export const Footer: FC = () => {
 
         <a
           href="https://discord.gg/TgyFNhthCK"
+          target="_blank"
+          rel="noreferrer"
           className="hover:text-primary-500 transition-colors ease-in-out duration-200"
         >
           <div className="flex flex-row gap-x-2 items-center">
