@@ -1,4 +1,4 @@
-import type { GetStaticProps } from "next";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 
 import { MainLayout } from "@/components/MainLayout";
@@ -39,7 +39,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
   };
 };
 
-const GuidesId = ({ html, character }: StaticProps) => {
+const GuidesId = ({ html, character }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>
