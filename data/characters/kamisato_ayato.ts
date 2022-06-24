@@ -3,7 +3,7 @@ import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 
 const kamisato_ayato = Character.parse({
   id: "kamisato_ayato",
-  accentColor: "#9ea1d7",
+  accentColor: "#96acdf",
 
   name: "Kamisato Ayato",
   description: `The young but highly accomplished head of the Yashiro Commission's Kamisato Clan. Cultured and polite, he is a man of many ways and means.`,

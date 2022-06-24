@@ -3,7 +3,7 @@ import { Character } from "@/data/character";
 
 const eula = Character.parse({
   id: "eula",
-  accentColor: "#9cc6db",
+  accentColor: "#c0e2e8",
 
   name: "Eula",
   description: `The Spindrift Knight, a scion of the old aristocracy, and the Captain of the Knights of Favonius Reconnaissance Company. The reason for which a descendant of the ancient nobles might join the Knights remains a great mystery in Mondstadt to this very day.`,

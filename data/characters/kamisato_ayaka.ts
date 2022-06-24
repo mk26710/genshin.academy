@@ -3,7 +3,7 @@ import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 
 const kamisato_ayaka = Character.parse({
   id: "kamisato_ayaka",
-  accentColor: "#bef8ff",
+  accentColor: "#96c3e8",
 
   name: "Kamisato Ayaka",
   description: `Daughter of the Yashiro Commission's Kamisato Clan from Inazuma. Dignified and elegant, wise and determined. Sincere and pleasant to others. Universally loved by the Inazuma people, she has earned the title of Shirasagi Himegimi.`,

@@ -3,7 +3,7 @@ import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 
 const raiden_shogun = Character.parse({
   id: "raiden_shogun",
-  accentColor: "#e0adf8",
+  accentColor: "#3f3575",
 
   name: "Raiden Shogun",
   description: `Her Excellency, the Almighty Narukami Ogosho, who promised the people of Inazuma an unchanging Eternity.`,
