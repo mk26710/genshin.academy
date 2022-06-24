@@ -8,3 +8,6 @@ node_modules
 dist
 public/img/characters/**/*.webp
 gvp-main
+.next
+.old/
+out/
