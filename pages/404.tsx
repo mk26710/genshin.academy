@@ -1,8 +1,8 @@
-import { MainLayout } from "@/components/MainLayout";
+import { Container } from "@/components/Container";
 import { NextPage } from "next";
 
 const NotFound: NextPage = () => {
-  return <MainLayout verticalCenter>404 NOT FOUND</MainLayout>;
+  return <Container verticalCenter>404 NOT FOUND</Container>;
 };
 
 export default NotFound;

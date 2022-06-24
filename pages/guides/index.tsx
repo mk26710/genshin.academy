@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import { debounce } from "lodash-es";
 
 import { GuideCard } from "@/components/cards/GuideCard";
-import { MainLayout } from "@/components/MainLayout";
+import { Container } from "@/components/Container";
 
 import { charactersArray } from "@/data/characters";
 import published from "@/data/guides/compiled/characters/published.json";
@@ -26,7 +26,7 @@ const GuidesIndex: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <MainLayout>
+      <Container>
         <input
           type="text"
           placeholder="Search by title"
@@ -48,7 +48,7 @@ const GuidesIndex: NextPage = () => {
             />
           ))}
         </div>
-      </MainLayout>
+      </Container>
     </>
   );
 };

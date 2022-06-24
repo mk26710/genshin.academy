@@ -1,4 +1,4 @@
-import { MainLayout } from "@/components/MainLayout";
+import { Container } from "@/components/Container";
 import type { NextPage } from "next";
 import Head from "next/head";
 
@@ -10,12 +10,12 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <MainLayout verticalCenter>
+      <Container verticalCenter>
         <div className="flex flex-col items-center">
           <h1 className="font-bold text-4xl">Hello, user!</h1>
           <p>Welcome to genshin.zenless.club!</p>
         </div>
-      </MainLayout>
+      </Container>
     </>
   );
 };

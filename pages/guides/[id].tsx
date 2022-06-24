@@ -1,7 +1,8 @@
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 
-import { MainLayout } from "@/components/MainLayout";
+import { Container } from "@/components/Container";
+
 import type { Character } from "@/data/character";
 import { getCharacterById } from "@/data/characters";
 import published from "@/data/guides/compiled/characters/published.json";
@@ -46,9 +47,9 @@ const GuidesId = ({ html, character }: InferGetStaticPropsType<typeof getStaticP
         <title>{`${character.name} Guide`}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainLayout>
+      <Container>
         <section className="md-body" dangerouslySetInnerHTML={{ __html: html }} />
-      </MainLayout>
+      </Container>
     </>
   );
 };

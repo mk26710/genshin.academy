@@ -1,7 +1,7 @@
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 
-import { MainLayout } from "@/components/MainLayout";
+import { Container } from "@/components/Container";
 
 import { charactersArray, getCharacterById } from "@/data/characters";
 import type { Character } from "@/data/character";
@@ -41,11 +41,11 @@ const CharactersId = ({ character }: StaticProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <MainLayout>
+      <Container>
         <h1 className="font-semibold text-4xl mb-4 mt-6">{character.name}</h1>
         <p>{character.description}</p>
         <img src={avatarPath(character.id, "webp")} alt={`${character.name} gacha image`} />
-      </MainLayout>
+      </Container>
     </>
   );
 };

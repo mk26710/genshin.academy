@@ -5,7 +5,7 @@ interface Props {
   verticalCenter?: boolean;
 }
 
-export const MainLayout = ({ verticalCenter = false, children }: Props) => {
+export const Container = ({ verticalCenter = false, children }: Props) => {
   const verticalClass = verticalCenter ? "place-content-center" : "";
 
   return (
