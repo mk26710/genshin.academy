@@ -4,11 +4,8 @@ import { useEffect } from "react";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import deLocale from "dayjs/locale/de";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import ruLocale from "dayjs/locale/ru";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import jaLocale from "dayjs/locale/ja";
 
 import { Navigation } from "@/components/Navigation";
