@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import NextLink from "next/link";
-import { HomeIcon, StarIcon } from "@heroicons/react/outline";
+import { BeakerIcon, HomeIcon, StarIcon } from "@heroicons/react/outline";
 import { FC, Fragment } from "react";
 
 export const Navigation: FC = () => {
@@ -16,6 +16,11 @@ export const Navigation: FC = () => {
       path: "/characters",
       title: "Characters",
       icon: <StarIcon className="h-7 w-7 p-0" />
+    },
+    {
+      path: "/guides",
+      title: "Guides",
+      icon: <BeakerIcon className="h-7 w-7 p-0" />
     }
   ];
 
