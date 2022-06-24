@@ -1,11 +1,11 @@
 import type { GetStaticProps } from "next";
-import Head from "next/head";
 
+import { Layout } from "@/components/Layout";
 import { Container } from "@/components/Container";
 
 import { charactersArray, getCharacterById } from "@/data/characters";
 import type { Character } from "@/data/character";
-import { avatarPath } from "@/lib/helpers";
+import { avatarPath, characterIcon } from "@/lib/helpers";
 
 interface StaticProps {
   character: Character;
@@ -35,18 +35,17 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
 
 const CharactersId = ({ character }: StaticProps) => {
   return (
-    <>
-      <Head>
-        <title>{`${character.name}`}</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+    <Layout
+      title={`${character.name}}`}
+      description={`${character.description}`}
+      iconURL={characterIcon(character.id)}
+    >
       <Container>
         <h1 className="font-semibold text-4xl mb-4 mt-6">{character.name}</h1>
         <p>{character.description}</p>
         <img src={avatarPath(character.id, "webp")} alt={`${character.name} gacha image`} />
       </Container>
-    </>
+    </Layout>
   );
 };
 

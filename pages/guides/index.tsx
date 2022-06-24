@@ -1,8 +1,8 @@
 import { type ChangeEvent, useState } from "react";
-import Head from "next/head";
 import { NextPage } from "next";
 import { debounce } from "lodash-es";
 
+import { Layout } from "@/components/Layout";
 import { GuideCard } from "@/components/cards/GuideCard";
 import { Container } from "@/components/Container";
 
@@ -20,12 +20,7 @@ const GuidesIndex: NextPage = () => {
   }, 300);
 
   return (
-    <>
-      <Head>
-        <title>Guides</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+    <Layout title="Guides" description="Genshin Impact characters' playstyle, builds and etc.">
       <Container>
         <input
           type="text"
@@ -49,7 +44,7 @@ const GuidesIndex: NextPage = () => {
           ))}
         </div>
       </Container>
-    </>
+    </Layout>
   );
 };
 

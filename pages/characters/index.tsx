@@ -1,17 +1,12 @@
 import { CharacterCard } from "@/components/cards/CharacterCard";
 import { Container } from "@/components/Container";
+import { Layout } from "@/components/Layout";
 import { charactersArray } from "@/data/characters";
 import { NextPage } from "next";
-import Head from "next/head";
 
 const CharactersIndex: NextPage = () => {
   return (
-    <>
-      <Head>
-        <title>Characters</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+    <Layout title="Characters" description="Genshin Impact playable characters.">
       <Container>
         <h1 className="font-semibold text-4xl mb-4 mt-6">Characters</h1>
 
@@ -26,7 +21,7 @@ const CharactersIndex: NextPage = () => {
           ))}
         </div>
       </Container>
-    </>
+    </Layout>
   );
 };
 

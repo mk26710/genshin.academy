@@ -1,10 +1,12 @@
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
-import Head from "next/head";
 
+import { Layout } from "@/components/Layout";
 import { Container } from "@/components/Container";
 
 import type { Character } from "@/data/character";
+import { characterIcon } from "@/lib/helpers";
 import { getCharacterById } from "@/data/characters";
+
 import published from "@/data/guides/compiled/characters/published.json";
 
 interface StaticProps {
@@ -42,15 +44,15 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
 
 const GuidesId = ({ html, character }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <>
-      <Head>
-        <title>{`${character.name} Guide`}</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <Layout
+      title={`${character.name} Guide`}
+      description={`Builds and playstyle for ${character.name}`}
+      iconURL={characterIcon(character.id)}
+    >
       <Container>
         <section className="md-body" dangerouslySetInnerHTML={{ __html: html }} />
       </Container>
-    </>
+    </Layout>
   );
 };
 
