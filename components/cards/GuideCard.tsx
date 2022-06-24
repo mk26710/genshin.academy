@@ -3,6 +3,7 @@ import NextLink from "next/link";
 import dayjs from "dayjs";
 
 interface Props {
+  id: string;
   title: string;
   description?: string;
   publishedAt?: Date;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export const GuideCard: FC<Props> = ({
+  id,
   title,
   description,
   publishedAt,
@@ -27,7 +29,7 @@ export const GuideCard: FC<Props> = ({
 
   return (
     <NextLink href={href} prefetch={false}>
-      <a className={`card card-vertical ${className}`}>
+      <a id={id} className={`card card-vertical ${className}`}>
         {thumbnail && (
           <img
             src={thumbnail}
