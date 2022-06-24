@@ -3,6 +3,7 @@ import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 
 const yae_miko = Character.parse({
   id: "yae_miko",
+  accentColor: "#f5b4b5",
 
   name: "Yae Miko",
   description: `Lady Guuji of the Grand Narukami Shrine. Also serves as the editor-in-chief of Yae Publishing House. Unimaginable intelligence and cunning are hidden under her beautiful appearance.`,

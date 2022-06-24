@@ -3,6 +3,7 @@ import { Character } from "@/data/character";
 
 const yelan = Character.parse({
   id: "yelan",
+  accentColor: "#3f58cb",
 
   name: "Yelan",
   description: `A mysterious person who claims to work for the Ministry of Civil Affairs, but is a "non-entity" on the Ministry of Civil Affairs' list.`,

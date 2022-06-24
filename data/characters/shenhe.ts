@@ -3,6 +3,7 @@ import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const shenhe = Character.parse({
   id: "shenhe",
+  accentColor: "#e8edf3",
 
   name: "Shenhe",
   description: `An adepti disciple with a most unusual air about her. Having spent much time cultivating in isolation in Liyue's mountains, she has become every bit as cool and distant as the adepti themselves.`,

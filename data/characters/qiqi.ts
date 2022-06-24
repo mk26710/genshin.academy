@@ -3,6 +3,7 @@ import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const qiqi = Character.parse({
   id: "qiqi",
+  accentColor: "#c94687",
 
   name: "Qiqi",
   description: `An apprentice and herb gatherer at Bubu Pharmacy. An undead with a bone-white complexion, she seldom has much in the way of words or emotion.`,

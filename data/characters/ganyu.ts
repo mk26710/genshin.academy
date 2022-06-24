@@ -3,6 +3,7 @@ import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 
 const ganyu = Character.parse({
   id: "ganyu",
+  accentColor: "#beddf1",
 
   name: "Ganyu",
   description: `The secretary at Yuehai Pavilion. The blood of the qilin, an illuminated beast, flows within her veins.`,
