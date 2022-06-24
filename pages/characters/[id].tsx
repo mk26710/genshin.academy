@@ -36,7 +36,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
 const CharactersId = ({ character }: StaticProps) => {
   return (
     <Layout
-      title={`${character.name}}`}
+      title={`${character.name}`}
       description={`${character.description}`}
       iconURL={characterIcon(character.id)}
     >
