@@ -8,7 +8,8 @@
     "preexport": "next build",
     "export": "next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cloudflare": "npm run export"
   },
   "dependencies": {
     "dayjs": "^1.11.3",
