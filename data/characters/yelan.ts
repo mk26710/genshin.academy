@@ -1,7 +1,7 @@
 import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 import { Character } from "@/data/character";
 
-const yelan = Character.parse({
+const yelan: Character = {
   id: "yelan",
   accentColor: "#6477db",
 
@@ -51,6 +51,6 @@ const yelan = Character.parse({
   ],
 
   story: [],
-});
+};
 
-export default yelan;
+export default Character.parse(yelan);

@@ -1,7 +1,7 @@
 import { Character } from "../character";
 import { Rarity, Vision, Weapon } from "../types/genshin";
 
-const shenhe = Character.parse({
+const shenhe: Character = {
   id: "shenhe",
   accentColor: "#e8edf3",
 
@@ -48,6 +48,6 @@ const shenhe = Character.parse({
   ],
 
   story: [],
-});
+};
 
-export default shenhe;
+export default Character.parse(shenhe);

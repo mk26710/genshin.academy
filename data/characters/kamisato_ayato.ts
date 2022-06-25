@@ -1,7 +1,7 @@
 import { Character } from "@/data/character";
 import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 
-const kamisato_ayato = Character.parse({
+const kamisato_ayato: Character = {
   id: "kamisato_ayato",
   accentColor: "#96acdf",
 
@@ -48,6 +48,6 @@ const kamisato_ayato = Character.parse({
   ],
 
   story: [],
-});
+};
 
-export default kamisato_ayato;
+export default Character.parse(kamisato_ayato);

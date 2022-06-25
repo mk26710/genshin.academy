@@ -1,7 +1,7 @@
 import { Character } from "@/data/character";
 import { Rarity, Vision, Weapon } from "../types/genshin";
 
-const qiqi = Character.parse({
+const qiqi: Character = {
   id: "qiqi",
   accentColor: "#c94687",
 
@@ -48,6 +48,6 @@ const qiqi = Character.parse({
   ],
 
   story: [],
-});
+};
 
-export default qiqi;
+export default Character.parse(qiqi);

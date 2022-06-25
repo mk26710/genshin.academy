@@ -1,7 +1,7 @@
 import { Character } from "@/data/character";
 import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 
-const yae_miko = Character.parse({
+const yae_miko: Character = {
   id: "yae_miko",
   accentColor: "#f5b4b5",
 
@@ -48,6 +48,6 @@ const yae_miko = Character.parse({
   ],
 
   story: [],
-});
+};
 
-export default yae_miko;
+export default Character.parse(yae_miko);

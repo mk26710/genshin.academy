@@ -1,7 +1,7 @@
 import { Character } from "@/data/character";
 import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 
-const raiden_shogun = Character.parse({
+const raiden_shogun: Character = {
   id: "raiden_shogun",
   accentColor: "#3f3575",
 
@@ -48,6 +48,6 @@ const raiden_shogun = Character.parse({
   ],
 
   story: [],
-});
+};
 
-export default raiden_shogun;
+export default Character.parse(raiden_shogun);

@@ -1,7 +1,7 @@
 import { Character } from "@/data/character";
 import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 
-const ganyu = Character.parse({
+const ganyu: Character = {
   id: "ganyu",
   accentColor: "#d4e2f2",
 
@@ -48,6 +48,6 @@ const ganyu = Character.parse({
   ],
 
   story: [],
-});
+};
 
-export default ganyu;
+export default Character.parse(ganyu);

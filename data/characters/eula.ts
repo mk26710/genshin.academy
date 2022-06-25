@@ -1,7 +1,7 @@
 import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 import { Character } from "@/data/character";
 
-const eula = Character.parse({
+const eula: Character = {
   id: "eula",
   accentColor: "#c0e2e8",
 
@@ -48,6 +48,6 @@ const eula = Character.parse({
   ],
 
   story: [],
-});
+};
 
-export default eula;
+export default Character.parse(eula);
