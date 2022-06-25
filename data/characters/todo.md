@@ -20,7 +20,7 @@ List of characters that require data gathering (except for story lines)
 - [ ] Kaeya
 - [x] Kamisato Ayaka
 - [x] Kamisato Ayato
-- [ ] Keqing
+- [x] Keqing
 - [ ] Klee
 - [ ] Kujou Sara
 - [ ] Lisa
@@ -45,6 +45,6 @@ List of characters that require data gathering (except for story lines)
 - [x] Yae Miko
 - [ ] Yanfei
 - [x] Yelan
-- [ ] Yoimiya
+- [x] Yoimiya
 - [ ] Yun Jin
 - [ ] Zhongli
