@@ -11,6 +11,7 @@ import yoimiya from "@/data/characters/yoimiya";
 import keqing from "@/data/characters/keqing";
 import kaedehara_kazuha from "@/data/characters/kaedehara_kazuha";
 import sangonomiya_kokomi from "./sangonomiya_kokomi";
+import rosaria from "./rosaria";
 
 const _array = Object.freeze([
   yae_miko,
@@ -26,6 +27,7 @@ const _array = Object.freeze([
   keqing,
   kaedehara_kazuha,
   sangonomiya_kokomi,
+  rosaria,
 ]);
 
 export const charactersArray = Object.freeze(
