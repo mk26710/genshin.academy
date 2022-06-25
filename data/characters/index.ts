@@ -8,6 +8,7 @@ import ganyu from "@/data/characters/ganyu";
 import eula from "@/data/characters/eula";
 import raiden_shogun from "@/data/characters/raiden_shogun";
 import yoimiya from "@/data/characters/yoimiya";
+import keqing from "@/data/characters/keqing";
 
 const _array = Object.freeze([
   yae_miko,
@@ -20,6 +21,7 @@ const _array = Object.freeze([
   eula,
   raiden_shogun,
   yoimiya,
+  keqing,
 ]);
 
 export const charactersArray = Object.freeze(
