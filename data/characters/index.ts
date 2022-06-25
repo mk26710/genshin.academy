@@ -29,7 +29,7 @@ const _array = Object.freeze([
 ]);
 
 export const charactersArray = Object.freeze(
-  [..._array].sort((a, b) => a.name.localeCompare(b.name) || b.rarity - a.rarity),
+  [..._array].sort((a, b) => a.name.localeCompare(b.name) && b.rarity - a.rarity),
 );
 
 export const getCharacterById = (id: string) => _array.find((c) => c.id === id);
