@@ -2,9 +2,41 @@ import { useRouter } from "next/router";
 import NextLink from "next/link";
 import { BeakerIcon, CalculatorIcon, HomeIcon, StarIcon } from "@heroicons/react/outline";
 import { MenuIcon, SunIcon, MoonIcon, XIcon } from "@heroicons/react/solid";
-import { FC, Fragment, useEffect, useRef, useState } from "react";
+import { FC, Fragment, type ReactNode, useEffect, useRef, useState } from "react";
 import { useClickAway } from "react-use";
 import { useTheme } from "next-themes";
+
+interface NavRoute {
+  path: string;
+  title: string;
+  hasNested?: boolean;
+  icon: ReactNode;
+}
+
+const navRoutes: NavRoute[] = [
+  {
+    path: "/",
+    title: "Home",
+    icon: <HomeIcon className="h-7 w-7 p-0" />,
+  },
+  {
+    path: "/characters",
+    title: "Characters",
+    hasNested: true,
+    icon: <StarIcon className="h-7 w-7 p-0" />,
+  },
+  {
+    path: "/guides",
+    title: "Guides",
+    hasNested: true,
+    icon: <BeakerIcon className="h-7 w-7 p-0" />,
+  },
+  {
+    path: "/calc",
+    title: "Calculator",
+    icon: <CalculatorIcon className="h-7 w-7 p-0" />,
+  },
+];
 
 export const Navigation: FC = () => {
   const router = useRouter();
@@ -44,38 +76,21 @@ export const Navigation: FC = () => {
     closePopover();
   });
 
-  const paths = [
-    {
-      path: "/",
-      title: "Home",
-      icon: <HomeIcon className="h-7 w-7 p-0" />,
-    },
-    {
-      path: "/characters",
-      title: "Characters",
-      icon: <StarIcon className="h-7 w-7 p-0" />,
-    },
-    {
-      path: "/guides",
-      title: "Guides",
-      icon: <BeakerIcon className="h-7 w-7 p-0" />,
-    },
-    {
-      path: "/calc",
-      title: "Calculator",
-      icon: <CalculatorIcon className="h-7 w-7 p-0" />,
-    },
-  ];
+  const isActive = (navRoute: NavRoute) => {
+    if (navRoute.hasNested === true) {
+      return router.route.startsWith(navRoute.path);
+    }
 
-  const activeClass = (routePath: string) =>
-    router.pathname === routePath
+    return router.route === navRoute.path;
+  };
+
+  const activeClass = (navRoute: NavRoute) =>
+    isActive(navRoute)
       ? " !bg-primary-600 rounded-tl-md rounded-tr-2xl rounded-bl-2xl rounded-br-md text-white"
       : "";
 
-  const mobileActiveClass = (routePath: string) =>
-    router.pathname === routePath
-      ? " bg-primary-600 text-white shadow-sm shadow-primary-300/50"
-      : "";
+  const mobileActiveClass = (navRoute: NavRoute) =>
+    isActive(navRoute) ? " bg-primary-600 text-white shadow-sm shadow-primary-300/50" : "";
 
   // firefox specific issue
   const mobileMarginBottom =
@@ -83,6 +98,7 @@ export const Navigation: FC = () => {
 
   return (
     <>
+      {/* Mobile Navigation popover */}
       {isOpen && (
         <aside
           className={`fixed lg:hidden select-none mr-4 bottom-0 right-0 z-20 ${mobileMarginBottom}`}
@@ -99,8 +115,8 @@ export const Navigation: FC = () => {
                 >
                   <div className="flex flex-row items-center gap-x-2">
                     <div className="flex-grow text-right">
-                      {resolvedTheme === "dark" && 'Dark'}
-                      {resolvedTheme !== "dark" && 'Light'}
+                      {resolvedTheme === "dark" && "Dark"}
+                      {resolvedTheme !== "dark" && "Light"}
                     </div>
                     <div>
                       {resolvedTheme === "dark" && <SunIcon className="w-6 h-6" />}
@@ -110,12 +126,12 @@ export const Navigation: FC = () => {
                 </div>
               )}
 
-              {paths.map(({ path, title, icon }) => (
-                <NextLink key={`${title}-popover-item`} href={path}>
-                  <a className={`px-3 py-2 rounded-lg ${mobileActiveClass(path)}`}>
+              {navRoutes.map((navRoute) => (
+                <NextLink key={`${navRoute.title}-popover-item`} href={navRoute.path}>
+                  <a className={`px-3 py-2 rounded-lg ${mobileActiveClass(navRoute)}`}>
                     <div className="flex flex-row items-center gap-x-2">
-                      <div className="flex-grow text-right">{title}</div>
-                      <div>{icon}</div>
+                      <div className="flex-grow text-right">{navRoute.title}</div>
+                      <div>{navRoute.icon}</div>
                     </div>
                   </a>
                 </NextLink>
@@ -146,7 +162,7 @@ export const Navigation: FC = () => {
         </aside>
       )}
 
-      {/* <!-- Desktop Sidebard --> */}
+      {/* Desktop Sidebard */}
       <aside
         data-description="Desktop Sidebar Navigation"
         className="sidebar hidden lg:flex flex-col w-64 border-r border-neutral-200 dark:border-neutral-200/10 dark:bg-neutral-800 bg-white h-full"
@@ -156,16 +172,16 @@ export const Navigation: FC = () => {
             <h1 className="font-extrabold text-xl">GENSHIN.ZENLESS</h1>
           </div>
 
-          {paths.map(({ path, title, icon }) => (
-            <NextLink key={path} href={path}>
+          {navRoutes.map((navRoute) => (
+            <NextLink key={navRoute.path} href={navRoute.path}>
               <a
                 className={
                   "w-full flex flex-row items-center gap-x-2 px-3 py-2 font-semibold text-lg cursor-pointer" +
-                  activeClass(path)
+                  activeClass(navRoute)
                 }
               >
-                <Fragment>{icon}</Fragment>
-                <h1>{title}</h1>
+                <Fragment>{navRoute.icon}</Fragment>
+                <h1>{navRoute.title}</h1>
               </a>
             </NextLink>
           ))}
