@@ -31,7 +31,7 @@ List of characters that require data gathering (except for story lines)
 - [x] Raiden Shogun
 - [ ] Razor
 - [ ] Rosaria
-- [ ] Sangonomiya Kokomi
+- [x] Sangonomiya Kokomi
 - [ ] Sayu
 - [x] Shenhe
 - [ ] Sucrose
