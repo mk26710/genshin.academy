@@ -16,7 +16,7 @@ List of characters that require data gathering (except for story lines)
 - [ ] Gorou
 - [ ] Hu Tao
 - [ ] Jean
-- [ ] Kaedehara Kazuha
+- [x] Kaedehara Kazuha
 - [ ] Kaeya
 - [x] Kamisato Ayaka
 - [x] Kamisato Ayato
