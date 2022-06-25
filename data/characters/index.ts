@@ -1,3 +1,5 @@
+import { Rarity } from "../types/genshin";
+import { Character } from "../character";
 import yae_miko from "@/data/characters/yae_miko";
 import kamisato_ayaka from "@/data/characters/kamisato_ayaka";
 import yelan from "@/data/characters/yelan";
@@ -33,7 +35,21 @@ const _array = Object.freeze([
 ]);
 
 export const charactersArray = Object.freeze(
-  [..._array].sort((a, b) => a.name.localeCompare(b.name) && b.rarity - a.rarity),
+  _array
+    .reduce((acc, item) => {
+      if (item.rarity === Rarity.FIVE_STAR) {
+        acc[0].push(item);
+      }
+
+      if (item.rarity === Rarity.FOUR_STAR) {
+        acc[1].push(item);
+      }
+
+      return acc;
+    }, new Array<Character[]>([], []))
+    .reduce((acc, item) => {
+      return [...acc, ...item.sort((a, b) => a.name.localeCompare(b.name))];
+    }, []),
 );
 
 export const getCharacterById = (id: string) => _array.find((c) => c.id === id);
