@@ -30,7 +30,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     console.log("dayjs extended with localized formats");
 
     nProgress.configure({
-      showSpinner: true,
+      showSpinner: false,
+      easing: "ease",
+      speed: 250,
     });
 
     console.log("nProgress configured");
