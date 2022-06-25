@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import NextLink from "next/link";
 import { BeakerIcon, CalculatorIcon, HomeIcon, StarIcon } from "@heroicons/react/outline";
 import { MenuIcon, SunIcon, MoonIcon, XIcon } from "@heroicons/react/solid";
-import { FC, Fragment, type ReactNode, useEffect, useRef, useState } from "react";
+import { FC, Fragment, type ReactNode, useEffect, useRef, useState, useCallback } from "react";
 import { useClickAway } from "react-use";
 import { useTheme } from "next-themes";
 
@@ -76,21 +76,31 @@ export const Navigation: FC = () => {
     closePopover();
   });
 
-  const isActive = (navRoute: NavRoute) => {
-    if (navRoute.hasNested === true) {
-      return router.route.startsWith(navRoute.path);
-    }
+  const isActive = useCallback(
+    (navRoute: NavRoute) => {
+      if (navRoute.hasNested === true) {
+        return router.route.startsWith(navRoute.path);
+      }
 
-    return router.route === navRoute.path;
-  };
+      return router.route === navRoute.path;
+    },
+    [router.route],
+  );
 
-  const activeClass = (navRoute: NavRoute) =>
-    isActive(navRoute)
-      ? " !bg-primary-600 rounded-tl-md rounded-tr-2xl rounded-bl-2xl rounded-br-md text-white"
-      : "";
+  const activeClass = useCallback(
+    (navRoute: NavRoute, isMobile: boolean = false) => {
+      const active = isActive(navRoute);
 
-  const mobileActiveClass = (navRoute: NavRoute) =>
-    isActive(navRoute) ? " bg-primary-600 text-white shadow-sm shadow-primary-300/50" : "";
+      if (isMobile && active) {
+        return " bg-primary-600 text-white shadow-sm shadow-primary-300/50";
+      } else if (!isMobile && active) {
+        return " !bg-primary-600 rounded-tl-md rounded-tr-2xl rounded-bl-2xl rounded-br-md text-white";
+      }
+
+      return "";
+    },
+    [isActive],
+  );
 
   // firefox specific issue
   const mobileMarginBottom =
@@ -128,7 +138,7 @@ export const Navigation: FC = () => {
 
               {navRoutes.map((navRoute) => (
                 <NextLink key={`${navRoute.title}-popover-item`} href={navRoute.path}>
-                  <a className={`px-3 py-2 rounded-lg ${mobileActiveClass(navRoute)}`}>
+                  <a className={`px-3 py-2 rounded-lg ${activeClass(navRoute, true)}`}>
                     <div className="flex flex-row items-center gap-x-2">
                       <div className="flex-grow text-right">{navRoute.title}</div>
                       <div>{navRoute.icon}</div>
