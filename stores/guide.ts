@@ -26,10 +26,10 @@ const stateFactory = (): State => {
 };
 
 export const useGuideStore = defineStore({
-  id: "guide",
+  id: `guide`,
   state: stateFactory,
   persist: {
-    paths: ["all"],
+    paths: [`all`],
   },
   actions: {
     async update() {
@@ -43,7 +43,7 @@ export const useGuideStore = defineStore({
       this.all = uniq(guides);
       this.isUpdated = true;
 
-      console.log("Guides data is now fresh!");
+      console.log(`Guides data is now fresh!`);
     },
   },
   getters: {

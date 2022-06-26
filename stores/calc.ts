@@ -2,19 +2,19 @@ import { defineStore } from "pinia";
 
 interface State {
   resin: {
-    current: number | "";
-    needed: number | "";
+    current: number | ``;
+    needed: number | ``;
   };
 }
 
 const stateFactory = (): State => ({
   resin: {
-    current: "",
+    current: ``,
     needed: 160,
   },
 });
 
 export const useCalcStore = defineStore({
-  id: "calc",
+  id: `calc`,
   state: stateFactory,
 });

@@ -5,12 +5,12 @@ export default defineNuxtConfig({
   typescript: {
     shim: false,
   },
-  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt", "@nuxtjs/color-mode", "@vueuse/nuxt"],
+  modules: [`@nuxtjs/tailwindcss`, `@pinia/nuxt`, `@nuxtjs/color-mode`, `@vueuse/nuxt`],
   colorMode: {
-    classSuffix: "",
-    storageKey: "theme",
+    classSuffix: ``,
+    storageKey: `theme`,
   },
-  css: ["@/assets/styles/main.scss", "@/assets/styles/nprogress.scss"],
+  css: [`@/assets/styles/main.scss`, `@/assets/styles/nprogress.scss`],
   // ssr: false,
-  target: "static",
+  target: `static`,
 });

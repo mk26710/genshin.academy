@@ -6,10 +6,10 @@ export default defineNuxtPlugin((nuxtApp) => {
   const pinia: Pinia = nuxtApp.$pinia;
 
   if (!pinia) {
-    console.log("pinia is not existing on nuxtApp!");
+    console.log(`pinia is not existing on nuxtApp!`);
     return;
   }
 
-  pinia.use(createNuxtPersistedState(useCookie, { cookieOptions: { sameSite: "strict" } }));
-  if (process.client) console.log("Persisted Pinia store plugin has been applied");
+  pinia.use(createNuxtPersistedState(useCookie, { cookieOptions: { sameSite: `strict` } }));
+  if (process.client) console.log(`Persisted Pinia store plugin has been applied`);
 });

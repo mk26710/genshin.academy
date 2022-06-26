@@ -10,22 +10,22 @@ export enum Rarity {
 export type RarityType = 5 | 4 | 3 | 2 | 1 | 0;
 
 export enum Weapon {
-  SWORD = "SWORD",
-  CLAYMORE = "CLAYMORE",
-  POLEARM = "POLEARM",
-  CATALYST = "CATALYST",
-  BOW = "BOW",
+  SWORD = `SWORD`,
+  CLAYMORE = `CLAYMORE`,
+  POLEARM = `POLEARM`,
+  CATALYST = `CATALYST`,
+  BOW = `BOW`,
 }
 
-export type WeaponType = "SWORD" | "CLAYMORE" | "POLEARM" | "CATALYST" | "BOW";
+export type WeaponType = `SWORD` | `CLAYMORE` | `POLEARM` | `CATALYST` | `BOW`;
 
 export enum Vision {
-  CRYO = "CRYO",
-  ELECTRO = "ELECTRO",
-  PYRO = "PYRO",
-  ANEMO = "ANEMO",
-  HYDRO = "HYDRO",
-  GEO = "GEO",
+  CRYO = `CRYO`,
+  ELECTRO = `ELECTRO`,
+  PYRO = `PYRO`,
+  ANEMO = `ANEMO`,
+  HYDRO = `HYDRO`,
+  GEO = `GEO`,
 }
 
-export type VisionType = "CRYO" | "ELECTRO" | "PYRO" | "ANEMO" | "HYDRO" | "GEO";
+export type VisionType = `CRYO` | `ELECTRO` | `PYRO` | `ANEMO` | `HYDRO` | `GEO`;
