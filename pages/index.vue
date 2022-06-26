@@ -11,12 +11,13 @@
 import { HomeIcon } from "@heroicons/vue/outline";
 
 definePageMeta({
-  name: "Home",
+  name: `Home`,
   icon: HomeIcon,
   navbar: true,
 });
 
-useHead({
-  title: "Home",
-})
+useZenlessMeta({
+  title: `Home`,
+  description: `A place for Genshin Impact character guides, calculators and other utilities`,
+});
 </script>

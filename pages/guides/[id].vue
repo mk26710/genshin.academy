@@ -1,6 +1,7 @@
 <template>
   <MainContainer>
-    <section class="md-body" v-if="!isNil(guide)" v-html="guide.html" />
+    <!-- eslint-disable-next-line vue/no-v-html -->
+    <section v-if="!isNil(guide)" class="md-body" v-html="guide.html" />
     <SuspenseFallback v-else-if="isNil(guide) && !isUpdated" />
     <ErrorDisplay
       v-else
@@ -28,28 +29,22 @@ const store = useGuideStore();
 const { all, isUpdated } = storeToRefs(store);
 
 const character = getCharacterById(id);
-const guide = computed(() => all.value.find((g) => g.id === id))
+const guide = computed(() => all.value.find((g) => g.id === id));
 
 onBeforeMount(() => {
   window.scrollTo({ top: 0 });
 });
 
-useHead(() => {
+useZenlessMeta(() => {
   if (character == null) {
     return {};
   }
 
   return {
     title: `${character.name} Guide`,
-    meta: [
-      { property: "og:title", content: `${character.name} Guide` },
-      { name: "description", content: character.description },
-      { property: "og:description", content: character.description },
-      {
-        property: "og:image",
-        content: `https://genshin.zenless.club/img/characters/${character.id}/icon.png`,
-      },
-    ],
+    description: `${character.description}`,
+    color: `${character.accentColor}`,
+    iconURL: `https://genshin.zenless.club/img/characters/${character.id}/icon.png`,
   };
 });
 </script>

@@ -16,7 +16,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import { useRoute } from "vue-router";
 import { isNil } from "lodash-es";
 
@@ -26,24 +25,18 @@ import { getCharacterById } from "@/data/characters";
 const route = useRoute();
 
 const id = route.params.id.toString();
-const character = ref(getCharacterById(id));
+const character = getCharacterById(id);
 
-useHead(() => {
-  if (character.value == null) {
+useZenlessMeta(() => {
+  if (character == null) {
     return {};
   }
 
   return {
-    title: character.value.name,
-    meta: [
-      { property: "og:title", content: character.value.name },
-      { name: "description", content: character.value.description },
-      { property: "og:description", content: character.value.description },
-      {
-        property: "og:image",
-        content: `https://genshin.zenless.club/img/characters/${character.value.id}/icon.png`,
-      },
-    ],
+    title: `${character.name} Guide`,
+    description: `${character.description}`,
+    color: `${character.accentColor}`,
+    iconURL: `https://genshin.zenless.club/img/characters/${character.id}/icon.png`,
   };
 });
 </script>

@@ -12,8 +12,8 @@
     >
       <CardsGuide
         v-for="c in publishedCharacters"
-        :id="c.id"
         v-show="isShown(c.name)"
+        :id="c.id"
         :key="c.id"
         :to="`/guides/${c.id}`"
         :title="c.name"
@@ -33,7 +33,7 @@ import published from "@/data/guides/compiled/characters/published.json";
 import { BeakerIcon } from "@heroicons/vue/outline";
 
 definePageMeta({
-  name: "Guides",
+  name: `Guides`,
   icon: BeakerIcon,
   navbar: true,
 });
@@ -45,7 +45,7 @@ const publishedCharacters = computed(() => {
   return charactersArray.filter(({ id }) => published.includes(id));
 });
 
-const search = ref(route.query.q?.toString() ?? "");
+const search = ref(route.query.q?.toString() ?? ``);
 const debouncedSearch = debouncedRef(search, 300);
 
 watch(debouncedSearch, () => {
@@ -56,16 +56,8 @@ const isShown = (title: string) => {
   return title.toLowerCase().includes(debouncedSearch.value.toLowerCase());
 };
 
-useHead(() => {
-  const description = "Place for Genshin Impact characters guides."
-
-  return {
-    title: "Guides",
-    meta: [
-      { property: "og:title", content: "Guides" },
-      { name: "description", content: description },
-      { property: "og:description", content: description },
-    ],
-  };
+useZenlessMeta({
+  title: `Guides`,
+  description: `Various playstyle and build guides for Genshin Impact characters`,
 });
 </script>

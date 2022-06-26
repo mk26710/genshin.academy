@@ -53,7 +53,7 @@ import { isNil, isNumber } from "lodash-es";
 import { CalculatorIcon } from "@heroicons/vue/outline";
 
 definePageMeta({
-  name: "Calculate",
+  name: `Calculate`,
   icon: CalculatorIcon,
   navbar: true,
 });
@@ -81,21 +81,13 @@ const fullResinAt = computed(() => {
 
   const delta = resinNeeded.value - resinCurrent.value;
   const minutesToWait = delta * 8;
-  const refillsAt = $dayjs().add(minutesToWait, "minutes");
+  const refillsAt = $dayjs().add(minutesToWait, `minutes`);
 
-  return refillsAt.format("LLL");
+  return refillsAt.format(`LLL`);
 });
 
-useHead(() => {
-  const description = "Genshin Impact calculators such as crit value, resin, etc.";
-
-  return {
-    title: "Calculators",
-    meta: [
-      { property: "og:title", content: "Calculators" },
-      { name: "description", content: description },
-      { property: "og:description", content: description },
-    ],
-  };
+useZenlessMeta({
+  title: `Calculators`,
+  description: `Genshin Impact calculators such as crit value, resin, etc.`,
 });
 </script>
