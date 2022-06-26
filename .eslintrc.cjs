@@ -1,18 +1,29 @@
 /* eslint-env node */
-require("@rushstack/eslint-patch/modern-module-resolution");
+require(`@rushstack/eslint-patch/modern-module-resolution`);
 
 module.exports = {
   root: true,
+  env: {
+    browser: true,
+    node: true,
+  },
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: `module`,
+    parser: `@typescript-eslint/parser`,
+  },
   extends: [
-    "plugin:vue/vue3-essential",
-    "eslint:recommended",
-    "@vue/eslint-config-typescript/recommended",
-    "@vue/eslint-config-prettier",
+    `plugin:@typescript-eslint/recommended`,
+    `plugin:nuxt/recommended`,
+    `plugin:vue/vue3-recommended`,
+    `plugin:prettier/recommended`,
   ],
+  plugins: [`@typescript-eslint`],
   env: {
     "vue/setup-compiler-macros": true,
   },
   rules: {
-    "@typescript-eslint/no-unused-vars": ["error"]
-  }
+    "@typescript-eslint/no-unused-vars": [`error`],
+    quotes: [`warn`, `backtick`],
+  },
 };
