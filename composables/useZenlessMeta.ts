@@ -1,3 +1,5 @@
+import { isFunction } from "lodash-es";
+
 interface Options {
   title?: string;
   titleTemplate?: string;
@@ -6,13 +8,17 @@ interface Options {
   color?: string;
 }
 
-export const useZenlessMeta = ({
-  title = `Paimon is the best!`,
-  titleTemplate = `GENSHIN.ZENLESS`,
-  description,
-  iconURL,
-  color = `#2563EB`,
-}: Options) => {
+type ZenlessMetaArgument = Options | (() => Options);
+
+export const useZenlessMeta = (arg: ZenlessMetaArgument) => {
+  const {
+    title = `Paimon is the best!`,
+    titleTemplate = `GENSHIN.ZENLESS`,
+    description,
+    iconURL,
+    color = `#2563eb`,
+  } = isFunction(arg) ? { ...arg() } : { ...arg };
+
   const realTitle = titleTemplate != null ? `${title} - ${titleTemplate}` : title;
 
   const metaArray = [
