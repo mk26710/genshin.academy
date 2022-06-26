@@ -66,6 +66,11 @@ const RouterReadyContent = () => {
 };
 
 const GuidesIndex: NextPage = () => {
+  const r = useRouter();
+  useEffect(() => {
+    console.log(r.query);
+  }, []);
+
   return (
     <Layout title="Guides" description="Genshin Impact characters' playstyle, builds and etc.">
       <Container>
@@ -73,6 +78,10 @@ const GuidesIndex: NextPage = () => {
       </Container>
     </Layout>
   );
+};
+
+GuidesIndex.getInitialProps = async (context) => {
+  return {};
 };
 
 export default GuidesIndex;
