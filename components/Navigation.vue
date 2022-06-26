@@ -13,19 +13,15 @@ const popover = ref(null);
 
 const colorMode = useColorMode();
 
-const isDark = computed(() => {
-  if (colorMode.unknown) {
-    return false;
-  }
-
-  return colorMode.value === "dark";
-});
-
 const toggleDark = () => {
-  if (colorMode.value === "dark") {
-    colorMode.preference = "light";
+  if (colorMode.unknown) return;
+
+  if (colorMode.value === `dark` && colorMode.preference === `system`) {
+    colorMode.preference = `light`;
+  } else if (colorMode.value === `light` && colorMode.preference === `system`) {
+    colorMode.preference = `dark`;
   } else {
-    colorMode.preference = "dark";
+    colorMode.preference = `system`;
   }
 };
 
@@ -35,10 +31,10 @@ onClickOutside(popover, () => {
 
 // thanks firefox for being great
 const firefoxMarginBottomClass = computed(() => {
-  if (process.client && navigator.userAgent.toLowerCase().includes("firefox")) {
-    return "mb-10";
+  if (process.client && navigator.userAgent.toLowerCase().includes(`firefox`)) {
+    return `mb-10`;
   }
-  return "mb-8";
+  return `mb-8`;
 });
 
 const endpoints = computed(() => {
@@ -72,19 +68,29 @@ const endpoints = computed(() => {
       class="fixed lg:hidden select-none mr-4 bottom-0 right-0 z-20"
     >
       <div
-        class="bg-neutral-100 dark:bg-dark-900 box-border border border-neutral-200 dark:border-dark-200/20 rounded-lg p-2"
         ref="popover"
+        class="bg-neutral-100 dark:bg-dark-900 box-border border border-neutral-200 dark:border-dark-200/20 rounded-lg p-2"
       >
         <div class="flex flex-col gap-y-2 text-lg font-semibold">
           <div
-            @click="toggleDark()"
             class="px-3 py-2 border-b border-neutral-200 dark:border-dark-200/10 cursor-pointer"
+            @click="toggleDark()"
           >
             <div class="flex flex-row items-center gap-x-2">
-              <div class="flex-grow text-right">{{ isDark ? "Light" : "Dark" }}</div>
-              <div>
-                <component :is="isDark ? SunIcon : MoonIcon" class="w-6 h-6" />
-              </div>
+              <template v-if="!colorMode.unknown">
+                <template v-if="colorMode.value === 'dark'">
+                  <div class="flex-grow text-right">Light</div>
+                  <div>
+                    <SunIcon class="w-6 h-6" />
+                  </div>
+                </template>
+                <template v-else>
+                  <div class="flex-grow text-right">Dark</div>
+                  <div>
+                    <MoonIcon class="w-6 h-6" />
+                  </div>
+                </template>
+              </template>
             </div>
           </div>
 
@@ -106,8 +112,8 @@ const endpoints = computed(() => {
           </NuxtLink>
 
           <div
-            @click="isOpen = false"
             class="px-3 py-2 border-t border-neutral-200 dark:border-dark-200/10 cursor-pointer"
+            @click="isOpen = false"
           >
             <div class="flex flex-row items-center gap-x-2">
               <div class="flex-grow text-right">Close</div>
@@ -164,10 +170,13 @@ const endpoints = computed(() => {
 
     <div class="fixed bottom-4 left-4">
       <div
-        @click="toggleDark()"
         class="transition-all duration-75 bg-neutral-200 dark:bg-dark-800 dark:text-neutral-300 rounded-lg flex items-center justify-center aspect-square h-8 cursor-pointer"
+        @click="toggleDark()"
       >
-        <component :is="isDark ? SunIcon : MoonIcon" class="w-5 h-5" />
+        <template v-if="!colorMode.unknown">
+          <SunIcon v-if="colorMode.value === 'dark'" class="w-5 h-5" />
+          <MoonIcon v-else class="w-5 h-5" />
+        </template>
       </div>
     </div>
   </aside>
