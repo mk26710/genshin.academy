@@ -29,7 +29,7 @@ import GitHubLogo from "@/components/icons/GitHubLogo.vue";
       class="place-self-start lg:place-self-center flex flex-col lg:flex-row gap-x-6 gap-y-2 mt-6 lg:mt-0 font-bold"
     >
       <a
-        href="https://github.com/BinaryKitsune/gvp"
+        href="https://github.com/BinaryKitsune/genshin.zenless.club"
         target="_blank"
         class="hover:text-primary-500 ransition-colors ease-in-out duration-200"
       >
