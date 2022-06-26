@@ -33,7 +33,7 @@ useZenlessMeta(() => {
   }
 
   return {
-    title: `${character.name} Guide`,
+    title: `${character.name}`,
     description: `${character.description}`,
     color: `${character.accentColor}`,
     iconURL: `https://genshin.zenless.club/img/characters/${character.id}/icon.png`,
