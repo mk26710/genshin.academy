@@ -13,19 +13,15 @@ const popover = ref(null);
 
 const colorMode = useColorMode();
 
-const isDark = computed(() => {
-  if (colorMode.unknown) {
-    return false;
-  }
-
-  return colorMode.value === `dark`;
-});
-
 const toggleDark = () => {
-  if (colorMode.value === `dark`) {
+  if (colorMode.unknown) return;
+
+  if (colorMode.value === `dark` && colorMode.preference === `system`) {
     colorMode.preference = `light`;
-  } else {
+  } else if (colorMode.value === `light` && colorMode.preference === `system`) {
     colorMode.preference = `dark`;
+  } else {
+    colorMode.preference = `system`;
   }
 };
 
@@ -81,10 +77,20 @@ const endpoints = computed(() => {
             @click="toggleDark()"
           >
             <div class="flex flex-row items-center gap-x-2">
-              <div class="flex-grow text-right">{{ isDark ? "Light" : "Dark" }}</div>
-              <div>
-                <component :is="isDark ? SunIcon : MoonIcon" class="w-6 h-6" />
-              </div>
+              <template v-if="!colorMode.unknown">
+                <template v-if="colorMode.value === 'dark'">
+                  <div class="flex-grow text-right">Light</div>
+                  <div>
+                    <SunIcon class="w-6 h-6" />
+                  </div>
+                </template>
+                <template v-else>
+                  <div class="flex-grow text-right">Dark</div>
+                  <div>
+                    <MoonIcon class="w-6 h-6" />
+                  </div>
+                </template>
+              </template>
             </div>
           </div>
 
@@ -167,7 +173,10 @@ const endpoints = computed(() => {
         class="transition-all duration-75 bg-neutral-200 dark:bg-dark-800 dark:text-neutral-300 rounded-lg flex items-center justify-center aspect-square h-8 cursor-pointer"
         @click="toggleDark()"
       >
-        <component :is="isDark ? SunIcon : MoonIcon" class="w-5 h-5" />
+        <template v-if="!colorMode.unknown">
+          <SunIcon v-if="colorMode.value === 'dark'" class="w-5 h-5" />
+          <MoonIcon v-else class="w-5 h-5" />
+        </template>
       </div>
     </div>
   </aside>
