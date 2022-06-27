@@ -9,7 +9,7 @@
     "export": "next export",
     "start": "next start",
     "lint": "next lint",
-    "cloudflare": "node generatePublicWebpImages.mjs -r && npm run export"
+    "cloudflare": "npm run export"
   },
   "dependencies": {
     "dayjs": "^1.11.3",
