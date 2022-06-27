@@ -6,7 +6,6 @@ node_modules
 .output
 .env
 dist
-public/img/characters/**/*.webp
 gvp-main
 .next
 .old/
