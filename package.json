@@ -7,7 +7,7 @@
     "pregenerate": "node generatePublicWebpImages.mjs -r",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "cloudflare": "npm run generate && node cloudflarePagesFix.mjs"
+    "cloudflare": "nuxt generate && node cloudflarePagesFix.mjs"
   },
   "devDependencies": {
     "@nuxtjs/color-mode": "^3.1.4",
