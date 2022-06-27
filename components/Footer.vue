@@ -1,9 +1,4 @@
 <!-- eslint-disable vue/multi-word-component-names -->
-<script setup lang="ts">
-import DiscordLogo from "@/components/icons/DiscordLogo.vue";
-import GitHubLogo from "@/components/icons/GitHubLogo.vue";
-</script>
-
 <template>
   <footer
     class="footer grid grid-cols-1 lg:grid-cols-[1fr_auto] grid-rows-[auto_auto] lg:grid-rows-1 py-4 mx-4 text-neutral-400 dark:text-neutral-600 border-t border-neutral-200 dark:border-neutral-200/10"
@@ -34,7 +29,7 @@ import GitHubLogo from "@/components/icons/GitHubLogo.vue";
         class="hover:text-primary-500 ransition-colors ease-in-out duration-200"
       >
         <div class="flex flex-row gap-x-2 items-center">
-          <GitHubLogo class="w-4 h-auto inline-block" />
+          <LogosDiscord class="w-4 h-auto inline-block" />
           <p>GitHub</p>
         </div>
       </a>
@@ -44,7 +39,7 @@ import GitHubLogo from "@/components/icons/GitHubLogo.vue";
         class="hover:text-primary-500 transition-colors ease-in-out duration-200"
       >
         <div class="flex flex-row gap-x-2 items-center">
-          <DiscordLogo class="w-4 h-auto inline-block" />
+          <LogosGitHub class="w-4 h-auto inline-block" />
           <p>Discord</p>
         </div>
       </a>
