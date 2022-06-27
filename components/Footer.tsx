@@ -1,6 +1,7 @@
 import { FC } from "react";
-import { GitHubLogo } from "@/components/icons/GitHubLogo";
+
 import { DiscordLogo } from "@/components/icons/DiscordLogo";
+import { GitHubLogo } from "@/components/icons/GitHubLogo";
 
 export const Footer: FC = () => {
   return (

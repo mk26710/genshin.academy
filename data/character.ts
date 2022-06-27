@@ -1,5 +1,5 @@
-import { z } from "zod";
 import { Component } from "react";
+import { z } from "zod";
 
 import { Rarity, Vision, Weapon } from "@/data/types/genshin";
 

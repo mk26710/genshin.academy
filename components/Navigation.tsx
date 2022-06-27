@@ -1,10 +1,10 @@
-import { useRouter } from "next/router";
-import NextLink from "next/link";
 import { BeakerIcon, CalculatorIcon, HomeIcon, StarIcon } from "@heroicons/react/outline";
 import { MenuIcon, SunIcon, MoonIcon, XIcon } from "@heroicons/react/solid";
+import { useTheme } from "next-themes";
+import NextLink from "next/link";
+import { useRouter } from "next/router";
 import { FC, Fragment, type ReactNode, useEffect, useRef, useState, useCallback } from "react";
 import { useClickAway } from "react-use";
-import { useTheme } from "next-themes";
 
 interface NavRoute {
   path: string;
@@ -88,7 +88,7 @@ export const Navigation: FC = () => {
   );
 
   const activeClass = useCallback(
-    (navRoute: NavRoute, isMobile: boolean = false) => {
+    (navRoute: NavRoute, isMobile = false) => {
       const active = isActive(navRoute);
 
       if (isMobile && active) {

@@ -6,5 +6,5 @@ interface Props {
 }
 
 export const CalculatorDetails: FC<Props> = ({ className = "", children }) => {
-  return <p className="calculator-details">{children}</p>;
+  return <p className={`calculator-details ${className}`}>{children}</p>;
 };

@@ -1,6 +1,6 @@
-import { FC, useEffect, useState } from "react";
-import NextLink from "next/link";
 import dayjs from "dayjs";
+import NextLink from "next/link";
+import { FC, useEffect, useState } from "react";
 
 interface Props {
   id: string;

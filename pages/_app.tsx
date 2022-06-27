@@ -1,24 +1,25 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { AppProps } from "next/app";
+
+
+import dayjs from "dayjs";
+import deLocale from "dayjs/locale/de";
+import jaLocale from "dayjs/locale/ja";
+import ruLocale from "dayjs/locale/ru";
+import localizedFormat from "dayjs/plugin/localizedFormat";
 import { ThemeProvider } from "next-themes";
 import { useRouter } from "next/router";
+import nProgress from "nprogress";
 import { useEffectOnce } from "react-use";
 
-import nProgress from "nprogress";
-import dayjs from "dayjs";
-import localizedFormat from "dayjs/plugin/localizedFormat";
-
-import deLocale from "dayjs/locale/de";
-import ruLocale from "dayjs/locale/ru";
-import jaLocale from "dayjs/locale/ja";
-
-import { Navigation } from "@/components/Navigation";
-import { Footer } from "@/components/Footer";
-
-import "@/assets/styles/main.scss";
-import "@/assets/styles/cards.scss";
 import "@/assets/styles/calculator.scss";
+import "@/assets/styles/cards.scss";
+import "@/assets/styles/main.scss";
 import "@/assets/styles/markdown.scss";
 import "@/assets/styles/nprogress.scss";
+import { Footer } from "@/components/Footer";
+import { Navigation } from "@/components/Navigation";
+
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();

@@ -1,8 +1,9 @@
+import { NextPage } from "next";
+
 import { CharacterCard } from "@/components/cards/CharacterCard";
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
 import { charactersArray } from "@/data/characters";
-import { NextPage } from "next";
 
 const CharactersIndex: NextPage = () => {
   return (

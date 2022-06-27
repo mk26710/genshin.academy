@@ -24,7 +24,6 @@
     "@typescript-eslint/restrict-template-expressions": "off",
     "@next/next/no-img-element": "off",
     "react-hooks/exhaustive-deps": "off",
-    "no-shadow": 1,
     "import/no-named-as-default": 0,
     "import/no-named-as-default-member": 0,
     "import/order": [

@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { CalculatorDetails } from "@/components/calculator/CalculatorDetails";
 import { CalculatorInput } from "@/components/calculator/CalculatorInput";
 import { CalculatorResult } from "@/components/calculator/CalculatorResult";
@@ -5,7 +7,6 @@ import { CalculatorRoot } from "@/components/calculator/CalculatorRoot";
 import { CalculatorTitle } from "@/components/calculator/CalculatorTitle";
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
-import { useState } from "react";
 
 const CalcPage = () => {
   const [critRate, setCritRate] = useState(NaN);

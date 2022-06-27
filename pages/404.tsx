@@ -1,6 +1,7 @@
+import { NextPage } from "next";
+
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
-import { NextPage } from "next";
 
 const NotFound: NextPage = () => {
   return (

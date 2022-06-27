@@ -1,21 +1,22 @@
-import { Rarity } from "../types/genshin";
 import { Character } from "../character";
-import yae_miko from "@/data/characters/yae_miko";
-import kamisato_ayaka from "@/data/characters/kamisato_ayaka";
-import yelan from "@/data/characters/yelan";
-import kamisato_ayato from "@/data/characters/kamisato_ayato";
-import qiqi from "@/data/characters/qiqi";
-import shenhe from "@/data/characters/shenhe";
-import ganyu from "@/data/characters/ganyu";
-import eula from "@/data/characters/eula";
-import raiden_shogun from "@/data/characters/raiden_shogun";
-import yoimiya from "@/data/characters/yoimiya";
-import keqing from "@/data/characters/keqing";
-import kaedehara_kazuha from "@/data/characters/kaedehara_kazuha";
-import sangonomiya_kokomi from "./sangonomiya_kokomi";
-import rosaria from "./rosaria";
+import { Rarity } from "../types/genshin";
 import amber from "./amber";
+import eula from "./eula";
 import fischl from "./fischl";
+import ganyu from "./ganyu";
+import kaedehara_kazuha from "./kaedehara_kazuha";
+import kamisato_ayaka from "./kamisato_ayaka";
+import kamisato_ayato from "./kamisato_ayato";
+import keqing from "./keqing";
+import qiqi from "./qiqi";
+import raiden_shogun from "./raiden_shogun";
+import rosaria from "./rosaria";
+import sangonomiya_kokomi from "./sangonomiya_kokomi";
+import shenhe from "./shenhe";
+import yae_miko from "./yae_miko";
+import yelan from "./yelan";
+import yoimiya from "./yoimiya";
+
 
 const _array = Object.freeze([
   yae_miko,

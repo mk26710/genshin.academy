@@ -1,6 +1,7 @@
+import type { NextPage } from "next";
+
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
-import type { NextPage } from "next";
 
 const Home: NextPage = () => {
   return (

@@ -1,10 +1,9 @@
+import type { Character } from "@/data/character";
 import type { GetStaticProps } from "next";
 
-import { Layout } from "@/components/Layout";
 import { Container } from "@/components/Container";
-
+import { Layout } from "@/components/Layout";
 import { charactersArray, getCharacterById } from "@/data/characters";
-import type { Character } from "@/data/character";
 import { avatarPath, characterIcon } from "@/lib/helpers";
 
 interface StaticProps {
