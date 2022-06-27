@@ -1,13 +1,12 @@
+import type { Character } from "@/data/character";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 
-import { Layout } from "@/components/Layout";
 import { Container } from "@/components/Container";
-
-import type { Character } from "@/data/character";
-import { characterIcon } from "@/lib/helpers";
+import { Layout } from "@/components/Layout";
 import { getCharacterById } from "@/data/characters";
-
+import { Guide } from "@/data/guide";
 import published from "@/data/guides/compiled/characters/published.json";
+import { characterIcon } from "@/lib/helpers";
 
 interface StaticProps {
   id: string;
@@ -32,10 +31,8 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
     return { notFound: true };
   }
 
-  const data = await import(`@/data/guides/compiled/characters/${character.id}.json`);
-
-  const id: string = data.id;
-  const html: string = data.html;
+  const { default: data } = await import(`@/data/guides/compiled/characters/${character.id}.json`);
+  const { id, html } = await Guide.parseAsync(data);
 
   return {
     props: { id, html, character },
