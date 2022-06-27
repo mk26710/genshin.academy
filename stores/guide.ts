@@ -2,7 +2,7 @@ import { z } from "zod";
 import { defineStore } from "pinia";
 import { uniq } from "lodash-es";
 
-import publishedCharactersGuides from "@/data/guides/compiled/characters/published.json";
+import ids from "@/data/guides/compiled/characters/published.json";
 
 const Guide = z.object({
   id: z.string(),
@@ -33,12 +33,11 @@ export const useGuideStore = defineStore({
   },
   actions: {
     async update() {
-      const guides = await Promise.all(
-        publishedCharactersGuides.map(async (id) => {
-          const data = await import(`../data/guides/compiled/characters/${id}.json`);
-          return Guide.parse(data);
-        }),
+      const jsons = await Promise.all(
+        ids.map((id) => import(`../data/guides/compiled/characters/${id}.json`)),
       );
+
+      const guides = await Promise.all(jsons.map((o) => Guide.parseAsync(o)));
 
       this.all = uniq(guides);
       this.isUpdated = true;
