@@ -17,9 +17,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   console.debug(`nprogress added to router.beforeEach()`);
 
   router.afterEach(() => {
-    setTimeout(() => {
-      nProgress.done();
-    }, 250);
+    nProgress.done();
   });
   console.debug(`nprogress added to router.afterEach()`);
 });
