@@ -1,4 +1,5 @@
-import { type ChangeEvent, useEffect, useRef } from "react";
+import { type ChangeEvent, useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { NextPage } from "next";
 import { debounce, isEmpty } from "lodash-es";
 
@@ -8,40 +9,40 @@ import { Container } from "@/components/Container";
 
 import { charactersArray } from "@/data/characters";
 import published from "@/data/guides/compiled/characters/published.json";
-import { useRouter } from "next/router";
 
 // this doesn't need to be reactive
 const publishedCharacters = charactersArray.filter(({ id }) => published.includes(id));
 
-const RouterReadyContent = () => {
+// function useQuery() {
+//   const router = useRouter();
+
+//   return useMemo(() => {
+//     const [, query] = router.asPath.split("?");
+
+//     return parseQuery(query);
+//   }, [router.asPath]);
+// }
+
+const TheActualContent = () => {
   const router = useRouter();
 
-  const input = useRef<HTMLInputElement>(null);
-  const query = router.query.q?.toString() ?? "";
+  // const { q = "" } = useMemo(() => {
+  //   return parseQuery(router.asPath.split("?").slice(1).join());
+  // }, [router.asPath]);
 
-  const handleChange = debounce((e: ChangeEvent<HTMLInputElement>) => {
-    router.replace(`/guides?q=${e.target.value}`, undefined, { shallow: true });
-  }, 300);
+  const { q = "" } = router.query;
 
   useEffect(() => {
-    const el = input.current;
-    if (el == null) {
-      return;
-    }
+    console.log(q);
+  }, [q]);
 
-    if (isEmpty(el.value) && !isEmpty(query)) {
-      el.value = query;
-    }
-  }, [query]);
-
-  if (!router.isReady) {
-    return null;
-  }
-
+  const handleChange = debounce((e: ChangeEvent<HTMLInputElement>) => {
+    const url = !isEmpty(e.target.value) ? `/guides?q=${e.target.value}` : `/guides`;
+    router.replace(url, undefined, { shallow: true });
+  }, 300);
   return (
     <>
       <input
-        ref={input}
         type="text"
         placeholder="Search by title"
         onChange={handleChange}
@@ -49,20 +50,34 @@ const RouterReadyContent = () => {
       />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
-        {publishedCharacters.map((character) => (
-          <GuideCard
-            key={character.id}
-            id={character.id}
-            href={`/guides/${character.id}`}
-            title={character.name}
-            description={character.description}
-            thumbnail={`/img/characters/${character.id}/avatar_header.webp`}
-            className={!character.name.toLowerCase().includes(query.toLowerCase()) ? "!hidden" : ""}
-          />
-        ))}
+        {publishedCharacters
+          .filter((c) => c.id.includes(q.toString().toLowerCase()))
+          .map((character) => (
+            <GuideCard
+              key={character.id}
+              id={character.id}
+              href={`/guides/${character.id}`}
+              title={character.name}
+              description={character.description}
+              thumbnail={`/img/characters/${character.id}/avatar_header.webp`}
+            />
+          ))}
       </div>
     </>
   );
+};
+
+const RouterReadyContent = () => {
+  const [ready, setReady] = useState(false);
+
+  const router = useRouter();
+  useEffect(() => {
+    if (router.isReady) {
+      setReady(true);
+    }
+  }, [router.isReady]);
+
+  return <>{ready && <TheActualContent />}</>;
 };
 
 const GuidesIndex: NextPage = () => {
