@@ -1,7 +1,103 @@
+# 2022-06-27
+ 
+ - Switched back to NextJS (yes, I've switched frameworks multiple times in  just a few days)
+ - `webp` converted files are now a part of the repo
+ - Internal changes
+
+# 2022-06-26
+ 
+ - Added Fischl character data
+ - Switched back to Nuxt
+ - Created custom composable shorthand for meta data
+
+# 2022-06-25
+
+ - Added Yoimiya character data
+ - Added Keqing character data
+ - Added Kaedehara Kazuha character data
+ - Added Sangonomiya Kokomi character data
+ - Added Rosaria character data
+ - Added Amber character data
+ - Parsing character with zod on their exports
+ - More complex search via array reducers (grouped and sorted inside of groups)
+
+# 2022-06-24
+ 
+ - Switch to NextJS
+ - Internal changes to scripts
+ - Added `accentColor` to `Character`
+ - Added IDs to cards
+ 
+# 2022-06-23
+
+ - Switch to Nuxt v3 (RC)
+ - Included meta tags with useHead()
+ - Created a NextJS branch
+
+# 2022-06-20
+
+ - Created custom image component
+ - Search input is now debounced
+ - Fixed naming of views
+
+# 2022-06-18
+
+ - Added Raiden Shogun character data
+ - Added Eula's constellations
+ - Internal changes to data
+ - Router redirects to /404 on catch all path
+
+№ 2022-06-17
+
+ - Added Raiden Shogun assets
+ - Added zod
+ - Added state persistance plugin for pinia
+ - Created a new store for guides
+ - Updated character type with zod so it can be validated
+
+# 2022-06-15
+
+ - Routes now are named
+ - Automatic conversion of static images to `webp` format
+ - Internal changes related to rerendering with params change
+ - Characters view now shows some basic data
+ - Added progress bar
+
+# 2022-06-12
+
+ - Created calculator components
+ - Added a crit value calculator
+ - Extended dayjs with local formats
+ - Added automatic scrolls for hashes (`https://genshin.zenless.club/guides#yae_miko` would scroll to Yae Miko's card automatically)
+ - Guides page data filter now uses search params as initial value
+ - Extended dayjs with more locales
+ - Updated color scheme (yes, once again)
+ - Minor styling changes
+
+# 2022-06-11
+
+ - Added Ganyu character data
+ - Added Eula character data (without constellations)
+
+# 2022-06-10
+
+ - Added Yelan character data
+ - Added Kamisato Ayato character data
+ - Added Qiqi character data
+ - Added Shenhe character data
+ - Populated Ayaka's constealltion data
+ - Sorting characters data array by default
+ - Fixed character card link
+
+# 2022-06-09
+
+- Styles for parsed guides data
+- Router is now using nested routes
+
 # 2022-06-08
 
  - Updated color scheme
- - 
+ - Created a git submodule to synchronize data with [gvp-guides](https://github.com/BinaryKitsune/gvp-guides)
 
 # 2022-06-05
  
