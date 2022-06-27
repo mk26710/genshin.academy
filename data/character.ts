@@ -1,12 +1,12 @@
 import { z } from "zod";
-import type { Component } from "react";
+import { Component } from "vue";
 
 import { Rarity, Vision, Weapon } from "@/data/types/genshin";
-import { freezeTransform } from "@/lib/utils";
 
-export const BirthdayDate = z
-  .tuple([z.number().int().min(1).max(31), z.number().int().min(1).max(12)])
-  .transform(freezeTransform);
+export const BirthdayDate = z.tuple([
+  z.number().int().min(1).max(31),
+  z.number().int().min(1).max(12),
+]);
 
 export type BirthdayDate = z.infer<typeof BirthdayDate>;
 
@@ -17,7 +17,7 @@ export const Constellation = z
     description: z.string(),
     icon: z.union([z.custom<Component>(), z.string()]).optional(),
   })
-  .transform(freezeTransform);
+  .strict();
 
 export type Constellation = z.infer<typeof Constellation>;
 
@@ -26,7 +26,7 @@ export const StoryEntry = z
     title: z.string(),
     description: z.string(),
   })
-  .transform(freezeTransform);
+  .strict();
 
 export type StoryEntry = z.infer<typeof StoryEntry>;
 
@@ -50,6 +50,6 @@ export const Character = z
     weapon: z.nativeEnum(Weapon),
     vision: z.nativeEnum(Vision),
   })
-  .transform(freezeTransform);
+  .strict();
 
 export type Character = z.infer<typeof Character>;
