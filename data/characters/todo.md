@@ -2,7 +2,7 @@ List of characters that require data gathering (except for story lines)
 
 - [ ] Albedo
 - [ ] Aloy
-- [ ] Amber
+- [x] Amber
 - [ ] Arataki Itto
 - [ ] Barbara
 - [ ] Beidou
@@ -21,7 +21,7 @@ List of characters that require data gathering (except for story lines)
 - [x] Kamisato Ayaka
 - [x] Kamisato Ayato
 - [x] Keqing
-- [ ] Klee
+- [x] Klee
 - [ ] Kujou Sara
 - [ ] Lisa
 - [ ] Mona
