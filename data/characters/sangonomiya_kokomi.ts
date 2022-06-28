@@ -1,7 +1,9 @@
+import type { CharacterType } from "../character";
+
 import { Character } from "../character";
 import { Rarity, Vision, Weapon } from "../types/genshin";
 
-const sangonomiya_kokomi: Character = {
+const sangonomiya_kokomi: CharacterType = {
   id: `sangonomiya_kokomi`,
   accentColor: `#4f58b7`,
 

@@ -1,7 +1,9 @@
+import type { CharacterType } from "../character";
+
 import { Character } from "../character";
 import { Rarity, Vision, Weapon } from "../types/genshin";
 
-const fischl: Character = {
+const fischl: CharacterType = {
   id: `fischl`,
   accentColor: `#9b7ed5`,
 

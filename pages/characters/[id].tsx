@@ -1,4 +1,4 @@
-import type { Character } from "@/data/character";
+import type { CharacterType } from "@/data/character";
 import type { GetStaticProps } from "next";
 
 import { Container } from "@/components/Container";
@@ -7,7 +7,7 @@ import { charactersArray, getCharacterById } from "@/data/characters";
 import { avatarPath, characterIcon } from "@/lib/helpers";
 
 interface StaticProps {
-  character: Character;
+  character: CharacterType;
 }
 
 export const getStaticPaths = async () => {

@@ -8,7 +8,7 @@ export const BirthdayDate = z.tuple([
   z.number().int().min(1).max(12),
 ]);
 
-export type BirthdayDate = z.infer<typeof BirthdayDate>;
+export type BirthdayDateType = z.infer<typeof BirthdayDate>;
 
 export const Constellation = z
   .object({
@@ -19,7 +19,7 @@ export const Constellation = z
   })
   .strict();
 
-export type Constellation = z.infer<typeof Constellation>;
+export type ConstellationType = z.infer<typeof Constellation>;
 
 export const StoryEntry = z
   .object({
@@ -28,7 +28,7 @@ export const StoryEntry = z
   })
   .strict();
 
-export type StoryEntry = z.infer<typeof StoryEntry>;
+export type StoryEntryType = z.infer<typeof StoryEntry>;
 
 export const Character = z
   .object({
@@ -52,4 +52,4 @@ export const Character = z
   })
   .strict();
 
-export type Character = z.infer<typeof Character>;
+export type CharacterType = z.infer<typeof Character>;

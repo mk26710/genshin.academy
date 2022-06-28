@@ -1,8 +1,9 @@
-import { Character } from "@/data/character";
+import type { CharacterType } from "../character";
 
+import { Character } from "../character";
 import { Rarity, Vision, Weapon } from "../types/genshin";
 
-const qiqi: Character = {
+const qiqi: CharacterType = {
   id: `qiqi`,
   accentColor: `#c94687`,
 

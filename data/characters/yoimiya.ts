@@ -1,7 +1,9 @@
-import { Character } from "@/data/character";
-import { Rarity, Vision, Weapon } from "@/data/types/genshin";
+import type { CharacterType } from "../character";
 
-const yoimiya: Character = {
+import { Character } from "../character";
+import { Rarity, Vision, Weapon } from "../types/genshin";
+
+const yoimiya: CharacterType = {
   id: `yoimiya`,
   accentColor: `#eb9263`,
 

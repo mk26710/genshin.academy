@@ -1,7 +1,9 @@
-import { Character } from "@/data/character";
-import { Rarity, Vision, Weapon } from "@/data/types/genshin";
+import type { CharacterType } from "../character";
 
-const raiden_shogun: Character = {
+import { Character } from "../character";
+import { Rarity, Vision, Weapon } from "../types/genshin";
+
+const raiden_shogun: CharacterType = {
   id: `raiden_shogun`,
   accentColor: `#3f3575`,
 

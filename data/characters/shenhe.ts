@@ -1,7 +1,9 @@
+import type { CharacterType } from "../character";
+
 import { Character } from "../character";
 import { Rarity, Vision, Weapon } from "../types/genshin";
 
-const shenhe: Character = {
+const shenhe: CharacterType = {
   id: `shenhe`,
   accentColor: `#e8edf3`,
 

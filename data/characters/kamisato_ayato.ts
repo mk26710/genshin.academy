@@ -1,7 +1,9 @@
-import { Character } from "@/data/character";
-import { Rarity, Vision, Weapon } from "@/data/types/genshin";
+import type { CharacterType } from "../character";
 
-const kamisato_ayato: Character = {
+import { Character } from "../character";
+import { Rarity, Vision, Weapon } from "../types/genshin";
+
+const kamisato_ayato: CharacterType = {
   id: `kamisato_ayato`,
   accentColor: `#96acdf`,
 

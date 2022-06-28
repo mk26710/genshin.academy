@@ -1,4 +1,4 @@
-import { Character } from "../character";
+import { CharacterType } from "../character";
 import { Rarity } from "../types/genshin";
 import amber from "./amber";
 import eula from "./eula";
@@ -16,7 +16,6 @@ import shenhe from "./shenhe";
 import yae_miko from "./yae_miko";
 import yelan from "./yelan";
 import yoimiya from "./yoimiya";
-
 
 const _array = Object.freeze([
   yae_miko,
@@ -49,7 +48,7 @@ export const charactersArray = Object.freeze(
       }
 
       return acc;
-    }, new Array<Character[]>([], []))
+    }, new Array<CharacterType[]>([], []))
     .reduce((acc, item) => {
       return [...acc, ...item.sort((a, b) => a.name.localeCompare(b.name))];
     }, []),

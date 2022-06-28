@@ -1,7 +1,9 @@
+import type { CharacterType } from "../character";
+
 import { Character } from "../character";
 import { Rarity, Vision, Weapon } from "../types/genshin";
 
-const kaedehara_kazuha: Character = {
+const kaedehara_kazuha: CharacterType = {
   id: `kaedehara_kazuha`,
   accentColor: `#e35036`,
 
