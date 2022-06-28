@@ -16,6 +16,7 @@ module.exports = {
     es6: true,
   },
   rules: {
+    "@typescript-eslint/consistent-type-imports": 2,
     quotes: [`warn`, `backtick`],
     "@typescript-eslint/require-await": `off`,
     "@typescript-eslint/no-unsafe-assignment": `off`,
