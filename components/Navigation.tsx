@@ -204,7 +204,7 @@ export const Navigation: FC = () => {
             <div className="fixed bottom-8 left-8">
               <div
                 onClick={() => toggleDark()}
-                className="transition-all duration-75 bg-neutral-50 dark:bg-neutral-900 dark:text-neutral-300 outline outline-1 outline-neutral-200 dark:outline-neutral-200/10 rounded-lg flex items-center justify-center aspect-square h-8 cursor-pointer"
+                className="transition-all duration-75 bg-neutral-100 dark:bg-neutral-900 dark:text-neutral-300 outline outline-1 outline-neutral-200 dark:outline-neutral-200/10 rounded-lg flex items-center justify-center aspect-square h-8 cursor-pointer"
               >
                 {resolvedTheme === `dark` && <SunIcon className="w-5 h-5" />}
                 {resolvedTheme !== `dark` && <MoonIcon className="w-5 h-5" />}
