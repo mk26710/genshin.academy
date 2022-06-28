@@ -1,5 +1,7 @@
+import type { FC, ReactNode } from "react";
+
 import Head from "next/head";
-import { FC, Fragment, ReactNode } from "react";
+import { Fragment } from "react";
 
 interface Props {
   title?: string;
@@ -11,11 +13,11 @@ interface Props {
 }
 
 export const Layout: FC<Props> = ({
-  title = "^_^",
-  titleTemplate = "GENSHIN.ZENLESS",
+  title = `^_^`,
+  titleTemplate = `GENSHIN.ZENLESS`,
   description,
   iconURL,
-  color = "#2563EB",
+  color = `#2563EB`,
   children,
 }) => {
   const realTitle = titleTemplate != null ? `${title} - ${titleTemplate}` : title;
