@@ -1,4 +1,5 @@
-import { CharacterType } from "../character";
+import type { CharacterType } from "../character";
+
 import { Rarity } from "../types/genshin";
 import amber from "./amber";
 import eula from "./eula";
@@ -11,6 +12,7 @@ import kamisato_ayaka from "./kamisato_ayaka";
 import kamisato_ayato from "./kamisato_ayato";
 import keqing from "./keqing";
 import klee from "./klee";
+import kujou_sara from "./kujou_sara";
 import mona from "./mona";
 import qiqi from "./qiqi";
 import raiden_shogun from "./raiden_shogun";
@@ -42,6 +44,7 @@ const _array = Object.freeze([
   jean,
   mona,
   hu_tao,
+  kujou_sara,
 ]);
 
 export const charactersArray = Object.freeze(
