@@ -1,3 +1,9 @@
+# 2022-06-28
+
+ - added Klee assets and character data
+ - Internal changes to types definitions and linter settings
+ - Using [git conventional commit](https://www.conventionalcommits.org/en/v1.0.0/#summary) for the commits in the repo from now on
+
 # 2022-06-27
  
  - Switched back to NextJS (yes, I've switched frameworks multiple times in  just a few days)
