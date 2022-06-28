@@ -1,9 +1,11 @@
+import type { FC } from "react";
+
 import { BeakerIcon, CalculatorIcon, HomeIcon, StarIcon } from "@heroicons/react/outline";
 import { MenuIcon, SunIcon, MoonIcon, XIcon } from "@heroicons/react/solid";
 import { useTheme } from "next-themes";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import { FC, Fragment, type ReactNode, useEffect, useRef, useState, useCallback } from "react";
+import { Fragment, type ReactNode, useEffect, useRef, useState, useCallback } from "react";
 import { useClickAway } from "react-use";
 
 interface NavRoute {
@@ -15,25 +17,25 @@ interface NavRoute {
 
 const navRoutes: NavRoute[] = [
   {
-    path: "/",
-    title: "Home",
+    path: `/`,
+    title: `Home`,
     icon: <HomeIcon className="h-7 w-7 p-0" />,
   },
   {
-    path: "/characters",
-    title: "Characters",
+    path: `/characters`,
+    title: `Characters`,
     hasNested: true,
     icon: <StarIcon className="h-7 w-7 p-0" />,
   },
   {
-    path: "/guides",
-    title: "Guides",
+    path: `/guides`,
+    title: `Guides`,
     hasNested: true,
     icon: <BeakerIcon className="h-7 w-7 p-0" />,
   },
   {
-    path: "/calc",
-    title: "Calculator",
+    path: `/calc`,
+    title: `Calculator`,
     icon: <CalculatorIcon className="h-7 w-7 p-0" />,
   },
 ];
@@ -48,12 +50,12 @@ export const Navigation: FC = () => {
     // don't do anything unless it's client side
     if (!isMounted) return;
 
-    if (resolvedTheme === "dark" && theme === "system") {
-      setTheme("light");
-    } else if (resolvedTheme === "light" && theme === "system") {
-      setTheme("dark");
+    if (resolvedTheme === `dark` && theme === `system`) {
+      setTheme(`light`);
+    } else if (resolvedTheme === `light` && theme === `system`) {
+      setTheme(`dark`);
     } else {
-      setTheme("system");
+      setTheme(`system`);
     }
   };
 
@@ -92,19 +94,19 @@ export const Navigation: FC = () => {
       const active = isActive(navRoute);
 
       if (isMobile && active) {
-        return " bg-primary-600 text-white shadow-sm shadow-primary-300/50";
+        return ` bg-primary-600 text-white shadow-sm shadow-primary-300/50`;
       } else if (!isMobile && active) {
-        return " !bg-primary-600 rounded-tl-md rounded-tr-2xl rounded-bl-2xl rounded-br-md text-white";
+        return ` !bg-primary-600 rounded-tl-md rounded-tr-2xl rounded-bl-2xl rounded-br-md text-white`;
       }
 
-      return "";
+      return ``;
     },
     [isActive],
   );
 
   // firefox specific issue
   const mobileMarginBottom =
-    isMounted && navigator.userAgent.toLowerCase().includes("firefox") ? "mb-10" : "mb-8";
+    isMounted && navigator.userAgent.toLowerCase().includes(`firefox`) ? `mb-10` : `mb-8`;
 
   return (
     <>
@@ -125,12 +127,12 @@ export const Navigation: FC = () => {
                 >
                   <div className="flex flex-row items-center gap-x-2">
                     <div className="flex-grow text-right">
-                      {resolvedTheme === "dark" && "Dark"}
-                      {resolvedTheme !== "dark" && "Light"}
+                      {resolvedTheme === `dark` && `Dark`}
+                      {resolvedTheme !== `dark` && `Light`}
                     </div>
                     <div>
-                      {resolvedTheme === "dark" && <SunIcon className="w-6 h-6" />}
-                      {resolvedTheme !== "dark" && <MoonIcon className="w-6 h-6" />}
+                      {resolvedTheme === `dark` && <SunIcon className="w-6 h-6" />}
+                      {resolvedTheme !== `dark` && <MoonIcon className="w-6 h-6" />}
                     </div>
                   </div>
                 </div>
@@ -186,7 +188,7 @@ export const Navigation: FC = () => {
             <NextLink key={navRoute.path} href={navRoute.path}>
               <a
                 className={
-                  "w-full flex flex-row items-center gap-x-2 px-3 py-2 font-semibold text-lg cursor-pointer" +
+                  `w-full flex flex-row items-center gap-x-2 px-3 py-2 font-semibold text-lg cursor-pointer` +
                   activeClass(navRoute)
                 }
               >
@@ -203,8 +205,8 @@ export const Navigation: FC = () => {
               onClick={() => toggleDark()}
               className="transition-all duration-75 bg-neutral-200 dark:bg-dark-800 dark:text-neutral-300 rounded-lg flex items-center justify-center aspect-square h-8 cursor-pointer"
             >
-              {resolvedTheme === "dark" && <SunIcon className="w-5 h-5" />}
-              {resolvedTheme !== "dark" && <MoonIcon className="w-5 h-5" />}
+              {resolvedTheme === `dark` && <SunIcon className="w-5 h-5" />}
+              {resolvedTheme !== `dark` && <MoonIcon className="w-5 h-5" />}
             </div>
           </div>
         )}
