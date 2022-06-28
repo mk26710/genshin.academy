@@ -127,8 +127,8 @@ export const Navigation: FC = () => {
                 >
                   <div className="flex flex-row items-center gap-x-2">
                     <div className="flex-grow text-right">
-                      {resolvedTheme === `dark` && `Dark`}
-                      {resolvedTheme !== `dark` && `Light`}
+                      {resolvedTheme === `dark` && `Light`}
+                      {resolvedTheme !== `dark` && `Dark`}
                     </div>
                     <div>
                       {resolvedTheme === `dark` && <SunIcon className="w-6 h-6" />}
