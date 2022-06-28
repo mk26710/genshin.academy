@@ -1,7 +1,7 @@
-import { useRouter } from "next/router";
+import { NextRouter, useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-export const useRouterReady = () => {
+export const useRouterReady = (): [boolean, NextRouter] => {
   const router = useRouter();
   const [ready, setReady] = useState(false);
 
@@ -11,5 +11,5 @@ export const useRouterReady = () => {
     }
   }, [router.isReady]);
 
-  return ready;
+  return [ready, router];
 };
