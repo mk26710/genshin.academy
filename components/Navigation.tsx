@@ -177,39 +177,41 @@ export const Navigation: FC = () => {
       {/* Desktop Sidebard */}
       <aside
         data-description="Desktop Sidebar Navigation"
-        className="sidebar hidden lg:flex flex-col w-64 border-r border-neutral-200 dark:border-neutral-200/10 dark:bg-neutral-800 bg-white h-full"
+        className="sidebar sticky top-0 hidden lg:flex flex-col min-h-screen max-h-screen"
       >
-        <div className="flex flex-col gap-y-2 sticky top-0 p-4 w-full">
-          <div className="self-center py-4 mb-2 border-b border-neutral-200 dark:border-dark-200/10">
-            <h1 className="font-extrabold text-xl">GENSHIN.ZENLESS</h1>
-          </div>
-
-          {navRoutes.map((navRoute) => (
-            <NextLink key={navRoute.path} href={navRoute.path}>
-              <a
-                className={
-                  `w-full flex flex-row items-center gap-x-2 px-3 py-2 font-semibold text-lg cursor-pointer` +
-                  activeClass(navRoute)
-                }
-              >
-                <Fragment>{navRoute.icon}</Fragment>
-                <h1>{navRoute.title}</h1>
-              </a>
-            </NextLink>
-          ))}
-        </div>
-
-        {isMounted && (
-          <div className="fixed bottom-4 left-4">
-            <div
-              onClick={() => toggleDark()}
-              className="transition-all duration-75 bg-neutral-200 dark:bg-dark-800 dark:text-neutral-300 rounded-lg flex items-center justify-center aspect-square h-8 cursor-pointer"
-            >
-              {resolvedTheme === `dark` && <SunIcon className="w-5 h-5" />}
-              {resolvedTheme !== `dark` && <MoonIcon className="w-5 h-5" />}
+        <div className="ml-4 my-4 w-64 h-full rounded-lg border border-neutral-200 dark:border-neutral-200/10 dark:bg-neutral-800 bg-white">
+          <div className="flex flex-col gap-y-2 p-4 w-full">
+            <div className="self-center py-4 mb-2 border-b border-neutral-200 dark:border-dark-200/10">
+              <h1 className="font-extrabold text-xl">GENSHIN.ZENLESS</h1>
             </div>
+
+            {navRoutes.map((navRoute) => (
+              <NextLink key={navRoute.path} href={navRoute.path}>
+                <a
+                  className={
+                    `w-full flex flex-row items-center gap-x-2 px-3 py-2 font-semibold text-lg cursor-pointer` +
+                    activeClass(navRoute)
+                  }
+                >
+                  <Fragment>{navRoute.icon}</Fragment>
+                  <h1>{navRoute.title}</h1>
+                </a>
+              </NextLink>
+            ))}
           </div>
-        )}
+
+          {isMounted && (
+            <div className="fixed bottom-8 left-8">
+              <div
+                onClick={() => toggleDark()}
+                className="transition-all duration-75 bg-neutral-50 dark:bg-neutral-900 dark:text-neutral-300 outline outline-1 outline-neutral-200 dark:outline-neutral-200/10 rounded-lg flex items-center justify-center aspect-square h-8 cursor-pointer"
+              >
+                {resolvedTheme === `dark` && <SunIcon className="w-5 h-5" />}
+                {resolvedTheme !== `dark` && <MoonIcon className="w-5 h-5" />}
+              </div>
+            </div>
+          )}
+        </div>
       </aside>
     </>
   );
