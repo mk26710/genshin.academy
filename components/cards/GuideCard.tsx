@@ -1,6 +1,8 @@
+import type { FC } from "react";
+
 import dayjs from "dayjs";
 import NextLink from "next/link";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   id: string;
@@ -18,8 +20,8 @@ export const GuideCard: FC<Props> = ({
   description,
   publishedAt,
   thumbnail,
-  href = "#",
-  className = "",
+  href = `#`,
+  className = ``,
 }) => {
   const [isMounted, setMounted] = useState(false);
 
@@ -42,7 +44,7 @@ export const GuideCard: FC<Props> = ({
         <div className="card-text-container">
           {publishedAt && (
             <div className="card-text-container-item font-medium text-sm leading-6 text-primary-500">
-              {isMounted && <>{dayjs(publishedAt).format("lll")}</>}
+              {isMounted && <>{dayjs(publishedAt).format(`lll`)}</>}
             </div>
           )}
 

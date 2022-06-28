@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from "react";
+import type { ChangeEvent, FC } from "react";
 
 interface Props {
   setValue: (value: number) => void;
@@ -11,7 +11,7 @@ export const CalculatorInput: FC<Props> = ({
   setValue,
   placeholder,
   step = 0.1,
-  className = "",
+  className = ``,
 }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.valueAsNumber);

@@ -1,11 +1,12 @@
 /* eslint-env node */
-import { access } from "fs/promises";
 import { constants } from "fs";
+import { access } from "fs/promises";
 import { basename, join, extname, dirname } from "path";
 import { fileURLToPath } from "url";
+
+import { Command } from "commander";
 import { globby } from "globby";
 import sharp from "sharp";
-import { Command } from "commander";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

@@ -1,4 +1,6 @@
-import { Character, CharacterType } from "../character";
+import type { CharacterType } from "../character";
+
+import { Character } from "../character";
 import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const hu_tao: CharacterType = {

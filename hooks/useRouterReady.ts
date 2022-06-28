@@ -1,4 +1,6 @@
-import { NextRouter, useRouter } from "next/router";
+import type { NextRouter } from "next/router";
+
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export const useRouterReady = (): [boolean, NextRouter] => {

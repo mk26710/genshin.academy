@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 
 import { DiscordLogo } from "@/components/icons/DiscordLogo";
 import { GitHubLogo } from "@/components/icons/GitHubLogo";
@@ -7,7 +7,7 @@ export const Footer: FC = () => {
   return (
     <footer className="footer grid grid-cols-1 lg:grid-cols-[1fr_auto] grid-rows-[auto_auto] lg:grid-rows-1 py-4 mx-4 text-neutral-400 dark:text-neutral-600 border-t border-neutral-200 dark:border-neutral-200/10">
       <p>
-        genshin.zenless.club is not affiliated with{" "}
+        genshin.zenless.club is not affiliated with{` `}
         <a
           className="hover:text-primary-500 transition-colors ease-in-out duration-200"
           target="_blank"
@@ -18,7 +18,7 @@ export const Footer: FC = () => {
         </a>
         .
         <br />
-        All in-game content is the property of{" "}
+        All in-game content is the property of{` `}
         <a
           className="hover:text-primary-500 transition-colors ease-in-out duration-200"
           target="_blank"

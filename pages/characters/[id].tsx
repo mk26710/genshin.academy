@@ -43,7 +43,7 @@ const CharactersId = ({ character }: StaticProps) => {
       <Container>
         <h1 className="font-semibold text-4xl mb-4 mt-6">{character.name}</h1>
         <p>{character.description}</p>
-        <img src={avatarPath(character.id, "webp")} alt={`${character.name} gacha image`} />
+        <img src={avatarPath(character.id, `webp`)} alt={`${character.name} gacha image`} />
       </Container>
     </Layout>
   );
