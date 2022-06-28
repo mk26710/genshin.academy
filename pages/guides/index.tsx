@@ -1,6 +1,5 @@
 import { debounce, isEmpty } from "lodash-es";
 import { NextPage } from "next";
-import { useRouter } from "next/router";
 import { type ChangeEvent, useEffect, useRef } from "react";
 
 import { GuideCard } from "@/components/cards/GuideCard";
@@ -14,8 +13,7 @@ import { useRouterReady } from "@/hooks/useRouterReady";
 const publishedCharacters = charactersArray.filter(({ id }) => published.includes(id));
 
 const GuidesIndex: NextPage = () => {
-  const router = useRouter();
-  const ready = useRouterReady();
+  const [ready, router] = useRouterReady();
 
   const inputRef = useRef<HTMLInputElement>(null);
   const q = router.query.q?.toString() ?? "";
