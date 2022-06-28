@@ -4,6 +4,7 @@ import amber from "./amber";
 import eula from "./eula";
 import fischl from "./fischl";
 import ganyu from "./ganyu";
+import hu_tao from "./hu_tao";
 import jean from "./jean";
 import kaedehara_kazuha from "./kaedehara_kazuha";
 import kamisato_ayaka from "./kamisato_ayaka";
@@ -40,6 +41,7 @@ const _array = Object.freeze([
   klee,
   jean,
   mona,
+  hu_tao,
 ]);
 
 export const charactersArray = Object.freeze(
