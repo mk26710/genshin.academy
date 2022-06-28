@@ -53,5 +53,5 @@ module.exports = {
       },
     },
   },
-  ignorePatterns: [`node_modules/`, `build/`, `dist/`],
+  ignorePatterns: [`node_modules/`, `build/`, `dist/`, `out/`, `.next/`],
 };
