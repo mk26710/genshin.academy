@@ -9,7 +9,7 @@ const yae_miko: CharacterType = {
 
   name: `Yae Miko`,
   description: `Lady Guuji of the Grand Narukami Shrine. Also serves as the editor-in-chief of Yae Publishing House. Unimaginable intelligence and cunning are hidden under her beautiful appearance.`,
-  birthday: [27, 5],
+  birthday: [27, 6],
 
   rarity: Rarity.FIVE_STAR,
 
