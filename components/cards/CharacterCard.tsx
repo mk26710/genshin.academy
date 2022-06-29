@@ -29,7 +29,7 @@ export const CharacterCard: FC<Props> = ({ character }) => {
     <>
       <NextLink href={`/characters/${character.id}`}>
         <a className="card card-vertical w-[calc(33.33%-0.75rem)] md:w-28">
-          <div className="bg-white dark:bg-neutral-800 box-border border border-neutral-200 dark:border-neutral-200/10 absolute -ml-2 -mt-2 rounded-full aspect-square w-8 flex items-center justify-center">
+          <div className="bg-black-900 box-border absolute -ml-[10px] -mt-[10px] rounded-full aspect-square w-8 flex items-center justify-center">
             <img
               src={elementSrc}
               alt="Element icon"
