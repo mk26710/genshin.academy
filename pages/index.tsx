@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 
+import { BirthdayToday } from "@/components/BirthdaysToday";
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
 
@@ -9,10 +10,9 @@ const Home: NextPage = () => {
       title="Home"
       description="Genshin Impact characters data, calculators, playstyle guides and more!"
     >
-      <Container verticalCenter>
-        <div className="flex flex-col items-center">
-          <h1 className="font-bold text-4xl">Hello, user!</h1>
-          <p>Welcome to genshin.zenless.club!</p>
+      <Container>
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+          <BirthdayToday />
         </div>
       </Container>
     </Layout>
