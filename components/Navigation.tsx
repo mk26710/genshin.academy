@@ -96,7 +96,7 @@ export const Navigation: FC = () => {
       if (isMobile && active) {
         return ` bg-primary-600 text-white shadow-sm shadow-primary-300/50`;
       } else if (!isMobile && active) {
-        return ` !bg-primary-600 rounded-tl-md rounded-tr-2xl rounded-bl-2xl rounded-br-md text-white`;
+        return ` !bg-primary-600 rounded-lg text-white`;
       }
 
       return ``;
