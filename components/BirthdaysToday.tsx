@@ -11,7 +11,6 @@ export const BirthdayToday: FC = () => {
 
   const celebrant = charactersArray.find((character) => {
     const [birthdayDay, birthdayMonth] = character.birthday;
-    console.log(birthdayDay, birthdayMonth);
     return birthdayDay === day && birthdayMonth === month;
   });
 
