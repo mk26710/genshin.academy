@@ -40,8 +40,8 @@ export const CharacterCard: FC<Props> = ({ character }) => {
             <img className="card-thumbnail" src={iconSrc} alt={`${character.name} icon`} />
           </div>
 
-          <div className="w-full h-9 flex items-center justify-center font-semibold">
-            <p className={`p-1 text-[.9rem] text-center ` + fontSize}>{character.name}</p>
+          <div className="w-full h-8 flex items-center justify-center font-semibold">
+            <p className={`p-1 text-center ` + fontSize}>{character.name}</p>
           </div>
         </a>
       </NextLink>
