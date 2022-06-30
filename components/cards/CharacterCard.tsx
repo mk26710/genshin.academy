@@ -11,7 +11,7 @@ interface Props {
 
 export const CharacterCard: FC<Props> = ({ character }) => {
   const elementSrc = `/img/elements/${character.vision.toLowerCase()}/icon.webp`;
-  const iconSrc = `/img/characters/${character.id}/icon.png`;
+  const iconSrc = `/img/characters/${character.id}/icon.webp`;
 
   const fontSize =
     /\s+/.test(character.name) && character.name.length > 10 ? `card-long-title` : ``;
