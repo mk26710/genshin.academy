@@ -1,4 +1,4 @@
-# GVP
+# GENSHIN.ZENLESS.CLUB
 
 Small project related to Genshin Impact
 
