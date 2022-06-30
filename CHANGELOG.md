@@ -1,6 +1,28 @@
+# 2022-06-30
+
+ - Added table of contents to guide pages
+ - Added Tartaglia assets and character data
+ - Fixed character cards using png icons isntead of webp
+
+# 2022-06-29
+
+ - Added Genshin element icons on top left on character cards
+ - Added birthdays to main page
+ - Changed active sidebar rounded border to consistent rounded class
+ - Fixed long titles styling not being applied
+ - Fixed wrong birth date of Yae Miko
+
+
 # 2022-06-28
 
- - added Klee assets and character data
+ - Added Kujou Sara assets and character data
+ - Added Hu Tao assets and character data
+ - Added Mona assets and character data
+ - Added Jean assets and character data
+ - Added Klee assets and character data
+ - Changed sidebar menu to a floating sticky container
+ - Changed light theme background to a little darker shade
+ - Fixed wrong texts on theme switch on mobile
  - Internal changes to types definitions and linter settings
  - Using [git conventional commit](https://www.conventionalcommits.org/en/v1.0.0/#summary) for the commits in the repo from now on
 
