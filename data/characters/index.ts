@@ -19,6 +19,7 @@ import raiden_shogun from "./raiden_shogun";
 import rosaria from "./rosaria";
 import sangonomiya_kokomi from "./sangonomiya_kokomi";
 import shenhe from "./shenhe";
+import tartaglia from "./tartaglia";
 import yae_miko from "./yae_miko";
 import yelan from "./yelan";
 import yoimiya from "./yoimiya";
@@ -45,6 +46,7 @@ const _array = Object.freeze([
   mona,
   hu_tao,
   kujou_sara,
+  tartaglia,
 ]);
 
 export const charactersArray = Object.freeze(
