@@ -1,6 +1,13 @@
 .card {
   @apply bg-white dark:bg-neutral-800 rounded-lg box-border border border-neutral-200 dark:border-neutral-200/10 flex text-[.9rem];
 
+  // this is needed since parent is masonry layout
+  @apply break-inside-avoid break-before-auto break-after-auto;
+  // kinda weird but fixes not working break-inside in firefox 
+  // also actually can be used alone without break-inside/before/after
+  // to echieve the same goal - prevent elements from breaking  
+  @apply overflow-hidden;
+
   &-long-title {
     word-spacing: 600px;
     line-height: 1;
