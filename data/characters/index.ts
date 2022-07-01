@@ -20,6 +20,7 @@ import rosaria from "./rosaria";
 import sangonomiya_kokomi from "./sangonomiya_kokomi";
 import shenhe from "./shenhe";
 import tartaglia from "./tartaglia";
+import venti from "./venti";
 import yae_miko from "./yae_miko";
 import yelan from "./yelan";
 import yoimiya from "./yoimiya";
@@ -47,6 +48,7 @@ const _array = Object.freeze([
   hu_tao,
   kujou_sara,
   tartaglia,
+  venti,
 ]);
 
 export const charactersArray = Object.freeze(
