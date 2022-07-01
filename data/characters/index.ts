@@ -2,6 +2,7 @@ import type { CharacterType } from "../character";
 
 import { Rarity } from "../types/genshin";
 import amber from "./amber";
+import arataki_itto from "./arataki_itto";
 import eula from "./eula";
 import fischl from "./fischl";
 import ganyu from "./ganyu";
@@ -49,6 +50,7 @@ const _array = Object.freeze([
   kujou_sara,
   tartaglia,
   venti,
+  arataki_itto,
 ]);
 
 export const charactersArray = Object.freeze(
