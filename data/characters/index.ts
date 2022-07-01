@@ -1,6 +1,7 @@
 import type { CharacterType } from "../character";
 
 import { Rarity } from "../types/genshin";
+import albedo from "./albedo";
 import amber from "./amber";
 import arataki_itto from "./arataki_itto";
 import diluc from "./diluc";
@@ -55,6 +56,7 @@ const _array = Object.freeze([
   arataki_itto,
   diluc,
   zhongli,
+  albedo,
 ]);
 
 export const charactersArray = Object.freeze(
