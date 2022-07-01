@@ -1,4 +1,4 @@
-[submodule "data/guides/compiled"]
+[submodule "guides"]
 	path = data/guides/compiled
-	url = https://github.com/kitsune-guuji/gvp-guides.git
+	url = https://github.com/TenkoSpirit/zenless-club-genshin-guides.git
 	branch = guides-compiled
