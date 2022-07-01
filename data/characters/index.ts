@@ -24,6 +24,7 @@ import sangonomiya_kokomi from "./sangonomiya_kokomi";
 import shenhe from "./shenhe";
 import tartaglia from "./tartaglia";
 import venti from "./venti";
+import xiao from "./xiao";
 import yae_miko from "./yae_miko";
 import yelan from "./yelan";
 import yoimiya from "./yoimiya";
@@ -57,6 +58,7 @@ const _array = Object.freeze([
   diluc,
   zhongli,
   albedo,
+  xiao,
 ]);
 
 export const charactersArray = Object.freeze(
