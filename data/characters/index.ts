@@ -26,6 +26,7 @@ import venti from "./venti";
 import yae_miko from "./yae_miko";
 import yelan from "./yelan";
 import yoimiya from "./yoimiya";
+import zhongli from "./zhongli";
 
 const _array = Object.freeze([
   yae_miko,
@@ -53,6 +54,7 @@ const _array = Object.freeze([
   venti,
   arataki_itto,
   diluc,
+  zhongli,
 ]);
 
 export const charactersArray = Object.freeze(
