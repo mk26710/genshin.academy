@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { Component, FC, SVGProps } from "react";
 
 import { BeakerIcon, CalculatorIcon, HomeIcon, StarIcon } from "@heroicons/react/outline";
 import { MenuIcon, SunIcon, MoonIcon, XIcon } from "@heroicons/react/solid";
@@ -8,35 +8,37 @@ import { useRouter } from "next/router";
 import { Fragment, type ReactNode, useEffect, useRef, useState, useCallback } from "react";
 import { useClickAway } from "react-use";
 
+type TIcon = (props: SVGProps<SVGSVGElement>) => JSX.Element;
+
 interface NavRoute {
   path: string;
   title: string;
   hasNested?: boolean;
-  icon: ReactNode;
+  Icon: TIcon;
 }
 
 const navRoutes: NavRoute[] = [
   {
     path: `/`,
     title: `Home`,
-    icon: <HomeIcon className="h-7 w-7 p-0" />,
+    Icon: HomeIcon,
   },
   {
     path: `/characters`,
     title: `Characters`,
     hasNested: true,
-    icon: <StarIcon className="h-7 w-7 p-0" />,
+    Icon: StarIcon,
   },
   {
     path: `/guides`,
     title: `Guides`,
     hasNested: true,
-    icon: <BeakerIcon className="h-7 w-7 p-0" />,
+    Icon: BeakerIcon,
   },
   {
     path: `/calc`,
     title: `Calculator`,
-    icon: <CalculatorIcon className="h-7 w-7 p-0" />,
+    Icon: CalculatorIcon,
   },
 ];
 
@@ -63,23 +65,8 @@ export const Navigation: FC = () => {
     setMounted(true);
   }, []);
 
-  const [isOpen, setOpen] = useState(false);
-  const popoverRef = useRef(null);
-
-  const openPopever = () => {
-    setOpen(true);
-  };
-
-  const closePopover = () => {
-    setOpen(false);
-  };
-
-  useClickAway(popoverRef, () => {
-    closePopover();
-  });
-
   const isActive = useCallback(
-    (navRoute: NavRoute) => {
+    (navRoute: Omit<NavRoute, `Icon`>) => {
       if (navRoute.hasNested === true) {
         return router.route.startsWith(navRoute.path);
       }
@@ -90,11 +77,11 @@ export const Navigation: FC = () => {
   );
 
   const activeClass = useCallback(
-    (navRoute: NavRoute, isMobile = false) => {
+    (navRoute: Omit<NavRoute, `Icon`>, isMobile = false) => {
       const active = isActive(navRoute);
 
       if (isMobile && active) {
-        return ` bg-primary-500 text-white shadow-sm shadow-primary-300/50`;
+        return `text-primary-500 dark:text-primary-400 font-bold`;
       } else if (!isMobile && active) {
         return ` !bg-primary-500 rounded-lg text-white`;
       }
@@ -104,75 +91,40 @@ export const Navigation: FC = () => {
     [isActive],
   );
 
-  // firefox specific issue
-  const mobileMarginBottom =
-    isMounted && navigator.userAgent.toLowerCase().includes(`firefox`) ? `mb-10` : `mb-8`;
-
   return (
     <>
-      {/* Mobile Navigation popover */}
-      {isOpen && (
-        <aside
-          className={`fixed lg:hidden select-none mr-4 bottom-0 right-0 z-20 ${mobileMarginBottom}`}
-        >
-          <div
-            className="bg-neutral-100 dark:bg-dark-900 box-border border border-neutral-200 dark:border-dark-200/20 rounded-lg p-2"
-            ref={popoverRef}
-          >
-            <div className="flex flex-col gap-y-2 text-lg font-semibold">
-              {isMounted && (
-                <div
-                  onClick={toggleDark}
-                  className="px-3 py-2 border-b border-neutral-200 dark:border-dark-200/10 cursor-pointer"
-                >
-                  <div className="flex flex-row items-center gap-x-2">
-                    <div className="flex-grow text-right">
-                      {resolvedTheme === `dark` && `Light`}
-                      {resolvedTheme !== `dark` && `Dark`}
-                    </div>
-                    <div>
-                      {resolvedTheme === `dark` && <SunIcon className="w-6 h-6" />}
-                      {resolvedTheme !== `dark` && <MoonIcon className="w-6 h-6" />}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {navRoutes.map((navRoute) => (
-                <NextLink key={`${navRoute.title}-popover-item`} href={navRoute.path}>
-                  <a className={`px-3 py-2 rounded-lg ${activeClass(navRoute, true)}`}>
-                    <div className="flex flex-row items-center gap-x-2">
-                      <div className="flex-grow text-right">{navRoute.title}</div>
-                      <div>{navRoute.icon}</div>
-                    </div>
-                  </a>
-                </NextLink>
-              ))}
-
-              <div
-                onClick={() => closePopover()}
-                className="px-3 py-2 border-t border-neutral-200 dark:border-dark-200/10 cursor-pointer"
+      {/* Mobile Bottom Navbar */}
+      <nav className="z-10 lg:hidden fixed bottom-0 left-0 h-[var(--mobile-navbar-height)] w-full border-t border-neutral-200 dark:border-dark-200/10 dark:bg-dark-800 bg-white select-none">
+        <div className="dark:text-slate-400 flex flex-row h-full gap-2 justify-evenly overflow-y-auto">
+          {navRoutes.map(({ Icon, ...navRoute }) => (
+            <NextLink key={`mobile-navbar-${navRoute.path}`} href={navRoute.path}>
+              <a
+                className={`${activeClass(
+                  navRoute,
+                  true,
+                )} flex flex-col items-center justify-center `}
               >
-                <div className="flex flex-row items-center gap-x-2">
-                  <div className="flex-grow text-right">Close</div>
-                  <div>
-                    <XIcon className="w-6 h-6" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </aside>
-      )}
+                <Icon className="h-6 w-6 p-0" />
+                <h1 className="text-sm font-semibold">{navRoute.title}</h1>
+              </a>
+            </NextLink>
+          ))}
 
-      {!isOpen && (
-        <aside
-          onClick={() => openPopever()}
-          className={`fixed lg:hidden select-none rounded-lg dark:text-dark-200/50 bg-neutral-100 dark:bg-dark-900 box-border border border-neutral-200 dark:border-dark-200/10 shadow-lg cursor-pointer mr-4 bottom-0 right-0 z-10 ${mobileMarginBottom}`}
-        >
-          <MenuIcon className="w-6 h-6 m-3" />
-        </aside>
-      )}
+          {isMounted && (
+            <div
+              onClick={toggleDark}
+              className="flex flex-col items-center justify-center cursor-pointer"
+            >
+              {resolvedTheme === `dark` && <SunIcon className="w-6 h-6" />}
+              {resolvedTheme !== `dark` && <MoonIcon className="w-6 h-6" />}
+              <h1 className="text-sm font-semibold">
+                {resolvedTheme === `dark` && `Light`}
+                {resolvedTheme !== `dark` && `Dark`}
+              </h1>
+            </div>
+          )}
+        </div>
+      </nav>
 
       {/* Desktop Sidebard */}
       <aside
@@ -185,7 +137,7 @@ export const Navigation: FC = () => {
               <h1 className="font-extrabold text-xl">GENSHIN.ZENLESS</h1>
             </div>
 
-            {navRoutes.map((navRoute) => (
+            {navRoutes.map(({ Icon, ...navRoute }) => (
               <NextLink key={navRoute.path} href={navRoute.path}>
                 <a
                   className={
@@ -193,7 +145,9 @@ export const Navigation: FC = () => {
                     activeClass(navRoute)
                   }
                 >
-                  <Fragment>{navRoute.icon}</Fragment>
+                  <Fragment>
+                    <Icon className="h-7 w-7 p-0" />
+                  </Fragment>
                   <h1>{navRoute.title}</h1>
                 </a>
               </NextLink>
