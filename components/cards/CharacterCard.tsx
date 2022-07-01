@@ -13,9 +13,6 @@ export const CharacterCard: FC<Props> = ({ character }) => {
   const elementSrc = `/img/elements/${character.vision.toLowerCase()}/icon.webp`;
   const iconSrc = `/img/characters/${character.id}/icon.webp`;
 
-  const fontSize =
-    /\s+/.test(character.name) && character.name.length > 10 ? `card-long-title` : ``;
-
   const iconBg = () => {
     if (character.rarity === Rarity.FIVE_STAR) {
       return `from-[#945C2C] to-[#B27330]`;
@@ -26,9 +23,9 @@ export const CharacterCard: FC<Props> = ({ character }) => {
   };
 
   return (
-    <>
+    <div className="w-[calc(33.33%-0.75rem)] md:w-28">
       <NextLink href={`/characters/${character.id}`}>
-        <a className="card card-vertical w-[calc(33.33%-0.75rem)] md:w-28">
+        <a className="card card-vertical">
           <div className="bg-black-900 box-border absolute -ml-[10px] -mt-[10px] rounded-full aspect-square w-8 flex items-center justify-center">
             <img
               src={elementSrc}
@@ -40,11 +37,11 @@ export const CharacterCard: FC<Props> = ({ character }) => {
             <img className="card-thumbnail" src={iconSrc} alt={`${character.name} icon`} />
           </div>
 
-          <div className="w-full h-8 flex items-center justify-center font-semibold">
-            <p className={`p-1 text-center ` + fontSize}>{character.name}</p>
+          <div className="w-full py-1 h-full flex items-center justify-center font-semibold">
+            <p className="p-1 text-center leading-none">{character.name}</p>
           </div>
         </a>
       </NextLink>
-    </>
+    </div>
   );
 };
