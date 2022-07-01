@@ -16,6 +16,7 @@ import kamisato_ayato from "./kamisato_ayato";
 import keqing from "./keqing";
 import klee from "./klee";
 import kujou_sara from "./kujou_sara";
+import lisa from "./lisa";
 import mona from "./mona";
 import qiqi from "./qiqi";
 import raiden_shogun from "./raiden_shogun";
@@ -59,6 +60,7 @@ const _array = Object.freeze([
   zhongli,
   albedo,
   xiao,
+  lisa,
 ]);
 
 export const charactersArray = Object.freeze(
