@@ -29,6 +29,7 @@ import xiao from "./xiao";
 import yae_miko from "./yae_miko";
 import yelan from "./yelan";
 import yoimiya from "./yoimiya";
+import yun_jin from "./yun_jin";
 import zhongli from "./zhongli";
 
 const _array = Object.freeze([
@@ -61,6 +62,7 @@ const _array = Object.freeze([
   albedo,
   xiao,
   lisa,
+  yun_jin,
 ]);
 
 export const charactersArray = Object.freeze(
