@@ -107,8 +107,8 @@ module.exports = {
     extend: {
       colors: {
         ...myColors,
-        primary: { ...colors.blue },
-        dark: { ...myColors[`black`] },
+        primary: { ...colors.indigo },
+        dark: { ...colors.slate },
       },
       screens: {
         ...myScreens,

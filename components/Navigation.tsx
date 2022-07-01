@@ -94,9 +94,9 @@ export const Navigation: FC = () => {
       const active = isActive(navRoute);
 
       if (isMobile && active) {
-        return ` bg-primary-600 text-white shadow-sm shadow-primary-300/50`;
+        return ` bg-primary-500 text-white shadow-sm shadow-primary-300/50`;
       } else if (!isMobile && active) {
-        return ` !bg-primary-600 rounded-lg text-white`;
+        return ` !bg-primary-500 rounded-lg text-white`;
       }
 
       return ``;
@@ -168,7 +168,7 @@ export const Navigation: FC = () => {
       {!isOpen && (
         <aside
           onClick={() => openPopever()}
-          className={`fixed lg:hidden select-none rounded-lg dark:text-dark-200/50 bg-neutral-100 dark:bg-dark-900 box-border border border-neutral-200 dark:border-neutral-200/10 shadow-lg cursor-pointer mr-4 bottom-0 right-0 z-10 ${mobileMarginBottom}`}
+          className={`fixed lg:hidden select-none rounded-lg dark:text-dark-200/50 bg-neutral-100 dark:bg-dark-900 box-border border border-neutral-200 dark:border-dark-200/10 shadow-lg cursor-pointer mr-4 bottom-0 right-0 z-10 ${mobileMarginBottom}`}
         >
           <MenuIcon className="w-6 h-6 m-3" />
         </aside>
@@ -179,7 +179,7 @@ export const Navigation: FC = () => {
         data-description="Desktop Sidebar Navigation"
         className="sidebar sticky top-0 hidden lg:flex flex-col min-h-screen max-h-screen"
       >
-        <div className="overflow-y-auto ml-4 my-4 w-64 h-full rounded-lg border border-neutral-200 dark:border-neutral-200/10 dark:bg-neutral-800 bg-white">
+        <div className="overflow-y-auto ml-4 my-4 w-64 h-full rounded-lg border border-neutral-200 dark:border-dark-200/10 dark:bg-dark-800 bg-white">
           <div className="flex flex-col gap-y-2 p-4 w-full">
             <div className="self-center py-4 mb-2 border-b border-neutral-200 dark:border-dark-200/10">
               <h1 className="font-extrabold text-xl">GENSHIN.ZENLESS</h1>
@@ -204,7 +204,7 @@ export const Navigation: FC = () => {
             <div className="fixed bottom-8 left-8">
               <div
                 onClick={() => toggleDark()}
-                className="transition-all duration-75 bg-neutral-100 dark:bg-neutral-900 dark:text-neutral-300 outline outline-1 outline-neutral-200 dark:outline-neutral-200/10 rounded-lg flex items-center justify-center aspect-square h-8 cursor-pointer"
+                className="transition-all duration-75 bg-neutral-100 dark:bg-dark-900 dark:text-dark-300 outline outline-1 outline-neutral-200 dark:outline-dark-200/10 rounded-lg flex items-center justify-center aspect-square h-8 cursor-pointer"
               >
                 {resolvedTheme === `dark` && <SunIcon className="w-5 h-5" />}
                 {resolvedTheme !== `dark` && <MoonIcon className="w-5 h-5" />}

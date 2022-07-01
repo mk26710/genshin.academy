@@ -15,7 +15,7 @@ export const BirthdayToday: FC = () => {
   });
 
   return (
-    <div className="p-4 bg-white dark:bg-neutral-800 rounded-lg box-border border border-neutral-200 dark:border-neutral-200/10 flex flex-col">
+    <div className="p-4 bg-white dark:bg-dark-800 rounded-lg box-border border border-neutral-200 dark:border-dark-200/10 flex flex-col">
       <h1 className="font-semibold text-xl mb-4">
         {celebrant == null && <>Characters Birthdays</>}
         {celebrant != null && <>Happy Birthday 🎉</>}
@@ -27,7 +27,7 @@ export const BirthdayToday: FC = () => {
         <>
           <div>
             <Link key={`bd-${celebrant.id}`} href={`/characters/${celebrant.id}`}>
-              <a className="rounded-lg bg-neutral-100 dark:bg-neutral-900 outline outline-1 outline-neutral-200 dark:outline-neutral-200/10 flex justify-center">
+              <a className="rounded-lg bg-neutral-100 dark:bg-dark-900 outline outline-1 outline-neutral-200 dark:outline-dark-200/10 flex justify-center">
                 <img
                   className="rounded-lg object-center object-cover"
                   src={`/img/characters/${celebrant.id}/icon.webp`}
