@@ -17,7 +17,7 @@ export const Layout: FC<Props> = ({
   titleTemplate = `GENSHIN.ZENLESS`,
   description,
   iconURL,
-  color = `#6366f1`,
+  color = `#0694fa`,
   children,
 }) => {
   const realTitle = titleTemplate != null ? `${title} - ${titleTemplate}` : title;
