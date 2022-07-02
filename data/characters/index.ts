@@ -4,6 +4,7 @@ import { Rarity } from "../types/genshin";
 import albedo from "./albedo";
 import amber from "./amber";
 import arataki_itto from "./arataki_itto";
+import barbara from "./barbara";
 import diluc from "./diluc";
 import eula from "./eula";
 import fischl from "./fischl";
@@ -63,6 +64,7 @@ const _array = Object.freeze([
   xiao,
   lisa,
   yun_jin,
+  barbara,
 ]);
 
 export const charactersArray = Object.freeze(
