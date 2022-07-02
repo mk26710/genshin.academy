@@ -1,12 +1,11 @@
-import type { Component, FC, SVGProps } from "react";
+import type { FC, SVGProps } from "react";
 
 import { BeakerIcon, CalculatorIcon, HomeIcon, StarIcon } from "@heroicons/react/outline";
-import { MenuIcon, SunIcon, MoonIcon, XIcon } from "@heroicons/react/solid";
+import { SunIcon, MoonIcon } from "@heroicons/react/solid";
 import { useTheme } from "next-themes";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import { Fragment, type ReactNode, useEffect, useRef, useState, useCallback } from "react";
-import { useClickAway } from "react-use";
+import { Fragment, useEffect, useState, useCallback } from "react";
 
 type TIcon = (props: SVGProps<SVGSVGElement>) => JSX.Element;
 
@@ -95,14 +94,14 @@ export const Navigation: FC = () => {
     <>
       {/* Mobile Bottom Navbar */}
       <nav className="z-10 lg:hidden fixed bottom-0 left-0 h-[var(--mobile-navbar-height)] w-full border-t border-neutral-200 dark:border-dark-200/10 dark:bg-dark-800 bg-white select-none">
-        <div className="dark:text-slate-400 flex flex-row h-full gap-2 justify-evenly overflow-y-auto">
+        <div className="dark:text-slate-400 flex flex-row h-full px-4 justify-between overflow-y-auto">
           {navRoutes.map(({ Icon, ...navRoute }) => (
             <NextLink key={`mobile-navbar-${navRoute.path}`} href={navRoute.path}>
               <a
                 className={`${activeClass(
                   navRoute,
                   true,
-                )} flex flex-col items-center justify-center `}
+                )} flex-1 flex flex-col items-center justify-center`}
               >
                 <Icon className="h-6 w-6 p-0" />
                 <h1 className="text-sm font-semibold">{navRoute.title}</h1>
@@ -113,7 +112,7 @@ export const Navigation: FC = () => {
           {isMounted && (
             <div
               onClick={toggleDark}
-              className="flex flex-col items-center justify-center cursor-pointer"
+              className="flex-1 flex flex-col items-center justify-center cursor-pointer"
             >
               {resolvedTheme === `dark` && <SunIcon className="w-6 h-6" />}
               {resolvedTheme !== `dark` && <MoonIcon className="w-6 h-6" />}
