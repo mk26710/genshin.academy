@@ -33,6 +33,8 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
 };
 
 const CharactersId = ({ character }: StaticProps) => {
+  const elementSrc = `/img/elements/${character.vision.toLowerCase()}/icon.webp`;
+
   return (
     <Layout
       title={`${character.name}`}
@@ -44,6 +46,8 @@ const CharactersId = ({ character }: StaticProps) => {
         <div className="flex flex-col-reverse lg:flex-row">
           <div className="flex-1 grow">
             <h1 id="name" className="font-semibold text-4xl mb-4 mt-6">
+              <img className="inline-block align-middle h-6 " src={elementSrc} alt="Element" />
+              {` `}
               {character.name}
             </h1>
 
