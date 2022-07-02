@@ -47,9 +47,17 @@
     @apply mt-0 mb-4;
   }
 
+  ul {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
   ol,
   ul {
-    @apply pl-4 marker:text-sky-500 list-disc;
+    @apply pl-4 marker:text-sky-500;
   }
 
   li + li {
