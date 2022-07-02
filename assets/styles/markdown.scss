@@ -49,7 +49,7 @@
 
   ol,
   ul {
-    @apply pl-8;
+    @apply pl-4 marker:text-sky-500 list-disc;
   }
 
   li + li {
