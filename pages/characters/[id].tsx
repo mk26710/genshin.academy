@@ -57,7 +57,7 @@ const CharactersId = ({ character }: StaticProps) => {
               Consteallations
             </h2>
 
-            <ol className="marker:text-sky-500 list-decimal pl-4">
+            <ol className="marker:text-sky-600 dark:marker:text-sky-500 list-decimal pl-4">
               {character.constellations.map(({ level, title, description }) => (
                 <li key={`const-${level}`} id={`constellation-${level}`} className="[&+li]:mt-2">
                   <h3 className="font-semibold text-lg">{title}</h3>
