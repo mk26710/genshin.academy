@@ -19,6 +19,8 @@
     "main"
     "footer";
 
+  margin-bottom: var(--mobile-navbar-height);
+
   @media (min-width: theme("screens.lg")) {
     grid-template-columns: auto 1fr;
     grid-template-rows: 1fr auto;
