@@ -6,6 +6,7 @@ import amber from "./amber";
 import arataki_itto from "./arataki_itto";
 import barbara from "./barbara";
 import diluc from "./diluc";
+import diona from "./diona";
 import eula from "./eula";
 import fischl from "./fischl";
 import ganyu from "./ganyu";
@@ -65,6 +66,7 @@ const _array = Object.freeze([
   lisa,
   yun_jin,
   barbara,
+  diona,
 ]);
 
 export const charactersArray = Object.freeze(
