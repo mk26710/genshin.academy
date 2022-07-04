@@ -13,6 +13,7 @@ import ganyu from "./ganyu";
 import hu_tao from "./hu_tao";
 import jean from "./jean";
 import kaedehara_kazuha from "./kaedehara_kazuha";
+import kaeya from "./kaeya";
 import kamisato_ayaka from "./kamisato_ayaka";
 import kamisato_ayato from "./kamisato_ayato";
 import keqing from "./keqing";
@@ -75,6 +76,7 @@ const _array = Object.freeze([
   sayu,
   sucrose,
   razor,
+  kaeya,
 ]);
 
 export const charactersArray = Object.freeze(
