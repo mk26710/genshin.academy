@@ -10,6 +10,7 @@ import diona from "./diona";
 import eula from "./eula";
 import fischl from "./fischl";
 import ganyu from "./ganyu";
+import gorou from "./gorou";
 import hu_tao from "./hu_tao";
 import jean from "./jean";
 import kaedehara_kazuha from "./kaedehara_kazuha";
@@ -77,6 +78,7 @@ const _array = Object.freeze([
   sucrose,
   razor,
   kaeya,
+  gorou,
 ]);
 
 export const charactersArray = Object.freeze(
