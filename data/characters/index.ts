@@ -32,6 +32,7 @@ import sayu from "./sayu";
 import shenhe from "./shenhe";
 import sucrose from "./sucrose";
 import tartaglia from "./tartaglia";
+import thoma from "./thoma";
 import venti from "./venti";
 import xiao from "./xiao";
 import yae_miko from "./yae_miko";
@@ -81,6 +82,7 @@ const _array = Object.freeze([
   kaeya,
   gorou,
   ningguang,
+  thoma,
 ]);
 
 export const charactersArray = Object.freeze(
