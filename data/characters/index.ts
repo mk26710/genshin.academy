@@ -26,6 +26,7 @@ import rosaria from "./rosaria";
 import sangonomiya_kokomi from "./sangonomiya_kokomi";
 import sayu from "./sayu";
 import shenhe from "./shenhe";
+import sucrose from "./sucrose";
 import tartaglia from "./tartaglia";
 import venti from "./venti";
 import xiao from "./xiao";
@@ -71,6 +72,7 @@ const _array = Object.freeze([
   diona,
   yanfei,
   sayu,
+  sucrose,
 ]);
 
 export const charactersArray = Object.freeze(
