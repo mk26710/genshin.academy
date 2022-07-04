@@ -2,6 +2,7 @@ import type { CharacterType } from "../character";
 
 import { Rarity } from "../types/genshin";
 import albedo from "./albedo";
+import aloy from "./aloy";
 import amber from "./amber";
 import arataki_itto from "./arataki_itto";
 import barbara from "./barbara";
@@ -91,6 +92,7 @@ const _array = Object.freeze([
   xingqiu,
   xinyan,
   bennett,
+  aloy,
 ]);
 
 export const charactersArray = Object.freeze(
