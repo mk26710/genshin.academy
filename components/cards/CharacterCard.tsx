@@ -34,7 +34,13 @@ export const CharacterCard: FC<Props> = ({ character }) => {
             />
           </div>
           <div className={`w-full aspect-square rounded-t-lg bg-gradient-to-b ` + iconBg()}>
-            <img className="card-thumbnail" src={iconSrc} alt={`${character.name} icon`} />
+            <img
+              className="card-thumbnail"
+              src={iconSrc}
+              alt={`${character.name} icon`}
+              loading="lazy"
+              decoding="async"
+            />
           </div>
 
           <div className="w-full py-1 h-full flex items-center justify-center font-semibold">
