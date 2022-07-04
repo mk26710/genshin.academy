@@ -7,6 +7,7 @@ import amber from "./amber";
 import arataki_itto from "./arataki_itto";
 import barbara from "./barbara";
 import bennett from "./bennett";
+import chongyun from "./chongyun";
 import diluc from "./diluc";
 import diona from "./diona";
 import eula from "./eula";
@@ -93,6 +94,7 @@ const _array = Object.freeze([
   xinyan,
   bennett,
   aloy,
+  chongyun,
 ]);
 
 export const charactersArray = Object.freeze(
