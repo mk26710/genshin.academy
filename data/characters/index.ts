@@ -29,6 +29,7 @@ import tartaglia from "./tartaglia";
 import venti from "./venti";
 import xiao from "./xiao";
 import yae_miko from "./yae_miko";
+import yanfei from "./yanfei";
 import yelan from "./yelan";
 import yoimiya from "./yoimiya";
 import yun_jin from "./yun_jin";
@@ -67,6 +68,7 @@ const _array = Object.freeze([
   yun_jin,
   barbara,
   diona,
+  yanfei,
 ]);
 
 export const charactersArray = Object.freeze(
