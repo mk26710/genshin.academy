@@ -22,6 +22,7 @@ import lisa from "./lisa";
 import mona from "./mona";
 import qiqi from "./qiqi";
 import raiden_shogun from "./raiden_shogun";
+import razor from "./razor";
 import rosaria from "./rosaria";
 import sangonomiya_kokomi from "./sangonomiya_kokomi";
 import sayu from "./sayu";
@@ -73,6 +74,7 @@ const _array = Object.freeze([
   yanfei,
   sayu,
   sucrose,
+  razor,
 ]);
 
 export const charactersArray = Object.freeze(
