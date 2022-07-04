@@ -22,6 +22,7 @@ import klee from "./klee";
 import kujou_sara from "./kujou_sara";
 import lisa from "./lisa";
 import mona from "./mona";
+import ningguang from "./ningguang";
 import qiqi from "./qiqi";
 import raiden_shogun from "./raiden_shogun";
 import razor from "./razor";
@@ -79,6 +80,7 @@ const _array = Object.freeze([
   razor,
   kaeya,
   gorou,
+  ningguang,
 ]);
 
 export const charactersArray = Object.freeze(
