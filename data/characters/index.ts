@@ -34,6 +34,7 @@ import sucrose from "./sucrose";
 import tartaglia from "./tartaglia";
 import thoma from "./thoma";
 import venti from "./venti";
+import xiangling from "./xiangling";
 import xiao from "./xiao";
 import yae_miko from "./yae_miko";
 import yanfei from "./yanfei";
@@ -83,6 +84,7 @@ const _array = Object.freeze([
   gorou,
   ningguang,
   thoma,
+  xiangling,
 ]);
 
 export const charactersArray = Object.freeze(
