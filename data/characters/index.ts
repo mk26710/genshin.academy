@@ -36,6 +36,7 @@ import thoma from "./thoma";
 import venti from "./venti";
 import xiangling from "./xiangling";
 import xiao from "./xiao";
+import xingqiu from "./xingqiu";
 import yae_miko from "./yae_miko";
 import yanfei from "./yanfei";
 import yelan from "./yelan";
@@ -85,6 +86,7 @@ const _array = Object.freeze([
   ningguang,
   thoma,
   xiangling,
+  xingqiu,
 ]);
 
 export const charactersArray = Object.freeze(
