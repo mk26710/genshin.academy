@@ -5,6 +5,7 @@ import albedo from "./albedo";
 import amber from "./amber";
 import arataki_itto from "./arataki_itto";
 import barbara from "./barbara";
+import bennett from "./bennett";
 import diluc from "./diluc";
 import diona from "./diona";
 import eula from "./eula";
@@ -89,6 +90,7 @@ const _array = Object.freeze([
   xiangling,
   xingqiu,
   xinyan,
+  bennett,
 ]);
 
 export const charactersArray = Object.freeze(
