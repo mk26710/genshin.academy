@@ -24,6 +24,7 @@ import qiqi from "./qiqi";
 import raiden_shogun from "./raiden_shogun";
 import rosaria from "./rosaria";
 import sangonomiya_kokomi from "./sangonomiya_kokomi";
+import sayu from "./sayu";
 import shenhe from "./shenhe";
 import tartaglia from "./tartaglia";
 import venti from "./venti";
@@ -69,6 +70,7 @@ const _array = Object.freeze([
   barbara,
   diona,
   yanfei,
+  sayu,
 ]);
 
 export const charactersArray = Object.freeze(
