@@ -5,7 +5,7 @@ import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const gorou: CharacterType = {
   id: `gorou`,
-  accentColor: `3abdbf`,
+  accentColor: `#3abdbf`,
 
   name: `Gorou`,
   description: `The great general of Watatsumi Island's forces. He is deeply trusted by his subordinates.`,
