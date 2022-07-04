@@ -34,7 +34,7 @@ export type StoryEntryType = z.infer<typeof StoryEntry>;
 export const Character = z
   .object({
     id: z.string().regex(/[a-z_]+/g),
-    accentColor: z.string().regex(/#?([0-9a-f]{6}|[0-9a-f]{3})/gi),
+    accentColor: z.string().regex(/#([0-9a-f]{6}|[0-9a-f]{3})/gi),
     name: z.string(),
     description: z.string(),
     birthday: BirthdayDate,
