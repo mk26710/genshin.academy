@@ -16,11 +16,11 @@ body = """
 {% for group, commits in commits | group_by(attribute="group") %}
     ### {{ group | upper_first }}
     {% for commit in commits | filter(attribute="scope") | sort(attribute="scope") %}
-        - **{{commit.scope}}:** {{ commit.message | upper_first }} ([{{ commit.id | truncate(length=7, end="") }}]({{ commit.id }}))\
+        - **{{commit.scope}}:** {{ commit.message | upper_first }} ([{{ commit.id | truncate(length=7, end="") }}](https://github.com/TenkoSpirit/genshin.zenless.club/commit/{{ commit.id }}))\
     {%- endfor -%}
     {%- for commit in commits -%}
     {% if not commit.scope %}
-        - **No category:** {{ commit.message | upper_first }} ([{{ commit.id | truncate(length=7, end="") }}]({{ commit.id }}))\
+        - **No category:** {{ commit.message | upper_first }} ([{{ commit.id | truncate(length=7, end="") }}](https://github.com/TenkoSpirit/genshin.zenless.club/commit/{{ commit.id }}))\
     {% endif %}
     {%- endfor %}
 {% endfor %}\n\n\n
