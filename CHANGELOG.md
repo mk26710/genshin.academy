@@ -5,12 +5,17 @@
 
 ### Bug Fixes
 
+- **CHANGELOG:** Updated after fixing cliff ([2851d37](https://github.com/TenkoSpirit/genshin.zenless.club/commit/2851d377541a26bd1910a0b6590fdb026b49267c))
 - **cliff:** Incorrect commit urls ([27624cd](https://github.com/TenkoSpirit/genshin.zenless.club/commit/27624cd4f9307f5846aaa185facf8ebb4ab8f84b))
 
 ### Miscellaneous Tasks
 
 - **CHANGELOG:** Updated the log ([a03ebbf](https://github.com/TenkoSpirit/genshin.zenless.club/commit/a03ebbff1026935639fef024bf8cf7cc1bae4418))
 - **cliff:** Updated body format ([6d3c3ac](https://github.com/TenkoSpirit/genshin.zenless.club/commit/6d3c3acab113ec69779ceeac3c59002056304e86))
+
+### Refactor
+
+- **No category:** Moved everything in `src/` directory ([7adafee](https://github.com/TenkoSpirit/genshin.zenless.club/commit/7adafeedb5313ef1ab4fe500c8c09f495f805b7b))
 
 
 
