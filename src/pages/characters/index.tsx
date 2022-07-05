@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import type { ChangeEvent } from "react";
 
-import debounce from "lodash-es/debounce";
+import { debounce } from "lodash-es";
 import { useState } from "react";
 
 import { CharacterCard } from "@/components/cards/CharacterCard";
