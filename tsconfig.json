@@ -15,9 +15,9 @@
     "jsx": "preserve",
     "incremental": true,
     "importsNotUsedAsValues": "error",
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
