@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
+import type { ChangeEvent } from "react";
 
 import { debounce, isEmpty } from "lodash-es";
-import { type ChangeEvent, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import { GuideCard } from "@/components/cards/GuideCard";
 import { Container } from "@/components/Container";
