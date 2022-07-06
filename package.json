@@ -3,6 +3,7 @@
   "version": "0.1.2",
   "private": true,
   "scripts": {
+    "postinstall": "next telemetry disable",
     "dev": "next dev",
     "build": "next build",
     "preexport": "next build",
