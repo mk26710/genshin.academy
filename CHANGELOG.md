@@ -1,20 +1,43 @@
 # Changelog
 
 
-## [unreleased]
+## (v0.1.2) - 2022-07-06
 
-### Bug Fixes
+### Features
 
-- **CHANGELOG:** Updated after fixing cliff ([2851d37](https://github.com/TenkoSpirit/genshin.zenless.club/commit/2851d377541a26bd1910a0b6590fdb026b49267c))
-- **cliff:** Incorrect commit urls ([27624cd](https://github.com/TenkoSpirit/genshin.zenless.club/commit/27624cd4f9307f5846aaa185facf8ebb4ab8f84b))
+- **CalculatorInput:** Added initial value prop ([d280d6e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d280d6e334270f4304cd43df50dd57b4466be142))
+- **app:** Added ClientOnly component and a hook ([b2279eb](https://github.com/TenkoSpirit/genshin.zenless.club/commit/b2279eba85bfabf6095f8bdbe2be619f32748098))
+- **app:** Wrapped the app with jotai's Provider and used the useHydrateAllAtoms hook ([842c0a7](https://github.com/TenkoSpirit/genshin.zenless.club/commit/842c0a7a7de21fdd39187a21b784aea85190ad5a))
+- **atoms:** Create atoms fot calculators ([f942467](https://github.com/TenkoSpirit/genshin.zenless.club/commit/f9424678248fee4bbe1e0e346f423e034b0b36a6))
+- **atoms:** Created atoms for resin calculations ([21b3529](https://github.com/TenkoSpirit/genshin.zenless.club/commit/21b352973844c0235a2a8a7c40275e4f6291a348))
+- **calc:** Added resin calculator and chagne layout to masonry ([d281298](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d28129847192934257387197e90cd72c3ba9f8c6))
+- **components:** Created StaticPicture to utilize optimized images versions on mobile ([bc5a8ea](https://github.com/TenkoSpirit/genshin.zenless.club/commit/bc5a8ea1ec102278ae6df87f8663533af5365b2f))
+- **hooks:** Created a hook to hydrate all atoms at once ([c7e9f5e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/c7e9f5ef39c0057b01a3418495095e6348d45734))
+- **images:** All webps are now regenerated ([68bddb5](https://github.com/TenkoSpirit/genshin.zenless.club/commit/68bddb50628c532ec7ca7fe4f255310b17121fa4))
+- **next.config:** Added type checking ([2276ddf](https://github.com/TenkoSpirit/genshin.zenless.club/commit/2276ddfd54fe2d4d22c1aae5b3e1e560c1e91f42))
+- **scripts:** Updated webp generator so it makes smaller variants for mobile and uses custom quality for smaller file sizes ([766cc4d](https://github.com/TenkoSpirit/genshin.zenless.club/commit/766cc4d5ce95e8c0b76c89b0db627be2237529e9))
 
 ### Miscellaneous Tasks
 
 - **CHANGELOG:** Updated the log ([a03ebbf](https://github.com/TenkoSpirit/genshin.zenless.club/commit/a03ebbff1026935639fef024bf8cf7cc1bae4418))
+- **CHANGELOG:** Updated the log ([c9bcddb](https://github.com/TenkoSpirit/genshin.zenless.club/commit/c9bcddbada83b457d491df656b8da9431b1df799))
 - **cliff:** Updated body format ([6d3c3ac](https://github.com/TenkoSpirit/genshin.zenless.club/commit/6d3c3acab113ec69779ceeac3c59002056304e86))
+- **deps:** Added jotai ([9c8953c](https://github.com/TenkoSpirit/genshin.zenless.club/commit/9c8953c88bbf33850719cebf367b7374bb068b88))
+- **deps:** Babel got updated ([4a291ab](https://github.com/TenkoSpirit/genshin.zenless.club/commit/4a291ab5a5da0d014868bd7a7afb164f30bbf506))
+
+### Performance
+
+- **CharacterCard:** Use StaticPicture to display character icon ([e3d8651](https://github.com/TenkoSpirit/genshin.zenless.club/commit/e3d8651b693efa48787e792a18a85c512d1ced28))
+- **GuideCard:** Use StaticPicture to display guides thumbnails ([ffd3c95](https://github.com/TenkoSpirit/genshin.zenless.club/commit/ffd3c95806422cde1fd1fde332bac14c19187692))
 
 ### Refactor
 
+- **_app:** Renamed jotai's provider ([09660ef](https://github.com/TenkoSpirit/genshin.zenless.club/commit/09660eff45275a01c51e527a2e8da2af0ac35e99))
+- **app:** Use ldoash named imports again ([071f3a4](https://github.com/TenkoSpirit/genshin.zenless.club/commit/071f3a4d3845eec6009150013db93f9b99a86219))
+- **atoms:** Added a comment to crit value atoms ([53a07f3](https://github.com/TenkoSpirit/genshin.zenless.club/commit/53a07f3db2f316e3c85ad0814dfbd5735b556c4b))
+- **calc:** Use the crit rate and dmg atoms to calculate crit value ([3179c48](https://github.com/TenkoSpirit/genshin.zenless.club/commit/3179c48a60a0dea08c73b1d55b19fb853f405cc8))
+- **calc:** Use resin jotai atoms instead of react's state ([046da3b](https://github.com/TenkoSpirit/genshin.zenless.club/commit/046da3bd37de5bf4d2e7d874b37f98619f6f9dc1))
+- **guides:** ChangeEvent type import moved to a different line ([ea9e2cc](https://github.com/TenkoSpirit/genshin.zenless.club/commit/ea9e2cc428eaaf73c925e4d047ad86531a649026))
 - **No category:** Moved everything in `src/` directory ([7adafee](https://github.com/TenkoSpirit/genshin.zenless.club/commit/7adafeedb5313ef1ab4fe500c8c09f495f805b7b))
 
 
