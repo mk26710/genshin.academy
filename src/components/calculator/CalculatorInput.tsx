@@ -5,10 +5,12 @@ interface Props {
   placeholder?: string;
   step?: number;
   className?: string;
+  value?: number;
 }
 
 export const CalculatorInput: FC<Props> = ({
   setValue,
+  value,
   placeholder,
   step = 0.1,
   className = ``,
@@ -19,6 +21,7 @@ export const CalculatorInput: FC<Props> = ({
 
   return (
     <input
+      value={value || ``}
       type="number"
       step={step}
       placeholder={placeholder}
