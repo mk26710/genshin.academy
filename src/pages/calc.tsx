@@ -1,6 +1,8 @@
 import dayjs from "dayjs";
+import { useAtom } from "jotai";
 import { useState } from "react";
 
+import { critDamageAtom, critRateAtom } from "@/atoms/calculator";
 import { CalculatorDetails } from "@/components/calculator/CalculatorDetails";
 import { CalculatorInput } from "@/components/calculator/CalculatorInput";
 import { CalculatorResult } from "@/components/calculator/CalculatorResult";
@@ -10,9 +12,9 @@ import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
 
 const CalcPage = () => {
-  const [critRate, setCritRate] = useState(NaN);
-  const [critDmg, setCritDmg] = useState(NaN);
-  const critValue = critDmg + critRate * 2;
+  const [critRate, setCritRate] = useAtom(critRateAtom);
+  const [critDmg, setCritDmg] = useAtom(critDamageAtom);
+  const critValue = critRate != null && critDmg != null ? critDmg + critRate * 2 : -1;
 
   const [resinCurrent, setResinCurrent] = useState(NaN);
   const [resinNeeded, setResinNeeded] = useState(NaN);
@@ -29,8 +31,14 @@ const CalcPage = () => {
           <CalculatorRoot className="overflow-y-auto break-inside-avoid">
             <CalculatorTitle>Crit Value</CalculatorTitle>
             <CalculatorDetails>Provide your stats details</CalculatorDetails>
-            <CalculatorInput setValue={setCritRate} step={0.1} placeholder="Artifact's crit rate" />
             <CalculatorInput
+              value={critRate}
+              setValue={setCritRate}
+              step={0.1}
+              placeholder="Artifact's crit rate"
+            />
+            <CalculatorInput
+              value={critDmg}
               setValue={setCritDmg}
               step={0.1}
               placeholder="Artifact's crit damage"
