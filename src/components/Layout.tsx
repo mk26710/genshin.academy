@@ -30,9 +30,7 @@ export const Layout: FC<Props> = ({
 
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="GENSHIN.ZENLESS.CLUB" />
-
         <meta property="twitter:domain" content="genshin.zenless.club" />
-        <meta name="twitter:card" content="summary_large_image" />
 
         <title>{realTitle}</title>
         <meta name="title" content={realTitle} />
