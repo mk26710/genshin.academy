@@ -3,6 +3,7 @@ import type { FC } from "react";
 
 import NextLink from "next/link";
 
+import { StaticPicture } from "@/components/StaticPicture";
 import { Rarity } from "@/data/types/genshin";
 
 interface Props {
@@ -23,23 +24,21 @@ export const CharacterCard: FC<Props> = ({ character }) => {
   };
 
   return (
-    <div className="w-[calc(33.33%-0.75rem)] md:w-28">
+    <div className="w-[calc(33.33%-0.75rem)] lg:w-28">
       <NextLink href={`/characters/${character.id}`}>
         <a className="card card-vertical">
           <div className="bg-black-900 box-border absolute -ml-[10px] -mt-[10px] rounded-full aspect-square w-8 flex items-center justify-center">
-            <img
+            <StaticPicture
               src={elementSrc}
-              alt="Element icon"
+              alt="Element src"
               className="w-5 h-5 aspect-square object-contain object-center"
             />
           </div>
           <div className={`w-full aspect-square rounded-t-lg bg-gradient-to-b ` + iconBg()}>
-            <img
+            <StaticPicture
               className="card-thumbnail"
               src={iconSrc}
               alt={`${character.name} icon`}
-              loading="lazy"
-              decoding="async"
             />
           </div>
 
