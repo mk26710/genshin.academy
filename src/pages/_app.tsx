@@ -6,6 +6,7 @@ import deLocale from "dayjs/locale/de";
 import jaLocale from "dayjs/locale/ja";
 import ruLocale from "dayjs/locale/ru";
 import localizedFormat from "dayjs/plugin/localizedFormat";
+import { Provider } from "jotai";
 import { ThemeProvider } from "next-themes";
 import { useRouter } from "next/router";
 import nProgress from "nprogress";
@@ -18,8 +19,11 @@ import "@/assets/styles/markdown.scss";
 import "@/assets/styles/nprogress.scss";
 import { Footer } from "@/components/Footer";
 import { Navigation } from "@/components/Navigation";
+import { useHydrateAllAtoms } from "@/hooks/useHydrateAllAtoms";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  useHydrateAllAtoms();
+
   const router = useRouter();
 
   useEffectOnce(() => {
@@ -58,15 +62,17 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   });
 
   return (
-    <ThemeProvider attribute="class">
-      <div className="app-container">
-        <Navigation />
+    <Provider>
+      <ThemeProvider attribute="class">
+        <div className="app-container">
+          <Navigation />
 
-        <Component {...pageProps} />
+          <Component {...pageProps} />
 
-        <Footer />
-      </div>
-    </ThemeProvider>
+          <Footer />
+        </div>
+      </ThemeProvider>
+    </Provider>
   );
 };
 
