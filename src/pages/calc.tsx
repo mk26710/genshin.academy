@@ -1,8 +1,12 @@
 import dayjs from "dayjs";
 import { useAtom } from "jotai";
-import { useState } from "react";
 
-import { critDamageAtom, critRateAtom } from "@/atoms/calculator";
+import {
+  critDamageAtom,
+  critRateAtom,
+  resinCurrentAtom,
+  resinNeededAtom,
+} from "@/atoms/calculator";
 import { CalculatorDetails } from "@/components/calculator/CalculatorDetails";
 import { CalculatorInput } from "@/components/calculator/CalculatorInput";
 import { CalculatorResult } from "@/components/calculator/CalculatorResult";
@@ -14,10 +18,10 @@ import { Layout } from "@/components/Layout";
 const CalcPage = () => {
   const [critRate, setCritRate] = useAtom(critRateAtom);
   const [critDmg, setCritDmg] = useAtom(critDamageAtom);
-  const critValue = critRate != null && critDmg != null ? critDmg + critRate * 2 : -1;
+  const critValue = critDmg + critRate * 2;
 
-  const [resinCurrent, setResinCurrent] = useState(NaN);
-  const [resinNeeded, setResinNeeded] = useState(NaN);
+  const [resinCurrent, setResinCurrent] = useAtom(resinCurrentAtom);
+  const [resinNeeded, setResinNeeded] = useAtom(resinNeededAtom);
   const resinDelta = (resinNeeded - resinCurrent) * 8;
   const resinReplenishAt = dayjs().add(resinDelta, `minutes`);
 
@@ -57,8 +61,16 @@ const CalcPage = () => {
           <CalculatorRoot className="overflow-y-auto break-inside-avoid">
             <CalculatorTitle>Resin</CalculatorTitle>
             <CalculatorDetails>Find out when you&apos;ll be able to farm</CalculatorDetails>
-            <CalculatorInput setValue={setResinCurrent} placeholder="How much resin you have" />
-            <CalculatorInput setValue={setResinNeeded} placeholder="How much resin you need" />
+            <CalculatorInput
+              value={resinCurrent}
+              setValue={setResinCurrent}
+              placeholder="How much resin you have"
+            />
+            <CalculatorInput
+              value={resinNeeded}
+              setValue={setResinNeeded}
+              placeholder="How much resin you need"
+            />
 
             {resinDelta > 0 && (
               <CalculatorResult>
