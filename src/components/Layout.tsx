@@ -28,18 +28,31 @@ export const Layout: FC<Props> = ({
         <meta charSet="utf-8" />
         <meta name="theme-color" content={color} />
 
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="GENSHIN.ZENLESS.CLUB" />
+
+        <meta property="twitter:domain" content="genshin.zenless.club" />
+        <meta name="twitter:card" content="summary_large_image" />
+
         <title>{realTitle}</title>
         <meta name="title" content={realTitle} />
         <meta property="og:title" content={realTitle} />
+        <meta name="twitter:title" content={realTitle} />
 
         {description && (
-          <Fragment>
+          <>
             <meta name="description" content={description} />
             <meta property="og:description" content={description} />
-          </Fragment>
+            <meta name="twitter:description" content={description} />
+          </>
         )}
 
-        {iconURL && <meta property="og:image" content={iconURL} />}
+        {iconURL && (
+          <>
+            <meta property="og:image" content={iconURL} />
+            <meta name="twitter:image" content={iconURL} />
+          </>
+        )}
 
         <meta
           name="keywords"
