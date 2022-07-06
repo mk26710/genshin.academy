@@ -6,7 +6,7 @@ import deLocale from "dayjs/locale/de";
 import jaLocale from "dayjs/locale/ja";
 import ruLocale from "dayjs/locale/ru";
 import localizedFormat from "dayjs/plugin/localizedFormat";
-import { Provider } from "jotai";
+import { Provider as JotaiProvider } from "jotai";
 import { ThemeProvider } from "next-themes";
 import { useRouter } from "next/router";
 import nProgress from "nprogress";
@@ -62,7 +62,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   });
 
   return (
-    <Provider>
+    <JotaiProvider>
       <ThemeProvider attribute="class">
         <div className="app-container">
           <Navigation />
@@ -72,7 +72,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           <Footer />
         </div>
       </ThemeProvider>
-    </Provider>
+    </JotaiProvider>
   );
 };
 
