@@ -4,6 +4,8 @@ import dayjs from "dayjs";
 import NextLink from "next/link";
 import { useEffect, useState } from "react";
 
+import { StaticPicture } from "@/components/StaticPicture";
+
 interface Props {
   id: string;
   title: string;
@@ -33,11 +35,10 @@ export const GuideCard: FC<Props> = ({
     <NextLink href={href} prefetch={false}>
       <a id={id} className={`card card-vertical ${className}`}>
         {thumbnail && (
-          <img
+          <StaticPicture
             src={thumbnail}
-            alt="character icon"
-            loading="lazy"
             className="card-thumbnail min-h-[10rem] lg:min-h-[20rem] aspect-[9/16]"
+            alt="character icon"
           />
         )}
 
