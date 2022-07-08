@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const gorou: CharacterType = {
   id: `gorou`,
@@ -11,9 +10,9 @@ const gorou: CharacterType = {
   description: `The great general of Watatsumi Island's forces. He is deeply trusted by his subordinates.`,
   birthday: [18, 5],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.GEO,
-  weapon: Weapon.BOW,
+  rarity: 4,
+  vision: `GEO`,
+  weapon: `BOW`,
 
   constellations: [
     {

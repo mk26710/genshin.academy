@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const mona: CharacterType = {
   id: `mona`,
@@ -11,9 +10,9 @@ const mona: CharacterType = {
   description: `A mysterious young astrologer who proclaims herself to be "Astrologist Mona Megistus," and who possesses abilities to match the title. Erudite, but prideful.`,
   birthday: [31, 8],
 
-  rarity: Rarity.FIVE_STAR,
-  vision: Vision.HYDRO,
-  weapon: Weapon.CATALYST,
+  rarity: 5,
+  vision: `HYDRO`,
+  weapon: `CATALYST`,
 
   constellations: [
     {

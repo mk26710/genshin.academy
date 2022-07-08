@@ -1,6 +1,5 @@
 import type { CharacterType } from "../character";
 
-import { Rarity } from "../types/genshin";
 import albedo from "./albedo";
 import aloy from "./aloy";
 import amber from "./amber";
@@ -102,11 +101,11 @@ const _array = Object.freeze([
 export const charactersArray = Object.freeze(
   _array
     .reduce((acc, item) => {
-      if (item.rarity === Rarity.FIVE_STAR) {
+      if (item.rarity === 5) {
         acc[0].push(item);
       }
 
-      if (item.rarity === Rarity.FOUR_STAR) {
+      if (item.rarity === 4) {
         acc[1].push(item);
       }
 

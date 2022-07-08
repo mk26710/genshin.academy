@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const shenhe: CharacterType = {
   id: `shenhe`,
@@ -11,10 +10,10 @@ const shenhe: CharacterType = {
   description: `An adepti disciple with a most unusual air about her. Having spent much time cultivating in isolation in Liyue's mountains, she has become every bit as cool and distant as the adepti themselves.`,
   birthday: [10, 3],
 
-  rarity: Rarity.FIVE_STAR,
+  rarity: 5,
 
-  vision: Vision.CRYO,
-  weapon: Weapon.POLEARM,
+  vision: `CRYO`,
+  weapon: `POLEARM`,
 
   constellations: [
     {

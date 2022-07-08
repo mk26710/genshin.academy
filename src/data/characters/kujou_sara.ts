@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const kujou_sara: CharacterType = {
   id: `kujou_sara`,
@@ -11,9 +10,9 @@ const kujou_sara: CharacterType = {
   description: `A general of the Tenryou Commission. Bold, decisive, and skilled in battle.`,
   birthday: [14, 7],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.ELECTRO,
-  weapon: Weapon.BOW,
+  rarity: 4,
+  vision: `ELECTRO`,
+  weapon: `BOW`,
 
   constellations: [
     {

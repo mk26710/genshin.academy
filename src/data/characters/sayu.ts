@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const sayu: CharacterType = {
   id: `sayu`,
@@ -11,9 +10,9 @@ const sayu: CharacterType = {
   description: `A pint-sized ninja attached to the Shuumatsuban, who always seems sleep-deprived.`,
   birthday: [19, 10],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.ANEMO,
-  weapon: Weapon.CLAYMORE,
+  rarity: 4,
+  vision: `ANEMO`,
+  weapon: `CLAYMORE`,
 
   constellations: [
     {

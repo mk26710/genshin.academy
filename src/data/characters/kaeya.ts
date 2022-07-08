@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const kaeya: CharacterType = {
   id: `kaeya`,
@@ -11,9 +10,9 @@ const kaeya: CharacterType = {
   description: `An accomplished swordsman and a strategic thinker in the Knights of Favonius, rumored to hail from beyond Mondstadt.`,
   birthday: [30, 11],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.CRYO,
-  weapon: Weapon.SWORD,
+  rarity: 4,
+  vision: `CRYO`,
+  weapon: `SWORD`,
 
   constellations: [
     {

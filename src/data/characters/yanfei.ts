@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const yanfei: CharacterType = {
   id: `yanfei`,
@@ -11,9 +10,9 @@ const yanfei: CharacterType = {
   description: `A well-known legal adviser active in Liyue Harbor. A brilliant young lady in whose veins runs the blood of an illuminated beast.`,
   birthday: [28, 7],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.PYRO,
-  weapon: Weapon.CATALYST,
+  rarity: 4,
+  vision: `PYRO`,
+  weapon: `CATALYST`,
 
   constellations: [
     {

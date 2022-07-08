@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const razor: CharacterType = {
   id: `razor`,
@@ -11,9 +10,9 @@ const razor: CharacterType = {
   description: `A boy who lives among the wolves in Wolvendom of Mondstadt, away from human civilization. As agile as lightning.`,
   birthday: [9, 9],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.ELECTRO,
-  weapon: Weapon.CLAYMORE,
+  rarity: 4,
+  vision: `ELECTRO`,
+  weapon: `CLAYMORE`,
 
   constellations: [
     {

@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const yoimiya: CharacterType = {
   id: `yoimiya`,
@@ -11,10 +10,10 @@ const yoimiya: CharacterType = {
   description: `Owner of Naganohara Fireworks. Known as "Queen of the Summer Festival," she excels in her craft of creating fireworks that symbolize people's hopes and dreams.`,
   birthday: [21, 6],
 
-  rarity: Rarity.FIVE_STAR,
+  rarity: 5,
 
-  vision: Vision.PYRO,
-  weapon: Weapon.BOW,
+  vision: `PYRO`,
+  weapon: `BOW`,
 
   constellations: [
     {

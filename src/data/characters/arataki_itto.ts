@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const arataki_itto: CharacterType = {
   id: `arataki_itto`,
@@ -11,9 +10,9 @@ const arataki_itto: CharacterType = {
   description: `The first and greatest head of the Arataki Gang, famed throughout Inazuma City's Hanamizaka... Wait, what? You've never heard of them? Are you trying to be funny here?`,
   birthday: [1, 6],
 
-  rarity: Rarity.FIVE_STAR,
-  vision: Vision.GEO,
-  weapon: Weapon.CLAYMORE,
+  rarity: 5,
+  vision: `GEO`,
+  weapon: `CLAYMORE`,
 
   constellations: [
     {

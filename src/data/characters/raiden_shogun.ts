@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const raiden_shogun: CharacterType = {
   id: `raiden_shogun`,
@@ -11,10 +10,10 @@ const raiden_shogun: CharacterType = {
   description: `Her Excellency, the Almighty Narukami Ogosho, who promised the people of Inazuma an unchanging Eternity.`,
   birthday: [26, 6],
 
-  rarity: Rarity.FIVE_STAR,
+  rarity: 5,
 
-  vision: Vision.ELECTRO,
-  weapon: Weapon.POLEARM,
+  vision: `ELECTRO`,
+  weapon: `POLEARM`,
 
   constellations: [
     {

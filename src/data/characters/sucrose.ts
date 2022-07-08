@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const sucrose: CharacterType = {
   id: `sucrose`,
@@ -11,9 +10,9 @@ const sucrose: CharacterType = {
   description: `An alchemist filled with curiosity about all things. She researches bio-alchemy.`,
   birthday: [26, 11],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.ANEMO,
-  weapon: Weapon.CATALYST,
+  rarity: 4,
+  vision: `ANEMO`,
+  weapon: `CATALYST`,
 
   constellations: [
     {

@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const jean: CharacterType = {
   id: `jean`,
@@ -11,9 +10,9 @@ const jean: CharacterType = {
   description: `The righteous and rigorous Dandelion Knight, and Acting Grand Master of Mondstadt's Knights of Favonius.`,
   birthday: [14, 3],
 
-  rarity: Rarity.FIVE_STAR,
-  vision: Vision.ANEMO,
-  weapon: Weapon.SWORD,
+  rarity: 5,
+  vision: `ANEMO`,
+  weapon: `SWORD`,
 
   constellations: [
     {

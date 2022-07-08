@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const zhongli: CharacterType = {
   id: `zhongli`,
@@ -11,9 +10,9 @@ const zhongli: CharacterType = {
   description: `A mysterious expert contracted by the Wangsheng Funeral Parlor. Extremely knowledgeable in all things.`,
   birthday: [31, 12],
 
-  rarity: Rarity.FIVE_STAR,
-  vision: Vision.GEO,
-  weapon: Weapon.POLEARM,
+  rarity: 5,
+  vision: `GEO`,
+  weapon: `POLEARM`,
 
   constellations: [
     {

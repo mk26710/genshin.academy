@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const qiqi: CharacterType = {
   id: `qiqi`,
@@ -11,10 +10,10 @@ const qiqi: CharacterType = {
   description: `An apprentice and herb gatherer at Bubu Pharmacy. An undead with a bone-white complexion, she seldom has much in the way of words or emotion.`,
   birthday: [3, 3],
 
-  rarity: Rarity.FIVE_STAR,
+  rarity: 5,
 
-  vision: Vision.CRYO,
-  weapon: Weapon.SWORD,
+  vision: `CRYO`,
+  weapon: `SWORD`,
 
   constellations: [
     {

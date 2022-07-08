@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const xiangling: CharacterType = {
   id: `xiangling`,
@@ -11,9 +10,9 @@ const xiangling: CharacterType = {
   description: `A renowned chef from Liyue. She's extremely passionate about cooking and excels at making her signature hot and spicy dishes.`,
   birthday: [2, 11],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.PYRO,
-  weapon: Weapon.POLEARM,
+  rarity: 4,
+  vision: `PYRO`,
+  weapon: `POLEARM`,
 
   constellations: [
     {

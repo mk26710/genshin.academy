@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const aloy: CharacterType = {
   id: `aloy`,
@@ -11,9 +10,9 @@ const aloy: CharacterType = {
   description: `Formerly an outcast, now a hunter of unparalleled skill. Ready to do the right thing at any time.`,
   birthday: [4, 4],
 
-  rarity: Rarity.FIVE_STAR,
-  vision: Vision.CRYO,
-  weapon: Weapon.BOW,
+  rarity: 5,
+  vision: `CRYO`,
+  weapon: `BOW`,
 
   constellations: [
     {

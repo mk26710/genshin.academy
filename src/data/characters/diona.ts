@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const diona: CharacterType = {
   id: `diona`,
@@ -11,9 +10,9 @@ const diona: CharacterType = {
   description: `A young lady who has inherited trace amounts of non-human blood. She is the incredibly popular bartender of the Cat's Tail tavern.`,
   birthday: [18, 1],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.CRYO,
-  weapon: Weapon.BOW,
+  rarity: 4,
+  vision: `CRYO`,
+  weapon: `BOW`,
 
   constellations: [
     {

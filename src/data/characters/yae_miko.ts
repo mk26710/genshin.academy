@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const yae_miko: CharacterType = {
   id: `yae_miko`,
@@ -11,10 +10,10 @@ const yae_miko: CharacterType = {
   description: `Lady Guuji of the Grand Narukami Shrine. Also serves as the editor-in-chief of Yae Publishing House. Unimaginable intelligence and cunning are hidden under her beautiful appearance.`,
   birthday: [27, 6],
 
-  rarity: Rarity.FIVE_STAR,
+  rarity: 5,
 
-  vision: Vision.ELECTRO,
-  weapon: Weapon.CATALYST,
+  vision: `ELECTRO`,
+  weapon: `CATALYST`,
 
   constellations: [
     {

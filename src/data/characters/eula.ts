@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const eula: CharacterType = {
   id: `eula`,
@@ -11,10 +10,10 @@ const eula: CharacterType = {
   description: `The Spindrift Knight, a scion of the old aristocracy, and the Captain of the Knights of Favonius Reconnaissance Company. The reason for which a descendant of the ancient nobles might join the Knights remains a great mystery in Mondstadt to this very day.`,
   birthday: [25, 10],
 
-  rarity: Rarity.FIVE_STAR,
+  rarity: 5,
 
-  vision: Vision.CRYO,
-  weapon: Weapon.CLAYMORE,
+  vision: `CRYO`,
+  weapon: `CLAYMORE`,
 
   constellations: [
     {

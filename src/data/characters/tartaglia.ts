@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const tartaglia: CharacterType = {
   id: `tartaglia`,
@@ -11,9 +10,9 @@ const tartaglia: CharacterType = {
   description: `No. 11 of The Harbingers, also known as "Childe." His name is highly feared on the battlefield.`,
   birthday: [20, 7],
 
-  rarity: Rarity.FIVE_STAR,
-  vision: Vision.HYDRO,
-  weapon: Weapon.BOW,
+  rarity: 5,
+  vision: `HYDRO`,
+  weapon: `BOW`,
 
   constellations: [
     {

@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const klee: CharacterType = {
   id: `klee`,
@@ -11,9 +10,9 @@ const klee: CharacterType = {
   description: `An explosives expert and a regular at the Knights of Favonius's confinement room. Also known as Fleeing Sunligh`,
   birthday: [27, 7],
 
-  rarity: Rarity.FIVE_STAR,
-  vision: Vision.PYRO,
-  weapon: Weapon.CATALYST,
+  rarity: 5,
+  vision: `PYRO`,
+  weapon: `CATALYST`,
 
   constellations: [
     {

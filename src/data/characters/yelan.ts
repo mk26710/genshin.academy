@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const yelan: CharacterType = {
   id: `yelan`,
@@ -12,10 +11,10 @@ const yelan: CharacterType = {
 
   birthday: [20, 4],
 
-  rarity: Rarity.FIVE_STAR,
+  rarity: 5,
 
-  vision: Vision.HYDRO,
-  weapon: Weapon.BOW,
+  vision: `HYDRO`,
+  weapon: `BOW`,
 
   constellations: [
     {

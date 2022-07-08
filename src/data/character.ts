@@ -2,7 +2,7 @@ import type { Component } from "react";
 
 import { z } from "zod";
 
-import { Rarity, Vision, Weapon } from "@/data/types/genshin";
+import { Region, Elements, Weapon, Rarity } from "@/data/types/genshin";
 
 export const BirthdayDate = z.tuple([
   z.number().int().min(1).max(31),
@@ -35,9 +35,16 @@ export const Character = z
   .object({
     id: z.string().regex(/[a-z_]+/g),
     accentColor: z.string().regex(/#([0-9a-f]{6}|[0-9a-f]{3})/gi),
+
     name: z.string(),
     description: z.string(),
+    region: Region.optional(),
     birthday: BirthdayDate,
+
+    rarity: Rarity,
+    vision: Elements,
+    weapon: Weapon,
+
     constellations: z.tuple([
       Constellation,
       Constellation,
@@ -47,9 +54,6 @@ export const Character = z
       Constellation,
     ]),
     story: StoryEntry.array(),
-    rarity: z.nativeEnum(Rarity),
-    weapon: z.nativeEnum(Weapon),
-    vision: z.nativeEnum(Vision),
   })
   .strict();
 

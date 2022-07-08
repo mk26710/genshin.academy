@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const rosaria: CharacterType = {
   id: `rosaria`,
@@ -11,9 +10,9 @@ const rosaria: CharacterType = {
   description: `A sister of the church, though you wouldn't know it if it weren't for her attire. Known for her sharp, cold words and manner, she often works alone.`,
   birthday: [24, 1],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.CRYO,
-  weapon: Weapon.POLEARM,
+  rarity: 4,
+  vision: `CRYO`,
+  weapon: `POLEARM`,
 
   constellations: [
     {

@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const bennett: CharacterType = {
   id: `bennett`,
@@ -11,9 +10,9 @@ const bennett: CharacterType = {
   description: `A good-natured adventurer from Mondstadt who's unfortunately extremely unlucky.`,
   birthday: [29, 2],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.PYRO,
-  weapon: Weapon.SWORD,
+  rarity: 4,
+  vision: `PYRO`,
+  weapon: `SWORD`,
 
   constellations: [
     {

@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const lisa: CharacterType = {
   id: `lisa`,
@@ -11,9 +10,9 @@ const lisa: CharacterType = {
   description: `The languid but knowledgeable Librarian of the Knights of Favonius, deemed by Sumeru Academia to be their most distinguished graduate in the past two centuries.`,
   birthday: [9, 6],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.ELECTRO,
-  weapon: Weapon.CATALYST,
+  rarity: 4,
+  vision: `ELECTRO`,
+  weapon: `CATALYST`,
 
   constellations: [
     {

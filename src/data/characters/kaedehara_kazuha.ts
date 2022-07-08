@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const kaedehara_kazuha: CharacterType = {
   id: `kaedehara_kazuha`,
@@ -11,9 +10,9 @@ const kaedehara_kazuha: CharacterType = {
   description: `A wandering samurai from Inazuma who is currently with Liyue's Crux Fleet. A gentle and carefree soul whose heart hides a great many burdens from the past.`,
   birthday: [29, 10],
 
-  rarity: Rarity.FIVE_STAR,
-  vision: Vision.ANEMO,
-  weapon: Weapon.SWORD,
+  rarity: 5,
+  vision: `ANEMO`,
+  weapon: `SWORD`,
 
   constellations: [
     {

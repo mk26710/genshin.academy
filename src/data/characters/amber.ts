@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const amber: CharacterType = {
   id: `amber`,
@@ -11,9 +10,9 @@ const amber: CharacterType = {
   description: `Always energetic and full of life, Amber's the best — albeit only — Outrider of the Knights of Favonius.`,
   birthday: [10, 8],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.PYRO,
-  weapon: Weapon.BOW,
+  rarity: 5,
+  vision: `PYRO`,
+  weapon: `BOW`,
 
   constellations: [
     {

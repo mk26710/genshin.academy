@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const ganyu: CharacterType = {
   id: `ganyu`,
@@ -11,10 +10,10 @@ const ganyu: CharacterType = {
   description: `The secretary at Yuehai Pavilion. The blood of the qilin, an illuminated beast, flows within her veins.`,
   birthday: [12, 2],
 
-  rarity: Rarity.FIVE_STAR,
+  rarity: 5,
 
-  vision: Vision.CRYO,
-  weapon: Weapon.BOW,
+  vision: `CRYO`,
+  weapon: `BOW`,
 
   constellations: [
     {

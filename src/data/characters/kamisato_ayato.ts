@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const kamisato_ayato: CharacterType = {
   id: `kamisato_ayato`,
@@ -11,10 +10,10 @@ const kamisato_ayato: CharacterType = {
   description: `The young but highly accomplished head of the Yashiro Commission's Kamisato Clan. Cultured and polite, he is a man of many ways and means.`,
   birthday: [26, 3],
 
-  rarity: Rarity.FIVE_STAR,
+  rarity: 5,
 
-  vision: Vision.HYDRO,
-  weapon: Weapon.SWORD,
+  vision: `HYDRO`,
+  weapon: `SWORD`,
 
   constellations: [
     {

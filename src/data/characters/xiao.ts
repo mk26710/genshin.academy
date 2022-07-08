@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const xiao: CharacterType = {
   id: `xiao`,
@@ -11,9 +10,9 @@ const xiao: CharacterType = {
   description: `A yaksha adeptus who defends Liyue. Also heralded as the "Conqueror of Demons" and "Vigilant Yaksha."`,
   birthday: [17, 4],
 
-  rarity: Rarity.FIVE_STAR,
-  vision: Vision.ANEMO,
-  weapon: Weapon.POLEARM,
+  rarity: 5,
+  vision: `ANEMO`,
+  weapon: `POLEARM`,
 
   constellations: [
     {

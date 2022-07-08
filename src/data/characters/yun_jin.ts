@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const yun_jin: CharacterType = {
   id: `yun_jin`,
@@ -11,9 +10,9 @@ const yun_jin: CharacterType = {
   description: `A renowned Liyue opera singer who is skilled in both playwriting and singing. Her style is one-of-a-kind, exquisite and delicate, much like the person herself.`,
   birthday: [21, 5],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.GEO,
-  weapon: Weapon.POLEARM,
+  rarity: 4,
+  vision: `GEO`,
+  weapon: `POLEARM`,
 
   constellations: [
     {

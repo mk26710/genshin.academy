@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const hu_tao: CharacterType = {
   id: `hu_tao`,
@@ -11,9 +10,9 @@ const hu_tao: CharacterType = {
   description: `The 77th Director of the Wangsheng Funeral Parlor. She took over the business at a rather young age.`,
   birthday: [15, 7],
 
-  rarity: Rarity.FIVE_STAR,
-  vision: Vision.PYRO,
-  weapon: Weapon.POLEARM,
+  rarity: 5,
+  vision: `PYRO`,
+  weapon: `POLEARM`,
 
   constellations: [
     {

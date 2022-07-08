@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const venti: CharacterType = {
   id: `venti`,
@@ -11,9 +10,9 @@ const venti: CharacterType = {
   description: `One of the many bards of Mondstadt, who freely wanders the city's streets and alleys.`,
   birthday: [16, 6],
 
-  rarity: Rarity.FIVE_STAR,
-  vision: Vision.ANEMO,
-  weapon: Weapon.BOW,
+  rarity: 5,
+  vision: `ANEMO`,
+  weapon: `BOW`,
 
   constellations: [
     {

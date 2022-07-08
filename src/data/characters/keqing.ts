@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const keqing: CharacterType = {
   id: `keqing`,
@@ -11,9 +10,9 @@ const keqing: CharacterType = {
   description: `The Yuheng of the Liyue Qixing. Keqing has much to say about Rex Lapis's unilateral approach to policymaking in Liyue — but in truth, gods admire skeptics such as her quite a lot.`,
   birthday: [20, 11],
 
-  rarity: Rarity.FIVE_STAR,
-  vision: Vision.ELECTRO,
-  weapon: Weapon.SWORD,
+  rarity: 5,
+  vision: `ELECTRO`,
+  weapon: `SWORD`,
 
   constellations: [
     {

@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const ningguang: CharacterType = {
   id: `ningguang`,
@@ -11,9 +10,9 @@ const ningguang: CharacterType = {
   description: `The Tianquan of the Liyue Qixing. Her wealth is unsurpassed in all of Teyvat.`,
   birthday: [26, 8],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.GEO,
-  weapon: Weapon.CATALYST,
+  rarity: 4,
+  vision: `GEO`,
+  weapon: `CATALYST`,
 
   constellations: [
     {

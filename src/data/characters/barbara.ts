@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const barbara: CharacterType = {
   id: `barbara`,
@@ -11,9 +10,9 @@ const barbara: CharacterType = {
   description: `Every citizen of Mondstadt adores Barbara. She learned the word "idol" from a magazine.`,
   birthday: [5, 7],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.HYDRO,
-  weapon: Weapon.CATALYST,
+  rarity: 4,
+  vision: `HYDRO`,
+  weapon: `CATALYST`,
 
   constellations: [
     {

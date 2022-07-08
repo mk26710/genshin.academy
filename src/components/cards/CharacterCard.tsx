@@ -4,7 +4,6 @@ import type { FC } from "react";
 import NextLink from "next/link";
 
 import { StaticPicture } from "@/components/StaticPicture";
-import { Rarity } from "@/data/types/genshin";
 
 interface Props {
   character: CharacterType;
@@ -15,9 +14,9 @@ export const CharacterCard: FC<Props> = ({ character }) => {
   const iconSrc = `/img/characters/${character.id}/icon.webp`;
 
   const iconBg = () => {
-    if (character.rarity === Rarity.FIVE_STAR) {
+    if (character.rarity === 5) {
       return `from-[#945C2C] to-[#B27330]`;
-    } else if (character.rarity === Rarity.FOUR_STAR) {
+    } else if (character.rarity === 4) {
       return `from-[#5E5789] to-[#9C75B7]`;
     }
     return `from-[#6A6D74] to-[#868586]`;

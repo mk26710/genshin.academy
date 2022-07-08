@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const chongyun: CharacterType = {
   id: `chongyun`,
@@ -11,9 +10,9 @@ const chongyun: CharacterType = {
   description: `A young exorcist from a family of exorcists. He does everything he can to suppress his abundance of yang energy.`,
   birthday: [7, 9],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.CRYO,
-  weapon: Weapon.CLAYMORE,
+  rarity: 4,
+  vision: `CRYO`,
+  weapon: `CLAYMORE`,
 
   constellations: [
     {

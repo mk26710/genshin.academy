@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const xingqiu: CharacterType = {
   id: `xingqiu`,
@@ -11,9 +10,9 @@ const xingqiu: CharacterType = {
   description: `A young man carrying a longsword who is frequently seen at book booths. He has a chivalrous heart and yearns for justice and fairness for all.`,
   birthday: [9, 10],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.HYDRO,
-  weapon: Weapon.SWORD,
+  rarity: 4,
+  vision: `HYDRO`,
+  weapon: `SWORD`,
 
   constellations: [
     {

@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const sangonomiya_kokomi: CharacterType = {
   id: `sangonomiya_kokomi`,
@@ -11,9 +10,9 @@ const sangonomiya_kokomi: CharacterType = {
   description: `The Divine Priestess of Watatsumi Island. All of the island's affairs are at this young lady's fingertips.`,
   birthday: [22, 2],
 
-  rarity: Rarity.FIVE_STAR,
-  vision: Vision.HYDRO,
-  weapon: Weapon.CATALYST,
+  rarity: 5,
+  vision: `HYDRO`,
+  weapon: `CATALYST`,
 
   constellations: [
     {

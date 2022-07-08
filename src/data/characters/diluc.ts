@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const diluc: CharacterType = {
   id: `diluc`,
@@ -11,9 +10,9 @@ const diluc: CharacterType = {
   description: `The tycoon of a winery empire in Mondstadt, unmatched in every possible way.`,
   birthday: [30, 4],
 
-  rarity: Rarity.FIVE_STAR,
-  vision: Vision.PYRO,
-  weapon: Weapon.CLAYMORE,
+  rarity: 5,
+  vision: `PYRO`,
+  weapon: `CLAYMORE`,
 
   constellations: [
     {

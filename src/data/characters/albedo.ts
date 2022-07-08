@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const albedo: CharacterType = {
   id: `albedo`,
@@ -11,9 +10,9 @@ const albedo: CharacterType = {
   description: `A genius known as the Kreideprinz, he is the Chief Alchemist and Captain of the Investigation Team of the Knights of Favonius.`,
   birthday: [13, 9],
 
-  rarity: Rarity.FIVE_STAR,
-  vision: Vision.GEO,
-  weapon: Weapon.SWORD,
+  rarity: 5,
+  vision: `GEO`,
+  weapon: `SWORD`,
 
   constellations: [
     {

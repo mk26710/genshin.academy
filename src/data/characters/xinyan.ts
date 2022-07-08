@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const xinyan: CharacterType = {
   id: `xinyan`,
@@ -11,9 +10,9 @@ const xinyan: CharacterType = {
   description: `Liyue's sole rock 'n' roll musician. She rebels against ossified prejudices using her music and passionate singing.`,
   birthday: [16, 10],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.PYRO,
-  weapon: Weapon.CLAYMORE,
+  rarity: 4,
+  vision: `PYRO`,
+  weapon: `CLAYMORE`,
 
   constellations: [
     {

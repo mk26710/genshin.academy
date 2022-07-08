@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const kamisato_ayaka: CharacterType = {
   id: `kamisato_ayaka`,
@@ -9,12 +8,13 @@ const kamisato_ayaka: CharacterType = {
 
   name: `Kamisato Ayaka`,
   description: `Daughter of the Yashiro Commission's Kamisato Clan from Inazuma. Dignified and elegant, wise and determined. Sincere and pleasant to others. Universally loved by the Inazuma people, she has earned the title of Shirasagi Himegimi.`,
+  region: `INAZUMA`,
   birthday: [28, 9],
 
-  rarity: Rarity.FIVE_STAR,
+  rarity: 5,
 
-  vision: Vision.CRYO,
-  weapon: Weapon.SWORD,
+  vision: `CRYO`,
+  weapon: `SWORD`,
 
   constellations: [
     {

@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const thoma: CharacterType = {
   id: `thoma`,
@@ -11,9 +10,9 @@ const thoma: CharacterType = {
   description: `The Kamisato Clan's housekeeper. A well-known "fixer" in Inazuma.`,
   birthday: [9, 1],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.PYRO,
-  weapon: Weapon.POLEARM,
+  rarity: 4,
+  vision: `PYRO`,
+  weapon: `POLEARM`,
 
   constellations: [
     {

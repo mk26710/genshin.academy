@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const beidou: CharacterType = {
   id: `beidou`,
@@ -11,9 +10,9 @@ const beidou: CharacterType = {
   description: `Captain of her crew, The Crux. She's quite an unbound and forthright woman.`,
   birthday: [14, 2],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.ELECTRO,
-  weapon: Weapon.CLAYMORE,
+  rarity: 4,
+  vision: `ELECTRO`,
+  weapon: `CLAYMORE`,
 
   constellations: [
     {

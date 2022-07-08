@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const fischl: CharacterType = {
   id: `fischl`,
@@ -11,9 +10,9 @@ const fischl: CharacterType = {
   description: `A mysterious girl who calls herself "Prinzessin der Verurteilung" and travels with a night raven named Oz.`,
   birthday: [27, 5],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.ELECTRO,
-  weapon: Weapon.BOW,
+  rarity: 4,
+  vision: `ELECTRO`,
+  weapon: `BOW`,
 
   constellations: [
     {

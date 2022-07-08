@@ -1,7 +1,6 @@
 import type { CharacterType } from "../character";
 
 import { Character } from "../character";
-import { Rarity, Vision, Weapon } from "../types/genshin";
 
 const noelle: CharacterType = {
   id: `noelle`,
@@ -11,9 +10,9 @@ const noelle: CharacterType = {
   description: `A maid who faithfully serves the Knights of Favonius. She dreams of joining their ranks someday.`,
   birthday: [21, 3],
 
-  rarity: Rarity.FOUR_STAR,
-  vision: Vision.GEO,
-  weapon: Weapon.CLAYMORE,
+  rarity: 4,
+  vision: `GEO`,
+  weapon: `CLAYMORE`,
 
   constellations: [
     {
