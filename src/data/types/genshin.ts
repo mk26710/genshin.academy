@@ -1,31 +1,37 @@
-export enum Rarity {
-  FIVE_STAR = 5,
-  FOUR_STAR = 4,
-  THREE_STAR = 3,
-  TWO_STAR = 2,
-  ONE_STAR = 1,
-  ZERO_STAR = 0,
-}
+import { z } from "zod";
 
-export type RarityType = 5 | 4 | 3 | 2 | 1 | 0;
+export const Rarity = z.union([
+  z.literal(5),
+  z.literal(4),
+  z.literal(3),
+  z.literal(2),
+  z.literal(1),
+]);
+export type RarityType = z.infer<typeof Rarity>;
 
-export enum Weapon {
-  SWORD = `SWORD`,
-  CLAYMORE = `CLAYMORE`,
-  POLEARM = `POLEARM`,
-  CATALYST = `CATALYST`,
-  BOW = `BOW`,
-}
+export const Weapon = z.union([
+  z.literal(`SWORD`),
+  z.literal(`CLAYMORE`),
+  z.literal(`POLEARM`),
+  z.literal(`CATALYST`),
+  z.literal(`BOW`),
+]);
+export type WeaponType = z.infer<typeof Weapon>;
 
-export type WeaponType = `SWORD` | `CLAYMORE` | `POLEARM` | `CATALYST` | `BOW`;
+export const Elements = z.union([
+  z.literal(`CRYO`),
+  z.literal(`ELECTRO`),
+  z.literal(`PYRO`),
+  z.literal(`ANEMO`),
+  z.literal(`HYDRO`),
+  z.literal(`GEO`),
+]);
+export type ElementsType = z.infer<typeof Elements>;
 
-export enum Vision {
-  CRYO = `CRYO`,
-  ELECTRO = `ELECTRO`,
-  PYRO = `PYRO`,
-  ANEMO = `ANEMO`,
-  HYDRO = `HYDRO`,
-  GEO = `GEO`,
-}
-
-export type VisionType = `CRYO` | `ELECTRO` | `PYRO` | `ANEMO` | `HYDRO` | `GEO`;
+export const Region = z.union([
+  z.literal(`MONDSTADT`),
+  z.literal(`LIYUE`),
+  z.literal(`INAZUMA`),
+  z.literal(`SUMERU`),
+]);
+export type RegionType = z.infer<typeof Region>;
