@@ -1,6 +1,23 @@
 # Changelog
 
 
+## (v0.1.3) - 2022-07-06
+
+### Bug Fixes
+
+- **Layout:** Large images are not wanted ([19aa581](https://github.com/TenkoSpirit/genshin.zenless.club/commit/19aa581d5fa168b869d4aea9c98472a1008d9efd))
+
+### Features
+
+- **Layout:** Added more meta tags ([e90642f](https://github.com/TenkoSpirit/genshin.zenless.club/commit/e90642f261d45a5b993a1c04d33303b2ca5dd963))
+
+### Miscellaneous Tasks
+
+- **release:** Version bump and new changelog entries ([8cc8670](https://github.com/TenkoSpirit/genshin.zenless.club/commit/8cc8670be416f358284850329af5ef0d7c7de202))
+- **scripts:** Opt out of nextjs telemetry after installng dependencies ([0f983fe](https://github.com/TenkoSpirit/genshin.zenless.club/commit/0f983fe735ba38cbe3df31e9bbd27cf59c283504))
+
+
+
 ## (v0.1.2) - 2022-07-06
 
 ### Features
