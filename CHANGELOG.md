@@ -1,6 +1,15 @@
 # Changelog
 
 
+## (v1.0.0) - 2022-07-08
+
+### Refactor
+
+- **app:** Updated use of `Character` and other Genshin types according to previous change ([095b074](https://github.com/TenkoSpirit/genshin.zenless.club/commit/095b074ecf737bbfb54f613dcb99a4224e995d19))
+- **types:** Converted Genshin enums in unions ([f8afcda](https://github.com/TenkoSpirit/genshin.zenless.club/commit/f8afcda3aecffffa76f3ecad272f468921a5c9fd))
+
+
+
 ## (v0.1.3) - 2022-07-06
 
 ### Bug Fixes
