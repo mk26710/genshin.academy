@@ -34,8 +34,8 @@ export const Layout: FC<Props> = ({
 
         <title>{realTitle}</title>
         <meta name="title" content={realTitle} />
-        <meta property="og:title" content={realTitle} />
-        <meta name="twitter:title" content={realTitle} />
+        <meta property="og:title" content={title} />
+        <meta name="twitter:title" content={title} />
 
         {description && (
           <>
