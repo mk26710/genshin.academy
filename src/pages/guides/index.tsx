@@ -1,3 +1,4 @@
+import type { CharacterType } from "@/data/character";
 import type { NextPage } from "next";
 import type { ChangeEvent } from "react";
 
@@ -9,11 +10,19 @@ import { Container } from "@/components/Container";
 import { Input } from "@/components/Input";
 import { Layout } from "@/components/Layout";
 import { charactersArray } from "@/data/characters";
-import published from "@/data/guides/compiled/characters/published.json";
+import published from "@/data/guides/compiled/published.json";
 import { useRouterReady } from "@/hooks/useRouterReady";
 
+type PublishedItem = typeof published[0];
+
 // this doesn't need to be reactive
-const publishedCharacters = charactersArray.filter(({ id }) => published.includes(id));
+const publishedGuides = published.reduce((acc, item) => {
+  const character = charactersArray.find((c) => c.id === item.id);
+  if (character != null) {
+    acc.push({ meta: item, character });
+  }
+  return acc;
+}, new Array<{ meta: PublishedItem; character: CharacterType }>());
 
 const GuidesIndex: NextPage = () => {
   const [ready, router] = useRouterReady();
@@ -41,16 +50,16 @@ const GuidesIndex: NextPage = () => {
             <Input ref={inputRef} placeholder="Search by title" onChange={handleChange} fullWidth />
 
             <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 2xl:columns-5 gap-4 space-y-4">
-              {publishedCharacters
-                .filter((c) => c.id.includes(q.toString().toLowerCase()))
-                .map((character) => (
+              {publishedGuides
+                .filter((g) => g.character.name.includes(q.toString().toLowerCase()))
+                .map((guide) => (
                   <GuideCard
-                    key={character.id}
-                    id={character.id}
-                    href={`/guides/${character.id}`}
-                    title={character.name}
-                    description={character.description}
-                    thumbnail={`/img/characters/${character.id}/avatar_header.webp`}
+                    key={guide.character.id}
+                    id={guide.character.id}
+                    href={`/guides/${guide.meta.id}`}
+                    title={guide.character.name}
+                    description={guide.character.description}
+                    thumbnail={`/img/characters/${guide.character.id}/avatar_header.webp`}
                   />
                 ))}
             </div>
