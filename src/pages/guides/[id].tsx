@@ -1,4 +1,5 @@
 import type { CharacterType } from "@/data/character";
+import type { MetaType } from "@/data/guides/compiled/meta";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 
 import { useEffect, useRef, useState } from "react";
@@ -7,18 +8,18 @@ import { Container } from "@/components/Container";
 import { ContentsTable } from "@/components/ContentsTable";
 import { Layout } from "@/components/Layout";
 import { getCharacterById } from "@/data/characters";
-import { Guide } from "@/data/guide";
-import published from "@/data/guides/compiled/characters/published.json";
+import { Guide } from "@/data/guides/compiled/guide";
+import published from "@/data/guides/compiled/published.json";
 import { characterIcon } from "@/lib/helpers";
 
 interface StaticProps {
-  id: string;
+  meta: MetaType;
   html: string;
   character: CharacterType;
 }
 
 export const getStaticPaths = async () => {
-  const paths = published.map((id) => ({ params: { id } }));
+  const paths = published.map(({ id }) => ({ params: { id } }));
 
   return {
     paths,
@@ -34,11 +35,11 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
     return { notFound: true };
   }
 
-  const { default: data } = await import(`@/data/guides/compiled/characters/${character.id}.json`);
-  const { id, html } = await Guide.parseAsync(data);
+  const { default: data } = await import(`@/data/guides/compiled/${character.id}.json`);
+  const { meta, html } = await Guide.parseAsync(data);
 
   return {
-    props: { id, html, character },
+    props: { meta, html, character },
   };
 };
 
