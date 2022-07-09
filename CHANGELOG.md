@@ -1,6 +1,27 @@
 # Changelog
 
 
+## (v1.0.1) - 2022-07-09
+
+### Bug Fixes
+
+- **ContentsTable:** Heading may now contain dashes, replacing them with empty space ([848f1cf](https://github.com/TenkoSpirit/genshin.zenless.club/commit/848f1cfd716316d2b3328a9f6c605475d1d4f59c))
+
+### Miscellaneous Tasks
+
+- **cliff:** Updated parsers settings ([1ce6c2b](https://github.com/TenkoSpirit/genshin.zenless.club/commit/1ce6c2b6a4188fd711ba5432bcaecffabcbacc37))
+- **data:** Pull latest version of submodule ([041dc54](https://github.com/TenkoSpirit/genshin.zenless.club/commit/041dc545cd85e24cbe937bf6d639c7d388159d4f))
+- **deps:** Bymped dependencies versions and added some packages ([eb5b2b3](https://github.com/TenkoSpirit/genshin.zenless.club/commit/eb5b2b39c9d96b27dcac76b49531221cfa979a60))
+- **deps:** Added cypress ([47e965f](https://github.com/TenkoSpirit/genshin.zenless.club/commit/47e965f72b6f279f712b00ace7f60b0d9e813fcc))
+
+### Refactor
+
+- **data:** Guide zod schema is now being exported with data submodule ([9b645ee](https://github.com/TenkoSpirit/genshin.zenless.club/commit/9b645ee0f81f901ff675feadef4dcc053aa383b7))
+- **pages:** Update guides index code according to latest changes of data submodule ([0347edb](https://github.com/TenkoSpirit/genshin.zenless.club/commit/0347edb48309a1621ed08d0a66fedfe51eec245d))
+- **pages:** Update guide display code according to latest changes of data submodule ([c45c9d0](https://github.com/TenkoSpirit/genshin.zenless.club/commit/c45c9d0e9c73d0396bc9519814a8d32f148cc226))
+
+
+
 ## (v1.0.0) - 2022-07-08
 
 ### Refactor
