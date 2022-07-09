@@ -18,7 +18,7 @@ export const ContentsTable: FC<Props> = ({ title, headings }) => {
 
           {headings.map((heading) => (
             <a key={`guide-nav-${heading}`} href={`#${heading}`} className="capitalize">
-              {heading}
+              {heading.replace(`-`, ` `)}
             </a>
           ))}
         </div>
