@@ -7,7 +7,7 @@ import { Layout } from "@/components/Layout";
 
 const NotFound: NextPage = () => {
   return (
-    <Layout title="404" description="Not found!">
+    <Layout title="404" description="Not found!" showNavigation={false}>
       <Container verticalCenter>
         <div className="flex flex-row gap-6">
           <div className="pr-6 border-r border-neutral-200 dark:border-neutral-200/10">
