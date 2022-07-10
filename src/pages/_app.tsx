@@ -64,13 +64,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <JotaiProvider>
       <ThemeProvider attribute="class">
-        <div className="app-container">
-          <Navigation />
-
-          <Component {...pageProps} />
-
-          <Footer />
-        </div>
+        <Component {...pageProps} />
       </ThemeProvider>
     </JotaiProvider>
   );
