@@ -1,5 +1,7 @@
 import type { ChangeEvent, FC } from "react";
 
+import { Input } from "@/components/Input";
+
 interface Props {
   setValue: (value: number) => void;
   placeholder?: string;
@@ -20,13 +22,13 @@ export const CalculatorInput: FC<Props> = ({
   };
 
   return (
-    <input
+    <Input
       value={value || ""}
       type="number"
       step={step}
       placeholder={placeholder}
       onChange={handleChange}
-      className={`calculator-input ${className}`}
+      className={`bg-neutral-100 dark:!bg-dark-900 mt-2 ${className} `}
     />
   );
 };
