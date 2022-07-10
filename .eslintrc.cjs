@@ -34,7 +34,20 @@ module.exports = {
           "external",
           "internal",
           ["parent", "sibling", "index"],
+          "object",
           "unknown",
+        ],
+        pathGroups: [
+          {
+            pattern: "**/*.css",
+            group: "unknown",
+            position: "after",
+          },
+          {
+            pattern: "**/*.scss",
+            group: "unknown",
+            position: "after",
+          },
         ],
         "newlines-between": "always",
         alphabetize: {
