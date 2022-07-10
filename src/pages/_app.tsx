@@ -7,6 +7,7 @@ import jaLocale from "dayjs/locale/ja";
 import ruLocale from "dayjs/locale/ru";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import { Provider as JotaiProvider } from "jotai";
+import { useHydrateAtoms } from "jotai/utils";
 import { ThemeProvider } from "next-themes";
 import { useRouter } from "next/router";
 import nProgress from "nprogress";
@@ -17,12 +18,10 @@ import "@/assets/styles/cards.scss";
 import "@/assets/styles/main.scss";
 import "@/assets/styles/markdown.scss";
 import "@/assets/styles/nprogress.scss";
-import { Footer } from "@/components/Footer";
-import { Navigation } from "@/components/Navigation";
-import { useHydrateAllAtoms } from "@/hooks/useHydrateAllAtoms";
+import { initialValues } from "@/atoms/initialValues";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  useHydrateAllAtoms();
+  useHydrateAtoms(initialValues);
 
   const router = useRouter();
 
@@ -62,7 +61,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   });
 
   return (
-    <JotaiProvider>
+    <JotaiProvider initialValues={initialValues}>
       <ThemeProvider attribute="class">
         <Component {...pageProps} />
       </ThemeProvider>
