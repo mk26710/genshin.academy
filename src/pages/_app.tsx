@@ -62,7 +62,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   });
 
   return (
-    <JotaiProvider initialValues={initialValues}>
+    <JotaiProvider>
       <ThemeProvider attribute="class">
         <Component {...pageProps} />
       </ThemeProvider>
