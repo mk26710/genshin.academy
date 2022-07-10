@@ -11,9 +11,9 @@ export const StaticPicture: FunctionComponent<Props> = ({
   src,
   alt,
   withOptimal = true,
-  className = ``,
+  className = "",
 }) => {
-  const mobileSrc = src.split(`.`).slice(0, -1).join(`.`) + `_1200.webp`;
+  const mobileSrc = src.split(".").slice(0, -1).join(".") + "_1200.webp";
 
   // if optimal is not desired, then just show the iamge
   if (withOptimal !== true)

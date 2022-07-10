@@ -1,14 +1,14 @@
 import { forwardRef } from "react";
 
-type InputProps = JSX.IntrinsicElements[`input`];
+type InputProps = JSX.IntrinsicElements["input"];
 
 interface Props extends InputProps {
   fullWidth?: boolean;
 }
 
 export const Input = forwardRef<HTMLInputElement, Props>(
-  ({ fullWidth, className = ``, type = `text`, ...props }, ref) => {
-    const fullWidthClass = fullWidth === true ? `w-full` : ``;
+  ({ fullWidth, className = "", type = "text", ...props }, ref) => {
+    const fullWidthClass = fullWidth === true ? "w-full" : "";
 
     return (
       <input
@@ -21,4 +21,4 @@ export const Input = forwardRef<HTMLInputElement, Props>(
   },
 );
 
-Input.displayName = `Input`;
+Input.displayName = "Input";

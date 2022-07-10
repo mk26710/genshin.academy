@@ -23,7 +23,7 @@ const CalcPage = () => {
   const [resinCurrent, setResinCurrent] = useAtom(resinCurrentAtom);
   const [resinNeeded, setResinNeeded] = useAtom(resinNeededAtom);
   const resinDelta = (resinNeeded - resinCurrent) * 8;
-  const resinReplenishAt = dayjs().add(resinDelta, `minutes`);
+  const resinReplenishAt = dayjs().add(resinDelta, "minutes");
 
   return (
     <Layout
@@ -50,7 +50,7 @@ const CalcPage = () => {
 
             {critRate > 0 && critDmg > 0 && (
               <CalculatorResult>
-                Crit Value is{` `}
+                Crit Value is{" "}
                 <span className="text-primary-500 dark:text-primary-400 font-semibold">
                   {critValue}
                 </span>
@@ -74,14 +74,13 @@ const CalcPage = () => {
 
             {resinDelta > 0 && (
               <CalculatorResult>
-                You will have{` `}
+                You will have{" "}
                 <span className="text-primary-500 dark:text-primary-400 font-semibold">
                   {resinNeeded}
-                </span>
-                {` `}
-                at{` `}
+                </span>{" "}
+                at{" "}
                 <span className="text-primary-500 dark:text-primary-400 font-semibold">
-                  {resinReplenishAt.format(`lll`)}
+                  {resinReplenishAt.format("lll")}
                 </span>
               </CalculatorResult>
             )}

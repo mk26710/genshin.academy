@@ -13,7 +13,7 @@ export const CalculatorInput: FC<Props> = ({
   value,
   placeholder,
   step = 0.1,
-  className = ``,
+  className = "",
 }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.valueAsNumber);
@@ -21,7 +21,7 @@ export const CalculatorInput: FC<Props> = ({
 
   return (
     <input
-      value={value || ``}
+      value={value || ""}
       type="number"
       step={step}
       placeholder={placeholder}

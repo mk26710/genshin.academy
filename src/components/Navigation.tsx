@@ -18,25 +18,25 @@ interface NavRoute {
 
 const navRoutes: NavRoute[] = [
   {
-    path: `/`,
-    title: `Home`,
+    path: "/",
+    title: "Home",
     Icon: HomeIcon,
   },
   {
-    path: `/characters`,
-    title: `Characters`,
+    path: "/characters",
+    title: "Characters",
     hasNested: true,
     Icon: StarIcon,
   },
   {
-    path: `/guides`,
-    title: `Guides`,
+    path: "/guides",
+    title: "Guides",
     hasNested: true,
     Icon: BeakerIcon,
   },
   {
-    path: `/calc`,
-    title: `Calculator`,
+    path: "/calc",
+    title: "Calculator",
     Icon: CalculatorIcon,
   },
 ];
@@ -51,12 +51,12 @@ export const Navigation: FC = () => {
     // don't do anything unless it's client side
     if (!isMounted) return;
 
-    if (resolvedTheme === `dark` && theme === `system`) {
-      setTheme(`light`);
-    } else if (resolvedTheme === `light` && theme === `system`) {
-      setTheme(`dark`);
+    if (resolvedTheme === "dark" && theme === "system") {
+      setTheme("light");
+    } else if (resolvedTheme === "light" && theme === "system") {
+      setTheme("dark");
     } else {
-      setTheme(`system`);
+      setTheme("system");
     }
   };
 
@@ -65,7 +65,7 @@ export const Navigation: FC = () => {
   }, []);
 
   const isActive = useCallback(
-    (navRoute: Omit<NavRoute, `Icon`>) => {
+    (navRoute: Omit<NavRoute, "Icon">) => {
       if (navRoute.hasNested === true) {
         return router.route.startsWith(navRoute.path);
       }
@@ -76,16 +76,16 @@ export const Navigation: FC = () => {
   );
 
   const activeClass = useCallback(
-    (navRoute: Omit<NavRoute, `Icon`>, isMobile = false) => {
+    (navRoute: Omit<NavRoute, "Icon">, isMobile = false) => {
       const active = isActive(navRoute);
 
       if (isMobile && active) {
-        return `text-primary-500 dark:text-primary-400 font-bold`;
+        return "text-primary-500 dark:text-primary-400 font-bold";
       } else if (!isMobile && active) {
-        return ` !bg-primary-500 rounded-lg text-white`;
+        return " !bg-primary-500 rounded-lg text-white";
       }
 
-      return ``;
+      return "";
     },
     [isActive],
   );
@@ -114,11 +114,11 @@ export const Navigation: FC = () => {
               onClick={toggleDark}
               className="flex-1 flex flex-col items-center justify-center cursor-pointer"
             >
-              {resolvedTheme === `dark` && <SunIcon className="w-6 h-6" />}
-              {resolvedTheme !== `dark` && <MoonIcon className="w-6 h-6" />}
+              {resolvedTheme === "dark" && <SunIcon className="w-6 h-6" />}
+              {resolvedTheme !== "dark" && <MoonIcon className="w-6 h-6" />}
               <h1 className="text-sm font-semibold">
-                {resolvedTheme === `dark` && `Light`}
-                {resolvedTheme !== `dark` && `Dark`}
+                {resolvedTheme === "dark" && "Light"}
+                {resolvedTheme !== "dark" && "Dark"}
               </h1>
             </div>
           )}
@@ -140,7 +140,7 @@ export const Navigation: FC = () => {
               <NextLink key={navRoute.path} href={navRoute.path}>
                 <a
                   className={
-                    `w-full flex flex-row items-center gap-x-2 px-3 py-2 font-semibold text-lg cursor-pointer` +
+                    "w-full flex flex-row items-center gap-x-2 px-3 py-2 font-semibold text-lg cursor-pointer" +
                     activeClass(navRoute)
                   }
                 >
@@ -159,8 +159,8 @@ export const Navigation: FC = () => {
                 onClick={() => toggleDark()}
                 className="transition-all duration-75 bg-neutral-100 dark:bg-dark-900 dark:text-dark-300 outline outline-1 outline-neutral-200 dark:outline-dark-200/10 rounded-lg flex items-center justify-center aspect-square h-8 cursor-pointer"
               >
-                {resolvedTheme === `dark` && <SunIcon className="w-5 h-5" />}
-                {resolvedTheme !== `dark` && <MoonIcon className="w-5 h-5" />}
+                {resolvedTheme === "dark" && <SunIcon className="w-5 h-5" />}
+                {resolvedTheme !== "dark" && <MoonIcon className="w-5 h-5" />}
               </div>
             </div>
           )}

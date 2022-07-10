@@ -52,9 +52,9 @@ const GuidesId = ({ html, character }: InferGetStaticPropsType<typeof getStaticP
 
     if (el != null && headings.length <= 0) {
       const headings = Array.from(el.children)
-        .filter((el) => el instanceof HTMLHeadingElement && el.getAttribute(`id`) != null)
+        .filter((el) => el instanceof HTMLHeadingElement && el.getAttribute("id") != null)
         .reduce((acc, el) => {
-          const id = el.getAttribute(`id`);
+          const id = el.getAttribute("id");
 
           const validArr = [...acc];
           if (id != null) {

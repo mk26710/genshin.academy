@@ -22,8 +22,8 @@ export const GuideCard: FC<Props> = ({
   description,
   publishedAt,
   thumbnail,
-  href = `#`,
-  className = ``,
+  href = "#",
+  className = "",
 }) => {
   const [isMounted, setMounted] = useState(false);
 
@@ -45,7 +45,7 @@ export const GuideCard: FC<Props> = ({
         <div className="card-text-container">
           {publishedAt && (
             <div className="card-text-container-item font-medium text-sm leading-6 text-primary-500">
-              {isMounted && <>{dayjs(publishedAt).format(`lll`)}</>}
+              {isMounted && <>{dayjs(publishedAt).format("lll")}</>}
             </div>
           )}
 

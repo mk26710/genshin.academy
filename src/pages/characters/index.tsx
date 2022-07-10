@@ -11,7 +11,7 @@ import { Layout } from "@/components/Layout";
 import { charactersArray } from "@/data/characters";
 
 const CharactersIndex: NextPage = () => {
-  const [input, setInput] = useState(``);
+  const [input, setInput] = useState("");
 
   const deboucnedHandleChange = debounce((e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);

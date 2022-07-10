@@ -15,11 +15,11 @@ export const CharacterCard: FC<Props> = ({ character }) => {
 
   const iconBg = () => {
     if (character.rarity === 5) {
-      return `from-[#945C2C] to-[#B27330]`;
+      return "from-[#945C2C] to-[#B27330]";
     } else if (character.rarity === 4) {
-      return `from-[#5E5789] to-[#9C75B7]`;
+      return "from-[#5E5789] to-[#9C75B7]";
     }
-    return `from-[#6A6D74] to-[#868586]`;
+    return "from-[#6A6D74] to-[#868586]";
   };
 
   return (
@@ -33,7 +33,7 @@ export const CharacterCard: FC<Props> = ({ character }) => {
               className="w-5 h-5 aspect-square object-contain object-center"
             />
           </div>
-          <div className={`w-full aspect-square rounded-t-lg bg-gradient-to-b ` + iconBg()}>
+          <div className={"w-full aspect-square rounded-t-lg bg-gradient-to-b " + iconBg()}>
             <StaticPicture
               className="card-thumbnail"
               src={iconSrc}

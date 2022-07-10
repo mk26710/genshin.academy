@@ -28,10 +28,10 @@ const GuidesIndex: NextPage = () => {
   const [ready, router] = useRouterReady();
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const q = router.query.q?.toString() ?? ``;
+  const q = router.query.q?.toString() ?? "";
 
   const handleChange = debounce((e: ChangeEvent<HTMLInputElement>) => {
-    const url = !isEmpty(e.target.value) ? `/guides?q=${e.target.value}` : `/guides`;
+    const url = !isEmpty(e.target.value) ? `/guides?q=${e.target.value}` : "/guides";
     void router.replace(url, undefined, { shallow: true });
   }, 300);
 

@@ -13,11 +13,11 @@ interface Props {
 }
 
 export const Layout: FC<Props> = ({
-  title = `^_^`,
-  titleTemplate = `GENSHIN.ZENLESS`,
+  title = "^_^",
+  titleTemplate = "GENSHIN.ZENLESS",
   description,
   iconURL,
-  color = `#0694fa`,
+  color = "#0694fa",
   children,
 }) => {
   const realTitle = titleTemplate != null ? `${title} - ${titleTemplate}` : title;

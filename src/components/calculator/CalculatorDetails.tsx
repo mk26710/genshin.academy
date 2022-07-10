@@ -5,6 +5,6 @@ interface Props {
   children: ReactNode;
 }
 
-export const CalculatorDetails: FC<Props> = ({ className = ``, children }) => {
+export const CalculatorDetails: FC<Props> = ({ className = "", children }) => {
   return <p className={`calculator-details ${className}`}>{children}</p>;
 };
