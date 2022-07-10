@@ -14,6 +14,8 @@ import nProgress from "nprogress";
 import { useEffectOnce } from "react-use";
 
 import { initialValues } from "@/atoms/initialValues";
+import { Footer } from "@/components/Footer";
+import { Navigation } from "@/components/Navigation";
 
 import "@/assets/styles/calculator.scss";
 import "@/assets/styles/cards.scss";
@@ -64,7 +66,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <JotaiProvider>
       <ThemeProvider attribute="class">
-        <Component {...pageProps} />
+        <div className="app-container">
+          <Navigation />
+          <Component {...pageProps} />
+          <Footer />
+        </div>
       </ThemeProvider>
     </JotaiProvider>
   );

@@ -3,17 +3,12 @@ import type { FC, ReactNode } from "react";
 import Head from "next/head";
 import { Fragment } from "react";
 
-import { Footer } from "@/components/Footer";
-import { Navigation } from "@/components/Navigation";
-
 interface Props {
   title?: string;
   titleTemplate?: string;
   description?: string;
   iconURL?: string;
   color?: string;
-  showNavigation?: boolean;
-  showFooter?: boolean;
   children: ReactNode;
 }
 
@@ -23,8 +18,6 @@ export const Layout: FC<Props> = ({
   description,
   iconURL,
   color = "#0694fa",
-  showNavigation = true,
-  showFooter = true,
   children,
 }) => {
   const realTitle = titleTemplate != null ? `${title} - ${titleTemplate}` : title;
@@ -65,11 +58,7 @@ export const Layout: FC<Props> = ({
         />
       </Head>
 
-      <div className="app-container">
-        {showNavigation && <Navigation />}
-        {children}
-        {showFooter && <Footer />}
-      </div>
+      <>{children}</>
     </Fragment>
   );
 };
