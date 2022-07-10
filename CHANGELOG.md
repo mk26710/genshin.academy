@@ -1,6 +1,59 @@
 # Changelog
 
 
+## (v1.0.3) - 2022-07-10
+
+### Bug Fixes
+
+- **naviagtion:** Theme switch flickers on navigations between pages ([8b7456b](https://github.com/TenkoSpirit/genshin.zenless.club/commit/8b7456b81f5408eaed724631c4f99453fc3e0465))
+
+
+
+## (v1.0.2) - 2022-07-10
+
+### Bug Fixes
+
+- **components:** Removed bottom margin from input field ([d7d8156](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d7d8156b9248c551bbc57b4286c0cb3028664bb6))
+- **components:** Styles of CalculatorInput ([fcb708a](https://github.com/TenkoSpirit/genshin.zenless.club/commit/fcb708a5e2487df44d6d2de67ad4e4a38f74c744))
+- **jotai:** I have completely misunderstood the purpose of `initialValues` prop on `Provider`, in my case I should use the `useHydrateAtoms` hook instead ([41ff68e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/41ff68e1fa947f8ff1cb5ce7c0ec1f936651f30c))
+- **tailwind:** Moved type import ([174d0df](https://github.com/TenkoSpirit/genshin.zenless.club/commit/174d0dfca6b03d7a51cbb4c2b3e9cb8008cc79ad))
+
+### Features
+
+- **atoms:** Character search atom created ([14a0840](https://github.com/TenkoSpirit/genshin.zenless.club/commit/14a084008128de7f7f390d10a3a9314890e7921b))
+- **atoms:** Created the array of initial values for jotai atoms ([7649c28](https://github.com/TenkoSpirit/genshin.zenless.club/commit/7649c28f939f37b562dc72164de87cf14df02360))
+- **atoms:** Added atoms for guides list page ([53cb8d9](https://github.com/TenkoSpirit/genshin.zenless.club/commit/53cb8d94cbf25f155f9249f6aa7891f0615bc6ba))
+- **pages:** Updated the 404 page ([a0da894](https://github.com/TenkoSpirit/genshin.zenless.club/commit/a0da89457d9634428b111346234073c3f1ee8cb8))
+- **pages:** Aded support for different guide types and improved query mutations ([3969ee9](https://github.com/TenkoSpirit/genshin.zenless.club/commit/3969ee9308b0e0e0b37a432430e7af3b2646b0f0))
+- **components:** Added `className` to CharacterCard ([3f1005b](https://github.com/TenkoSpirit/genshin.zenless.club/commit/3f1005b81222b85d34b4bfd5c6b05e9a28c7c4ab))
+
+### Miscellaneous Tasks
+
+- **eslint:** Ignore precompiled guides ([58f3bc4](https://github.com/TenkoSpirit/genshin.zenless.club/commit/58f3bc45129cb17a6b2defd761ab1616914e3c67))
+- **eslint:** Update quotes rule to use double ([513940a](https://github.com/TenkoSpirit/genshin.zenless.club/commit/513940a0cb96d83116e662338a0977cf56c1145a))
+- **eslint:** Update import order for style files ([b56a675](https://github.com/TenkoSpirit/genshin.zenless.club/commit/b56a67580daa1dd833d542da084d9638c76c8007))
+
+### Refactor
+
+- **Layout:** Use title without template in OpenGraph and twitter meta tags ([2d42571](https://github.com/TenkoSpirit/genshin.zenless.club/commit/2d425718f69e3a74394a8f6c4c9cdb5abb7fcf78))
+- **app:** Moved `Navigation` and `Footer` components into `Layout` from the custom app ([75b52df](https://github.com/TenkoSpirit/genshin.zenless.club/commit/75b52df3e0917e3cb6491a301c77051514f6f386))
+- **hooks:** Removed `useHydrateAllAtoms` since we have `initialValues` array now ([03e6a83](https://github.com/TenkoSpirit/genshin.zenless.club/commit/03e6a837acd030530e00fe4379f9179f706c3e7a))
+- **pages:** Using jotai atom to store user search input on characters list page ([a737add](https://github.com/TenkoSpirit/genshin.zenless.club/commit/a737addc93897a0e54dc3c2c54d3cd42af49907e))
+- **pages:** Updated guides by using atoms to keep state in sync with router ([1c13502](https://github.com/TenkoSpirit/genshin.zenless.club/commit/1c13502e9ed6a89b123d31c32dbced77d4a4253c))
+
+### Styling
+
+- **app:** Used eslint fix on all project files ([eb48681](https://github.com/TenkoSpirit/genshin.zenless.club/commit/eb486817ce241a2aaa7757f0e0ed79abe7035e08))
+- **pages:** Fix import order in the `_app.tsx` ([2a399f8](https://github.com/TenkoSpirit/genshin.zenless.club/commit/2a399f8f9d670ae7f3c90fbe1bf98e1570660a7e))
+- **scripts:** Used eslint fix on webp generator script ([709379a](https://github.com/TenkoSpirit/genshin.zenless.club/commit/709379a0d64550f6db9b94af96bc8ec582e7d365))
+
+### Build
+
+- **nvmrc:** Created config for nvm ([7a05324](https://github.com/TenkoSpirit/genshin.zenless.club/commit/7a05324a46ea1384168a1ce676c3be033e868cd2))
+- **tailwind:** Added some plugins ([2db356e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/2db356e8c593ba97b3a2aa4e3aadcf1172cb31ed))
+
+
+
 ## (v1.0.1) - 2022-07-09
 
 ### Bug Fixes
