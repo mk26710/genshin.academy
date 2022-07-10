@@ -7,9 +7,10 @@ import { StaticPicture } from "@/components/StaticPicture";
 
 interface Props {
   character: CharacterType;
+  className?: string;
 }
 
-export const CharacterCard: FC<Props> = ({ character }) => {
+export const CharacterCard: FC<Props> = ({ character, className }) => {
   const elementSrc = `/img/elements/${character.vision.toLowerCase()}/icon.webp`;
   const iconSrc = `/img/characters/${character.id}/icon.webp`;
 
@@ -23,7 +24,7 @@ export const CharacterCard: FC<Props> = ({ character }) => {
   };
 
   return (
-    <div className="w-[calc(33.33%-0.75rem)] lg:w-28">
+    <div className={`w-[calc(33.33%-0.75rem)] lg:w-28 ${className}`}>
       <NextLink href={`/characters/${character.id}`}>
         <a className="card card-vertical">
           <div className="bg-black-900 box-border absolute -ml-[10px] -mt-[10px] rounded-full aspect-square w-8 flex items-center justify-center">
