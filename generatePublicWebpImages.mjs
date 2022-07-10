@@ -12,9 +12,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const program = new Command();
-program.option(`-r`, `--regenerate`, false).option(`-o`, `--optimize`, false).parse(process.argv);
+program.option("-r", "--regenerate", false).option("-o", "--optimize", false).parse(process.argv);
 
-const pattern = join(__dirname, `./public`, `**/*.{png,jpg,jpeg}`);
+const pattern = join(__dirname, "./public", "**/*.{png,jpg,jpeg}");
 const paths = await globby(pattern);
 
 const fileExists = async (file) => {
@@ -27,7 +27,7 @@ const fileExists = async (file) => {
 };
 
 for (const p of paths) {
-  const webpFileName = basename(p, extname(p)) + `.webp`;
+  const webpFileName = basename(p, extname(p)) + ".webp";
   const webpFilePath = join(dirname(p), webpFileName);
 
   if ((await fileExists(webpFilePath)) && program.opts().r !== true) {
@@ -43,7 +43,7 @@ for (const p of paths) {
   }
 
   if (program.opts().o === true) {
-    const webp1200FileName = basename(p, extname(p)) + `_1200.webp`;
+    const webp1200FileName = basename(p, extname(p)) + "_1200.webp";
     const webp1200FilePath = join(dirname(p), webp1200FileName);
 
     if ((await fileExists(webp1200FilePath)) && program.opts().r !== true) {
@@ -67,4 +67,4 @@ for (const p of paths) {
   }
 }
 
-console.log(`> finish`);
+console.log("> finish");
