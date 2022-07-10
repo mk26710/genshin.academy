@@ -13,12 +13,13 @@ import { useRouter } from "next/router";
 import nProgress from "nprogress";
 import { useEffectOnce } from "react-use";
 
+import { initialValues } from "@/atoms/initialValues";
+
 import "@/assets/styles/calculator.scss";
 import "@/assets/styles/cards.scss";
 import "@/assets/styles/main.scss";
 import "@/assets/styles/markdown.scss";
 import "@/assets/styles/nprogress.scss";
-import { initialValues } from "@/atoms/initialValues";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   useHydrateAtoms(initialValues);
