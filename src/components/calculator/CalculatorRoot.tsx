@@ -6,5 +6,5 @@ interface Props {
 }
 
 export const CalculatorRoot: FC<Props> = ({ className = "", children }) => {
-  return <div className={`calculator ${className}`}>{children}</div>;
+  return <div className={`card card-with-padding flex-col ${className}`}>{children}</div>;
 };

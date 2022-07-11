@@ -46,6 +46,7 @@ const CalcPage = () => {
               setValue={setCritDmg}
               step={0.1}
               placeholder="Artifact's crit damage"
+              className="mt-2"
             />
 
             {critRate > 0 && critDmg > 0 && (
@@ -70,6 +71,7 @@ const CalcPage = () => {
               value={resinNeeded}
               setValue={setResinNeeded}
               placeholder="How much resin you need"
+              className="mt-2"
             />
 
             {resinDelta > 0 && (
