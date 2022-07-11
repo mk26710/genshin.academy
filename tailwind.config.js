@@ -78,6 +78,10 @@ const myColors = {
     850: "#0a0a0a",
     900: "#000000",
   },
+  neutral: {
+    ...colors.neutral,
+    950: "#0c0c0c",
+  },
 };
 
 const myScreens = {
@@ -97,7 +101,7 @@ module.exports = {
       colors: {
         ...myColors,
         primary: myColors.azure,
-        dark: colors.slate,
+        dark: myColors.neutral,
       },
       screens: {
         ...myScreens,
