@@ -7,13 +7,11 @@ import jaLocale from "dayjs/locale/ja";
 import ruLocale from "dayjs/locale/ru";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import { Provider as JotaiProvider } from "jotai";
-import { useHydrateAtoms } from "jotai/utils";
 import { ThemeProvider } from "next-themes";
 import { useRouter } from "next/router";
 import nProgress from "nprogress";
 import { useEffectOnce } from "react-use";
 
-import { initialValues } from "@/atoms/initialValues";
 import { Footer } from "@/components/Footer";
 import { Navigation } from "@/components/Navigation";
 
@@ -24,8 +22,6 @@ import "@/assets/styles/markdown.scss";
 import "@/assets/styles/nprogress.scss";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  useHydrateAtoms(initialValues);
-
   const router = useRouter();
 
   useEffectOnce(() => {
