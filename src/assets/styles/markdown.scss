@@ -1,11 +1,13 @@
 .md-body {
+  @apply dark:text-dark-300;
+
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply font-semibold mt-6 mb-4;
+    @apply font-semibold mt-6 mb-4 dark:text-dark-200;
   }
 
   h1 {
