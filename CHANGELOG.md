@@ -1,6 +1,39 @@
 # Changelog
 
 
+## (v1.0.4) - 2022-07-11
+
+### Bug Fixes
+
+- **BirthdaysToday:** Updated colors and other styles ([3992f9d](https://github.com/TenkoSpirit/genshin.zenless.club/commit/3992f9db97e0b97aac182c588da1dba827974c27))
+- **Navigation:** Should have updated text-slate to text-dark ([fbae6ef](https://github.com/TenkoSpirit/genshin.zenless.club/commit/fbae6efd15db75ec41fd0a563f65a7a209bc581d))
+- **tailwind:** Forms plugin should be addign it's classes explicitly ([c1abab9](https://github.com/TenkoSpirit/genshin.zenless.club/commit/c1abab96c92f1411ad8c44b926ae220e04ab5cbf))
+
+### Features
+
+- **CharacterCard:** Explicitly set fotn size and colors ([3370315](https://github.com/TenkoSpirit/genshin.zenless.club/commit/3370315befbc83ed869f6b9d9c1523246fc0cb14))
+- **ContentsTable:** Used cards base class and explicitly set text colors ([836963c](https://github.com/TenkoSpirit/genshin.zenless.club/commit/836963c2931c4adc7ce4281d49a8bfc599f75f3b))
+- **GuideCard:** More explicit styles ([d032861](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d032861e575a3d452d703f529e0ac95de664532a))
+- **Navigation:** Use darker text color on dark color scheme ([ab8723a](https://github.com/TenkoSpirit/genshin.zenless.club/commit/ab8723a5682062c381602b48364b11672f647c72))
+- **app:** Updated dark colors and other styles across available components ([a8af529](https://github.com/TenkoSpirit/genshin.zenless.club/commit/a8af529a47e902e527f21dbc4b0f73bb3fff1b8b))
+- **calculator, components:** Use more explicit styles ([cc274cb](https://github.com/TenkoSpirit/genshin.zenless.club/commit/cc274cbd4100b785261a1deeb927102f30b66775))
+- **characters, pages:** Fix text colors on dark color scheme ([d77b905](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d77b905f1f33c6ac28dbdcca645d2e4569f59ec8))
+- **characters, pages:** Removed top margin from input and removed redundant text ([f872ca4](https://github.com/TenkoSpirit/genshin.zenless.club/commit/f872ca470b126c917350b1e4a694ee47939e9dbf))
+- **markdown, styles:** Brighter text on dark color scheme ([e459efe](https://github.com/TenkoSpirit/genshin.zenless.club/commit/e459efe924b5f508dae91e4514121362d9ecbcd6))
+- **markdown, styles:** Bring back darker texts ([d303c7c](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d303c7c48506cb7a142f6b56ba59fb4b422b02de))
+- **tailwind:** Updated color scheme and added one more shade of neutral ([ebed497](https://github.com/TenkoSpirit/genshin.zenless.club/commit/ebed497c6baafe6f8e08ceb30f95e18c5003b756))
+
+### Refactor
+
+- **atoms, _app:** Hydrating all atoms in `_app` is unnecessary ([5a4c6fe](https://github.com/TenkoSpirit/genshin.zenless.club/commit/5a4c6febcf83407b17896536d4c2b3a64a95f285))
+- **styles, cards:** Udpated cards base and removed redundant classes ([84a8386](https://github.com/TenkoSpirit/genshin.zenless.club/commit/84a8386e8e291f168e5b65af9bc4693e70f225f1))
+
+### Build
+
+- **tailwind:** Changed primary to indigo ([5c9da4d](https://github.com/TenkoSpirit/genshin.zenless.club/commit/5c9da4d31cb2d6eb7bb9d74d7f5350f6ef3d9adb))
+
+
+
 ## (v1.0.3) - 2022-07-10
 
 ### Bug Fixes
