@@ -93,7 +93,7 @@ export const Navigation: FC = () => {
   return (
     <>
       {/* Mobile Bottom Navbar */}
-      <nav className="z-10 lg:hidden fixed bottom-0 left-0 h-[var(--mobile-navbar-height)] w-full text-[#000] dark:text-dark-300 rounded-lg border-t border-neutral-200 dark:border-dark-800 bg-white dark:bg-dark-900 select-none">
+      <nav className="z-10 lg:hidden fixed bottom-0 left-0 h-[var(--mobile-navbar-height)] w-full text-[#000] dark:text-dark-300 border-t border-neutral-200 dark:border-dark-800 bg-white dark:bg-dark-900 select-none">
         <div className="dark:text-dark-400 flex flex-row h-full gap-4 px-4 justify-between overflow-y-auto">
           {navRoutes.map(({ Icon, ...navRoute }) => (
             <NextLink key={`mobile-navbar-${navRoute.path}`} href={navRoute.path}>
