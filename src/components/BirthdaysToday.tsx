@@ -15,8 +15,8 @@ export const BirthdayToday: FC = () => {
   });
 
   return (
-    <div className="p-4 bg-white dark:bg-dark-800 rounded-lg box-border border border-neutral-200 dark:border-dark-200/10 flex flex-col">
-      <h1 className="font-semibold text-xl mb-4">
+    <div className="p-4 box-border flex flex-col rounded-lg border border-neutral-200 dark:border-dark-800 bg-white dark:bg-dark-900">
+      <h1 className="font-semibold text-xl mb-4 text-[#000] dark:text-dark-300">
         {celebrant == null && <>Characters Birthdays</>}
         {celebrant != null && <>Happy Birthday 🎉</>}
       </h1>
