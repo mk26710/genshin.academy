@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-env node */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const colors = require("tailwindcss/colors");
@@ -111,6 +112,8 @@ module.exports = {
   plugins: [
     require("tw-elements/dist/plugin"),
     require("@tailwindcss/typography"),
-    require("@tailwindcss/forms"),
+    require("@tailwindcss/forms")({
+      strategy: "class",
+    }),
   ],
 };
