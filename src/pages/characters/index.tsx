@@ -20,8 +20,8 @@ const CharactersIndex: NextPage = () => {
   return (
     <Layout title="Characters" description="Genshin Impact playable characters.">
       <Container>
-        <div className="mb-4 mt-6 flex flex-col lg:flex-row gap-4">
-          <h1 className="font-semibold text-4xl">Characters</h1>
+        <div className="mb-6 mt-6 flex flex-col lg:flex-row gap-4">
+          <h1 className="font-semibold text-4xl dark:text-dark-200">Characters</h1>
           <Input placeholder="Search by name" onChange={handleChange} value={search} />
         </div>
 

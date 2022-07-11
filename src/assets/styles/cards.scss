@@ -1,5 +1,5 @@
 .card {
-  @apply bg-white dark:bg-dark-800 rounded-lg box-border border border-neutral-200 dark:border-dark-200/10 flex text-[.9rem];
+  @apply dark:text-dark-200 bg-white dark:bg-dark-900 rounded-lg box-border border border-neutral-200 dark:border-dark-200/10 flex text-[.9rem];
 
   // this is needed since parent is masonry layout
   @apply break-inside-avoid break-before-auto break-after-auto;

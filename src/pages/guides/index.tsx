@@ -81,7 +81,7 @@ const RouterReadyContent: FunctionComponent<{ router: NextRouter }> = ({ router 
         <select
           value={guideType}
           onChange={handleOptionChange}
-          className="w-full lg:w-40 form-select appearance-none block h-10 leading-6 dark:text-dark-300 placeholder:text-neutral-400 dark:placeholder:text-dark-400 accent-primary-500 rounded-lg border border-neutral-200 dark:border-dark-200/10 dark:bg-dark-800 bg-whiteshadow-sm py-1.5 pl-2 pr-3"
+          className="form-select w-full lg:w-40 appearance-none block h-10 py-1.5 pl-2 pr-3 text-[#000] dark:text-dark-300 rounded-lg border border-neutral-200 dark:border-dark-800 bg-white dark:bg-dark-900 focus:outline-2 focus:accent-primary-500 placeholder:text-neutral-400 dark:placeholder:text-dark-500"
         >
           <option value="character">Characters</option>
           <option value="general">General</option>

@@ -80,9 +80,9 @@ export const Navigation: FC = () => {
       const active = isActive(navRoute);
 
       if (isMobile && active) {
-        return "text-primary-500 dark:text-primary-400 font-bold";
+        return " text-primary-500 dark:text-primary-400 font-bold";
       } else if (!isMobile && active) {
-        return " !bg-primary-500 rounded-lg text-white";
+        return " rounded-lg outline outline-1 outline-primary-200 dark:outline-primary-800 bg-primary-100 dark:bg-primary-900";
       }
 
       return "";
@@ -93,7 +93,7 @@ export const Navigation: FC = () => {
   return (
     <>
       {/* Mobile Bottom Navbar */}
-      <nav className="z-10 lg:hidden fixed bottom-0 left-0 h-[var(--mobile-navbar-height)] w-full border-t border-neutral-200 dark:border-dark-200/10 dark:bg-dark-800 bg-white select-none">
+      <nav className="z-10 lg:hidden fixed bottom-0 left-0 h-[var(--mobile-navbar-height)] w-full text-[#000] dark:text-dark-300 rounded-lg border-t border-neutral-200 dark:border-dark-800 bg-white dark:bg-dark-900 select-none">
         <div className="dark:text-dark-400 flex flex-row h-full gap-4 px-4 justify-between overflow-y-auto">
           {navRoutes.map(({ Icon, ...navRoute }) => (
             <NextLink key={`mobile-navbar-${navRoute.path}`} href={navRoute.path}>
@@ -103,7 +103,7 @@ export const Navigation: FC = () => {
                   true,
                 )} flex-1 flex flex-col items-center justify-center`}
               >
-                <Icon className="h-6 w-6 p-0" />
+                <Icon className="h-6 w-6 p-0 stroke-2" />
                 <h1 className="text-sm font-semibold">{navRoute.title}</h1>
               </a>
             </NextLink>
@@ -130,7 +130,7 @@ export const Navigation: FC = () => {
         data-description="Desktop Sidebar Navigation"
         className="sidebar sticky top-0 hidden lg:flex flex-col min-h-screen max-h-screen"
       >
-        <div className="overflow-y-auto ml-4 my-4 w-64 h-full rounded-lg border border-neutral-200 dark:border-dark-200/10 dark:bg-dark-800 bg-white">
+        <div className="overflow-y-auto ml-4 my-4 w-64 h-full text-[#000] dark:text-dark-200 rounded-lg border border-neutral-200 dark:border-dark-800 bg-white dark:bg-dark-900">
           <div className="flex flex-col gap-y-2 p-4 w-full">
             <div className="self-center py-4 mb-2 border-b border-neutral-200 dark:border-dark-200/10">
               <h1 className="font-extrabold text-xl">GENSHIN.ZENLESS</h1>
@@ -157,7 +157,7 @@ export const Navigation: FC = () => {
             <div className="fixed bottom-8 left-8">
               <div
                 onClick={() => toggleDark()}
-                className="transition-all duration-75 bg-neutral-100 dark:bg-dark-900 dark:text-dark-300 outline outline-1 outline-neutral-200 dark:outline-dark-200/10 rounded-lg flex items-center justify-center aspect-square h-8 cursor-pointer"
+                className="transition-all duration-75 bg-neutral-100 dark:bg-dark-950 dark:text-dark-300 outline outline-1 outline-neutral-200 dark:outline-dark-200/10 rounded-lg flex items-center justify-center aspect-square h-8 cursor-pointer"
               >
                 {resolvedTheme === "dark" && <SunIcon className="w-5 h-5" />}
                 {resolvedTheme !== "dark" && <MoonIcon className="w-5 h-5" />}
