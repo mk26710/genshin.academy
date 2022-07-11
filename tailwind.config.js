@@ -100,7 +100,7 @@ module.exports = {
     extend: {
       colors: {
         ...myColors,
-        primary: myColors.azure,
+        primary: colors.indigo,
         dark: myColors.neutral,
       },
       screens: {
