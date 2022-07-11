@@ -42,7 +42,7 @@ export const CharacterCard: FC<Props> = ({ character, className }) => {
             />
           </div>
 
-          <div className="w-full py-1 h-full flex items-center justify-center font-semibold">
+          <div className="w-full py-1 h-full flex items-center justify-center font-semibold text-[.9rem] text-[#000] dark:text-dark-300 ">
             <p className="p-1 text-center leading-none">{character.name}</p>
           </div>
         </a>
