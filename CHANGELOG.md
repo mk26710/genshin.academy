@@ -1,6 +1,32 @@
 # Changelog
 
 
+## (v1.0.5) - 2022-07-12
+
+### Bug Fixes
+
+- **Navigation:** Mobile navbar shouldn't be rounded ([2bcb727](https://github.com/TenkoSpirit/genshin.zenless.club/commit/2bcb72723d20ab2213f5727b1fa46668af2a9947))
+
+### Features
+
+- **components, Input:** Updated focused styles and added form-input from tailwind/forms ([82bb13c](https://github.com/TenkoSpirit/genshin.zenless.club/commit/82bb13ca361a91565288318ef25402e77a2b9163))
+- **pages, guides:** Added an option to show all types of guides ([3b9c564](https://github.com/TenkoSpirit/genshin.zenless.club/commit/3b9c564dd601a004ef1396655a84b87f40aabaa6))
+- **tailwind:** Use Noto Sans as sans font ([a7305fc](https://github.com/TenkoSpirit/genshin.zenless.club/commit/a7305fc5f2c8ab40aa6ec74d65ee3e78d5c4fecc))
+
+### Miscellaneous Tasks
+
+- **deps:** Removed react-use ([83c7563](https://github.com/TenkoSpirit/genshin.zenless.club/commit/83c7563bffa176506b60079f98eb1be25c66da8a))
+- **deps:** Removed tw-elements ([5c9245e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/5c9245e142a66973e911332f50fe478ad5f6faad))
+- **deps:** Removed cypress ([089e30a](https://github.com/TenkoSpirit/genshin.zenless.club/commit/089e30a0cd7338c9963ccee3fa49a67c99446c62))
+
+### Refactor
+
+- **deps, pages:** Added exact lodash pacakges that are needed isntead of using whole lodash lib ([bf42a20](https://github.com/TenkoSpirit/genshin.zenless.club/commit/bf42a203e5ce6075588dd6de882f1d1cb90461f2))
+- **pages:** `useEffectOnce` can be easily replaced in `_app.tsx` ([1819abf](https://github.com/TenkoSpirit/genshin.zenless.club/commit/1819abf689482a41daaa463f8bc675d18a234077))
+- **tailwind:** Tw-elements was removed ([d89385e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d89385ec94520fde3cf0c3c95d5c3fcb981ad800))
+
+
+
 ## (v1.0.4) - 2022-07-11
 
 ### Bug Fixes
