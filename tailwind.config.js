@@ -2,6 +2,7 @@
 /* eslint-env node */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const colors = require("tailwindcss/colors");
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 const myColors = {
   azure: {
@@ -99,8 +100,11 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Noto Sans", ...defaultTheme.fontFamily.sans],
+      },
       colors: {
-        ...myColors,
+        ...defaultTheme.colors,
         primary: colors.indigo,
         dark: myColors.neutral,
       },
