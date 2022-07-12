@@ -20,14 +20,23 @@ import { useRouterReady } from "@/hooks/useRouterReady";
 
 type PublishedItem = typeof published[0];
 
+interface PublishedGuide {
+  meta: PublishedItem;
+  character: CharacterType;
+}
+
 // this doesn't need to be reactive
-const publishedGuides = published.reduce((acc, item) => {
+const publishedGuides = published.reduce<PublishedGuide[]>((acc, item) => {
   const character = charactersArray.find((c) => c.id === item.id);
   if (character != null) {
     acc.push({ meta: item, character });
   }
   return acc;
-}, new Array<{ meta: PublishedItem; character: CharacterType }>());
+}, []);
+
+const NoResult: FunctionComponent = () => {
+  return <>There&apos;s nothing here :(</>;
+};
 
 const RouterReadyContent: FunctionComponent<{ router: NextRouter }> = ({ router }) => {
   // just realized jotai's hydration can be
@@ -35,13 +44,17 @@ const RouterReadyContent: FunctionComponent<{ router: NextRouter }> = ({ router 
   // and keep atoms in sync with router :o
   useHydrateAtoms([
     [guideSearchQueryAtom, router.query.q ?? ""],
-    [guideSearchTypeAtom, router.query.t ?? "character"],
+    [guideSearchTypeAtom, router.query.t ?? "all"],
   ]);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [input, setInput] = useAtom(guideSearchQueryAtom);
   const [guideType, setGuideType] = useAtom(guideSearchTypeAtom);
+
+  const filteredGuides = publishedGuides
+    .filter((g) => (guideType !== "all" ? g.meta.type === guideType : true))
+    .filter((g) => g.character.name.toLowerCase().includes(input.toString().toLowerCase()));
 
   const handleInputChange = debounce((e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -82,8 +95,9 @@ const RouterReadyContent: FunctionComponent<{ router: NextRouter }> = ({ router 
         <select
           value={guideType}
           onChange={handleOptionChange}
-          className="form-select w-full lg:w-40 appearance-none block h-10 py-1.5 pl-2 pr-3 text-[#000] dark:text-dark-300 rounded-lg border border-neutral-200 dark:border-dark-800 bg-white dark:bg-dark-900 focus:outline-2 focus:accent-primary-500 placeholder:text-neutral-400 dark:placeholder:text-dark-500"
+          className="form-select w-full lg:w-44 appearance-none block h-10 text-[#000] dark:text-dark-300 rounded-lg border border-neutral-200 dark:border-dark-800 bg-white dark:bg-dark-900 focus:ring-2 focus:ring-primary-500 placeholder:text-neutral-400 dark:placeholder:text-dark-500 font-semibold uppercase"
         >
+          <option value="all">All</option>
           <option value="character">Characters</option>
           <option value="general">General</option>
         </select>
@@ -97,19 +111,17 @@ const RouterReadyContent: FunctionComponent<{ router: NextRouter }> = ({ router 
       </div>
 
       <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 2xl:columns-5 gap-4 space-y-4">
-        {publishedGuides
-          .filter((g) => g.meta.type === guideType)
-          .filter((g) => g.character.name.toLowerCase().includes(input.toString().toLowerCase()))
-          .map((guide) => (
-            <GuideCard
-              key={guide.character.id}
-              id={guide.character.id}
-              href={`/guides/${guide.meta.id}`}
-              title={guide.character.name}
-              description={guide.character.description}
-              thumbnail={`/img/characters/${guide.character.id}/avatar_header.webp`}
-            />
-          ))}
+        {filteredGuides.length <= 0 && <NoResult />}
+        {filteredGuides.map((guide) => (
+          <GuideCard
+            key={guide.character.id}
+            id={guide.character.id}
+            href={`/guides/${guide.meta.id}`}
+            title={guide.character.name}
+            description={guide.character.description}
+            thumbnail={`/img/characters/${guide.character.id}/avatar_header.webp`}
+          />
+        ))}
       </div>
     </>
   );
