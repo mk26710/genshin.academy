@@ -5,7 +5,8 @@ import type { ChangeEvent, FunctionComponent } from "react";
 
 import { useAtom } from "jotai";
 import { useHydrateAtoms } from "jotai/utils";
-import { debounce, isEmpty } from "lodash-es";
+import debounce from "lodash.debounce";
+import isEmpty from "lodash.isempty";
 import { useRef, useEffect } from "react";
 
 import { guideSearchQueryAtom, guideSearchTypeAtom } from "@/atoms/guideSearch";
