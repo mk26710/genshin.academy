@@ -10,7 +10,7 @@ import { Provider as JotaiProvider } from "jotai";
 import { ThemeProvider } from "next-themes";
 import { useRouter } from "next/router";
 import nProgress from "nprogress";
-import { useEffectOnce } from "react-use";
+import { useEffect } from "react";
 
 import { Footer } from "@/components/Footer";
 import { Navigation } from "@/components/Navigation";
@@ -23,7 +23,7 @@ import "@/assets/styles/nprogress.scss";
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
 
-  useEffectOnce(() => {
+  useEffect(() => {
     dayjs.extend(localizedFormat);
     dayjs.locale(navigator.language);
 
@@ -56,7 +56,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       router.events.off("routeChangeComplete", handleStop);
       router.events.off("routeChangeError", handleStop);
     };
-  });
+  }, []);
 
   return (
     <JotaiProvider>
