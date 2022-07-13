@@ -33,6 +33,7 @@ import rosaria from "./rosaria";
 import sangonomiya_kokomi from "./sangonomiya_kokomi";
 import sayu from "./sayu";
 import shenhe from "./shenhe";
+import shikanoin_heizou from "./shikanoin_heizou";
 import sucrose from "./sucrose";
 import tartaglia from "./tartaglia";
 import thoma from "./thoma";
@@ -96,6 +97,7 @@ const _array = Object.freeze([
   aloy,
   chongyun,
   beidou,
+  shikanoin_heizou,
 ]);
 
 export const charactersArray = Object.freeze(
