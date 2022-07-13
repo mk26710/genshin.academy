@@ -17,7 +17,7 @@ module.exports = {
   },
   rules: {
     "@typescript-eslint/consistent-type-imports": 2,
-    quotes: [2, "double", { avoidEscape: true }],
+    quotes: [2, "double", { avoidEscape: true, allowTemplateLiterals: true }],
     "@typescript-eslint/require-await": "off",
     "@typescript-eslint/no-unsafe-assignment": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
