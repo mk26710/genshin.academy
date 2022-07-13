@@ -1,5 +1,6 @@
 import type { FC } from "react";
 
+import { ExternalLink } from "@/components/ExternalLink";
 import { DiscordLogo } from "@/components/icons/DiscordLogo";
 import { GitHubLogo } from "@/components/icons/GitHubLogo";
 
@@ -8,52 +9,26 @@ export const Footer: FC = () => {
     <footer className="footer text-sm grid grid-cols-1 lg:grid-cols-[1fr_auto] grid-rows-[auto_auto] lg:grid-rows-1 py-4 mx-4 text-neutral-400 dark:text-dark-600 border-t border-neutral-200 dark:border-dark-800">
       <p>
         genshin.zenless.club is not affiliated with{" "}
-        <a
-          className="hover:text-primary-500 transition-colors ease-in-out duration-200"
-          target="_blank"
-          rel="noreferrer"
-          href="https://www.mihoyo.com/"
-        >
-          miHoYo
-        </a>
-        .
+        <ExternalLink href="https://www.mihoyo.com/">miHoYo</ExternalLink>.
         <br />
         All in-game content is the property of{" "}
-        <a
-          className="hover:text-primary-500 transition-colors ease-in-out duration-200"
-          target="_blank"
-          rel="noreferrer"
-          href="https://www.mihoyo.com/"
-        >
-          miHoYo Co., Ltd
-        </a>
-        .
+        <ExternalLink href="https://www.mihoyo.com/">miHoYo Co., Ltd</ExternalLink>.
       </p>
 
       <div className="place-self-start lg:place-self-center flex flex-col lg:flex-row gap-x-6 gap-y-2 mt-6 lg:mt-0 font-bold">
-        <a
-          href="https://github.com/kitsune-guuji/gvp"
-          target="_blank"
-          rel="noreferrer"
-          className="hover:text-primary-500 ransition-colors ease-in-out duration-200"
-        >
+        <ExternalLink href="https://github.com/kitsune-guuji/gvp">
           <div className="flex flex-row gap-x-2 items-center">
             <GitHubLogo className="w-4 h-auto inline-block" />
             <p>GitHub</p>
           </div>
-        </a>
+        </ExternalLink>
 
-        <a
-          href="https://discord.gg/TgyFNhthCK"
-          target="_blank"
-          rel="noreferrer"
-          className="hover:text-primary-500 transition-colors ease-in-out duration-200"
-        >
+        <ExternalLink href="https://discord.gg/TgyFNhthCK">
           <div className="flex flex-row gap-x-2 items-center">
             <DiscordLogo className="w-4 h-auto inline-block" />
             <p>Discord</p>
           </div>
-        </a>
+        </ExternalLink>
       </div>
     </footer>
   );
