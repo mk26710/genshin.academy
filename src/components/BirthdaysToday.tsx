@@ -1,11 +1,11 @@
-import type { FC } from "react";
+import type { FunctionComponent } from "react";
 
 import dayjs from "dayjs";
 import Link from "next/link";
 
 import { charactersArray } from "@/data/characters";
 
-export const BirthdayToday: FC = () => {
+const BirthdaysToday: FunctionComponent = () => {
   const now = dayjs();
   const [day, month] = [now.date(), now.month() + 1];
 
@@ -49,3 +49,5 @@ export const BirthdayToday: FC = () => {
     </div>
   );
 };
+
+export default BirthdaysToday;
