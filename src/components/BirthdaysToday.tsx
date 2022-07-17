@@ -1,9 +1,9 @@
 import type { FunctionComponent } from "react";
 
 import dayjs from "dayjs";
-import Link from "next/link";
 
 import { charactersArray } from "@/data/characters";
+import Link from "@/i18n/Link";
 
 const BirthdaysToday: FunctionComponent = () => {
   const now = dayjs();
