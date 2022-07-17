@@ -1,15 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { AppProps } from "next/app";
 
 import dayjs from "dayjs";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import deLocale from "dayjs/locale/de";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import jaLocale from "dayjs/locale/ja";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import ruLocale from "dayjs/locale/ru";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import { Provider as JotaiProvider } from "jotai";
-import { appWithTranslation } from "next-i18next";
 import { ThemeProvider } from "next-themes";
 import { useRouter } from "next/router";
 import nProgress from "nprogress";
@@ -74,4 +71,4 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   );
 };
 
-export default appWithTranslation(MyApp);
+export default MyApp;

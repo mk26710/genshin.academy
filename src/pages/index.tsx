@@ -1,37 +1,25 @@
-import type { InferGetStaticPropsType } from "next";
+import type { NextPage } from "next";
 
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import dynamic from "next/dynamic";
 
-import i18nextConfig from "../../next-i18next.config";
+import { Container } from "@/components/Container";
+import { Layout } from "@/components/Layout";
 
-export const getStaticProps = () => {
-  const { locales } = i18nextConfig.i18n;
-  return {
-    props: {
-      locales,
-    },
-  };
+const BirthdayToday = dynamic(() => import("../components/BirthdaysToday"), { ssr: false });
+
+const Home: NextPage = () => {
+  return (
+    <Layout
+      title="Home"
+      description="Genshin Impact characters data, calculators, playstyle guides and more!"
+    >
+      <Container>
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+          <BirthdayToday />
+        </div>
+      </Container>
+    </Layout>
+  );
 };
 
-const Index = ({ locales }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const router = useRouter();
-
-  // language detection
-  // not recommended for production, use server redirection instead of this
-  useEffect(() => {
-    for (const locale of locales) {
-      // eslint-disable-next-line no-undef
-      for (const lang of navigator.languages) {
-        if (lang.startsWith(locale)) {
-          router.replace("/" + locale);
-          return;
-        }
-      }
-    }
-  }, []);
-
-  return <></>;
-};
-
-export default Index;
+export default Home;

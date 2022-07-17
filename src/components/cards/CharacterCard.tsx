@@ -1,8 +1,9 @@
 import type { CharacterType } from "@/data/character";
 import type { FC } from "react";
 
+import NextLink from "next/link";
+
 import { StaticPicture } from "@/components/StaticPicture";
-import Link from "@/i18n/Link";
 
 interface Props {
   character: CharacterType;
@@ -24,7 +25,7 @@ export const CharacterCard: FC<Props> = ({ character, className }) => {
 
   return (
     <div className={`w-[calc(33.33%-0.75rem)] lg:w-28 ${className}`}>
-      <Link href={`/characters/${character.id}`}>
+      <NextLink href={`/characters/${character.id}`}>
         <a className="card card-vertical">
           <div className="bg-dark-900 box-border absolute -ml-[10px] -mt-[10px] rounded-full aspect-square w-8 flex items-center justify-center">
             <StaticPicture
@@ -45,7 +46,7 @@ export const CharacterCard: FC<Props> = ({ character, className }) => {
             <p className="p-1 text-center leading-none">{character.name}</p>
           </div>
         </a>
-      </Link>
+      </NextLink>
     </div>
   );
 };

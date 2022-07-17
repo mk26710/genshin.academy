@@ -1,10 +1,22 @@
+import type { CharacterType } from "@/data/character";
+import type { MetaType } from "@/data/guides/compiled/meta";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
+import { Container } from "@/components/Container";
+import { ContentsTable } from "@/components/ContentsTable";
+import { Layout } from "@/components/Layout";
+import { getCharacterById } from "@/data/characters";
+import { Guide } from "@/data/guides/compiled/guide";
 import published from "@/data/guides/compiled/published.json";
-import i18nextConfig from "next-i18next.config";
+import { characterIcon } from "@/lib/helpers";
+
+interface StaticProps {
+  meta: MetaType;
+  html: string;
+  character: CharacterType;
+}
 
 export const getStaticPaths = async () => {
   const paths = published.map(({ id }) => ({ params: { id } }));
@@ -15,34 +27,67 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
-  const { locales } = i18nextConfig.i18n;
+export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
+  const paramsId = context.params?.id;
+  const character = getCharacterById(`${paramsId}`);
+
+  if (character == null) {
+    return { notFound: true };
+  }
+
+  const { default: data } = await import(`@/data/guides/compiled/${character.id}.json`);
+  const { meta, html } = await Guide.parseAsync(data);
+
   return {
-    props: {
-      locales,
-      id: ctx.params?.id,
-    },
+    props: { meta, html, character },
   };
 };
 
-const Index = ({ locales, id }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const router = useRouter();
+const GuidesId = ({ html, character }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const [headings, setHeadings] = useState<string[]>([]);
+  const contentRoot = useRef<HTMLElement>(null);
 
-  // language detection
-  // not recommended for production, use server redirection instead of this
   useEffect(() => {
-    for (const locale of locales) {
-      // eslint-disable-next-line no-undef
-      for (const lang of navigator.languages) {
-        if (lang.startsWith(locale)) {
-          router.replace("/" + locale + "/guides/" + id);
-          return;
-        }
-      }
-    }
-  }, []);
+    const el = contentRoot.current;
 
-  return <></>;
+    if (el != null && headings.length <= 0) {
+      const headings = Array.from(el.children)
+        .filter((el) => el instanceof HTMLHeadingElement && el.getAttribute("id") != null)
+        .reduce((acc, el) => {
+          const id = el.getAttribute("id");
+
+          const validArr = [...acc];
+          if (id != null) {
+            validArr.push(id);
+          }
+
+          return validArr;
+        }, new Array<string>());
+
+      setHeadings(headings);
+    }
+  }, [contentRoot]);
+
+  return (
+    <Layout
+      title={`${character.name} Guide`}
+      color={`${character.accentColor}`}
+      description={`Builds and playstyle for ${character.name}`}
+      iconURL={characterIcon(character.id)}
+    >
+      <Container>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto]">
+          <section
+            ref={contentRoot}
+            className="md-body"
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
+
+          <ContentsTable title="Guide Contents" headings={headings} />
+        </div>
+      </Container>
+    </Layout>
+  );
 };
 
-export default Index;
+export default GuidesId;
