@@ -11,7 +11,6 @@ type TIcon = (props: SVGProps<SVGSVGElement>) => JSX.Element;
 
 interface NavRoute {
   path: string;
-  title: string;
   i18nKey: string;
   hasNested?: boolean;
   Icon: TIcon;
@@ -20,27 +19,23 @@ interface NavRoute {
 const navRoutes: NavRoute[] = [
   {
     path: "/",
-    title: "Home",
     i18nKey: "common:home",
     Icon: HomeIcon,
   },
   {
     path: "/characters",
-    title: "Characters",
     i18nKey: "common:characters",
     hasNested: true,
     Icon: StarIcon,
   },
   {
     path: "/guides",
-    title: "Guides",
     i18nKey: "common:guides",
     hasNested: true,
     Icon: BeakerIcon,
   },
   {
     path: "/calc",
-    title: "Calculators",
     i18nKey: "common:calculators",
     Icon: CalculatorIcon,
   },
@@ -102,7 +97,7 @@ export const Navigation: FC = () => {
       {/* Mobile Bottom Navbar */}
       <nav className="z-10 lg:hidden fixed bottom-0 left-0 h-[var(--mobile-navbar-height)] w-full text-[#000] dark:text-dark-300 border-t border-neutral-200 dark:border-dark-800 bg-white dark:bg-dark-900 select-none">
         <div className="dark:text-dark-400 flex flex-row h-full gap-4 px-4 justify-between overflow-y-auto">
-          {navRoutes.map(({ Icon, ...navRoute }) => (
+          {navRoutes.map(({ Icon, i18nKey, ...navRoute }) => (
             <NextLink key={`mobile-navbar-${navRoute.path}`} href={navRoute.path}>
               <a
                 className={`${activeClass(
@@ -111,7 +106,7 @@ export const Navigation: FC = () => {
                 )} flex-1 flex flex-col items-center justify-center`}
               >
                 <Icon className="h-6 w-6 p-0 stroke-2" />
-                <h1 className="text-sm font-semibold">{navRoute.title}</h1>
+                <h1 className="text-sm font-semibold">{t(i18nKey)}</h1>
               </a>
             </NextLink>
           ))}
