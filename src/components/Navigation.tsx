@@ -3,15 +3,16 @@ import type { FC, SVGProps } from "react";
 import { BeakerIcon, CalculatorIcon, HomeIcon, StarIcon } from "@heroicons/react/outline";
 import { SunIcon, MoonIcon } from "@heroicons/react/solid";
 import { useTheme } from "next-themes";
+import useTranslation from "next-translate/useTranslation";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState, useCallback } from "react";
-
 type TIcon = (props: SVGProps<SVGSVGElement>) => JSX.Element;
 
 interface NavRoute {
   path: string;
   title: string;
+  i18nKey: string;
   hasNested?: boolean;
   Icon: TIcon;
 }
@@ -20,29 +21,35 @@ const navRoutes: NavRoute[] = [
   {
     path: "/",
     title: "Home",
+    i18nKey: "common:home",
     Icon: HomeIcon,
   },
   {
     path: "/characters",
     title: "Characters",
+    i18nKey: "common:characters",
     hasNested: true,
     Icon: StarIcon,
   },
   {
     path: "/guides",
     title: "Guides",
+    i18nKey: "common:guides",
     hasNested: true,
     Icon: BeakerIcon,
   },
   {
     path: "/calc",
-    title: "Calculator",
+    title: "Calculators",
+    i18nKey: "common:calculators",
     Icon: CalculatorIcon,
   },
 ];
 
 export const Navigation: FC = () => {
   const router = useRouter();
+
+  const { t } = useTranslation();
 
   const [isMounted, setMounted] = useState(false);
   const { theme, setTheme, resolvedTheme } = useTheme();
@@ -65,7 +72,7 @@ export const Navigation: FC = () => {
   }, []);
 
   const isActive = useCallback(
-    (navRoute: Omit<NavRoute, "Icon">) => {
+    (navRoute: Pick<NavRoute, "hasNested" | "path">) => {
       if (navRoute.hasNested === true) {
         return router.route.startsWith(navRoute.path);
       }
@@ -76,7 +83,7 @@ export const Navigation: FC = () => {
   );
 
   const activeClass = useCallback(
-    (navRoute: Omit<NavRoute, "Icon">, isMobile = false) => {
+    (navRoute: Pick<NavRoute, "hasNested" | "path">, isMobile = false) => {
       const active = isActive(navRoute);
 
       if (isMobile && active) {
@@ -136,7 +143,7 @@ export const Navigation: FC = () => {
               <h1 className="font-extrabold text-xl">GENSHIN.ZENLESS</h1>
             </div>
 
-            {navRoutes.map(({ Icon, ...navRoute }) => (
+            {navRoutes.map(({ Icon, i18nKey, ...navRoute }) => (
               <NextLink key={navRoute.path} href={navRoute.path}>
                 <a
                   className={
@@ -147,7 +154,7 @@ export const Navigation: FC = () => {
                   <Fragment>
                     <Icon className="h-7 w-7 p-0" />
                   </Fragment>
-                  <h1>{navRoute.title}</h1>
+                  <h1>{t(i18nKey)}</h1>
                 </a>
               </NextLink>
             ))}
