@@ -1,5 +1,5 @@
 import type { CharacterType } from "@/data/character";
-import type { GetStaticProps } from "next";
+import type { GetStaticPaths, GetStaticProps } from "next";
 
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
@@ -10,8 +10,19 @@ interface StaticProps {
   character: CharacterType;
 }
 
-export const getStaticPaths = async () => {
-  const paths = charactersArray.map(({ id }) => ({ params: { id } }));
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+  let paths = charactersArray.map(({ id }) => ({ params: { id } }));
+
+  if (typeof locales !== "undefined") {
+    paths = locales.flatMap((locale) => {
+      return paths.map((path) => {
+        return {
+          ...path,
+          locale,
+        };
+      });
+    });
+  }
 
   return {
     paths,

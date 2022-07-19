@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+const nextTranslate = require("next-translate");
+
 // @ts-check
 
 /**
@@ -8,4 +11,4 @@ const nextConfig = {
   reactStrictMode: true,
 };
 
-module.exports = nextConfig;
+module.exports = nextTranslate(nextConfig);

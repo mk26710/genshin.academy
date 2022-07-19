@@ -1,6 +1,6 @@
 import type { CharacterType } from "@/data/character";
 import type { MetaType } from "@/data/guides/compiled/meta";
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
+import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 
 import { useEffect, useRef, useState } from "react";
 
@@ -18,8 +18,19 @@ interface StaticProps {
   character: CharacterType;
 }
 
-export const getStaticPaths = async () => {
-  const paths = published.map(({ id }) => ({ params: { id } }));
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+  let paths = published.map(({ id }) => ({ params: { id } }));
+
+  if (typeof locales !== "undefined") {
+    paths = locales.flatMap((locale) => {
+      return paths.map((path) => {
+        return {
+          ...path,
+          locale,
+        };
+      });
+    });
+  }
 
   return {
     paths,
