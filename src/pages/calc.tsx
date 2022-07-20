@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { useAtom } from "jotai";
+import useTranslation from "next-translate/useTranslation";
 
 import {
   critDamageAtom,
@@ -16,6 +17,8 @@ import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
 
 const CalcPage = () => {
+  const { t } = useTranslation();
+
   const [critRate, setCritRate] = useAtom(critRateAtom);
   const [critDmg, setCritDmg] = useAtom(critDamageAtom);
   const critValue = critDmg + critRate * 2;
@@ -26,10 +29,7 @@ const CalcPage = () => {
   const resinReplenishAt = dayjs().add(resinDelta, "minutes");
 
   return (
-    <Layout
-      title="Calculators"
-      description="Genshin Impact calculators for crti value, resin and etc."
-    >
+    <Layout title={t("common:calculators")} description={t("meta:calculators.description")}>
       <Container>
         <div className="columns-1 md:columns-2 gap-4 space-y-4">
           <CalculatorRoot className="overflow-y-auto break-inside-avoid">

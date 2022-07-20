@@ -7,6 +7,7 @@ import { useAtom } from "jotai";
 import { useHydrateAtoms } from "jotai/utils";
 import debounce from "lodash.debounce";
 import isEmpty from "lodash.isempty";
+import useTranslation from "next-translate/useTranslation";
 import { useRef, useEffect } from "react";
 
 import { guideSearchQueryAtom, guideSearchTypeAtom } from "@/atoms/guideSearch";
@@ -129,9 +130,10 @@ const RouterReadyContent: FunctionComponent<{ router: NextRouter }> = ({ router 
 
 const GuidesIndex: NextPage = () => {
   const [ready, router] = useRouterReady();
+  const { t } = useTranslation();
 
   return (
-    <Layout title="Guides" description="Genshin Impact characters' playstyle, builds and etc.">
+    <Layout title={t("common:guides")} description={t("meta:guides.home.description")}>
       <Container>{ready && <RouterReadyContent router={router} />}</Container>
     </Layout>
   );

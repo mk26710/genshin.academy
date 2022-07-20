@@ -2,6 +2,7 @@ import type { CharacterType } from "@/data/character";
 import type { MetaType } from "@/data/guides/compiled/meta";
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 
+import useTranslation from "next-translate/useTranslation";
 import { useEffect, useRef, useState } from "react";
 
 import { Container } from "@/components/Container";
@@ -38,8 +39,8 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   };
 };
 
-export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
-  const paramsId = context.params?.id;
+export const getStaticProps: GetStaticProps<StaticProps> = async ({ params }) => {
+  const paramsId = params?.id;
   const character = getCharacterById(`${paramsId}`);
 
   if (character == null) {
@@ -55,6 +56,8 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
 };
 
 const GuidesId = ({ html, character }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const { t } = useTranslation();
+
   const [headings, setHeadings] = useState<string[]>([]);
   const contentRoot = useRef<HTMLElement>(null);
 
@@ -81,10 +84,10 @@ const GuidesId = ({ html, character }: InferGetStaticPropsType<typeof getStaticP
 
   return (
     <Layout
-      title={`${character.name} Guide`}
-      color={`${character.accentColor}`}
-      description={`Builds and playstyle for ${character.name}`}
+      title={t("meta:guides.id.title", { name: character.name })}
+      description={t("meta:guides.id.description", { name: character.name })}
       iconURL={characterIcon(character.id)}
+      color={`${character.accentColor}`}
     >
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto]">
