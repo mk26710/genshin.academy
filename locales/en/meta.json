@@ -18,5 +18,8 @@
       "title" : "Guide for {{ name }}",
       "description": "{{ name }} build and playstyle guide"
     }
+  },
+  "404": {
+    "description": "Not found!"
   }
 }
