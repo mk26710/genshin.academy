@@ -7,6 +7,7 @@ import useTranslation from "next-translate/useTranslation";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState, useCallback } from "react";
+
 type TIcon = (props: SVGProps<SVGSVGElement>) => JSX.Element;
 
 interface NavRoute {
@@ -106,7 +107,7 @@ export const Navigation: FC = () => {
                 )} flex-1 flex flex-col items-center justify-center`}
               >
                 <Icon className="h-6 w-6 p-0 stroke-2" />
-                <h1 className="text-sm font-semibold">{t(i18nKey)}</h1>
+                <h1 className="text-sm font-semibold">{t(i18nKey, { count: 0 })}</h1>
               </a>
             </NextLink>
           ))}
@@ -149,7 +150,7 @@ export const Navigation: FC = () => {
                   <Fragment>
                     <Icon className="h-7 w-7 p-0" />
                   </Fragment>
-                  <h1>{t(i18nKey)}</h1>
+                  <h1>{t(i18nKey, { count: 0 })}</h1>
                 </a>
               </NextLink>
             ))}

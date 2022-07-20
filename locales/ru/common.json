@@ -1,6 +1,12 @@
 {
   "home": "Главная",
+
   "characters": "Персонажи",
+  "characters_one": "Персонаж",
+
   "guides": "Руководства",
-  "calculators": "Калькуляторы"
+  "guides_one": "Руководство",
+
+  "calculators": "Калькуляторы",
+  "calculators_one": "Калькулятор"
 }

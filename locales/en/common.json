@@ -1,6 +1,12 @@
 {
   "home": "Home",
+
   "characters": "Characters",
+  "characters_one": "Character",
+
   "guides": "Guides",
-  "calculators": "Calculators"
+  "guides_one": "Guide",
+
+  "calculators": "Calculators",
+  "calculators_one": "Calculator"
 }
