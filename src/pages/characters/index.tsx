@@ -24,7 +24,7 @@ const CharactersIndex: NextPage = () => {
     <Layout title={t("common:characters")} description={t("meta:characters.home.description")}>
       <Container>
         <div className="mb-6 flex flex-col lg:flex-row gap-4">
-          <Input placeholder="Search by name" onChange={handleChange} value={search} />
+          <Input placeholder={t`common:search-by-name`} onChange={handleChange} value={search} />
         </div>
 
         <div className="flex flex-row flex-wrap gap-4 justify-evenly md:justify-start">

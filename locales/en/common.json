@@ -8,5 +8,8 @@
   "guides_one": "Guide",
 
   "calculators": "Calculators",
-  "calculators_one": "Calculator"
+  "calculators_one": "Calculator",
+
+  "search-by-name": "Search by name",
+  "search-by-title": "Search by title"
 }

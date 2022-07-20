@@ -48,6 +48,8 @@ const RouterReadyContent: FunctionComponent<{ router: NextRouter }> = ({ router 
     [guideSearchTypeAtom, router.query.t ?? "all"],
   ]);
 
+  const { t } = useTranslation();
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [input, setInput] = useAtom(guideSearchQueryAtom);
@@ -106,7 +108,7 @@ const RouterReadyContent: FunctionComponent<{ router: NextRouter }> = ({ router 
         <Input
           ref={inputRef}
           onChange={handleInputChange}
-          placeholder="Search by title"
+          placeholder={t`common:search-by-title`}
           fullWidth
         />
       </div>

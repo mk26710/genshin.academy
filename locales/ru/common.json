@@ -8,5 +8,8 @@
   "guides_one": "Руководство",
 
   "calculators": "Калькуляторы",
-  "calculators_one": "Калькулятор"
+  "calculators_one": "Калькулятор",
+
+  "search-by-name": "Поиск по имени",
+  "search-by-title": "Поиск по названию"
 }
