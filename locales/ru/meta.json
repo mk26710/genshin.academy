@@ -1,0 +1,22 @@
+{
+  "home": {
+    "description": "Информация о персонажах Genshin Impact, калькуляторы, руководства по прокачке и другое!"
+  },
+  "characters": {
+    "home": {
+      "description": "Игровые персонажи Genshin Impact."
+    }
+  },
+  "calculators": {
+    "description": "Подсчитайте соотношение крит урона и крит шанса своих артефактов из Genshin Impact, время восстановление смолы."
+  },
+  "guides": {
+    "home": {
+      "description": "Руководства по прокачке персонажей Genshin Impact и другие руководства."
+    },
+    "id": {
+      "title" : "Руководство по {{ name }}",
+      "description": "Руководство по прокачке и игре за {{ name }}"
+    }
+  }
+}

@@ -2,6 +2,6 @@ module.exports = {
   locales: ["en", "ru"],
   defaultLocale: "en",
   pages: {
-    "*": ["common", "footer"],
+    "*": ["common", "footer", "meta"],
   },
 };

@@ -1,0 +1,22 @@
+{
+  "home": {
+    "description": "Genshin Impact characters data, calculators, playstyle guides and more!"
+  },
+  "characters": {
+    "home": {
+      "description": "Genshin Impact playable characters."
+    }
+  },
+  "calculators": {
+    "description": "Calculate your Genshin Impact artifacts crit value and resin recovery time."
+  },
+  "guides": {
+    "home": {
+      "description": "Genshin Impact characters building guides and other guides."
+    },
+    "id": {
+      "title" : "Guide for {{ name }}",
+      "description": "{{ name }} build and playstyle guide"
+    }
+  }
+}
