@@ -1,6 +1,46 @@
 # Changelog
 
 
+## (v1.0.6) - 2022-07-20
+
+### Bug Fixes
+
+- **i18n:** Removed redundant word from ru.footer.copyright ([ab8216e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/ab8216ea33ac57c0056ecdfa80f8edbaf469988b))
+- **i18n, Navigation:** Missing translation on mobile ([89a8cb7](https://github.com/TenkoSpirit/genshin.zenless.club/commit/89a8cb7ffd3582ba0c09f0bac04efe634b989102))
+- **No category:** Weird hydration error that is happening on home page could be caused by birthdays ([c8a0e43](https://github.com/TenkoSpirit/genshin.zenless.club/commit/c8a0e43d67aace8f3adaca46b7d6b1c51c261488))
+
+### Features
+
+- **components:** Created `ExternalLink` as an alias for `a` but with some default values ([18fa9b9](https://github.com/TenkoSpirit/genshin.zenless.club/commit/18fa9b9e2d81886a2de99fd15861bf5c709b704c))
+- **components:** Removed shadow from input fields ([6cb1e27](https://github.com/TenkoSpirit/genshin.zenless.club/commit/6cb1e27b1d0779b696e269bd3fedd97643c8e48b))
+- **data:** Added Shikanoin Heizou ([4726cb1](https://github.com/TenkoSpirit/genshin.zenless.club/commit/4726cb163eedfc761a67fd46384bf034d1075dfa))
+- **i18n:** Absolutely awful i18n implementation ([3e27227](https://github.com/TenkoSpirit/genshin.zenless.club/commit/3e272278fbaa647fd2cc2a2bf1e6d5476618e1fb))
+- **i18n:** Implemented i18n with next-translate ([e456350](https://github.com/TenkoSpirit/genshin.zenless.club/commit/e4563507d6e04c672f3b10f7a91a3687a1d6ff4e))
+- **i18n:** Added some basic translation strings ([ab40940](https://github.com/TenkoSpirit/genshin.zenless.club/commit/ab40940176721f3762c50870d2b8c942cae24f9c))
+- **i18n:** Added plural forms for some common strings ([8abece1](https://github.com/TenkoSpirit/genshin.zenless.club/commit/8abece1fe328ff4600ad8d96c21af246c100aef3))
+- **i18n:** Added translation strings for meta data ([ceb58b2](https://github.com/TenkoSpirit/genshin.zenless.club/commit/ceb58b26c0e262e913a06d561baa4486b87f69f8))
+- **i18n, pages:** Implemented meta translation strings ([5684622](https://github.com/TenkoSpirit/genshin.zenless.club/commit/568462262ca89139baf7f7cb20284c8921cf6fae))
+- **i18n, pages:** Implemented localized input placeholders ([fc9e1ec](https://github.com/TenkoSpirit/genshin.zenless.club/commit/fc9e1ecf5d41143a9e0c156c46a63a8ebe93834d))
+- **i18n, pages:** Added translations to 404 page ([5f78862](https://github.com/TenkoSpirit/genshin.zenless.club/commit/5f788620e3eac7a10008ea45ec3030f62a064655))
+- **sitemap:** Added automatic sitemap generation ([88912db](https://github.com/TenkoSpirit/genshin.zenless.club/commit/88912dbe427e4867abe7f9ce1e8d9e771aeb6729))
+
+### Miscellaneous Tasks
+
+- **deps:** Version bumps and zod moved from dev deps ([1a9e78c](https://github.com/TenkoSpirit/genshin.zenless.club/commit/1a9e78c6f1f53b84d0b662be583301096967dc28))
+- **eslint:** Allow template literals ([5b01126](https://github.com/TenkoSpirit/genshin.zenless.club/commit/5b011267c0fb6eb9a15820ae1ed9c3db534019c1))
+- **tailwind:** Removed redundant entry in content ([44c7b67](https://github.com/TenkoSpirit/genshin.zenless.club/commit/44c7b67573a7108b394e5cbb05d5e9f4765c18c8))
+
+### Refactor
+
+- **c8a0e43d67aace8f3adaca46b7d6b1c51c261488:** The issue was indeed caused by this component, should probably use Next's dynamic import with disabled ssr instead of wrapping with custom `ClientOnly` ([e21b4f1](https://github.com/TenkoSpirit/genshin.zenless.club/commit/e21b4f180ff21d74a8074e49a4e46055268495ef))
+- **components:** Switched `a`s with `ExternalLink`s in Footer ([c79394b](https://github.com/TenkoSpirit/genshin.zenless.club/commit/c79394befbedf0c5d078a04f6e3100092437364a))
+
+### Revert
+
+- **i18n:** Absolutely awful i18n implementation ([5c0c3d1](https://github.com/TenkoSpirit/genshin.zenless.club/commit/5c0c3d1f533701196a6355b6c303b9473a2756d8))
+
+
+
 ## (v1.0.5) - 2022-07-12
 
 ### Bug Fixes
