@@ -2,12 +2,13 @@
 import type { AppProps } from "next/app";
 
 import dayjs from "dayjs";
-import deLocale from "dayjs/locale/de";
-import jaLocale from "dayjs/locale/ja";
-import ruLocale from "dayjs/locale/ru";
+import "dayjs/locale/de";
+import "dayjs/locale/ja";
+import "dayjs/locale/ru";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import { Provider as JotaiProvider } from "jotai";
 import { ThemeProvider } from "next-themes";
+import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
 import nProgress from "nprogress";
 import { useEffect } from "react";
@@ -23,9 +24,11 @@ import "@/assets/styles/nprogress.scss";
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
 
+  const { lang } = useTranslation();
+
   useEffect(() => {
     dayjs.extend(localizedFormat);
-    dayjs.locale(navigator.language);
+    dayjs.locale(lang);
 
     console.log("dayjs extended with localized formats");
 
