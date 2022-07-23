@@ -9,9 +9,7 @@ export const critRateAtom = atom<number>(critRateInit);
 export const critDamageInit = NaN;
 export const critDamageAtom = atom<number>(critDamageInit);
 
-export const critValueAtom = atom((get) =>
-  (get(critDamageAtom) + get(critRateAtom) * 2).toFixed(2),
-);
+export const critValueAtom = atom((get) => get(critDamageAtom) + get(critRateAtom) * 2);
 
 /** Resin calculator atoms */
 
