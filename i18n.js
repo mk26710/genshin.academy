@@ -3,5 +3,6 @@ module.exports = {
   defaultLocale: "en",
   pages: {
     "*": ["common", "footer", "meta", "404"],
+    "/calc": ["calc"],
   },
 };
