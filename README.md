@@ -12,3 +12,20 @@ The project is essentially a statically generated website, so it had to be done 
 compute services
 
 Please, see [gvp-guides](https://github.com/kitsune-guuji/gvp-guides), if you would like to publish something! 
+
+## Team
+
+<table>
+    <tr>
+        <td align="center">
+        <a href="https://github.com/TenkoSpirit">
+            <img src="https://github.com/TenkoSpirit.png" width="100px;" alt=""/>
+            <br />
+            <b>TenkoSpirit</b>
+        </a>
+        <br />
+        <p>Owner<br />
+        Developer<br />
+        Translator</p>
+    </td>
+</table>
