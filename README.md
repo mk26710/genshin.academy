@@ -28,4 +28,15 @@ Please, see [gvp-guides](https://github.com/kitsune-guuji/gvp-guides), if you wo
         Developer<br />
         Translator</p>
     </td>
+        <td align="center">
+        <a href="https://github.com/Pikachupsik">
+            <img src="https://github.com/Pikachupsik.png" width="100px;" alt=""/>
+            <br />
+            <b>Pikachupsik</b>
+        </a>
+        <br />
+        <p>Writer<br />
+        Translator</p>
+    </td>
+    </tr>
 </table>
