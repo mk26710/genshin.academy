@@ -1,4 +1,0 @@
-[submodule "guides"]
-	path = src/data/guides/compiled
-	url = https://github.com/TenkoSpirit/zenless-club-genshin-guides.git
-	branch = guides-compiled
