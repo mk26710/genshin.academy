@@ -19,6 +19,30 @@ import { CalculatorTitle } from "@/components/calculator/CalculatorTitle";
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
 
+const CritValueResult = ({ critValue }: { critValue: number }) => {
+  const color = () => {
+    if (critValue > 50) {
+      return "text-emerald-300";
+    } else if (critValue > 40) {
+      return "text-emerald-500";
+    } else if (critValue > 30) {
+      return "text-emerald-900";
+    } else if (critValue > 20) {
+      return "text-yellow-600";
+    } else if (critValue > 10) {
+      return "text-yellow-300";
+    }
+
+    return "text-red-700";
+  };
+
+  return (
+    <>
+      <span className={color()}>{critValue.toFixed(2)}</span>
+    </>
+  );
+};
+
 const CrtitValueCalculator: FunctionComponent = () => {
   const { t } = useTranslation();
 
@@ -30,7 +54,7 @@ const CrtitValueCalculator: FunctionComponent = () => {
     <CalculatorRoot className="overflow-y-auto break-inside-avoid">
       <CalculatorTitle>
         <span className="flex-1">{t`calc:crit-value`}</span>
-        {critValue > 0 && <span className="text-primary-500">{critValue.toFixed(2)}</span>}
+        {critValue > 0 && <CritValueResult critValue={critValue} />}
       </CalculatorTitle>
       <CalculatorDetails>{t`calc:cv-details`}</CalculatorDetails>
       <CalculatorInput
@@ -60,7 +84,7 @@ const ResinCalculator: FunctionComponent = () => {
 
   return (
     <CalculatorRoot className="overflow-y-auto break-inside-avoid">
-      <CalculatorTitle>
+      <CalculatorTitle className="!flex-col lg:!flex-row">
         <span className="flex-1">{t`calc:resin`}</span>
         {resinDelta > 0 && (
           <span className="text-primary-500 normal-case">{resinReplenishTime.format("lll")}</span>
