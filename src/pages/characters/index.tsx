@@ -1,46 +1,37 @@
-import type { NextPage } from "next";
-import type { ChangeEvent } from "react";
+import type { InferGetStaticPropsType } from "next";
 
-import { useAtom } from "jotai";
-import useTranslation from "next-translate/useTranslation";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
-import { characterSearchAtom } from "@/atoms/characterSearch";
-import { CharacterCard } from "@/components/cards/CharacterCard";
-import { Container } from "@/components/Container";
-import { Input } from "@/components/Input";
-import { Layout } from "@/components/Layout";
-import { charactersArray } from "@/data/characters";
+import i18nextConfig from "next-i18next.config";
 
-const CharactersIndex: NextPage = () => {
-  const [search, setSearch] = useAtom(characterSearchAtom);
-
-  const { t } = useTranslation();
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
+export const getStaticProps = () => {
+  const { locales } = i18nextConfig.i18n;
+  return {
+    props: {
+      locales,
+    },
   };
-
-  return (
-    <Layout title={t("common:characters")} description={t("meta:characters.home.description")}>
-      <Container>
-        <div className="mb-6 flex flex-col lg:flex-row gap-4">
-          <Input placeholder={t`common:search-by-name`} onChange={handleChange} value={search} />
-        </div>
-
-        <div className="flex flex-row flex-wrap gap-4 justify-evenly md:justify-start">
-          {charactersArray.map((character) => (
-            <CharacterCard
-              className={
-                character.name.toLowerCase().includes(search.toLowerCase()) ? "" : "hidden"
-              }
-              key={character.id}
-              character={character}
-            />
-          ))}
-        </div>
-      </Container>
-    </Layout>
-  );
 };
 
-export default CharactersIndex;
+const Index = ({ locales }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const router = useRouter();
+
+  // language detection
+  // not recommended for production, use server redirection instead of this
+  useEffect(() => {
+    for (const locale of locales) {
+      // eslint-disable-next-line no-undef
+      for (const lang of navigator.languages) {
+        if (lang.startsWith(locale)) {
+          router.replace("/" + locale + router.asPath);
+          return;
+        }
+      }
+    }
+  }, []);
+
+  return null;
+};
+
+export default Index;

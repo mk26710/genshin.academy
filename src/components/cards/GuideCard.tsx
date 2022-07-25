@@ -1,10 +1,11 @@
 import type { FC } from "react";
 
 import dayjs from "dayjs";
-import NextLink from "next/link";
 import { useEffect, useState } from "react";
 
 import { StaticPicture } from "@/components/StaticPicture";
+
+import LocaleLink from "../LocaleLink";
 
 interface Props {
   id: string;
@@ -32,7 +33,7 @@ export const GuideCard: FC<Props> = ({
   }, []);
 
   return (
-    <NextLink href={href} prefetch={false}>
+    <LocaleLink href={href} prefetch={false}>
       <a id={id} className={`card card-vertical ${className}`}>
         {thumbnail && (
           <StaticPicture
@@ -54,6 +55,6 @@ export const GuideCard: FC<Props> = ({
           {description && <p className="text-sm text-justify">{description}</p>}
         </div>
       </a>
-    </NextLink>
+    </LocaleLink>
   );
 };

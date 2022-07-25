@@ -1,86 +1,18 @@
-import type { CharacterType } from "@/data/character";
-import type { MetaType } from "@/data/guides/meta.schema";
-import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
+import type { GetStaticPaths, InferGetStaticPropsType } from "next";
 
-import useTranslation from "next-translate/useTranslation";
-import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
-import { Container } from "@/components/Container";
-import { ContentsTable } from "@/components/ContentsTable";
-import { Layout } from "@/components/Layout";
-import { getCharacterById } from "@/data/characters";
 import { publishedIds } from "@/data/guides/published";
-import { characterIcon } from "@/lib/helpers";
-import { getGuide } from "@/lib/markdownTools";
+import { getI18nLocales } from "@/lib/i18n";
+import i18nextConfig from "next-i18next.config";
 
-interface StaticProps {
-  meta: MetaType;
-  html: string;
-  character: CharacterType;
-}
+export const getStaticPaths: GetStaticPaths = async () => {
+  const locales = getI18nLocales();
 
-const GuidesId = ({ html, character }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { t } = useTranslation();
-
-  const [headings, setHeadings] = useState<string[]>([]);
-  const contentRoot = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const el = contentRoot.current;
-
-    if (el != null && headings.length <= 0) {
-      const headings = Array.from(el.children)
-        .filter((el) => el instanceof HTMLHeadingElement && el.getAttribute("id") != null)
-        .reduce((acc, el) => {
-          const id = el.getAttribute("id");
-
-          const validArr = [...acc];
-          if (id != null) {
-            validArr.push(id);
-          }
-
-          return validArr;
-        }, new Array<string>());
-
-      setHeadings(headings);
-    }
-  }, [contentRoot]);
-
-  return (
-    <Layout
-      title={t("meta:guides.id.title", { name: character.name })}
-      description={t("meta:guides.id.description", { name: character.name })}
-      iconURL={characterIcon(character.id)}
-      color={`${character.accentColor}`}
-    >
-      <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto]">
-          <section
-            ref={contentRoot}
-            className="md-body"
-            dangerouslySetInnerHTML={{ __html: html }}
-          />
-
-          <ContentsTable title="Guide Contents" headings={headings} />
-        </div>
-      </Container>
-    </Layout>
+  const paths = publishedIds.flatMap((id) =>
+    locales.flatMap((locale) => ({ params: { id, locale } })),
   );
-};
-
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  let paths = publishedIds.map((id) => ({ params: { id } }));
-
-  if (typeof locales !== "undefined") {
-    paths = locales.flatMap((locale) => {
-      return paths.map((path) => {
-        return {
-          ...path,
-          locale,
-        };
-      });
-    });
-  }
 
   return {
     paths,
@@ -88,26 +20,33 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   };
 };
 
-export const getStaticProps: GetStaticProps<StaticProps> = async ({ params, locale = "en" }) => {
-  const paramsId = params?.id?.toString().toLowerCase();
-  if (typeof paramsId === "undefined") {
-    return { notFound: true };
-  }
-
-  if (!publishedIds.includes(paramsId)) {
-    return { notFound: true };
-  }
-
-  const character = getCharacterById(paramsId);
-  if (character == null) {
-    return { notFound: true };
-  }
-
-  const guide = await getGuide(paramsId, locale);
-
+export const getStaticProps = () => {
+  const { locales } = i18nextConfig.i18n;
   return {
-    props: { ...guide, character },
+    props: {
+      locales,
+    },
   };
+};
+
+const GuidesId = ({ locales }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const router = useRouter();
+
+  // language detection
+  // not recommended for production, use server redirection instead of this
+  useEffect(() => {
+    for (const locale of locales) {
+      // eslint-disable-next-line no-undef
+      for (const lang of navigator.languages) {
+        if (lang.startsWith(locale)) {
+          router.replace("/" + locale + router.asPath);
+          return;
+        }
+      }
+    }
+  }, []);
+
+  return null;
 };
 
 export default GuidesId;

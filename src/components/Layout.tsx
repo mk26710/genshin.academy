@@ -3,6 +3,9 @@ import type { FC, ReactNode } from "react";
 import Head from "next/head";
 import { Fragment } from "react";
 
+import { Footer } from "./Footer";
+import { Navigation } from "./Navigation";
+
 interface Props {
   title?: string;
   titleTemplate?: string;
@@ -58,7 +61,11 @@ export const Layout: FC<Props> = ({
         />
       </Head>
 
-      <>{children}</>
+      <div className="app-container">
+        <Navigation />
+        <>{children}</>
+        <Footer />
+      </div>
     </Fragment>
   );
 };

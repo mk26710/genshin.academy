@@ -2,11 +2,12 @@ import type { FC, SVGProps } from "react";
 
 import { BeakerIcon, CalculatorIcon, HomeIcon, StarIcon } from "@heroicons/react/outline";
 import { SunIcon, MoonIcon } from "@heroicons/react/solid";
+import { useTranslation } from "next-i18next";
 import { useTheme } from "next-themes";
-import useTranslation from "next-translate/useTranslation";
-import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState, useCallback } from "react";
+
+import LocaleLink from "@/components/LocaleLink";
 
 type TIcon = (props: SVGProps<SVGSVGElement>) => JSX.Element;
 
@@ -99,7 +100,7 @@ export const Navigation: FC = () => {
       <nav className="z-10 lg:hidden fixed bottom-0 left-0 h-[var(--mobile-navbar-height)] w-full text-[#000] dark:text-dark-300 border-t border-neutral-200 dark:border-dark-800 bg-white dark:bg-dark-900 select-none">
         <div className="dark:text-dark-400 flex flex-row h-full gap-4 px-4 justify-between overflow-y-auto">
           {navRoutes.map(({ Icon, i18nKey, ...navRoute }) => (
-            <NextLink key={`mobile-navbar-${navRoute.path}`} href={navRoute.path}>
+            <LocaleLink key={`mobile-navbar-${navRoute.path}`} href={navRoute.path}>
               <a
                 className={`${activeClass(
                   navRoute,
@@ -109,7 +110,7 @@ export const Navigation: FC = () => {
                 <Icon className="h-6 w-6 p-0 stroke-2" />
                 <h1 className="text-sm font-semibold">{t(i18nKey, { count: 0 })}</h1>
               </a>
-            </NextLink>
+            </LocaleLink>
           ))}
 
           {isMounted && (
@@ -117,11 +118,13 @@ export const Navigation: FC = () => {
               onClick={toggleDark}
               className="flex-1 flex flex-col items-center justify-center cursor-pointer"
             >
-              {resolvedTheme === "dark" && <SunIcon className="w-6 h-6" />}
-              {resolvedTheme !== "dark" && <MoonIcon className="w-6 h-6" />}
+              {resolvedTheme === "dark" ? (
+                <SunIcon className="w-6 h-6" />
+              ) : (
+                <MoonIcon className="w-6 h-6" />
+              )}
               <h1 className="text-sm font-semibold">
-                {resolvedTheme === "dark" && "Light"}
-                {resolvedTheme !== "dark" && "Dark"}
+                {resolvedTheme === "dark" ? "Light" : "Dark"}
               </h1>
             </div>
           )}
@@ -140,7 +143,7 @@ export const Navigation: FC = () => {
             </div>
 
             {navRoutes.map(({ Icon, i18nKey, ...navRoute }) => (
-              <NextLink key={navRoute.path} href={navRoute.path}>
+              <LocaleLink key={navRoute.path} href={navRoute.path}>
                 <a
                   className={
                     "w-full flex flex-row items-center gap-x-2 px-3 py-2 font-semibold text-lg cursor-pointer" +
@@ -152,7 +155,7 @@ export const Navigation: FC = () => {
                   </Fragment>
                   <h1>{t(i18nKey, { count: 0 })}</h1>
                 </a>
-              </NextLink>
+              </LocaleLink>
             ))}
           </div>
 

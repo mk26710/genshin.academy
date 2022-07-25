@@ -1,9 +1,10 @@
 import type { FunctionComponent } from "react";
 
 import dayjs from "dayjs";
-import Link from "next/link";
 
 import { charactersArray } from "@/data/characters";
+
+import LocaleLink from "./LocaleLink";
 
 const BirthdaysToday: FunctionComponent = () => {
   const now = dayjs();
@@ -26,7 +27,7 @@ const BirthdaysToday: FunctionComponent = () => {
       {celebrant != null && (
         <>
           <div>
-            <Link key={`bd-${celebrant.id}`} href={`/characters/${celebrant.id}`}>
+            <LocaleLink key={`bd-${celebrant.id}`} href={`/characters/${celebrant.id}`}>
               <a className="rounded-lg bg-neutral-100 dark:bg-dark-900 outline outline-1 outline-neutral-200 dark:outline-dark-200/10 flex justify-center">
                 <img
                   className="rounded-lg object-center object-cover"
@@ -34,7 +35,7 @@ const BirthdaysToday: FunctionComponent = () => {
                   alt={`${celebrant.name} icon`}
                 />
               </a>
-            </Link>
+            </LocaleLink>
           </div>
 
           <section className="mt-2 text-justify">
