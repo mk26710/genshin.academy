@@ -1,6 +1,26 @@
 # Changelog
 
 
+## (v1.0.8) - 2022-07-25
+
+### Features
+
+- **README:** Pikachupsik added to the team on the README file ([cbeeb79](https://github.com/TenkoSpirit/genshin.zenless.club/commit/cbeeb791a2ec582532c32d7a5eda3505f85ec010))
+- **README:** Updated ([e17266e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/e17266eeb5339f00c1c8e581852fa226a0dcbb3c))
+- **guides:** Created zod schemas for validation purposes ([10b6374](https://github.com/TenkoSpirit/genshin.zenless.club/commit/10b6374d16280f710a034c38d8b330290ba19fe0))
+- **guides:** Submodule is not needed anymore, we are parsing markdown directly in nextjs ([e0ea0b2](https://github.com/TenkoSpirit/genshin.zenless.club/commit/e0ea0b263da2a09c8ad75823c3e2ed8f0969ee57))
+- **guides:** Added a list of published guides ([aba2468](https://github.com/TenkoSpirit/genshin.zenless.club/commit/aba24684796295f6926e6851f5c4eb6483c4d5dd))
+- **guides:** Made lang meta required ([da23664](https://github.com/TenkoSpirit/genshin.zenless.club/commit/da2366465a1552e385bc8a1067943924dde9007f))
+- **lib:** Added a bunch of markdown parsing functions ([c3202dd](https://github.com/TenkoSpirit/genshin.zenless.club/commit/c3202ddaeb1eebfb5b625f6814e3fd7d1246a56f))
+- **pages:** Updated guides index and guides view pages using recently moved markdown parser ([f72f37e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/f72f37e727f21ffd42006077d866a77da586fd77))
+
+### Miscellaneous Tasks
+
+- **deps:** Added markdown parsing related dependencies ([fc03674](https://github.com/TenkoSpirit/genshin.zenless.club/commit/fc036748bf282c61ee446cc54a1b439dce3a3a3f))
+- **deps:** Version bumps ([f6f7bba](https://github.com/TenkoSpirit/genshin.zenless.club/commit/f6f7bbaf49674a5b6c20f1b40b00b936e0a63837))
+
+
+
 ## (v1.0.7) - 2022-07-25
 
 ### Bug Fixes
