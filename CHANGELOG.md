@@ -1,6 +1,26 @@
 # Changelog
 
 
+## (v1.0.7) - 2022-07-25
+
+### Bug Fixes
+
+- **app:** Fix dayjs locale imports and made it depend on lang from next-translate ([f07ec61](https://github.com/TenkoSpirit/genshin.zenless.club/commit/f07ec61581e3922d6f83508f4089e91ba7c2b41a))
+- **atoms:** Apply toFixed on crit value result ([27c35a5](https://github.com/TenkoSpirit/genshin.zenless.club/commit/27c35a58187eac4c2a1307cb940c5f31303f981d))
+
+### Features
+
+- **atoms:** Added derived atoms with results for calculators ([a11f179](https://github.com/TenkoSpirit/genshin.zenless.club/commit/a11f1792c0d172d6151f1ff8f38bd2899ff122f9))
+- **atoms:** Actually better use .toFixed when needed ([220979e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/220979ecc1a4c7af82b2de4086653be426d4570d))
+- **components, Calculators:** Turned title into a flex container ([00ab60f](https://github.com/TenkoSpirit/genshin.zenless.club/commit/00ab60faeab90a7a83961db632aa7c9d12752b61))
+- **components, calculators:** Changed default styles for title and details ([eb40bf8](https://github.com/TenkoSpirit/genshin.zenless.club/commit/eb40bf83c9f11a7e24a9cf427cb320c6f302f0f9))
+- **i18n:** Added more translation strigns for calculators ([21ea648](https://github.com/TenkoSpirit/genshin.zenless.club/commit/21ea648549608f8841bf7e706873b40c9f68d7fd))
+- **pages:** Separated each calculator in subcomponents and used derived atoms instead of react state ([bc271ef](https://github.com/TenkoSpirit/genshin.zenless.club/commit/bc271ef66af028f7dcd37bfb958e68fd82668348))
+- **pages:** Updated calculators with i18n translations and changed some styles ([465ff3e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/465ff3eb24a28625ff6efb50a5f16ee8627ac67a))
+- **pages:** Crit value is now colored accordingg to infographics ([c0a4d9d](https://github.com/TenkoSpirit/genshin.zenless.club/commit/c0a4d9d8950da55fdd5d1d2ba8343d59e802ad5a))
+
+
+
 ## (v1.0.6) - 2022-07-20
 
 ### Bug Fixes
