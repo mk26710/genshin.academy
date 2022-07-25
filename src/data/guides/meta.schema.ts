@@ -9,6 +9,7 @@ export type MetaRestType = z.infer<typeof MetaRest>;
 export const MetaRequired = z.object({
   id: z.string(),
   type: GuideTypes,
+  lang: z.string(),
 });
 export type MetaRequiredType = z.infer<typeof MetaRequired>;
 
