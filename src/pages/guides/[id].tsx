@@ -1,5 +1,5 @@
 import type { CharacterType } from "@/data/character";
-import type { MetaType } from "@/data/guides/compiled/meta";
+import type { MetaType } from "@/data/guides/meta.schema";
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 
 import useTranslation from "next-translate/useTranslation";
@@ -9,51 +9,15 @@ import { Container } from "@/components/Container";
 import { ContentsTable } from "@/components/ContentsTable";
 import { Layout } from "@/components/Layout";
 import { getCharacterById } from "@/data/characters";
-import { Guide } from "@/data/guides/compiled/guide";
-import published from "@/data/guides/compiled/published.json";
+import { publishedIds } from "@/data/guides/published";
 import { characterIcon } from "@/lib/helpers";
+import { getGuide } from "@/lib/markdownTools";
 
 interface StaticProps {
   meta: MetaType;
   html: string;
   character: CharacterType;
 }
-
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  let paths = published.map(({ id }) => ({ params: { id } }));
-
-  if (typeof locales !== "undefined") {
-    paths = locales.flatMap((locale) => {
-      return paths.map((path) => {
-        return {
-          ...path,
-          locale,
-        };
-      });
-    });
-  }
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps<StaticProps> = async ({ params }) => {
-  const paramsId = params?.id;
-  const character = getCharacterById(`${paramsId}`);
-
-  if (character == null) {
-    return { notFound: true };
-  }
-
-  const { default: data } = await import(`@/data/guides/compiled/${character.id}.json`);
-  const { meta, html } = await Guide.parseAsync(data);
-
-  return {
-    props: { meta, html, character },
-  };
-};
 
 const GuidesId = ({ html, character }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { t } = useTranslation();
@@ -102,6 +66,48 @@ const GuidesId = ({ html, character }: InferGetStaticPropsType<typeof getStaticP
       </Container>
     </Layout>
   );
+};
+
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+  let paths = publishedIds.map((id) => ({ params: { id } }));
+
+  if (typeof locales !== "undefined") {
+    paths = locales.flatMap((locale) => {
+      return paths.map((path) => {
+        return {
+          ...path,
+          locale,
+        };
+      });
+    });
+  }
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps<StaticProps> = async ({ params, locale = "en" }) => {
+  const paramsId = params?.id?.toString().toLowerCase();
+  if (typeof paramsId === "undefined") {
+    return { notFound: true };
+  }
+
+  if (!publishedIds.includes(paramsId)) {
+    return { notFound: true };
+  }
+
+  const character = getCharacterById(paramsId);
+  if (character == null) {
+    return { notFound: true };
+  }
+
+  const guide = await getGuide(paramsId, locale);
+
+  return {
+    props: { ...guide, character },
+  };
 };
 
 export default GuidesId;

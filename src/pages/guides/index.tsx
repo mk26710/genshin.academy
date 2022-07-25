@@ -1,5 +1,6 @@
 import type { CharacterType } from "@/data/character";
-import type { NextPage } from "next";
+import type { MetaType } from "@/data/guides/meta.schema";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { NextRouter } from "next/router";
 import type { ChangeEvent, FunctionComponent } from "react";
 
@@ -15,31 +16,19 @@ import { GuideCard } from "@/components/cards/GuideCard";
 import { Container } from "@/components/Container";
 import { Input } from "@/components/Input";
 import { Layout } from "@/components/Layout";
-import { charactersArray } from "@/data/characters";
-import published from "@/data/guides/compiled/published.json";
+import { getCharacterById } from "@/data/characters";
+import { publishedIds } from "@/data/guides/published";
 import { useRouterReady } from "@/hooks/useRouterReady";
-
-type PublishedItem = typeof published[0];
-
-interface PublishedGuide {
-  meta: PublishedItem;
-  character: CharacterType;
-}
-
-// this doesn't need to be reactive
-const publishedGuides = published.reduce<PublishedGuide[]>((acc, item) => {
-  const character = charactersArray.find((c) => c.id === item.id);
-  if (character != null) {
-    acc.push({ meta: item, character });
-  }
-  return acc;
-}, []);
+import { getAllGuides } from "@/lib/markdownTools";
 
 const NoResult: FunctionComponent = () => {
   return <>There&apos;s nothing here :(</>;
 };
 
-const RouterReadyContent: FunctionComponent<{ router: NextRouter }> = ({ router }) => {
+const RouterReadyContent: FunctionComponent<{ router: NextRouter } & StaticProps> = ({
+  router,
+  availableGuides,
+}) => {
   // just realized jotai's hydration can be
   // abused to avoid the useEffects mess
   // and keep atoms in sync with router :o
@@ -55,7 +44,7 @@ const RouterReadyContent: FunctionComponent<{ router: NextRouter }> = ({ router 
   const [input, setInput] = useAtom(guideSearchQueryAtom);
   const [guideType, setGuideType] = useAtom(guideSearchTypeAtom);
 
-  const filteredGuides = publishedGuides
+  const filteredGuides = availableGuides
     .filter((g) => (guideType !== "all" ? g.meta.type === guideType : true))
     .filter((g) => g.character.name.toLowerCase().includes(input.toString().toLowerCase()));
 
@@ -130,15 +119,42 @@ const RouterReadyContent: FunctionComponent<{ router: NextRouter }> = ({ router 
   );
 };
 
-const GuidesIndex: NextPage = () => {
+const GuidesIndex = ({ availableGuides }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [ready, router] = useRouterReady();
   const { t } = useTranslation();
 
   return (
     <Layout title={t("common:guides")} description={t("meta:guides.home.description")}>
-      <Container>{ready && <RouterReadyContent router={router} />}</Container>
+      <Container>
+        {ready && <RouterReadyContent router={router} availableGuides={availableGuides} />}
+      </Container>
     </Layout>
   );
+};
+
+type StaticProps = {
+  availableGuides: Array<{ character: CharacterType; meta: MetaType }>;
+};
+
+export const getStaticProps: GetStaticProps<StaticProps> = async ({ locale = "en" }) => {
+  const guides = await getAllGuides(locale);
+  const metas = guides.map((g) => g.meta);
+
+  const availableGuides = publishedIds.reduce((acc, id) => {
+    const character = getCharacterById(id);
+    if (typeof character !== "undefined") {
+      const meta = metas.find((m) => m.id.toLowerCase() === id.toLowerCase());
+      if (typeof meta !== "undefined") {
+        acc.push({ character, meta });
+      }
+    }
+
+    return acc;
+  }, new Array<StaticProps["availableGuides"][0]>());
+
+  return {
+    props: { availableGuides },
+  };
 };
 
 export default GuidesIndex;
