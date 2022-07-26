@@ -1,12 +1,10 @@
 import type { FC, SVGProps } from "react";
 
 import { BeakerIcon, CalculatorIcon, CogIcon, HomeIcon, StarIcon } from "@heroicons/react/outline";
-import { SunIcon, MoonIcon } from "@heroicons/react/solid";
-import { useTheme } from "next-themes";
 import useTranslation from "next-translate/useTranslation";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import { Fragment, useEffect, useState, useCallback } from "react";
+import { Fragment, useCallback } from "react";
 
 type TIcon = (props: SVGProps<SVGSVGElement>) => JSX.Element;
 
@@ -53,26 +51,6 @@ export const Navigation: FC = () => {
   const router = useRouter();
 
   const { t } = useTranslation();
-
-  const [isMounted, setMounted] = useState(false);
-  const { theme, setTheme, resolvedTheme } = useTheme();
-
-  const toggleDark = () => {
-    // don't do anything unless it's client side
-    if (!isMounted) return;
-
-    if (resolvedTheme === "dark" && theme === "system") {
-      setTheme("light");
-    } else if (resolvedTheme === "light" && theme === "system") {
-      setTheme("dark");
-    } else {
-      setTheme("system");
-    }
-  };
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const isActive = useCallback(
     (navRoute: Pick<NavRoute, "hasNested" | "path">) => {
