@@ -1,6 +1,14 @@
 # Changelog
 
 
+## (v1.1.1) - 2022-07-26
+
+### Refactor
+
+- **components:** Removed redundant code from Navigation ([da2c068](https://github.com/TenkoSpirit/genshin.zenless.club/commit/da2c0681d0b9308b14a6d4930d9bc7e3d82e10f0))
+
+
+
 ## (v1.1.0) - 2022-07-26
 
 ### Features
