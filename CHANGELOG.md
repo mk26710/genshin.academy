@@ -1,6 +1,21 @@
 # Changelog
 
 
+## (v1.1.0) - 2022-07-26
+
+### Features
+
+- **README:** Better looking team table ([72ac379](https://github.com/TenkoSpirit/genshin.zenless.club/commit/72ac3792b3c1b9edb2465ca49642fc72ecc57bb8))
+- **components:** Added settings page to navigation ([57037c2](https://github.com/TenkoSpirit/genshin.zenless.club/commit/57037c2ad54014bcff8e0ce425196c563fea9778))
+- **i18n:** Added translation strings for settings page ([6fbaf96](https://github.com/TenkoSpirit/genshin.zenless.club/commit/6fbaf965eaa6732cac5bbb0b08415906911693bf))
+- **pages:** Created a settings page ([d83449d](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d83449d40f81eccf15893e58116e4ef9ed3f61dd))
+
+### Miscellaneous Tasks
+
+- **deps:** Added needed packages ([f191055](https://github.com/TenkoSpirit/genshin.zenless.club/commit/f191055740f0bf4c539b5d2a1e5eb2b3b1fbe819))
+
+
+
 ## (v1.0.8) - 2022-07-25
 
 ### Features
