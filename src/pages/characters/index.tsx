@@ -23,11 +23,11 @@ const CharactersIndex: NextPage = () => {
   return (
     <Layout title={t("common:characters")} description={t("meta:characters.home.description")}>
       <Container>
-        <div className="mb-6 flex flex-col lg:flex-row gap-4">
+        <div className="mb-6 flex flex-col gap-4 lg:flex-row">
           <Input placeholder={t`common:search-by-name`} onChange={handleChange} value={search} />
         </div>
 
-        <div className="flex flex-row flex-wrap gap-4 justify-evenly md:justify-start">
+        <div className="flex flex-row flex-wrap justify-evenly gap-4 md:justify-start">
           {charactersArray.map((character) => (
             <CharacterCard
               className={

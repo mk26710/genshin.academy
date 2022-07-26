@@ -83,11 +83,11 @@ const RouterReadyContent: FunctionComponent<{ router: NextRouter } & StaticProps
 
   return (
     <>
-      <div className="flex flex-col lg:flex-row mb-4 gap-2">
+      <div className="mb-4 flex flex-col gap-2 lg:flex-row">
         <select
           value={guideType}
           onChange={handleOptionChange}
-          className="form-select w-full lg:w-44 appearance-none block h-10 text-[#000] dark:text-dark-300 rounded-lg border border-neutral-200 dark:border-dark-800 bg-white dark:bg-dark-900 focus:ring-2 focus:ring-primary-500 placeholder:text-neutral-400 dark:placeholder:text-dark-500 font-semibold uppercase"
+          className="form-select block h-10 w-full appearance-none rounded-lg border border-neutral-200 bg-white font-semibold uppercase text-[#000] placeholder:text-neutral-400 focus:ring-2 focus:ring-primary-500 dark:border-dark-800 dark:bg-dark-900 dark:text-dark-300 dark:placeholder:text-dark-500 lg:w-44"
         >
           <option value="all">All</option>
           <option value="character">Characters</option>
@@ -102,7 +102,7 @@ const RouterReadyContent: FunctionComponent<{ router: NextRouter } & StaticProps
         />
       </div>
 
-      <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 2xl:columns-5 gap-4 space-y-4">
+      <div className="columns-1 gap-4 space-y-4 sm:columns-2 lg:columns-3 xl:columns-4 2xl:columns-5">
         {filteredGuides.length <= 0 && <NoResult />}
         {filteredGuides.map((guide) => (
           <GuideCard

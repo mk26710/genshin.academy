@@ -37,21 +37,21 @@ export const GuideCard: FC<Props> = ({
         {thumbnail && (
           <StaticPicture
             src={thumbnail}
-            className="object-fill object-top rounded-t-lg w-full min-h-[10rem] lg:min-h-[20rem] aspect-[9/16]"
+            className="aspect-[9/16] min-h-[10rem] w-full rounded-t-lg object-fill object-top lg:min-h-[20rem]"
             alt="character icon"
           />
         )}
 
         <div className="p-4">
           {publishedAt && (
-            <div className="font-medium text-sm text-primary-500">
+            <div className="text-sm font-medium text-primary-500">
               {isMounted && <>{dayjs(publishedAt).format("lll")}</>}
             </div>
           )}
 
-          <p className="mb-2 block font-bold text-[#000] dark:text-dark-300 text-lg">{title}</p>
+          <p className="mb-2 block text-lg font-bold text-[#000] dark:text-dark-300">{title}</p>
 
-          {description && <p className="text-sm text-justify">{description}</p>}
+          {description && <p className="text-justify text-sm">{description}</p>}
         </div>
       </a>
     </NextLink>

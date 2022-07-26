@@ -51,7 +51,7 @@ const CrtitValueCalculator: FunctionComponent = () => {
   const [critValue] = useAtom(critValueAtom);
 
   return (
-    <CalculatorRoot className="overflow-y-auto break-inside-avoid">
+    <CalculatorRoot className="break-inside-avoid overflow-y-auto">
       <CalculatorTitle>
         <span className="flex-1">{t`calc:crit-value`}</span>
         {critValue > 0 && <CritValueResult critValue={critValue} />}
@@ -83,11 +83,11 @@ const ResinCalculator: FunctionComponent = () => {
   const [resinReplenishTime] = useAtom(resinReplenishTimeAtom);
 
   return (
-    <CalculatorRoot className="overflow-y-auto break-inside-avoid">
+    <CalculatorRoot className="break-inside-avoid overflow-y-auto">
       <CalculatorTitle className="!flex-col lg:!flex-row">
         <span className="flex-1">{t`calc:resin`}</span>
         {resinDelta > 0 && (
-          <span className="text-primary-500 normal-case">{resinReplenishTime.format("lll")}</span>
+          <span className="normal-case text-primary-500">{resinReplenishTime.format("lll")}</span>
         )}
       </CalculatorTitle>
       <CalculatorDetails>{t`calc:resin-details`}</CalculatorDetails>
@@ -112,7 +112,7 @@ const CalcPage = () => {
   return (
     <Layout title={t("common:calculators")} description={t("meta:calculators.description")}>
       <Container>
-        <div className="columns-1 md:columns-2 gap-4 space-y-4">
+        <div className="columns-1 gap-4 space-y-4 md:columns-2">
           <CrtitValueCalculator />
           <ResinCalculator />
         </div>

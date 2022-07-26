@@ -27,14 +27,14 @@ export const CharacterCard: FC<Props> = ({ character, className }) => {
     <div className={`w-[calc(33.33%-0.75rem)] lg:w-28 ${className}`}>
       <NextLink href={`/characters/${character.id}`}>
         <a className="card card-vertical">
-          <div className="bg-dark-900 box-border absolute -ml-[10px] -mt-[10px] rounded-full aspect-square w-8 flex items-center justify-center">
+          <div className="absolute -ml-[10px] -mt-[10px] box-border flex aspect-square w-8 items-center justify-center rounded-full bg-dark-900">
             <StaticPicture
               src={elementSrc}
               alt="Element src"
-              className="w-5 h-5 aspect-square object-contain object-center"
+              className="aspect-square h-5 w-5 object-contain object-center"
             />
           </div>
-          <div className={"w-full aspect-square rounded-t-lg bg-gradient-to-b " + iconBg()}>
+          <div className={"aspect-square w-full rounded-t-lg bg-gradient-to-b " + iconBg()}>
             <StaticPicture
               className="card-thumbnail"
               src={iconSrc}
@@ -42,7 +42,7 @@ export const CharacterCard: FC<Props> = ({ character, className }) => {
             />
           </div>
 
-          <div className="w-full py-1 h-full flex items-center justify-center font-semibold text-[.9rem] text-[#000] dark:text-dark-300 ">
+          <div className="flex h-full w-full items-center justify-center py-1 text-[.9rem] font-semibold text-[#000] dark:text-dark-300 ">
             <p className="p-1 text-center leading-none">{character.name}</p>
           </div>
         </a>

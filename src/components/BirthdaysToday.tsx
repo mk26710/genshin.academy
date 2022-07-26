@@ -15,8 +15,8 @@ const BirthdaysToday: FunctionComponent = () => {
   });
 
   return (
-    <div className="p-4 box-border flex flex-col rounded-lg border border-neutral-200 dark:border-dark-800 bg-white dark:bg-dark-900">
-      <h1 className="font-semibold text-xl mb-4 text-[#000] dark:text-dark-300">
+    <div className="box-border flex flex-col rounded-lg border border-neutral-200 bg-white p-4 dark:border-dark-800 dark:bg-dark-900">
+      <h1 className="mb-4 text-xl font-semibold text-[#000] dark:text-dark-300">
         {celebrant == null && <>Characters Birthdays</>}
         {celebrant != null && <>Happy Birthday 🎉</>}
       </h1>
@@ -27,9 +27,9 @@ const BirthdaysToday: FunctionComponent = () => {
         <>
           <div>
             <Link key={`bd-${celebrant.id}`} href={`/characters/${celebrant.id}`}>
-              <a className="rounded-lg bg-neutral-100 dark:bg-dark-900 outline outline-1 outline-neutral-200 dark:outline-dark-200/10 flex justify-center">
+              <a className="flex justify-center rounded-lg bg-neutral-100 outline outline-1 outline-neutral-200 dark:bg-dark-900 dark:outline-dark-200/10">
                 <img
-                  className="rounded-lg object-center object-cover"
+                  className="rounded-lg object-cover object-center"
                   src={`/img/characters/${celebrant.id}/icon.webp`}
                   alt={`${celebrant.name} icon`}
                 />

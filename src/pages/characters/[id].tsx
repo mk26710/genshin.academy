@@ -56,24 +56,24 @@ const CharactersId = ({ character }: StaticProps) => {
       <Container>
         <div className="flex flex-col-reverse lg:flex-row">
           <div className="flex-1 grow">
-            <h1 id="name" className="font-semibold text-4xl mb-4 mt-6 dark:text-dark-300">
+            <h1 id="name" className="mb-4 mt-6 text-4xl font-semibold dark:text-dark-300">
               {character.name}{" "}
-              <img className="inline-block align-middle h-6 " src={elementSrc} alt="Element" />
+              <img className="inline-block h-6 align-middle " src={elementSrc} alt="Element" />
             </h1>
 
             <p id="description">{character.description}</p>
 
             <h2
               id="consteallations"
-              className="font-semibold text-2xl mt-6 mb-4 dark:text-dark-300"
+              className="mt-6 mb-4 text-2xl font-semibold dark:text-dark-300"
             >
               Consteallations
             </h2>
 
-            <ol className="marker:text-primary-500 list-decimal pl-4">
+            <ol className="list-decimal pl-4 marker:text-primary-500">
               {character.constellations.map(({ level, title, description }) => (
                 <li key={`const-${level}`} id={`constellation-${level}`} className="[&+li]:mt-2">
-                  <h3 className="font-semibold text-lg dark:text-dark-300">{title}</h3>
+                  <h3 className="text-lg font-semibold dark:text-dark-300">{title}</h3>
                   <p className="whitespace-pre-line">{description}</p>
                 </li>
               ))}

@@ -13,13 +13,13 @@ const NotFound: NextPage = () => {
     <Layout title="404" description={t`meta:404.description`}>
       <Container verticalCenter>
         <div className="flex flex-row gap-6">
-          <div className="pr-6 border-r border-neutral-200 dark:border-neutral-200/10">
-            <h1 className="font-bold text-5xl text-primary-500">404</h1>
+          <div className="border-r border-neutral-200 pr-6 dark:border-neutral-200/10">
+            <h1 className="text-5xl font-bold text-primary-500">404</h1>
           </div>
 
           <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-2">
-              <h1 className="font-bold text-5xl -ml-1">{t`404:page-not-found`}</h1>
+              <h1 className="-ml-1 text-5xl font-bold">{t`404:page-not-found`}</h1>
               <h3 className="opacity-60">{t`404:details`}</h3>
             </div>
 
@@ -27,7 +27,7 @@ const NotFound: NextPage = () => {
               <Link href="/">
                 <a
                   role="button"
-                  className="px-4 py-2 rounded-lg bg-primary-500 font-medium text-white"
+                  className="rounded-lg bg-primary-500 px-4 py-2 font-medium text-white"
                 >
                   {t`404:go-back-home`}
                 </a>

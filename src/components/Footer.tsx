@@ -8,7 +8,7 @@ import { GitHubLogo } from "@/components/icons/GitHubLogo";
 
 export const Footer: FC = () => {
   return (
-    <footer className="footer text-sm grid grid-cols-1 lg:grid-cols-[1fr_auto] grid-rows-[auto_auto] lg:grid-rows-1 py-4 mx-4 text-neutral-400 dark:text-dark-600 border-t border-neutral-200 dark:border-dark-800">
+    <footer className="footer mx-4 grid grid-cols-1 grid-rows-[auto_auto] border-t border-neutral-200 py-4 text-sm text-neutral-400 dark:border-dark-800 dark:text-dark-600 lg:grid-cols-[1fr_auto] lg:grid-rows-1">
       <p>
         <Trans
           i18nKey="footer:affiliation"
@@ -25,17 +25,17 @@ export const Footer: FC = () => {
         />
       </p>
 
-      <div className="place-self-start lg:place-self-center flex flex-col lg:flex-row gap-x-6 gap-y-2 mt-6 lg:mt-0 font-bold">
+      <div className="mt-6 flex flex-col gap-x-6 gap-y-2 place-self-start font-bold lg:mt-0 lg:flex-row lg:place-self-center">
         <ExternalLink href="https://github.com/kitsune-guuji/gvp">
-          <div className="flex flex-row gap-x-2 items-center">
-            <GitHubLogo className="w-4 h-auto inline-block" />
+          <div className="flex flex-row items-center gap-x-2">
+            <GitHubLogo className="inline-block h-auto w-4" />
             <p>GitHub</p>
           </div>
         </ExternalLink>
 
         <ExternalLink href="https://discord.gg/TgyFNhthCK">
-          <div className="flex flex-row gap-x-2 items-center">
-            <DiscordLogo className="w-4 h-auto inline-block" />
+          <div className="flex flex-row items-center gap-x-2">
+            <DiscordLogo className="inline-block h-auto w-4" />
             <p>Discord</p>
           </div>
         </ExternalLink>
