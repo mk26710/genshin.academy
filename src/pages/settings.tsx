@@ -49,7 +49,7 @@ const LanguageSwitch: FunctionComponent = () => {
               value={code}
               checked={lang === code}
               onChange={handleOnChange}
-              className="peer sr-only w-full"
+              className="peer sr-only"
             />
             <label
               htmlFor={`${code}-btn`}
@@ -108,7 +108,7 @@ const ThemeSwitch: FunctionComponent = () => {
                 value={name}
                 checked={theme === name}
                 onChange={handleOnChange}
-                className="peer sr-only w-full"
+                className="peer sr-only"
               />
               <label
                 htmlFor={`${name}-btn`}
