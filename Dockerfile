@@ -50,7 +50,4 @@ USER nextjs
 EXPOSE 3000
 ENV PORT 3000
 
-RUN ls -al
-RUN pwd
-
 CMD ["node", "server.js"]
