@@ -30,7 +30,7 @@ jobs:
         with:
           name: TenkoSpirit/genshin.zenless.club/genshin-zenless
           registry: ghcr.io
-          username: ${{ secrets.USERNAME }}
+          username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           dockerfile: Dockerfile
           tags: latest
