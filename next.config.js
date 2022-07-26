@@ -8,6 +8,7 @@ const nextTranslate = require("next-translate");
  **/
 
 const nextConfig = {
+  output: "standalone",
   reactStrictMode: true,
 };
 
