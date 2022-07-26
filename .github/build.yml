@@ -4,7 +4,7 @@ name: Build
 # events but only for the master branch
 on:
   push:
-    branches: [main]
+    branches: [main, docker]
   workflow_dispatch:
     inputs:
       logLevel:
