@@ -1,6 +1,6 @@
 import type { FC, SVGProps } from "react";
 
-import { BeakerIcon, CalculatorIcon, HomeIcon, StarIcon } from "@heroicons/react/outline";
+import { BeakerIcon, CalculatorIcon, CogIcon, HomeIcon, StarIcon } from "@heroicons/react/outline";
 import { SunIcon, MoonIcon } from "@heroicons/react/solid";
 import { useTheme } from "next-themes";
 import useTranslation from "next-translate/useTranslation";
@@ -14,6 +14,7 @@ interface NavRoute {
   path: string;
   i18nKey: string;
   hasNested?: boolean;
+  prefetch?: false;
   Icon: TIcon;
 }
 
@@ -39,6 +40,12 @@ const navRoutes: NavRoute[] = [
     path: "/calc",
     i18nKey: "common:calculators",
     Icon: CalculatorIcon,
+  },
+  {
+    path: "/settings",
+    i18nKey: "common:settings",
+    prefetch: false,
+    Icon: CogIcon,
   },
 ];
 
@@ -96,54 +103,44 @@ export const Navigation: FC = () => {
   return (
     <>
       {/* Mobile Bottom Navbar */}
-      <nav className="z-10 lg:hidden fixed bottom-0 left-0 h-[var(--mobile-navbar-height)] w-full text-[#000] dark:text-dark-300 border-t border-neutral-200 dark:border-dark-800 bg-white dark:bg-dark-900 select-none">
-        <div className="dark:text-dark-400 flex flex-row h-full gap-4 px-4 justify-between overflow-y-auto">
-          {navRoutes.map(({ Icon, i18nKey, ...navRoute }) => (
-            <NextLink key={`mobile-navbar-${navRoute.path}`} href={navRoute.path}>
+      <nav className="fixed bottom-0 left-0 z-10 h-[var(--mobile-navbar-height)] w-full select-none border-t border-neutral-200 bg-white text-[#000] dark:border-dark-800 dark:bg-dark-900 dark:text-dark-300 lg:hidden">
+        <div className="flex h-full flex-row justify-between gap-4 overflow-y-auto px-4 dark:text-dark-400">
+          {navRoutes.map(({ Icon, i18nKey, prefetch, ...navRoute }) => (
+            <NextLink
+              key={`mobile-navbar-${navRoute.path}`}
+              href={navRoute.path}
+              prefetch={prefetch}
+            >
               <a
                 className={`${activeClass(
                   navRoute,
                   true,
-                )} flex-1 flex flex-col items-center justify-center`}
+                )} flex flex-1 flex-col items-center justify-center`}
               >
-                <Icon className="h-6 w-6 p-0 stroke-2" />
+                <Icon className="h-6 w-6 stroke-2 p-0" />
                 <h1 className="text-sm font-semibold">{t(i18nKey, { count: 0 })}</h1>
               </a>
             </NextLink>
           ))}
-
-          {isMounted && (
-            <div
-              onClick={toggleDark}
-              className="flex-1 flex flex-col items-center justify-center cursor-pointer"
-            >
-              {resolvedTheme === "dark" && <SunIcon className="w-6 h-6" />}
-              {resolvedTheme !== "dark" && <MoonIcon className="w-6 h-6" />}
-              <h1 className="text-sm font-semibold">
-                {resolvedTheme === "dark" && "Light"}
-                {resolvedTheme !== "dark" && "Dark"}
-              </h1>
-            </div>
-          )}
         </div>
       </nav>
 
       {/* Desktop Sidebard */}
       <aside
         data-description="Desktop Sidebar Navigation"
-        className="sidebar sticky top-0 hidden lg:flex flex-col min-h-screen max-h-screen"
+        className="sidebar sticky top-0 hidden max-h-screen min-h-screen flex-col lg:flex"
       >
-        <div className="overflow-y-auto ml-4 my-4 w-64 h-full text-[#000] dark:text-dark-300 rounded-lg border border-neutral-200 dark:border-dark-800 bg-white dark:bg-dark-900">
-          <div className="flex flex-col gap-y-2 p-4 w-full">
-            <div className="self-center py-4 mb-2 border-b border-neutral-200 dark:border-dark-200/10">
-              <h1 className="font-extrabold text-xl">GENSHIN.ZENLESS</h1>
+        <div className="my-4 ml-4 h-full w-64 overflow-y-auto rounded-lg border border-neutral-200 bg-white text-[#000] dark:border-dark-800 dark:bg-dark-900 dark:text-dark-300">
+          <div className="flex w-full flex-col gap-y-2 p-4">
+            <div className="mb-2 self-center border-b border-neutral-200 py-4 dark:border-dark-200/10">
+              <h1 className="text-xl font-extrabold">GENSHIN.ZENLESS</h1>
             </div>
 
-            {navRoutes.map(({ Icon, i18nKey, ...navRoute }) => (
-              <NextLink key={navRoute.path} href={navRoute.path}>
+            {navRoutes.map(({ Icon, i18nKey, prefetch, ...navRoute }) => (
+              <NextLink key={navRoute.path} href={navRoute.path} prefetch={prefetch}>
                 <a
                   className={
-                    "w-full flex flex-row items-center gap-x-2 px-3 py-2 font-semibold text-lg cursor-pointer" +
+                    "flex w-full cursor-pointer flex-row items-center gap-x-2 px-3 py-2 text-lg font-semibold" +
                     activeClass(navRoute)
                   }
                 >
@@ -155,18 +152,6 @@ export const Navigation: FC = () => {
               </NextLink>
             ))}
           </div>
-
-          {isMounted && (
-            <div className="fixed bottom-8 left-8">
-              <div
-                onClick={() => toggleDark()}
-                className="transition-all duration-75 bg-neutral-100 dark:bg-dark-950 dark:text-dark-300 outline outline-1 outline-neutral-200 dark:outline-dark-200/10 rounded-lg flex items-center justify-center aspect-square h-8 cursor-pointer"
-              >
-                {resolvedTheme === "dark" && <SunIcon className="w-5 h-5" />}
-                {resolvedTheme !== "dark" && <MoonIcon className="w-5 h-5" />}
-              </div>
-            </div>
-          )}
         </div>
       </aside>
     </>
