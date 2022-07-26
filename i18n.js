@@ -4,5 +4,6 @@ module.exports = {
   pages: {
     "*": ["common", "footer", "meta", "404"],
     "/calc": ["calc"],
+    "/settings": ["settings"],
   },
 };

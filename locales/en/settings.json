@@ -1,0 +1,9 @@
+{
+  "title": "Settings",
+  "appearance": "Appearance",
+  "theme": "Theme",
+  "light-radio-button": "Light",
+  "dark-radio-button": "Dark",
+  "system-radio-button": "Sync with device",
+  "language": "Language"
+}

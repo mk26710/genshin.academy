@@ -1,0 +1,9 @@
+{
+  "title": "Настройки",
+  "appearance": "Внешний вид",
+  "theme": "Оформление",
+  "light-radio-button": "Светлое",
+  "dark-radio-button": "Тёмное",
+  "system-radio-button": "Как на устройстве",
+  "language": "Язык"
+}
