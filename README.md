@@ -21,7 +21,8 @@ To report a security vulnerability, please, contact **TenkoSpirit** on [Discord]
 That's pretty straight forward! Clone the repo, run `yarn install` and feel free to prupose your changes via pull requests! 
 
 ### Contribution guidelines
-
+ 
+ - Commit messages should follow [convetions](https://www.conventionalcommits.org/), we are trying to follow theme here.
  - Please, try to avoid adding more dependencies, do that only if it's necessary. Thanks you!
  - Make sure added features/content doesn't use getServerSideProps or getInitialProps.
  - Don't forget about ESLint! We are using it for both formatting and linting purposes. VSCode is highly recommended.
