@@ -10,26 +10,30 @@ Tiny database, utilities and guides website for Genshin Impact players in multip
 
 <table>
     <tr>
-        <td align="center">
+    <td align="center">
         <a href="https://github.com/TenkoSpirit">
             <img src="https://github.com/TenkoSpirit.png" width="100px;" alt=""/>
             <br />
             <b>TenkoSpirit</b>
         </a>
-        <br />
-        <p>Owner<br />
-        Developer<br />
-        Translator</p>
     </td>
-        <td align="center">
+    <td align="center">
         <a href="https://github.com/Pikachupsik">
             <img src="https://github.com/Pikachupsik.png" width="100px;" alt=""/>
             <br />
             <b>Pikachupsik</b>
         </a>
-        <br />
-        <p>Writer<br />
-        Translator</p>
+    </td>
+    </tr>
+    <tr>
+    <td align="center">
+        Owner<br/>
+        Developer<br/>
+        Translator
+    </td>
+    <td align="center">
+        Writer<br/>
+        Translator
     </td>
     </tr>
 </table>
