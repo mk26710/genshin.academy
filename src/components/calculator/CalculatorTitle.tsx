@@ -8,7 +8,7 @@ interface Props {
 export const CalculatorTitle: FC<Props> = ({ className = "", children }) => {
   return (
     <h1
-      className={`flex flex-row font-semibold text-3xl dark:text-dark-300 capitalize ${className}`}
+      className={`flex flex-row text-3xl font-semibold capitalize dark:text-dark-300 ${className}`}
     >
       {children}
     </h1>

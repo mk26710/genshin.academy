@@ -11,7 +11,7 @@ export const ExternalLink: FunctionComponent<JSX.IntrinsicElements["a"]> = ({
     <a
       target={target}
       rel={rel}
-      className={`hover:text-primary-500 transition-colors ease-in-out duration-200 ${className}`}
+      className={`transition-colors duration-200 ease-in-out hover:text-primary-500 ${className}`}
       {...props}
     >
       {children}
