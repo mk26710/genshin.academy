@@ -1,1 +1,1 @@
-export const publishedIds = ["kamisato_ayaka"];
+export const publishedIds = ["ganyu"];
