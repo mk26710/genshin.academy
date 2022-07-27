@@ -1,4 +1,4 @@
-import type { CharacterType } from "@/data/character";
+import type { CharacterType } from "@/data/character.schema";
 import type { MetaType } from "@/data/guides/meta.schema";
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 

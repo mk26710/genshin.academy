@@ -1,4 +1,4 @@
-import type { CharacterType } from "@/data/character";
+import type { CharacterType } from "@/data/character.schema";
 import type { FC } from "react";
 
 import NextLink from "next/link";

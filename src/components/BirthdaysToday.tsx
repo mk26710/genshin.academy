@@ -18,7 +18,7 @@ const BirthdaysToday: FunctionComponent = () => {
   return (
     <div className="box-border flex flex-col rounded-lg border border-neutral-200 bg-white p-4 dark:border-dark-800 dark:bg-dark-900">
       <h1 className="mb-4 text-xl font-semibold text-[#000] dark:text-dark-300">
-        {celebrants.length > 0 ? "🎉 Happy Birthday!" : "Character Birthdays"}
+        {celebrants.length > 0 ? "🎉 Happy Birthday!" : "CharacterSchema Birthdays"}
       </h1>
 
       {celebrants.length <= 0 && <>There are no birthdays today :&#40;</>}

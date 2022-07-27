@@ -2,7 +2,7 @@ import type { Component } from "react";
 
 import { z } from "zod";
 
-import { Region, Elements, Weapon, Rarity } from "@/data/types/genshin";
+import { Region, Elements, Weapon, Rarity } from "@/data/genshin.schema";
 
 export const BirthdayDate = z.tuple([
   z.number().int().min(1).max(31),

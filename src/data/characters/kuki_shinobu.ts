@@ -1,6 +1,6 @@
-import type { CharacterType } from "../character";
+import type { CharacterType } from "../character.schema";
 
-import { Character } from "../character";
+import { Character } from "../character.schema";
 
 const kuki_shinobu: CharacterType = {
   id: "kuki_shinobu",

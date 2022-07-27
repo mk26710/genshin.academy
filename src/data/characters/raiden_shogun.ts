@@ -1,6 +1,6 @@
-import type { CharacterType } from "../character";
+import type { CharacterType } from "../character.schema";
 
-import { Character } from "../character";
+import { Character } from "../character.schema";
 
 const raiden_shogun: CharacterType = {
   id: "raiden_shogun",

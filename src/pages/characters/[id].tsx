@@ -1,4 +1,4 @@
-import type { CharacterType } from "@/data/character";
+import type { CharacterType } from "@/data/character.schema";
 import type { GetStaticPaths, GetStaticProps } from "next";
 
 import { Container } from "@/components/Container";

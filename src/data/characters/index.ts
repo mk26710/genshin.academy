@@ -1,4 +1,4 @@
-import type { CharacterType } from "../character";
+import type { CharacterType } from "../character.schema";
 
 import albedo from "./albedo";
 import aloy from "./aloy";

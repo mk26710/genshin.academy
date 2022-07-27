@@ -1,6 +1,6 @@
-import type { CharacterType } from "../character";
+import type { CharacterType } from "../character.schema";
 
-import { Character } from "../character";
+import { Character } from "../character.schema";
 
 const kamisato_ayaka: CharacterType = {
   id: "kamisato_ayaka",
