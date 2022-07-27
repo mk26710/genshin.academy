@@ -1,4 +1,5 @@
 ---
+title: Ganyu Guide
 id: ganyu
 type: character
 lang: en
@@ -35,7 +36,7 @@ Ganyu's elemental burst. This talent is a strong ability with a medium energy co
 Taking DMG from a Charge Level 2 Frostflake Arrow or Frostflake Arrow Bloom decreases opponents' **Cryo RES** by 15% for 6s.  
 A hit regenerates 2 Energy for Ganyu. This effect can only occur once per Charge Level 2 Frostflake Arrow, regardless if Frostflake Arrow itself or its Bloom hit the target.
 
-The first constellation of Ganyu is one of its key constellations. Its buff can be compared to VV (Viridescent Venerer) but is much easier to apply and use.\* 
+The first constellation of Ganyu is one of its key constellations. Its buff can be compared to VV (Viridescent Venerer) but is much easier to apply and use. 
 
 ## 2) The Auspicious
 
@@ -73,7 +74,7 @@ But besides these bows, there are plenty of options that suit Ganyu.
 
 2) Aqua Simulacrum
 
-# Teams for ganyu
+# Teams
 
 The teams you will use depend on what kind of reaction you will play with Ganyu - freeze or melt.
 
@@ -98,7 +99,18 @@ The following commands are played through the freeze reaction
 
 Standard team with freeze reaction, based on the use of Ganyu, hydro character, anemo character, cryo character. A good hydro character under Ganyu is Mona or Xingqiu (but he has his own nuances). The best variants of anemo characters under Ganyu are Venti or Kazuha. Their ability to pull opponents and use the "Swirl" reaction
 
-One of the famous teams is "Morgana" using Ganyu, Mona, Venti and Diona. The rotation is quite simple: using Ganyu's elemental blast, using Venty's elemental burstand its elemental skill, using Mona's elemental burst and her elemental skill, and using Ganyu's second level charged attacks. Pros of using this rotation: increasing Mona's elemental burst buff for Ganyu. Diona is used to gain energy and heal.
+## Rotation
+
+One of the famous teams is "Morgana" using Ganyu, Mona, Venti and Diona. 
+
+The rotation is quite simple: 
+
+ 1. Ganyu's elemental burst 
+ 2. Venti's elemental burst and elemental skill 
+ 3. Mona's elemental burst and elemental skill 
+ 4. Ganyu's charged attacks 
+ 
+Pros of using this rotation: increasing Mona's elemental burst buff for Ganyu. Diona is used to gain energy and heal.
 
 # Acknowledgements
 
