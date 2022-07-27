@@ -1,6 +1,45 @@
 # Changelog
 
 
+## (v1.1.2) - 2022-07-27
+
+### Bug Fixes
+
+- **components:** Incorrect css styles for sticky side navigation also only first letter of each heading is uppercase now ([1800916](https://github.com/TenkoSpirit/genshin.zenless.club/commit/18009165c9b43d410a0161c541096534264e35b6))
+- **guides:** Incorrect wording for elemental skill in Russian version of Ganyu guide ([59906c0](https://github.com/TenkoSpirit/genshin.zenless.club/commit/59906c0f12d72da88cb810788084c1fc0dee6c93))
+- **guides:** Corrected typos and added KQM url to the acknowledgements section ([c80ce3f](https://github.com/TenkoSpirit/genshin.zenless.club/commit/c80ce3f7f3e5c2df21908877e889b69ff6a49adc))
+- **pages:** W-full on sr-only input was causing a horizontal scrollbar to appear on Chrome ([599090f](https://github.com/TenkoSpirit/genshin.zenless.club/commit/599090f3883f50174fd8c40299933f080c4d08d3))
+
+### Features
+
+- **Docker:** The website can now be used with Docker ([223070e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/223070e80326afaa7a6e3cedb9ad2bb79ad8e1f0))
+- **README:** Added more information ([56e58da](https://github.com/TenkoSpirit/genshin.zenless.club/commit/56e58da461e4366817cb717799e3facf736da1d6))
+- **README:** Added conventions info ([e53657d](https://github.com/TenkoSpirit/genshin.zenless.club/commit/e53657d6d5ae918d9d88f3184a597229a3a455c2))
+- **actions:** Use official Docker actions instead of some third party ([d8fe9dd](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d8fe9dd9f7daceceb2a532b0cf997b3af24ac432))
+- **components:** Birthdays now support multiple birthdays per day ([16161c1](https://github.com/TenkoSpirit/genshin.zenless.club/commit/16161c1e6b454c8e14203290ec81c623ea41a9dc))
+- **data:** Added Kuki Shinobu ([0845a41](https://github.com/TenkoSpirit/genshin.zenless.club/commit/0845a414b9bc650f3f851fd10c4487b137516a52))
+- **guides:** Created guide for Ganyu in Russian ([5ef299d](https://github.com/TenkoSpirit/genshin.zenless.club/commit/5ef299d40e707ff8bdf49d9a8df37e24adf62c1f))
+- **guides:** English version for Ganyu guide ([cf6fa48](https://github.com/TenkoSpirit/genshin.zenless.club/commit/cf6fa486a2f9def8818b3a79c9444b920ee6ad66))
+- **guides:** Some styling changes to Ganyu guide and added title to frontmatter ([537bbe6](https://github.com/TenkoSpirit/genshin.zenless.club/commit/537bbe6de83d28bef449b7f3636bba040a1ffecb))
+- **guides:** Removed test Ayaka guide and added Ganyu guide to published list ([6253e35](https://github.com/TenkoSpirit/genshin.zenless.club/commit/6253e3533de4acd73ffd88ca08239e67df203cf8))
+- **pages:** Created deferred search value which is used for filtering ([1d8bf3d](https://github.com/TenkoSpirit/genshin.zenless.club/commit/1d8bf3d922c964aefca0e3e4f85c1a09b782b337))
+- **pages:** Shrink guide width to improve readability ([3c4ba4c](https://github.com/TenkoSpirit/genshin.zenless.club/commit/3c4ba4c77cb4c7eba76f31b481597d87d8f8b53b))
+
+### Miscellaneous Tasks
+
+- **deps:** Bumped dependencies versions ([d26e3bc](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d26e3bc1a2ae366a10a87750cbf120c95eb8fd58))
+
+### Refactor
+
+- **data:** Renamed files containing zod schemas to end with .schema.ts ([d61226b](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d61226b0b6d74674e47465aae2fff598f08aa5f9))
+
+### Styling
+
+- **pages, components:** Fixed eslint errors ([495982d](https://github.com/TenkoSpirit/genshin.zenless.club/commit/495982db6446f5e114a51586a4f739a2b20ae0e5))
+- **pages, components:** Fix eslint ([ddedd3c](https://github.com/TenkoSpirit/genshin.zenless.club/commit/ddedd3cd0704e7c3f6b23463266055b75ed9def8))
+
+
+
 ## (v1.1.1) - 2022-07-26
 
 ### Refactor
