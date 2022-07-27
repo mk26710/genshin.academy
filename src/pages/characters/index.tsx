@@ -3,6 +3,7 @@ import type { ChangeEvent } from "react";
 
 import { useAtom } from "jotai";
 import useTranslation from "next-translate/useTranslation";
+import { useDeferredValue } from "react";
 
 import { characterSearchAtom } from "@/atoms/characterSearch";
 import { CharacterCard } from "@/components/cards/CharacterCard";
@@ -13,6 +14,7 @@ import { charactersArray } from "@/data/characters";
 
 const CharactersIndex: NextPage = () => {
   const [search, setSearch] = useAtom(characterSearchAtom);
+  const deferredSearch = useDeferredValue(search);
 
   const { t } = useTranslation();
 
@@ -28,15 +30,13 @@ const CharactersIndex: NextPage = () => {
         </div>
 
         <div className="flex flex-row flex-wrap justify-evenly gap-4 md:justify-start">
-          {charactersArray.map((character) => (
-            <CharacterCard
-              className={
-                character.name.toLowerCase().includes(search.toLowerCase()) ? "" : "hidden"
-              }
-              key={character.id}
-              character={character}
-            />
-          ))}
+          {charactersArray
+            .filter((character) =>
+              character.name.toLowerCase().includes(deferredSearch.toLowerCase()),
+            )
+            .map((character) => (
+              <CharacterCard key={character.id} character={character} />
+            ))}
         </div>
       </Container>
     </Layout>
