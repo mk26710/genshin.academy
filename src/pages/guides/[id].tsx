@@ -54,7 +54,7 @@ const GuidesId = ({ html, character }: InferGetStaticPropsType<typeof getStaticP
       color={`${character.accentColor}`}
     >
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto]">
+        <div className="grid max-w-screen-xl grid-cols-1 lg:grid-cols-[1fr_auto]">
           <section
             ref={contentRoot}
             className="md-body"
