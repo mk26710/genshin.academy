@@ -23,6 +23,7 @@ import kamisato_ayato from "./kamisato_ayato";
 import keqing from "./keqing";
 import klee from "./klee";
 import kujou_sara from "./kujou_sara";
+import kuki_shinobu from "./kuki_shinobu";
 import lisa from "./lisa";
 import mona from "./mona";
 import ningguang from "./ningguang";
@@ -98,6 +99,7 @@ const _array = Object.freeze([
   chongyun,
   beidou,
   shikanoin_heizou,
+  kuki_shinobu,
 ]);
 
 export const charactersArray = Object.freeze(
