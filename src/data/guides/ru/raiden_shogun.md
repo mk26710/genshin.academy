@@ -2,6 +2,7 @@
 id: raiden_shogun
 type: character
 author: pikachupsik
+lang: ru
 ---
 
 # Сёгун Райдэн 
@@ -68,5 +69,3 @@ author: pikachupsik
 
 | ![](https://genshin.zenless.club/img/characters/raiden_shogun/icon.webp)|![](https://genshin.zenless.club/img/characters/xiangling/icon.webp)| ![](https://genshin.zenless.club/img/characters/xingqiu/icon.webp) | ![](https://genshin.zenless.club/img/characters/bennett/icon.webp) |
 |  :---:   |   :---:  |  :---:   | :---:    |
-
-
