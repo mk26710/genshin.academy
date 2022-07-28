@@ -1,4 +1,5 @@
 ---
+title: Raiden Shogun Guide 
 id: raiden_shogun
 type: character
 author: pikachupsik
