@@ -1,6 +1,27 @@
 # Changelog
 
 
+## (v1.1.3) - 2022-07-28
+
+### Bug Fixes
+
+- **guides:** Fixed typos and removed redundant lines from Raiden guide in Russian ([e0d7e77](https://github.com/TenkoSpirit/genshin.zenless.club/commit/e0d7e77f6c3fb4ad53777b51afd9cc3c50abd768))
+
+### Features
+
+- **guides:** Created Raiden Shogun in Russian ([83e2869](https://github.com/TenkoSpirit/genshin.zenless.club/commit/83e28695984d07b71cc081654a892d6ef0a63607))
+- **guides:** Created a file for Raiden guide in English ([e02646f](https://github.com/TenkoSpirit/genshin.zenless.club/commit/e02646f01c420f58e7595552e1e6208d630187e6))
+- **guides:** Added Raiden to list of published guides ([977aae0](https://github.com/TenkoSpirit/genshin.zenless.club/commit/977aae086734f0ce4da40afa09a67af9f8e231ba))
+- **pages:** Guides view markdown styles were replaced with tailwind typography classes ([ef3177e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/ef3177ef0da45cb1a70faf9a15987636672ae8a7))
+- **styles:** Added some styling to markdown tables ([6be9598](https://github.com/TenkoSpirit/genshin.zenless.club/commit/6be9598b7685f833ca90bc09c597f796d459b302))
+- **No category:** Created a redeployment script for docker ([82f97c2](https://github.com/TenkoSpirit/genshin.zenless.club/commit/82f97c29c5216a0af30fecd6146472b22c0fc2dc))
+
+### Fox
+
+- **guides:** Lang was missing in meta tags of Raiden guide in Russian ([256d4b9](https://github.com/TenkoSpirit/genshin.zenless.club/commit/256d4b9232f37dc0993b06c62f4e0834d1dcb540))
+
+
+
 ## (v1.1.2) - 2022-07-27
 
 ### Bug Fixes
