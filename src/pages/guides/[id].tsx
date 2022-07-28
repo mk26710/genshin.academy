@@ -29,8 +29,8 @@ const GuidesId = ({ html, character }: InferGetStaticPropsType<typeof getStaticP
     const el = contentRoot.current;
 
     if (el != null && headings.length <= 0) {
-      const headings = Array.from(el.children)
-        .filter((el) => el instanceof HTMLHeadingElement && el.getAttribute("id") != null)
+      const headings = Array.from(el.querySelectorAll("h1, h2"))
+        .filter((el) => el.getAttribute("id") != null)
         .reduce((acc, el) => {
           const id = el.getAttribute("id");
 
