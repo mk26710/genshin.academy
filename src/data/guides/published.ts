@@ -1,1 +1,1 @@
-export const publishedIds = ["ganyu"];
+export const publishedIds = ["ganyu", "raiden_shogun"];
