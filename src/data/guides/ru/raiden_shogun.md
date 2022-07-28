@@ -4,6 +4,7 @@ id: raiden_shogun
 type: character
 author: pikachupsik
 lang: ru
+publishedAt: 1659007004
 ---
 
 # Сёгун Райдэн 

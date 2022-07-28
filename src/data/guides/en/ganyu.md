@@ -4,6 +4,7 @@ id: ganyu
 type: character
 lang: en
 author: GetMads
+publishedAt: 1658929952
 ---
 
 # Introduction

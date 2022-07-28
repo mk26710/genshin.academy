@@ -10,6 +10,7 @@ export const MetaRequired = z.object({
   id: z.string(),
   type: GuideTypes,
   lang: z.string(),
+  publishedAt: z.number(),
 });
 export type MetaRequiredType = z.infer<typeof MetaRequired>;
 

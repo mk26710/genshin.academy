@@ -4,6 +4,7 @@ id: ganyu
 type: character
 lang: ru
 author: GetMads
+publishedAt: 1658929999
 ---
 
 # Вступление
