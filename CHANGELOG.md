@@ -1,6 +1,14 @@
 # Changelog
 
 
+## (v1.2.1) - 2022-07-28
+
+### Features
+
+- **app:** Change layout again because right side menu is kinda bad looking ([895575c](https://github.com/TenkoSpirit/genshin.zenless.club/commit/895575c297d8ea60598976e0e6d4f4cc4d43c535))
+
+
+
 ## (v1.2.0) - 2022-07-28
 
 ### Features
