@@ -1,6 +1,7 @@
 import type { FC } from "react";
 
 import dayjs from "dayjs";
+import useTranslation from "next-translate/useTranslation";
 import NextLink from "next/link";
 import { useEffect, useState } from "react";
 
@@ -10,7 +11,7 @@ interface Props {
   id: string;
   title: string;
   description?: string;
-  publishedAt?: Date;
+  publishedAtUnix?: number;
   thumbnail?: string;
   href?: string;
   className?: string;
@@ -20,12 +21,13 @@ export const GuideCard: FC<Props> = ({
   id,
   title,
   description,
-  publishedAt,
+  publishedAtUnix,
   thumbnail,
   href = "#",
   className = "",
 }) => {
   const [isMounted, setMounted] = useState(false);
+  const { lang } = useTranslation();
 
   useEffect(() => {
     setMounted(true);
@@ -43,9 +45,9 @@ export const GuideCard: FC<Props> = ({
         )}
 
         <div className="p-4">
-          {publishedAt && (
+          {publishedAtUnix && (
             <div className="text-sm font-medium text-primary-500">
-              {isMounted && <>{dayjs(publishedAt).format("lll")}</>}
+              {isMounted && <>{dayjs.unix(publishedAtUnix).locale(lang).format("lll")}</>}
             </div>
           )}
 
