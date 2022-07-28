@@ -26,12 +26,7 @@ export const GuideCard: FC<Props> = ({
   href = "#",
   className = "",
 }) => {
-  const [isMounted, setMounted] = useState(false);
   const { lang } = useTranslation();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <NextLink href={href} prefetch={false}>
@@ -47,7 +42,7 @@ export const GuideCard: FC<Props> = ({
         <div className="p-4">
           {publishedAtUnix && (
             <div className="text-sm font-medium text-primary-500">
-              {isMounted && <>{dayjs.unix(publishedAtUnix).locale(lang).format("lll")}</>}
+              {dayjs.unix(publishedAtUnix).locale(lang).format("lll")}
             </div>
           )}
 
