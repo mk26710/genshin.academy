@@ -3,7 +3,6 @@ import type { FC } from "react";
 import dayjs from "dayjs";
 import useTranslation from "next-translate/useTranslation";
 import NextLink from "next/link";
-import { useEffect, useState } from "react";
 
 import { StaticPicture } from "@/components/StaticPicture";
 
