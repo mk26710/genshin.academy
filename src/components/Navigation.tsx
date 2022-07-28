@@ -108,7 +108,7 @@ export const Navigation: FC = () => {
         data-description="Desktop Sidebar Navigation"
         className="sidebar sticky top-0 hidden max-h-screen min-h-screen flex-col lg:flex"
       >
-        <div className="my-4 ml-4 h-full w-64 overflow-y-auto rounded-lg border border-neutral-200 bg-white text-[#000] dark:border-dark-800 dark:bg-dark-900 dark:text-dark-300">
+        <div className="my-4 h-full w-64 overflow-y-auto rounded-lg border border-neutral-200 bg-white text-[#000] dark:border-dark-800 dark:bg-dark-900 dark:text-dark-300">
           <div className="flex w-full flex-col gap-y-2 p-4">
             <div className="mb-2 self-center border-b border-neutral-200 py-4 dark:border-dark-200/10">
               <h1 className="text-xl font-extrabold">GENSHIN.ZENLESS</h1>

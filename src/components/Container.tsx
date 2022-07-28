@@ -9,7 +9,7 @@ export const Container = ({ verticalCenter = false, children }: Props) => {
   const verticalClass = verticalCenter ? "place-content-center" : "";
 
   return (
-    <main className={`main grid p-4 ${verticalClass}`}>
+    <main className={`main my-4 grid ${verticalClass}`}>
       <div id="content">{children}</div>
     </main>
   );

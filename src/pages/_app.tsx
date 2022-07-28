@@ -63,9 +63,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <JotaiProvider>
       <ThemeProvider attribute="class">
-        <div className="app-container">
-          <Navigation />
+        <div className="app-container mx-auto max-w-screen-2xl gap-4 px-2">
           <Component {...pageProps} />
+          <Navigation />
           <Footer />
         </div>
       </ThemeProvider>

@@ -22,11 +22,11 @@
   margin-bottom: var(--mobile-navbar-height);
 
   @media (min-width: theme("screens.lg")) {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 1fr auto;
     grid-template-rows: 1fr auto;
     grid-template-areas:
-      "sidebar main"
-      "sidebar footer";
+      "main sidebar"
+      "footer sidebar";
     margin-bottom: 0;
   }
 

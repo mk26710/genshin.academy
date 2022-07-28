@@ -54,14 +54,14 @@ const GuidesId = ({ html, character }: InferGetStaticPropsType<typeof getStaticP
       color={`${character.accentColor}`}
     >
       <Container>
-        <div className="grid max-w-screen-xl grid-cols-1 lg:grid-cols-[1fr_auto]">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-[auto_1fr]">
+          <ContentsTable title="Guide Contents" headings={headings} />
+
           <section
             ref={contentRoot}
             className="prose prose-neutral max-w-none prose-thead:border-neutral-200 dark:prose-invert prose-thead:dark:border-dark-800"
             dangerouslySetInnerHTML={{ __html: html }}
           />
-
-          <ContentsTable title="Guide Contents" headings={headings} />
         </div>
       </Container>
     </Layout>
