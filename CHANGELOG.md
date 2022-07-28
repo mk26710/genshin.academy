@@ -1,6 +1,14 @@
 # Changelog
 
 
+## (v1.2.0) - 2022-07-28
+
+### Features
+
+- **app:** Updated layout, navigation now is on the right and added max width ([a837314](https://github.com/TenkoSpirit/genshin.zenless.club/commit/a8373146f961e53e0b4962b411678ee9b81a9ca3))
+
+
+
 ## (v1.1.3) - 2022-07-28
 
 ### Bug Fixes
