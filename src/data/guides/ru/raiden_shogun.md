@@ -1,5 +1,5 @@
 ---
-title: Руководство по Сёгун Райдэн
+title: Сёгун Райдэн
 id: raiden_shogun
 type: character
 author: pikachupsik

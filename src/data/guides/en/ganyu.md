@@ -1,5 +1,5 @@
 ---
-title: Ganyu Guide
+title: Ganyu
 id: ganyu
 type: character
 lang: en

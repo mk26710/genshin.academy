@@ -1,5 +1,5 @@
 ---
-title: Руководство по Гань Юй
+title: Гань Юй
 id: ganyu
 type: character
 lang: ru
