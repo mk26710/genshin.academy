@@ -46,7 +46,7 @@ const RouterReadyContent: FunctionComponent<{ router: NextRouter } & StaticProps
 
   const filteredGuides = availableGuides
     .filter((g) => (guideType !== "all" ? g.meta.type === guideType : true))
-    .filter((g) => g.character.name.toLowerCase().includes(input.toString().toLowerCase()))
+    .filter((g) => g.meta.title.toLowerCase().includes(input.toString().toLowerCase()))
     .sort((a, b) => b.meta.publishedAt - a.meta.publishedAt);
 
   const handleInputChange = debounce((e: ChangeEvent<HTMLInputElement>) => {
@@ -110,7 +110,7 @@ const RouterReadyContent: FunctionComponent<{ router: NextRouter } & StaticProps
             key={guide.character.id}
             id={guide.character.id}
             href={`/guides/${guide.meta.id}`}
-            title={guide.character.name}
+            title={guide.meta.title}
             description={guide.character.description}
             publishedAtUnix={guide.meta.publishedAt}
             thumbnail={`/img/characters/${guide.character.id}/avatar_header.webp`}
