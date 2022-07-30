@@ -29,7 +29,7 @@ const LanguageSwitch: FunctionComponent = () => {
   const handleOnChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (typeof document !== "undefined") {
       // create NEXT_LOCALE for 90 days
-      document.cookie = `NEXT_LOCALE=${e.target.value};max-age=7776000;path=/`;
+      document.cookie = `NEXT_LOCALE=${e.target.value};max-age=7776000;path=/;SameSite=Lax`;
     }
 
     await setLanguage(e.target.value);
