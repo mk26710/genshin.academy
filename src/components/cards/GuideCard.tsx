@@ -1,7 +1,6 @@
 import type { FC } from "react";
 
 import dayjs from "dayjs";
-import useTranslation from "next-translate/useTranslation";
 import NextLink from "next/link";
 
 import { StaticPicture } from "@/components/StaticPicture";
@@ -25,8 +24,6 @@ export const GuideCard: FC<Props> = ({
   href = "#",
   className = "",
 }) => {
-  const { lang } = useTranslation();
-
   return (
     <NextLink href={href} prefetch={false}>
       <a id={id} className={`card card-vertical ${className}`}>
@@ -41,7 +38,7 @@ export const GuideCard: FC<Props> = ({
         <div className="p-4">
           {publishedAtUnix && (
             <div className="text-sm font-medium text-primary-500">
-              {dayjs.unix(publishedAtUnix).locale(lang).format("lll")}
+              {dayjs.unix(publishedAtUnix).format("YYYY-MM-DD, HH:mm")}
             </div>
           )}
 
