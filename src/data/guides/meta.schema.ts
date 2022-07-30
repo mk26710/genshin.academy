@@ -7,6 +7,7 @@ export const MetaRest = z.record(z.union([z.string(), z.number()]));
 export type MetaRestType = z.infer<typeof MetaRest>;
 
 export const MetaRequired = z.object({
+  title: z.string(),
   id: z.string(),
   type: GuideTypes,
   lang: z.string(),
