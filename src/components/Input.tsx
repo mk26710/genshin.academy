@@ -14,7 +14,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
       <input
         ref={ref}
         type={type}
-        className={`form-input h-10 rounded-lg border border-neutral-200 bg-white text-[#000] placeholder:text-neutral-400 focus:ring-2 focus:ring-primary-500 dark:border-dark-800 dark:bg-dark-900 dark:text-dark-300 dark:placeholder:text-dark-500 ${fullWidthClass} ${className}`}
+        className={`form-input h-10 rounded-lg border border-neutral-200 bg-white text-sm text-[#000] placeholder:text-neutral-400 focus:ring-2 focus:ring-primary-500 dark:border-dark-800 dark:bg-dark-900 dark:text-dark-300 dark:placeholder:text-dark-500 ${fullWidthClass} ${className}`}
         {...props}
       />
     );
