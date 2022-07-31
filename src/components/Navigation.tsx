@@ -1,10 +1,16 @@
-import type { FC, SVGProps } from "react";
+import type { FunctionComponent, SVGProps } from "react";
 
-import { BeakerIcon, CalculatorIcon, CogIcon, HomeIcon, StarIcon } from "@heroicons/react/outline";
+import {
+  CalculatorIcon,
+  CogIcon,
+  DocumentTextIcon,
+  HomeIcon,
+  UserGroupIcon,
+} from "@heroicons/react/outline";
 import useTranslation from "next-translate/useTranslation";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import { Fragment, useCallback } from "react";
+import { useCallback } from "react";
 
 type TIcon = (props: SVGProps<SVGSVGElement>) => JSX.Element;
 
@@ -23,16 +29,16 @@ const navRoutes: NavRoute[] = [
     Icon: HomeIcon,
   },
   {
-    path: "/characters",
-    i18nKey: "common:characters",
-    hasNested: true,
-    Icon: StarIcon,
-  },
-  {
     path: "/guides",
     i18nKey: "common:guides",
     hasNested: true,
-    Icon: BeakerIcon,
+    Icon: DocumentTextIcon,
+  },
+  {
+    path: "/characters",
+    i18nKey: "common:characters",
+    hasNested: true,
+    Icon: UserGroupIcon,
   },
   {
     path: "/calc",
@@ -47,7 +53,7 @@ const navRoutes: NavRoute[] = [
   },
 ];
 
-export const Navigation: FC = () => {
+export const Navigation: FunctionComponent = () => {
   const router = useRouter();
 
   const { t } = useTranslation();
@@ -63,21 +69,6 @@ export const Navigation: FC = () => {
     [router.route],
   );
 
-  const activeClass = useCallback(
-    (navRoute: Pick<NavRoute, "hasNested" | "path">, isMobile = false) => {
-      const active = isActive(navRoute);
-
-      if (isMobile && active) {
-        return " text-primary-500 dark:text-primary-400 font-bold";
-      } else if (!isMobile && active) {
-        return " rounded-lg outline outline-1 outline-primary-200 dark:outline-primary-800 bg-primary-100 dark:bg-primary-900";
-      }
-
-      return "";
-    },
-    [isActive],
-  );
-
   return (
     <>
       {/* Mobile Bottom Navbar */}
@@ -90,10 +81,8 @@ export const Navigation: FC = () => {
               prefetch={prefetch}
             >
               <a
-                className={`${activeClass(
-                  navRoute,
-                  true,
-                )} flex flex-1 flex-col items-center justify-center`}
+                data-active={isActive(navRoute)}
+                className={`flex flex-1 flex-col items-center justify-center active:text-primary-700`}
               >
                 <Icon className="h-6 w-6 stroke-2 p-0" />
                 <h1 className="text-sm font-semibold">{t(i18nKey, { count: 0 })}</h1>
@@ -109,23 +98,20 @@ export const Navigation: FC = () => {
         className="sidebar sticky top-0 hidden max-h-screen min-h-screen flex-col lg:flex"
       >
         <div className="my-4 h-full w-64 overflow-y-auto rounded-lg border border-neutral-200 bg-white text-[#000] dark:border-dark-800 dark:bg-dark-900 dark:text-dark-300">
-          <div className="flex w-full flex-col gap-y-2 p-4">
-            <div className="mb-2 self-center border-b border-neutral-200 py-4 dark:border-dark-200/10">
-              <h1 className="text-xl font-extrabold">GENSHIN.ZENLESS</h1>
+          <div className="flex w-full flex-col gap-y-1 px-4 py-6">
+            <div className="mb-3 self-center border-b border-neutral-200 pb-3 dark:border-dark-800">
+              <h1 className="font-semibold">genshin.zenless</h1>
             </div>
 
             {navRoutes.map(({ Icon, i18nKey, prefetch, ...navRoute }) => (
               <NextLink key={navRoute.path} href={navRoute.path} prefetch={prefetch}>
                 <a
-                  className={
-                    "flex w-full cursor-pointer flex-row items-center gap-x-2 px-3 py-2 text-lg font-semibold" +
-                    activeClass(navRoute)
-                  }
+                  data-active={isActive(navRoute)}
+                  className="flex items-center rounded-lg px-4 py-2 text-neutral-700 active:bg-primary-100 active:text-primary-700 dark:text-dark-300 dark:active:bg-primary-900 dark:active:text-primary-200"
                 >
-                  <Fragment>
-                    <Icon className="h-7 w-7 p-0" />
-                  </Fragment>
-                  <h1>{t(i18nKey, { count: 0 })}</h1>
+                  <Icon className="h-5 w-5 opacity-75" />
+
+                  <span className="ml-3 text-sm font-medium"> {t(i18nKey, { count: 0 })} </span>
                 </a>
               </NextLink>
             ))}
