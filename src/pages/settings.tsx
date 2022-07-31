@@ -37,7 +37,7 @@ const LanguageSwitch: FunctionComponent = () => {
 
   return (
     <div className="w-full">
-      <h1 className="mb-2 text-lg font-semibold">{t`settings:language`}</h1>
+      <h1 className="mb-2 font-semibold">{t`settings:language`}</h1>
 
       <fieldset role="radiogroup" className="flex flex-col gap-1">
         {locales.map(({ code, name, flag }) => (
@@ -53,12 +53,12 @@ const LanguageSwitch: FunctionComponent = () => {
             />
             <label
               htmlFor={`${code}-btn`}
-              className="flex w-full flex-row items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-100 p-4 px-3 py-2 text-[#000] hover:cursor-pointer peer-checked:border-primary-200 peer-checked:bg-primary-100 dark:border-dark-800 dark:bg-dark-900 dark:text-dark-300 dark:peer-checked:border-primary-800 dark:peer-checked:bg-primary-900"
+              className="flex w-full flex-row items-center gap-2 rounded-lg bg-neutral-100 p-4 px-3 py-2 text-sm text-[#000] hover:cursor-pointer peer-checked:bg-primary-100 peer-checked:text-primary-700 dark:bg-dark-900 dark:text-dark-300 dark:peer-checked:bg-primary-900 dark:peer-checked:text-primary-200"
             >
               <div className="align-middle">
                 <ReactCountryFlag countryCode={flag} />
               </div>
-              <div className="font-semibold">{name}</div>
+              <div className="font-medium">{name}</div>
             </label>
           </div>
         ))}
@@ -96,7 +96,7 @@ const ThemeSwitch: FunctionComponent = () => {
   return (
     <>
       <div className="w-full">
-        <h1 className="mb-2 text-lg font-semibold">{t`settings:theme`}</h1>
+        <h1 className="mb-2 font-semibold">{t`settings:theme`}</h1>
 
         <fieldset role="radiogroup" className="flex flex-col gap-1">
           {themes.map(({ name, Icon, i18nKey }) => (
@@ -112,12 +112,12 @@ const ThemeSwitch: FunctionComponent = () => {
               />
               <label
                 htmlFor={`${name}-btn`}
-                className="flex w-full flex-row items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-100 p-4 px-3 py-2 text-[#000] hover:cursor-pointer peer-checked:border-primary-200 peer-checked:bg-primary-100 dark:border-dark-800 dark:bg-dark-900 dark:text-dark-300 dark:peer-checked:border-primary-800 dark:peer-checked:bg-primary-900"
+                className="flex w-full flex-row items-center gap-2 rounded-lg bg-neutral-100 p-4 px-3 py-2 text-sm text-[#000] hover:cursor-pointer peer-checked:bg-primary-100 peer-checked:text-primary-700 dark:bg-dark-900 dark:text-dark-300 dark:peer-checked:bg-primary-900 dark:peer-checked:text-primary-200"
               >
                 <div className="align-middle">
                   <Icon className="h-5 w-5" />
                 </div>
-                <div className="font-semibold">{t(i18nKey)}</div>
+                <div className="font-medium">{t(i18nKey)}</div>
               </label>
             </div>
           ))}
@@ -132,7 +132,7 @@ const Appearance: FunctionComponent<PropsWithChildren> = ({ children }) => {
 
   return (
     <div className="flex w-full flex-col gap-2 rounded-lg border border-neutral-200 bg-white p-4 text-[#000] dark:border-dark-800 dark:bg-dark-900 dark:text-dark-300">
-      <h1 className="mb-4 text-2xl font-semibold">{t`settings:appearance`}</h1>
+      <h1 className="mb-4 text-xl font-semibold">{t`settings:appearance`}</h1>
       {children}
     </div>
   );
