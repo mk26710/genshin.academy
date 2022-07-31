@@ -1,6 +1,41 @@
 # Changelog
 
 
+## (v1.3.0) - 2022-07-31
+
+### Bug Fixes
+
+- **components:** Closes #18 ([38ca837](https://github.com/TenkoSpirit/genshin.zenless.club/commit/38ca837116373273075e872a378924833cd29212))
+- **settings:** Firefox complains about missing SameSite :/ ([bccf330](https://github.com/TenkoSpirit/genshin.zenless.club/commit/bccf330326ff27884896f9adb7ae6353852f6fd1))
+
+### Features
+
+- **_app:** Instead of setting dayjs locale globally we should set it on demand, that way it'll be easier and will prevent some weird framework perls ([10c7966](https://github.com/TenkoSpirit/genshin.zenless.club/commit/10c7966acf9e4016530dbe583950af7380ba06aa))
+- **app:** General appearance updated ([01c516b](https://github.com/TenkoSpirit/genshin.zenless.club/commit/01c516be8c6b9a8943ae8f983112f596c93472a3))
+- **atoms:** Set init guide search value to `all` ([f36059f](https://github.com/TenkoSpirit/genshin.zenless.club/commit/f36059f20b0ece09d438ebc496ed3ed3ead11532))
+- **components:** Support unix timestamps for guide cards ([01a842a](https://github.com/TenkoSpirit/genshin.zenless.club/commit/01a842a973345c011a4f15c6f99b07b260a4a7fe))
+- **components:** Display guides publish date in some sort of an ISO format instead of depending on external packages for dayjs ([9305e72](https://github.com/TenkoSpirit/genshin.zenless.club/commit/9305e72e214890d1e3601abf25caffaebeabc934))
+- **components:** Use smaller text in birthdays card ([0a1a9b2](https://github.com/TenkoSpirit/genshin.zenless.club/commit/0a1a9b29651a3a1490ef333206a9101117ff713f))
+- **guides:** Removed Ayaka test guide page and added titles to Raiden guides ([4e564a8](https://github.com/TenkoSpirit/genshin.zenless.club/commit/4e564a8dbbf4c684279afd1c532a00b0af578056))
+- **guides:** Added published date as unix timestamp to frontmatter ([6e834c9](https://github.com/TenkoSpirit/genshin.zenless.club/commit/6e834c9bbc062ace9d190fb0d5a61556e87ef300))
+- **guides:** Added title to required meta tags for guides ([dd752d6](https://github.com/TenkoSpirit/genshin.zenless.club/commit/dd752d66340162c1f8da268476e2d841f4843ff6))
+- **guides:** Updated titles of existing guides ([188e791](https://github.com/TenkoSpirit/genshin.zenless.club/commit/188e791eb5183604c4178d5dec0c543b648cf4cd))
+- **i18n:** Added contents as a translatable string ([be64ec4](https://github.com/TenkoSpirit/genshin.zenless.club/commit/be64ec4e0c478f820c84beadc1c69b5a839dead5))
+- **pages:** Instead of getting all heading elements, get only h1 and h2 for heading ([1d30a95](https://github.com/TenkoSpirit/genshin.zenless.club/commit/1d30a9564909b99f798c94cdb6ea07b899727918))
+- **pages:** Sort available guides by `publishedAt` value ([8a3defb](https://github.com/TenkoSpirit/genshin.zenless.club/commit/8a3defb1b4f62386629b0962d5497a02368da4f7))
+- **pages:** Removed SameSite from the NEXT_LOCALE cookie on settings page since it's basically useless here (maybe) ([8566c0a](https://github.com/TenkoSpirit/genshin.zenless.club/commit/8566c0a5349a1b8588d5522d7da1a887131a79a9))
+- **pages:** Use guide title for card titles ([6aeaf79](https://github.com/TenkoSpirit/genshin.zenless.club/commit/6aeaf7900f54a5b96f0d2b136b54af115dd8a299))
+- **pages:** Use i18n string for contents title on guides id page ([d00ec9e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d00ec9e9d3755ec3b5994481a6caf63da5226547))
+- **pages:** Settings now should look somewhat similar to the redesign ([25251b4](https://github.com/TenkoSpirit/genshin.zenless.club/commit/25251b4408f57cd4836c970c81b2e2680b48eb4f))
+- **tailwind:** Added `active` variant ([d94a2f7](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d94a2f76c67fea4477ccbf4eac60dc81700a257e))
+
+### Refactor
+
+- **components:** Tracking client side is not required anymore for guide cards ([2f7cffc](https://github.com/TenkoSpirit/genshin.zenless.club/commit/2f7cffc4ad0ed303271413bb7c7789c313d7e4a2))
+- **components:** Removed redundant import statement ([a8fa3b2](https://github.com/TenkoSpirit/genshin.zenless.club/commit/a8fa3b2c1c939709e3b348e029d53967e2a3d234))
+
+
+
 ## (v1.2.1) - 2022-07-28
 
 ### Features
