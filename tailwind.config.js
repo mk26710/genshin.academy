@@ -3,6 +3,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const colors = require("tailwindcss/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
+const plugin = require("tailwindcss/plugin");
 
 const myColors = {
   azure: {
@@ -113,6 +114,10 @@ module.exports = {
     require("@tailwindcss/typography"),
     require("@tailwindcss/forms")({
       strategy: "class",
+    }),
+    plugin(({ addVariant }) => {
+      // Add a `active` variant, ie. `active:pb-0`
+      addVariant("active", "&[data-active=true]");
     }),
   ],
 };
