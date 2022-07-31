@@ -61,7 +61,7 @@ const GuidesId = ({ html, character }: InferGetStaticPropsType<typeof getStaticP
             dangerouslySetInnerHTML={{ __html: html }}
           />
 
-          <ContentsTable title="Guide Contents" headings={headings} />
+          <ContentsTable title={t`common:contents`} headings={headings} />
         </div>
       </Container>
     </Layout>
