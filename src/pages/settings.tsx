@@ -53,7 +53,7 @@ const LanguageSwitch: FunctionComponent = () => {
             />
             <label
               htmlFor={`${code}-btn`}
-              className="flex w-full flex-row items-center gap-2 rounded-lg bg-neutral-100 p-4 px-3 py-2 text-sm text-[#000] hover:cursor-pointer peer-checked:bg-primary-100 peer-checked:text-primary-700 dark:bg-dark-900 dark:text-dark-300 dark:peer-checked:bg-primary-900 dark:peer-checked:text-primary-200"
+              className="flex w-full flex-row items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-100 p-4 px-3 py-2 text-sm text-[#000] hover:cursor-pointer peer-checked:border-primary-700 peer-checked:bg-primary-100 peer-checked:text-primary-700 dark:border-dark-700 dark:bg-dark-800 dark:bg-dark-900 dark:text-dark-300 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-900 dark:peer-checked:text-primary-200"
             >
               <div className="align-middle">
                 <ReactCountryFlag countryCode={flag} />
@@ -112,7 +112,7 @@ const ThemeSwitch: FunctionComponent = () => {
               />
               <label
                 htmlFor={`${name}-btn`}
-                className="flex w-full flex-row items-center gap-2 rounded-lg bg-neutral-100 p-4 px-3 py-2 text-sm text-[#000] hover:cursor-pointer peer-checked:bg-primary-100 peer-checked:text-primary-700 dark:bg-dark-900 dark:text-dark-300 dark:peer-checked:bg-primary-900 dark:peer-checked:text-primary-200"
+                className="flex w-full flex-row items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-100 p-4 px-3 py-2 text-sm text-[#000] hover:cursor-pointer peer-checked:border-primary-700 peer-checked:bg-primary-100 peer-checked:text-primary-700 dark:border-dark-700 dark:bg-dark-800 dark:bg-dark-900 dark:text-dark-300 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-900 dark:peer-checked:text-primary-200"
               >
                 <div className="align-middle">
                   <Icon className="h-5 w-5" />
