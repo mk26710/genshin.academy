@@ -2,16 +2,16 @@ import type { FC } from "react";
 
 import dayjs from "dayjs";
 import NextLink from "next/link";
-
-import { StaticPicture } from "@/components/StaticPicture";
+import { useId } from "react";
 
 interface Props {
   id: string;
   title: string;
-  description?: string;
-  publishedAtUnix?: number;
-  thumbnail?: string;
-  href?: string;
+  description: string;
+  publishedAtUnix: number;
+  thumbnail: string;
+  href: string;
+  author: string;
   className?: string;
 }
 
@@ -22,31 +22,52 @@ export const GuideCard: FC<Props> = ({
   publishedAtUnix,
   thumbnail,
   href = "#",
+  author,
   className = "",
 }) => {
-  return (
-    <NextLink href={href} prefetch={false}>
-      <a id={id} className={`card card-vertical ${className}`}>
-        {thumbnail && (
-          <StaticPicture
-            src={thumbnail}
-            className="aspect-[9/16] min-h-[10rem] w-full rounded-t-lg object-fill object-top lg:min-h-[20rem]"
-            alt="character icon"
-          />
-        )}
+  const htmlId = useId();
 
-        <div className="p-4">
-          {publishedAtUnix && (
-            <div className="text-sm font-medium text-primary-500">
-              {dayjs.unix(publishedAtUnix).format("YYYY-MM-DD, HH:mm")}
+  return (
+    <div>
+      <NextLink href={href} prefetch={false}>
+        <a
+          id={id}
+          className={`mt-4 flex flex-col gap-4 rounded-lg bg-white p-6 drop-shadow-lg ${className}`}
+        >
+          {thumbnail && (
+            <div id={htmlId + "-header"}>
+              <img
+                src={thumbnail}
+                className="-mt-12 rounded-lg text-transparent drop-shadow-lg"
+                alt="character icon"
+                height="1920px"
+                width="1080px"
+              />
             </div>
           )}
 
-          <p className="mb-2 block text-lg font-bold text-[#000] dark:text-dark-300">{title}</p>
+          <div id={htmlId + "-body"} className="flex flex-col gap-2">
+            <h4 className="text-xl font-semibold">{title}</h4>
 
-          {description && <p className="text-justify text-sm">{description}</p>}
-        </div>
-      </a>
-    </NextLink>
+            <div className="text-justify text-sm">
+              <p>{description}</p>
+            </div>
+          </div>
+
+          <div id={htmlId + "-footer"} className="mt-2 flex flex-row gap-4">
+            <img
+              className="h-10 w-10 rounded-full text-transparent drop-shadow-lg"
+              src={`https://github.com/${author}.png?size=128`}
+              alt="author avatar"
+            />
+
+            <div className="flex-1 self-center text-sm opacity-75">
+              <p>by {author}</p>
+              <p>{dayjs.unix(publishedAtUnix).format("YYYY-MM-DD")}</p>
+            </div>
+          </div>
+        </a>
+      </NextLink>
+    </div>
   );
 };
