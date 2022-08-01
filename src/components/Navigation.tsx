@@ -107,7 +107,7 @@ export const Navigation: FunctionComponent = () => {
               <NextLink key={navRoute.path} href={navRoute.path} prefetch={prefetch}>
                 <a
                   data-active={isActive(navRoute)}
-                  className="flex items-center rounded-lg px-4 py-2 text-neutral-700 active:bg-primary-100 active:text-primary-700 dark:text-dark-300 dark:active:bg-primary-900 dark:active:text-primary-200"
+                  className="flex items-center rounded-lg px-4 py-2 text-neutral-700 active:bg-primary-100 active:text-primary-700 active:outline active:outline-1 active:outline-primary-700 dark:text-dark-300 dark:active:bg-primary-900 dark:active:text-primary-200 dark:active:outline-primary-500"
                 >
                   <Icon className="h-5 w-5 opacity-75" />
 
