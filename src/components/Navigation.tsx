@@ -82,7 +82,7 @@ export const Navigation: FunctionComponent = () => {
             >
               <a
                 data-active={isActive(navRoute)}
-                className={`flex flex-1 flex-col items-center justify-center active:text-primary-700`}
+                className={`flex flex-1 flex-col items-center justify-center active:text-primary-500`}
               >
                 <Icon className="h-6 w-6 stroke-2 p-0" />
                 <h1 className="text-sm font-semibold">{t(i18nKey, { count: 0 })}</h1>
