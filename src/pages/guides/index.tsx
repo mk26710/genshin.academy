@@ -103,7 +103,7 @@ const RouterReadyContent: FunctionComponent<{ router: NextRouter } & StaticProps
         />
       </div>
 
-      <div className="columns-1 gap-4 space-y-4 sm:columns-2 lg:columns-3 xl:columns-4 2xl:columns-5">
+      <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {filteredGuides.length <= 0 && <NoResult />}
         {filteredGuides.map((guide) => (
           <GuideCard
@@ -113,7 +113,8 @@ const RouterReadyContent: FunctionComponent<{ router: NextRouter } & StaticProps
             title={guide.meta.title}
             description={guide.character.description}
             publishedAtUnix={guide.meta.publishedAt}
-            thumbnail={`/img/characters/${guide.character.id}/avatar_header.webp`}
+            author={guide.meta.author}
+            thumbnail={`/img/characters/${guide.character.id}/avatar_header_1200.webp`}
           />
         ))}
       </div>
