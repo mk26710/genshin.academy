@@ -28,7 +28,7 @@ export const GuideCard: FC<Props> = ({
   const htmlId = useId();
 
   return (
-    <div>
+    <>
       <NextLink href={href} prefetch={false}>
         <a
           id={id}
@@ -46,7 +46,7 @@ export const GuideCard: FC<Props> = ({
             </div>
           )}
 
-          <div id={htmlId + "-body"} className="flex flex-col gap-2">
+          <div id={htmlId + "-body"} className="flex flex-grow flex-col gap-2">
             <h4 className="text-xl font-semibold">{title}</h4>
 
             <div className="text-justify text-sm">
@@ -68,6 +68,6 @@ export const GuideCard: FC<Props> = ({
           </div>
         </a>
       </NextLink>
-    </div>
+    </>
   );
 };
