@@ -32,7 +32,7 @@ export const GuideCard: FC<Props> = ({
       <NextLink href={href} prefetch={false}>
         <a
           id={id}
-          className={`mt-4 flex flex-col gap-4 rounded-lg bg-white p-6 drop-shadow-lg ${className}`}
+          className={`mt-4 flex flex-col gap-4 rounded-lg bg-white p-6 drop-shadow-lg dark:bg-dark-900 ${className}`}
         >
           {thumbnail && (
             <div id={htmlId + "-header"}>
@@ -47,7 +47,7 @@ export const GuideCard: FC<Props> = ({
           )}
 
           <div id={htmlId + "-body"} className="flex flex-grow flex-col gap-2">
-            <h4 className="text-xl font-semibold">{title}</h4>
+            <h4 className="text-xl font-semibold dark:text-dark-200">{title}</h4>
 
             <div className="text-justify text-sm">
               <p>{description}</p>
@@ -61,7 +61,7 @@ export const GuideCard: FC<Props> = ({
               alt="author avatar"
             />
 
-            <div className="flex-1 self-center text-sm opacity-75">
+            <div className="flex-1 self-center text-sm opacity-75 dark:text-dark-200">
               <p>by {author}</p>
               <p>{dayjs.unix(publishedAtUnix).format("YYYY-MM-DD")}</p>
             </div>
