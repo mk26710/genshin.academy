@@ -17,6 +17,7 @@ import { Navigation } from "@/components/Navigation";
 
 import "@/assets/styles/cards.scss";
 import "@/assets/styles/main.scss";
+import "@/assets/styles/markdown.scss";
 import "@/assets/styles/nprogress.scss";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {

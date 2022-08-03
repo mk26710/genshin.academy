@@ -1,0 +1,31 @@
+.markdown-content {
+  details {
+    @apply rounded-lg border-l-4 border-primary-500 bg-white font-semibold text-[#000];
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+
+      user-select: none;
+    }
+
+    &[open] {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      padding-top: 0;
+      padding-bottom: 1rem;
+
+      summary {
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
+    }
+  }
+}
