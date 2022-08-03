@@ -1,6 +1,6 @@
 .markdown-content {
   details {
-    @apply rounded-lg border-l-4 border-primary-500 bg-white font-semibold text-[#000];
+    @apply rounded-lg border-l-4 border-primary-500 bg-white dark:bg-dark-900 font-semibold text-[#000] dark:text-dark-200;
 
     summary {
       cursor: pointer;
