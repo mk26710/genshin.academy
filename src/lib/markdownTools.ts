@@ -5,14 +5,12 @@ import { basename, join } from "path";
 
 import { globby } from "globby";
 import rehypePresetMinify from "rehype-preset-minify";
-import rehypeSanitize from "rehype-sanitize";
 import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
-import remarkStringify from "remark-stringify";
 import { unified } from "unified";
 import { parse as parseYaml } from "yaml";
 
@@ -27,7 +25,6 @@ const GUIDES_DIR = join(process.cwd(), "src/data/guides");
 
 const parser = unified()
   .use(remarkParse)
-  .use(remarkStringify)
   .use(remarkFrontmatter, ["yaml"])
   .use(() => (tree, file) => {
     const meta = tree.children.find((c) => c.type === "yaml");
@@ -38,11 +35,10 @@ const parser = unified()
     }
   })
   .use(remarkGfm)
-  .use(remarkRehype)
-  .use(rehypeSanitize)
+  .use(remarkRehype, { allowDangerousHtml: true })
   .use(rehypeSlug)
   .use(rehypePresetMinify)
-  .use(rehypeStringify);
+  .use(rehypeStringify, { allowDangerousHtml: true });
 
 export const parseMarkdown = async (content: Buffer) => {
   return await parser.process(content);
