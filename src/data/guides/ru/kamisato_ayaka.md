@@ -1,5 +1,5 @@
 ---
-title: Камисато Аяка: Руководство по прокачке и игре
+title: Камисато Аяка
 id: kamisato_ayaka
 type: character
 lang: ru
