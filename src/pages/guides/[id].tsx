@@ -57,7 +57,7 @@ const GuidesId = ({ html, character }: InferGetStaticPropsType<typeof getStaticP
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-[auto_1fr]">
           <section
             ref={contentRoot}
-            className="prose prose-neutral max-w-none prose-thead:border-neutral-200 dark:prose-invert prose-thead:dark:border-dark-800"
+            className="markdown-content prose prose-neutral max-w-none prose-thead:border-neutral-200 dark:prose-invert prose-thead:dark:border-dark-800"
             dangerouslySetInnerHTML={{ __html: html }}
           />
 
