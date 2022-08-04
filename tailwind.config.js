@@ -115,9 +115,16 @@ module.exports = {
     require("@tailwindcss/forms")({
       strategy: "class",
     }),
-    plugin(({ addVariant }) => {
+    plugin(({ addVariant, addUtilities }) => {
       // Add a `active` variant, ie. `active:pb-0`
       addVariant("active", "&[data-active=true]");
+      addUtilities({
+        ".hyphens-auto": {
+          "-webkit-hyphens": "auto",
+          "-ms-hyphens": "auto",
+          hyphens: "auto",
+        },
+      });
     }),
   ],
 };
