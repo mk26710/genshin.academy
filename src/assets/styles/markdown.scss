@@ -12,9 +12,11 @@
   }
 
   details {
-    @apply rounded-lg border-l-4 border-primary-500 bg-white font-semibold text-[#000] dark:bg-dark-900 dark:text-dark-200;
+    @apply rounded-lg border-l-4 border-primary-500 bg-white text-[#000] dark:bg-dark-900 dark:text-dark-200;
 
     summary {
+      font-weight: theme("fontWeight.semibold");
+
       cursor: pointer;
       list-style: none;
 
