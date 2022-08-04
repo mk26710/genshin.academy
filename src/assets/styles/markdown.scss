@@ -1,4 +1,13 @@
 .markdown-content {
+  p + ol,
+  p + ul {
+    margin-top: 0;
+  }
+
+  li + li {
+    margin-top: 0;
+  }
+
   table {
     img {
       margin: 0;
