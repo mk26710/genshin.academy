@@ -19,7 +19,7 @@ interface StaticProps {
   character: CharacterType;
 }
 
-const GuidesId = ({ html, character }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const GuidesId = ({ meta, html, character }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { t } = useTranslation();
 
   const [headings, setHeadings] = useState<string[]>([]);
@@ -48,7 +48,7 @@ const GuidesId = ({ html, character }: InferGetStaticPropsType<typeof getStaticP
 
   return (
     <Layout
-      title={t("meta:guides.id.title", { name: character.name })}
+      title={meta.title}
       description={t("meta:guides.id.description", { name: character.name })}
       iconURL={characterIcon(character.id)}
       color={`${character.accentColor}`}
