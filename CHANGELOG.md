@@ -1,6 +1,23 @@
 # Changelog
 
 
+## (v1.4.0) - 2022-08-01
+
+### Bug Fixes
+
+- **components:** Bg color should be important on calculator input ([40326b8](https://github.com/TenkoSpirit/genshin.zenless.club/commit/40326b8d2aa318d8e3cf9e39e55573a289d4a8a3))
+
+### Features
+
+- **components:** Updated guide card look ([350d3b6](https://github.com/TenkoSpirit/genshin.zenless.club/commit/350d3b6bbe6367e844e380571df4361d7a666fb5))
+- **components:** Lighter active color on mobile ([46fafd4](https://github.com/TenkoSpirit/genshin.zenless.club/commit/46fafd48b5c9c206a81122f4abe68a7df24657ac))
+- **components:** Updated navigation looks ([913de67](https://github.com/TenkoSpirit/genshin.zenless.club/commit/913de676aa3a5fb0b64c9f6718abadbf94fa43ea))
+- **guides:** Author is required meta tag ([dfa8931](https://github.com/TenkoSpirit/genshin.zenless.club/commit/dfa8931cc4b4d7e7b9fd1525b8709517934c080b))
+- **pages:** Updated guides index page ([3cf55e2](https://github.com/TenkoSpirit/genshin.zenless.club/commit/3cf55e236a469c5c97b86774f14c3197639eee9b))
+- **pages:** Updated settings looks ([776cb8b](https://github.com/TenkoSpirit/genshin.zenless.club/commit/776cb8bbf8ed4ce618018cc0e5d19d4857a36ae4))
+
+
+
 ## (v1.3.0) - 2022-07-31
 
 ### Bug Fixes
