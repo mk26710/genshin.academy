@@ -50,7 +50,9 @@ export const GuideCard: FC<Props> = ({
             <h4 className="text-xl font-semibold dark:text-dark-200">{title}</h4>
 
             <div className="text-justify text-sm">
-              <p>{description}</p>
+              <p lang="en" className="hyphens-auto">
+                {description}
+              </p>
             </div>
           </div>
 
