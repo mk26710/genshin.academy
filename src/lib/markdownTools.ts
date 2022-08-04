@@ -4,13 +4,12 @@ import fs from "fs/promises";
 import { basename, join } from "path";
 
 import { globby } from "globby";
-import rehypePresetMinify from "rehype-preset-minify";
 import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
-import remarkRehype from "remark-rehype";
+import remark2Rehype from "remark-rehype";
 import { unified } from "unified";
 import { parse as parseYaml } from "yaml";
 
@@ -35,9 +34,8 @@ const parser = unified()
     }
   })
   .use(remarkGfm)
-  .use(remarkRehype, { allowDangerousHtml: true })
+  .use(remark2Rehype, { allowDangerousHtml: true })
   .use(rehypeSlug)
-  .use(rehypePresetMinify)
   .use(rehypeStringify, { allowDangerousHtml: true });
 
 export const parseMarkdown = async (content: Buffer) => {
