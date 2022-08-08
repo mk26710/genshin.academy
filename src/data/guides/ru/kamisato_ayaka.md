@@ -38,9 +38,9 @@ _Интересный факт: Аяка находилась в разрабо�
 
 При использовании обычных и заряженных атак важно подходить к этому эффективно, поскольку заряженные атаки потребляют довольно много выносливости. Заряженные атаки можно прерывать, что позволяет экономить выносливость. Прервать их можно либо с помощью спринта, либо с помощью прыжка.
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/iM8ziqqWeT0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe src="https://www.youtube-nocookie.com/embed/iM8ziqqWeT0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/9CWiASUXXLE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe src="https://www.youtube-nocookie.com/embed/9CWiASUXXLE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Рекомендуются следующие последовательности атак:
 
@@ -48,11 +48,11 @@ _Интересный факт: Аяка находилась в разрабо�
 2. **Три обычных и заряженная атака.**
 3. **Одна обычная и заряженная атака.**
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8phkdl5m_GI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe src="https://www.youtube-nocookie.com/embed/8phkdl5m_GI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/r4Ezm1_kBHw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe src="https://www.youtube-nocookie.com/embed/r4Ezm1_kBHw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Ab08Os6DX2U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe src="https://www.youtube-nocookie.com/embed/Ab08Os6DX2U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 </details>
 
@@ -205,7 +205,7 @@ _Автор данного руководства пользуется комп�
 Видео-пример
 </summary>
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/fVqi_YF-j8w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe src="https://www.youtube-nocookie.com/embed/fVqi_YF-j8w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </details>
 
 Эффективный отряд, способный вносить большое количество урона. Важно поддерживать ульты, поэтому нужно обращать внимание на восстановление энергии.
@@ -226,7 +226,7 @@ _Автор данного руководства пользуется комп�
 Видео-пример
 </summary>
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/pKJB67HBB9Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe src="https://www.youtube-nocookie.com/embed/pKJB67HBB9Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </details>
 
 - **от Е Лань получаем поддержку гидро эффекта и бонус урона.** Во время действия ульты Е Лань можно получить приятный бонус урона Аяки, а так же урон самой ульты Е Лань довольно высокий. Помимо бонусов мы получаем неплохого гидро аппликатора а команду.
@@ -255,7 +255,7 @@ _Автор данного руководства пользуется комп�
 <details>
 <summary>Разбор первого созвездия</summary>
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/_fE_UZAjGTo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe src="https://www.youtube-nocookie.com/embed/_fE_UZAjGTo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 </details>
 
@@ -268,7 +268,7 @@ _Автор данного руководства пользуется комп�
 <details>
   <summary>Демонстрация взрыва стихий со вторым созвездием</summary>
 
-  <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ArYGdTiTCRI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe src="https://www.youtube-nocookie.com/embed/ArYGdTiTCRI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </details>
 
 ### Третье созвездие: Ледяной цветок камифубуки
