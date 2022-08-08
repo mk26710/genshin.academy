@@ -9,7 +9,7 @@ import { Container } from "@/components/Container";
 import { ContentsTable } from "@/components/ContentsTable";
 import { Layout } from "@/components/Layout";
 import { getCharacterById } from "@/data/characters";
-import { publishedIds } from "@/data/guides/published";
+import { PUBLISHED_GUIDES } from "@/data/guides/published";
 import { characterIcon } from "@/lib/helpers";
 import { getGuide } from "@/lib/markdownTools";
 
@@ -68,19 +68,19 @@ const GuidesId = ({ meta, html, character }: InferGetStaticPropsType<typeof getS
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  let paths = publishedIds.map((id) => ({ params: { id } }));
+export const getStaticPaths: GetStaticPaths = async ({ locales = ["en"] }) => {
+  const paths = locales.flatMap((locale) => {
+    const availableGuides = PUBLISHED_GUIDES[locale];
 
-  if (typeof locales !== "undefined") {
-    paths = locales.flatMap((locale) => {
-      return paths.map((path) => {
-        return {
-          ...path,
-          locale,
-        };
-      });
+    return availableGuides.map((id) => {
+      return {
+        locale,
+        params: {
+          id,
+        },
+      };
     });
-  }
+  });
 
   return {
     paths,
@@ -94,7 +94,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({ params, loca
     return { notFound: true };
   }
 
-  if (!publishedIds.includes(paramsId)) {
+  if (!PUBLISHED_GUIDES[locale].includes(paramsId)) {
     return { notFound: true };
   }
 

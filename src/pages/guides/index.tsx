@@ -17,7 +17,6 @@ import { Container } from "@/components/Container";
 import { Input } from "@/components/Input";
 import { Layout } from "@/components/Layout";
 import { getCharacterById } from "@/data/characters";
-import { publishedIds } from "@/data/guides/published";
 import { useRouterReady } from "@/hooks/useRouterReady";
 import { getAllGuides } from "@/lib/markdownTools";
 
@@ -143,13 +142,10 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({ locale = "en
   const guides = await getAllGuides(locale);
   const metas = guides.map((g) => g.meta);
 
-  const availableGuides = publishedIds.reduce((acc, id) => {
-    const character = getCharacterById(id);
+  const availableGuides = metas.reduce((acc, meta) => {
+    const character = getCharacterById(meta.id);
     if (typeof character !== "undefined") {
-      const meta = metas.find((m) => m.id.toLowerCase() === id.toLowerCase());
-      if (typeof meta !== "undefined") {
-        acc.push({ character, meta });
-      }
+      acc.push({ character, meta });
     }
 
     return acc;
