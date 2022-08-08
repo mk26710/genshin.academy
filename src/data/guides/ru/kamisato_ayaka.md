@@ -4,7 +4,7 @@ id: kamisato_ayaka
 type: character
 lang: ru
 author: TenkoSpirit
-publishedAt: 1659087191
+publishedAt: 1659974233
 ---
 
 # Вступление
