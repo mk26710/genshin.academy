@@ -8,7 +8,8 @@ import { useAtom } from "jotai";
 import { useHydrateAtoms } from "jotai/utils";
 import debounce from "lodash.debounce";
 import isEmpty from "lodash.isempty";
-import useTranslation from "next-translate/useTranslation";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRef, useEffect } from "react";
 
 import { guideSearchQueryAtom, guideSearchTypeAtom } from "@/atoms/guideSearch";
@@ -152,7 +153,10 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({ locale = "en
   }, new Array<StaticProps["availableGuides"][0]>());
 
   return {
-    props: { availableGuides },
+    props: {
+      availableGuides,
+      ...(await serverSideTranslations(locale, ["common", "footer", "meta"])),
+    },
   };
 };
 

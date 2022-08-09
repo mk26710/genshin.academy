@@ -3,7 +3,8 @@ import type { MetaType } from "@/data/guides/meta.schema";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { FunctionComponent } from "react";
 
-import useTranslation from "next-translate/useTranslation";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 
@@ -90,6 +91,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({ locale = "en
     props: {
       character,
       latestGuideMeta,
+      ...(await serverSideTranslations(locale, ["common", "footer", "home", "meta"])),
     },
   };
 };

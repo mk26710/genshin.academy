@@ -1,6 +1,7 @@
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 
-import useTranslation from "next-translate/useTranslation";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
 
 import { Container } from "@/components/Container";
@@ -38,6 +39,14 @@ const NotFound: NextPage = () => {
       </Container>
     </Layout>
   );
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale = "en" }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "footer", "404", "meta"])),
+    },
+  };
 };
 
 export default NotFound;

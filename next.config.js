@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const nextTranslate = require("next-translate");
+const { i18n } = require("./next-i18next.config");
 
 // @ts-check
 
@@ -10,6 +10,7 @@ const nextTranslate = require("next-translate");
 const nextConfig = {
   output: "standalone",
   reactStrictMode: true,
+  i18n,
 };
 
-module.exports = nextTranslate(nextConfig);
+module.exports = nextConfig;

@@ -1,6 +1,8 @@
 import type { CharacterType } from "@/data/character.schema";
 import type { GetStaticPaths, GetStaticProps } from "next";
 
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
 import { charactersArray, getCharacterById } from "@/data/characters";
@@ -30,8 +32,8 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   };
 };
 
-export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
-  const paramsId = context.params?.id;
+export const getStaticProps: GetStaticProps<StaticProps> = async ({ locale = "en", params }) => {
+  const paramsId = params?.id;
   const character = getCharacterById(`${paramsId}`);
 
   if (character == null) {
@@ -39,7 +41,11 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
   }
 
   return {
-    props: { character },
+    props: {
+      character,
+
+      ...(await serverSideTranslations(locale, ["common", "footer", "meta"])),
+    },
   };
 };
 

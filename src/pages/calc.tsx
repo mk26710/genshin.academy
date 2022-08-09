@@ -1,7 +1,9 @@
+import type { GetStaticProps } from "next";
 import type { FunctionComponent } from "react";
 
 import { useAtom } from "jotai";
-import useTranslation from "next-translate/useTranslation";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import {
   critDamageAtom,
@@ -119,6 +121,14 @@ const CalcPage = () => {
       </Container>
     </Layout>
   );
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale = "en" }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "footer", "calc", "meta"])),
+    },
+  };
 };
 
 export default CalcPage;

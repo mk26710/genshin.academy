@@ -1,10 +1,11 @@
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import type { ChangeEvent, FunctionComponent, PropsWithChildren } from "react";
 
 import { DesktopComputerIcon, MoonIcon, SunIcon } from "@heroicons/react/solid";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTheme } from "next-themes";
-import setLanguage from "next-translate/setLanguage";
-import useTranslation from "next-translate/useTranslation";
+import { useRouter } from "next/router";
 import ReactCountryFlag from "react-country-flag";
 
 import { Container } from "@/components/Container";
@@ -24,15 +25,18 @@ const locales = [
 ];
 
 const LanguageSwitch: FunctionComponent = () => {
-  const { t, lang } = useTranslation();
+  const router = useRouter();
+
+  const { t, i18n } = useTranslation();
+  const { language: lang } = i18n;
 
   const handleOnChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (typeof document !== "undefined") {
       // create NEXT_LOCALE for 90 days
       document.cookie = `NEXT_LOCALE=${e.target.value};max-age=7776000;path=/;SameSite=Lax`;
-    }
 
-    await setLanguage(e.target.value);
+      void router.push("/settings", undefined, { locale: e.target.value });
+    }
   };
 
   return (
@@ -153,6 +157,14 @@ const Settings: NextPage = () => {
       </Container>
     </Layout>
   );
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale = "en" }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "footer", "settings", "meta"])),
+    },
+  };
 };
 
 export default Settings;

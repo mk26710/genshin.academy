@@ -1,8 +1,9 @@
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import type { ChangeEvent } from "react";
 
 import { useAtom } from "jotai";
-import useTranslation from "next-translate/useTranslation";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useDeferredValue } from "react";
 
 import { characterSearchAtom } from "@/atoms/characterSearch";
@@ -41,6 +42,14 @@ const CharactersIndex: NextPage = () => {
       </Container>
     </Layout>
   );
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale = "en" }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "footer", "meta"])),
+    },
+  };
 };
 
 export default CharactersIndex;

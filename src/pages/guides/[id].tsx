@@ -2,7 +2,8 @@ import type { CharacterType } from "@/data/character.schema";
 import type { MetaType } from "@/data/guides/meta.schema";
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 
-import useTranslation from "next-translate/useTranslation";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useEffect, useRef, useState } from "react";
 
 import { Container } from "@/components/Container";
@@ -106,7 +107,11 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({ params, loca
   const guide = await getGuide(paramsId, locale);
 
   return {
-    props: { ...guide, character },
+    props: {
+      ...guide,
+      character,
+      ...(await serverSideTranslations(locale, ["common", "footer", "meta"])),
+    },
   };
 };
 

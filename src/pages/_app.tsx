@@ -7,6 +7,7 @@ import "dayjs/locale/ja";
 import "dayjs/locale/ru";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import { Provider as JotaiProvider } from "jotai";
+import { appWithTranslation } from "next-i18next";
 import { ThemeProvider } from "next-themes";
 import { useRouter } from "next/router";
 import nProgress from "nprogress";
@@ -70,4 +71,4 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   );
 };
 
-export default MyApp;
+export default appWithTranslation(MyApp);

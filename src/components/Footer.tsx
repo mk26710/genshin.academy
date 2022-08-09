@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import Trans from "next-translate/Trans";
+import { Trans } from "next-i18next";
 
 import { ExternalLink } from "@/components/ExternalLink";
 import { DiscordLogo } from "@/components/icons/DiscordLogo";
