@@ -1,6 +1,45 @@
 # Changelog
 
 
+## (v1.4.1) - 2022-08-09
+
+### Bug Fixes
+
+- **components:** Dark colors on guide cards were missing ([5b29ce4](https://github.com/TenkoSpirit/genshin.zenless.club/commit/5b29ce4d031a3e4f37aa1f54f5a6e66854cd0dce))
+- **css:** Semibold font style should be applied only to summary not all details tag ([15b0d5d](https://github.com/TenkoSpirit/genshin.zenless.club/commit/15b0d5d05dcbada36ed5900c7fdc31c2460c45e0))
+- **guides, css:** Iframes were causing overflows ([1061857](https://github.com/TenkoSpirit/genshin.zenless.club/commit/10618571c5eb6d3c183ac62ef19c45dc7ede762a))
+
+### Features
+
+- **app:** Switched from `next-translate` to `next-i18next` ([93e4e36](https://github.com/TenkoSpirit/genshin.zenless.club/commit/93e4e36a9abf9ee8bae586ae6bc3e29e7299826f))
+- **components:** Authors on guide cards will be always at the bottom ([964c90c](https://github.com/TenkoSpirit/genshin.zenless.club/commit/964c90c2e7e03e3c00b38b5c20cc8beac5033eb2))
+- **components:** Added hyphens to description text ([eebb2b1](https://github.com/TenkoSpirit/genshin.zenless.club/commit/eebb2b1c730bc6b4142903f4e84217d2c1c6b2ca))
+- **css:** Added styles for details tag that is parsed from markdown ([d2de6e3](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d2de6e3457e845c5b287df16c70f64c4ff478bdc))
+- **css:** Added dark styles for details tag ([aec44c5](https://github.com/TenkoSpirit/genshin.zenless.club/commit/aec44c5b731c74c1f8663b3c4831585a09b64ef5))
+- **css:** Added custom styling to table ([29a64ee](https://github.com/TenkoSpirit/genshin.zenless.club/commit/29a64eeac0544d68b0d32497a452da5d300fc5fa))
+- **css:** Adjusted styles of lists in markdown content ([26cfa4a](https://github.com/TenkoSpirit/genshin.zenless.club/commit/26cfa4a53692a6ad0a2fb3b3cb81a192801d4b72))
+- **css:** Added spacing between iframes ([fee97ed](https://github.com/TenkoSpirit/genshin.zenless.club/commit/fee97ed8a463dd7f633f3f4c8ee432c4d64ecc1c))
+- **guides:** Added Kamisato Ayaka guide in Russian ([c99ac1a](https://github.com/TenkoSpirit/genshin.zenless.club/commit/c99ac1a15b5083b80cb82c6de955efe5bb658d3d))
+- **guides:** Updated publish timestamp on Ayaka's guide ([959e9d1](https://github.com/TenkoSpirit/genshin.zenless.club/commit/959e9d11dfe675ca5d7bad0910f795bab40c71db))
+- **guides:** Added temp Ayaka guide file for English, so the project compiles ([e3ba853](https://github.com/TenkoSpirit/genshin.zenless.club/commit/e3ba853b041427d1286de228fb9a5b2634d3c4a0))
+- **i18n:** Added translation strings for home page ([91c77a0](https://github.com/TenkoSpirit/genshin.zenless.club/commit/91c77a055a77e983d7dd4f0b1e18ea61c4211fdb))
+- **i18n:** Added translation strings for character names ([535bad4](https://github.com/TenkoSpirit/genshin.zenless.club/commit/535bad4845a7d620020dab71f5e26d4b67e85c17))
+- **lib:** Allow html in markdown ([e888c68](https://github.com/TenkoSpirit/genshin.zenless.club/commit/e888c6844d1dec4932feda13eb3164ccc5a9e487))
+- **lib:** Updated markdown parser ([803b4d1](https://github.com/TenkoSpirit/genshin.zenless.club/commit/803b4d1bb297066ec08c3da65464d3db8f48fa6b))
+- **pages:** Apply recently create styles for markdown ([07857b7](https://github.com/TenkoSpirit/genshin.zenless.club/commit/07857b76896e90e8572208fcc69264c2ec48b5cd))
+- **pages:** Use guide's meta title as an actual page title ([a6afac7](https://github.com/TenkoSpirit/genshin.zenless.club/commit/a6afac704d7b9945aba550a5609e5001cfcc4ae3))
+- **pages:** Use `article` HTML tag for the guide content and `thead` doesnt have a border anymore ([cc6dfc8](https://github.com/TenkoSpirit/genshin.zenless.club/commit/cc6dfc80bad4d9755d2bcace0a079feb3c5d7551))
+- **pages, components:** Added latest guide promotion and adjusted styles ([c938824](https://github.com/TenkoSpirit/genshin.zenless.club/commit/c9388248fb9ec98512a468d10da34e5aae7673af))
+- **pages, components:** Implemented translations for character names ([82a23db](https://github.com/TenkoSpirit/genshin.zenless.club/commit/82a23dbd91473f601e5805d1b2391940505199e2))
+- **pages, guides:** Prevent showing guides that don't exist in current user's context and published list of guides now support languages ([b96b874](https://github.com/TenkoSpirit/genshin.zenless.club/commit/b96b874b6ee54658b2b25db1fa32fc07fa7e025f))
+- **tailwind:** Added a special utility class that adds automatic hyphens to text ([501bdef](https://github.com/TenkoSpirit/genshin.zenless.club/commit/501bdef77601d338990a641262b4d0897b733327))
+
+### Miscellaneous Tasks
+
+- **deps:** Upgraded dependencies ([8093eae](https://github.com/TenkoSpirit/genshin.zenless.club/commit/8093eae2a2cc74152e6b7b56af6a738d0b7fce83))
+
+
+
 ## (v1.4.0) - 2022-08-01
 
 ### Bug Fixes
