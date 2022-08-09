@@ -33,7 +33,9 @@ const CharactersIndex: NextPage = () => {
         <div className="flex flex-row flex-wrap justify-evenly gap-4 md:justify-start">
           {charactersArray
             .filter((character) =>
-              character.name.toLowerCase().includes(deferredSearch.toLowerCase()),
+              t(`characters/names:${character.id}`)
+                .toLowerCase()
+                .includes(deferredSearch.toLowerCase()),
             )
             .map((character) => (
               <CharacterCard key={character.id} character={character} />
@@ -47,7 +49,7 @@ const CharactersIndex: NextPage = () => {
 export const getStaticProps: GetStaticProps = async ({ locale = "en" }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "footer", "meta"])),
+      ...(await serverSideTranslations(locale, ["common", "footer", "meta", "characters/names"])),
     },
   };
 };

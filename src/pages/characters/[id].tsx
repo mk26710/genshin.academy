@@ -1,6 +1,7 @@
 import type { CharacterType } from "@/data/character.schema";
 import type { GetStaticPaths, GetStaticProps } from "next";
 
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { Container } from "@/components/Container";
@@ -44,17 +45,19 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({ locale = "en
     props: {
       character,
 
-      ...(await serverSideTranslations(locale, ["common", "footer", "meta"])),
+      ...(await serverSideTranslations(locale, ["common", "footer", "meta", `characters/names`])),
     },
   };
 };
 
 const CharactersId = ({ character }: StaticProps) => {
+  const { t } = useTranslation();
+
   const elementSrc = `/img/elements/${character.vision.toLowerCase()}/icon.webp`;
 
   return (
     <Layout
-      title={`${character.name}`}
+      title={t(`characters/names:${character.id}`)}
       color={`${character.accentColor}`}
       description={`${character.description}`}
       iconURL={characterIcon(character.id)}
@@ -63,7 +66,7 @@ const CharactersId = ({ character }: StaticProps) => {
         <div className="flex flex-col-reverse lg:flex-row">
           <div className="flex-1 grow">
             <h1 id="name" className="mb-4 mt-6 text-4xl font-semibold dark:text-dark-300">
-              {character.name}{" "}
+              {t(`characters/names:${character.id}`)}{" "}
               <img className="inline-block h-6 align-middle " src={elementSrc} alt="Element" />
             </h1>
 
