@@ -11,7 +11,7 @@ const amber: CharacterType = {
     "Always energetic and full of life, Amber's the best — albeit only — Outrider of the Knights of Favonius.",
   birthday: [10, 8],
 
-  rarity: 5,
+  rarity: 4,
   vision: "PYRO",
   weapon: "BOW",
 
