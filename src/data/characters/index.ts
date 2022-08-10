@@ -27,6 +27,7 @@ import kuki_shinobu from "./kuki_shinobu";
 import lisa from "./lisa";
 import mona from "./mona";
 import ningguang from "./ningguang";
+import noelle from "./noelle";
 import qiqi from "./qiqi";
 import raiden_shogun from "./raiden_shogun";
 import razor from "./razor";
@@ -100,6 +101,7 @@ const _array = Object.freeze([
   beidou,
   shikanoin_heizou,
   kuki_shinobu,
+  noelle,
 ]);
 
 export const charactersArray = Object.freeze(
