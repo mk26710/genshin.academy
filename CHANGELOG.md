@@ -1,6 +1,32 @@
 # Changelog
 
 
+## (v1.4.2) - 2022-08-24
+
+### Bug Fixes
+
+- **data:** Amber is a 4* not 5* ([e4be714](https://github.com/TenkoSpirit/genshin.zenless.club/commit/e4be714b04535e402528a148c24944086710b401))
+- **data:** Added Noelle to all characters and included assets ([dfeb5c6](https://github.com/TenkoSpirit/genshin.zenless.club/commit/dfeb5c624ee3bb522e69cf7719ac1680a0e0a78e))
+- **guides:** Typo in "stats" in Russian Ayaka guide ([5e70ef8](https://github.com/TenkoSpirit/genshin.zenless.club/commit/5e70ef8437f99352df95cd2707b419ec8e36fa9c))
+- **i18n:** Typo in Russian `yae_miko` name translation ([b50a104](https://github.com/TenkoSpirit/genshin.zenless.club/commit/b50a10441debca84501718f55b2f3f61fe236249))
+- **i18n:** Typo in Russian Keqing translation ([64373cc](https://github.com/TenkoSpirit/genshin.zenless.club/commit/64373cce65ffb64032c89544d04efbb06b64a66b))
+- **i18n:** Missing Noelle name translation ([28cff03](https://github.com/TenkoSpirit/genshin.zenless.club/commit/28cff0320ffdec7a4633571314a944a75c7d3ac5))
+
+### Features
+
+- **data:** Added dendro and made story an optional data sicne it's going to be in locales soon ([7cc56b0](https://github.com/TenkoSpirit/genshin.zenless.club/commit/7cc56b03ce1280f5c162a3d52d819268c840986c))
+- **data:** Added Tighnari ([61adaa8](https://github.com/TenkoSpirit/genshin.zenless.club/commit/61adaa880b635d86976cefee4229e631a54b6501))
+- **data:** Added Collei ([9886510](https://github.com/TenkoSpirit/genshin.zenless.club/commit/98865107caa6c824efb84d652bf2ef15be11d1eb))
+- **pages:** Preserve whitespaces on descriptions ([5a45033](https://github.com/TenkoSpirit/genshin.zenless.club/commit/5a4503324c3e2b1e11777de4172ed06d95a2b58d))
+- **pages:** Made rarity filters buttons smaller ([a04e456](https://github.com/TenkoSpirit/genshin.zenless.club/commit/a04e456de1fea06de1d6042d2d380f6d541c0302))
+- **pages, atoms:** Added characters rarity filtering ([ec7dee7](https://github.com/TenkoSpirit/genshin.zenless.club/commit/ec7dee73d439dae548356823fe2bb4227c2d2e27))
+
+### Miscellaneous Tasks
+
+- **deps:** Upgraded some packages ([99bbcbb](https://github.com/TenkoSpirit/genshin.zenless.club/commit/99bbcbb92ee74c032b281547d2fc14827888ec68))
+
+
+
 ## (v1.4.1) - 2022-08-09
 
 ### Bug Fixes
