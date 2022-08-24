@@ -39,6 +39,7 @@ import shikanoin_heizou from "./shikanoin_heizou";
 import sucrose from "./sucrose";
 import tartaglia from "./tartaglia";
 import thoma from "./thoma";
+import tighnari from "./tighnari";
 import venti from "./venti";
 import xiangling from "./xiangling";
 import xiao from "./xiao";
@@ -102,6 +103,7 @@ const _array = Object.freeze([
   shikanoin_heizou,
   kuki_shinobu,
   noelle,
+  tighnari,
 ]);
 
 export const charactersArray = Object.freeze(
