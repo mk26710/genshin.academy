@@ -70,7 +70,9 @@ const CharactersId = ({ character }: StaticProps) => {
               <img className="inline-block h-6 align-middle " src={elementSrc} alt="Element" />
             </h1>
 
-            <p id="description">{character.description}</p>
+            <p id="description" className="whitespace-pre-line">
+              {character.description}
+            </p>
 
             <h2
               id="consteallations"
