@@ -56,7 +56,7 @@ const SearchAndFilter: FunctionComponent = () => {
             />
             <label
               htmlFor="fivestar-filter"
-              className="rounded-l-lg border border-neutral-200 bg-white px-5 py-3 text-sm font-medium text-[#000] peer-checked:border-primary-700 peer-checked:bg-primary-100 peer-checked:text-primary-700 dark:border-dark-800 dark:bg-dark-900 dark:text-dark-300"
+              className="h-10 rounded-l-lg border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-[#000] peer-checked:border-primary-700 peer-checked:bg-primary-100 peer-checked:text-primary-700 dark:border-dark-800 dark:bg-dark-900 dark:text-dark-300"
             >
               5*
             </label>
@@ -72,7 +72,7 @@ const SearchAndFilter: FunctionComponent = () => {
             />
             <label
               htmlFor="fourstar-filter"
-              className=" rounded-r-lg border border-neutral-200 bg-white px-5 py-3 text-sm font-medium text-[#000] peer-checked:border-primary-700 peer-checked:bg-primary-100 peer-checked:text-primary-700 dark:border-dark-800 dark:bg-dark-900 dark:text-dark-300"
+              className="h-10 rounded-r-lg border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-[#000] peer-checked:border-primary-700 peer-checked:bg-primary-100 peer-checked:text-primary-700 dark:border-dark-800 dark:bg-dark-900 dark:text-dark-300"
             >
               4*
             </label>
