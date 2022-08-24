@@ -53,7 +53,7 @@ export const Character = z
       Constellation,
       Constellation,
     ]),
-    story: StoryEntry.array(),
+    story: StoryEntry.array().optional(),
   })
   .strict();
 

@@ -25,6 +25,7 @@ export const Elements = z.union([
   z.literal("ANEMO"),
   z.literal("HYDRO"),
   z.literal("GEO"),
+  z.literal("DENDRO"),
 ]);
 export type ElementsType = z.infer<typeof Elements>;
 
