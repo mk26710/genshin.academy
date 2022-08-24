@@ -8,6 +8,7 @@ import barbara from "./barbara";
 import beidou from "./beidou";
 import bennett from "./bennett";
 import chongyun from "./chongyun";
+import collei from "./collei";
 import diluc from "./diluc";
 import diona from "./diona";
 import eula from "./eula";
@@ -104,6 +105,7 @@ const _array = Object.freeze([
   kuki_shinobu,
   noelle,
   tighnari,
+  collei,
 ]);
 
 export const charactersArray = Object.freeze(
