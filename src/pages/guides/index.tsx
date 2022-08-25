@@ -5,10 +5,9 @@ import type { ChangeEvent, FunctionComponent } from "react";
 
 import { useAtom } from "jotai";
 import { useHydrateAtoms } from "jotai/utils";
-import debounce from "lodash.debounce";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useMemo, useRef } from "react";
+import { useDeferredValue, useMemo } from "react";
 
 import { guideSearchQueryAtom, guideSearchTypeAtom } from "@/atoms/guideSearch";
 import { GuideCard } from "@/components/cards/GuideCard";
@@ -30,9 +29,9 @@ const GuidesIndex = ({ availableGuides }: InferGetStaticPropsType<typeof getStat
 
   const { t } = useTranslation();
 
-  const inputRef = useRef<HTMLInputElement>(null);
-
   const [input, setInput] = useAtom(guideSearchQueryAtom);
+  const deferredInput = useDeferredValue(input);
+
   const [guideType, setGuideType] = useAtom(guideSearchTypeAtom);
 
   const filteredGuides = useMemo(
@@ -41,12 +40,12 @@ const GuidesIndex = ({ availableGuides }: InferGetStaticPropsType<typeof getStat
         .filter((g) => (guideType !== "all" ? g.meta.type === guideType : true))
         .filter((g) => g.meta.title.toLowerCase().includes(input.toString().toLowerCase()))
         .sort((a, b) => b.meta.publishedAt - a.meta.publishedAt),
-    [input, guideType],
+    [deferredInput, guideType],
   );
 
-  const handleInputChange = debounce((e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
-  }, 200);
+  };
 
   const handleOptionChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setGuideType(e.target.value);
@@ -67,9 +66,10 @@ const GuidesIndex = ({ availableGuides }: InferGetStaticPropsType<typeof getStat
           </select>
 
           <Input
-            ref={inputRef}
+            value={input}
             onChange={handleInputChange}
             placeholder={t`common:search-by-title`}
+            autoFocus
             fullWidth
           />
         </div>
