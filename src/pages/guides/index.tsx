@@ -69,7 +69,6 @@ const GuidesIndex = ({ availableGuides }: InferGetStaticPropsType<typeof getStat
             value={input}
             onChange={handleInputChange}
             placeholder={t`common:search-by-title`}
-            autoFocus
             fullWidth
           />
         </div>
