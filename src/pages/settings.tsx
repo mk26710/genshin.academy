@@ -1,7 +1,7 @@
 import type { GetStaticProps, NextPage } from "next";
 import type { ChangeEvent, FunctionComponent, PropsWithChildren } from "react";
 
-import { DesktopComputerIcon, MoonIcon, SunIcon } from "@heroicons/react/solid";
+import { ComputerDesktopIcon, MoonIcon, SunIcon } from "@heroicons/react/20/solid";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTheme } from "next-themes";
@@ -85,7 +85,7 @@ const themes = [
   {
     name: "system",
     i18nKey: "settings:system-radio-button",
-    Icon: DesktopComputerIcon,
+    Icon: ComputerDesktopIcon,
   },
 ];
 

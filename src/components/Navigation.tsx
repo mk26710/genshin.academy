@@ -2,11 +2,11 @@ import type { FunctionComponent, SVGProps } from "react";
 
 import {
   CalculatorIcon,
-  CogIcon,
+  Cog6ToothIcon,
   DocumentTextIcon,
   HomeIcon,
   UserGroupIcon,
-} from "@heroicons/react/outline";
+} from "@heroicons/react/20/solid";
 import { useTranslation } from "next-i18next";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -49,7 +49,7 @@ const navRoutes: NavRoute[] = [
     path: "/settings",
     i18nKey: "common:settings",
     prefetch: false,
-    Icon: CogIcon,
+    Icon: Cog6ToothIcon,
   },
 ];
 
