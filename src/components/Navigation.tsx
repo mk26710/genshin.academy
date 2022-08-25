@@ -99,8 +99,13 @@ export const Navigation: FunctionComponent = () => {
       >
         <div className="my-4 h-full w-64 overflow-y-auto rounded-lg border border-neutral-200 bg-white text-[#000] dark:border-dark-800 dark:bg-dark-900 dark:text-dark-300">
           <div className="flex w-full flex-col gap-y-1 px-4 py-6">
-            <div className="mb-3 self-center border-b border-neutral-200 pb-3 dark:border-dark-800">
-              <h1 className="font-semibold">genshin.zenless</h1>
+            <div className="mb-6 self-center">
+              <NextLink href="/">
+                <a className="font-semibold">
+                  genshin.zenless
+                  <span className="text-xs text-primary-700 dark:text-primary-300">.club</span>
+                </a>
+              </NextLink>
             </div>
 
             {navRoutes.map(({ Icon, i18nKey, prefetch, ...navRoute }) => (
