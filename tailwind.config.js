@@ -98,11 +98,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Noto Sans", ...defaultTheme.fontFamily.sans],
+        sans: [...defaultTheme.fontFamily.sans],
       },
       colors: {
         ...defaultTheme.colors,
-        primary: colors.indigo,
+        primary: colors.blue,
         dark: myColors.neutral,
       },
       screens: {
