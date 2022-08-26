@@ -1,6 +1,14 @@
 # Changelog
 
 
+## (v1.5.1) - 2022-08-26
+
+### Bug Fixes
+
+- **No category:** Dark mode worked for website title for some reason ([54a0e84](https://github.com/TenkoSpirit/genshin.zenless.club/commit/54a0e842f636ecfb0030670721906c703f0fbf72))
+
+
+
 ## (v1.5.0) - 2022-08-26
 
 ### Bug Fixes
