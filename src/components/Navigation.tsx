@@ -72,8 +72,8 @@ export const Navigation: FunctionComponent = () => {
   return (
     <>
       {/* Mobile Bottom Navbar */}
-      <nav className="fixed bottom-0 left-0 z-10 h-[var(--mobile-navbar-height)] w-full select-none border-t border-neutral-200 bg-white text-[#000] dark:border-dark-800 dark:bg-dark-900 dark:text-dark-300 lg:hidden">
-        <div className="flex h-full flex-row justify-between gap-4 overflow-y-auto px-4 dark:text-dark-400">
+      <nav className="fixed bottom-0 left-0 z-10 h-[var(--mobile-navbar-height)] w-full select-none border-t border-gray-200 bg-white text-[#000] lg:hidden">
+        <div className="flex h-full flex-row justify-between gap-4 overflow-y-auto px-4">
           {navRoutes.map(({ Icon, i18nKey, prefetch, ...navRoute }) => (
             <NextLink
               key={`mobile-navbar-${navRoute.path}`}
@@ -97,13 +97,13 @@ export const Navigation: FunctionComponent = () => {
         data-description="Desktop Sidebar Navigation"
         className="sidebar sticky top-0 hidden max-h-screen min-h-screen flex-col lg:flex"
       >
-        <div className="my-4 h-full w-64 overflow-y-auto rounded-lg border border-neutral-200 bg-white text-[#000] dark:border-dark-800 dark:bg-dark-900 dark:text-dark-300">
-          <div className="flex w-full flex-col gap-y-1 px-4 py-6">
-            <div className="mb-6 self-center">
+        <div className="my-4 h-full w-56 overflow-y-auto rounded-lg">
+          <div className="flex w-full flex-col gap-y-1 pb-6">
+            <div className="mb-4 mt-2 self-center">
               <NextLink href="/">
                 <a className="font-semibold">
                   genshin.zenless
-                  <span className="text-xs text-primary-700 dark:text-primary-300">.club</span>
+                  <span className="text-xs text-primary-700">.club</span>
                 </a>
               </NextLink>
             </div>
@@ -112,7 +112,7 @@ export const Navigation: FunctionComponent = () => {
               <NextLink key={navRoute.path} href={navRoute.path} prefetch={prefetch}>
                 <a
                   data-active={isActive(navRoute)}
-                  className="flex items-center rounded-lg px-4 py-2 text-neutral-700 active:bg-primary-100 active:text-primary-700 active:outline active:outline-1 active:outline-primary-700 dark:text-dark-300 dark:active:bg-primary-900 dark:active:text-primary-200 dark:active:outline-primary-500"
+                  className="box-border flex items-center rounded-lg border border-transparent px-4 py-2 text-gray-700 active:border-primary-700 active:bg-primary-100  active:text-primary-700"
                 >
                   <Icon className="h-5 w-5 opacity-75" />
 

@@ -58,7 +58,7 @@ const GuidesIndex = ({ availableGuides }: InferGetStaticPropsType<typeof getStat
           <select
             value={guideType}
             onChange={handleOptionChange}
-            className="form-select block h-10 w-full appearance-none rounded-lg border border-neutral-200 bg-white text-sm font-semibold uppercase text-[#000] placeholder:text-neutral-400 focus:ring-2 focus:ring-primary-500 dark:border-dark-800 dark:bg-dark-900 dark:text-dark-300 dark:placeholder:text-dark-500 lg:w-44"
+            className="form-select block h-10 w-full appearance-none rounded-lg border border-gray-200 bg-white text-sm font-semibold uppercase text-[#000] shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-primary-500 lg:w-44"
           >
             <option value="all">{t`guides:types-all`}</option>
             <option value="character">{t`guides:types-characters`}</option>

@@ -63,9 +63,9 @@ const CharactersId = ({ character }: StaticProps) => {
       iconURL={characterIcon(character.id)}
     >
       <Container>
-        <div className="flex flex-col-reverse lg:flex-row">
+        <div className="card flex flex-col-reverse px-6 pt-6 pb-8 lg:flex-row">
           <div className="flex-1 grow">
-            <h1 id="name" className="mb-4 mt-6 text-4xl font-semibold dark:text-dark-300">
+            <h1 id="name" className="mb-4 text-4xl font-semibold">
               {t(`characters/names:${character.id}`)}{" "}
               <img className="inline-block h-6 align-middle " src={elementSrc} alt="Element" />
             </h1>
@@ -74,17 +74,14 @@ const CharactersId = ({ character }: StaticProps) => {
               {character.description}
             </p>
 
-            <h2
-              id="consteallations"
-              className="mt-6 mb-4 text-2xl font-semibold dark:text-dark-300"
-            >
+            <h2 id="consteallations" className="mt-6 mb-4 text-2xl font-semibold">
               Consteallations
             </h2>
 
             <ol className="list-decimal pl-4 marker:text-primary-500">
               {character.constellations.map(({ level, title, description }) => (
                 <li key={`const-${level}`} id={`constellation-${level}`} className="[&+li]:mt-2">
-                  <h3 className="text-lg font-semibold dark:text-dark-300">{title}</h3>
+                  <h3 className="font-semibold00 text-lg">{title}</h3>
                   <p className="whitespace-pre-line">{description}</p>
                 </li>
               ))}

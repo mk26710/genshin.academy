@@ -43,3 +43,22 @@
     grid-area: footer;
   }
 }
+
+@layer components {
+  .card {
+    background-color: theme("colors.white");
+    
+    box-sizing: border-box;
+    border-width: 1px;
+    border-radius: theme("borderRadius.lg");
+    
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+
+    color: #000;
+
+    @apply shadow-sm;
+  }
+}

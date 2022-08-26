@@ -1,5 +1,5 @@
-.card {
-  @apply flex box-border rounded-lg border border-neutral-200 dark:border-dark-800 bg-white dark:bg-dark-900;
+.card-old {
+  @apply flex box-border rounded-lg border border-gray-200 bg-white;
 
   &-with-padding {
     @apply p-4;

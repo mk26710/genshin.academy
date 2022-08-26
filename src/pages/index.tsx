@@ -25,10 +25,8 @@ const LatestGuide: FunctionComponent<LatestGuideProps> = ({ meta, character }) =
 
   return (
     <Link href={`/guides/${meta.id}`}>
-      <a className="box-border flex flex-col rounded-lg border border-neutral-200 bg-white p-4 text-sm text-neutral-700 dark:border-dark-800 dark:bg-dark-900 dark:text-dark-400">
-        <h1 className="mb-4 text-xl font-semibold text-[#000] dark:text-dark-300">
-          {t`home:latest-guide`}
-        </h1>
+      <a className="card flex flex-col transition-all duration-200 ease-in-out hover:-translate-y-1 hover:shadow-lg">
+        <h1 className="mb-4 text-xl font-semibold text-[#000]">{t`home:latest-guide`}</h1>
 
         {/* TODO: handle non-character guides */}
         {meta.type === "character" && (
@@ -38,10 +36,10 @@ const LatestGuide: FunctionComponent<LatestGuideProps> = ({ meta, character }) =
               alt={character.name + " icon"}
               width="256px"
               height="256px"
-              className="border-box h-28 w-28 rounded-lg border border-neutral-200 bg-neutral-100 text-transparent dark:border-dark-800 dark:bg-dark-950"
+              className="border-box h-28 w-28 rounded-lg border border-gray-200 bg-gray-100 text-transparent"
             />
 
-            <p>
+            <p className="text-sm">
               {t("home:latest-guide-character-legend", {
                 author: meta.author,
                 name: meta.title,
@@ -60,7 +58,7 @@ const Home = ({ latestGuideMeta, character }: InferGetStaticPropsType<typeof get
   return (
     <Layout title={t("common:home")} description={t("meta:home.description")}>
       <Container>
-        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3">
           <div>
             <LatestGuide meta={latestGuideMeta} character={character} />
           </div>

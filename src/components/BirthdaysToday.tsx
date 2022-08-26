@@ -16,8 +16,8 @@ const BirthdaysToday: FunctionComponent = () => {
   });
 
   return (
-    <div className="box-border flex flex-col rounded-lg border border-neutral-200 bg-white p-4 text-sm text-neutral-700 dark:border-dark-800 dark:bg-dark-900 dark:text-dark-400">
-      <h1 className="mb-4 text-xl font-semibold text-[#000] dark:text-dark-300">
+    <div className="card">
+      <h1 className="mb-4 text-xl font-semibold text-[#000]">
         {celebrants.length > 0 ? "🎉 Happy Birthday!" : "Character Birthdays"}
       </h1>
 
@@ -28,9 +28,9 @@ const BirthdaysToday: FunctionComponent = () => {
           <div className="flex flex-wrap gap-2">
             {celebrants.map(({ id, name }, index) => (
               <Link href={`/characters/${id}`} key={index}>
-                <a className="block h-24  w-24 rounded-lg border border-neutral-200 bg-neutral-100 dark:border-dark-800 dark:bg-dark-950">
+                <a className="block rounded-lg border border-gray-200 bg-gray-100">
                   <StaticPicture
-                    className="rounded-lg"
+                    className="h-28 w-28 rounded-lg"
                     src={`/img/characters/${id}/icon.webp`}
                     alt={`${name} Icon`}
                   />

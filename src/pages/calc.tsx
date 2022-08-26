@@ -93,6 +93,7 @@ const ResinCalculator: FunctionComponent = () => {
         )}
       </CalculatorTitle>
       <CalculatorDetails>{t`calc:resin-details`}</CalculatorDetails>
+
       <CalculatorInput
         value={resinCurrent}
         setValue={setResinCurrent}

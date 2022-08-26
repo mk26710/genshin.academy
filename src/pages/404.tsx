@@ -14,7 +14,7 @@ const NotFound: NextPage = () => {
     <Layout title="404" description={t`meta:404.description`}>
       <Container verticalCenter>
         <div className="flex flex-row gap-6">
-          <div className="border-r border-neutral-200 pr-6 dark:border-neutral-200/10">
+          <div className="border-r border-gray-200 pr-6">
             <h1 className="text-5xl font-bold text-primary-500">404</h1>
           </div>
 

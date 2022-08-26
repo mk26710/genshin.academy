@@ -6,5 +6,5 @@ interface Props {
 }
 
 export const CalculatorResult: FC<Props> = ({ className = "", children }) => {
-  return <div className={`mt-4 dark:text-dark-300 ${className}`}>{children}</div>;
+  return <div className={`mt-4 ${className}`}>{children}</div>;
 };

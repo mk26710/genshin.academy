@@ -57,7 +57,7 @@ const LanguageSwitch: FunctionComponent = () => {
             />
             <label
               htmlFor={`${code}-btn`}
-              className="flex w-full flex-row items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-100 p-4 px-3 py-2 text-sm text-[#000] hover:cursor-pointer peer-checked:border-primary-700 peer-checked:bg-primary-100 peer-checked:text-primary-700 dark:border-dark-700 dark:bg-dark-800 dark:bg-dark-900 dark:text-dark-300 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-900 dark:peer-checked:text-primary-200"
+              className="flex w-full flex-row items-center gap-2 rounded-lg border border-gray-200 bg-gray-100 p-4 px-3 py-2 text-sm text-[#000] hover:cursor-pointer peer-checked:border-primary-700 peer-checked:bg-primary-100 peer-checked:text-primary-700"
             >
               <div className="align-middle">
                 <ReactCountryFlag countryCode={flag} />
@@ -113,10 +113,11 @@ const ThemeSwitch: FunctionComponent = () => {
                 checked={theme === name}
                 onChange={handleOnChange}
                 className="peer sr-only"
+                disabled={name === "dark"}
               />
               <label
                 htmlFor={`${name}-btn`}
-                className="flex w-full flex-row items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-100 p-4 px-3 py-2 text-sm text-[#000] hover:cursor-pointer peer-checked:border-primary-700 peer-checked:bg-primary-100 peer-checked:text-primary-700 dark:border-dark-700 dark:bg-dark-800 dark:bg-dark-900 dark:text-dark-300 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-900 dark:peer-checked:text-primary-200"
+                className="flex w-full flex-row items-center gap-2 rounded-lg border border-gray-200 bg-gray-100 p-4 px-3 py-2 text-sm text-[#000] hover:cursor-pointer peer-checked:border-primary-700 peer-checked:bg-primary-100 peer-checked:text-primary-700 peer-disabled:opacity-50"
               >
                 <div className="align-middle">
                   <Icon className="h-5 w-5" />
@@ -135,7 +136,7 @@ const Appearance: FunctionComponent<PropsWithChildren> = ({ children }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex w-full flex-col gap-2 rounded-lg border border-neutral-200 bg-white p-4 text-[#000] dark:border-dark-800 dark:bg-dark-900 dark:text-dark-300">
+    <div className="flex w-full flex-col gap-2 rounded-lg border border-gray-200 bg-white p-4 text-[#000]">
       <h1 className="mb-4 text-xl font-semibold">{t`settings:appearance`}</h1>
       {children}
     </div>

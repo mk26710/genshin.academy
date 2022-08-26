@@ -29,7 +29,7 @@ export const CharacterCard: FC<Props> = ({ character, className }) => {
   return (
     <div className={`w-[calc(33.33%-0.75rem)] lg:w-28 ${className}`}>
       <NextLink href={`/characters/${character.id}`}>
-        <a className="card card-vertical">
+        <a className="card block p-0">
           <div className="absolute -ml-[10px] -mt-[10px] box-border flex aspect-square w-8 items-center justify-center rounded-full bg-dark-900">
             <StaticPicture
               src={elementSrc}
@@ -45,7 +45,7 @@ export const CharacterCard: FC<Props> = ({ character, className }) => {
             />
           </div>
 
-          <div className="flex h-full w-full items-center justify-center py-1 text-[.9rem] font-semibold text-[#000] dark:text-dark-300 ">
+          <div className="flex h-full w-full items-center justify-center py-1 text-[.9rem] font-semibold text-[#000]">
             <p className="p-1 text-center leading-none">{t(`characters/names:${character.id}`)}</p>
           </div>
         </a>

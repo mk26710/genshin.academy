@@ -26,12 +26,12 @@
 
   tr {
     th {
-      @apply even:bg-neutral-200/40 dark:even:bg-dark-900/60;
+      @apply even:bg-gray-200/40;
     }
   }
 
   details {
-    @apply rounded-lg border-l-4 border-primary-500 bg-white text-[#000] dark:bg-dark-900 dark:text-dark-200;
+    @apply rounded-lg border-l-4 border-primary-500 bg-white text-[#000];
 
     summary {
       font-weight: theme("fontWeight.semibold");
