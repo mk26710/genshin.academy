@@ -58,7 +58,7 @@ const GuidesId = ({ meta, html, character }: InferGetStaticPropsType<typeof getS
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-[auto_1fr]">
           <article
             ref={contentRoot}
-            className="markdown-content card prose prose-blue max-w-none bg-white px-4 py-6 text-justify text-base prose-thead:border-none prose-thead:border-gray-200 dark:prose-invert lg:px-8 lg:py-8"
+            className="markdown-content card prose prose-blue max-w-none bg-white px-4 py-6 text-justify text-base prose-thead:border-none prose-thead:border-gray-200 lg:px-8 lg:py-8"
             dangerouslySetInnerHTML={{ __html: html }}
           />
 

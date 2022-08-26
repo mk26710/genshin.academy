@@ -101,7 +101,7 @@ export const Navigation: FunctionComponent = () => {
           <div className="flex w-full flex-col gap-y-1 pb-6">
             <div className="mb-4 mt-2 self-center">
               <NextLink href="/">
-                <a className="font-semibold">
+                <a className="font-semibold text-black">
                   genshin.zenless
                   <span className="text-xs text-primary-700">.club</span>
                 </a>
