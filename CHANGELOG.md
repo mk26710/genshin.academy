@@ -1,6 +1,33 @@
 # Changelog
 
 
+## (v1.5.0) - 2022-08-26
+
+### Bug Fixes
+
+- **pages:** Autofocus wasn't that great of idea since on mobile it's very annoying ([49b810e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/49b810e107086254371908b51ffcf398d0a9e416))
+
+### Features
+
+- **app:** Big design refresh ([18308dc](https://github.com/TenkoSpirit/genshin.zenless.club/commit/18308dc6422facaa65f5c978b50ade0237a31a25))
+- **components:** Display full domain name as title ([3110052](https://github.com/TenkoSpirit/genshin.zenless.club/commit/3110052153bdd8fea002dad354d5ceff735d1de3))
+- **components:** Shadows were causing performance issues so switched guide cards styles to something simpler ([8e9fc7e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/8e9fc7e2264554eb3c7142c1ed6acb6a6c9a61ea))
+- **i18n, pages:** Added translations to guide types ([dae36d9](https://github.com/TenkoSpirit/genshin.zenless.club/commit/dae36d9448fe69c7411134af3a5901e68e8ff950))
+- **pages:** Query params search is no more, only input field is allowed ([40e6460](https://github.com/TenkoSpirit/genshin.zenless.club/commit/40e6460c8f85ef6cb9f021dc61511d1426bb401b))
+- **pages:** Removed redundant top margin from guide cards container ([253442f](https://github.com/TenkoSpirit/genshin.zenless.club/commit/253442f77216ea3051221010c05ac5678f6e00b8))
+- **pages:** Guides search input field is now controlled and also ahs autofocus ([0fb73bf](https://github.com/TenkoSpirit/genshin.zenless.club/commit/0fb73bf9202b08c3022756c5cae5f28fdbc03de6))
+- **tailwind:** Remove custom font and use blue as primary colour ([8338e01](https://github.com/TenkoSpirit/genshin.zenless.club/commit/8338e015e7f2a0652af49d6e9dab5844a1746640))
+
+### Miscellaneous Tasks
+
+- **deps:** Upgraded dependencies ([d369798](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d36979870ec49df75bbb93eb3b4e7a73fc68e1d0))
+
+### Refactor
+
+- **pages, components:** Heroicons had major changes that required code updates ([9e56d9b](https://github.com/TenkoSpirit/genshin.zenless.club/commit/9e56d9b579abcd89fd14cf4f3c5d4bfd96109a4e))
+
+
+
 ## (v1.4.2) - 2022-08-24
 
 ### Bug Fixes
