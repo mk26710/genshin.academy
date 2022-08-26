@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "dayjs": "^1.11.5",
-    "jotai": "~1.8.0",
+    "jotai": "~1.8.1",
     "lodash.debounce": "^4.0.8",
     "lodash.isempty": "^4.4.0",
     "next": "~12.2.5",
@@ -33,7 +33,7 @@
     "zod": "^3.18.0"
   },
   "devDependencies": {
-    "@heroicons/react": "^2.0.7",
+    "@heroicons/react": "^2.0.8",
     "@next/eslint-plugin-next": "^12.2.5",
     "@tailwindcss/forms": "^0.5.2",
     "@tailwindcss/typography": "^0.5.4",
@@ -72,7 +72,7 @@
     "sass": "^1.54.5",
     "sharp": "^0.30.7",
     "tailwindcss": "^3.1.8",
-    "typescript": "4.7.4",
+    "typescript": "4.8.2",
     "unified": "^10.1.2",
     "yaml": "^2.1.1"
   }
