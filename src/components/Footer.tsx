@@ -8,7 +8,7 @@ import { GitHubLogo } from "@/components/icons/GitHubLogo";
 
 export const Footer: FC = () => {
   return (
-    <footer className="footer grid grid-cols-1 grid-rows-[auto_auto] border-t border-gray-200 py-4 text-sm text-gray-400 lg:grid-cols-[1fr_auto] lg:grid-rows-1">
+    <footer className="footer grid grid-cols-1 grid-rows-[auto_auto] border-t py-6 px-4 text-sm text-gray-400 lg:grid-cols-[1fr_auto] lg:grid-rows-1">
       <p>
         <Trans
           i18nKey="footer:affiliation"
