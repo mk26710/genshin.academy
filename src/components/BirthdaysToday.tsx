@@ -1,12 +1,15 @@
 import type { FunctionComponent } from "react";
 
 import dayjs from "dayjs";
+import { useTranslation } from "next-i18next";
 import Link from "next/link";
 
 import { StaticPicture } from "@/components/StaticPicture";
 import { charactersArray } from "@/data/characters";
 
 const BirthdaysToday: FunctionComponent = () => {
+  const { t } = useTranslation();
+
   const now = dayjs();
   const [day, month] = [now.date(), now.month() + 1];
 
@@ -17,29 +20,27 @@ const BirthdaysToday: FunctionComponent = () => {
 
   return (
     <div className="card">
-      <h1 className="mb-4 text-xl font-semibold text-[#000]">
-        {celebrants.length > 0 ? "🎉 Happy Birthday!" : "Character Birthdays"}
-      </h1>
+      <h1 className="mb-4 text-xl font-semibold text-[#000]">{t`common:birthdays`}</h1>
 
-      {celebrants.length <= 0 && <>There are no birthdays today :&#40;</>}
-
-      {celebrants.length > 0 && (
-        <>
-          <div className="flex flex-wrap gap-2">
-            {celebrants.map(({ id, name }, index) => (
-              <Link href={`/characters/${id}`} key={index}>
-                <a className="block rounded-lg border border-gray-200 bg-gray-100">
-                  <StaticPicture
-                    className="h-28 w-28 rounded-lg"
-                    src={`/img/characters/${id}/icon.webp`}
-                    alt={`${name} Icon`}
-                  />
-                </a>
-              </Link>
-            ))}
+      <div className="flex flex-wrap gap-2">
+        {celebrants.length <= 0 && (
+          <div className="flex h-28 w-full items-center justify-center">
+            <p className="text-sm opacity-75">{t`birthdays-none`}</p>
           </div>
-        </>
-      )}
+        )}
+
+        {celebrants.map(({ id, name }, index) => (
+          <Link href={`/characters/${id}`} key={index}>
+            <a className="block rounded-lg border border-gray-200 bg-gray-100">
+              <StaticPicture
+                className="h-28 w-28 rounded-lg"
+                src={`/img/characters/${id}/icon.webp`}
+                alt={`${name} Icon`}
+              />
+            </a>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };
