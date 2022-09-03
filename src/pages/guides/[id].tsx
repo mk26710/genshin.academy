@@ -1,7 +1,9 @@
 import type { CharacterType } from "@/data/character.schema";
 import type { MetaType } from "@/data/guides/meta.schema";
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
+import type { FC } from "react";
 
+import dayjs from "dayjs";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useEffect, useRef, useState } from "react";
@@ -19,6 +21,33 @@ interface StaticProps {
   html: string;
   character: CharacterType;
 }
+
+const ArticleFooter: FC<Pick<StaticProps, "meta">> = ({ meta }) => {
+  const { t } = useTranslation();
+
+  return (
+    <div className="flex flex-col justify-end px-4 py-6 text-base lg:flex-row lg:gap-4 lg:px-8 lg:py-8">
+      <p className="italic">
+        {t`guides:authored-by`}{" "}
+        <a
+          href={`https://github.com/${meta.author}`}
+          target="_blank"
+          className="font-semibold text-primary-500 transition-colors duration-200 ease-in-out hover:text-primary-700"
+          rel="noreferrer"
+        >
+          <span>{meta.author}</span>
+        </a>
+      </p>
+      <span className="hidden lg:inline">&#8226;</span>
+      <p className="italic">
+        {t`guides:published-at`}{" "}
+        <span className="font-semibold text-primary-500 transition-colors duration-200 ease-in-out hover:text-primary-700">
+          {dayjs.unix(meta.publishedAt).format("YYYY-MM-DD")}
+        </span>
+      </p>
+    </div>
+  );
+};
 
 const GuidesId = ({ meta, html, character }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { t } = useTranslation();
@@ -56,11 +85,15 @@ const GuidesId = ({ meta, html, character }: InferGetStaticPropsType<typeof getS
     >
       <Container>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-[auto_1fr]">
-          <article
-            ref={contentRoot}
-            className="markdown-content card prose prose-blue max-w-none bg-white px-4 py-6 text-justify text-base prose-thead:border-none prose-thead:border-gray-200 lg:px-8 lg:py-8"
-            dangerouslySetInnerHTML={{ __html: html }}
-          />
+          <div className="card flex max-w-none flex-col gap-4 divide-y  bg-white p-0">
+            <article
+              ref={contentRoot}
+              className="markdown-content prose prose-blue w-full max-w-none px-4 py-6 text-justify text-base prose-thead:border-none prose-thead:border-gray-200 lg:px-8 lg:py-8"
+              dangerouslySetInnerHTML={{ __html: html }}
+            />
+
+            <ArticleFooter meta={meta} />
+          </div>
 
           <ContentsTable title={t`common:contents`} headings={headings} />
         </div>
@@ -110,7 +143,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({ params, loca
     props: {
       ...guide,
       character,
-      ...(await serverSideTranslations(locale, ["common", "footer", "meta"])),
+      ...(await serverSideTranslations(locale, ["common", "footer", "meta", "guides"])),
     },
   };
 };
