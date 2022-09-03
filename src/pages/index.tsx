@@ -5,15 +5,13 @@ import type { FunctionComponent } from "react";
 
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import dynamic from "next/dynamic";
 import Link from "next/link";
 
+import BirthdaysToday from "@/components/BirthdaysToday";
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
 import { getCharacterById } from "@/data/characters";
 import { getAllGuides } from "@/lib/markdownTools";
-
-const BirthdayToday = dynamic(() => import("@/components/BirthdaysToday"), { ssr: false });
 
 interface LatestGuideProps {
   meta: MetaType;
@@ -63,7 +61,7 @@ const Home = ({ latestGuideMeta, character }: InferGetStaticPropsType<typeof get
             <LatestGuide meta={latestGuideMeta} character={character} />
           </div>
           <div>
-            <BirthdayToday />
+            <BirthdaysToday />
           </div>
         </div>
       </Container>
