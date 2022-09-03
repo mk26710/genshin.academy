@@ -55,14 +55,9 @@ export const GuideCard: FC<Props> = ({
           </div>
 
           <div id={htmlId + "-footer"} className="mt-2 grid grid-cols-1 gap-4 px-6 pb-6 ">
-            <NextLink href={href}>
-              <a
-                role="button"
-                className="flex flex-row items-center justify-center gap-2 rounded bg-primary-100 py-2 pl-4 pr-3 text-sm font-medium text-primary-700 transition-all duration-150 ease-in-out group-hover:bg-primary-200"
-              >
-                <span>{t`common:read`}</span>
-              </a>
-            </NextLink>
+            <button className="flex flex-row items-center justify-center gap-2 rounded bg-primary-100 py-2 pl-4 pr-3 text-sm font-medium text-primary-700 transition-all duration-150 ease-in-out group-hover:bg-primary-200">
+              {t`common:read`}
+            </button>
           </div>
         </a>
       </NextLink>
