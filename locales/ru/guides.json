@@ -1,5 +1,7 @@
 {
   "types-all": "Все",
   "types-characters": "Персонажи",
-  "types-general": "Общие"
+  "types-general": "Общие",
+  "authored-by": "Автор статьи",
+  "published-at": "Опубликовано"
 }

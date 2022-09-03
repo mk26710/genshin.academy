@@ -1,5 +1,7 @@
 {
   "types-all": "All",
   "types-characters": "Characters",
-  "types-general": "General"
+  "types-general": "General",
+  "authored-by": "Written by",
+  "published-at": "Published at"
 }
