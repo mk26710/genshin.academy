@@ -17,5 +17,8 @@
 
   "contents": "Contents",
 
-  "read": "Read"
+  "read": "Read",
+
+  "birthdays": "Birthdays today",
+  "birthdays-none": "Today there are no birthdays :("
 }
