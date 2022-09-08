@@ -1,6 +1,5 @@
 import type { FunctionComponent } from "react";
 
-import dayjs from "dayjs";
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
 
@@ -10,8 +9,8 @@ import { charactersArray } from "@/data/characters";
 const BirthdaysToday: FunctionComponent = () => {
   const { t } = useTranslation();
 
-  const now = dayjs();
-  const [day, month] = [now.date(), now.month() + 1];
+  const now = new Date();
+  const [day, month] = [now.getDate(), now.getMonth() + 1];
 
   const celebrants = charactersArray.filter((character) => {
     const [birthdayDay, birthdayMonth] = character.birthday;
