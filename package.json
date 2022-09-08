@@ -17,7 +17,6 @@
     "cloudflare": "run-s export"
   },
   "dependencies": {
-    "dayjs": "^1.11.5",
     "jotai": "~1.8.2",
     "lodash.debounce": "^4.0.8",
     "lodash.isempty": "^4.4.0",
