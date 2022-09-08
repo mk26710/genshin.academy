@@ -20,6 +20,7 @@ import { CalculatorRoot } from "@/components/calculator/CalculatorRoot";
 import { CalculatorTitle } from "@/components/calculator/CalculatorTitle";
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
+import { useCurrentLocale } from "@/hooks/use-current-locale";
 
 const CritValueResult = ({ critValue }: { critValue: number }) => {
   const color = () => {
@@ -78,6 +79,7 @@ const CrtitValueCalculator: FunctionComponent = () => {
 
 const ResinCalculator: FunctionComponent = () => {
   const { t } = useTranslation();
+  const locale = useCurrentLocale();
 
   const [resinCurrent, setResinCurrent] = useAtom(resinCurrentAtom);
   const [resinNeeded, setResinNeeded] = useAtom(resinNeededAtom);
@@ -89,7 +91,9 @@ const ResinCalculator: FunctionComponent = () => {
       <CalculatorTitle className="!flex-col lg:!flex-row">
         <span className="flex-1">{t`calc:resin`}</span>
         {resinDelta > 0 && (
-          <span className="normal-case text-primary-500">{resinReplenishTime.format("lll")}</span>
+          <span className="normal-case text-primary-500">
+            {resinReplenishTime.toLocaleString(locale)}
+          </span>
         )}
       </CalculatorTitle>
       <CalculatorDetails>{t`calc:resin-details`}</CalculatorDetails>
