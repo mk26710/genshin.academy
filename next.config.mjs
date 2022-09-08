@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const { i18n } = require("./next-i18next.config");
+import i18nConfig from "./next-i18next.config.js";
 
 /**
+ * This was taken from create.t3.gg template :)
  *
  * @template {import('next').NextConfig} T
  * @param {T} config - A generic parameter that flows through to the return type
@@ -11,9 +11,9 @@ function defineNextConfig(config) {
   return config;
 }
 
-module.exports = defineNextConfig({
+export default defineNextConfig({
   output: "standalone",
   reactStrictMode: true,
   swcMinify: true,
-  i18n: i18n,
+  i18n: i18nConfig.i18n,
 });
