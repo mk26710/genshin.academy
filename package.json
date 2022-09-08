@@ -3,7 +3,6 @@
   "version": "1.5.2",
   "private": true,
   "scripts": {
-    "postinstall": "next telemetry disable",
     "dev": "run-s dev:*",
     "dev:next": "next dev",
     "build": "run-s build:*",
