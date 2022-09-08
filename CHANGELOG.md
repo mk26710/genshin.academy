@@ -1,6 +1,42 @@
 # Changelog
 
 
+## (v1.5.2) - 2022-09-08
+
+### Bug Fixes
+
+- **components:** Guide card was causing hydration mismatches ([d8f8602](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d8f86029c7346a451cd41963e370efd19f987f5c))
+
+### Features
+
+- **README:** Updated roles and added GetMads to team section ([aa8e4ea](https://github.com/TenkoSpirit/genshin.zenless.club/commit/aa8e4ea48e45ef4fbf69517800148a10882eca6b))
+- **_app:** Removed redundant dayjs things, since we're using ISO formats now ([b118631](https://github.com/TenkoSpirit/genshin.zenless.club/commit/b118631a130f0405baead3fc10bc4bfae4447c04))
+- **atoms:** Use JS built-in `Date`s to calculate resin replenishment instead of 3rd party lib ([41542b4](https://github.com/TenkoSpirit/genshin.zenless.club/commit/41542b4c7111158c01f514e723b8c4186519db0d))
+- **components:** Updated guide card, now has read button and doesn't display authors and publish dates ([04d30e1](https://github.com/TenkoSpirit/genshin.zenless.club/commit/04d30e14e1dab4110f2a2c24306f9322cf612be0))
+- **components:** Guide card read button now takes full width and doesn't have an icon ([4040911](https://github.com/TenkoSpirit/genshin.zenless.club/commit/4040911a972b75884173d46151c89d63b43b02f4))
+- **components:** Birthdays today is now translated and informs users if there are no birthdays on the day ([ae1a279](https://github.com/TenkoSpirit/genshin.zenless.club/commit/ae1a279715d7105f051a589ca692e3349aae06b1))
+- **components:** Footer now takes full space ([42b5c7f](https://github.com/TenkoSpirit/genshin.zenless.club/commit/42b5c7f5504365dd82fac7f7a33d01990bd9da44))
+- **components:** Using JS `Date`s instead of dayjs to detrmine current day in `BirthdaysToday` ([ac18bf2](https://github.com/TenkoSpirit/genshin.zenless.club/commit/ac18bf2ad7bcaf8e1ca1777f6d9d7a75f78da33c))
+- **hooks:** Added a hook to get currently active locale ([1f11c76](https://github.com/TenkoSpirit/genshin.zenless.club/commit/1f11c76fe3cdef611a1dccd464928941ba5b4bbc))
+- **i18n:** Translation strings added ([1ec65b8](https://github.com/TenkoSpirit/genshin.zenless.club/commit/1ec65b84e6a8f9fa64e0236578f68381cbb4f24b))
+- **i18n:** Even more strings added ([b7bd03d](https://github.com/TenkoSpirit/genshin.zenless.club/commit/b7bd03d2752bed0d07b1029541195a381dec183f))
+- **pages:** Guide articles now have footers containing authors and publish date ([dbaaf9d](https://github.com/TenkoSpirit/genshin.zenless.club/commit/dbaaf9d740dd088d16e4db868c8d427fd02ef1fc))
+- **pages:** Switched fynamic no SSR import of birthdays card to regular import ([025dc63](https://github.com/TenkoSpirit/genshin.zenless.club/commit/025dc63f77b70abc943e2d142ed26f1318e268c2))
+- **pages:** Instead of using dayjs for date formatting using JS built-in formatter based on Intl API ([9ffa758](https://github.com/TenkoSpirit/genshin.zenless.club/commit/9ffa758b8ad46bb7f43501d2dd3f068fcb682b9f))
+- **pages:** Format resin replenishment time with JS built-in Intl formatter ([4a854b4](https://github.com/TenkoSpirit/genshin.zenless.club/commit/4a854b45ba3685a7c9a199a6670c9145adff1913))
+
+### Miscellaneous Tasks
+
+- **deps:** Upgraded dependencies ([8cce34c](https://github.com/TenkoSpirit/genshin.zenless.club/commit/8cce34cae90079c1d3ace04aeeb98afc560ca2a9))
+- **deps:** Bumped dependencies versions ([33c2f8b](https://github.com/TenkoSpirit/genshin.zenless.club/commit/33c2f8bcae92ec3ce340dff8a827fb2a0e30dfd3))
+- **deps:** Removed dayjs ([d6642a5](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d6642a5650e3f8e675519baafb3d0bd438347360))
+
+### Refactor
+
+- **_app:** Removed dayjs imports ([7380303](https://github.com/TenkoSpirit/genshin.zenless.club/commit/73803033061bf9b500bc5735d8c1ac2bda84c87f))
+
+
+
 ## (v1.5.1) - 2022-08-26
 
 ### Bug Fixes
