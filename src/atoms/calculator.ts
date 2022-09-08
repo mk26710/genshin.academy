@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import { atom } from "jotai";
 
 /** Crit value calculator atoms */
@@ -20,6 +19,7 @@ export const resinNeededInit = NaN;
 export const resinNeededAtom = atom<number>(resinCurrentInit);
 
 export const resinTimeDeltaAtom = atom((get) => (get(resinNeededAtom) - get(resinCurrentAtom)) * 8);
-export const resinReplenishTimeAtom = atom((get) =>
-  dayjs().add(get(resinTimeDeltaAtom), "minutes"),
-);
+export const resinReplenishTimeAtom = atom((get) => {
+  const now = new Date();
+  return new Date(now.setMinutes(now.getMinutes() + get(resinTimeDeltaAtom)));
+});
