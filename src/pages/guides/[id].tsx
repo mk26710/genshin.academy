@@ -3,7 +3,6 @@ import type { MetaType } from "@/data/guides/meta.schema";
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import type { FC } from "react";
 
-import dayjs from "dayjs";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useEffect, useRef, useState } from "react";
@@ -13,6 +12,7 @@ import { ContentsTable } from "@/components/ContentsTable";
 import { Layout } from "@/components/Layout";
 import { getCharacterById } from "@/data/characters";
 import { PUBLISHED_GUIDES } from "@/data/guides/published";
+import { useCurrentLocale } from "@/hooks/use-current-locale";
 import { characterIcon } from "@/lib/helpers";
 import { getGuide } from "@/lib/markdownTools";
 
@@ -24,6 +24,9 @@ interface StaticProps {
 
 const ArticleFooter: FC<Pick<StaticProps, "meta">> = ({ meta }) => {
   const { t } = useTranslation();
+  const locale = useCurrentLocale();
+
+  const publishedAt = new Date(meta.publishedAt * 1000).toLocaleDateString(locale);
 
   return (
     <div className="flex flex-col justify-end px-4 py-6 text-base lg:flex-row lg:gap-4 lg:px-8 lg:py-8">
@@ -42,7 +45,7 @@ const ArticleFooter: FC<Pick<StaticProps, "meta">> = ({ meta }) => {
       <p className="italic">
         {t`guides:published-at`}{" "}
         <span className="font-semibold text-primary-500 transition-colors duration-200 ease-in-out hover:text-primary-700">
-          {dayjs.unix(meta.publishedAt).format("YYYY-MM-DD")}
+          {publishedAt}
         </span>
       </p>
     </div>
