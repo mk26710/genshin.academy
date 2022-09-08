@@ -1,9 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { AppProps } from "next/app";
 
-import "dayjs/locale/de";
-import "dayjs/locale/ja";
-import "dayjs/locale/ru";
 import { Provider as JotaiProvider } from "jotai";
 import { appWithTranslation } from "next-i18next";
 import { ThemeProvider } from "next-themes";
