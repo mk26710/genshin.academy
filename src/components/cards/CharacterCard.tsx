@@ -29,7 +29,7 @@ export const CharacterCard: FC<Props> = ({ character, className }) => {
   return (
     <div className={`w-[calc(33.33%-0.75rem)] lg:w-28 ${className}`}>
       <NextLink href={`/characters/${character.id}`}>
-        <a className="card block p-0">
+        <a className="card block p-0 transition-all duration-200 hover:shadow-lg ">
           <div className="absolute -ml-[10px] -mt-[10px] box-border flex aspect-square w-8 items-center justify-center rounded-full bg-dark-900">
             <StaticPicture
               src={elementSrc}
