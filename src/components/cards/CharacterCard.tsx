@@ -1,7 +1,7 @@
 import type { CharacterType } from "@/data/character.schema";
 import type { FC } from "react";
 
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 import NextLink from "next/link";
 
 import { StaticPicture } from "@/components/StaticPicture";
@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const CharacterCard: FC<Props> = ({ character, className }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const elementSrc = `/img/elements/${character.vision.toLowerCase()}/icon.webp`;
   const iconSrc = `/img/characters/${character.id}/icon.webp`;
@@ -41,12 +41,12 @@ export const CharacterCard: FC<Props> = ({ character, className }) => {
             <StaticPicture
               className="card-thumbnail"
               src={iconSrc}
-              alt={`${t(`characters/names:${character.id}`)} icon`}
+              alt={`${t(`characters/names.${character.id}`)} icon`}
             />
           </div>
 
           <div className="flex h-full w-full items-center justify-center py-1 text-[.9rem] font-semibold text-[#000]">
-            <p className="p-1 text-center leading-none">{t(`characters/names:${character.id}`)}</p>
+            <p className="p-1 text-center leading-none">{t(`characters/names.${character.id}`)}</p>
           </div>
         </a>
       </NextLink>

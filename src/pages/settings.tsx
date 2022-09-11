@@ -2,8 +2,7 @@ import type { GetStaticProps, NextPage } from "next";
 import type { ChangeEvent, FunctionComponent, PropsWithChildren } from "react";
 
 import { ComputerDesktopIcon, MoonIcon, SunIcon } from "@heroicons/react/20/solid";
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 import ReactCountryFlag from "react-country-flag";
@@ -27,8 +26,8 @@ const locales = [
 const LanguageSwitch: FunctionComponent = () => {
   const router = useRouter();
 
-  const { t, i18n } = useTranslation();
-  const { language: lang } = i18n;
+  const t = useTranslations();
+  const { locale } = useRouter();
 
   const handleOnChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (typeof document !== "undefined") {
@@ -41,7 +40,7 @@ const LanguageSwitch: FunctionComponent = () => {
 
   return (
     <div className="w-full">
-      <h1 className="mb-2 font-semibold">{t`settings:language`}</h1>
+      <h1 className="mb-2 font-semibold">{t("settings.language")}</h1>
 
       <fieldset role="radiogroup" className="flex flex-col gap-1">
         {locales.map(({ code, name, flag }) => (
@@ -51,7 +50,7 @@ const LanguageSwitch: FunctionComponent = () => {
               type="radio"
               name="locales"
               value={code}
-              checked={lang === code}
+              checked={locale === code}
               onChange={handleOnChange}
               className="peer sr-only"
             />
@@ -74,23 +73,23 @@ const LanguageSwitch: FunctionComponent = () => {
 const themes = [
   {
     name: "light",
-    i18nKey: "settings:light-radio-button",
+    i18nKey: "settings.light-radio-button",
     Icon: SunIcon,
   },
   {
     name: "dark",
-    i18nKey: "settings:dark-radio-button",
+    i18nKey: "settings.dark-radio-button",
     Icon: MoonIcon,
   },
   {
     name: "system",
-    i18nKey: "settings:system-radio-button",
+    i18nKey: "settings.system-radio-button",
     Icon: ComputerDesktopIcon,
   },
 ];
 
 const ThemeSwitch: FunctionComponent = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { setTheme, theme } = useTheme();
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -100,7 +99,7 @@ const ThemeSwitch: FunctionComponent = () => {
   return (
     <>
       <div className="w-full">
-        <h1 className="mb-2 font-semibold">{t`settings:theme`}</h1>
+        <h1 className="mb-2 font-semibold">{t("settings.theme")}</h1>
 
         <fieldset role="radiogroup" className="flex flex-col gap-1">
           {themes.map(({ name, Icon, i18nKey }) => (
@@ -133,21 +132,21 @@ const ThemeSwitch: FunctionComponent = () => {
 };
 
 const Appearance: FunctionComponent<PropsWithChildren> = ({ children }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <div className="flex w-full flex-col gap-2 rounded-lg border border-gray-200 bg-white p-4 text-[#000]">
-      <h1 className="mb-4 text-xl font-semibold">{t`settings:appearance`}</h1>
+      <h1 className="mb-4 text-xl font-semibold">{t("settings.appearance")}</h1>
       {children}
     </div>
   );
 };
 
 const Settings: NextPage = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
-    <Layout title={t`settings:title`}>
+    <Layout title={t("settings.title")}>
       <Container>
         <div className="flex flex-col gap-2 lg:max-w-screen-xl">
           <Appearance>
@@ -161,9 +160,15 @@ const Settings: NextPage = () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale = "en" }) => {
+  const messages = {
+    common: (await import(`#/locales/${locale}/common.json`)).default,
+    meta: (await import(`#/locales/${locale}/meta.json`)).default,
+    footer: (await import(`#/locales/${locale}/footer.json`)).default,
+    settings: (await import(`#/locales/${locale}/settings.json`)).default,
+  };
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "footer", "settings", "meta"])),
+      messages,
     },
   };
 };

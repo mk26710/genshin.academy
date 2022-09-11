@@ -3,8 +3,7 @@ import type { GetStaticProps, NextPage } from "next";
 import type { ChangeEvent, FunctionComponent } from "react";
 
 import { useAtom } from "jotai";
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslations } from "next-intl";
 import { useDeferredValue } from "react";
 
 import {
@@ -19,7 +18,7 @@ import { Layout } from "@/components/Layout";
 import { charactersArray } from "@/data/characters";
 
 const SearchAndFilter: FunctionComponent = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const [search, setSearch] = useAtom(characterSearchAtom);
   const [fivestars, setFivestars] = useAtom(charactersFilterFivestarsAtom);
@@ -39,8 +38,8 @@ const SearchAndFilter: FunctionComponent = () => {
 
   return (
     <>
-      <div className="sticky top-0 z-10 flex flex-row gap-4 rounded-b-md bg-gray-100 pb-6 pt-4 pl-4 lg:flex-row">
-        <Input placeholder={t`common:search-by-name`} onChange={handleChange} value={search} />
+      <div className="mb-6 flex flex-row gap-4 lg:flex-row">
+        <Input placeholder={t(`common.search-by-name`)} onChange={handleChange} value={search} />
 
         <div
           role="radiogroup"
@@ -84,7 +83,7 @@ const SearchAndFilter: FunctionComponent = () => {
 };
 
 const CharactersIndex: NextPage = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const [search] = useAtom(characterSearchAtom);
   const deferredSearch = useDeferredValue(search);
@@ -94,7 +93,7 @@ const CharactersIndex: NextPage = () => {
 
   const filteredCharacters = charactersArray
     .filter((c) =>
-      t(`characters/names:${c.id}`).toLowerCase().includes(deferredSearch.toLowerCase()),
+      t(`characters/names.${c.id}`).toLowerCase().includes(deferredSearch.toLowerCase()),
     )
     .reduce<CharacterType[]>((acc, current) => {
       if (!showFivestars && current.rarity === 5) {
@@ -109,8 +108,8 @@ const CharactersIndex: NextPage = () => {
     }, []);
 
   return (
-    <Layout title={t("common:characters")} description={t("meta:characters.home.description")}>
-      <Container className="mt-0">
+    <Layout title={t("common.characters")} description={t("meta.characters.home.description")}>
+      <Container>
         <SearchAndFilter />
 
         <div className="mt-4 flex flex-row flex-wrap justify-evenly gap-4 md:justify-start">
@@ -124,9 +123,16 @@ const CharactersIndex: NextPage = () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale = "en" }) => {
+  const messages = {
+    common: (await import(`#/locales/${locale}/common.json`)).default,
+    meta: (await import(`#/locales/${locale}/meta.json`)).default,
+    footer: (await import(`#/locales/${locale}/footer.json`)).default,
+    "characters/names": (await import(`#/locales/${locale}/characters/names.json`)).default,
+  };
+
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "footer", "meta", "characters/names"])),
+      messages,
     },
   };
 };

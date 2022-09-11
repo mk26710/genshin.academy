@@ -7,7 +7,7 @@ import {
   HomeIcon,
   UserGroupIcon,
 } from "@heroicons/react/20/solid";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
@@ -25,29 +25,29 @@ interface NavRoute {
 const navRoutes: NavRoute[] = [
   {
     path: "/",
-    i18nKey: "common:home",
+    i18nKey: "common.home",
     Icon: HomeIcon,
   },
   {
     path: "/guides",
-    i18nKey: "common:guides",
+    i18nKey: "common.guides",
     hasNested: true,
     Icon: DocumentTextIcon,
   },
   {
     path: "/characters",
-    i18nKey: "common:characters",
+    i18nKey: "common.characters",
     hasNested: true,
     Icon: UserGroupIcon,
   },
   {
     path: "/calc",
-    i18nKey: "common:calculators",
+    i18nKey: "common.calculators",
     Icon: CalculatorIcon,
   },
   {
     path: "/settings",
-    i18nKey: "common:settings",
+    i18nKey: "common.settings",
     prefetch: false,
     Icon: Cog6ToothIcon,
   },
@@ -56,7 +56,7 @@ const navRoutes: NavRoute[] = [
 export const Navigation: FunctionComponent = () => {
   const router = useRouter();
 
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const isActive = useCallback(
     (navRoute: Pick<NavRoute, "hasNested" | "path">) => {

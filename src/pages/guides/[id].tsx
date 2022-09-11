@@ -3,8 +3,7 @@ import type { MetaType } from "@/data/guides/meta.schema";
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import type { FC } from "react";
 
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 
 import { Container } from "@/components/Container";
@@ -23,7 +22,7 @@ interface StaticProps {
 }
 
 const ArticleFooter: FC<Pick<StaticProps, "meta">> = ({ meta }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const locale = useCurrentLocale();
 
   const publishedAt = new Date(meta.publishedAt * 1000).toLocaleDateString(locale);
@@ -31,7 +30,7 @@ const ArticleFooter: FC<Pick<StaticProps, "meta">> = ({ meta }) => {
   return (
     <div className="flex flex-col justify-end px-4 py-6 text-base lg:flex-row lg:gap-4 lg:px-8 lg:py-8">
       <p className="italic">
-        {t`guides:authored-by`}{" "}
+        {t(`guides.authored-by`)}{" "}
         <a
           href={`https://github.com/${meta.author}`}
           target="_blank"
@@ -43,7 +42,7 @@ const ArticleFooter: FC<Pick<StaticProps, "meta">> = ({ meta }) => {
       </p>
       <span className="hidden lg:inline">&#8226;</span>
       <p className="italic">
-        {t`guides:published-at`}{" "}
+        {t(`guides.published-at`)}{" "}
         <span className="font-semibold text-primary-500 transition-colors duration-200 ease-in-out hover:text-primary-700">
           {publishedAt}
         </span>
@@ -53,7 +52,7 @@ const ArticleFooter: FC<Pick<StaticProps, "meta">> = ({ meta }) => {
 };
 
 const GuidesId = ({ meta, html, character }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const [headings, setHeadings] = useState<string[]>([]);
   const contentRoot = useRef<HTMLElement>(null);
@@ -82,7 +81,7 @@ const GuidesId = ({ meta, html, character }: InferGetStaticPropsType<typeof getS
   return (
     <Layout
       title={meta.title}
-      description={t("meta:guides.id.description", { name: character.name })}
+      description={t("meta.guides.id.description", { name: character.name })}
       iconURL={characterIcon(character.id)}
       color={`${character.accentColor}`}
     >
@@ -98,7 +97,7 @@ const GuidesId = ({ meta, html, character }: InferGetStaticPropsType<typeof getS
             <ArticleFooter meta={meta} />
           </div>
 
-          <ContentsTable title={t`common:contents`} headings={headings} />
+          <ContentsTable title={t(`common.contents`)} headings={headings} />
         </div>
       </Container>
     </Layout>
@@ -142,11 +141,18 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({ params, loca
 
   const guide = await getGuide(paramsId, locale);
 
+  const messages = {
+    common: (await import(`#/locales/${locale}/common.json`)).default,
+    meta: (await import(`#/locales/${locale}/meta.json`)).default,
+    footer: (await import(`#/locales/${locale}/footer.json`)).default,
+    guides: (await import(`#/locales/${locale}/guides.json`)).default,
+  };
+
   return {
     props: {
       ...guide,
       character,
-      ...(await serverSideTranslations(locale, ["common", "footer", "meta", "guides"])),
+      messages,
     },
   };
 };
