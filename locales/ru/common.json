@@ -4,13 +4,9 @@
   "characters": "Персонажи",
   "characters_one": "Персонаж",
 
-  "guides": "Руководства",
-  "guides_one": "Руководство",
-
-  "calculators": "Калькуляторы",
-  "calculators_one": "Калькулятор",
-
-  "settings": "Настройки",
+  "guides": "{ count, plural, one {Руководство} other {Руководства} }",
+  "calculators": "{ count, plural, one {Калькулятор} other {Калькуляторы} }",
+  "settings": "{ count, plural, one {Настройка} other {Настройки} }",
 
   "search-by-name": "Поиск по имени",
   "search-by-title": "Поиск по названию",

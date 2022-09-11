@@ -1,6 +1,5 @@
 {
   "latest-guide": "Новое руководство",
-  "latest-guide-legend": "Рекомендуем к прсмотру новейшее руковдоство от {{ author }}!",
-  "latest-guide-character-legend_en": "Check out our newest guide written by {{ author }} about {{ name }} to learn more about your favourite character!",
-  "latest-guide-character-legend": "Рекомендуем ознакомиться с недавно опубликованным руководством о персонаже {{ name }}, чтобы узнать больше подробностей!"
+  "latest-guide-legend": "Рекомендуем к просмотру новейшее руковдоство от { author }!",
+  "latest-guide-character-legend": "Рекомендуем ознакомиться с недавно опубликованным руководством о персонаже { name }, чтобы узнать больше подробностей!"
 }

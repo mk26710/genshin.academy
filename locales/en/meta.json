@@ -15,8 +15,8 @@
       "description": "Genshin Impact characters building guides and other guides."
     },
     "id": {
-      "title" : "Guide for {{ name }}",
-      "description": "{{ name }} build and playstyle guide"
+      "title" : "Guide for { name }",
+      "description": "{ name } build and playstyle guide"
     }
   },
   "404": {

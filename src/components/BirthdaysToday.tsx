@@ -1,13 +1,13 @@
 import type { FunctionComponent } from "react";
 
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 import { StaticPicture } from "@/components/StaticPicture";
 import { charactersArray } from "@/data/characters";
 
 const BirthdaysToday: FunctionComponent = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const now = new Date();
   const [day, month] = [now.getDate(), now.getMonth() + 1];
@@ -19,12 +19,12 @@ const BirthdaysToday: FunctionComponent = () => {
 
   return (
     <div className="card">
-      <h1 className="mb-4 text-xl font-semibold text-[#000]">{t`common:birthdays`}</h1>
+      <h1 className="mb-4 text-xl font-semibold text-[#000]">{t("common.birthdays")}</h1>
 
       <div className="flex flex-wrap gap-2">
         {celebrants.length <= 0 && (
           <div className="flex h-28 w-full items-center justify-center">
-            <p className="text-sm opacity-75">{t`birthdays-none`}</p>
+            <p className="text-sm opacity-75">{t("common.birthdays-none")}</p>
           </div>
         )}
 

@@ -1,22 +1,19 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import type { AbstractIntlMessages } from "next-intl";
 import type { AppProps } from "next/app";
 
 import { Provider as JotaiProvider } from "jotai";
-import { appWithTranslation } from "next-i18next";
+import { NextIntlProvider } from "next-intl";
 import { ThemeProvider } from "next-themes";
 import { useRouter } from "next/router";
 import nProgress from "nprogress";
 import { useEffect } from "react";
-
-import { Footer } from "@/components/Footer";
-import { Navigation } from "@/components/Navigation";
 
 import "@/assets/styles/cards.scss";
 import "@/assets/styles/main.scss";
 import "@/assets/styles/markdown.scss";
 import "@/assets/styles/nprogress.scss";
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const MyApp = ({ Component, pageProps }: AppProps<{ messages?: AbstractIntlMessages }>) => {
   const router = useRouter();
 
   useEffect(() => {
@@ -50,16 +47,16 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   }, []);
 
   return (
-    <JotaiProvider>
-      <ThemeProvider attribute="class">
-        <div className="app-container mx-auto max-w-screen-2xl gap-4 px-2">
-          <Navigation />
-          <Component {...pageProps} />
-          <Footer />
-        </div>
-      </ThemeProvider>
-    </JotaiProvider>
+    <NextIntlProvider messages={pageProps.messages}>
+      <JotaiProvider>
+        <ThemeProvider attribute="class">
+          <div className="app-container mx-auto max-w-screen-2xl gap-4 px-2">
+            <Component {...pageProps} />
+          </div>
+        </ThemeProvider>
+      </JotaiProvider>
+    </NextIntlProvider>
   );
 };
 
-export default appWithTranslation(MyApp);
+export default MyApp;

@@ -1,8 +1,7 @@
 import type { CharacterType } from "@/data/character.schema";
 import type { GetStaticPaths, GetStaticProps } from "next";
 
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslations } from "next-intl";
 
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
@@ -41,23 +40,29 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({ locale = "en
     return { notFound: true };
   }
 
+  const messages = {
+    common: (await import(`#/locales/${locale}/common.json`)).default,
+    meta: (await import(`#/locales/${locale}/meta.json`)).default,
+    footer: (await import(`#/locales/${locale}/footer.json`)).default,
+    "characters/names": (await import(`#/locales/${locale}/characters/names.json`)).default,
+  };
+
   return {
     props: {
       character,
-
-      ...(await serverSideTranslations(locale, ["common", "footer", "meta", `characters/names`])),
+      messages,
     },
   };
 };
 
 const CharactersId = ({ character }: StaticProps) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const elementSrc = `/img/elements/${character.vision.toLowerCase()}/icon.webp`;
 
   return (
     <Layout
-      title={t(`characters/names:${character.id}`)}
+      title={t(`characters/names.${character.id}`)}
       color={`${character.accentColor}`}
       description={`${character.description}`}
       iconURL={characterIcon(character.id)}
@@ -66,7 +71,7 @@ const CharactersId = ({ character }: StaticProps) => {
         <div className="card flex flex-col-reverse px-6 pt-6 pb-8 lg:flex-row">
           <div className="flex-1 grow">
             <h1 id="name" className="mb-4 text-4xl font-semibold">
-              {t(`characters/names:${character.id}`)}{" "}
+              {t(`characters/names.${character.id}`)}{" "}
               <img className="inline-block h-6 align-middle " src={elementSrc} alt="Element" />
             </h1>
 

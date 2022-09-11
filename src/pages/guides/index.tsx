@@ -5,8 +5,7 @@ import type { ChangeEvent, FunctionComponent } from "react";
 
 import { useAtom } from "jotai";
 import { useHydrateAtoms } from "jotai/utils";
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslations } from "next-intl";
 import { useDeferredValue, useMemo } from "react";
 
 import { guideSearchQueryAtom, guideSearchTypeAtom } from "@/atoms/guideSearch";
@@ -27,7 +26,7 @@ const GuidesIndex = ({ availableGuides }: InferGetStaticPropsType<typeof getStat
     [guideSearchTypeAtom, "all"],
   ]);
 
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const [input, setInput] = useAtom(guideSearchQueryAtom);
   const deferredInput = useDeferredValue(input);
@@ -52,7 +51,10 @@ const GuidesIndex = ({ availableGuides }: InferGetStaticPropsType<typeof getStat
   };
 
   return (
-    <Layout title={t("common:guides")} description={t("meta:guides.home.description")}>
+    <Layout
+      title={t("common.guides", { count: 0 })}
+      description={t("meta.guides.home.description")}
+    >
       <Container>
         <div className="mb-4 flex flex-col gap-2 lg:flex-row">
           <select
@@ -60,15 +62,15 @@ const GuidesIndex = ({ availableGuides }: InferGetStaticPropsType<typeof getStat
             onChange={handleOptionChange}
             className="form-select block h-10 w-full appearance-none rounded-lg border border-gray-200 bg-white text-sm font-semibold uppercase text-[#000] shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-primary-500 lg:w-44"
           >
-            <option value="all">{t`guides:types-all`}</option>
-            <option value="character">{t`guides:types-characters`}</option>
-            <option value="general">{t`guides:types-general`}</option>
+            <option value="all">{t(`guides.types-all`)}</option>
+            <option value="character">{t(`guides.types-characters`)}</option>
+            <option value="general">{t(`guides.types-general`)}</option>
           </select>
 
           <Input
             value={input}
             onChange={handleInputChange}
-            placeholder={t`common:search-by-title`}
+            placeholder={t(`common.search-by-title`)}
             fullWidth
           />
         </div>
@@ -110,10 +112,17 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({ locale = "en
     return acc;
   }, new Array<StaticProps["availableGuides"][0]>());
 
+  const messages = {
+    common: (await import(`#/locales/${locale}/common.json`)).default,
+    meta: (await import(`#/locales/${locale}/meta.json`)).default,
+    footer: (await import(`#/locales/${locale}/footer.json`)).default,
+    guides: (await import(`#/locales/${locale}/guides.json`)).default,
+  };
+
   return {
     props: {
       availableGuides,
-      ...(await serverSideTranslations(locale, ["common", "footer", "meta", "guides"])),
+      messages,
     },
   };
 };

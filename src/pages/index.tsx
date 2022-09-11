@@ -3,8 +3,7 @@ import type { MetaType } from "@/data/guides/meta.schema";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { FunctionComponent } from "react";
 
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 import BirthdaysToday from "@/components/BirthdaysToday";
@@ -19,12 +18,12 @@ interface LatestGuideProps {
 }
 
 const LatestGuide: FunctionComponent<LatestGuideProps> = ({ meta, character }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <Link href={`/guides/${meta.id}`}>
       <a className="card flex flex-col transition-all duration-200 ease-in-out hover:-translate-y-1 hover:shadow-lg">
-        <h1 className="mb-4 text-xl font-semibold text-[#000]">{t`home:latest-guide`}</h1>
+        <h1 className="mb-4 text-xl font-semibold text-[#000]">{t("home.latest-guide")}</h1>
 
         {/* TODO: handle non-character guides */}
         {meta.type === "character" && (
@@ -38,7 +37,7 @@ const LatestGuide: FunctionComponent<LatestGuideProps> = ({ meta, character }) =
             />
 
             <p className="text-sm">
-              {t("home:latest-guide-character-legend", {
+              {t("home.latest-guide-character-legend", {
                 author: meta.author,
                 name: meta.title,
               })}
@@ -51,10 +50,10 @@ const LatestGuide: FunctionComponent<LatestGuideProps> = ({ meta, character }) =
 };
 
 const Home = ({ latestGuideMeta, character }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
-    <Layout title={t("common:home")} description={t("meta:home.description")}>
+    <Layout title={t("common.home")} description={t("meta.home.description")}>
       <Container>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3">
           <div>
@@ -83,11 +82,18 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({ locale = "en
     throw new Error("character for the guide " + latestGuideMeta.id + " was not found");
   }
 
+  const messages = {
+    common: (await import(`#/locales/${locale}/common.json`)).default,
+    meta: (await import(`#/locales/${locale}/meta.json`)).default,
+    footer: (await import(`#/locales/${locale}/footer.json`)).default,
+    home: (await import(`#/locales/${locale}/home.json`)).default,
+  };
+
   return {
     props: {
       character,
       latestGuideMeta,
-      ...(await serverSideTranslations(locale, ["common", "footer", "home", "meta"])),
+      messages,
     },
   };
 };
