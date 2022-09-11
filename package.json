@@ -3,8 +3,9 @@
   "version": "1.5.2",
   "private": true,
   "scripts": {
-    "dev": "run-s dev:*",
+    "dev": "run-s dev:next",
     "dev:next": "next dev",
+    "dev:i18n": "nodemon --watch locales/ --exec \"next dev\"",
     "build": "run-s build:*",
     "build:next": "next build",
     "postbuild": "next-sitemap",
