@@ -3,7 +3,8 @@ import type { GetStaticProps, NextPage } from "next";
 import type { ChangeEvent, FunctionComponent } from "react";
 
 import { useAtom } from "jotai";
-import { useTranslations } from "next-intl";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useDeferredValue } from "react";
 
 import {
@@ -18,7 +19,7 @@ import { Layout } from "@/components/Layout";
 import { charactersArray } from "@/data/characters";
 
 const SearchAndFilter: FunctionComponent = () => {
-  const t = useTranslations();
+  const { t } = useTranslation();
 
   const [search, setSearch] = useAtom(characterSearchAtom);
   const [fivestars, setFivestars] = useAtom(charactersFilterFivestarsAtom);
@@ -39,7 +40,7 @@ const SearchAndFilter: FunctionComponent = () => {
   return (
     <>
       <div className="mb-6 flex flex-row gap-4 lg:flex-row">
-        <Input placeholder={t(`common.search-by-name`)} onChange={handleChange} value={search} />
+        <Input placeholder={t`common:search-by-name`} onChange={handleChange} value={search} />
 
         <div
           role="radiogroup"
@@ -83,7 +84,7 @@ const SearchAndFilter: FunctionComponent = () => {
 };
 
 const CharactersIndex: NextPage = () => {
-  const t = useTranslations();
+  const { t } = useTranslation();
 
   const [search] = useAtom(characterSearchAtom);
   const deferredSearch = useDeferredValue(search);
@@ -93,7 +94,7 @@ const CharactersIndex: NextPage = () => {
 
   const filteredCharacters = charactersArray
     .filter((c) =>
-      t(`characters/names.${c.id}`).toLowerCase().includes(deferredSearch.toLowerCase()),
+      t(`characters/names:${c.id}`).toLowerCase().includes(deferredSearch.toLowerCase()),
     )
     .reduce<CharacterType[]>((acc, current) => {
       if (!showFivestars && current.rarity === 5) {
@@ -108,7 +109,7 @@ const CharactersIndex: NextPage = () => {
     }, []);
 
   return (
-    <Layout title={t("common.characters")} description={t("meta.characters.home.description")}>
+    <Layout title={t("common:characters")} description={t("meta:characters.home.description")}>
       <Container>
         <SearchAndFilter />
 
@@ -123,16 +124,9 @@ const CharactersIndex: NextPage = () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale = "en" }) => {
-  const messages = {
-    common: (await import(`#/locales/${locale}/common.json`)).default,
-    meta: (await import(`#/locales/${locale}/meta.json`)).default,
-    footer: (await import(`#/locales/${locale}/footer.json`)).default,
-    "characters/names": (await import(`#/locales/${locale}/characters/names.json`)).default,
-  };
-
   return {
     props: {
-      messages,
+      ...(await serverSideTranslations(locale, ["common", "footer", "meta", "characters/names"])),
     },
   };
 };

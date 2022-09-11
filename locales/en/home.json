@@ -1,5 +1,5 @@
 {
   "latest-guide": "New release",
-  "latest-guide-legend": "Check out the newest guide written by { author }!",
-  "latest-guide-character-legend": "We recommend checking out the recently published character guide on { name } for more details!"
+  "latest-guide-legend": "Check out the newest guide written by {{ author }}!",
+  "latest-guide-character-legend": "We recommend checking out the recently published character guide on {{ name }} for more details!"
 }

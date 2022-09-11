@@ -2,7 +2,8 @@ import type { GetStaticProps } from "next";
 import type { FunctionComponent } from "react";
 
 import { useAtom } from "jotai";
-import { useTranslations } from "next-intl";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import {
   critDamageAtom,
@@ -46,7 +47,7 @@ const CritValueResult = ({ critValue }: { critValue: number }) => {
 };
 
 const CrtitValueCalculator: FunctionComponent = () => {
-  const t = useTranslations();
+  const { t } = useTranslation();
 
   const [critRate, setCritRate] = useAtom(critRateAtom);
   const [critDmg, setCritDmg] = useAtom(critDamageAtom);
@@ -55,21 +56,21 @@ const CrtitValueCalculator: FunctionComponent = () => {
   return (
     <CalculatorRoot className="break-inside-avoid overflow-y-auto">
       <CalculatorTitle>
-        <span className="flex-1">{t(`calc.crit-value`)}</span>
+        <span className="flex-1">{t`calc:crit-value`}</span>
         {critValue > 0 && <CritValueResult critValue={critValue} />}
       </CalculatorTitle>
-      <CalculatorDetails>{t(`calc.cv-details`)}</CalculatorDetails>
+      <CalculatorDetails>{t`calc:cv-details`}</CalculatorDetails>
       <CalculatorInput
         value={critRate}
         setValue={setCritRate}
         step={0.1}
-        placeholder={t(`calc.cv-cr-placeholder`)}
+        placeholder={t`calc:cv-cr-placeholder`}
       />
       <CalculatorInput
         value={critDmg}
         setValue={setCritDmg}
         step={0.1}
-        placeholder={t(`calc.cv-cd-placeholder`)}
+        placeholder={t`calc:cv-cd-placeholder`}
         className="mt-2"
       />
     </CalculatorRoot>
@@ -77,7 +78,7 @@ const CrtitValueCalculator: FunctionComponent = () => {
 };
 
 const ResinCalculator: FunctionComponent = () => {
-  const t = useTranslations();
+  const { t } = useTranslation();
   const locale = useCurrentLocale();
 
   const [resinCurrent, setResinCurrent] = useAtom(resinCurrentAtom);
@@ -88,24 +89,24 @@ const ResinCalculator: FunctionComponent = () => {
   return (
     <CalculatorRoot className="break-inside-avoid overflow-y-auto">
       <CalculatorTitle className="!flex-col lg:!flex-row">
-        <span className="flex-1">{t(`calc.resin`)}</span>
+        <span className="flex-1">{t`calc:resin`}</span>
         {resinDelta > 0 && (
           <span className="normal-case text-primary-500">
             {resinReplenishTime.toLocaleString(locale)}
           </span>
         )}
       </CalculatorTitle>
-      <CalculatorDetails>{t(`calc.resin-details`)}</CalculatorDetails>
+      <CalculatorDetails>{t`calc:resin-details`}</CalculatorDetails>
 
       <CalculatorInput
         value={resinCurrent}
         setValue={setResinCurrent}
-        placeholder={t(`calc.resin-current-placeholder`)}
+        placeholder={t`calc:resin-current-placeholder`}
       />
       <CalculatorInput
         value={resinNeeded}
         setValue={setResinNeeded}
-        placeholder={t(`calc.resin-needed-placeholder`)}
+        placeholder={t`calc:resin-needed-placeholder`}
         className="mt-2"
       />
     </CalculatorRoot>
@@ -113,13 +114,10 @@ const ResinCalculator: FunctionComponent = () => {
 };
 
 const CalcPage = () => {
-  const t = useTranslations();
+  const { t } = useTranslation();
 
   return (
-    <Layout
-      title={t("common.calculators", { count: 0 })}
-      description={t("meta.calculators.description")}
-    >
+    <Layout title={t("common:calculators")} description={t("meta:calculators.description")}>
       <Container>
         <div className="columns-1 gap-4 space-y-4 md:columns-2">
           <CrtitValueCalculator />
@@ -131,16 +129,9 @@ const CalcPage = () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale = "en" }) => {
-  const messages = {
-    common: (await import(`#/locales/${locale}/common.json`)).default,
-    meta: (await import(`#/locales/${locale}/meta.json`)).default,
-    footer: (await import(`#/locales/${locale}/footer.json`)).default,
-    calc: (await import(`#/locales/${locale}/calc.json`)).default,
-  };
-
   return {
     props: {
-      messages,
+      ...(await serverSideTranslations(locale, ["common", "footer", "calc", "meta"])),
     },
   };
 };

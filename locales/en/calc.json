@@ -5,7 +5,7 @@
   "cv-details": "Provide your artifact's stats details to find out the crit value it has.",
   "cv-cr-placeholder": "Put artifact's crit rate here",
   "cv-cd-placeholder": "Put artifact's crit damage here",
-  "cv-result": "Crit Value is",
+  "cv-result": "The resulting crit value is: <colored>{{ result }}</colored>",
   "resin": "Resin",
   "resin-details": "You can find out when you're going to have the required amount of resin.",
   "resin-current-placeholder": "How much resin you currently have",
