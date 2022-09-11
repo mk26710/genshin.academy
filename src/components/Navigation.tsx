@@ -110,10 +110,7 @@ export const Navigation: FunctionComponent = () => {
 
             {navRoutes.map(({ Icon, i18nKey, prefetch, ...navRoute }) => (
               <NextLink key={navRoute.path} href={navRoute.path} prefetch={prefetch}>
-                <a
-                  data-active={isActive(navRoute)}
-                  className="box-border flex items-center rounded-lg border border-transparent px-4 py-2 text-gray-700 active:border-primary-700 active:bg-primary-100  active:text-primary-700"
-                >
+                <a className="box-border flex items-center rounded-md border border-transparent px-4 py-2 text-gray-700 transition-all duration-200 hover:bg-gray-200">
                   <Icon className="h-5 w-5 opacity-75" />
 
                   <span className="ml-3 text-sm font-medium"> {t(i18nKey, { count: 0 })} </span>
