@@ -39,7 +39,7 @@ const SearchAndFilter: FunctionComponent = () => {
 
   return (
     <>
-      <div className="mb-6 flex flex-row gap-4 lg:flex-row">
+      <div className="sticky top-0 z-10 flex flex-row gap-4 rounded-b-md bg-gray-100 pb-6 pt-4 pl-4 lg:flex-row">
         <Input placeholder={t`common:search-by-name`} onChange={handleChange} value={search} />
 
         <div
@@ -110,10 +110,10 @@ const CharactersIndex: NextPage = () => {
 
   return (
     <Layout title={t("common:characters")} description={t("meta:characters.home.description")}>
-      <Container>
+      <Container className="mt-0">
         <SearchAndFilter />
 
-        <div className="flex flex-row flex-wrap justify-evenly gap-4 md:justify-start">
+        <div className="mt-4 flex flex-row flex-wrap justify-evenly gap-4 md:justify-start">
           {filteredCharacters.map((c) => (
             <CharacterCard key={c.id} character={c} />
           ))}
