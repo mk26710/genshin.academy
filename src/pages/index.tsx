@@ -1,6 +1,6 @@
 import type { CharacterType } from "@/data/character.schema";
 import type { MetaType } from "@/data/guides/meta.schema";
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
+import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import type { FunctionComponent } from "react";
 
 import { useTranslations } from "next-intl";
@@ -11,6 +11,7 @@ import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
 import { getCharacterById } from "@/data/characters";
 import { getAllGuides } from "@/lib/markdownTools";
+import { getServerAuthSession } from "@/server/common/get-server-auth-session";
 
 interface LatestGuideProps {
   meta: MetaType;
@@ -51,7 +52,10 @@ const LatestGuide: FunctionComponent<LatestGuideProps> = ({ meta, character }) =
   );
 };
 
-const Home = ({ latestGuideMeta, character }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Home = ({
+  latestGuideMeta,
+  character,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const t = useTranslations();
 
   return (
@@ -70,12 +74,16 @@ const Home = ({ latestGuideMeta, character }: InferGetStaticPropsType<typeof get
   );
 };
 
-type StaticProps = {
+type ServerSideProps = {
   character: CharacterType;
   latestGuideMeta: MetaType;
 };
 
-export const getStaticProps: GetStaticProps<StaticProps> = async ({ locale = "en" }) => {
+export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({
+  req,
+  res,
+  locale = "en",
+}) => {
   const guides = await getAllGuides(locale);
 
   const latestGuideMeta = guides.sort((a, b) => b.meta.publishedAt - a.meta.publishedAt)[0].meta;
@@ -93,6 +101,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({ locale = "en
 
   return {
     props: {
+      session: await getServerAuthSession({ req, res }),
       character,
       latestGuideMeta,
       messages,

@@ -1,4 +1,5 @@
 import i18nConfig from "./next-i18next.config.js";
+import { env } from "./src/env/server.mjs";
 
 /**
  * This was taken from create.t3.gg template :)
