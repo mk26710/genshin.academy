@@ -103,7 +103,7 @@ module.exports = {
       },
       colors: {
         ...defaultTheme.colors,
-        primary: colors.blue,
+        primary: colors.purple,
         dark: myColors.neutral,
       },
       screens: {
