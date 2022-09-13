@@ -117,7 +117,7 @@ module.exports = {
     }),
     plugin(({ addVariant, addUtilities }) => {
       // Add a `active` variant, ie. `active:pb-0`
-      addVariant("active", "&[data-active=true]");
+      addVariant("data-active", "&[data-active=true]");
       addUtilities({
         ".hyphens-auto": {
           "-webkit-hyphens": "auto",
