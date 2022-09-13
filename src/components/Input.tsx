@@ -14,7 +14,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
       <input
         ref={ref}
         type={type}
-        className={`form-input h-10 rounded-lg border border-gray-200 bg-white text-sm text-[#000] shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-primary-500 ${fullWidthClass} ${className}`}
+        className={`input-field ${fullWidthClass} ${className}`}
         {...props}
       />
     );
