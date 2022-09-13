@@ -109,7 +109,6 @@ const ThemeSwitch: FunctionComponent = () => {
                 checked={theme === name}
                 onChange={handleOnChange}
                 className="peer sr-only"
-                disabled={name === "dark"}
               />
               <label htmlFor={`${name}-btn`} className="radio-button">
                 <div className="align-middle">
