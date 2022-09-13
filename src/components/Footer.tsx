@@ -10,7 +10,7 @@ export const Footer: FC = () => {
   const t = useTranslations();
 
   return (
-    <footer className="footer grid grid-cols-1 grid-rows-[auto_auto] border-t py-6 px-4 text-sm text-gray-400 lg:grid-cols-[1fr_auto] lg:grid-rows-1">
+    <footer className="footer grid grid-cols-1 grid-rows-[auto_auto] border-t py-6 px-4 text-sm text-gray-400 dark:border-neutral-800 dark:text-neutral-700  lg:grid-cols-[1fr_auto] lg:grid-rows-1">
       <p>
         {t.rich("footer.affiliation", {
           officialWebsite: (children) => (
