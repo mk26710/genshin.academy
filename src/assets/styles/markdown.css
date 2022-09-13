@@ -22,11 +22,16 @@
 }
 
 .markdown-content tr th {
-  @apply even:bg-gray-200/40;
+  @apply even:bg-gray-200/40 dark:even:bg-neutral-900;
 }
 
 .markdown-content details {
   @apply rounded-lg border-l-4 border-primary-500 bg-white text-[#000];
+}
+
+.dark .markdown-content details {
+  background-color: theme("colors.neutral.900");
+  color: theme("colors.neutral.300")
 }
 
 .markdown-content details summary {
