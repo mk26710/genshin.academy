@@ -24,7 +24,9 @@ const LatestGuide: FunctionComponent<LatestGuideProps> = ({ meta, character }) =
   return (
     <Link href={`/guides/${meta.id}`}>
       <a className="card flex flex-col transition-all duration-200 ease-in-out hover:-translate-y-1 hover:shadow-lg">
-        <h1 className="mb-4 text-xl font-semibold text-[#000]">{t("home.latest-guide")}</h1>
+        <h1 className="mb-4 text-xl font-semibold text-[#000] dark:text-neutral-100">
+          {t("home.latest-guide")}
+        </h1>
 
         {/* TODO: handle non-character guides */}
         {meta.type === "character" && (
@@ -34,7 +36,7 @@ const LatestGuide: FunctionComponent<LatestGuideProps> = ({ meta, character }) =
               alt={character.name + " icon"}
               width="256px"
               height="256px"
-              className="border-box h-28 w-28 rounded-lg border border-gray-200 bg-gray-100 text-transparent"
+              className="border-box h-28 w-28 rounded-lg border border-gray-200 bg-gray-100 text-transparent dark:border-neutral-700 dark:bg-neutral-900"
             />
 
             <p className="text-sm">
