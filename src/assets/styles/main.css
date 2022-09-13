@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("./nprogress.css");
+@import url("./markdown.css");
+@import url("./cards.css");
+
 :root {
   --mobile-navbar-height: theme("height.16");
 }
@@ -15,50 +19,43 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr auto;
-  grid-template-areas:
-    "main"
-    "footer";
-
+  grid-template-areas: "main" "footer";
   margin-bottom: var(--mobile-navbar-height);
+}
 
-  @media (min-width: theme("screens.lg")) {
+@media (min-width: theme("screens.lg")) {
+  .app-container {
     grid-template-columns: auto 1fr;
     grid-template-rows: 1fr auto;
-    grid-template-areas:
-      "sidebar main"
-      "footer footer";
+    grid-template-areas: "sidebar main" "footer footer";
     margin-bottom: 0;
   }
+}
 
-  .sidebar {
-    grid-area: sidebar;
-  }
+.app-container .sidebar {
+  grid-area: sidebar;
+}
 
-  .main {
-    grid-area: main;
-    min-height: 100vh;
-  }
+.app-container .main {
+  grid-area: main;
+  min-height: 100vh;
+}
 
-  .footer {
-    grid-area: footer;
-  }
+.app-container .footer {
+  grid-area: footer;
 }
 
 @layer components {
   .card {
     background-color: theme("colors.white");
-    
     box-sizing: border-box;
     border-width: 1px;
     border-radius: theme("borderRadius.lg");
-    
     padding-top: 1rem;
     padding-bottom: 1rem;
     padding-left: 1.25rem;
     padding-right: 1.25rem;
-
     color: #000;
-
     @apply shadow-sm;
   }
 }

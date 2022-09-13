@@ -13,10 +13,7 @@ import { useEffect } from "react";
 import { Footer } from "@/components/Footer";
 import { Navigation } from "@/components/Navigation";
 
-import "@/assets/styles/cards.scss";
-import "@/assets/styles/main.scss";
-import "@/assets/styles/markdown.scss";
-import "@/assets/styles/nprogress.scss";
+import "@/assets/styles/main.css";
 
 const MyApp = ({
   Component,
