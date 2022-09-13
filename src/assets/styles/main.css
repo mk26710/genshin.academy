@@ -81,7 +81,6 @@
     font-size: theme("fontSize.sm");
     line-height: theme("lineHeight.5");
     color: theme("colors.black");
-
   }
 
   .dark .input-field {
@@ -90,5 +89,49 @@
     border-color: theme("colors.neutral.700");
     background-color: theme("colors.neutral.800");
     color: theme("colors.neutral.300");
+  }
+
+  .radio-button {
+    display: flex;
+    width: theme("width.full");
+    flex-direction: flex-row;
+    align-items: center;
+    gap: theme("gap.2");
+    border-width: 1px;
+    border-radius: theme("borderRadius.md");
+    border-color: theme("colors.gray.200");
+    background-color: theme("colors.gray.100");
+    padding-left: theme("padding.2");
+    padding-right: theme("padding.2");
+    padding-top: theme("padding.2");
+    padding-bottom: theme("padding.2");
+    font-size: theme("fontSize.sm");
+    line-height: theme("lineHeight.5");
+  }
+
+  .peer:disabled ~ .radio-button {
+    opacity: 0.5;
+  }
+
+  .dark .radio-button {
+    color: theme("colors.neutral.300");
+    background-color: theme("colors.neutral.900");
+    border-color: theme("colors.neutral.700");
+  }
+
+  .peer:checked ~ .radio-button {
+    border-color: theme("colors.primary.700");
+    background-color: theme("colors.primary.100");
+    color: theme("colors.primary.700");
+  }
+
+  .dark .peer:checked ~ .radio-button {
+    color: theme("colors.primary.300");
+    border-color: theme("colors.primary.500");
+    background-color: theme("colors.primary.900");
+  }
+  
+  .radio-button:hover {
+    cursor: pointer;
   }
 }
