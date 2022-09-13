@@ -72,7 +72,7 @@ export const Navigation: FunctionComponent = () => {
   return (
     <>
       {/* Mobile Bottom Navbar */}
-      <nav className="fixed bottom-0 left-0 z-10 h-[var(--mobile-navbar-height)] w-full select-none border-t border-gray-200 bg-white text-[#000] lg:hidden">
+      <nav className="fixed bottom-0 left-0 z-10 h-[var(--mobile-navbar-height)] w-full select-none border-t border-gray-200 bg-white text-[#000] dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-400 lg:hidden">
         <div className="flex h-full flex-row justify-between gap-4 overflow-y-auto px-4">
           {navRoutes.map(({ Icon, i18nKey, prefetch, ...navRoute }) => (
             <NextLink
@@ -101,16 +101,16 @@ export const Navigation: FunctionComponent = () => {
           <div className="flex w-full flex-col gap-y-1 pb-6">
             <div className="mb-4 mt-2 self-center">
               <NextLink href="/">
-                <a className="font-semibold text-black">
+                <a className="font-semibold text-black dark:text-white">
                   genshin.zenless
-                  <span className="text-xs text-primary-700">.club</span>
+                  <span className="text-xs text-primary-700 dark:text-primary-400">.club</span>
                 </a>
               </NextLink>
             </div>
 
             {navRoutes.map(({ Icon, i18nKey, prefetch, ...navRoute }) => (
               <NextLink key={navRoute.path} href={navRoute.path} prefetch={prefetch}>
-                <a className="box-border flex items-center rounded-md border border-transparent px-4 py-2 text-gray-700 transition-all duration-200 hover:bg-gray-200">
+                <a className="box-border flex items-center rounded-md border border-transparent px-4 py-2 text-gray-700 transition-all duration-200 hover:bg-gray-200 dark:text-neutral-400 dark:hover:bg-neutral-800">
                   <Icon className="h-5 w-5 opacity-75" />
 
                   <span className="ml-3 text-sm font-medium"> {t(i18nKey, { count: 0 })} </span>
