@@ -1,0 +1,37 @@
+.card-old {
+  @apply flex box-border rounded-lg border border-gray-200 bg-white;
+  @apply break-inside-avoid break-before-auto break-after-auto;
+  @apply overflow-hidden;
+}
+
+.card-old-with-padding {
+  @apply p-4;
+}
+
+.card-old-horizontal {
+  @apply flex-row;
+}
+
+.card-old-vertical {
+  @apply flex-col;
+}
+
+.card-old-thumbnail {
+  @apply object-fill object-top rounded-t-lg w-full;
+}
+
+.card-old > .card-old-text-container {
+  @apply py-4;
+}
+
+.card-old-text-container {
+  @apply space-y-2;
+}
+
+.card-old-text-container-item {
+  @apply mx-6;
+}
+
+.card-old-text-container-item + .card-old-text-container-item {
+  margin-top: 0 !important;
+}

@@ -1,12 +1,10 @@
-$color: theme("colors.primary.500");
-
 /* Make clicks pass-through */
 #nprogress {
   pointer-events: none;
 }
 
 #nprogress .bar {
-  background: $color;
+  background: theme("colors.primary.500");
   position: fixed;
   z-index: 1031;
   top: 0;
@@ -22,9 +20,8 @@ $color: theme("colors.primary.500");
   right: 0px;
   width: 100px;
   height: 100%;
-  box-shadow: 0 0 10px $color, 0 0 5px $color;
+  box-shadow: 0 0 10px theme("colors.primary.500"), 0 0 5px theme("colors.primary.500");
   opacity: 1;
-
   -webkit-transform: rotate(3deg) translate(0px, -4px);
   -ms-transform: rotate(3deg) translate(0px, -4px);
   transform: rotate(3deg) translate(0px, -4px);
@@ -43,12 +40,10 @@ $color: theme("colors.primary.500");
   width: 18px;
   height: 18px;
   box-sizing: border-box;
-
   border: solid 2px transparent;
-  border-top-color: $color;
-  border-left-color: $color;
+  border-top-color: theme("colors.primary.500");
+  border-left-color: theme("colors.primary.500");
   border-radius: 50%;
-
   -webkit-animation: nprogress-spinner 400ms linear infinite;
   animation: nprogress-spinner 400ms linear infinite;
 }
