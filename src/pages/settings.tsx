@@ -54,10 +54,7 @@ const LanguageSwitch: FunctionComponent = () => {
               onChange={handleOnChange}
               className="peer sr-only"
             />
-            <label
-              htmlFor={`${code}-btn`}
-              className="flex w-full flex-row items-center gap-2 rounded-lg border border-gray-200 bg-gray-100 p-4 px-3 py-2 text-sm text-[#000] hover:cursor-pointer peer-checked:border-primary-700 peer-checked:bg-primary-100 peer-checked:text-primary-700"
-            >
+            <label htmlFor={`${code}-btn`} className="radio-button">
               <div className="align-middle">
                 <ReactCountryFlag countryCode={flag} />
               </div>
@@ -114,10 +111,7 @@ const ThemeSwitch: FunctionComponent = () => {
                 className="peer sr-only"
                 disabled={name === "dark"}
               />
-              <label
-                htmlFor={`${name}-btn`}
-                className="flex w-full flex-row items-center gap-2 rounded-lg border border-gray-200 bg-gray-100 p-4 px-3 py-2 text-sm text-[#000] hover:cursor-pointer peer-checked:border-primary-700 peer-checked:bg-primary-100 peer-checked:text-primary-700 peer-disabled:opacity-50"
-              >
+              <label htmlFor={`${name}-btn`} className="radio-button">
                 <div className="align-middle">
                   <Icon className="h-5 w-5" />
                 </div>
@@ -135,7 +129,7 @@ const Appearance: FunctionComponent<PropsWithChildren> = ({ children }) => {
   const t = useTranslations();
 
   return (
-    <div className="flex w-full flex-col gap-2 rounded-lg border border-gray-200 bg-white p-4 text-[#000]">
+    <div className="card flex w-full flex-col gap-2">
       <h1 className="mb-4 text-xl font-semibold">{t("settings.appearance")}</h1>
       {children}
     </div>
