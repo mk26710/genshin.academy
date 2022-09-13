@@ -15,6 +15,11 @@
   color: white;
 }
 
+.dark body {
+  background-color: theme("colors.neutral.900");
+  color: theme("colors.neutral.300");
+}
+
 .app-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -57,5 +62,11 @@
     padding-right: 1.25rem;
     color: #000;
     @apply shadow-sm;
+  }
+
+  .dark .card {
+    background-color: theme("colors.neutral.800");
+    color: theme("colors.neutral.300");
+    border-color: theme("colors.neutral.700");
   }
 }
