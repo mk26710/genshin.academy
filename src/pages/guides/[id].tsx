@@ -87,10 +87,10 @@ const GuidesId = ({ meta, html, character }: InferGetStaticPropsType<typeof getS
     >
       <Container>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-[auto_1fr]">
-          <div className="card flex max-w-none flex-col gap-4 divide-y  bg-white p-0">
+          <div className="card flex max-w-none flex-col gap-4 divide-y bg-white p-0">
             <article
               ref={contentRoot}
-              className="markdown-content prose prose-blue w-full max-w-none px-4 py-6 text-justify text-base prose-thead:border-none prose-thead:border-gray-200 lg:px-8 lg:py-8"
+              className="markdown-content prose prose-purple w-full max-w-none px-4 py-6 text-justify text-base prose-thead:border-none prose-thead:border-gray-200 dark:prose-invert dark:prose-hr:border-neutral-700 lg:px-8 lg:py-8"
               dangerouslySetInnerHTML={{ __html: html }}
             />
 
