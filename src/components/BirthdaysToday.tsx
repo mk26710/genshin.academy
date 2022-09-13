@@ -19,7 +19,9 @@ const BirthdaysToday: FunctionComponent = () => {
 
   return (
     <div className="card">
-      <h1 className="mb-4 text-xl font-semibold text-[#000]">{t("common.birthdays")}</h1>
+      <h1 className="mb-4 text-xl font-semibold text-[#000] dark:text-neutral-100">
+        {t("common.birthdays")}
+      </h1>
 
       <div className="flex flex-wrap gap-2">
         {celebrants.length <= 0 && (
@@ -30,7 +32,7 @@ const BirthdaysToday: FunctionComponent = () => {
 
         {celebrants.map(({ id, name }, index) => (
           <Link href={`/characters/${id}`} key={index}>
-            <a className="block rounded-lg border border-gray-200 bg-gray-100">
+            <a className="block rounded-lg border border-gray-200 bg-gray-100 duration-200 hover:-translate-y-1 hover:shadow-lg dark:border-neutral-700 dark:bg-neutral-900 ">
               <StaticPicture
                 className="h-28 w-28 rounded-lg"
                 src={`/img/characters/${id}/icon.webp`}
