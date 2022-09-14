@@ -7,12 +7,29 @@ import { env } from "@/env/server.mjs";
 import { prisma } from "@/server/db/client";
 
 export const authOptions: NextAuthOptions = {
-  // Include user.id on session
   callbacks: {
+    async signIn({ account }) {
+      if (account.provider === "discord") {
+        const allowedEntity = await prisma.allowedDiscordIds.findFirst({
+          where: { id: account.providerAccountId },
+        });
+
+        if (allowedEntity?.id === account.providerAccountId) {
+          return true;
+        }
+      }
+
+      return false;
+    },
+    // Include more use data and hide email on session
     session({ session, user }) {
       if (session.user) {
+        session.user.email = null;
         session.user.id = user.id;
+        session.user.role = user.role;
+        session.user.createdAt = user.createdAt.toISOString();
       }
+
       return session;
     },
   },
