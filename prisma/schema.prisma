@@ -14,10 +14,22 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+model AllowedDiscordIds {
+    id String @unique
+}
+
+enum Role {
+    ADMIN
+    MODERATOR
+    WRITER
+    REGULAR
+}
 
 model User {
-    id            String    @id @default(dbgenerated("gen_random_uuid()"))
+    id            String    @id @default(cuid())
     name          String?
+    role          Role      @default(REGULAR)
+    createdAt     DateTime  @default(now())
     email         String?   @unique
     emailVerified DateTime?
     image         String?
@@ -27,7 +39,7 @@ model User {
 
 // Necessary for Next auth
 model Account {
-    id                String  @id @default(dbgenerated("gen_random_uuid()"))
+    id                String  @id @default(cuid())
     userId            String
     type              String
     provider          String
@@ -40,7 +52,6 @@ model Account {
     id_token          String? @db.Text
     session_state     String?
     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
     @@unique([provider, providerAccountId])
 }
 
@@ -52,12 +63,9 @@ model Session {
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-
-
 model VerificationToken {
     identifier String
     token      String   @unique
     expires    DateTime
-
     @@unique([identifier, token])
 }
