@@ -1,4 +1,5 @@
-import type { DefaultSession } from "next-auth";
+import type { Role } from "@prisma/client";
+import type { DefaultSession, DefaultUser } from "next-auth";
 
 declare module "next-auth" {
   /**
@@ -7,6 +8,13 @@ declare module "next-auth" {
   interface Session {
     user?: {
       id: string;
+      createdAt: string;
+      role: Role;
     } & DefaultSession["user"];
+  }
+
+  interface User extends DefaultUser {
+    createdAt: Date;
+    role: Role;
   }
 }
