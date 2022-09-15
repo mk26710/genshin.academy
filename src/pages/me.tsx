@@ -1,7 +1,7 @@
 import type { GetServerSideProps } from "next";
 
+import { Square2StackIcon } from "@heroicons/react/20/solid";
 import { useSession } from "next-auth/react";
-import { useEffect } from "react";
 
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
@@ -14,9 +14,11 @@ const Me = () => {
 
   const locale = useCurrentLocale();
 
-  useEffect(() => {
-    console.log(session);
-  }, [session]);
+  const copyUserIdToClipboard = () => {
+    if (navigator != null && session != null && session.user != null) {
+      navigator.clipboard.writeText(session.user.id);
+    }
+  };
 
   if (!session) {
     return null;
@@ -29,7 +31,22 @@ const Me = () => {
   return (
     <Layout title="Profile">
       <Container className="lg:place-items-center">
-        <div className="card flex w-full flex-col gap-2 lg:w-96">
+        <div className="card flex w-full flex-col gap-2 pt-2 lg:w-96">
+          <input type="text" name="currentUserId" value={session.user.id} hidden readOnly />
+
+          <div className="mb-4 grid w-fit grid-cols-[auto_auto_auto] grid-rows-1 text-sm dark:text-neutral-600">
+            <p>ID:</p>
+            <p className="ml-1 mr-4">{session.user.id}</p>
+            <div className="relative">
+              <button onClick={copyUserIdToClipboard} className="peer">
+                <Square2StackIcon className="h-5 w-5 hover:opacity-60 active:opacity-40" />
+              </button>
+              <span className="absolute bottom-6 -left-7 ml-4 rounded bg-black px-2 py-1.5 text-xs font-medium text-white opacity-0 peer-hover:opacity-100 lg:bottom-8">
+                Copy
+              </span>
+            </div>
+          </div>
+
           {session.user.image && (
             <img
               src={session.user.image}
