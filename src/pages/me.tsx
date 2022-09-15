@@ -84,7 +84,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, locale 
         session: null,
       },
       redirect: {
-        destination: `login`,
+        destination: `/${locale}/signin`,
       },
     };
   }
