@@ -14,6 +14,8 @@ export const RoleBadge: FC<RoleBadgeProps> = ({ role }) => {
   };
 
   return (
-    <span className={`rounded-md px-2 py-0.5 font-semibold text-white ${bgColor()}`}>{role}</span>
+    <span className={`rounded-md px-2 py-0.5 text-xs font-semibold text-white ${bgColor()}`}>
+      {role}
+    </span>
   );
 };
