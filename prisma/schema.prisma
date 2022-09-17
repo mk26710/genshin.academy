@@ -99,6 +99,7 @@ model Post {
     description  String?
     tags         String
     thumbnailUrl String?
+    lang         String        @default("en")
     content      PostContent[]
 
     author User? @relation(fields: [authorId], references: [id])
