@@ -1,4 +1,3 @@
-import i18nConfig from "./next-i18next.config.js";
 import { env } from "./src/env/server.mjs";
 
 /**
@@ -16,5 +15,8 @@ export default defineNextConfig({
   output: "standalone",
   reactStrictMode: true,
   swcMinify: true,
-  i18n: i18nConfig.i18n,
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "ru"],
+  },
 });
