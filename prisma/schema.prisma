@@ -88,27 +88,29 @@ enum PostStatus {
 }
 
 model Post {
-    id           String        @id @default(cuid())
-    slug         String        @unique
+    id           String       @id @default(cuid())
+    slug         String       @unique
     authorId     String?
-    type         PostType      @default(GENERAL)
-    status       PostStatus    @default(AWAITING_APPROVAL)
-    publishedAt  DateTime      @default(now())
+    type         PostType     @default(GENERAL)
+    status       PostStatus   @default(AWAITING_APPROVAL)
+    publishedAt  DateTime     @default(now())
     editedAt     DateTime?
     title        String
     description  String?
     tags         String
     thumbnailUrl String?
-    lang         String        @default("en")
-    content      PostContent[]
+    lang         String       @default("en")
+    content      PostContent?
 
     author User? @relation(fields: [authorId], references: [id])
 }
 
 model PostContent {
     id     String @id @default(cuid())
-    postId String
+    postId String @unique
     raw    String
 
-    post Post? @relation(fields: [postId], references: [id])
+    post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+    @@unique([id, postId])
 }
