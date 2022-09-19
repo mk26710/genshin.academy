@@ -5,6 +5,9 @@
   "characters_one": "Персонаж",
 
   "guides": "{ count, plural, one {Руководство} other {Руководства} }",
+
+  "posts": "{ count, plural, one {Публикация} other {Публикации} }", 
+
   "calculators": "{ count, plural, one {Калькулятор} other {Калькуляторы} }",
   "settings": "{ count, plural, one {Настройка} other {Настройки} }",
 
