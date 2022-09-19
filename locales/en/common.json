@@ -1,16 +1,11 @@
 {
   "home": "Home",
 
-  "characters": "Characters",
-  "characters_one": "Character",
-
-  "guides": "Guides",
-  "guides_one": "Guide",
-
-  "calculators": "Calculators",
-  "calculators_one": "Calculator",
-
-  "settings": "Settings",
+  "characters": "{ count, plural, one {Character} other {Characters} }",
+  "guides": "{ count, plural, one {Guide} other {Guides} }",
+  "posts": "{ count, plural, one {Post} other {Posts} }", 
+  "calculators": "{ count, plural, one {Calculator} other {Calculators} }",
+  "settings": "{ count, plural, one {Setting} other {Settings} }",
 
   "search-by-name": "Search by name",
   "search-by-title": "Search by title",
