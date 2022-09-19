@@ -6,6 +6,7 @@ import {
   DocumentTextIcon,
   HomeIcon,
   UserGroupIcon,
+  BookOpenIcon,
 } from "@heroicons/react/20/solid";
 import { useTranslations } from "next-intl";
 import NextLink from "next/link";
@@ -33,6 +34,12 @@ const navRoutes: NavRoute[] = [
     i18nKey: "common.guides",
     hasNested: true,
     Icon: DocumentTextIcon,
+  },
+  {
+    path: "/posts",
+    i18nKey: "common.posts",
+    hasNested: true,
+    Icon: BookOpenIcon,
   },
   {
     path: "/characters",
