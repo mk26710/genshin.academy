@@ -1,20 +1,22 @@
-import type { GetServerSideProps, NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import type { FormEventHandler } from "react";
 import type { ZodIssue } from "zod";
 
 import { PostType } from "@prisma/client";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState, useRef } from "react";
 
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
+import { LoadingSomething } from "@/components/LoadingSomething";
 import { RoleBadge } from "@/components/RoleBadge";
+import { useAuthorizedSession } from "@/hooks/use-authorized-session";
 import { useCurrentLocale } from "@/hooks/use-current-locale";
-import { getServerAuthSession } from "@/server/common/get-server-auth-session";
 
 const PostsNew: NextPage = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useAuthorizedSession({
+    allowedRoles: ["WRITER", "MODERATOR", "ADMIN"],
+  });
 
   const router = useRouter();
   const locale = useCurrentLocale();
@@ -59,6 +61,14 @@ const PostsNew: NextPage = () => {
       router.push(redirect.destination);
     }
   }, [redirect]);
+
+  if (status === "loading") {
+    return (
+      <Layout title="New Post">
+        <LoadingSomething />
+      </Layout>
+    );
+  }
 
   if (session == null) {
     return null;
@@ -202,17 +212,7 @@ const PostsNew: NextPage = () => {
 
 export default PostsNew;
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res, locale = "en" }) => {
-  const session = await getServerAuthSession({ req, res });
-  if (!session) {
-    return {
-      props: {},
-      redirect: {
-        destination: "/signin",
-      },
-    };
-  }
-
+export const getStaticProps: GetStaticProps = async ({ locale = "en" }) => {
   const messages = {
     common: (await import(`#/locales/${locale}/common.json`)).default,
     meta: (await import(`#/locales/${locale}/meta.json`)).default,
@@ -222,7 +222,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, locale 
   return {
     props: {
       messages,
-      session,
     },
   };
 };
