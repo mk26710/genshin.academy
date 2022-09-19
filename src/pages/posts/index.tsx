@@ -15,7 +15,6 @@ import { prisma } from "@/server/db/client";
  *                  TODO
  *
  * - Need to add filtering for users and search field
- * - Also need to fix cards height somehow
  * - Would be nice to figure out inferece of GSSP and why
  *   it ignore NonNullable
  */
@@ -37,7 +36,7 @@ interface PostCardProps {
 const PostCard: FC<PostCardProps> = ({ title, thumbnailUrl, description, slug }) => {
   return (
     <Link href={`/posts/${slug}`} prefetch={false}>
-      <a className="card w-full p-0 lg:w-[calc(50%-1rem)]">
+      <a className="card h-fit w-full p-0 lg:w-[calc(50%-1rem)]">
         {thumbnailUrl && (
           <img
             src={thumbnailUrl}
