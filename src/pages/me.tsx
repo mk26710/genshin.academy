@@ -1,24 +1,31 @@
-import type { GetServerSideProps } from "next";
+import type { GetStaticProps } from "next";
 
 import { Square2StackIcon } from "@heroicons/react/20/solid";
-import { useSession } from "next-auth/react";
 
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
+import { LoadingSomething } from "@/components/LoadingSomething";
 import { RoleBadge } from "@/components/RoleBadge";
+import { useAuthenticatedSession } from "@/hooks/use-authenticated-session";
 import { useCurrentLocale } from "@/hooks/use-current-locale";
-import { getServerAuthSession } from "@/server/common/get-server-auth-session";
 
 const Me = () => {
-  const { data: session } = useSession();
-
   const locale = useCurrentLocale();
+  const { data: session, status } = useAuthenticatedSession();
 
   const copyUserIdToClipboard = () => {
     if (navigator != null && session != null && session.user != null) {
       navigator.clipboard.writeText(session.user.id);
     }
   };
+
+  if (status === "loading") {
+    return (
+      <Layout title="Profile">
+        <LoadingSomething />
+      </Layout>
+    );
+  }
 
   if (!session) {
     return null;
@@ -75,20 +82,7 @@ const Me = () => {
 
 export default Me;
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res, locale = "en" }) => {
-  const session = await getServerAuthSession({ req, res });
-  if (!session) {
-    return {
-      props: {
-        messages: {},
-        session: null,
-      },
-      redirect: {
-        destination: `/${locale}/signin`,
-      },
-    };
-  }
-
+export const getStaticProps: GetStaticProps = async ({ locale = "en" }) => {
   const messages = {
     common: (await import(`#/locales/${locale}/common.json`)).default,
     meta: (await import(`#/locales/${locale}/meta.json`)).default,
@@ -98,7 +92,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, locale 
   return {
     props: {
       messages,
-      session,
     },
   };
 };
