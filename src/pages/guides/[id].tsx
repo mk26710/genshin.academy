@@ -12,8 +12,8 @@ import { Layout } from "@/components/Layout";
 import { getCharacterById } from "@/data/characters";
 import { PUBLISHED_GUIDES } from "@/data/guides/published";
 import { useCurrentLocale } from "@/hooks/use-current-locale";
-import { characterIcon } from "@/lib/helpers";
-import { getGuide } from "@/lib/markdownTools";
+import { characterIcon } from "@/utils/helpers";
+import { getGuide } from "@/utils/markdownTools";
 
 interface StaticProps {
   meta: MetaType;

@@ -10,8 +10,8 @@ import BirthdaysToday from "@/components/BirthdaysToday";
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
 import { getCharacterById } from "@/data/characters";
-import { getAllGuides } from "@/lib/markdownTools";
 import { getServerAuthSession } from "@/server/common/get-server-auth-session";
+import { getAllGuides } from "@/utils/markdownTools";
 
 interface LatestGuideProps {
   meta: MetaType;

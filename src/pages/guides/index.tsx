@@ -14,7 +14,7 @@ import { Container } from "@/components/Container";
 import { Input } from "@/components/Input";
 import { Layout } from "@/components/Layout";
 import { getCharacterById } from "@/data/characters";
-import { getAllGuides } from "@/lib/markdownTools";
+import { getAllGuides } from "@/utils/markdownTools";
 
 const NoResult: FunctionComponent = () => {
   return <>There&apos;s nothing here :(</>;

@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
 import { charactersArray, getCharacterById } from "@/data/characters";
-import { avatarPath, characterIcon } from "@/lib/helpers";
+import { avatarPath, characterIcon } from "@/utils/helpers";
 
 interface StaticProps {
   character: CharacterType;
