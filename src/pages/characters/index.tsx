@@ -108,7 +108,10 @@ const CharactersIndex: NextPage = () => {
     }, []);
 
   return (
-    <Layout title={t("common.characters")} description={t("meta.characters.home.description")}>
+    <Layout
+      title={t("common.characters", { count: 99 })}
+      description={t("meta.characters.home.description")}
+    >
       <Container>
         <SearchAndFilter />
 
