@@ -45,18 +45,32 @@ export default function PostsSlug({ post }: ServerSideProps) {
   return (
     <Layout title={post.title}>
       <Container>
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-[auto_1fr]">
-          <div className="card flex max-w-none flex-col gap-4 divide-y bg-white p-0">
-            <h1 className="px-4 pt-4 text-2xl font-semibold lg:px-8">{post.title}</h1>
-            <article
-              className="markdown-content prose prose-purple w-full max-w-none px-4 py-6 text-justify text-base prose-thead:border-none prose-thead:border-gray-200 dark:prose-invert dark:prose-hr:border-neutral-700 lg:px-8 lg:py-8"
-              dangerouslySetInnerHTML={{ __html: post.content.parsed }}
-            />
+        <div className="grid grid-cols-1 gap-4 xl:grid-cols-[auto_1fr]">
+          <div className="flex flex-col gap-4">
+            <div className="card py-8dark:prose-invert prose prose-purple flex w-full max-w-none flex-col px-4 lg:p-8">
+              <h1 className="mb-0">{post.title}</h1>
+              <p>{post.description}</p>
+              {/* <img
+                src={post.thumbnailUrl ?? ""}
+                alt="Post humbnail"
+                className="aspect-auto w-[50%] self-center object-cover"
+              /> */}
+            </div>
+            <div className="card flex max-w-none flex-col gap-4 divide-y bg-white p-0">
+              <article
+                className="markdown-content prose prose-purple w-full max-w-none px-4 py-6 text-justify text-base prose-thead:border-none prose-thead:border-gray-200 dark:prose-invert dark:prose-hr:border-neutral-700 xl:px-8 xl:py-8"
+                dangerouslySetInnerHTML={{ __html: post.content.parsed }}
+              />
 
-            <PostFooter post={post} />
+              <PostFooter post={post} />
+            </div>
           </div>
 
-          <ContentsTable title="Contents" headings={[]} />
+          <ContentsTable
+            title="Contents"
+            headings={[]}
+            containerClassName="hidden lg:hidden xl:flex"
+          />
         </div>
       </Container>
     </Layout>
