@@ -4,7 +4,7 @@ import type { ZodIssue } from "zod";
 
 import { PostType } from "@prisma/client";
 import { useRouter } from "next/router";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
@@ -14,8 +14,7 @@ import { useAuthorizedSession } from "@/hooks/use-authorized-session";
 import { useCurrentLocale } from "@/hooks/use-current-locale";
 import { getServerAuthSession } from "@/server/common/get-server-auth-session";
 import { prisma } from "@/server/db/client";
-
-// WIP
+import { canUserEditPost } from "@/server/db/models/posts";
 
 const PostsEdit = ({ post }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { data: session, status } = useAuthorizedSession({
@@ -28,7 +27,6 @@ const PostsEdit = ({ post }: InferGetServerSidePropsType<typeof getServerSidePro
   const formRef = useRef<HTMLFormElement>(null);
 
   const [issues, setIssues] = useState<ZodIssue[]>();
-  const [redirect, setRedirect] = useState({ needed: false, destination: "/" });
 
   const issueOf = (path: string) => {
     return issues?.find((issue) => issue.path.includes(path));
@@ -40,7 +38,7 @@ const PostsEdit = ({ post }: InferGetServerSidePropsType<typeof getServerSidePro
     const formData = new FormData(formRef.current ?? undefined);
     const json = Object.fromEntries(formData.entries());
 
-    const response = await fetch("/api/posts/new", {
+    const response = await fetch("/api/posts/edit", {
       method: "POST",
       body: JSON.stringify(json),
       headers: {
@@ -48,23 +46,14 @@ const PostsEdit = ({ post }: InferGetServerSidePropsType<typeof getServerSidePro
       },
     });
 
-    if (!response.redirected) {
-      const responseData = await response.json();
-      if ("error" in responseData && "success" in responseData && responseData.success !== true) {
-        setIssues(responseData.error.issues);
-      } else {
-        setIssues([]);
-      }
-    } else {
-      setRedirect({ needed: true, destination: `/${locale}/posts/${json.slug}` });
+    const { success, error }: ZenlessJsonResponse<unknown, ZodIssue[]> = await response.json();
+    if (success === true) {
+      router.push(`/${locale}/posts/${post?.slug}`);
+    } else if (success === false || error) {
+      setIssues(error?.data);
+      console.error(error, error?.data);
     }
   };
-
-  useEffect(() => {
-    if (redirect.needed) {
-      router.push(redirect.destination);
-    }
-  }, [redirect]);
 
   if (status === "loading") {
     return (
@@ -139,9 +128,9 @@ const PostsEdit = ({ post }: InferGetServerSidePropsType<typeof getServerSidePro
               type="text"
               id="slug"
               name="slug"
-              className="input-field w-full disabled:opacity-70"
+              className="input-field w-full read-only:opacity-70"
               defaultValue={post?.slug}
-              disabled
+              readOnly
             />
 
             {issueOf("slug") && <div className="pt-1 text-red-700">{issueOf("slug")?.message}</div>}
@@ -152,13 +141,16 @@ const PostsEdit = ({ post }: InferGetServerSidePropsType<typeof getServerSidePro
               Language (en, ru, etc.)
             </label>
 
-            <input
+            <select
               id="lang"
               name="lang"
-              className="input-field form-input w-full disabled:opacity-70"
+              className="input-field form-select w-full"
               defaultValue={post?.lang}
-              disabled
-            />
+              required
+            >
+              <option value="en">English</option>
+              <option value="ru">Русский</option>
+            </select>
 
             {issueOf("lang") && <div className="pt-1 text-red-700">{issueOf("lang")?.message}</div>}
           </div>
@@ -293,6 +285,13 @@ export const getServerSideProps = async ({
   });
 
   if (!post) {
+    return {
+      props: {},
+      notFound: true,
+    };
+  }
+
+  if (!canUserEditPost(session.user, post)) {
     return {
       props: {},
       notFound: true,
