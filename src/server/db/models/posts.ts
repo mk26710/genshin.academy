@@ -37,3 +37,50 @@ export const getPostBySlugWithAuthorJsonSafe = async (slug: string) => {
 
   return safePost;
 };
+
+interface SearchPostsPaginatedOptions {
+  skip: number;
+  take: number;
+  authorName?: string;
+  searchTitle?: string;
+  order?: "asc" | "desc";
+}
+
+export const searchPostsPaginated = async ({
+  skip,
+  take,
+  order = "desc",
+  ...options
+}: SearchPostsPaginatedOptions) => {
+  return await prisma.post.findMany({
+    skip,
+    take,
+    where: {
+      author: {
+        name: options.authorName,
+      },
+      title: {
+        search: options.searchTitle,
+        mode: "insensitive",
+      },
+    },
+    orderBy: {
+      publishedAt: order,
+    },
+    select: {
+      id: true,
+      slug: true,
+      title: true,
+      description: true,
+      thumbnailUrl: true,
+      status: true,
+      author: {
+        select: {
+          id: true,
+          name: true,
+          role: true,
+        },
+      },
+    },
+  });
+};
