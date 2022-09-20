@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
-import { prisma } from "@/server/db/client";
+import { searchPostsPaginated } from "@/server/db/models/posts";
 
 /**
  *                  TODO
@@ -79,7 +79,7 @@ const Paginator: FC<PaginatorProps> = ({ currentPage, totalPages }) => {
   };
 
   return (
-    <div className="self-ce inline-flex items-center justify-center gap-3">
+    <div className="inline-flex items-center justify-center gap-3 self-center">
       <button
         className="inline-flex h-8 w-8 items-center justify-center rounded border border-gray-200 disabled:opacity-50 dark:border-neutral-700"
         disabled={currentPage === 1}
@@ -115,28 +115,35 @@ const PostsIndex = ({ posts, currentPage, itemsPerPage, totalPosts }: PageProps)
   return (
     <Layout title={t("common.posts", { count: 99 })}>
       <Container className="mt-0">
-        <div className="flex h-full flex-col-reverse gap-2 lg:grid lg:grid-cols-[1fr_auto]">
-          <div className="flex flex-col flex-wrap gap-2 lg:mt-4 lg:flex-row">
-            {posts?.map((post) => (
-              <PostCard
-                key={post.id}
-                id={post.id}
-                slug={post.slug}
-                title={post.title}
-                description={post.description}
-                thumbnailUrl={post.thumbnailUrl}
-                status={post.status}
-                author={post.author}
-              />
-            ))}
-          </div>
+        {posts != null && (
+          <div className="flex h-full flex-col-reverse gap-2 lg:grid lg:grid-cols-[1fr_auto]">
+            {posts.length > 0 && (
+              <div className="flex flex-grow flex-col flex-wrap gap-2 lg:mt-4 lg:flex-row">
+                {posts?.map((post) => (
+                  <PostCard
+                    key={post.id}
+                    id={post.id}
+                    slug={post.slug}
+                    title={post.title}
+                    description={post.description}
+                    thumbnailUrl={post.thumbnailUrl}
+                    status={post.status}
+                    author={post.author}
+                  />
+                ))}
+              </div>
+            )}
+            {posts.length <= 0 && (
+              <div className="flex flex-grow items-center justify-center">Nothing here :(</div>
+            )}
 
-          <div className="sticky top-0 w-full pb-2 pt-2 lg:w-64">
-            <div className="card flex flex-col bg-white/80 backdrop-blur-lg dark:bg-neutral-900/90 lg:sticky lg:top-4">
-              <Paginator currentPage={currentPage ?? 1} totalPages={totalPages} />
+            <div className="sticky top-0 w-full pb-2 pt-2 lg:w-64">
+              <div className="card flex flex-col bg-white/80 backdrop-blur-lg dark:bg-neutral-900/90 lg:sticky lg:top-4">
+                <Paginator currentPage={currentPage ?? 1} totalPages={totalPages} />
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </Container>
     </Layout>
   );
@@ -167,56 +174,12 @@ export const getServerSideProps = async ({ locale = "en", query }: GetServerSide
   const skip = (page - 1) * itemsPerPage;
   const take = itemsPerPage;
 
-  const totalPosts = await prisma.post.aggregate({
-    _count: { id: true },
-    where: {
-      author: {
-        name: authorName,
-      },
-      title: {
-        search: searchTitle,
-        mode: "insensitive",
-      },
-    },
-  });
-  const totalPages = Math.ceil(totalPosts._count.id / itemsPerPage);
-  if (page > totalPages) {
-    return {
-      props: {},
-      notFound: true,
-    };
-  }
-
-  const posts = await prisma.post.findMany({
+  const posts = await searchPostsPaginated({
     skip,
     take,
-    where: {
-      author: {
-        name: authorName,
-      },
-      title: {
-        search: searchTitle,
-        mode: "insensitive",
-      },
-    },
-    orderBy: {
-      publishedAt: order,
-    },
-    select: {
-      id: true,
-      slug: true,
-      title: true,
-      description: true,
-      thumbnailUrl: true,
-      status: true,
-      author: {
-        select: {
-          id: true,
-          name: true,
-          role: true,
-        },
-      },
-    },
+    order,
+    authorName,
+    searchTitle,
   });
 
   const messages = {
@@ -231,7 +194,7 @@ export const getServerSideProps = async ({ locale = "en", query }: GetServerSide
       posts,
       currentPage: page,
       itemsPerPage,
-      totalPosts: totalPosts._count.id,
+      totalPosts: posts.length,
     },
   };
 };
