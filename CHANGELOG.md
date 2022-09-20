@@ -1,6 +1,109 @@
 # Changelog
 
 
+## (v1.6.0) - 2022-09-20
+
+### Bug Fixes
+
+- **Docker:** Node 16 is required ([315806a](https://github.com/TenkoSpirit/genshin.zenless.club/commit/315806ab88cd428a93b9ec1734f9932c5e98316e))
+- **css:** Some incorrect styles on input field ([f75fe89](https://github.com/TenkoSpirit/genshin.zenless.club/commit/f75fe8924ac3458da7453130dffd3cbc0e4ed55c))
+- **pages:** `/me` will redirect to correct sign in url now ([51e8fa7](https://github.com/TenkoSpirit/genshin.zenless.club/commit/51e8fa7ed77e1be599ff0fe25902b08ab10ff579))
+- **pages:** Posts card height now should be normal and not extend itself if there's just one or two cards ([348d642](https://github.com/TenkoSpirit/genshin.zenless.club/commit/348d6420930ec8bff5cc0e55815b51f3a2e29373))
+- **pages:** Characters index page used i18n string without providing count when it was needed ([89fb41a](https://github.com/TenkoSpirit/genshin.zenless.club/commit/89fb41ac26a8de18c98bd57a6a7c941b47eb48a8))
+- **tailwind:** There was a built-in active slector, custom one was overriding it ([baf1a04](https://github.com/TenkoSpirit/genshin.zenless.club/commit/baf1a045be9b655eb04f6059d8de376b8f46e39f))
+
+### Features
+
+- **api:** Updated next-auths endpoint so it lets sign in only users from the allowlist ([c845bcd](https://github.com/TenkoSpirit/genshin.zenless.club/commit/c845bcd114127c9e5b9bfef4c3518c31d61ef3ef))
+- **api:** Created an api route to create new posts ([76dbb0e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/76dbb0e50d0b7eb524e75bde69251a308256e62b))
+- **api:** Created an epi endpoint so posts can be edited ([c87b8b4](https://github.com/TenkoSpirit/genshin.zenless.club/commit/c87b8b421df7193eb6cdc282914af1a87f5d65ab))
+- **app:** Migrate from `next-i18next` to `next-intl` ([d8d5501](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d8d5501bb219746490da345eb8d3dd31e075550a))
+- **app:** Bringing back `next-intl` ([14a3459](https://github.com/TenkoSpirit/genshin.zenless.club/commit/14a3459e4c11faa9fe4515cc845b10e0bdcb04d8))
+- **assets:** Switch from scss to regular css ([e3101e4](https://github.com/TenkoSpirit/genshin.zenless.club/commit/e3101e4e9c21c8c098b389adaca66df630ac508d))
+- **auth, pages:** Created a custom sign in page for next-auth ([6332f31](https://github.com/TenkoSpirit/genshin.zenless.club/commit/6332f3137dda3797e73826b6dd49860f1623b393))
+- **components:** Remove active state from desktop navigation links and included hover animations ([12b976e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/12b976e0617a4132e5dcec1bf17ad2e646e37038))
+- **components:** Added shadow on hover to guide cards ([d0ff26c](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d0ff26c717cb162ffb37437820adbb9f0e69290d))
+- **components:** Ability to override main classes ([ed6b38c](https://github.com/TenkoSpirit/genshin.zenless.club/commit/ed6b38c91a4f7d488e3f1ae51bed30063989a77c))
+- **components:** Added dark mdoe support to navigation ([409f482](https://github.com/TenkoSpirit/genshin.zenless.club/commit/409f48289c7e161a621c253068c121b52d7c2811))
+- **components:** Birthdays today card is now dark mode compatible ([3651cda](https://github.com/TenkoSpirit/genshin.zenless.club/commit/3651cdaaf10e005d714f403254b625ed966a2aa7))
+- **components:** Character card now supports dark mode ([3cb7198](https://github.com/TenkoSpirit/genshin.zenless.club/commit/3cb71986be5c892f513055cdacda0ff9c0a29375))
+- **components:** Custom input now supports dark mode and supports tailwind class overrides ([01a4cad](https://github.com/TenkoSpirit/genshin.zenless.club/commit/01a4cad5fd8d6d97159560d5480d54ce3308c045))
+- **components:** Guide card is now dark mode compatible ([9a710a7](https://github.com/TenkoSpirit/genshin.zenless.club/commit/9a710a71d00eefa6ba88d87b80a02867d970ab9c))
+- **components:** Contents table now supports dark mode ([5c0e03d](https://github.com/TenkoSpirit/genshin.zenless.club/commit/5c0e03d526094771fc6cab74504c6567d75b8bf2))
+- **components:** Footer is now dark mode compatible ([8934cff](https://github.com/TenkoSpirit/genshin.zenless.club/commit/8934cffe43b35a2170c0fdcd3627050cc0d575c0))
+- **components:** Created `RoleBadge` to display user's role in a nicely formatted way ([8956b08](https://github.com/TenkoSpirit/genshin.zenless.club/commit/8956b08e2e40c65a45835fd84653ce0826e5c355))
+- **components:** Role badge text is now smaller ([4866f9d](https://github.com/TenkoSpirit/genshin.zenless.club/commit/4866f9ddc6149d8753c40a39f13d0a25c3dff5a3))
+- **components:** Loading state component ([f8ac162](https://github.com/TenkoSpirit/genshin.zenless.club/commit/f8ac1626b76052c1c2a9dc93fb4ec0ceb1726719))
+- **components:** Added `/posts` to navigation ([efd911b](https://github.com/TenkoSpirit/genshin.zenless.club/commit/efd911b265e2fe9e5119968a6cf7f732fdd12dc7))
+- **components, css:** Moved contents table container classes into css so it's overridable ([55ec66e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/55ec66e4ec438f58999e28e5a2f3f708b8aa08c0))
+- **css:** Added dark background and text colours ([40fabd1](https://github.com/TenkoSpirit/genshin.zenless.club/commit/40fabd117586db187a2fc94b8bdfed1c542038ce))
+- **css:** Created custom input styles ([a0bc052](https://github.com/TenkoSpirit/genshin.zenless.club/commit/a0bc052578664ae7894783dab87657d7dced8960))
+- **css:** Created styles for radio buttons ([a05592b](https://github.com/TenkoSpirit/genshin.zenless.club/commit/a05592b7db12ed281ce7cd8ffc2c9d54b3b72f1c))
+- **hooks:** A shorthand hook that requires user session and redirects to `/signin` or desired location ([38b529a](https://github.com/TenkoSpirit/genshin.zenless.club/commit/38b529afc1136b877a69581db6c740c9dec6b9c8))
+- **hooks:** A custom hook returning session data of an authorized user based on roles ([a0c46e4](https://github.com/TenkoSpirit/genshin.zenless.club/commit/a0c46e4d4097dff30fe18602542a300cb54f7e87))
+- **i18n:** Converted English common strings to ICU format ([8d02fa5](https://github.com/TenkoSpirit/genshin.zenless.club/commit/8d02fa5aa05b2458968435b39c1d94e65f7dc23a))
+- **i18n:** Added posts translation string ([3c16122](https://github.com/TenkoSpirit/genshin.zenless.club/commit/3c16122bf8e6a240ed2dbea3b8ae880feda4fe4e))
+- **models:** Some basic functions to work with posts table ([d81d0ce](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d81d0cec622b7059507a89019e7d57017b80bfe5))
+- **models:** Added a search function to posts model ([0959773](https://github.com/TenkoSpirit/genshin.zenless.club/commit/0959773d7ea4c94d9e448cb7d3aa4def5777ed8f))
+- **models:** Added `canUserEditPost` to posts model ([78fdc04](https://github.com/TenkoSpirit/genshin.zenless.club/commit/78fdc04e393c2d99a086479bc4cfb9db6b25d843))
+- **next.config:** Move i18n config in the next config, i18next is not being used anymore ([8fa1b1e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/8fa1b1efe3f18251994f0f7ff96b53cd1b1c6a63))
+- **npm:** Removed postinstall ([76a6a84](https://github.com/TenkoSpirit/genshin.zenless.club/commit/76a6a849bb168543a40dfbbf5aa0467be3b3621f))
+- **npm:** Added a script to run development server including a watcher for locale files changes ([fe4eae7](https://github.com/TenkoSpirit/genshin.zenless.club/commit/fe4eae7024a071a0bf84343ed10048542296ecc8))
+- **npm:** Ok that's quite a bad solution that spawns a lot of sub processes, not cool ([10e3aad](https://github.com/TenkoSpirit/genshin.zenless.club/commit/10e3aad0c0ad78e65baef852379ff2893a00916c))
+- **pages:** Characters search and filter is not sticky ([2c6f889](https://github.com/TenkoSpirit/genshin.zenless.club/commit/2c6f88924796af19040a7c524260c0788c774316))
+- **pages:** Index page is now dark mode compatible ([bc471f4](https://github.com/TenkoSpirit/genshin.zenless.club/commit/bc471f4ccb7921c32f6f7a0425ef679a1069cdb2))
+- **pages:** Settings page now supports dark mode ([a55c1cd](https://github.com/TenkoSpirit/genshin.zenless.club/commit/a55c1cd05e3e70f5a7c4d441fd40e6724b3aebdf))
+- **pages:** Guides idnex page now supports dark mode ([f071372](https://github.com/TenkoSpirit/genshin.zenless.club/commit/f07137298bb0b8f9bd0a48169b9fc777118afb77))
+- **pages:** Custom 404 page now supports dark mode ([f78158f](https://github.com/TenkoSpirit/genshin.zenless.club/commit/f78158fc16ee1ccb23ad58b4b93bbfcd4e33ebc7))
+- **pages:** Settings now allow switch to dark mode ([7222ac9](https://github.com/TenkoSpirit/genshin.zenless.club/commit/7222ac9043ee949d253a66269b1578f047e7f543))
+- **pages:** Added `/me` page that disaplys information about current session's user ([78b8720](https://github.com/TenkoSpirit/genshin.zenless.club/commit/78b8720a1582f312753e1a90b5e6e1b4a11bfb58))
+- **pages:** Added user id and a button to copy it to clipboard ([7ab12c7](https://github.com/TenkoSpirit/genshin.zenless.club/commit/7ab12c7d9becd98ea55d8e8fa14fb7f7e3a4f000))
+- **pages:** Created a new post form ([de9476e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/de9476edd92e7108eeac565cbf96db166ea9a1e8))
+- **pages:** Display post page ([a939529](https://github.com/TenkoSpirit/genshin.zenless.club/commit/a93952910c3af30a6bd1c57365a7205c89516248))
+- **pages:** `/me` doesn't need SEO optimization, so it can be static ([03c9486](https://github.com/TenkoSpirit/genshin.zenless.club/commit/03c94861ebcf891e0eaf9914c6e6e8f127c3ce48))
+- **pages:** `/posts/new` can be static too ([f821dbb](https://github.com/TenkoSpirit/genshin.zenless.club/commit/f821dbb214bfce6af9b66b80590e7879993125bf))
+- **pages:** Created posts index page ([21e2df2](https://github.com/TenkoSpirit/genshin.zenless.club/commit/21e2df240e3663266c210ba5dc86a89fae4fadde))
+- **pages:** Created a directory for subroutes of posts ([c07287f](https://github.com/TenkoSpirit/genshin.zenless.club/commit/c07287f42330fc2ba55e97b9af8ddf3d6eded9f8))
+- **pages:** A way to edit a post (WIP) ([bdc980a](https://github.com/TenkoSpirit/genshin.zenless.club/commit/bdc980aeb50c4a03361ed2a95665a9ccc861919c))
+- **pages:** On `/posts` added explicit typing to server side props generator, added search input field, fixed minor css issues ([42af15a](https://github.com/TenkoSpirit/genshin.zenless.club/commit/42af15ad96549a87ad71cfae148de5b7ac3581d3))
+- **pages:** On `/posts/[slug]` updated the looks of the article and separated title from the article card itself, changed some breakpoints for better mobile UX ([33388f5](https://github.com/TenkoSpirit/genshin.zenless.club/commit/33388f595d90ea57f0699e1ebee33d5b9b44da87))
+- **pages:** Edit page of a post is now finished and more flexible ([5763d67](https://github.com/TenkoSpirit/genshin.zenless.club/commit/5763d67e00ddb703f5337d23803b4cd23ed2247a))
+- **pages, css:** Guide view page now supports dark mode ([8b0f468](https://github.com/TenkoSpirit/genshin.zenless.club/commit/8b0f468388a6dc519c2b5060ec3410c180e452dc))
+- **prisma:** Created models for posts ([19da494](https://github.com/TenkoSpirit/genshin.zenless.club/commit/19da4944580b5a1ebf91c38f0543995e12eb7bcc))
+- **prisma:** Posts should have a language code ([3f41279](https://github.com/TenkoSpirit/genshin.zenless.club/commit/3f41279ee1ac2e65008435538b5bad121cabf617))
+- **prisma:** `PostContent` now must be unique according to each existing `Post` ([78d6ec0](https://github.com/TenkoSpirit/genshin.zenless.club/commit/78d6ec0da986f5a522ed603483118260b8ca26a0))
+- **prisma:** Enabled full text search ([a6f7190](https://github.com/TenkoSpirit/genshin.zenless.club/commit/a6f71904057c00e015c4a732a6ae6bf53980b379))
+- **prisma:** Added editor to `Post` model ([e747ab9](https://github.com/TenkoSpirit/genshin.zenless.club/commit/e747ab93eae8fc34e71b50016380078b0459af15))
+- **schemas:** Moved posts creation and edit zod schema to a separate file ([122c0b5](https://github.com/TenkoSpirit/genshin.zenless.club/commit/122c0b5ef11218aa909f9d8bd7c1c6cac219aa76))
+- **server, utils:** Added role checking functions ([0429344](https://github.com/TenkoSpirit/genshin.zenless.club/commit/04293441069c262b3931e424bbf9bcfacdb93a1d))
+- **tailwind:** Enable dark mode ([ed9d4e1](https://github.com/TenkoSpirit/genshin.zenless.club/commit/ed9d4e1b54432fe3f79f8c223a18dccc7d1a4e2a))
+- **tailwind:** Purple is now a primary color ([799f052](https://github.com/TenkoSpirit/genshin.zenless.club/commit/799f052cbe2538017d14cbfec07d001fa3edc93d))
+- **types:** Added property types on `next-auth`'s session and user ([a74d827](https://github.com/TenkoSpirit/genshin.zenless.club/commit/a74d82784afca1f64cbb100eb1a6c2f723d193e7))
+- **types:** Created generic helper type `Nil` ([69f4d8c](https://github.com/TenkoSpirit/genshin.zenless.club/commit/69f4d8c6c022edcf21547c4a78c4a297babf2fad))
+- **types:** Created custom `ZenlessJsonResponse` in order to unify json responses across local API ([89ceffe](https://github.com/TenkoSpirit/genshin.zenless.club/commit/89ceffecc39b4ff463be4acb0a8004f668e229b0))
+- **utils:** Created safe and unsafe markdown parsers ([d823960](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d823960056aec2bae35c2d3f864e60a7af5e781d))
+- **utils:** Created a check function to see if user has any of the provided roles ([b86b13a](https://github.com/TenkoSpirit/genshin.zenless.club/commit/b86b13a2ffdd83c58bc33b2c6264046a71514290))
+- **utils:** Updated `userHasAnyRole` so it can accept nullish values ([8bc3065](https://github.com/TenkoSpirit/genshin.zenless.club/commit/8bc3065297fe3a1b5d0121e7f0cc3f8265f0d79b))
+- **workflows:** Disable docker builder for now ([613cb43](https://github.com/TenkoSpirit/genshin.zenless.club/commit/613cb4382d47c047c0e05c2211073a7f713e0196))
+- **No category:** Added discord authentication with `next-auth` ([1673c6b](https://github.com/TenkoSpirit/genshin.zenless.club/commit/1673c6b97821e95e4d1900296a8aa1edbb9d75cb))
+
+### Miscellaneous Tasks
+
+- **deps:** Upgrades ([05b351a](https://github.com/TenkoSpirit/genshin.zenless.club/commit/05b351a33546a013f88286024065269ea19172a6))
+- **deps:** Upgraded deps and added tiny-invariant ([813381a](https://github.com/TenkoSpirit/genshin.zenless.club/commit/813381ab32ce3e7382c3a95d680d0a42d62e959b))
+- **No category:** Updated next config and enable swc minification ([6c8bea8](https://github.com/TenkoSpirit/genshin.zenless.club/commit/6c8bea8317a64fc1671ae70b84ad857e6c55a4ee))
+- **No category:** Converted next config to ES module ([21dd221](https://github.com/TenkoSpirit/genshin.zenless.club/commit/21dd221490796e9508a1c6e3ef3f3fee2c9bec0e))
+
+### Refactor
+
+- **api:** Use schema from predefined schemas ([9e0be05](https://github.com/TenkoSpirit/genshin.zenless.club/commit/9e0be053ad807c1de8ac25a339ac2a40311a89d3))
+- **hooks:** Renamed from camel case to something different hehe ([b43f1a4](https://github.com/TenkoSpirit/genshin.zenless.club/commit/b43f1a4fbc816fa854bfbcaaebf659b885ddb1a4))
+- **pages:** Removed redundant import in 404 page ([b4cc04c](https://github.com/TenkoSpirit/genshin.zenless.club/commit/b4cc04cc0630b80dea91f598b9cae5ec38f8c85a))
+- **pages:** Some optimization to server side props of posts index page and fixed styles on mobile ([b8cac2b](https://github.com/TenkoSpirit/genshin.zenless.club/commit/b8cac2b8ef9e235e682076f647421eb08b5aafb5))
+- **No category:** Renamed lib to utils ([4d30ce5](https://github.com/TenkoSpirit/genshin.zenless.club/commit/4d30ce519b86c089c43f4c1a2a82993129242266))
+
+
+
 ## (v1.5.2) - 2022-09-08
 
 ### Bug Fixes
