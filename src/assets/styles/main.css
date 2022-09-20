@@ -134,4 +134,8 @@
   .radio-button:hover {
     cursor: pointer;
   }
+
+  .contents-table-container {
+    @apply hidden flex-col space-y-1 lg:flex;
+  }
 }

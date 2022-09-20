@@ -3,11 +3,12 @@ import type { FC } from "react";
 interface Props {
   title?: string;
   headings: Array<string>;
+  containerClassName?: string;
 }
 
-export const ContentsTable: FC<Props> = ({ title, headings }) => {
+export const ContentsTable: FC<Props> = ({ title, headings, containerClassName }) => {
   return (
-    <div className="hidden flex-col space-y-1 lg:flex">
+    <div className={`contents-table-container ${containerClassName}`}>
       <div className="card sticky right-0 top-4 w-60 overflow-y-auto">
         <div className="flex w-full flex-col gap-y-2">
           <div className="mb-0 self-center border-b border-gray-200 pb-3 dark:border-neutral-700">
