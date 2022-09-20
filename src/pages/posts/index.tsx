@@ -1,8 +1,9 @@
-import type { PostStatus, Role } from "@prisma/client";
-import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import type { FC } from "react";
+import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import type { FC, FormEvent } from "react";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
+import { atom, useAtom } from "jotai";
+import { useHydrateAtoms } from "jotai/utils";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -19,19 +20,15 @@ import { searchPostsPaginated } from "@/server/db/models/posts";
  *   it ignore NonNullable
  */
 
-interface PostCardProps {
-  status: PostStatus;
-  id: string;
-  slug: string;
-  author: {
-    id: string;
-    name: string | null;
-    role: Role;
-  } | null;
-  title: string;
-  description: string | null;
-  thumbnailUrl: string | null;
-}
+type ServerSideProps = {
+  messages: unknown;
+  posts: Awaited<ReturnType<typeof searchPostsPaginated>>;
+  currentPage: number;
+  itemsPerPage: number;
+  totalPosts: number;
+};
+
+type PostCardProps = NonNullable<Awaited<ReturnType<typeof searchPostsPaginated>>>[0];
 
 const PostCard: FC<PostCardProps> = ({ title, thumbnailUrl, description, slug }) => {
   return (
@@ -81,7 +78,7 @@ const Paginator: FC<PaginatorProps> = ({ currentPage, totalPages }) => {
   return (
     <div className="inline-flex items-center justify-center gap-3 self-center">
       <button
-        className="inline-flex h-8 w-8 items-center justify-center rounded border border-gray-200 disabled:opacity-50 dark:border-neutral-700"
+        className="inline-flex h-8 w-8 items-center justify-center rounded border border-gray-200 bg-gray-100 disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900"
         disabled={currentPage === 1}
         onClick={decrementPage}
       >
@@ -95,7 +92,7 @@ const Paginator: FC<PaginatorProps> = ({ currentPage, totalPages }) => {
       </p>
 
       <button
-        className="inline-flex h-8 w-8 items-center justify-center rounded border border-gray-200 disabled:opacity-50 dark:border-neutral-700"
+        className="inline-flex h-8 w-8 items-center justify-center rounded border border-gray-200 bg-gray-100 disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900"
         disabled={currentPage === totalPages}
         onClick={incrementPage}
       >
@@ -107,10 +104,28 @@ const Paginator: FC<PaginatorProps> = ({ currentPage, totalPages }) => {
 
 type PageProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
+const searchPostsAtom = atom("");
+
 const PostsIndex = ({ posts, currentPage, itemsPerPage, totalPosts }: PageProps) => {
   const t = useTranslations();
+  const router = useRouter();
+
+  useHydrateAtoms([[searchPostsAtom, router.query?.search?.toString() ?? ""]]);
+
+  const [search, setSearch] = useAtom(searchPostsAtom);
 
   const totalPages = Math.ceil((totalPosts ?? 1) / (itemsPerPage ?? 1));
+
+  const handleSearchSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    void router.push({
+      query: {
+        ...router.query,
+        search: search,
+      },
+    });
+  };
 
   return (
     <Layout title={t("common.posts", { count: 99 })}>
@@ -138,7 +153,17 @@ const PostsIndex = ({ posts, currentPage, itemsPerPage, totalPosts }: PageProps)
             )}
 
             <div className="sticky top-0 w-full pb-2 pt-2 lg:w-64">
-              <div className="card flex flex-col bg-white/80 backdrop-blur-lg dark:bg-neutral-900/90 lg:sticky lg:top-4">
+              <div className="card flex flex-col gap-4 bg-white/80 backdrop-blur-lg dark:bg-neutral-800/90 lg:sticky lg:top-4">
+                <form className="w-full" onSubmit={handleSearchSubmit}>
+                  <input
+                    type="text"
+                    placeholder="Enter query here..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className="input-field form-input w-full bg-gray-100 dark:bg-neutral-900"
+                  />
+                </form>
+
                 <Paginator currentPage={currentPage ?? 1} totalPages={totalPages} />
               </div>
             </div>
@@ -151,7 +176,10 @@ const PostsIndex = ({ posts, currentPage, itemsPerPage, totalPosts }: PageProps)
 
 export default PostsIndex;
 
-export const getServerSideProps = async ({ locale = "en", query }: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({
+  locale = "en",
+  query,
+}) => {
   const page = query.page != null ? parseInt(query.page.toString()) : 1;
   if (page <= 0) {
     return {
