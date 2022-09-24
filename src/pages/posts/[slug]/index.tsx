@@ -45,7 +45,7 @@ export default function PostsSlug({ post }: ServerSideProps) {
   return (
     <Layout title={post.title}>
       <Container>
-        <div className="grid grid-cols-1 gap-4 xl:grid-cols-[auto_1fr]">
+        <div className="grid grid-cols-1 gap-4 xl:grid-cols-[1fr_auto]">
           <div className="flex flex-col gap-4">
             <div className="card py-8dark:prose-invert prose prose-purple flex w-full max-w-none flex-col px-4 lg:p-8">
               <h1 className="mb-0">{post.title}</h1>
