@@ -1,4 +1,4 @@
-import type { Post, User } from "@prisma/client";
+import type { Post, PostType, User } from "@prisma/client";
 
 import { prisma } from "@/server/db/client";
 import { userHasAnyRole } from "@/utils/permissions";
@@ -46,6 +46,8 @@ interface SearchPostsPaginatedOptions {
   take: number;
   authorName?: string;
   searchTitle?: string;
+  lang?: string[];
+  type?: PostType;
   order?: "asc" | "desc";
 }
 
@@ -59,6 +61,10 @@ export const searchPostsPaginated = async ({
     skip,
     take,
     where: {
+      type: options.type,
+      lang: {
+        in: options.lang,
+      },
       author: {
         name: options.authorName,
       },
@@ -74,6 +80,8 @@ export const searchPostsPaginated = async ({
       id: true,
       slug: true,
       title: true,
+      type: true,
+      lang: true,
       description: true,
       thumbnailUrl: true,
       status: true,
