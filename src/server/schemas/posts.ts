@@ -1,6 +1,8 @@
 import { PostType } from "@prisma/client";
 import { z } from "zod";
 
+import nextConfig from "next.config.mjs";
+
 export const PostsNewOrEditForm = z.object({
   title: z.string().min(3),
   description: z.string().min(3),
@@ -13,4 +15,18 @@ export const PostsNewOrEditForm = z.object({
   thumbnail: z.string().url(),
   tags: z.string().min(2),
   text: z.string().min(1, "Text must contain at least one character."),
+});
+
+const langValidator = (val: unknown) =>
+  typeof val === "string" && nextConfig.i18n.locales.includes(val);
+const typeValidator = (val: unknown) => typeof val === "string" && val in PostType;
+
+export const PostsSearch = z.object({
+  skip: z.number(),
+  take: z.number(),
+  query: z.string().optional(),
+  lang: z.array(z.custom<string>(langValidator, { message: "Incorrect language provided" })),
+  order: z.union([z.literal("asc"), z.literal("desc")]).default("desc"),
+  authorName: z.string().optional(),
+  type: z.custom<PostType>(typeValidator, { message: "Incorrect post type provided" }).optional(),
 });
