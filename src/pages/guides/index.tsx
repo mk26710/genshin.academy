@@ -55,12 +55,12 @@ const GuidesIndex = ({ availableGuides }: InferGetStaticPropsType<typeof getStat
       title={t("common.guides", { count: 0 })}
       description={t("meta.guides.home.description")}
     >
-      <Container>
-        <div className="mb-4 flex flex-col gap-2 lg:flex-row">
+      <Container className="px-0 pt-0">
+        <div className="sticky top-[var(--header-height)] mb-4 flex flex-col gap-2 border-b bg-white px-[var(--default-gap)] py-4 lg:static lg:mb-0 lg:flex-row lg:border-none">
           <select
             value={guideType}
             onChange={handleOptionChange}
-            className="input-field form-select block h-10 w-full appearance-none font-semibold uppercase lg:w-44"
+            className="select-field block lg:w-44"
           >
             <option value="all">{t(`guides.types-all`)}</option>
             <option value="character">{t(`guides.types-characters`)}</option>
@@ -75,7 +75,7 @@ const GuidesIndex = ({ availableGuides }: InferGetStaticPropsType<typeof getStat
           />
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 px-[var(--default-gap)] md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filteredGuides.length <= 0 && <NoResult />}
           {filteredGuides.map((guide) => (
             <GuideCard

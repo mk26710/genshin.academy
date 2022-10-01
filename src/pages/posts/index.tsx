@@ -186,11 +186,11 @@ const PostsIndex = ({ posts, currentPage, itemsPerPage, totalPosts }: PageProps)
 
   return (
     <Layout title={t("common.posts", { count: 99 })}>
-      <Container className="mt-0">
+      <Container className="max-w-7xl">
         {posts != null && (
           <div className="flex h-full flex-col-reverse gap-2 lg:grid lg:grid-cols-[1fr_auto]">
             {posts.length > 0 && (
-              <div className="flex flex-grow flex-col flex-wrap gap-2 lg:mt-4 lg:grid lg:auto-rows-auto lg:grid-cols-2">
+              <div className="flex flex-grow flex-col flex-wrap gap-2 lg:grid lg:auto-rows-auto lg:grid-cols-2">
                 {posts?.map((post) => (
                   <PostCard
                     key={post.id}
@@ -211,15 +211,15 @@ const PostsIndex = ({ posts, currentPage, itemsPerPage, totalPosts }: PageProps)
               <div className="flex flex-grow items-center justify-center">Nothing here :(</div>
             )}
 
-            <div className="sticky top-0 w-full pb-2 pt-2 lg:w-64">
-              <div className="card flex flex-col gap-4 bg-white dark:bg-neutral-800 lg:sticky lg:top-4">
+            <div className="sticky top-[calc(var(--header-height)_+_var(--default-gap))] w-full pb-2  lg:w-64">
+              <div className="card flex flex-col gap-4 bg-white dark:bg-neutral-800 lg:sticky lg:top-[calc(var(--header-height)_+_var(--default-gap))]">
                 <form className="w-full" onSubmit={handleSearchSubmit}>
                   <input
                     type="text"
                     placeholder={t("common.enter-query")}
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    className="input-field form-input w-full bg-gray-100 dark:bg-neutral-900"
+                    className="input-field w-full"
                   />
                 </form>
 
