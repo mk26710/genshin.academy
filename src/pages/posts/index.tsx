@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
 import { searchPostsPaginated } from "@/server/db/models/posts";
+import { PostsSearch } from "@/server/schemas/posts";
 
 /**
  *                  TODO
@@ -28,12 +29,68 @@ type ServerSideProps = {
   totalPosts: number;
 };
 
+export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({
+  locale = "en",
+  query,
+}) => {
+  const page = query.page != null ? parseInt(query.page.toString()) : 1;
+  if (page <= 0) {
+    return {
+      props: {},
+      notFound: true,
+    };
+  }
+
+  const itemsPerPage = 6;
+  const searchData = PostsSearch.strip().safeParse({
+    skip: (page - 1) * itemsPerPage,
+    take: itemsPerPage,
+    order: query.order,
+    authorName: query.author,
+    type: query.type,
+    query: query.search?.toString().trim().replaceAll(/\s+/gi, " & "),
+    lang: query.lang?.toString().split(",") ?? [locale],
+  });
+  if (searchData.success !== true) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const { skip, take, order, lang, authorName, query: searchTitle, type } = searchData.data;
+  const posts = await searchPostsPaginated({
+    skip,
+    take,
+    order,
+    authorName,
+    searchTitle,
+    lang,
+    type,
+  });
+
+  const messages = {
+    common: (await import(`#/locales/${locale}/common.json`)).default,
+    meta: (await import(`#/locales/${locale}/meta.json`)).default,
+    footer: (await import(`#/locales/${locale}/footer.json`)).default,
+  };
+
+  return {
+    props: {
+      messages,
+      posts,
+      currentPage: page,
+      itemsPerPage,
+      totalPosts: posts.length,
+    },
+  };
+};
+
 type PostCardProps = NonNullable<Awaited<ReturnType<typeof searchPostsPaginated>>>[0];
 
 const PostCard: FC<PostCardProps> = ({ title, thumbnailUrl, description, slug }) => {
   return (
     <Link href={`/posts/${slug}`} prefetch={false}>
-      <a className="card h-fit w-full p-0 lg:w-[calc(50%-1rem)]">
+      <a className="card h-fit w-full p-0 lg:w-full">
         {thumbnailUrl && (
           <img
             src={thumbnailUrl}
@@ -133,7 +190,7 @@ const PostsIndex = ({ posts, currentPage, itemsPerPage, totalPosts }: PageProps)
         {posts != null && (
           <div className="flex h-full flex-col-reverse gap-2 lg:grid lg:grid-cols-[1fr_auto]">
             {posts.length > 0 && (
-              <div className="flex flex-grow flex-col flex-wrap gap-2 lg:mt-4 lg:flex-row">
+              <div className="flex flex-grow flex-col flex-wrap gap-2 lg:mt-4 lg:grid lg:auto-rows-auto lg:grid-cols-2">
                 {posts?.map((post) => (
                   <PostCard
                     key={post.id}
@@ -144,6 +201,8 @@ const PostsIndex = ({ posts, currentPage, itemsPerPage, totalPosts }: PageProps)
                     thumbnailUrl={post.thumbnailUrl}
                     status={post.status}
                     author={post.author}
+                    lang={post.lang}
+                    type={post.type}
                   />
                 ))}
               </div>
@@ -157,7 +216,7 @@ const PostsIndex = ({ posts, currentPage, itemsPerPage, totalPosts }: PageProps)
                 <form className="w-full" onSubmit={handleSearchSubmit}>
                   <input
                     type="text"
-                    placeholder="Enter query here..."
+                    placeholder={t("common.enter-query")}
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     className="input-field form-input w-full bg-gray-100 dark:bg-neutral-900"
@@ -175,54 +234,3 @@ const PostsIndex = ({ posts, currentPage, itemsPerPage, totalPosts }: PageProps)
 };
 
 export default PostsIndex;
-
-export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({
-  locale = "en",
-  query,
-}) => {
-  const page = query.page != null ? parseInt(query.page.toString()) : 1;
-  if (page <= 0) {
-    return {
-      props: {},
-      notFound: true,
-    };
-  }
-
-  const itemsPerPage = 6;
-
-  const order = query.order === "asc" ? "asc" : "desc";
-  const authorName = query.author == null ? undefined : query.author.toString();
-  const searchTitle =
-    query.search == null
-      ? undefined
-      : query.search.length <= 0
-      ? undefined
-      : query.search.toString().trim().replaceAll(/\s+/gi, " & ");
-
-  const skip = (page - 1) * itemsPerPage;
-  const take = itemsPerPage;
-
-  const posts = await searchPostsPaginated({
-    skip,
-    take,
-    order,
-    authorName,
-    searchTitle,
-  });
-
-  const messages = {
-    common: (await import(`#/locales/${locale}/common.json`)).default,
-    meta: (await import(`#/locales/${locale}/meta.json`)).default,
-    footer: (await import(`#/locales/${locale}/footer.json`)).default,
-  };
-
-  return {
-    props: {
-      messages,
-      posts,
-      currentPage: page,
-      itemsPerPage,
-      totalPosts: posts.length,
-    },
-  };
-};
