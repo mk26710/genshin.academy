@@ -20,11 +20,13 @@ export const PostsNewOrEditForm = z.object({
 const langValidator = (val: unknown) =>
   typeof val === "string" && nextConfig.i18n.locales.includes(val);
 const typeValidator = (val: unknown) => typeof val === "string" && val in PostType;
+const queryTransformer = (val: unknown) =>
+  typeof val === "string" && val.length > 0 ? val : undefined;
 
 export const PostsSearch = z.object({
   skip: z.number(),
   take: z.number(),
-  query: z.string().optional(),
+  query: z.string().transform(queryTransformer).optional(),
   lang: z.array(z.custom<string>(langValidator, { message: "Incorrect language provided" })),
   order: z.union([z.literal("asc"), z.literal("desc")]).default("desc"),
   authorName: z.string().optional(),
