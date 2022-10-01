@@ -22,7 +22,7 @@
 }
 
 .markdown-content tr th {
-  @apply even:bg-gray-200/40 dark:even:bg-neutral-900;
+  @apply even:bg-neutral-200/40 dark:even:bg-neutral-900;
 }
 
 .markdown-content details {
