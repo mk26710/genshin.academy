@@ -21,6 +21,10 @@ const links = [
     hasNested: true,
   },
   {
+    i18nKey: "common.calculators",
+    path: "/calc",
+  },
+  {
     i18nKey: "common.characters",
     path: "/characters",
     hasNested: true,
