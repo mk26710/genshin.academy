@@ -1,4 +1,5 @@
 {
+  "navigation": "Navigation",
   "home": "Home",
 
   "characters": "{ count, plural, one {Character} other {Characters} }",
