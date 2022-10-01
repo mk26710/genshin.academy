@@ -11,9 +11,9 @@ import nProgress from "nprogress";
 import { useEffect } from "react";
 
 import { Footer } from "@/components/Footer";
-import { Navigation } from "@/components/Navigation";
+import { Header } from "@/components/Header";
 
-import "@/assets/styles/main.css";
+import "@/assets/styles/index.css";
 
 const MyApp = ({
   Component,
@@ -56,8 +56,9 @@ const MyApp = ({
       <NextIntlProvider messages={pageProps.messages}>
         <JotaiProvider>
           <ThemeProvider attribute="class">
-            <div className="app-container mx-auto max-w-screen-2xl gap-4 px-2">
-              <Navigation />
+            <div className="app">
+              {/* <Navigation /> */}
+              <Header />
               <Component {...pageProps} />
               <Footer />
             </div>
