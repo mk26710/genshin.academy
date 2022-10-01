@@ -212,7 +212,7 @@ const PostsIndex = ({ posts, currentPage, itemsPerPage, totalPosts }: PageProps)
             )}
 
             <div className="sticky top-0 w-full pb-2 pt-2 lg:w-64">
-              <div className="card flex flex-col gap-4 bg-white/80 backdrop-blur-lg dark:bg-neutral-800/90 lg:sticky lg:top-4">
+              <div className="card flex flex-col gap-4 bg-white dark:bg-neutral-800 lg:sticky lg:top-4">
                 <form className="w-full" onSubmit={handleSearchSubmit}>
                   <input
                     type="text"
