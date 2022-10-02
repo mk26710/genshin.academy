@@ -45,3 +45,21 @@ export const canUserDeletePost = (user?: UserWithRoleAndId, post?: PostWithAutho
 
   return false;
 };
+
+type PostLikeObject = Record<string, unknown> & Pick<Post, "authorId">;
+type UserLikeObject = Record<string, unknown> & {
+  id: User["id"];
+  role: User["role"];
+};
+
+export const canUserEditPost = (user: Nil<UserLikeObject>, post: Nil<PostLikeObject>) => {
+  if (user == null || post == null) {
+    return false;
+  }
+
+  if (user.id === post.authorId || userHasAnyRole(user, "ADMIN", "MODERATOR")) {
+    return true;
+  }
+
+  return false;
+};
