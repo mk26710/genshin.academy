@@ -1,6 +1,10 @@
 import type { GetServerSideProps } from "next";
 import type { FC } from "react";
 
+import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/router";
+
 import { Container } from "@/components/Container";
 import { ContentsTable } from "@/components/ContentsTable";
 import { Layout } from "@/components/Layout";
@@ -8,6 +12,7 @@ import { RoleBadge } from "@/components/RoleBadge";
 import { useCurrentLocale } from "@/hooks/use-current-locale";
 import { markdownParser } from "@/server/common/markdown-parser";
 import { getPostBySlugWithAuthorJsonSafe } from "@/server/db/models/posts";
+import { canUserDeletePost, canUserEditPost } from "@/utils/permissions";
 
 interface ServerSideProps {
   post: NonNullable<Awaited<ReturnType<typeof getPostBySlugWithAuthorJsonSafe>>> & {
@@ -18,10 +23,53 @@ interface ServerSideProps {
 }
 
 const PostFooter: FC<ServerSideProps> = ({ post }) => {
+  const router = useRouter();
   const locale = useCurrentLocale();
+  const t = useTranslations();
+
+  const { data: session } = useSession();
+
+  // Post deletion handler could be improved but since it's accessed
+  // only by people from the team, this should not be an issue at all
+  const handlePostDelete = async () => {
+    const confirmation = confirm("Are you sure about deleting this post?");
+    if (confirmation !== true) {
+      return;
+    }
+
+    const response = await fetch(`/api/posts/${post.slug}/delete`);
+    const status = response.status;
+    if (status === 200) {
+      alert("Post deleted");
+      router.reload();
+    } else {
+      alert("Something went wrong please check network response from the api");
+    }
+  };
+
+  const handlePostEdit = async () => {
+    router.push({
+      pathname: "/posts/[slug]/edit",
+      query: { slug: post.slug },
+    });
+  };
 
   return (
-    <div className="flex flex-row flex-wrap gap-2 p-4 lg:p-8">
+    <div className="grid grid-flow-row grid-cols-1 flex-row flex-wrap gap-2 p-4 md:grid-cols-[1fr_auto] lg:p-8">
+      {session?.user && (
+        <div className="mb-4 flex flex-row gap-2 md:col-span-2">
+          {canUserDeletePost(session.user, post) && (
+            <button onClick={handlePostDelete} className="button-danger">
+              {t("posts.delete-post")}
+            </button>
+          )}
+          {canUserEditPost(session.user, post) && (
+            <button onClick={handlePostEdit} className="button">
+              {t("posts.edit-post")}
+            </button>
+          )}
+        </div>
+      )}
       <div className="flex flex-grow flex-row gap-x-2">
         <img
           src={post.author?.image ?? ""}
@@ -101,6 +149,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({
     common: (await import(`#/locales/${locale}/common.json`)).default,
     meta: (await import(`#/locales/${locale}/meta.json`)).default,
     footer: (await import(`#/locales/${locale}/footer.json`)).default,
+    posts: (await import(`#/locales/${locale}/posts.json`)).default,
   };
 
   return {
