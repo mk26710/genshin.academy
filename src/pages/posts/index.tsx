@@ -135,11 +135,11 @@ const Paginator: FC<PaginatorProps> = ({ currentPage, totalPages }) => {
   return (
     <div className="inline-flex items-center justify-center gap-3 self-center">
       <button
-        className="inline-flex h-8 w-8 items-center justify-center rounded border border-gray-200 bg-gray-100 disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900"
+        className="group inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-black bg-black transition-all duration-200 hover:bg-white hover:text-black disabled:pointer-events-none"
         disabled={currentPage === 1}
         onClick={decrementPage}
       >
-        <ChevronLeftIcon className="h-4 w-4" />
+        <ChevronLeftIcon className="h-4 w-4 text-white transition-all duration-200 group-hover:text-black" />
       </button>
 
       <p className="text-sm">
@@ -149,11 +149,11 @@ const Paginator: FC<PaginatorProps> = ({ currentPage, totalPages }) => {
       </p>
 
       <button
-        className="inline-flex h-8 w-8 items-center justify-center rounded border border-gray-200 bg-gray-100 disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900"
+        className="group inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-black bg-black transition-all duration-200 hover:bg-white hover:text-black disabled:pointer-events-none"
         disabled={currentPage === totalPages}
         onClick={incrementPage}
       >
-        <ChevronRightIcon className="h-4 w-4" />
+        <ChevronRightIcon className="h-4 w-4 text-white transition-all duration-200 group-hover:text-black" />
       </button>
     </div>
   );
