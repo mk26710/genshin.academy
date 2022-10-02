@@ -1,9 +1,12 @@
+import type { FunctionComponent, PropsWithChildren } from "react";
+
+import { Menu } from "@headlessui/react";
 import { Bars3BottomRightIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 const links = [
   {
@@ -35,9 +38,43 @@ const links = [
   },
 ];
 
+const userMenuLinks = [
+  {
+    i18nKey: "common.my-profile",
+    path: "/me",
+  },
+  {
+    i18nKey: "common.create-post",
+    path: "/posts/new",
+  },
+];
+
 type GenericLink = Record<string, unknown> & {
   path: string;
   hasNested?: boolean;
+};
+
+const UserMenu: FunctionComponent<PropsWithChildren> = ({ children }) => {
+  const t = useTranslations();
+
+  return (
+    <Menu>
+      <Menu.Button>{children}</Menu.Button>
+      <Menu.Items className="card fixed top-[calc(var(--header-height)_+_0.5rem)] flex flex-col bg-white px-0 py-2 font-medium shadow-lg">
+        {userMenuLinks.map((link) => (
+          <Menu.Item key={link.i18nKey}>
+            <div className="h-8 w-full text-sm">
+              <Link href={link.path}>
+                <a className="flex h-full w-full items-center px-4 text-neutral-600 transition-all duration-100 hover:bg-neutral-100 hover:text-black">
+                  {t(link.i18nKey)}
+                </a>
+              </Link>
+            </div>
+          </Menu.Item>
+        ))}
+      </Menu.Items>
+    </Menu>
+  );
 };
 
 export const Header = () => {
@@ -86,12 +123,20 @@ export const Header = () => {
               <h3 className="text-sm font-medium text-gray-600">{session.user.name}</h3>
             )}
 
-            {session?.user?.image && (
-              <img src={session.user.image} className="block h-7 w-7 rounded-full" alt="Avatar" />
-            )}
+            {session?.user && (
+              <UserMenu>
+                {session.user.image && (
+                  <img
+                    src={session.user.image}
+                    className="block h-7 w-7 rounded-full"
+                    alt="Avatar"
+                  />
+                )}
 
-            {!session?.user?.image && sessionStatus === "authenticated" && (
-              <div className="h-7 w-7 rounded-full bg-gray-200" />
+                {!session.user.image && (
+                  <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary-500 to-blue-500" />
+                )}
+              </UserMenu>
             )}
 
             {sessionStatus === "unauthenticated" && (
