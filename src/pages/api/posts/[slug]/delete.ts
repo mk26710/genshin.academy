@@ -1,26 +1,8 @@
-import type { Post } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
-import type { Session } from "next-auth";
 
 import { getServerAuthSession } from "@/server/common/get-server-auth-session";
 import { prisma } from "@/server/db/client";
-import { userHasAnyRole } from "@/utils/permissions";
-
-const canDelete = (user?: Session["user"], post?: Post) => {
-  if (user == null || post == null) {
-    return false;
-  }
-
-  if (userHasAnyRole(user, "MODERATOR", "ADMIN")) {
-    return true;
-  }
-
-  if (user.id === post.authorId) {
-    return true;
-  }
-
-  return false;
-};
+import { canUserDeletePost } from "@/utils/permissions";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const session = await getServerAuthSession({ req, res });
@@ -41,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return;
   }
 
-  if (!canDelete(session.user, post)) {
+  if (!canUserDeletePost(session.user, post)) {
     res.status(403).send("You are not allowed to delete this post");
     return;
   }

@@ -1,4 +1,4 @@
-import type { Role, User } from "@prisma/client";
+import type { Post, Role, User } from "@prisma/client";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type UserWithRole = Record<any, unknown> & { role: User["role"] | null | undefined };
@@ -24,4 +24,24 @@ export const userHasAnyRole = (userWithRole?: UserWithRole, ...allowedRoles: Rol
   }
 
   return allowedRoles.includes(userWithRole.role);
+};
+
+type UserWithRoleAndId = UserWithRole & { id: User["id"] | null | undefined };
+type PostWithAuthorId = Record<string, unknown> & Pick<Post, "authorId">;
+
+/** Check if specified user has permissions to delete specified post */
+export const canUserDeletePost = (user?: UserWithRoleAndId, post?: PostWithAuthorId) => {
+  if (user == null || post == null) {
+    return false;
+  }
+
+  if (userHasAnyRole(user, "MODERATOR", "ADMIN")) {
+    return true;
+  }
+
+  if (user.id === post.authorId) {
+    return true;
+  }
+
+  return false;
 };
