@@ -14,7 +14,7 @@ import { useAuthorizedSession } from "@/hooks/use-authorized-session";
 import { useCurrentLocale } from "@/hooks/use-current-locale";
 import { getServerAuthSession } from "@/server/common/get-server-auth-session";
 import { prisma } from "@/server/db/client";
-import { canUserEditPost } from "@/server/db/models/posts";
+import { canUserEditPost } from "@/utils/permissions";
 
 const PostsEdit = ({ post }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { data: session, status } = useAuthorizedSession({
