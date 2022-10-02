@@ -37,7 +37,7 @@ const Me = () => {
 
   return (
     <Layout title="Profile">
-      <Container className="lg:place-items-center">
+      <Container className="grid place-items-center">
         <div className="card flex w-full flex-col gap-2 pt-2 lg:w-96">
           <input type="text" name="currentUserId" value={session.user.id} hidden readOnly />
 
