@@ -1,6 +1,65 @@
 # Changelog
 
 
+## (v1.7.0) - 2022-10-02
+
+### Bug Fixes
+
+- **components:** Gap betweeen header and the contents table ([19fea35](https://github.com/TenkoSpirit/genshin.zenless.club/commit/19fea353f655fb6475bb32bdbe80cfba861e4b42))
+- **pages:** Incorrect grid column values on post ([00f7d67](https://github.com/TenkoSpirit/genshin.zenless.club/commit/00f7d6775cae402bbd9bb45a2658f93ae72d968a))
+- **pages:** Incorrect total posts ([9d45110](https://github.com/TenkoSpirit/genshin.zenless.club/commit/9d4511090c25ec9cf16dd361ef263cfc5dfae015))
+- **pages:** 404 page had some bad styling ([6b444d6](https://github.com/TenkoSpirit/genshin.zenless.club/commit/6b444d6bc6849ab4c7a5890c415ec988692e2ef7))
+- **pages:** Profile card should be centered ([4b978e9](https://github.com/TenkoSpirit/genshin.zenless.club/commit/4b978e933c7306ad039356e12cc8d26754764f79))
+- **pages:** Posts page content had incorrect classes ([7d9321e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/7d9321e32146e3811f545beac64e05dc3e280fb2))
+
+### Features
+
+- **api:** Created an edpoint to search across posts ([9603015](https://github.com/TenkoSpirit/genshin.zenless.club/commit/96030156d92591c81eab8d28888338f0672bfaf9))
+- **api:** Removed search endpoint since using GSSP isntead ([61dc6d3](https://github.com/TenkoSpirit/genshin.zenless.club/commit/61dc6d3073e60101d958cb642a7a4a6ab6e48da6))
+- **api:** An endpoint to delete posts ([5b9bdff](https://github.com/TenkoSpirit/genshin.zenless.club/commit/5b9bdff0f4f0d3cb79361df16dfcc3c361de8f04))
+- **api, utils:** Moved function that checks if user has enough permissions to delete a post in `permissions.ts` ([4f88713](https://github.com/TenkoSpirit/genshin.zenless.club/commit/4f88713a681eef26b72c94a70c82a0c3a0b4f9d9))
+- **app:** Implemented header and removed background color from _document ([479692e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/479692ee768cd54157e57b16915bd0ce8685d6cd))
+- **components:** Created a header ([39e5403](https://github.com/TenkoSpirit/genshin.zenless.club/commit/39e54036436a3534c05a4df7eca4964c2d01ba32))
+- **components:** Added calculators link to header ([d77451f](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d77451f8579e8cdc744e84cdbd57705f77f1a771))
+- **components:** Realigned footer according to new layout ([2a147be](https://github.com/TenkoSpirit/genshin.zenless.club/commit/2a147bea89e34c21839a626a02891f786740ac7d))
+- **components:** The container component no longer needs inner wrapper and additional props since it can be customized with classes ([6813a05](https://github.com/TenkoSpirit/genshin.zenless.club/commit/6813a05752e3ad9b4daaa34191d7d8fd022950b0))
+- **components:** Create user menu for authenticated users ([b2303ad](https://github.com/TenkoSpirit/genshin.zenless.club/commit/b2303ad264ec0c4543f25c449174f8bdb6ad7db5))
+- **components:** Added default title for contents table ([4bc1cd9](https://github.com/TenkoSpirit/genshin.zenless.club/commit/4bc1cd9f23d4a59845b0f0f5627741e70d7a0397))
+- **css:** Some fresh styles ([a94599e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/a94599e2aa69de93b991b0589fa53bcf04c80fa8))
+- **css:** Created buttons styles ([d76deca](https://github.com/TenkoSpirit/genshin.zenless.club/commit/d76deca85d0b0ad993163786215a6c795146a57a))
+- **css:** Added scrol margin to markdown content ([f6e5fb5](https://github.com/TenkoSpirit/genshin.zenless.club/commit/f6e5fb524602d47453fcdc7aca4d47d813e10068))
+- **i18n:** Added tranlsation string ([6ca7841](https://github.com/TenkoSpirit/genshin.zenless.club/commit/6ca78417d105ce7ddacb567749d3e4bfbc7f6d95))
+- **i18n:** Added translation strings ([6737459](https://github.com/TenkoSpirit/genshin.zenless.club/commit/67374596f36cc6536e94830ffd65b2e88d74bad5))
+- **i18n:** Posts specific translation strings ([e4e90fd](https://github.com/TenkoSpirit/genshin.zenless.club/commit/e4e90fd4a254510e2b1a2655f87ac586e3ae40e8))
+- **i18n:** Added user menu translation strings ([3533790](https://github.com/TenkoSpirit/genshin.zenless.club/commit/3533790e9264324f3a373dc4ac170c02c965a628))
+- **models:** Included lang and type on posts and added options to search by lang ([dea2564](https://github.com/TenkoSpirit/genshin.zenless.club/commit/dea2564c19932d579b4da300eba9c59653a2d539))
+- **models:** Count searchable posts function ([4a9b824](https://github.com/TenkoSpirit/genshin.zenless.club/commit/4a9b82438c428bb2e2f37c1941108081986bf09a))
+- **models, utils:** Moved a permission check for posts from model to `permissions.ts` ([18ec63e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/18ec63e5676abf45e84a39a4ee7b4977a365d58e))
+- **pages:** Added more query options to posts search page ([215e8fe](https://github.com/TenkoSpirit/genshin.zenless.club/commit/215e8feb52a16479884e455de1263ba60144336a))
+- **pages:** Removed opacity from search box on posts index page and removed backdrop filter ([7d950a9](https://github.com/TenkoSpirit/genshin.zenless.club/commit/7d950a93e36f2d1913c1e65b17cb93c7ac0d975e))
+- **pages:** Implemented new styles ([5c93528](https://github.com/TenkoSpirit/genshin.zenless.club/commit/5c93528c2e4f5bf72326539794af6c08b8fbaed3))
+- **pages:** Changed buttons styles on posts paginator ([92601d7](https://github.com/TenkoSpirit/genshin.zenless.club/commit/92601d74a11d9c06ab31d4c0a725c1bd61a66e12))
+- **pages:** Added delete and edit buttons to post pages ([cfe35f5](https://github.com/TenkoSpirit/genshin.zenless.club/commit/cfe35f5ceb11c97e6069ea26c690fbd07b563448))
+- **pages:** Posts pages will now have contents table displayed properly ([6d1fa1e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/6d1fa1e637106eeb1b1d492b5563f0b7a3e1b132))
+- **schemas:** Created validation schema for posts search body ([fe73dfe](https://github.com/TenkoSpirit/genshin.zenless.club/commit/fe73dfefc61848a40ce6255d492ef24738def257))
+- **schemas:** Added a query transformer to PostsSearch schema to prevent empty queries from gettign parased as strings ([c822eb6](https://github.com/TenkoSpirit/genshin.zenless.club/commit/c822eb6ad1cf72e55cbc441d496b2c717a98590f))
+- **server:** Properly allow html in markdown ([0557439](https://github.com/TenkoSpirit/genshin.zenless.club/commit/05574395bfabb1aee3103d0b0d72a3ad35640d9c))
+
+### Miscellaneous Tasks
+
+- **deps:** Bump dependencies ([79fd32e](https://github.com/TenkoSpirit/genshin.zenless.club/commit/79fd32ef41342fa8a687d63ade24d846ee88cf60))
+- **deps:** Added headlessui ([aa62d19](https://github.com/TenkoSpirit/genshin.zenless.club/commit/aa62d19e7db6e1327290897253310fe61c2fe85b))
+
+### Refactor
+
+- **components:** Removed redundant import ([e7399d4](https://github.com/TenkoSpirit/genshin.zenless.club/commit/e7399d437afe826c49903c6e5fbfccf0919f00a1))
+
+### Refacotr
+
+- **pages:** `canUserEditPost` was moved and reference in post edit page was updated ([8ac7870](https://github.com/TenkoSpirit/genshin.zenless.club/commit/8ac7870840dc287545553ebca3c859241ba18437))
+
+
+
 ## (v1.6.0) - 2022-09-20
 
 ### Bug Fixes
