@@ -1,5 +1,7 @@
 import type { FC } from "react";
 
+import { useTranslations } from "next-intl";
+
 interface Props {
   title?: string;
   headings: Array<string>;
@@ -7,12 +9,14 @@ interface Props {
 }
 
 export const ContentsTable: FC<Props> = ({ title, headings, containerClassName }) => {
+  const t = useTranslations();
+
   return (
     <div className={`contents-table-container ${containerClassName}`}>
       <div className="card sticky right-0 top-[calc(var(--header-height)_+_var(--default-gap))] w-60 overflow-y-auto">
         <div className="flex w-full flex-col gap-y-2">
           <div className="mb-0 self-center border-b border-gray-200 pb-3 dark:border-neutral-700">
-            <h1 className="font-semibold dark:text-neutral-300">{title}</h1>
+            <h1 className="font-semibold dark:text-neutral-300">{title ?? t("common.contents")}</h1>
           </div>
 
           <div className="flex flex-col gap-y-0">
