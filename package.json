@@ -16,6 +16,7 @@
     "cloudflare": "run-s export"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.3",
     "@next-auth/prisma-adapter": "^1.0.4",
     "@prisma/client": "4.4.0",
     "jotai": "~1.8.4",
