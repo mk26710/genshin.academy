@@ -20,5 +20,8 @@
   "birthdays": "Birthdays today",
   "birthdays-none": "Today there are no birthdays :(",
 
+  "my-profile": "My Profile",
+  "create-post": "Create Post",
+
   "error-500": "Internal Server Error"
 }

@@ -2,13 +2,9 @@
   "navigation": "Навигация",
   "home": "Главная",
 
-  "characters": "Персонажи",
-  "characters_one": "Персонаж",
-
+  "characters": "{ count, plural, one {Персонаж} other {Персонажи} }",
   "guides": "{ count, plural, one {Руководство} other {Руководства} }",
-
   "posts": "{ count, plural, one {Публикация} other {Публикации} }", 
-
   "calculators": "{ count, plural, one {Калькулятор} other {Калькуляторы} }",
   "settings": "{ count, plural, one {Настройка} other {Настройки} }",
 
@@ -23,6 +19,9 @@
 
   "birthdays": "Дни рождения сегодня",
   "birthdays-none": "Сегодня нет дней рождений :(",
+  
+  "my-profile": "Мой профиль",
+  "create-post": "Создать публикацию",
 
   "error-500": "Внутренняя ошибка сервера"
 }
