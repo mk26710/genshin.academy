@@ -93,8 +93,8 @@ export default function PostsSlug({ post }: ServerSideProps) {
   return (
     <Layout title={post.title}>
       <Container>
-        <div className="grid grid-cols-1 gap-4 xl:grid-cols-[1fr_auto]">
-          <div className="flex flex-col gap-4">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-[auto_1fr]">
+          <article className="flex flex-col gap-4">
             <div className="card py-8dark:prose-invert prose prose-purple flex w-full max-w-none flex-col px-4 lg:p-8">
               <h1 className="mb-0">{post.title}</h1>
               <p>{post.description}</p>
@@ -105,20 +105,16 @@ export default function PostsSlug({ post }: ServerSideProps) {
               /> */}
             </div>
             <div className="card flex max-w-none flex-col gap-4 divide-y bg-white p-0">
-              <article
+              <section
                 className="markdown-content prose prose-purple w-full max-w-none px-4 py-6 text-justify text-base prose-thead:border-none prose-thead:border-gray-200 dark:prose-invert dark:prose-hr:border-neutral-700 xl:px-8 xl:py-8"
                 dangerouslySetInnerHTML={{ __html: post.content.parsed }}
               />
 
               <PostFooter post={post} />
             </div>
-          </div>
+          </article>
 
-          <ContentsTable
-            title="Contents"
-            headings={[]}
-            containerClassName="hidden lg:hidden xl:flex"
-          />
+          <ContentsTable title="Contents" headings={[]} containerClassName="hidden lg:block" />
         </div>
       </Container>
     </Layout>
