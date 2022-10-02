@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
-import { searchPostsPaginated } from "@/server/db/models/posts";
+import { countSearchPostsPaginated, searchPostsPaginated } from "@/server/db/models/posts";
 import { PostsSearch } from "@/server/schemas/posts";
 
 /**
@@ -58,7 +58,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({
   }
 
   const { skip, take, order, lang, authorName, query: searchTitle, type } = searchData.data;
-  const posts = await searchPostsPaginated({
+  const prismaOptions = {
     skip,
     take,
     order,
@@ -66,7 +66,10 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({
     searchTitle,
     lang,
     type,
-  });
+  };
+
+  const count = await countSearchPostsPaginated(prismaOptions);
+  const posts = await searchPostsPaginated(prismaOptions);
 
   const messages = {
     common: (await import(`#/locales/${locale}/common.json`)).default,
@@ -80,7 +83,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({
       posts,
       currentPage: page,
       itemsPerPage,
-      totalPosts: posts.length,
+      totalPosts: count,
     },
   };
 };
