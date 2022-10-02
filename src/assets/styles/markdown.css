@@ -31,7 +31,7 @@
 
 .dark .markdown-content details {
   background-color: theme("colors.neutral.900");
-  color: theme("colors.neutral.300")
+  color: theme("colors.neutral.300");
 }
 
 .markdown-content details summary {
@@ -57,4 +57,13 @@
   padding-right: 0;
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  scroll-margin-top: 4.5rem;
 }
