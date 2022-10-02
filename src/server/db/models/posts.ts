@@ -51,6 +51,26 @@ interface SearchPostsPaginatedOptions {
   order?: "asc" | "desc";
 }
 
+export const countSearchPostsPaginated = async (
+  options: Exclude<SearchPostsPaginatedOptions, "skip" | "take">,
+) => {
+  return await prisma.post.count({
+    where: {
+      type: options.type,
+      lang: {
+        in: options.lang,
+      },
+      author: {
+        name: options.authorName,
+      },
+      title: {
+        search: options.searchTitle,
+        mode: "insensitive",
+      },
+    },
+  });
+};
+
 export const searchPostsPaginated = async ({
   skip,
   take,
