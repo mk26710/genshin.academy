@@ -133,11 +133,7 @@ export default function PostsSlug({ post }: ServerSideProps) {
             </div>
           </article>
 
-          <ContentsTable
-            title="Contents"
-            headings={headings}
-            containerClassName="hidden lg:block"
-          />
+          <ContentsTable headings={headings} containerClassName="hidden lg:block" />
         </div>
       </Container>
     </Layout>
