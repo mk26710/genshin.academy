@@ -96,4 +96,34 @@
   .input-field:focus {
     @apply border-black ring-black;
   }
+
+  .button {
+    border-radius: var(--default-radius);
+    border-width: 1px;
+    border-color: black;
+    background-color: black;
+    color: white;
+    padding-left: theme("padding.3");
+    padding-right: theme("padding.3");
+    padding-top: theme("padding[1.5]");
+    padding-bottom: theme("padding[1.5]");
+
+    @apply text-sm font-medium transition-all duration-200;
+  }
+
+  .button:hover {
+    color: black;
+    background-color: white;
+  }
+
+  .button-danger {
+    @apply button;
+
+    border-color: theme("colors.red.500");
+    background-color: theme("colors.red.500");
+  }
+
+  .button-danger:hover {
+    color: theme("colors.red.500");
+  }
 }
