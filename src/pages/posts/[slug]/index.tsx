@@ -4,6 +4,7 @@ import type { FC } from "react";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 
 import { Container } from "@/components/Container";
 import { ContentsTable } from "@/components/ContentsTable";
@@ -90,6 +91,23 @@ const PostFooter: FC<ServerSideProps> = ({ post }) => {
 };
 
 export default function PostsSlug({ post }: ServerSideProps) {
+  const [headings, setHeadings] = useState<Array<string>>([]);
+  const contentRoot = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = contentRoot.current;
+    const headlineNodes = el?.querySelectorAll("h1, h2");
+    if (!headlineNodes) {
+      return;
+    }
+
+    const headlines = Array.from(headlineNodes);
+
+    setHeadings(headlines.map((el) => `${el.getAttribute("id")}`));
+
+    console.log(el?.querySelectorAll("h1, h2"));
+  }, [contentRoot]);
+
   return (
     <Layout title={post.title}>
       <Container>
@@ -106,6 +124,7 @@ export default function PostsSlug({ post }: ServerSideProps) {
             </div>
             <div className="card flex max-w-none flex-col gap-4 divide-y bg-white p-0">
               <section
+                ref={contentRoot}
                 className="markdown-content prose prose-purple w-full max-w-none px-4 py-6 text-justify text-base prose-thead:border-none prose-thead:border-gray-200 dark:prose-invert dark:prose-hr:border-neutral-700 xl:px-8 xl:py-8"
                 dangerouslySetInnerHTML={{ __html: post.content.parsed }}
               />
@@ -114,7 +133,11 @@ export default function PostsSlug({ post }: ServerSideProps) {
             </div>
           </article>
 
-          <ContentsTable title="Contents" headings={[]} containerClassName="hidden lg:block" />
+          <ContentsTable
+            title="Contents"
+            headings={headings}
+            containerClassName="hidden lg:block"
+          />
         </div>
       </Container>
     </Layout>
