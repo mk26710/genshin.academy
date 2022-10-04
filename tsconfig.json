@@ -1,26 +1,26 @@
 {
+  "exclude": ["./cypress", "./cypress.config.ts"],
+  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
   "compilerOptions": {
-    "target": "ES2021",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
+    "lib": ["DOM", "DOM.Iterable", "ES2021"],
+    "isolatedModules": true,
     "esModuleInterop": true,
-    "module": "esnext",
+    "jsx": "react-jsx",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "importsNotUsedAsValues": "error",
+    "target": "ES2021",
+    "strict": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
+      "~/*": ["./app/*"],
       "#/*": ["./*"]
-    }
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+    },
+    "skipLibCheck": true,
+
+    // Remix takes care of building everything in `remix build`.
+    "noEmit": true
+  }
 }

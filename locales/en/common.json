@@ -22,6 +22,7 @@
 
   "my-profile": "My Profile",
   "create-post": "Create Post",
+  "logout": "Log Out",
 
   "error-500": "Internal Server Error"
 }
