@@ -1,7 +1,7 @@
-import type { Post, UserRole, User } from "@prisma/client";
+import type { Post, UserRole, User, UserRoles } from "@prisma/client";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type UserWithRole = Record<any, unknown> & { roles: UserRole[] | null | undefined };
+type UserWithRole = Record<any, unknown> & { roles: Array<Pick<UserRoles, "title">> };
 
 /** Checks if a user has one of the `allowedRoles`.
  *
@@ -15,8 +15,8 @@ export const userHasAnyRole = (userWithRoles?: UserWithRole, ...allowedRoles: Us
     return false;
   }
 
-  if (!("role" in userWithRoles)) {
-    throw TypeError(`Provided object doesn't have a "role" property.`);
+  if (!("roles" in userWithRoles)) {
+    throw TypeError(`Provided object doesn't have a "roles" property.`);
   }
 
   if (userWithRoles.roles == null) {
@@ -25,18 +25,18 @@ export const userHasAnyRole = (userWithRoles?: UserWithRole, ...allowedRoles: Us
 
   // project owner can do anything
   // kinda debatable if it should be explicit or not
-  if (userWithRoles.roles.includes("OWNER")) {
+  if (userWithRoles.roles.some(({ title }) => title === "OWNER")) {
     return true;
   }
 
-  return userWithRoles.roles.some((role) => allowedRoles.includes(role));
+  return userWithRoles.roles.some(({ title }) => allowedRoles.includes(title));
 };
 
-type UserWithRoleAndId = UserWithRole & { id: User["id"] | null | undefined };
+type UserWithRolesAndId = UserWithRole & { id: User["id"] | null | undefined };
 type PostWithAuthorId = Record<string, unknown> & Pick<Post, "authorId">;
 
 /** Check if specified user has permissions to delete specified post */
-export const canUserDeletePost = (user?: UserWithRoleAndId, post?: PostWithAuthorId) => {
+export const canUserDeletePost = (user?: UserWithRolesAndId, post?: PostWithAuthorId) => {
   if (user == null || post == null) {
     return false;
   }
@@ -53,12 +53,8 @@ export const canUserDeletePost = (user?: UserWithRoleAndId, post?: PostWithAutho
 };
 
 type PostLikeObject = Record<string, unknown> & Pick<Post, "authorId">;
-type UserLikeObject = Record<string, unknown> & {
-  id: User["id"];
-  roles: UserRole[];
-};
 
-export const canUserEditPost = (user: Nil<UserLikeObject>, post: Nil<PostLikeObject>) => {
+export const canUserEditPost = (user: Nil<UserWithRolesAndId>, post: Nil<PostLikeObject>) => {
   if (user == null || post == null) {
     return false;
   }
