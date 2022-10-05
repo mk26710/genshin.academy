@@ -92,8 +92,17 @@
     padding-right: var(--default-gap);
   }
 
+  .textarea-field {
+    @apply form-textarea border-neutral-200;
+    background-color: whtie;
+    border-width: 1px;
+    border-radius: var(--default-radius);
+    font-size: theme("fontSize.sm");
+  }
+
   .select-field:focus,
-  .input-field:focus {
+  .input-field:focus,
+  .textarea-field:focus {
     @apply border-black ring-black;
   }
 
