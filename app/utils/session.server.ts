@@ -7,6 +7,8 @@ import type { User } from "@prisma/client";
 import { getUserById } from "~/models/user.server";
 import { redis } from "~/db/redis.server";
 
+import { text } from "./responses.server";
+
 invariant(process.env.SESSION_SECRET, "SESSION_SECRET must be set");
 
 const SESSION_MAX_AGE = 172800; // 2 days
@@ -137,6 +139,30 @@ export const ensureAuthenticatedUser = async (request: Request) => {
 
   if (!user) {
     throw await logout(request);
+  }
+
+  return user;
+};
+
+export const ensureAuthorizedUser = async (
+  request: Request,
+  predicate:
+    | ((user: Awaited<ReturnType<typeof ensureAuthenticatedUser>>) => Promise<boolean>)
+    | boolean,
+) => {
+  const user = await ensureAuthenticatedUser(request);
+
+  let result = false;
+  if (typeof predicate === "boolean") {
+    result = predicate;
+  } else if (typeof predicate === "function") {
+    result = await predicate(user);
+  } else {
+    throw new TypeError("predicate must be a function that returns a boolean or a boolean value.");
+  }
+
+  if (result === false) {
+    throw text("Forbidden", { status: 403 });
   }
 
   return user;
