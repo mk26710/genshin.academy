@@ -1,13 +1,12 @@
-import type { PostType } from "@prisma/client";
+import type { Post, PostContent, PostType } from "@prisma/client";
 
 import { prisma } from "~/db/prisma.server";
 
-export const getPostBySlug = async (slug: string) => {
-  return await prisma.post.findFirst({ where: { slug }, include: { content: true } });
-};
+export const getPostBySlug = async (slug: string) =>
+  await prisma.post.findFirst({ where: { slug }, include: { content: true } });
 
-export const getPostBySlugWithAuthor = async (slug: string) => {
-  return await prisma.post.findFirst({
+export const getPostBySlugWithAuthor = async (slug: string) =>
+  await prisma.post.findFirst({
     where: { slug },
     include: {
       content: true,
@@ -21,7 +20,6 @@ export const getPostBySlugWithAuthor = async (slug: string) => {
       },
     },
   });
-};
 
 export const getPostBySlugWithAuthorJsonSafe = async (slug: string) => {
   const _post = await getPostBySlugWithAuthor(slug);
@@ -52,14 +50,12 @@ interface SearchPostsPaginatedOptions {
 
 export const countSearchPostsPaginated = async (
   options: Exclude<SearchPostsPaginatedOptions, "skip" | "take">,
-) => {
-  return await prisma.post.count({
+) =>
+  await prisma.post.count({
     where: {
       type: options.type,
-      content: {
-        lang: {
-          in: options.lang,
-        },
+      lang: {
+        in: options.lang,
       },
       author: {
         name: options.authorName,
@@ -70,30 +66,27 @@ export const countSearchPostsPaginated = async (
       },
     },
   });
-};
 
 export const searchPostsPaginated = async ({
   skip,
   take,
   order = "desc",
   ...options
-}: SearchPostsPaginatedOptions) => {
-  return await prisma.post.findMany({
+}: SearchPostsPaginatedOptions) =>
+  await prisma.post.findMany({
     skip,
     take,
     where: {
       type: options.type,
+      lang: {
+        in: options.lang,
+      },
       author: {
         name: options.authorName,
       },
       title: {
         search: options.searchTitle,
         mode: "insensitive",
-      },
-      content: {
-        lang: {
-          in: options.lang,
-        },
       },
     },
     orderBy: {
@@ -107,11 +100,7 @@ export const searchPostsPaginated = async ({
       description: true,
       thumbnailUrl: true,
       status: true,
-      content: {
-        select: {
-          lang: true,
-        },
-      },
+      lang: true,
       author: {
         select: {
           id: true,
@@ -121,4 +110,34 @@ export const searchPostsPaginated = async ({
       },
     },
   });
+
+type CreatePostOptions = {
+  slug: Post["slug"];
+  type: Post["type"];
+  lang: Post["lang"];
+  title: Post["title"];
+  description: Post["description"];
+  tags: Post["tags"];
+  thumbnailUrl: Post["thumbnailUrl"];
+  authorId: Post["authorId"];
+  contentRaw: PostContent["raw"];
 };
+
+export const createPost = async (opts: CreatePostOptions) =>
+  await prisma.post.create({
+    data: {
+      slug: opts.slug,
+      lang: opts.lang,
+      title: opts.title,
+      description: opts.description,
+      tags: opts.tags,
+      type: opts.type,
+      thumbnailUrl: opts.thumbnailUrl,
+      authorId: opts.authorId,
+      content: {
+        create: {
+          raw: opts.contentRaw,
+        },
+      },
+    },
+  });
