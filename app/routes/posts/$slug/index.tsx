@@ -1,7 +1,7 @@
 import type { ActionArgs, LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useFetcher, useLoaderData } from "@remix-run/react";
+import { useFetcher, useLoaderData, useNavigate } from "@remix-run/react";
 import type { FunctionComponent } from "react";
 import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "use-intl";
@@ -83,6 +83,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 };
 
 const PostFooter: FunctionComponent<Pick<LoaderData, "post">> = ({ post }) => {
+  const navigate = useNavigate();
   const locale = useLocale();
   const t = useTranslations();
 
@@ -97,7 +98,7 @@ const PostFooter: FunctionComponent<Pick<LoaderData, "post">> = ({ post }) => {
   };
 
   const handlePostEdit = async () => {
-    console.log("edit");
+    navigate("./edit");
   };
 
   return (
