@@ -38,7 +38,7 @@ model User {
 
 model UserRoles {
   userId String
-  title   UserRole @default(DEFAULT)
+  title  UserRole @default(DEFAULT)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -67,18 +67,19 @@ enum PostStatus {
 }
 
 model Post {
-  id           String       @id @default(cuid())
-  slug         String       @unique
+  id           String        @id @default(cuid())
+  slug         String        @unique
   authorId     String?
-  type         PostType     @default(GENERAL)
-  status       PostStatus   @default(PUBLISHED)
-  publishedAt  DateTime     @default(now())
+  type         PostType      @default(GENERAL)
+  status       PostStatus    @default(PUBLISHED)
+  publishedAt  DateTime      @default(now())
   editedAt     DateTime?
   editorId     String?
   title        String
   description  String?
   tags         String
   thumbnailUrl String?
+  lang         String        @db.VarChar(2)
   content      PostContent?
 
   editor User? @relation(fields: [editorId], references: [id], name: "EditedPosts")
@@ -87,13 +88,10 @@ model Post {
 
 model PostContent {
   id     String @id @default(cuid())
-  lang   String @db.VarChar(2)
   postId String @unique
   raw    String
 
   post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
-
-  @@unique([id, postId])
 }
 
 // Genshin specific models
