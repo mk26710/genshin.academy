@@ -141,3 +141,8 @@ export const createPost = async (opts: CreatePostOptions) =>
       },
     },
   });
+
+export const deletePostBySlug = async (slug: string) =>
+  await prisma.post.delete({ where: { slug } });
+
+export const deletePostById = async (id: string) => await prisma.post.delete({ where: { id } });
