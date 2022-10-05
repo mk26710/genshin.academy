@@ -111,11 +111,11 @@ export function CatchBoundary() {
         <div className="app">
           <Container className="flex flex-wrap items-center justify-center px-2">
             <div className="flex flex-col items-center gap-4">
-              <div className="flex text-4xl">
+              <div className="flex text-2xl">
                 <h2 className="mr-2 border-r border-black pr-2 font-bold">{caught.status}</h2>
                 <p>{caught.statusText}</p>
               </div>
-              <Link to="/" role="button" className="button w-full text-center">
+              <Link to="/" role="button" className="button w-fit text-center">
                 Go to home page
               </Link>
             </div>
