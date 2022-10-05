@@ -1,12 +1,14 @@
 import type { LinksFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
+  Link,
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useCatch,
   useLoaderData,
   useTransition,
 } from "@remix-run/react";
@@ -21,6 +23,7 @@ import { IntlProvider } from "use-intl";
 import { getMessages, resolveLocale } from "~/utils/i18n.server";
 import { Footer } from "~/components/Footer";
 import Nprogress from "nprogress";
+import { Container } from "./components/Container";
 
 export const links: LinksFunction = () => {
   return [
@@ -86,6 +89,39 @@ export default function App() {
         </div>
 
         <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
+      </body>
+    </html>
+  );
+}
+
+export function CatchBoundary() {
+  const caught = useCatch();
+
+  return (
+    <html>
+      <head>
+        <meta charSet="utf-8" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <Meta />
+        <Links />
+      </head>
+      <body className="h-full">
+        <div className="app">
+          <Container className="flex flex-wrap items-center justify-center px-2">
+            <div className="flex flex-col items-center gap-4">
+              <div className="flex text-4xl">
+                <h2 className="mr-2 border-r border-black pr-2 font-bold">{caught.status}</h2>
+                <p>{caught.statusText}</p>
+              </div>
+              <Link to="/" role="button" className="button w-full text-center">
+                Go to home page
+              </Link>
+            </div>
+          </Container>
+        </div>
+
         <Scripts />
         <LiveReload />
       </body>
