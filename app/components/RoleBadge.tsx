@@ -6,6 +6,10 @@ interface RoleBadgeProps {
 }
 
 export const RoleBadge: FC<RoleBadgeProps> = ({ role }) => {
+  if (role === "DEFAULT") {
+    return null;
+  }
+
   const bgColor = () => {
     if (role === "ADMIN") return "bg-red-500";
     else if (role === "MODERATOR") return "bg-green-700";
