@@ -19,7 +19,7 @@ async function seed() {
       name,
       roles: {
         create: {
-          role: "DEFAULT",
+          title: "DEFAULT",
         },
       },
       password: {
@@ -62,7 +62,8 @@ async function seed() {
 }
 
 seed()
-  .catch((e) => {
+  .catch(async (e) => {
+    await prisma.$disconnect();
     console.error(e);
     process.exit(1);
   })
