@@ -101,6 +101,7 @@ export const searchPostsPaginated = async ({
       thumbnailUrl: true,
       status: true,
       lang: true,
+      publishedAt: true,
       author: {
         select: {
           id: true,
