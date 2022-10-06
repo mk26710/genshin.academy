@@ -22,8 +22,8 @@ const queryTransformer = (val: unknown) =>
   typeof val === "string" && val.length > 0 ? val : undefined;
 
 export const PostsSearch = z.object({
-  skip: z.number(),
-  take: z.number(),
+  skip: z.number().int().min(0),
+  take: z.number().int().min(1),
   query: z.string().transform(queryTransformer).optional(),
   lang: z.array(z.custom<string>(langValidator, { message: "Incorrect language provided" })),
   order: z.union([z.literal("asc"), z.literal("desc")]).default("desc"),
