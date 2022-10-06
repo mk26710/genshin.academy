@@ -10,6 +10,7 @@ esbuild
     sourcemap: true,
     target: "node18",
     format: "cjs",
+    charset: "utf8",
   })
   .then(() => {
     console.log("\n\n  Compiled to build/server.js\n\n");
