@@ -8,7 +8,7 @@ esbuild
     minify: true,
     platform: "node",
     sourcemap: true,
-    target: "node16",
+    target: "node18",
     format: "cjs",
   })
   .then(() => {

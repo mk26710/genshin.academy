@@ -6,7 +6,7 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "module": "CommonJS",
+    "module": "NodeNext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "target": "ES2021",
