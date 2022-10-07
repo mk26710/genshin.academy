@@ -143,6 +143,33 @@ export const createPost = async (opts: CreatePostOptions) =>
     },
   });
 
+type UpdatePostOptions = Omit<CreatePostOptions, "slug" | "authorId">;
+
+export const updatePostBySlug = async (slug: string, opts: UpdatePostOptions) =>
+  await prisma.post.update({
+    where: {
+      slug,
+    },
+    data: {
+      lang: opts.lang,
+      title: opts.title,
+      description: opts.description,
+      tags: opts.tags,
+      type: opts.type,
+      thumbnailUrl: opts.thumbnailUrl,
+      content: {
+        upsert: {
+          create: {
+            raw: opts.contentRaw,
+          },
+          update: {
+            raw: opts.contentRaw,
+          },
+        },
+      },
+    },
+  });
+
 export const deletePostBySlug = async (slug: string) =>
   await prisma.post.delete({ where: { slug } });
 
