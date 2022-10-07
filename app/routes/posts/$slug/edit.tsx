@@ -151,9 +151,8 @@ const PostsSlugEditRoute = () => {
             id="slug"
             name="slug"
             className="input-field w-full"
-            disabled
             defaultValue={post.slug}
-            value={post.slug}
+            readOnly
           />
 
           {issueOf("slug") && <div className="pt-1 text-red-700">{issueOf("slug")?.message}</div>}
