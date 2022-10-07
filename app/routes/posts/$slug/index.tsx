@@ -8,6 +8,7 @@ import { useLocale, useTranslations } from "use-intl";
 import { Container } from "~/components/Container";
 import { ContentsTable } from "~/components/ContentsTable";
 import { RoleBadge } from "~/components/RoleBadge";
+import { RouteLevelCatchBoundary } from "~/components/RouteLevelCatchBoundary";
 import { useOptionalUser } from "~/hooks/use-optional-user";
 import { deletePostById, getPostBySlugWithAuthor } from "~/models/posts.server";
 import { markdownParser } from "~/utils/markdown.server";
@@ -184,3 +185,5 @@ const PostsSlugIndexRoute = () => {
 };
 
 export default PostsSlugIndexRoute;
+
+export const CatchBoundary = () => <RouteLevelCatchBoundary />;
