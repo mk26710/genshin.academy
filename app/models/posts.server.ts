@@ -143,7 +143,9 @@ export const createPost = async (opts: CreatePostOptions) =>
     },
   });
 
-type UpdatePostOptions = Omit<CreatePostOptions, "slug" | "authorId">;
+type UpdatePostOptions = Omit<CreatePostOptions, "slug" | "authorId"> & {
+  editorId: Post["editorId"];
+};
 
 export const updatePostBySlug = async (slug: string, opts: UpdatePostOptions) =>
   await prisma.post.update({
@@ -157,6 +159,8 @@ export const updatePostBySlug = async (slug: string, opts: UpdatePostOptions) =>
       tags: opts.tags,
       type: opts.type,
       thumbnailUrl: opts.thumbnailUrl,
+      editorId: opts.editorId,
+      editedAt: new Date(),
       content: {
         upsert: {
           create: {
