@@ -24,5 +24,7 @@
   "create-post": "Create Post",
   "logout": "Log Out",
 
+  "latest-post": "Latest Post",
+
   "error-500": "Internal Server Error"
 }
