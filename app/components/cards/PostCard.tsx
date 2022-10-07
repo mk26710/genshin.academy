@@ -1,6 +1,7 @@
 import type { Post } from "@prisma/client";
 import { Link } from "@remix-run/react";
 import type { FunctionComponent } from "react";
+import { useVisitorLocale } from "~/hooks/use-visitor-locale";
 
 type PostCardProps = Pick<Post, "slug" | "thumbnailUrl" | "title" | "description" | "publishedAt">;
 
@@ -11,6 +12,8 @@ export const PostCard: FunctionComponent<PostCardProps> = ({
   description,
   publishedAt,
 }) => {
+  const locale = useVisitorLocale();
+
   return (
     <Link
       to={`/posts/${slug}`}
@@ -20,7 +23,7 @@ export const PostCard: FunctionComponent<PostCardProps> = ({
       <h3 className="mt-2 px-[var(--default-gap)] text-xl font-semibold">{title}</h3>
       <p className="px-[var(--default-gap)] text-sm hyphens-auto">{description}</p>
       <p className="mb-[var(--default-gap)] self-end px-[var(--default-gap)] text-sm italic opacity-70">
-        {new Date(publishedAt).toLocaleDateString()}
+        {new Date(publishedAt).toLocaleDateString(locale)}
       </p>
     </Link>
   );
