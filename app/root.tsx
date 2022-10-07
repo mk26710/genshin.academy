@@ -27,6 +27,7 @@ import { Container } from "./components/Container";
 
 export const links: LinksFunction = () => {
   return [
+    { rel: "preload", href: tailwindStylesheetUrl, as: "style" },
     { rel: "stylesheet", href: tailwindStylesheetUrl },
     { rel: "stylesheet", href: nprogressStylesheetUrl },
   ];
