@@ -1,8 +1,9 @@
-import type { LoaderFunction, MetaFunction } from "@remix-run/node";
+import type { LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useAtom } from "jotai";
 import type { ChangeEvent, FunctionComponent } from "react";
+import { useEffect } from "react";
 import { useDeferredValue } from "react";
 import { useTranslations } from "use-intl";
 import {
@@ -15,20 +16,19 @@ import { Container } from "~/components/Container";
 import { Input } from "~/components/Input";
 import { getCharactersList } from "~/models/characters.server";
 import { resolveLocale } from "~/utils/i18n.server";
+import { defaultLocale } from "~/utils/locales";
 
 export const meta: MetaFunction = ({}) => ({
   title: "Characters - GENSHIN.ZENLESS",
 });
 
-type LoaderData = {
-  characters: Awaited<ReturnType<typeof getCharactersList>>;
-};
+type LoaderData = SerializeFrom<typeof loader>;
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader = async ({ request }: LoaderArgs) => {
   const locale = await resolveLocale(request);
-  const characters = await getCharactersList({ lang: locale });
+  const characters = await getCharactersList({ langs: [locale, defaultLocale] });
 
-  return json<LoaderData>({ characters });
+  return json({ characters });
 };
 
 const SearchAndFilter: FunctionComponent = () => {
@@ -104,6 +104,10 @@ const CharactersIndex = () => {
 
   const [showFivestars] = useAtom(charactersFilterFivestarsAtom);
   const [showFourstars] = useAtom(charactersFilterFourstarsAtom);
+
+  useEffect(() => {
+    console.log(characters);
+  }, []);
 
   const filteredCharacters = characters
     .filter((c) => c.identity.at(0)?.name.toLowerCase().includes(deferredSearch.toLowerCase()))
