@@ -11,7 +11,9 @@ export const RoleBadge: FC<RoleBadgeProps> = ({ role }) => {
   }
 
   const bgColor = () => {
-    if (role === "ADMIN") return "bg-red-500";
+    if (role === "OWNER") return "bg-purple-500";
+    else if (role === "ADMIN") return "bg-red-500";
+    else if (role === "DEVELOPER") return "bg-black";
     else if (role === "MODERATOR") return "bg-green-700";
     else if (role === "WRITER") return "bg-sky-600";
     else return "bg-gray-700 dark:bg-neutral-700";
