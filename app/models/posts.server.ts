@@ -38,6 +38,33 @@ export const getPostBySlugWithAuthorJsonSafe = async (slug: string) => {
   return safePost;
 };
 
+type GetLatestPostOptions = Pick<Post, "lang">;
+
+export const getLatestPost = async (opts?: GetLatestPostOptions) =>
+  await prisma.post.findFirst({
+    orderBy: {
+      publishedAt: "desc",
+    },
+    where: {
+      lang: opts?.lang,
+    },
+    select: {
+      slug: true,
+      title: true,
+      description: true,
+      thumbnailUrl: true,
+      lang: true,
+      publishedAt: true,
+      author: {
+        select: {
+          id: true,
+          name: true,
+          avatarUrl: true,
+        },
+      },
+    },
+  });
+
 interface SearchPostsPaginatedOptions {
   skip: number;
   take: number;
