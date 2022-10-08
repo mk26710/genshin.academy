@@ -4,8 +4,10 @@ import { Menu } from "@headlessui/react";
 import { Bars3BottomRightIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import { useTranslations } from "use-intl";
 import { Link, NavLink, useFetcher, useLocation } from "@remix-run/react";
+import { generatePath } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useOptionalUser } from "~/hooks/use-optional-user";
+import { useVisitorLocale } from "~/hooks/use-visitor-locale";
 
 const links = [
   {
@@ -14,7 +16,7 @@ const links = [
   },
   {
     i18nKey: "common.posts",
-    path: "/posts",
+    path: "/posts?lang=:userLocale",
     hasNested: true,
   },
   {
@@ -94,6 +96,7 @@ const UserMenu: FunctionComponent<PropsWithChildren> = ({ children }) => {
 
 export const Header = () => {
   const t = useTranslations();
+  const userLocale = useVisitorLocale();
 
   const location = useLocation();
   const maybeUser = useOptionalUser();
@@ -113,7 +116,7 @@ export const Header = () => {
           <div className="hidden h-full lg:flex lg:flex-grow">
             {links.map((link) => (
               <NavLink
-                to={link.path}
+                to={generatePath(link.path, { userLocale })}
                 key={link.path}
                 className={({ isActive }) =>
                   "mr-4 flex h-full items-center border-b-2 border-transparent text-sm font-medium text-neutral-600 " +
@@ -177,7 +180,7 @@ export const Header = () => {
         </h3>
         {links.map((link) => (
           <NavLink
-            to={link.path}
+            to={generatePath(link.path, { userLocale })}
             key={link.path}
             className={({ isActive }) =>
               "flex h-12 items-center border-b px-[var(--default-gap)] text-sm font-medium text-neutral-700 hover:bg-gray-50 " +
