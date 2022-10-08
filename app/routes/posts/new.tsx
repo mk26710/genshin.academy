@@ -6,8 +6,9 @@ import { json } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import { Container } from "~/components/Container";
 import { useUser } from "~/hooks/use-user";
-import { createPost } from "~/models/posts.server";
+import { createPost, getPostBySlug } from "~/models/posts.server";
 import { PostsNewOrEditForm } from "~/schemas/posts";
+import { text } from "~/utils/responses.server";
 import type { ensureAuthenticatedUser } from "~/utils/session.server";
 import { ensureAuthorizedUser } from "~/utils/session.server";
 
@@ -41,6 +42,11 @@ export const action = async ({ request }: ActionArgs) => {
     thumbnail: thumbnailUrl,
     text: contentRaw,
   } = parsedForm.data;
+
+  const post = await getPostBySlug(slug);
+  if (post != null) {
+    throw text("Post already exists", { status: 400 });
+  }
 
   const createdPost = await createPost({
     authorId: user.id,
