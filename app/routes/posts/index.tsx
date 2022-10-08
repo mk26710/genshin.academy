@@ -1,28 +1,27 @@
-import type { LoaderArgs, MetaFunction } from "@remix-run/node";
+import type { LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Response } from "@remix-run/node";
-import { useLoaderData, useSearchParams } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
+import { useSearchParams } from "react-router-dom";
 import type { ChangeEvent } from "react";
 import { useEffect } from "react";
 import { PostCard } from "~/components/cards/PostCard";
 import { Container } from "~/components/Container";
 import { countSearchPostsPaginated, searchPostsPaginated } from "~/models/posts.server";
 import { PostsSearch } from "~/schemas/posts";
-import { resolveLocale } from "~/utils/i18n.server";
+import { Paginator } from "~/components/Paginator";
 
 export const loader = async ({ request }: LoaderArgs) => {
-  const locale = await resolveLocale(request);
-
   const url = new URL(request.url);
 
   const pageParam = url.searchParams.get("page");
   const page = pageParam != null ? parseInt(pageParam.toString()) : 1;
   const postsPerPage = 6;
 
-  const searchLangs = await Promise.resolve(url.searchParams.getAll("lang"))
-    .then((arr) => arr.filter((el) => el.length > 0))
-    .then((arr) => [...new Set(arr)])
-    .then((arr) => (arr.length > 0 ? arr : [locale]));
+  const searchLangs = await Promise.resolve(url.searchParams.get("lang"))
+    .then((val) => val?.split(",") ?? [])
+    .then((arr) => arr.filter((el) => el.length > 0)) // filter out empty strings
+    .then((arr) => [...new Set(arr)]); // make an array of uniques
 
   const parseResult = PostsSearch.safeParse({
     skip: (page - 1) * postsPerPage,
@@ -52,8 +51,12 @@ export const loader = async ({ request }: LoaderArgs) => {
   const totalPosts = await countSearchPostsPaginated(searchOptions);
   const posts = await searchPostsPaginated(searchOptions);
 
-  return json({ posts, totalPosts, page, searchLangs });
+  const totalPages = Math.ceil(totalPosts / postsPerPage);
+
+  return json({ posts, totalPages, page, searchLangs });
 };
+
+type LoaderData = SerializeFrom<typeof loader>;
 
 export const meta: MetaFunction = () => {
   return {
@@ -62,27 +65,27 @@ export const meta: MetaFunction = () => {
 };
 
 const PostsIndexRoute = () => {
-  const { posts, page, searchLangs } = useLoaderData<typeof loader>();
+  const { posts, page, totalPages, searchLangs } = useLoaderData() as LoaderData;
   const [search, setSearch] = useSearchParams();
 
-  const handlePageIncrease = () => {
-    setSearch({ page: `${page + 1}` });
-  };
-
   const handleLanguageSelect = async (e: ChangeEvent<HTMLInputElement>) => {
-    const langs = new Set(search.getAll("lang"));
-    if (e.target.checked) {
-      if (!langs.has(e.target.value)) {
-        langs.add(e.target.value);
-      }
-    } else {
-      if (langs.has(e.target.value)) {
-        langs.delete(e.target.value);
-      }
-    }
-    console.log("a " + search.getAll("lang"));
+    // make set of selected languages and provdei empty as default
+    const langs = new Set(search.get("lang")?.split(",") ?? []);
 
-    setSearch({ lang: [...langs] });
+    if (e.target.checked && !langs.has(e.target.value)) {
+      langs.add(e.target.value);
+    } else if (!e.target.checked && langs.has(e.target.value)) {
+      langs.delete(e.target.value);
+    }
+
+    const newSearch = new URLSearchParams(search);
+    if (langs.size > 0) {
+      newSearch.set("lang", [...langs].join(","));
+    } else {
+      newSearch.delete("lang");
+    }
+
+    setSearch(newSearch);
   };
 
   useEffect(() => {
@@ -93,9 +96,7 @@ const PostsIndexRoute = () => {
     <Container className="px-0 pt-0 lg:px-[var(--default-gap)]">
       <div className="grid h-full grid-rows-[auto_auto] gap-[var(--default-gap)] lg:grid-cols-[1fr_auto] lg:grid-rows-1">
         <div className="card sticky top-[var(--header-height)] z-[5] flex h-fit w-full flex-col rounded-none border-b border-t-0 bg-white lg:top-[calc(var(--header-height)_+_var(--default-gap))] lg:w-64 lg:rounded-md lg:border-r lg:border-l lg:border-t">
-          <button onClick={handlePageIncrease} className="button">
-            plus page
-          </button>
+          <Paginator page={page} totalPages={totalPages} />
 
           <div role="group">
             <label>
