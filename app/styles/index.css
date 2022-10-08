@@ -3,11 +3,9 @@
 @tailwind utilities;
 @tailwind variants;
 
-@import url("./nprogress.css");
-@import url("./markdown.css");
-
 * {
   text-rendering: optimizeLegibility;
+  -moz-transition: none !important; /* firefox is just built different ok */
 }
 
 :root {
