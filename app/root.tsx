@@ -45,7 +45,7 @@ type LoaderData = {
 
 export async function loader({ request }: LoaderArgs) {
   const resolvedLocale = await resolveLocale(request);
-  const messages = await getMessages(resolvedLocale, ["calc", "posts"]);
+  const messages = await getMessages(resolvedLocale, ["calc", "posts", "settings"]);
 
   return json<LoaderData>({
     user: await getUser(request),
