@@ -25,3 +25,30 @@ export const getCharactersList = async (opts?: GetCharactersOptions) => {
     },
   });
 };
+
+export const getCharactersByBirthday = async (
+  day: number,
+  month: number,
+  opts?: GetCharactersOptions,
+) => {
+  return await prisma.genshinCharacter.findMany({
+    where: {
+      birthDay: day,
+      birthMonth: month,
+    },
+    select: {
+      id: true,
+      identity: {
+        where: {
+          lang: {
+            in: opts?.langs,
+          },
+        },
+        select: {
+          lang: true,
+          name: true,
+        },
+      },
+    },
+  });
+};
