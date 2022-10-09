@@ -110,6 +110,7 @@ const CharactersIndex = () => {
   }, []);
 
   const filteredCharacters = characters
+    .sort((a, b) => b.rarity - a.rarity)
     .filter((c) => c.identity.at(0)?.name.toLowerCase().includes(deferredSearch.toLowerCase()))
     .reduce<Awaited<ReturnType<typeof getCharactersList>>>((acc, current) => {
       if (!showFivestars && current.rarity === 5) {
