@@ -11,7 +11,7 @@ export const useOptionalUser = (): GetUser | undefined => {
   const data = useMatchesData("root");
 
   const caught = useCatch();
-  const caughtData = caught.data;
+  const caughtData = caught?.data;
 
   if (data && typeof data === "object" && "user" in data && isUser(data.user)) {
     return data.user;
