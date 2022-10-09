@@ -1,4 +1,4 @@
-import { createCookie, createSession, createSessionStorage, redirect } from "@remix-run/node";
+import { createCookie, createSession, createSessionStorage, json, redirect } from "@remix-run/node";
 import invariant from "tiny-invariant";
 
 import cuid from "cuid";
@@ -119,6 +119,8 @@ export const getUser = async (request: Request) => {
 
   const user = await getUserById(userId);
   if (user) {
+    if (user.enabled !== true)
+      throw json({ user }, { status: 403, statusText: "Your account is disabled." });
     return user;
   }
 
