@@ -19,6 +19,8 @@
 
   "birthdays": "Birthdays today",
   "birthdays-none": "Today there are no birthdays :(",
+  "bday-wish": "Happy Birthday, {name}!" ,
+  "bday-description": "{name} is celebrating a birthday today! Don't forget to check the in-game mail for a present!",
 
   "my-profile": "My Profile",
   "create-post": "Create Post",
