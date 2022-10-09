@@ -16,7 +16,6 @@ import {
 
 import tailwindStylesheetUrl from "~/styles/tailwind.css";
 import nprogressStylesheetUrl from "~/styles/nprogress.css";
-import type { GetUser } from "~/utils/session.server";
 import { getUser } from "~/utils/session.server";
 import { useEffect } from "react";
 import { Header } from "~/components/Header";
@@ -26,6 +25,7 @@ import { getMessages, resolveLocale } from "~/utils/i18n.server";
 import { Footer } from "~/components/Footer";
 import Nprogress from "nprogress";
 import { Container } from "./components/Container";
+import { useOptionalUser } from "./hooks/use-optional-user";
 
 export const links: LinksFunction = () => {
   return [
@@ -101,10 +101,7 @@ export default function App() {
 
 export function CatchBoundary() {
   const caught = useCatch();
-  const maybeUser =
-    typeof caught.data === "object" && typeof caught.data?.user === "object"
-      ? (caught.data.user as GetUser)
-      : null;
+  const maybeUser = useOptionalUser();
 
   const fetcher = useFetcher();
 
@@ -117,7 +114,6 @@ export function CatchBoundary() {
 
   useEffect(() => {
     Nprogress.done();
-    console.log(maybeUser);
   }, []);
 
   return (
