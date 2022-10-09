@@ -1,10 +1,14 @@
 import type { LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { useEffect } from "react";
+import { BirthdayCard } from "~/components/cards/BirthdayCard";
 import { PostCard } from "~/components/cards/PostCard";
 import { Container } from "~/components/Container";
+import { getCharactersByBirthday } from "~/models/characters.server";
 import { getLatestPost } from "~/models/posts.server";
 import { resolveLocale } from "~/utils/i18n.server";
+import { defaultLocale } from "~/utils/locales";
 
 type LoaderData = SerializeFrom<typeof loader>;
 
@@ -13,7 +17,15 @@ export const loader = async ({ request }: LoaderArgs) => {
 
   const latestPost = await getLatestPost({ lang: resolvedLocale });
 
-  return json({ latestPost });
+  const now = new Date();
+  const nowDay = now.getUTCDate();
+  const nowMonth = now.getUTCMonth() + 1;
+
+  const charactersWithBirthdays = await getCharactersByBirthday(nowDay, nowMonth, {
+    langs: [resolvedLocale, defaultLocale],
+  });
+
+  return json({ latestPost, charactersWithBirthdays });
 };
 
 export const meta: MetaFunction = () => ({
@@ -21,12 +33,15 @@ export const meta: MetaFunction = () => ({
 });
 
 const IndexRoute = () => {
-  const { latestPost } = useLoaderData() as LoaderData;
+  const { latestPost, charactersWithBirthdays } = useLoaderData() as LoaderData;
+
+  useEffect(() => {
+    console.log(charactersWithBirthdays);
+  }, []);
 
   return (
     <Container>
-      <div className="columns-1 md:columns-2 lg:columns-3">
-        {/* test */}
+      <div className="columns-1 space-y-[var(--default-gap)] md:columns-2 lg:columns-3">
         {latestPost && (
           <PostCard
             slug={latestPost.slug}
@@ -36,6 +51,11 @@ const IndexRoute = () => {
             thumbnailUrl={latestPost.thumbnailUrl}
           />
         )}
+
+        {charactersWithBirthdays.map((c) => (
+          // @ts-expect-error - character identity always has at least one element
+          <BirthdayCard key={c.id} id={c.id} name={c.identity.at(0).name} />
+        ))}
       </div>
     </Container>
   );
