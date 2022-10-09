@@ -9,12 +9,14 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
+  useFetcher,
   useLoaderData,
   useTransition,
 } from "@remix-run/react";
 
 import tailwindStylesheetUrl from "~/styles/tailwind.css";
 import nprogressStylesheetUrl from "~/styles/nprogress.css";
+import type { GetUser } from "~/utils/session.server";
 import { getUser } from "~/utils/session.server";
 import { useEffect } from "react";
 import { Header } from "~/components/Header";
@@ -99,6 +101,24 @@ export default function App() {
 
 export function CatchBoundary() {
   const caught = useCatch();
+  const maybeUser =
+    typeof caught.data === "object" && typeof caught.data?.user === "object"
+      ? (caught.data.user as GetUser)
+      : null;
+
+  const fetcher = useFetcher();
+
+  const handleLogOut = async () => {
+    fetcher.submit(null, {
+      action: "/logout",
+      method: "patch",
+    });
+  };
+
+  useEffect(() => {
+    Nprogress.done();
+    console.log(maybeUser);
+  }, []);
 
   return (
     <html>
@@ -116,9 +136,18 @@ export function CatchBoundary() {
                 <h2 className="mr-2 border-r border-black pr-2 font-bold">{caught.status}</h2>
                 <p>{caught.statusText}</p>
               </div>
-              <Link to="/" role="button" className="button w-fit text-center">
-                Go to home page
-              </Link>
+
+              <div className="flex flex-col items-center justify-center gap-2 md:flex-row ">
+                <Link to="/" role="button" className="button w-fit text-center">
+                  Go to home page
+                </Link>
+
+                {maybeUser && !maybeUser.enabled && (
+                  <button onClick={handleLogOut} className="button w-fit text-center">
+                    Log Out
+                  </button>
+                )}
+              </div>
             </div>
           </Container>
         </div>
