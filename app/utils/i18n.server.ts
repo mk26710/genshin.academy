@@ -13,7 +13,7 @@ export const localeCookie = createCookie("ZENLESS_LOCALE", {
 });
 
 export const safePickLocale = (locale: Nil<string>) =>
-  acceptLanguageParser.pick(supportedLocales, locale || defaultLocale) || defaultLocale;
+  acceptLanguageParser.pick([...supportedLocales], locale || defaultLocale) || defaultLocale;
 
 export const resolveLocale = async (request: Request) => {
   const url = new URL(request.url);
@@ -23,7 +23,7 @@ export const resolveLocale = async (request: Request) => {
 
   const locale =
     acceptLanguageParser.pick(
-      supportedLocales,
+      [...supportedLocales],
       url.searchParams.get("locale") ||
         userLocale ||
         request.headers.get("accept-language") ||
