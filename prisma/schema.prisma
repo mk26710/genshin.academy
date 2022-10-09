@@ -67,19 +67,19 @@ enum PostStatus {
 }
 
 model Post {
-  id           String        @id @default(cuid())
-  slug         String        @unique
+  id           String       @id @default(cuid())
+  slug         String       @unique
   authorId     String?
-  type         PostType      @default(GENERAL)
-  status       PostStatus    @default(PUBLISHED)
-  publishedAt  DateTime      @default(now())
+  type         PostType     @default(GENERAL)
+  status       PostStatus   @default(PUBLISHED)
+  publishedAt  DateTime     @default(now())
   editedAt     DateTime?
   editorId     String?
   title        String
   description  String?
   tags         String
   thumbnailUrl String?
-  lang         String        @db.VarChar(2)
+  lang         String       @db.VarChar(2)
   content      PostContent?
 
   editor User? @relation(fields: [editorId], references: [id], name: "EditedPosts")
