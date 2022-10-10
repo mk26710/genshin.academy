@@ -1,4 +1,4 @@
-import { createCookie, createSession, createSessionStorage, json, redirect } from "@remix-run/node";
+import { createCookie, createSession, createSessionStorage, redirect } from "@remix-run/node";
 import invariant from "tiny-invariant";
 
 import cuid from "cuid";
