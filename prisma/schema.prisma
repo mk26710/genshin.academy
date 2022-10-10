@@ -21,8 +21,8 @@ enum UserRole {
 model User {
   id String @id @default(cuid())
 
-  name        String   @unique @map("username")
-  enabled     Boolean  @default(false)
+  name        String  @unique @map("username")
+  enabled     Boolean @default(false)
   avatarUrl   String?
   accentColor String?
 
