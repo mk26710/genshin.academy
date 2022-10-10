@@ -3,13 +3,14 @@ import { json } from "@remix-run/node";
 import { Response } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useSearchParams } from "react-router-dom";
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, FormEvent } from "react";
 import { useEffect } from "react";
 import { PostCard } from "~/components/cards/PostCard";
 import { Container } from "~/components/Container";
 import { countSearchPostsPaginated, searchPostsPaginated } from "~/models/posts.server";
 import { PostsSearch } from "~/schemas/posts";
 import { Paginator } from "~/components/Paginator";
+import { useTranslations } from "use-intl";
 
 export const loader = async ({ request }: LoaderArgs) => {
   const url = new URL(request.url);
@@ -65,12 +66,34 @@ export const meta: MetaFunction = () => {
 };
 
 const PostsIndexRoute = () => {
+  const t = useTranslations();
+
   const { posts, page, totalPages, searchLangs } = useLoaderData() as LoaderData;
-  const [search, setSearch] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleSearchSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const searchQuery = formData.get("search-query");
+
+    if (typeof searchQuery !== "string") {
+      return;
+    }
+
+    const newSearchParams = new URLSearchParams(searchParams);
+    if (!searchQuery) {
+      newSearchParams.delete("search");
+    } else {
+      newSearchParams.set("search", searchQuery);
+    }
+
+    setSearchParams(newSearchParams);
+  };
 
   const handleLanguageSelect = async (e: ChangeEvent<HTMLInputElement>) => {
     // make set of selected languages and provdei empty as default
-    const langs = new Set(search.get("lang")?.split(",") ?? []);
+    const langs = new Set(searchParams.get("lang")?.split(",") ?? []);
 
     if (e.target.checked && !langs.has(e.target.value)) {
       langs.add(e.target.value);
@@ -78,14 +101,14 @@ const PostsIndexRoute = () => {
       langs.delete(e.target.value);
     }
 
-    const newSearch = new URLSearchParams(search);
+    const newSearch = new URLSearchParams(searchParams);
     if (langs.size > 0) {
       newSearch.set("lang", [...langs].join(","));
     } else {
       newSearch.delete("lang");
     }
 
-    setSearch(newSearch);
+    setSearchParams(newSearch);
   };
 
   useEffect(() => {
@@ -96,6 +119,14 @@ const PostsIndexRoute = () => {
     <Container className="px-0 pt-0 lg:px-[var(--default-gap)]">
       <div className="grid h-full grid-rows-[auto_auto] gap-[var(--default-gap)] lg:grid-cols-[1fr_auto] lg:grid-rows-1">
         <div className="card sticky top-[var(--header-height)] z-[5] flex h-fit w-full flex-col rounded-none border-b border-t-0 bg-white lg:top-[calc(var(--header-height)_+_var(--default-gap))] lg:w-64 lg:rounded-md lg:border-r lg:border-l lg:border-t">
+          <form onSubmit={handleSearchSubmit}>
+            <input
+              name="search-query"
+              placeholder={t("common.enter-query")}
+              className="input-field mb-2"
+            />
+          </form>
+
           <Paginator page={page} totalPages={totalPages} />
 
           <div role="group">
