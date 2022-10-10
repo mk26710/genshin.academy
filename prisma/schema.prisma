@@ -139,10 +139,11 @@ model GenshinCharacterIdentity {
 }
 
 model GenshinCharacterConstellations {
-  id                 String  @id
+  id                 String  @id @default(cuid())
   lang               String  @db.VarChar(2)
   genshinCharacterId String?
   level              Int
+  name               String
   description        String
 
   GenshinCharacter GenshinCharacter? @relation(fields: [genshinCharacterId], references: [id], onDelete: Cascade)
