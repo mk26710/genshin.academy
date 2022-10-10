@@ -7,7 +7,8 @@ const kuki_shinobu: CharacterType = {
   accentColor: "#a6c383",
 
   name: "Kuki Shinobu",
-  description: ``,
+  description:
+    'The capable and reliable deputy leader of the "Arataki Gang." Please note: capable and reliable are not appellations for the "Arataki Gang," but for their deputy leader in specific.',
   birthday: [27, 7],
 
   rarity: 4,
