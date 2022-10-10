@@ -44,7 +44,6 @@ async function seed() {
           identity: {
             create: {
               lang: "en",
-              id: character.id,
               name: character.name,
               description: character.description,
             },
