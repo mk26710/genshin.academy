@@ -7,7 +7,7 @@ import type { User } from "@prisma/client";
 import { getUserById } from "~/models/user.server";
 import { redis } from "~/db/redis.server";
 
-import { text } from "./responses.server";
+import { jsonError, text } from "./responses.server";
 
 invariant(process.env.SESSION_SECRET, "SESSION_SECRET must be set");
 
@@ -120,7 +120,10 @@ export const getUser = async (request: Request) => {
   const user = await getUserById(userId);
   if (user) {
     if (user.enabled !== true)
-      throw json({ user }, { status: 403, statusText: "Your account is disabled." });
+      throw jsonError(
+        { code: "user.disabled", message: "Your account is disabled." },
+        { status: 403 },
+      );
     return user;
   }
 

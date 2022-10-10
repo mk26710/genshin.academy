@@ -25,7 +25,6 @@ import { getMessages, resolveLocale } from "~/utils/i18n.server";
 import { Footer } from "~/components/Footer";
 import Nprogress from "nprogress";
 import { Container } from "./components/Container";
-import { useOptionalUser } from "./hooks/use-optional-user";
 
 export const links: LinksFunction = () => {
   return [
@@ -101,7 +100,6 @@ export default function App() {
 
 export function CatchBoundary() {
   const caught = useCatch();
-  const maybeUser = useOptionalUser();
 
   const fetcher = useFetcher();
 
@@ -134,11 +132,13 @@ export function CatchBoundary() {
               </div>
 
               <div className="flex flex-col items-center justify-center gap-2 md:flex-row ">
-                <Link to="/" role="button" className="button w-fit text-center">
-                  Go to home page
-                </Link>
+                {caught?.data?.error?.code == null && (
+                  <Link to="/" role="button" className="button w-fit text-center">
+                    Go to home page
+                  </Link>
+                )}
 
-                {maybeUser && !maybeUser.enabled && (
+                {caught?.data?.error?.code === "user.disabled" && (
                   <button onClick={handleLogOut} className="button w-fit text-center">
                     Log Out
                   </button>
@@ -147,9 +147,6 @@ export function CatchBoundary() {
             </div>
           </Container>
         </div>
-
-        <Scripts />
-        <LiveReload />
       </body>
     </html>
   );
