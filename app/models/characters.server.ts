@@ -52,3 +52,38 @@ export const getCharactersByBirthday = async (
     },
   });
 };
+
+type GetCharacterById = {
+  langs?: string[];
+};
+
+export const getCharacterById = async (id: string, opts?: GetCharacterById) => {
+  const character = await prisma.genshinCharacter.findUnique({ where: { id } });
+  if (!character) {
+    return null;
+  }
+
+  const identity = await prisma.genshinCharacterIdentity.findMany({
+    where: {
+      lang: {
+        in: opts?.langs,
+      },
+      genshinCharacterId: id,
+    },
+  });
+
+  // const identity = identityEntries.reduce((acc, current) => {
+  //   return { ...acc, [current.lang]: current };
+  // }, {} as Record<string, typeof identityEntries[number]>);
+
+  const constellations = await prisma.genshinCharacterConstellations.findMany({
+    where: {
+      lang: {
+        in: opts?.langs,
+      },
+      genshinCharacterId: id,
+    },
+  });
+
+  return { character, identity, constellations };
+};
