@@ -1,4 +1,3 @@
-import { useCatch } from "@remix-run/react";
 import type { GetUser } from "~/utils/session.server";
 import { useMatchesData } from "./use-matches-data";
 
@@ -9,17 +8,8 @@ function isUser(user: any): user is NonNullable<GetUser> {
 
 export const useOptionalUser = (): GetUser | undefined => {
   const data = useMatchesData("root");
-
-  const caught = useCatch();
-  const caughtData = caught?.data;
-
-  if (data && typeof data === "object" && "user" in data && isUser(data.user)) {
-    return data.user;
+  if (!data || !isUser(data.user)) {
+    return undefined;
   }
-
-  if (caught && typeof caughtData === "object" && "user" in caughtData && isUser(caughtData.user)) {
-    return caughtData.user;
-  }
-
-  return undefined;
+  return data.user;
 };
