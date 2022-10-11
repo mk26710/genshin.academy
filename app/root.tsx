@@ -7,6 +7,7 @@ import {
   Meta,
   Outlet,
   Scripts,
+  ScrollRestoration,
   useCatch,
   useFetcher,
   useLoaderData,
@@ -89,8 +90,7 @@ export default function App() {
           </IntlProvider>
         </div>
 
-        {/* Scroll restoration messes up anchors :/  */}
-        {/* <ScrollRestoration /> */}
+        <ScrollRestoration />
         <Scripts />
         <LiveReload />
       </body>
