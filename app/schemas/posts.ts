@@ -1,5 +1,6 @@
 import { PostType } from "#prisma/client";
 import { z } from "zod";
+import type { UserLocale } from "~/utils/locales";
 import { supportedLocales } from "~/utils/locales";
 
 export const PostsNewOrEditForm = z.object({
@@ -16,7 +17,8 @@ export const PostsNewOrEditForm = z.object({
   text: z.string().min(1, "Text must contain at least one character."),
 });
 
-const langValidator = (val: unknown) => typeof val === "string" && supportedLocales.includes(val);
+const langValidator = (val: unknown) =>
+  typeof val === "string" && supportedLocales.includes(val as UserLocale);
 const typeValidator = (val: unknown) => typeof val === "string" && val in PostType;
 const queryTransformer = (val: unknown) =>
   typeof val === "string" && val.length > 0 ? val : undefined;
