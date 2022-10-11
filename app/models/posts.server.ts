@@ -3,10 +3,10 @@ import type { Post, PostContent, PostType } from "#prisma/client";
 import { prisma } from "~/db/prisma.server";
 
 export const getPostBySlug = async (slug: string) =>
-  await prisma.post.findFirst({ where: { slug }, include: { content: true } });
+  await prisma.post.findUnique({ where: { slug }, include: { content: true } });
 
 export const getPostBySlugWithAuthor = async (slug: string) =>
-  await prisma.post.findFirst({
+  await prisma.post.findUnique({
     where: { slug },
     include: {
       content: true,
