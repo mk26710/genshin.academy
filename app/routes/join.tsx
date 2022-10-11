@@ -8,6 +8,7 @@ import { getUserId, createUserSession } from "~/utils/session.server";
 import { createUser, getUserByName } from "~/models/user.server";
 import { Container } from "~/components/Container";
 import { safeRedirect } from "~/utils/helpers";
+import { UserNameAndPassword } from "~/schemas/user.server";
 
 export async function loader({ request }: LoaderArgs) {
   const userId = await getUserId(request);
@@ -17,21 +18,26 @@ export async function loader({ request }: LoaderArgs) {
 
 export async function action({ request }: ActionArgs) {
   const formData = await request.formData();
-  const name = formData.get("name");
-  const password = formData.get("password");
   const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
 
-  if (typeof name !== "string") {
-    return json({ errors: { name: "Name is invalid", password: null } }, { status: 400 });
+  const safeParse = await UserNameAndPassword.safeParseAsync({
+    name: formData.get("name"),
+    password: formData.get("password"),
+  });
+
+  if (!safeParse.success) {
+    return json(
+      {
+        errors: {
+          name: safeParse.error.format().name?._errors.at(0),
+          password: safeParse.error.format().password?._errors.at(0),
+        },
+      },
+      { status: 400 },
+    );
   }
 
-  if (typeof password !== "string" || password.length === 0) {
-    return json({ errors: { name: null, password: "Password is required" } }, { status: 400 });
-  }
-
-  if (password.length < 8) {
-    return json({ errors: { name: null, password: "Password is too short" } }, { status: 400 });
-  }
+  const { name, password } = safeParse.data;
 
   const existingUser = await getUserByName(name);
   if (existingUser) {
@@ -68,14 +74,6 @@ export default function Join() {
   const actionData = useActionData<typeof action>();
   const nameRef = React.useRef<HTMLInputElement>(null);
   const passwordRef = React.useRef<HTMLInputElement>(null);
-
-  React.useEffect(() => {
-    if (actionData?.errors?.name) {
-      nameRef.current?.focus();
-    } else if (actionData?.errors?.password) {
-      passwordRef.current?.focus();
-    }
-  }, [actionData]);
 
   return (
     <Container className="flex items-center justify-center">
