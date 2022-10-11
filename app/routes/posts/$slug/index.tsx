@@ -122,7 +122,7 @@ const PostFooter: FunctionComponent<Pick<LoaderData, "post">> = ({ post }) => {
         <img
           src={post.author?.avatarUrl ?? ""}
           alt="Author avatar"
-          className="h-20 w-20 rounded-full"
+          className="h-20 w-20 rounded-full object-cover"
         />
         <div className="flex flex-col items-start justify-center">
           <p className="text-xl font-semibold">{post.author?.name}</p>

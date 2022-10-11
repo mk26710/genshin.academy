@@ -136,7 +136,7 @@ export const Header = () => {
                 {maybeUser.avatarUrl && (
                   <img
                     src={maybeUser.avatarUrl}
-                    className="block h-7 w-7 rounded-full"
+                    className="block h-7 w-7 rounded-full object-cover"
                     alt="Avatar"
                   />
                 )}
