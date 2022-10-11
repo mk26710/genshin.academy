@@ -1,4 +1,4 @@
-import { PostType } from "@prisma/client";
+import { PostType } from "#prisma/client";
 import { z } from "zod";
 import { supportedLocales } from "~/utils/locales";
 

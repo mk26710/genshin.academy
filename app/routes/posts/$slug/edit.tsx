@@ -1,4 +1,4 @@
-import { PostType } from "@prisma/client";
+import { PostType } from "#prisma/client";
 import type { ActionArgs, LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";

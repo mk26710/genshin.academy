@@ -3,7 +3,7 @@ import invariant from "tiny-invariant";
 
 import cuid from "cuid";
 import dayjs from "dayjs";
-import type { User } from "@prisma/client";
+import type { User } from "#prisma/client";
 import { getUserById } from "~/models/user.server";
 import { redis } from "~/db/redis.server";
 

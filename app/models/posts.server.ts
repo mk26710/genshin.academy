@@ -1,4 +1,4 @@
-import type { Post, PostContent, PostType } from "@prisma/client";
+import type { Post, PostContent, PostType } from "#prisma/client";
 
 import { prisma } from "~/db/prisma.server";
 

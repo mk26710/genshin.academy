@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { Link } from "@remix-run/react";
 
 import { StaticPicture } from "~/components/StaticPicture";
-import type { GenshinCharacter, GenshinCharacterIdentity } from "@prisma/client";
+import type { GenshinCharacter, GenshinCharacterIdentity } from "#prisma/client";
 
 interface Props {
   character: {

@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./app/*"],
-      "#/*": ["./*"]
+      "#/*": ["./*"],
+      "#prisma/client": ["./prisma/lib/client"]
     },
     "skipLibCheck": true,
 

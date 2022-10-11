@@ -1,4 +1,4 @@
-import type { Post, UserRole, User, UserRoles } from "@prisma/client";
+import type { Post, UserRole, User, UserRoles } from "#prisma/client";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type UserWithRole = Record<any, unknown> & { roles: Array<Pick<UserRoles, "title">> };

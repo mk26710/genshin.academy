@@ -1,4 +1,4 @@
-import type { Post } from "@prisma/client";
+import type { Post } from "#prisma/client";
 import { Link } from "@remix-run/react";
 import type { FunctionComponent } from "react";
 import { useVisitorLocale } from "~/hooks/use-visitor-locale";
