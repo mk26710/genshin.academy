@@ -73,18 +73,22 @@ const CharactersIdRoute = () => {
             {identity?.description}
           </p>
 
-          <h2 id="consteallations" className="mt-6 mb-4 text-2xl font-semibold">
-            Consteallations
-          </h2>
+          {constellations.length > 0 && (
+            <>
+              <h2 id="consteallations" className="mt-6 mb-4 text-2xl font-semibold">
+                Consteallations
+              </h2>
 
-          <ol className="list-decimal pl-4 marker:text-primary-500">
-            {constellations?.map(({ level, description, name }) => (
-              <li key={`const-${level}`} id={`constellation-${level}`} className="[&+li]:mt-2">
-                <h3 className="font-semibold00 text-lg">{name}</h3>
-                <p className="whitespace-pre-line">{description}</p>
-              </li>
-            ))}
-          </ol>
+              <ol className="list-decimal pl-4 marker:text-primary-500">
+                {constellations?.map(({ level, description, name }) => (
+                  <li key={`const-${level}`} id={`constellation-${level}`} className="[&+li]:mt-2">
+                    <h3 className="font-semibold00 text-lg">{name}</h3>
+                    <p className="whitespace-pre-line">{description}</p>
+                  </li>
+                ))}
+              </ol>
+            </>
+          )}
         </div>
 
         <div className="lg:max-w-xs xl:max-w-xl">
