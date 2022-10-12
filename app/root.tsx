@@ -63,6 +63,21 @@ export default function App() {
   const transition = useTransition();
   const { messages, locale } = useLoaderData() as LoaderData;
 
+  const matches = useMatches();
+
+  const matchesHas = (id: string) =>
+    matches.some((m) => m.id.toLowerCase().includes(id.toLowerCase()));
+
+  const removeTransitionsRemoverClass = () => {
+    if (!document) return;
+    if (!document.body) return;
+
+    setTimeout(() => {
+      document.body.classList.remove("transitions-be-gone");
+      console.log("CSS transitions are enabled again!");
+    }, 200);
+  };
+
   useEffect(() => {
     Nprogress.configure({
       showSpinner: false,
@@ -77,10 +92,9 @@ export default function App() {
     }
   }, [transition.state]);
 
-  const matches = useMatches();
-
-  const matchesHas = (id: string) =>
-    matches.some((m) => m.id.toLowerCase().includes(id.toLowerCase()));
+  useEffect(() => {
+    removeTransitionsRemoverClass();
+  }, []);
 
   return (
     <html lang={locale}>
@@ -90,7 +104,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="h-full">
+      <body className="transitions-be-gone h-full">
         <div className="app">
           <IntlProvider locale={locale} messages={messages}>
             <Header />
@@ -135,7 +149,7 @@ export function CatchBoundary() {
         <Meta />
         <Links />
       </head>
-      <body className="h-full">
+      <body className="transitions-be-gone h-full">
         <div className="app">
           <Container className="flex flex-wrap items-center justify-center px-2">
             <div className="flex flex-col items-center gap-4">

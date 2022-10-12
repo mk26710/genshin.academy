@@ -7,8 +7,12 @@
   text-rendering: optimizeLegibility;
 }
 
-.app * {
-  -moz-transition: none !important; /* firefox is just built different ok */
+.transitions-be-gone * {
+  transition: none !important;
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
 }
 
 :root {
