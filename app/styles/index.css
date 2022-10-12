@@ -5,6 +5,9 @@
 
 * {
   text-rendering: optimizeLegibility;
+}
+
+.app * {
   -moz-transition: none !important; /* firefox is just built different ok */
 }
 
