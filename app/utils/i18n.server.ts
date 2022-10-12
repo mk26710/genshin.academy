@@ -1,8 +1,10 @@
 import fs from "fs/promises";
 import path from "path";
-import acceptLanguageParser from "accept-language-parser";
-import { defaultLocale, supportedLocales } from "./locales";
+
 import { createCookie } from "@remix-run/node";
+import acceptLanguageParser from "accept-language-parser";
+
+import { defaultLocale, supportedLocales } from "./locales";
 
 export const localeCookie = createCookie("ZENLESS_LOCALE", {
   maxAge: 2_592_000, // 30 days

@@ -1,4 +1,5 @@
 import type { ActionArgs, ActionFunction } from "@remix-run/node";
+
 import { Response } from "@remix-run/node";
 
 import { logout } from "~/utils/session.server";

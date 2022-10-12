@@ -1,7 +1,9 @@
-import { useFetcher } from "@remix-run/react";
 import type { ChangeEvent } from "react";
+
+import { useFetcher } from "@remix-run/react";
 import { generatePath, useLocation } from "react-router";
 import { useTranslations } from "use-intl";
+
 import { Container } from "~/components/Container";
 import { useVisitorLocale } from "~/hooks/use-visitor-locale";
 import { supportedLocales } from "~/utils/locales";

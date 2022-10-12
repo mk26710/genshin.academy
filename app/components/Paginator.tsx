@@ -1,3 +1,5 @@
+import type { FunctionComponent } from "react";
+
 import {
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
@@ -5,7 +7,6 @@ import {
   ChevronRightIcon,
 } from "@heroicons/react/20/solid";
 import { useSearchParams } from "@remix-run/react";
-import type { FunctionComponent } from "react";
 
 type PaginatorProps = {
   page: number;

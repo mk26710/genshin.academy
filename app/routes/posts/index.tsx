@@ -1,16 +1,17 @@
 import type { LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { Response } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import { useSearchParams } from "react-router-dom";
 import type { ChangeEvent, FormEvent } from "react";
+
+import { json, Response } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import { useTranslations } from "use-intl";
+
 import { PostCard } from "~/components/cards/PostCard";
 import { Container } from "~/components/Container";
+import { Paginator } from "~/components/Paginator";
 import { countSearchPostsPaginated, searchPostsPaginated } from "~/models/posts.server";
 import { PostsSearch } from "~/schemas/posts";
-import { Paginator } from "~/components/Paginator";
-import { useTranslations } from "use-intl";
 
 export const loader = async ({ request }: LoaderArgs) => {
   const url = new URL(request.url);

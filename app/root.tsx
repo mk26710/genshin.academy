@@ -1,4 +1,6 @@
 import type { LinksFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
+import type { AbstractIntlMessages } from "use-intl";
+
 import { json } from "@remix-run/node";
 import {
   Link,
@@ -13,18 +15,19 @@ import {
   useLoaderData,
   useTransition,
 } from "@remix-run/react";
-
-import tailwindStylesheetUrl from "~/styles/tailwind.css";
-import nprogressStylesheetUrl from "~/styles/nprogress.css";
-import { getUser } from "~/utils/session.server";
-import { useEffect } from "react";
-import { Header } from "~/components/Header";
-import type { AbstractIntlMessages } from "use-intl";
-import { IntlProvider } from "use-intl";
-import { getMessages, resolveLocale } from "~/utils/i18n.server";
-import { Footer } from "~/components/Footer";
 import Nprogress from "nprogress";
+import { useEffect } from "react";
+import { IntlProvider } from "use-intl";
+
+import { Footer } from "~/components/Footer";
+import { Header } from "~/components/Header";
+import { getMessages, resolveLocale } from "~/utils/i18n.server";
+import { getUser } from "~/utils/session.server";
+
 import { Container } from "./components/Container";
+
+import nprogressStylesheetUrl from "~/styles/nprogress.css";
+import tailwindStylesheetUrl from "~/styles/tailwind.css";
 
 export const links: LinksFunction = () => {
   return [

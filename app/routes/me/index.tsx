@@ -1,7 +1,9 @@
-import { Square2StackIcon } from "@heroicons/react/20/solid";
 import type { LoaderArgs, MetaFunction } from "@remix-run/node";
+
+import { Square2StackIcon } from "@heroicons/react/20/solid";
 import { json } from "@remix-run/node";
 import { useLocale } from "use-intl";
+
 import { Container } from "~/components/Container";
 import { RoleBadge } from "~/components/RoleBadge";
 import { useUser } from "~/hooks/use-user";

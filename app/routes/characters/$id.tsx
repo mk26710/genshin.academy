@@ -1,8 +1,10 @@
 import type { LoaderArgs, SerializeFrom } from "@remix-run/node";
+
 import { json } from "@remix-run/node";
 import { useCatch, useLoaderData, useSearchParams } from "@remix-run/react";
 import { useEffect } from "react";
 import { useTranslations } from "use-intl";
+
 import { Container } from "~/components/Container";
 import { useVisitorLocale } from "~/hooks/use-visitor-locale";
 import { getCharacterById } from "~/models/characters.server";

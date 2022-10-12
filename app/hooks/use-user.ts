@@ -1,4 +1,5 @@
 import type { getUser } from "~/utils/session.server";
+
 import { useOptionalUser } from "./use-optional-user";
 
 export const useUser = (): NonNullable<Awaited<ReturnType<typeof getUser>>> => {

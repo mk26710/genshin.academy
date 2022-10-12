@@ -1,6 +1,8 @@
 import type { Post } from "#prisma/client";
-import { Link } from "@remix-run/react";
 import type { FunctionComponent } from "react";
+
+import { Link } from "@remix-run/react";
+
 import { useVisitorLocale } from "~/hooks/use-visitor-locale";
 
 type PostCardProps = Pick<Post, "slug" | "thumbnailUrl" | "title" | "description" | "publishedAt">;

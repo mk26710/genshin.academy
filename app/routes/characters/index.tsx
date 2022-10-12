@@ -1,11 +1,12 @@
 import type { LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
+import type { ChangeEvent, FunctionComponent } from "react";
+
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useAtom } from "jotai";
-import type { ChangeEvent, FunctionComponent } from "react";
-import { useEffect } from "react";
-import { useDeferredValue } from "react";
+import { useEffect, useDeferredValue } from "react";
 import { useTranslations } from "use-intl";
+
 import {
   characterSearchAtom,
   charactersFilterFivestarsAtom,

@@ -1,5 +1,6 @@
 import type { GenshinCharacter, GenshinCharacterIdentity } from "#prisma/client";
 import type { FunctionComponent } from "react";
+
 import { Link } from "@remix-run/react";
 import { useTranslations } from "use-intl";
 

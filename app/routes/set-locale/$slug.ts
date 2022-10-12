@@ -1,8 +1,10 @@
 import type { ActionFunction } from "@remix-run/node";
+import type { UserLocale } from "~/utils/locales";
+
 import { redirect } from "@remix-run/node";
+
 import { safeRedirect } from "~/utils/helpers";
 import { localeCookie, safePickLocale } from "~/utils/i18n.server";
-import type { UserLocale } from "~/utils/locales";
 import { supportedLocales } from "~/utils/locales";
 import { text } from "~/utils/responses.server";
 

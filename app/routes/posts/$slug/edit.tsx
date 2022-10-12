@@ -1,8 +1,9 @@
-import { PostType } from "#prisma/client";
 import type { ActionArgs, LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
-import { json } from "@remix-run/node";
+
+import { redirect, json } from "@remix-run/node";
 import { Form, useActionData, useLoaderData } from "@remix-run/react";
+
+import { PostType } from "#prisma/client";
 import { Container } from "~/components/Container";
 import { useUser } from "~/hooks/use-user";
 import { getPostBySlugWithAuthor, updatePostBySlug } from "~/models/posts.server";

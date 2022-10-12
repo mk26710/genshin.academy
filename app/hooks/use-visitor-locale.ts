@@ -1,4 +1,5 @@
 import { defaultLocale } from "~/utils/locales";
+
 import { useMatchesData } from "./use-matches-data";
 
 export const useVisitorLocale = () => {

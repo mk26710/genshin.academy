@@ -1,14 +1,14 @@
 import type { ActionArgs, LoaderArgs, MetaFunction } from "@remix-run/node";
+
 import { json, redirect } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import * as React from "react";
 
-import { getUserId, createUserSession } from "~/utils/session.server";
-
-import { createUser, getUserByName } from "~/models/user.server";
 import { Container } from "~/components/Container";
-import { safeRedirect } from "~/utils/helpers";
+import { createUser, getUserByName } from "~/models/user.server";
 import { UserNameAndPassword } from "~/schemas/user.server";
+import { safeRedirect } from "~/utils/helpers";
+import { getUserId, createUserSession } from "~/utils/session.server";
 
 export async function loader({ request }: LoaderArgs) {
   const userId = await getUserId(request);

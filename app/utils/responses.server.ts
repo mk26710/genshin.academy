@@ -1,6 +1,6 @@
 import type { ResponseInit, SerializeFrom } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { Response } from "@remix-run/node";
+
+import { json, Response } from "@remix-run/node";
 
 type TextResponseInit = Omit<ResponseInit, "statusText">;
 

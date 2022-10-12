@@ -1,7 +1,9 @@
 import type { MetaFunction } from "@remix-run/node";
-import { useAtom } from "jotai";
 import type { FunctionComponent } from "react";
+
+import { useAtom } from "jotai";
 import { useLocale, useTranslations } from "use-intl";
+
 import {
   critDamageAtom,
   critRateAtom,

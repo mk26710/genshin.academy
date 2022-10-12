@@ -1,4 +1,5 @@
 import { useCatch } from "@remix-run/react";
+
 import { Container } from "./Container";
 
 export const RouteLevelCatchBoundary = () => {

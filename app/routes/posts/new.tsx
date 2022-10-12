@@ -1,15 +1,16 @@
 import type { UserRole } from "#prisma/client";
-import { PostType } from "#prisma/client";
 import type { ActionArgs, LoaderArgs } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
-import { json } from "@remix-run/node";
+import type { ensureAuthenticatedUser } from "~/utils/session.server";
+
+import { redirect, json } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
+
+import { PostType } from "#prisma/client";
 import { Container } from "~/components/Container";
 import { useUser } from "~/hooks/use-user";
 import { createPost, getPostBySlug } from "~/models/posts.server";
 import { PostsNewOrEditForm } from "~/schemas/posts";
 import { text } from "~/utils/responses.server";
-import type { ensureAuthenticatedUser } from "~/utils/session.server";
 import { ensureAuthorizedUser } from "~/utils/session.server";
 
 const allowedRoles: UserRole[] = ["OWNER", "ADMIN", "WRITER"];

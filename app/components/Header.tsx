@@ -2,10 +2,11 @@ import type { FunctionComponent, PropsWithChildren } from "react";
 
 import { Menu } from "@headlessui/react";
 import { Bars3BottomRightIcon, XMarkIcon } from "@heroicons/react/20/solid";
-import { useTranslations } from "use-intl";
 import { Link, NavLink, useFetcher, useLocation } from "@remix-run/react";
-import { generatePath } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { generatePath } from "react-router-dom";
+import { useTranslations } from "use-intl";
+
 import { useOptionalUser } from "~/hooks/use-optional-user";
 import { useVisitorLocale } from "~/hooks/use-visitor-locale";
 
