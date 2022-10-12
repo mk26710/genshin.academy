@@ -92,6 +92,9 @@ export default function App() {
     }
   }, [transition.state]);
 
+  // this is to prevent the weird layout shift
+  // on initial page loads for components with
+  // transitions
   useEffect(() => {
     removeTransitionsRemoverClass();
   }, []);
