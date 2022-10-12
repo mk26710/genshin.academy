@@ -13,6 +13,7 @@ import {
   useCatch,
   useFetcher,
   useLoaderData,
+  useMatches,
   useTransition,
 } from "@remix-run/react";
 import Nprogress from "nprogress";
@@ -76,6 +77,11 @@ export default function App() {
     }
   }, [transition.state]);
 
+  const matches = useMatches();
+
+  const matchesHas = (id: string) =>
+    matches.some((m) => m.id.toLowerCase().includes(id.toLowerCase()));
+
   return (
     <html lang={locale}>
       <head>
@@ -93,7 +99,11 @@ export default function App() {
           </IntlProvider>
         </div>
 
-        <ScrollRestoration />
+        {!matchesHas("posts/$slug") && (
+          <>
+            <ScrollRestoration />
+          </>
+        )}
         <Scripts />
         <LiveReload />
       </body>
