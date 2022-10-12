@@ -17,7 +17,7 @@
     "generate:css": "tailwindcss -i ./app/styles/index.css -o ./app/styles/tailwind.css",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "setup": "prisma generate && prisma migrate deploy && prisma db seed",
-    "start": "cross-env NODE_ENV=production node ./build/server.js",
+    "start": "cross-env NODE_ENV=production node --require ./node_modules/dotenv/config ./build/server.js",
     "typecheck": "tsc -b",
     "validate": "run-p lint typecheck"
   },
