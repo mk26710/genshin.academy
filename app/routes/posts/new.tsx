@@ -7,6 +7,7 @@ import { Form, useActionData } from "@remix-run/react";
 
 import { PostType } from "#prisma/client";
 import { Container } from "~/components/Container";
+import { UserAvatar } from "~/components/UserAvatar";
 import { useUser } from "~/hooks/use-user";
 import { createPost, getPostBySlug } from "~/models/posts.server";
 import { PostsNewOrEditForm } from "~/schemas/posts";
@@ -75,11 +76,7 @@ const PostsNewRoute = () => {
   return (
     <Container>
       <div className="mb-8 flex flex-row gap-x-2">
-        <img
-          src={user.avatarUrl ?? undefined}
-          alt="User avatar"
-          className="h-16 w-16 rounded-full"
-        />
+        <UserAvatar avatarUrl={user.avatarUrl} className="h-16 w-16" />
         <div className="self-center">{user.name}</div>
       </div>
 

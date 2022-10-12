@@ -16,6 +16,7 @@ import { Container } from "~/components/Container";
 import { ContentsTable } from "~/components/ContentsTable";
 import { RoleBadge } from "~/components/RoleBadge";
 import { RouteLevelCatchBoundary } from "~/components/RouteLevelCatchBoundary";
+import { UserAvatar } from "~/components/UserAvatar";
 import { useOptionalUser } from "~/hooks/use-optional-user";
 import { deletePostById, getPostBySlugWithAuthor } from "~/models/posts.server";
 import { markdownParser } from "~/utils/markdown.server";
@@ -132,11 +133,7 @@ const PostFooter: FunctionComponent<Pick<LoaderData, "post">> = ({ post }) => {
         </div>
       )}
       <div className="flex flex-grow flex-row gap-x-2">
-        <img
-          src={post.author?.avatarUrl ?? ""}
-          alt="Author avatar"
-          className="h-20 w-20 rounded-full object-cover"
-        />
+        <UserAvatar avatarUrl={post.author?.avatarUrl} className="h-20 w-20" />
         <div className="flex flex-col items-start justify-center">
           <p className="text-xl font-semibold">{post.author?.name}</p>
           {post.author?.roles.map(({ title }, i) => (

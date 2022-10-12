@@ -6,6 +6,7 @@ import { useLocale } from "use-intl";
 
 import { Container } from "~/components/Container";
 import { RoleBadge } from "~/components/RoleBadge";
+import { UserAvatar } from "~/components/UserAvatar";
 import { useUser } from "~/hooks/use-user";
 import { ensureAuthenticatedUser } from "~/utils/session.server";
 
@@ -52,15 +53,10 @@ const MeRoute = () => {
           </div>
         </div>
 
-        {user.avatarUrl && (
-          <img
-            src={user.avatarUrl}
-            width="128"
-            height="128"
-            alt={`${user.name}'s avatar`}
-            className="self-center rounded-full"
-          />
-        )}
+        <UserAvatar
+          avatarUrl={user.avatarUrl}
+          className="block h-[128px] w-[128px] self-center outline outline-1 outline-gray-300"
+        />
 
         <h1 className="self-center text-xl font-semibold">{user.name}</h1>
         <div className="mt-4 grid auto-rows-min grid-cols-[auto_1fr] gap-x-2">

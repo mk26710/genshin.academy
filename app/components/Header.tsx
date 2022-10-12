@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { generatePath } from "react-router-dom";
 import { useTranslations } from "use-intl";
 
+import { UserAvatar } from "~/components/UserAvatar";
 import { useOptionalUser } from "~/hooks/use-optional-user";
 import { useVisitorLocale } from "~/hooks/use-visitor-locale";
 
@@ -134,17 +135,7 @@ export const Header = () => {
 
             {maybeUser && (
               <UserMenu>
-                {maybeUser.avatarUrl && (
-                  <img
-                    src={maybeUser.avatarUrl}
-                    className="block h-7 w-7 rounded-full object-cover"
-                    alt="Avatar"
-                  />
-                )}
-
-                {!maybeUser.avatarUrl && (
-                  <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary-500 to-blue-500" />
-                )}
+                <UserAvatar avatarUrl={maybeUser.avatarUrl} className="block h-7 w-7" />
               </UserMenu>
             )}
 
