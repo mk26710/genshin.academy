@@ -237,7 +237,7 @@ const PostsSlugEditRoute = () => {
             id="text"
             name="text"
             defaultValue={post.content?.raw}
-            className="textarea-field min-h-[2.5rem] w-full resize-y"
+            className="textarea-field h-[30rem] min-h-[2.5rem] w-full resize-y"
             required
           />
           {issueOf("text") && <div className="pt-1 text-red-700">{issueOf("text")?.message}</div>}
