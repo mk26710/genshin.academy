@@ -1,7 +1,9 @@
 import type { LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
+
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useEffect } from "react";
+
 import { BirthdayCard } from "~/components/cards/BirthdayCard";
 import { PostCard } from "~/components/cards/PostCard";
 import { Container } from "~/components/Container";
@@ -9,6 +11,7 @@ import { getCharactersByBirthday } from "~/models/characters.server";
 import { getLatestPost } from "~/models/posts.server";
 import { resolveLocale } from "~/utils/i18n.server";
 import { defaultLocale } from "~/utils/locales";
+import { generateMeta } from "~/utils/meta-generator";
 
 type LoaderData = SerializeFrom<typeof loader>;
 
@@ -28,9 +31,10 @@ export const loader = async ({ request }: LoaderArgs) => {
   return json({ latestPost, charactersWithBirthdays });
 };
 
-export const meta: MetaFunction = () => ({
-  title: "Home - GENSHIN.ZENLESS",
-});
+export const meta: MetaFunction = () =>
+  generateMeta({
+    title: "Home",
+  });
 
 const IndexRoute = () => {
   const { latestPost, charactersWithBirthdays } = useLoaderData() as LoaderData;
