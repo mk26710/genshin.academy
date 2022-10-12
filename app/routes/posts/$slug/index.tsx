@@ -1,10 +1,17 @@
-import type { ActionArgs, LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { useFetcher, useLoaderData, useNavigate } from "@remix-run/react";
+import type {
+  ActionArgs,
+  LinksFunction,
+  LoaderArgs,
+  MetaFunction,
+  SerializeFrom,
+} from "@remix-run/node";
 import type { FunctionComponent } from "react";
+
+import { redirect, json } from "@remix-run/node";
+import { useFetcher, useLoaderData, useNavigate } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "use-intl";
+
 import { Container } from "~/components/Container";
 import { ContentsTable } from "~/components/ContentsTable";
 import { RoleBadge } from "~/components/RoleBadge";
@@ -15,6 +22,12 @@ import { markdownParser } from "~/utils/markdown.server";
 import { canUserDeletePost, canUserEditPost } from "~/utils/permissions";
 import { text } from "~/utils/responses.server";
 import { getUser } from "~/utils/session.server";
+
+import markdownCss from "~/styles/markdown.css";
+
+export const links: LinksFunction = () => {
+  return [{ rel: "stylesheet", href: markdownCss }];
+};
 
 type LoaderData = SerializeFrom<typeof loader>;
 
