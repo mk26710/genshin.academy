@@ -1,4 +1,4 @@
-import type { LoaderArgs, SerializeFrom } from "@remix-run/node";
+import type { LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
 
 import { json } from "@remix-run/node";
 import { useCatch, useLoaderData, useSearchParams } from "@remix-run/react";
@@ -10,6 +10,7 @@ import { useVisitorLocale } from "~/hooks/use-visitor-locale";
 import { getCharacterById } from "~/models/characters.server";
 import { avatarPath } from "~/utils/helpers";
 import { resolveLocale } from "~/utils/i18n.server";
+import { generateMeta } from "~/utils/meta-generator";
 import { jsonError } from "~/utils/responses.server";
 
 export const loader = async ({ request, params }: LoaderArgs) => {
@@ -43,6 +44,17 @@ export const loader = async ({ request, params }: LoaderArgs) => {
 };
 
 type LoaderData = SerializeFrom<typeof loader>;
+
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  if (!data?.character || !data?.identity) return { title: "Error" };
+
+  return generateMeta({
+    title: data.identity.at(0)?.name,
+    description: data.identity.at(0)?.description,
+    imageUrl: `/img/characters/${data.character.id}/icon.webp`,
+    themeColor: data.character.accentColor,
+  });
+};
 
 const CharactersIdRoute = () => {
   const locale = useVisitorLocale();
