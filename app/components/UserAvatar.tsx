@@ -15,6 +15,8 @@ export const UserAvatar = forwardRef<HTMLImageElement, UserAvatarProps>((props, 
     <img
       src={props.avatarUrl ?? defaultAvatarUrl}
       ref={ref}
+      decoding="async"
+      loading="lazy"
       className={`rounded-full object-cover ${props.className}`}
     />
   );
