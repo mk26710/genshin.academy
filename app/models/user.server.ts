@@ -36,6 +36,23 @@ export const getUserByName = async (name: User["name"]) => {
   });
 };
 
+export const getUserByNameOrId = async (nameOrId: string) =>
+  await prisma.user.findFirst({
+    where: {
+      OR: [{ id: nameOrId }, { name: nameOrId }],
+    },
+    include: {
+      roles: {
+        orderBy: {
+          title: "asc",
+        },
+        select: {
+          title: true,
+        },
+      },
+    },
+  });
+
 export const createUser = async (name: User["name"], password: string) => {
   const hashedPassword = await bcrypt.hash(password, 10);
   return prisma.user.create({
