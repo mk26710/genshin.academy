@@ -4,6 +4,7 @@ import { useCatch } from "@remix-run/react";
 
 import { Container } from "~/components/Container";
 import { getUserByNameOrId } from "~/models/user.server";
+import { ifNullToUndefined } from "~/utils/helpers";
 import { generateMeta } from "~/utils/meta-generator";
 import { userHasAnyRole } from "~/utils/permissions";
 import { text } from "~/utils/responses.server";
@@ -15,8 +16,6 @@ export const loader = async ({ request, params }: LoaderArgs) => {
   if (typeof params?.slug !== "string") {
     throw text("Something went wrong with the slug.", { status: 500 });
   }
-
-  console.log({ slug: params.slug });
 
   const user = await getUserByNameOrId(params.slug);
   if (!user) {
@@ -35,7 +34,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
   return generateMeta({
     title: data.user.name,
-    imageUrl: data.user.avatarUrl,
+    imageUrl: ifNullToUndefined(data.user.avatarUrl),
   });
 };
 
