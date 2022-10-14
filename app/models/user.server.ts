@@ -2,37 +2,31 @@ import type { Password, User } from "#prisma/client";
 
 import bcrypt from "bcryptjs";
 
+import { Prisma } from "#prisma/client";
 import { prisma } from "~/db/prisma.server";
+
+export const includedWithUser = Prisma.validator<Prisma.UserInclude>()({
+  roles: {
+    orderBy: {
+      title: "asc",
+    },
+    select: {
+      title: true,
+    },
+  },
+});
 
 export const getUserById = async (id: User["id"]) => {
   return prisma.user.findUnique({
     where: { id },
-    include: {
-      roles: {
-        orderBy: {
-          title: "asc",
-        },
-        select: {
-          title: true,
-        },
-      },
-    },
+    include: includedWithUser,
   });
 };
 
 export const getUserByName = async (name: User["name"]) => {
   return prisma.user.findUnique({
     where: { name },
-    include: {
-      roles: {
-        orderBy: {
-          title: "asc",
-        },
-        select: {
-          title: true,
-        },
-      },
-    },
+    include: includedWithUser,
   });
 };
 
@@ -41,16 +35,7 @@ export const getUserByNameOrId = async (nameOrId: string) =>
     where: {
       OR: [{ id: nameOrId }, { name: nameOrId }],
     },
-    include: {
-      roles: {
-        orderBy: {
-          title: "asc",
-        },
-        select: {
-          title: true,
-        },
-      },
-    },
+    include: includedWithUser,
   });
 
 export const createUser = async (name: User["name"], password: string) => {
