@@ -44,9 +44,5 @@ export const safeRedirect = (
 };
 
 export const ifNullToUndefined = <T>(val: T) => {
-  if (val === null) {
-    return undefined;
-  }
-
-  return val;
+  return val ?? undefined;
 };
