@@ -63,5 +63,5 @@ module.exports = {
       },
     },
   },
-  ignorePatterns: ["node_modules/", "build/", "dist/", "out/", ".next/"],
+  ignorePatterns: ["node_modules/", "build/", "dist/", "out/", ".next/", "prisma/lib"],
 };
