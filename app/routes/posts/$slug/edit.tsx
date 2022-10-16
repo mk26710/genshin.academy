@@ -1,9 +1,9 @@
 import type { ActionArgs, LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
 
+import { PostType } from "@prisma/client";
 import { redirect, json } from "@remix-run/node";
 import { Form, useActionData, useLoaderData } from "@remix-run/react";
 
-import { PostType } from "#prisma/client";
 import { Container } from "~/components/Container";
 import { UserAvatar } from "~/components/UserAvatar";
 import { useUser } from "~/hooks/use-user";

@@ -1,4 +1,4 @@
-import type { User } from "#/prisma/lib/client";
+import type { User } from "@prisma/client";
 import type { FunctionComponent } from "react";
 
 import { useNavigate } from "@remix-run/react";

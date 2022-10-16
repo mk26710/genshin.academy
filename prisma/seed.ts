@@ -1,5 +1,6 @@
-import { Prisma, PrismaClient } from "#prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+
 import { charactersArray } from "./data/characters";
 
 const prisma = new PrismaClient();

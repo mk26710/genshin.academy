@@ -1,4 +1,4 @@
-import type { User } from "#prisma/client";
+import type { User } from "@prisma/client";
 
 import { createCookie, createSession, createSessionStorage, redirect } from "@remix-run/node";
 import cuid from "cuid";

@@ -1,4 +1,4 @@
-import type { Post } from "#prisma/client";
+import type { Post } from "@prisma/client";
 import type { FunctionComponent } from "react";
 
 import { Link } from "@remix-run/react";

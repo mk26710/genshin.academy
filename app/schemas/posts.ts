@@ -1,8 +1,8 @@
 import type { UserLocale } from "~/utils/locales";
 
+import { PostType } from "@prisma/client";
 import { z } from "zod";
 
-import { PostType } from "#prisma/client";
 import { supportedLocales } from "~/utils/locales";
 
 export const PostsNewOrEditForm = z.object({

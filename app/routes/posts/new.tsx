@@ -1,11 +1,11 @@
-import type { UserRole } from "#prisma/client";
+import type { UserRole } from "@prisma/client";
 import type { ActionArgs, LoaderArgs } from "@remix-run/node";
 import type { ensureAuthenticatedUser } from "~/utils/session.server";
 
+import { PostType } from "@prisma/client";
 import { redirect, json } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 
-import { PostType } from "#prisma/client";
 import { Container } from "~/components/Container";
 import { UserAvatar } from "~/components/UserAvatar";
 import { useUser } from "~/hooks/use-user";

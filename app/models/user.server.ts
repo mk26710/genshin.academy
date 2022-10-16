@@ -1,8 +1,8 @@
-import type { Password, User } from "#prisma/client";
+import type { Password, User } from "@prisma/client";
 
+import { Prisma } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
-import { Prisma } from "#prisma/client";
 import { prisma } from "~/db/prisma.server";
 
 export const includedWithUser = Prisma.validator<Prisma.UserInclude>()({
