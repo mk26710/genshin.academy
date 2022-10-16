@@ -43,6 +43,18 @@ export const safeRedirect = (
   return to;
 };
 
-export const ifNullToUndefined = <T>(val: T) => {
-  return val ?? undefined;
-};
+export const undefinify = ifNullToUndefined;
+export function ifNullToUndefined<T>(val: T) {
+  if (val === null) {
+    return undefined;
+  }
+  return val;
+}
+
+export const undefinifyString = ifNotStringToUndefined;
+export function ifNotStringToUndefined<T>(val: T) {
+  if (typeof val === "string") {
+    return val;
+  }
+  return undefined;
+}
