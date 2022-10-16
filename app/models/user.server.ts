@@ -101,3 +101,22 @@ export const changePasswordOfUser = async (userId: User["id"], newPassword: stri
 
   return true;
 };
+
+type UpdateUserOptions = {
+  name?: User["name"];
+  avatarUrl?: User["avatarUrl"];
+  enabled?: User["enabled"];
+  updatedAt: User["updatedAt"];
+};
+
+export const updateUserById = async (id: string, opts?: UpdateUserOptions) => {
+  return await prisma.user.updateMany({
+    where: { id },
+    data: {
+      name: opts?.name,
+      enabled: opts?.enabled,
+      avatarUrl: opts?.avatarUrl,
+      updatedAt: opts?.updatedAt,
+    },
+  });
+};
