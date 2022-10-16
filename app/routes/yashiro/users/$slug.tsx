@@ -1,16 +1,16 @@
 import type { ActionArgs, LoaderArgs, MetaFunction } from "@remix-run/node";
 import type { ChangeEvent } from "react";
 
-import { PencilIcon, XMarkIcon } from "@heroicons/react/20/solid";
+import { PencilIcon, TrashIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import { Prisma } from "@prisma/client";
-import { json } from "@remix-run/node";
-import { Form, useActionData, useCatch, useLoaderData } from "@remix-run/react";
+import { redirect, json } from "@remix-run/node";
+import { Form, useActionData, useCatch, useFetcher, useLoaderData } from "@remix-run/react";
 import { useEffect, useState } from "react";
 
 import { Container } from "~/components/Container";
 import { UserAvatar } from "~/components/UserAvatar";
 import { prisma } from "~/db/prisma.server";
-import { getUserById, getUserByNameOrId } from "~/models/user.server";
+import { deleteUserById, getUserById, getUserByNameOrId } from "~/models/user.server";
 import { stringOrUndefined, undefinify } from "~/utils/helpers";
 import { generateMeta } from "~/utils/meta-generator";
 import { userHasAnyRole } from "~/utils/permissions";
@@ -59,6 +59,11 @@ export const action = async ({ request }: ActionArgs) => {
     );
   }
 
+  if (request.method === "DELETE") {
+    await deleteUserById(targetId);
+    return redirect("/yashiro/users");
+  }
+
   const target = await getUserById(targetId);
   if (!target) {
     return json<ActionData>(
@@ -91,8 +96,6 @@ export const action = async ({ request }: ActionArgs) => {
     });
   } catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      console.log("\n\n\n\nasdasdasdasdasdasd\n\n\n\n");
-
       return json<ActionData>(
         {
           success: false,
@@ -127,10 +130,19 @@ const YashiroUsersSlugRoute = () => {
   const { user } = useLoaderData<typeof loader>();
   const actionData = useActionData<typeof action>();
 
+  const fetcher = useFetcher();
+
   const [isEditing, setIsEditing] = useState(false);
   const [madeChanges, setMadeChanges] = useState(false);
 
   const [avatarUrl, setAvatarUrl] = useState("");
+
+  const handleDeleteClick = () => {
+    const yesOrNo = confirm("you sure you wanna delete that user?");
+    if (yesOrNo === true) {
+      fetcher.submit({ "user.id": user.id }, { method: "delete", replace: true });
+    }
+  };
 
   const handleEditClick = () => {
     setIsEditing((val) => !val);
@@ -173,15 +185,26 @@ const YashiroUsersSlugRoute = () => {
           <h2 className="text-sm">Error: {actionData.errors?.message}</h2>
         </div>
       )}
-      <div className="card relative flex flex-col gap-[var(--default-gap)] md:flex-row">
+
+      <div className="flex flex-col justify-end gap-2 md:flex-row">
         <button
           onClick={handleEditClick}
-          className="button top-0 right-0 flex w-full flex-row items-center justify-center gap-2 self-end md:absolute md:w-fit"
+          className="button flex w-full flex-row items-center justify-center gap-2 self-end md:w-fit"
         >
           {isEditing ? <XMarkIcon className="h-5 w-5" /> : <PencilIcon className="h-5 w-5" />}
           <span>{isEditing ? "Stop Editing" : "Start Editing"}</span>
         </button>
 
+        <button
+          onClick={handleDeleteClick}
+          className="button flex w-full flex-row items-center justify-center gap-2 self-end md:w-fit"
+        >
+          <TrashIcon className="h-5 w-5" />
+          <span>Delete user</span>
+        </button>
+      </div>
+
+      <div className="card relative flex flex-col gap-[var(--default-gap)] md:flex-row">
         <UserAvatar avatarUrl={avatarUrl} className="aspect-square h-32 w-32 self-center" />
 
         <Form
