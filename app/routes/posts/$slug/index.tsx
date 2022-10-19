@@ -19,7 +19,9 @@ import { RouteLevelCatchBoundary } from "~/components/RouteLevelCatchBoundary";
 import { UserAvatar } from "~/components/UserAvatar";
 import { useOptionalUser } from "~/hooks/use-optional-user";
 import { deletePostById, getPostBySlugWithAuthor } from "~/models/posts.server";
+import { orUndefined } from "~/utils/helpers";
 import { markdownParser } from "~/utils/markdown.server";
+import { generateMeta } from "~/utils/meta-generator";
 import { canUserDeletePost, canUserEditPost } from "~/utils/permissions";
 import { text } from "~/utils/responses.server";
 import { getUser } from "~/utils/session.server";
@@ -91,10 +93,12 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     };
   }
 
-  return {
+  return generateMeta({
     title: data.post.title,
-    description: data.post.description,
-  };
+    description: orUndefined(data.post.description),
+    keywords: data.post.tags,
+    imageUrl: orUndefined(data.post.thumbnailUrl),
+  });
 };
 
 const PostFooter: FunctionComponent<Pick<LoaderData, "post">> = ({ post }) => {
