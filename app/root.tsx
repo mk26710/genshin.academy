@@ -116,11 +116,6 @@ export default function App() {
           </IntlProvider>
         </div>
 
-        {!matchesHas("posts/$slug") && (
-          <>
-            <ScrollRestoration />
-          </>
-        )}
         <Scripts />
         <LiveReload />
       </body>
