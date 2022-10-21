@@ -9,7 +9,7 @@ import type { FunctionComponent } from "react";
 
 import { redirect, json } from "@remix-run/node";
 import { useFetcher, useLoaderData, useNavigate } from "@remix-run/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useLocale, useTranslations } from "use-intl";
 
 import { Container } from "~/components/Container";
@@ -20,7 +20,7 @@ import { UserAvatar } from "~/components/UserAvatar";
 import { useOptionalUser } from "~/hooks/use-optional-user";
 import { deletePostById, getPostBySlugWithAuthor } from "~/models/posts.server";
 import { orUndefined } from "~/utils/helpers";
-import { markdownParser } from "~/utils/markdown.server";
+import { extractHeadings, markdownParser } from "~/utils/markdown.server";
 import { generateMeta } from "~/utils/meta-generator";
 import { canUserDeletePost, canUserEditPost } from "~/utils/permissions";
 import { text } from "~/utils/responses.server";
@@ -44,14 +44,18 @@ export const loader = async ({ params }: LoaderArgs) => {
     throw text(`Not found`, { status: 404 });
   }
 
-  const contentProcessed = (await markdownParser.process(post.content.raw)).toString();
+  const vfile = await markdownParser.process(post.content.raw);
+
+  const html = vfile.toString();
+  const headings = extractHeadings(html);
 
   return json({
     slug: params.slug,
     post: {
       ...post,
       content: {
-        processed: contentProcessed,
+        html,
+        headings,
       },
     },
   });
@@ -156,22 +160,11 @@ const PostFooter: FunctionComponent<Pick<LoaderData, "post">> = ({ post }) => {
 const PostsSlugIndexRoute = () => {
   const { post } = useLoaderData<typeof loader>();
 
-  const [headings, setHeadings] = useState<Array<string>>([]);
   const contentRoot = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const el = contentRoot.current;
-    const headlineNodes = el?.querySelectorAll("h1, h2");
-    if (!headlineNodes) {
-      return;
-    }
-
-    const headlines = Array.from(headlineNodes);
-
-    setHeadings(headlines.map((el) => `${el.getAttribute("id")}`));
-
-    console.log(el?.querySelectorAll("h1, h2"));
-  }, [contentRoot]);
+    console.log(post.content.headings);
+  }, [post]);
 
   return (
     <Container>
@@ -185,14 +178,17 @@ const PostsSlugIndexRoute = () => {
             <section
               ref={contentRoot}
               className="markdown-content prose prose-purple w-full max-w-none px-4 py-6 text-justify text-base prose-thead:border-none prose-thead:border-gray-200 dark:prose-invert dark:prose-hr:border-neutral-700 xl:px-8 xl:py-8"
-              dangerouslySetInnerHTML={{ __html: post.content.processed }}
+              dangerouslySetInnerHTML={{ __html: post.content.html }}
             />
 
             <PostFooter post={post} />
           </div>
         </article>
 
-        <ContentsTable headings={headings} containerClassName="hidden lg:block" />
+        <ContentsTable
+          headings={post.content.headings.filter((h) => h.level && h.level <= 2)}
+          containerClassName="hidden lg:block"
+        />
       </div>
     </Container>
   );
