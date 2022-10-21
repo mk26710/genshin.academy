@@ -4,7 +4,12 @@ import { useTranslations } from "use-intl";
 
 interface Props {
   title?: string;
-  headings: Array<string>;
+  headings: Array<
+    {
+      id?: string | null;
+      value?: string | null;
+    } & Record<string, unknown>
+  >;
   containerClassName?: string;
 }
 
@@ -22,11 +27,11 @@ export const ContentsTable: FC<Props> = ({ title, headings, containerClassName }
           <div className="flex flex-col gap-y-0">
             {headings.map((heading) => (
               <a
-                key={`guide-nav-${heading}`}
-                href={`#${heading}`}
+                key={`guide-nav-${heading.id}`}
+                href={`#${heading.id}`}
                 className="block rounded-lg px-4 py-2 text-sm font-medium capitalize text-neutral-700 hover:bg-gray-100 dark:text-neutral-400"
               >
-                {heading.replaceAll("-", " ")}
+                {heading.value}
               </a>
             ))}
           </div>
