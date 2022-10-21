@@ -22,11 +22,6 @@ const links = [
     hasNested: true,
   },
   {
-    i18nKey: "common.guides",
-    path: "/guides",
-    hasNested: true,
-  },
-  {
     i18nKey: "common.calculators",
     path: "/calc",
   },
