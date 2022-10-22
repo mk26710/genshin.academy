@@ -9,11 +9,9 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration,
   useCatch,
   useFetcher,
   useLoaderData,
-  useMatches,
   useTransition,
 } from "@remix-run/react";
 import Nprogress from "nprogress";
@@ -32,7 +30,6 @@ import tailwindStylesheetUrl from "~/styles/tailwind.css";
 
 export const links: LinksFunction = () => {
   return [
-    { rel: "preload", href: tailwindStylesheetUrl, as: "style" },
     { rel: "stylesheet", href: tailwindStylesheetUrl },
     { rel: "stylesheet", href: nprogressStylesheetUrl },
   ];
@@ -62,11 +59,6 @@ export async function loader({ request }: LoaderArgs) {
 export default function App() {
   const transition = useTransition();
   const { messages, locale } = useLoaderData() as LoaderData;
-
-  const matches = useMatches();
-
-  const matchesHas = (id: string) =>
-    matches.some((m) => m.id.toLowerCase().includes(id.toLowerCase()));
 
   const removeTransitionsRemoverClass = () => {
     if (!document) return;
