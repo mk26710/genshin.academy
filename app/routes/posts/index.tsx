@@ -1,5 +1,6 @@
 import type { LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
 import type { ChangeEvent, FormEvent } from "react";
+import type { UserLocale } from "~/utils/locales";
 
 import { json, Response } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
@@ -12,6 +13,8 @@ import { Container } from "~/components/Container";
 import { Paginator } from "~/components/Paginator";
 import { countSearchPostsPaginated, searchPostsPaginated } from "~/models/posts.server";
 import { PostsSearch } from "~/schemas/posts";
+import { orUndefined } from "~/utils/helpers";
+import { supportedLocales } from "~/utils/locales";
 
 export const loader = async ({ request }: LoaderArgs) => {
   const url = new URL(request.url);
@@ -20,10 +23,7 @@ export const loader = async ({ request }: LoaderArgs) => {
   const page = pageParam != null ? parseInt(pageParam.toString()) : 1;
   const postsPerPage = 6;
 
-  const searchLangs = await Promise.resolve(url.searchParams.get("lang"))
-    .then((val) => val?.split(",") ?? [])
-    .then((arr) => arr.filter((el) => el.length > 0)) // filter out empty strings
-    .then((arr) => [...new Set(arr)]); // make an array of uniques
+  const searchLang = orUndefined(url.searchParams.get("lang"));
 
   const parseResult = PostsSearch.safeParse({
     skip: (page - 1) * postsPerPage,
@@ -32,7 +32,7 @@ export const loader = async ({ request }: LoaderArgs) => {
     authorName: url.searchParams.get("author") ?? undefined,
     type: url.searchParams.get("type") ?? undefined,
     query: url.searchParams.get("search")?.toString().trim().replaceAll(/\s+/gi, " & "),
-    lang: searchLangs,
+    lang: searchLang,
   });
 
   if (parseResult.success !== true) {
@@ -55,7 +55,7 @@ export const loader = async ({ request }: LoaderArgs) => {
 
   const totalPages = Math.ceil(totalPosts / postsPerPage);
 
-  return json({ posts, totalPages, page, searchLangs });
+  return json({ posts, totalPages, page, searchLang });
 };
 
 type LoaderData = SerializeFrom<typeof loader>;
@@ -69,7 +69,7 @@ export const meta: MetaFunction = () => {
 const PostsIndexRoute = () => {
   const t = useTranslations();
 
-  const { posts, page, totalPages, searchLangs } = useLoaderData() as LoaderData;
+  const { posts, page, totalPages, searchLang } = useLoaderData() as LoaderData;
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleSearchSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -92,28 +92,20 @@ const PostsIndexRoute = () => {
     setSearchParams(newSearchParams);
   };
 
-  const handleLanguageSelect = async (e: ChangeEvent<HTMLInputElement>) => {
-    // make set of selected languages and provdei empty as default
-    const langs = new Set(searchParams.get("lang")?.split(",") ?? []);
+  const handleLanguageSelect = async (e: ChangeEvent<HTMLSelectElement>) => {
+    const newSearchParams = new URLSearchParams(searchParams);
 
-    if (e.target.checked && !langs.has(e.target.value)) {
-      langs.add(e.target.value);
-    } else if (!e.target.checked && langs.has(e.target.value)) {
-      langs.delete(e.target.value);
-    }
-
-    const newSearch = new URLSearchParams(searchParams);
-    if (langs.size > 0) {
-      newSearch.set("lang", [...langs].join(","));
+    if (!supportedLocales.includes(e.target.value as UserLocale)) {
+      newSearchParams.delete("lang");
     } else {
-      newSearch.delete("lang");
+      newSearchParams.set("lang", e.target.value);
     }
 
-    setSearchParams(newSearch);
+    setSearchParams(newSearchParams);
   };
 
   useEffect(() => {
-    console.log(searchLangs);
+    console.log(searchLang);
   }, []);
 
   return (
@@ -121,38 +113,36 @@ const PostsIndexRoute = () => {
       <div className="grid h-full grid-rows-[auto_auto] gap-[var(--default-gap)] lg:grid-cols-[1fr_auto] lg:grid-rows-1">
         <div className="card sticky top-[var(--header-height)] z-[5] flex h-fit w-full flex-col rounded-none border-b border-t-0 bg-white lg:top-[calc(var(--header-height)_+_var(--default-gap))] lg:w-64 lg:rounded-md lg:border-r lg:border-l lg:border-t">
           <form onSubmit={handleSearchSubmit}>
-            <input
-              name="search-query"
-              placeholder={t("common.enter-query")}
-              className="input-field mb-2"
-            />
+            <div>
+              <label htmlFor="search-query" className="text-xs font-bold uppercase opacity-60">
+                {t("common.query")}
+              </label>
+              <input
+                id="search-query"
+                name="search-query"
+                placeholder={t("common.enter-query")}
+                className="input-field mb-2 w-full"
+              />
+            </div>
           </form>
 
-          <Paginator page={page} totalPages={totalPages} />
-
-          <div role="group">
-            <label>
-              <input
-                type="checkbox"
-                name="lang"
-                value="ru"
-                onChange={handleLanguageSelect}
-                checked={searchLangs.includes("ru")}
-              />{" "}
-              ru
+          <div className="flex flex-col">
+            <label htmlFor="search-language" className="text-xs font-bold uppercase opacity-60">
+              {t("common.language")}
             </label>
-
-            <label>
-              <input
-                type="checkbox"
-                name="lang"
-                value="en"
-                onChange={handleLanguageSelect}
-                checked={searchLangs.includes("en")}
-              />{" "}
-              en
-            </label>
+            <select
+              id="search-language"
+              defaultValue={searchLang}
+              onChange={handleLanguageSelect}
+              className="select-field mb-2"
+            >
+              <option value={undefined}>Any</option>
+              <option value="en">English</option>
+              <option value="ru">Русский</option>
+            </select>
           </div>
+
+          <Paginator page={page} totalPages={totalPages} />
         </div>
 
         {posts.length <= 0 && (
