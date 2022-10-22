@@ -106,5 +106,8 @@
   },
   "engines": {
     "node": ">=16"
+  },
+  "resolutions": {
+    "**remix-run/**/unset-value": "2.0.1"
   }
 }
