@@ -29,7 +29,7 @@ export const PostsSearch = z.object({
   skip: z.number().int().min(0),
   take: z.number().int().min(1),
   query: z.string().transform(queryTransformer).optional(),
-  lang: z.array(z.custom<string>(langValidator, { message: "Incorrect language provided" })),
+  lang: z.custom<UserLocale>(langValidator, { message: "Incorrect language provided" }).optional(),
   order: z.union([z.literal("asc"), z.literal("desc")]).default("desc"),
   authorName: z.string().optional(),
   type: z.custom<PostType>(typeValidator, { message: "Incorrect post type provided" }).optional(),
