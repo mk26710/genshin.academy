@@ -120,3 +120,45 @@ export const updateUserById = async (id: string, opts?: UpdateUserOptions) => {
     },
   });
 };
+
+type LinkDiscordAccountOptions = {
+  id: string;
+  name?: string;
+};
+
+export const linkDiscordAccountByUserId = async (id: string, options: LinkDiscordAccountOptions) =>
+  prisma.linkedAccounts.create({
+    data: {
+      userId: id,
+      provider: "discord",
+      providerAccountId: options.id,
+      providerAccountName: options.name,
+    },
+  });
+
+export const unlinkDiscordAccountByUserId = async (id: string) =>
+  prisma.linkedAccounts.deleteMany({
+    where: {
+      userId: id,
+      provider: "discord",
+    },
+  });
+
+export const getUserByDiscordAccount = async (discordUserId: string) =>
+  prisma.user.findFirst({
+    where: {
+      linkedAccounts: {
+        some: {
+          providerAccountId: discordUserId,
+        },
+      },
+    },
+    include: includedWithUser,
+  });
+
+export const getLinkedAccountsById = async (id: string) =>
+  prisma.linkedAccounts.findMany({
+    where: {
+      userId: id,
+    },
+  });
