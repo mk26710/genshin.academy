@@ -70,7 +70,7 @@ interface SearchPostsPaginatedOptions {
   take: number;
   authorName?: string;
   searchTitle?: string;
-  lang?: string[];
+  lang?: string;
   type?: PostType;
   order?: "asc" | "desc";
 }
@@ -81,9 +81,7 @@ export const countSearchPostsPaginated = async (
   await prisma.post.count({
     where: {
       type: options.type,
-      lang: {
-        in: options.lang,
-      },
+      lang: options.lang,
       author: {
         name: options.authorName,
       },
@@ -105,9 +103,7 @@ export const searchPostsPaginated = async ({
     take,
     where: {
       type: options.type,
-      lang: {
-        in: options.lang,
-      },
+      lang: options.lang,
       author: {
         name: options.authorName,
       },
