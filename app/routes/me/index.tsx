@@ -1,23 +1,38 @@
-import type { LoaderArgs, MetaFunction } from "@remix-run/node";
+import type { ActionArgs, LoaderArgs, MetaFunction } from "@remix-run/node";
 
-import { Square2StackIcon } from "@heroicons/react/20/solid";
 import { json } from "@remix-run/node";
+import { useFetcher, useLoaderData } from "@remix-run/react";
 import { useLocale } from "use-intl";
 
 import { Container } from "~/components/Container";
 import { RoleBadge } from "~/components/RoleBadge";
 import { UserAvatar } from "~/components/UserAvatar";
 import { useUser } from "~/hooks/use-user";
+import { getLinkedAccountsById, unlinkDiscordAccountByUserId } from "~/models/user.server";
+import { getDiscordLinkOAuthURL } from "~/oauth/discord.server";
 import { ensureAuthenticatedUser } from "~/utils/session.server";
-
-type LoaderData = typeof loader;
 
 export const loader = async ({ request }: LoaderArgs) => {
   const user = await ensureAuthenticatedUser(request);
-  return json({ user });
+  const linkedAccounts = await getLinkedAccountsById(user.id);
+  const discordOauthUrl = getDiscordLinkOAuthURL();
+  return json({ user, linkedAccounts, discordOauthUrl });
 };
 
-export const meta: MetaFunction<LoaderData> = ({ data }) => {
+export const action = async ({ request }: ActionArgs) => {
+  const user = await ensureAuthenticatedUser(request);
+
+  const formData = await request.formData();
+  const action = formData.get("action");
+
+  if (action === "unlink.discord") {
+    await unlinkDiscordAccountByUserId(user.id);
+  }
+
+  return null;
+};
+
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   const { user } = data;
 
   return {
@@ -29,36 +44,35 @@ const MeRoute = () => {
   const locale = useLocale();
   const user = useUser();
 
-  const copyUserIdToClipboard = () => {
-    if (navigator != null) {
-      navigator.clipboard.writeText(user.id);
+  const { linkedAccounts, discordOauthUrl } = useLoaderData<typeof loader>();
+  const discordAccount = linkedAccounts.find((acc) => acc.provider === "discord");
+
+  const fetcher = useFetcher();
+
+  const unlinkDiscordAccount = () => {
+    const confirmed = confirm(
+      `Are you 100% sure you want to unlink discord account with id ${discordAccount?.providerAccountId}?`,
+    );
+
+    if (confirmed) {
+      fetcher.submit(new URLSearchParams({ action: "unlink.discord" }), { method: "patch" });
     }
   };
 
   return (
-    <Container className="grid place-items-center">
-      <div className="card flex w-full flex-col gap-2 pt-2 lg:w-96">
+    <Container className="flex flex-col items-center justify-center">
+      <div className="card flex w-full flex-col gap-2 lg:w-96">
         <input type="text" name="currentUserId" value={user.id} hidden readOnly />
-
-        <div className="mb-4 grid w-fit grid-cols-[auto_auto_auto] grid-rows-1 text-sm dark:text-neutral-600">
-          <p>ID:</p>
-          <p className="ml-1 mr-4">{user.id}</p>
-          <div className="relative">
-            <button onClick={copyUserIdToClipboard} className="peer">
-              <Square2StackIcon className="h-5 w-5 hover:opacity-60 active:opacity-40" />
-            </button>
-            <span className="absolute bottom-6 -left-7 ml-4 rounded bg-black px-2 py-1.5 text-xs font-medium text-white opacity-0 peer-hover:opacity-100 lg:bottom-8">
-              Copy
-            </span>
-          </div>
-        </div>
 
         <UserAvatar
           avatarUrl={user.avatarUrl}
           className="block h-[128px] w-[128px] self-center outline outline-1 outline-gray-300"
         />
 
-        <h1 className="self-center text-xl font-semibold">{user.name}</h1>
+        <div className="flex flex-col items-center justify-center">
+          <h2 className="text-xl font-semibold">{user.name}</h2>
+          <h6 className="text-xs opacity-40">ID: {user.id}</h6>
+        </div>
         <div className="mt-4 grid auto-rows-min grid-cols-[auto_1fr] gap-x-2">
           <h1 className="font-semibold">Roles:</h1>
           <h2>
@@ -71,6 +85,32 @@ const MeRoute = () => {
 
           <h1 className="font-semibold">Joined:</h1>
           <h2>{new Date(user.createdAt).toLocaleString(locale)}</h2>
+        </div>
+      </div>
+
+      <div className="card mt-2 flex w-full flex-col gap-2 lg:w-96">
+        <h3 className="text-sm font-bold uppercase">Linked accounts</h3>
+
+        <div className="flex flex-row flex-wrap gap-2">
+          <span className="flex-1">Discord</span>
+          {discordAccount && (
+            <button
+              onClick={unlinkDiscordAccount}
+              className="button group disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <span className="inline group-hover:hidden group-focus:hidden group-active:hidden">
+                Linked
+              </span>
+              <span className="hidden group-hover:inline group-focus:inline group-active:inline">
+                Unlink?
+              </span>
+            </button>
+          )}
+          {!discordAccount && (
+            <a href={discordOauthUrl} rel="noreferrer" role="button" className="button">
+              Link
+            </a>
+          )}
         </div>
       </div>
     </Container>
