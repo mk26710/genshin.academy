@@ -4,14 +4,17 @@
 
   "characters": "{ count, plural, one {Character} other {Characters} }",
   "guides": "{ count, plural, one {Guide} other {Guides} }",
-  "posts": "{ count, plural, one {Post} other {Posts} }", 
+  "posts": "{ count, plural, one {Post} other {Posts} }",
   "calculators": "{ count, plural, one {Calculator} other {Calculators} }",
   "settings": "{ count, plural, one {Setting} other {Settings} }",
 
   "search-by-name": "Search by name",
   "search-by-title": "Search by title",
-  
+
   "enter-query": "Enter query...",
+  "query": "Query",
+  "language": "Lagnuage",
+  "any": "Any",
 
   "contents": "Contents",
 
@@ -19,9 +22,16 @@
 
   "birthdays": "Birthdays today",
   "birthdays-none": "Today there are no birthdays :(",
+  "bday-wish": "Happy Birthday, {name}!",
+  "bday-description": "{name} is celebrating a birthday today! Don't forget to check the in-game mail for a present!",
 
   "my-profile": "My Profile",
   "create-post": "Create Post",
+  "logout": "Log Out",
+
+  "latest-post": "Latest Post",
+
+  "view-in-english": "View in English",
 
   "error-500": "Internal Server Error"
 }

@@ -1,12 +1,9 @@
-/* eslint-env node */
-
 module.exports = {
   root: true,
   parser: "@typescript-eslint/parser",
   plugins: ["@typescript-eslint", "import"],
   extends: [
     "plugin:@typescript-eslint/recommended",
-    "next",
     "plugin:import/recommended",
     "plugin:import/typescript",
     "plugin:prettier/recommended",
@@ -66,12 +63,5 @@ module.exports = {
       },
     },
   },
-  ignorePatterns: [
-    "node_modules/",
-    "build/",
-    "dist/",
-    "out/",
-    ".next/",
-    "src/data/guides/compiled/",
-  ],
+  ignorePatterns: ["node_modules/", "build/", "dist/", "out/", ".next/", "prisma/lib"],
 };

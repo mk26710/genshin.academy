@@ -1,120 +1,152 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
 
 generator client {
-    provider        = "prisma-client-js"
-    previewFeatures = ["fullTextSearch"]
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
-datasource db {
-    provider = "postgresql"
-    // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.text annotations in model Account below
-    // Further reading: 
-    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
-    url      = env("DATABASE_URL")
-}
-
-model AllowedDiscordIds {
-    id String @unique
-}
-
-enum Role {
-    ADMIN
-    MODERATOR
-    WRITER
-    REGULAR
+enum UserRole {
+  OWNER
+  ADMIN
+  MODERATOR
+  DEVELOPER
+  WRITER
+  SUPPORTER
+  DEFAULT
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    role          Role      @default(REGULAR)
-    createdAt     DateTime  @default(now())
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
-    posts         Post[]    @relation("AuthoredPosts")
-    editedPosts   Post[]    @relation("EditedPosts")
+  id String @id @default(cuid())
+
+  name        String  @unique @map("username")
+  enabled     Boolean @default(false)
+  avatarUrl   String?
+  accentColor String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  roles    UserRoles[]
+  password Password?
+
+  posts       Post[] @relation("AuthoredPosts")
+  editedPosts Post[] @relation("EditedPosts")
 }
 
-// Necessary for Next auth
-model Account {
-    id                String  @id @default(cuid())
-    userId            String
-    type              String
-    provider          String
-    providerAccountId String
-    refresh_token     String? @db.Text
-    access_token      String? @db.Text
-    expires_at        Int?
-    token_type        String?
-    scope             String?
-    id_token          String? @db.Text
-    session_state     String?
-    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+model UserRoles {
+  userId String
+  title  UserRole @default(DEFAULT)
 
-    @@unique([provider, providerAccountId])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, title])
 }
 
-// Necessary for Next auth
-model Session {
-    id           String   @id @default(cuid())
-    sessionToken String   @unique
-    userId       String
-    expires      DateTime
-    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+model Password {
+  userId String @unique
+  hash   String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
-// Necessary for Next auth
-model VerificationToken {
-    identifier String
-    token      String   @unique
-    expires    DateTime
-
-    @@unique([identifier, token])
-}
+// Posts
 
 enum PostType {
-    CHARACTER_GUIDE
-    GENERAL_GUIDE
-    GENERAL
+  CHARACTER_GUIDE
+  GENERAL_GUIDE
+  GENERAL
 }
 
 enum PostStatus {
-    PUBLISHED
-    AWAITING_APPROVAL
-    HIDDEN
+  PUBLISHED
+  AWAITING_APPROVAL
+  HIDDEN
 }
 
 model Post {
-    id           String       @id @default(cuid())
-    slug         String       @unique
-    authorId     String?
-    type         PostType     @default(GENERAL)
-    status       PostStatus   @default(AWAITING_APPROVAL)
-    publishedAt  DateTime     @default(now())
-    editedAt     DateTime?
-    editorId     String?
-    title        String
-    description  String?
-    tags         String
-    thumbnailUrl String?
-    lang         String       @default("en")
-    content      PostContent?
+  id           String       @id @default(cuid())
+  slug         String       @unique
+  authorId     String?
+  type         PostType     @default(GENERAL)
+  status       PostStatus   @default(PUBLISHED)
+  publishedAt  DateTime     @default(now())
+  editedAt     DateTime?
+  editorId     String?
+  title        String
+  description  String?
+  tags         String
+  thumbnailUrl String?
+  lang         String       @db.VarChar(2)
+  content      PostContent?
 
-    editor User? @relation(fields: [editorId], references: [id], name: "EditedPosts")
-    author User? @relation(fields: [authorId], references: [id], name: "AuthoredPosts")
+  editor User? @relation(fields: [editorId], references: [id], name: "EditedPosts")
+  author User? @relation(fields: [authorId], references: [id], name: "AuthoredPosts")
 }
 
 model PostContent {
-    id     String @id @default(cuid())
-    postId String @unique
-    raw    String
+  id     String @id @default(cuid())
+  postId String @unique
+  raw    String
 
-    post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
 
-    @@unique([id, postId])
+// Genshin specific models
+
+enum GenshinVision {
+  PYRO
+  HYDRO
+  ELECTRO
+  CRYO
+  DENDRO
+  ANEMO
+  GEO
+}
+
+enum GenshinWeapon {
+  SWORD
+  CLAYMORE
+  BOW
+  CATALYST
+  POLEARM
+}
+
+model GenshinCharacter {
+  id             String                           @id @default(cuid())
+  accentColor    String                           @db.VarChar(7)
+  birthDay       Int
+  birthMonth     Int
+  rarity         Int
+  vision         GenshinVision
+  weapon         GenshinWeapon
+  identity       GenshinCharacterIdentity[]
+  constellations GenshinCharacterConstellations[]
+}
+
+model GenshinCharacterIdentity {
+  id                 String  @id @default(cuid())
+  lang               String  @db.VarChar(2)
+  genshinCharacterId String?
+  name               String
+  description        String
+
+  GenshinCharacter GenshinCharacter? @relation(fields: [genshinCharacterId], references: [id], onDelete: Cascade)
+
+  @@unique([lang, genshinCharacterId])
+}
+
+model GenshinCharacterConstellations {
+  id                 String  @id @default(cuid())
+  lang               String  @db.VarChar(2)
+  genshinCharacterId String?
+  level              Int
+  name               String
+  description        String
+
+  GenshinCharacter GenshinCharacter? @relation(fields: [genshinCharacterId], references: [id], onDelete: Cascade)
+
+  @@unique([lang, level, genshinCharacterId])
 }
