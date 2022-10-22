@@ -1,25 +1,28 @@
 import type { ActionArgs, LoaderArgs, MetaFunction } from "@remix-run/node";
 
 import { json, redirect } from "@remix-run/node";
-import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
+import { Form, Link, useActionData, useLoaderData, useSearchParams } from "@remix-run/react";
 import * as React from "react";
 
 import { Container } from "~/components/Container";
 import { verifyLogin } from "~/models/user.server";
+import { getDiscordLoginOAuthURL } from "~/oauth/discord.server";
 import { safeRedirect } from "~/utils/helpers";
 import { createUserSession, getUserId } from "~/utils/session.server";
 
 export async function loader({ request }: LoaderArgs) {
   const userId = await getUserId(request);
   if (userId) return redirect("/");
-  return json({});
+
+  const discordOAuthUrl = getDiscordLoginOAuthURL();
+  return json({ discordOAuthUrl });
 }
 
 export async function action({ request }: ActionArgs) {
   const formData = await request.formData();
   const name = formData.get("name");
   const password = formData.get("password");
-  const redirectTo = safeRedirect(formData.get("redirectTo"), "/notes");
+  const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
   const remember = formData.get("remember");
 
   if (typeof name !== "string") {
@@ -55,11 +58,20 @@ export const meta: MetaFunction = () => {
 };
 
 export default function LoginPage() {
+  const { discordOAuthUrl } = useLoaderData<typeof loader>();
+  const actionData = useActionData<typeof action>();
+
   const [searchParams] = useSearchParams();
   const redirectTo = searchParams.get("redirectTo") || "/";
-  const actionData = useActionData<typeof action>();
+
   const nameRef = React.useRef<HTMLInputElement>(null);
   const passwordRef = React.useRef<HTMLInputElement>(null);
+
+  const redirectToDiscord = () => {
+    if (typeof window !== "undefined") {
+      window.location.href = discordOAuthUrl;
+    }
+  };
 
   React.useEffect(() => {
     if (actionData?.errors?.name) {
@@ -72,7 +84,7 @@ export default function LoginPage() {
   return (
     <Container className="flex items-center justify-center">
       <div className="w-full max-w-md px-8">
-        <Form method="post" className="space-y-6">
+        <Form method="post" className="space-y-4">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">
               Username
@@ -125,6 +137,13 @@ export default function LoginPage() {
           <button type="submit" className="button w-full">
             Log in
           </button>
+
+          <div>
+            <button type="button" onClick={redirectToDiscord} className="button w-full">
+              Login with Discord
+            </button>
+          </div>
+
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input
