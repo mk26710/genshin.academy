@@ -4,7 +4,7 @@ import { Link, useCatch } from "@remix-run/react";
 
 import { Container } from "~/components/Container";
 import { getUserByDiscordAccount } from "~/models/user.server";
-import { exchageDiscordCode, getDiscordAccount } from "~/oauth/discord.server";
+import { exchageDiscordCode, getDiscordAccount } from "~/utils/oauth/discord.server";
 import { text } from "~/utils/responses.server";
 import { createUserSession } from "~/utils/session.server";
 

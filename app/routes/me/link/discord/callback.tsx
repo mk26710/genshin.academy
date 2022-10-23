@@ -6,7 +6,7 @@ import { useLoaderData } from "@remix-run/react";
 
 import { Container } from "~/components/Container";
 import { getLinkedAccountsById, linkDiscordAccountByUserId } from "~/models/user.server";
-import { exchageDiscordCode, getDiscordAccount } from "~/oauth/discord.server";
+import { exchageDiscordCode, getDiscordAccount } from "~/utils/oauth/discord.server";
 import { text } from "~/utils/responses.server";
 import { ensureAuthenticatedUser } from "~/utils/session.server";
 

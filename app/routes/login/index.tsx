@@ -6,8 +6,8 @@ import * as React from "react";
 
 import { Container } from "~/components/Container";
 import { verifyLogin } from "~/models/user.server";
-import { getDiscordLoginOAuthURL } from "~/oauth/discord.server";
 import { safeRedirect } from "~/utils/helpers";
+import { getDiscordLoginOAuthURL } from "~/utils/oauth/discord.server";
 import { createUserSession, getUserId } from "~/utils/session.server";
 
 export const handle: RouteHandle = {

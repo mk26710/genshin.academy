@@ -9,7 +9,7 @@ import { RoleBadge } from "~/components/RoleBadge";
 import { UserAvatar } from "~/components/UserAvatar";
 import { useUser } from "~/hooks/use-user";
 import { getLinkedAccountsById, unlinkDiscordAccountByUserId } from "~/models/user.server";
-import { getDiscordLinkOAuthURL } from "~/oauth/discord.server";
+import { getDiscordLinkOAuthURL } from "~/utils/oauth/discord.server";
 import { ensureAuthenticatedUser } from "~/utils/session.server";
 
 export const handle: RouteHandle = {
