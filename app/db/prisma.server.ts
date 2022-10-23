@@ -1,5 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 
+import { requiredServerEnv } from "~/utils/helpers.server";
+
+requiredServerEnv("DATABASE_URL");
+
 let prisma: PrismaClient;
 
 declare global {
