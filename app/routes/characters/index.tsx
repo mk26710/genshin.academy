@@ -19,6 +19,11 @@ import { getCharactersList } from "~/models/characters.server";
 import { resolveLocale } from "~/utils/i18n.server";
 import { defaultLocale } from "~/utils/locales";
 
+export const handle: RouteHandle = {
+  id: "characters",
+  withScrollRestoration: true,
+};
+
 export const meta: MetaFunction = ({}) => ({
   title: "Characters - GENSHIN.ZENLESS",
 });

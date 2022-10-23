@@ -10,6 +10,11 @@ import { getDiscordLoginOAuthURL } from "~/oauth/discord.server";
 import { safeRedirect } from "~/utils/helpers";
 import { createUserSession, getUserId } from "~/utils/session.server";
 
+export const handle: RouteHandle = {
+  id: "login",
+  withScrollRestoration: true,
+};
+
 export async function loader({ request }: LoaderArgs) {
   const userId = await getUserId(request);
   if (userId) return redirect("/");

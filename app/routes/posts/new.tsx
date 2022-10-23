@@ -19,6 +19,11 @@ const allowedRoles: UserRole[] = ["OWNER", "ADMIN", "WRITER"];
 const accessLevelPredicate = async (user: Awaited<ReturnType<typeof ensureAuthenticatedUser>>) =>
   user.roles.some((role) => allowedRoles.includes(role.title));
 
+export const handle: RouteHandle = {
+  id: "post.new",
+  withScrollRestoration: true,
+};
+
 export const loader = async ({ request }: LoaderArgs) => {
   await ensureAuthorizedUser(request, accessLevelPredicate);
   return null;

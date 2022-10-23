@@ -10,6 +10,11 @@ import { UserNameAndPassword } from "~/schemas/user.server";
 import { safeRedirect } from "~/utils/helpers";
 import { getUserId, createUserSession } from "~/utils/session.server";
 
+export const handle: RouteHandle = {
+  id: "join",
+  withScrollRestoration: true,
+};
+
 export async function loader({ request }: LoaderArgs) {
   const userId = await getUserId(request);
   if (userId) return redirect("/");

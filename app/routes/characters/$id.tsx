@@ -13,6 +13,11 @@ import { resolveLocale } from "~/utils/i18n.server";
 import { generateMeta } from "~/utils/meta-generator";
 import { jsonError } from "~/utils/responses.server";
 
+export const handle: RouteHandle = {
+  id: "character",
+  withScrollRestoration: true,
+};
+
 export const loader = async ({ request, params }: LoaderArgs) => {
   if (typeof params?.id !== "string") {
     throw jsonError({ message: "ID is somehow not a string" }, { status: 500 });

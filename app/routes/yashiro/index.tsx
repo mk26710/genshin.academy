@@ -6,6 +6,11 @@ import { Container } from "~/components/Container";
 import { userHasAnyRole } from "~/utils/permissions";
 import { ensureAuthorizedUser } from "~/utils/session.server";
 
+export const handle: RouteHandle = {
+  id: "yashiro.home",
+  withScrollRestoration: true,
+};
+
 export const loader = async ({ request }: LoaderArgs) => {
   await ensureAuthorizedUser(request, async (user) => userHasAnyRole(user, "ADMIN"));
 

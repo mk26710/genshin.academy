@@ -110,6 +110,11 @@ const ResinCalculator: FunctionComponent = () => {
   );
 };
 
+export const handle: RouteHandle = {
+  id: "calc",
+  withScrollRestoration: true,
+};
+
 export const meta: MetaFunction = () => ({
   title: "Calculators - GENSHIN.ZENLESS",
 });

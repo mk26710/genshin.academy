@@ -16,6 +16,11 @@ import { PostsSearch } from "~/schemas/posts";
 import { orUndefined } from "~/utils/helpers";
 import { supportedLocales } from "~/utils/locales";
 
+export const handle: RouteHandle = {
+  id: "posts",
+  withScrollRestoration: true,
+};
+
 export const loader = async ({ request }: LoaderArgs) => {
   const url = new URL(request.url);
 

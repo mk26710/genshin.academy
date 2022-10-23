@@ -12,6 +12,11 @@ import { getLinkedAccountsById, unlinkDiscordAccountByUserId } from "~/models/us
 import { getDiscordLinkOAuthURL } from "~/oauth/discord.server";
 import { ensureAuthenticatedUser } from "~/utils/session.server";
 
+export const handle: RouteHandle = {
+  id: "me",
+  withScrollRestoration: true,
+};
+
 export const loader = async ({ request }: LoaderArgs) => {
   const user = await ensureAuthenticatedUser(request);
   const linkedAccounts = await getLinkedAccountsById(user.id);

@@ -28,6 +28,11 @@ import { getUser } from "~/utils/session.server";
 
 import markdownCss from "~/styles/markdown.css";
 
+export const handle: RouteHandle = {
+  id: "post",
+  withScrollRestoration: false,
+};
+
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: markdownCss }];
 };

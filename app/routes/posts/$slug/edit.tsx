@@ -15,6 +15,11 @@ import { ensureAuthorizedUser } from "~/utils/session.server";
 
 type LoaderData = SerializeFrom<typeof loader>;
 
+export const handle: RouteHandle = {
+  id: "post.edit",
+  withScrollRestoration: true,
+};
+
 export const loader = async ({ request, params }: LoaderArgs) => {
   const slug = params?.slug;
   if (typeof slug !== "string") {

@@ -13,6 +13,11 @@ import { resolveLocale } from "~/utils/i18n.server";
 import { defaultLocale } from "~/utils/locales";
 import { generateMeta } from "~/utils/meta-generator";
 
+export const handle: RouteHandle = {
+  id: "home",
+  withScrollRestoration: true,
+};
+
 type LoaderData = SerializeFrom<typeof loader>;
 
 export const loader = async ({ request }: LoaderArgs) => {

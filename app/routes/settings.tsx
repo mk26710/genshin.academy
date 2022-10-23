@@ -8,6 +8,11 @@ import { Container } from "~/components/Container";
 import { useVisitorLocale } from "~/hooks/use-visitor-locale";
 import { supportedLocales } from "~/utils/locales";
 
+export const handle: RouteHandle = {
+  id: "settings",
+  withScrollRestoration: true,
+};
+
 const SettingsRoute = () => {
   const t = useTranslations();
   const locale = useVisitorLocale();
@@ -46,7 +51,7 @@ const SettingsRoute = () => {
               />
               <label
                 htmlFor={`${code}-btn`}
-                className="border-[var(--default-border-color)] flex flex-row gap-2 rounded-md border px-3 py-2 text-gray-700 hover:cursor-pointer peer-checked:border-black peer-checked:text-black"
+                className="flex flex-row gap-2 rounded-md border border-[var(--default-border-color)] px-3 py-2 text-gray-700 hover:cursor-pointer peer-checked:border-black peer-checked:text-black"
               >
                 <div className="align-middle">*flag here*</div>
                 <div className="font-medium">{code}</div>

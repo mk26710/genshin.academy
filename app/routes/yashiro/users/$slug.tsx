@@ -17,6 +17,11 @@ import { userHasAnyRole } from "~/utils/permissions";
 import { text } from "~/utils/responses.server";
 import { ensureAuthorizedUser } from "~/utils/session.server";
 
+export const handle: RouteHandle = {
+  id: "yashiro.user",
+  withScrollRestoration: true,
+};
+
 export const loader = async ({ request, params }: LoaderArgs) => {
   await ensureAuthorizedUser(request, async (user) => userHasAnyRole(user, "ADMIN"));
 
