@@ -28,6 +28,10 @@ import { Container } from "./components/Container";
 import nprogressStylesheetUrl from "~/styles/nprogress.css";
 import tailwindStylesheetUrl from "~/styles/tailwind.css";
 
+export const handle: RouteHandle = {
+  id: "root",
+};
+
 export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: tailwindStylesheetUrl },
