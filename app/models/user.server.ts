@@ -1,4 +1,4 @@
-import type { Password, User } from "@prisma/client";
+import type { Password, User, UserRole } from "@prisma/client";
 
 import { Prisma } from "@prisma/client";
 import bcrypt from "bcryptjs";
@@ -162,3 +162,44 @@ export const getLinkedAccountsById = async (id: string) =>
       userId: id,
     },
   });
+
+export const addUserRolesById = async (id: string, roles: UserRole[]) =>
+  prisma.userRoles.createMany({
+    data: roles.map((role) => ({
+      userId: id,
+      title: role,
+    })),
+  });
+
+export const deleteUserRolesById = async (id: string, roles: UserRole[]) =>
+  prisma.userRoles.deleteMany({
+    where: {
+      userId: id,
+      title: {
+        in: roles,
+      },
+    },
+  });
+
+type EditUserRolesOptions = {
+  toAdd: UserRole[];
+  toDelete: UserRole[];
+};
+
+export const editUserRolesById = async (id: string, options: EditUserRolesOptions) =>
+  prisma.$transaction([
+    prisma.userRoles.createMany({
+      data: options.toAdd.map((role) => ({
+        userId: id,
+        title: role,
+      })),
+    }),
+    prisma.userRoles.deleteMany({
+      where: {
+        userId: id,
+        title: {
+          in: options.toDelete,
+        },
+      },
+    }),
+  ]);
