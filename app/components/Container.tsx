@@ -1,8 +1,5 @@
 import type { ReactNode } from "react";
 
-import { ScrollRestoration } from "@remix-run/react";
-import { Fragment } from "react";
-
 interface Props {
   children: ReactNode;
   className?: string;
@@ -10,15 +7,6 @@ interface Props {
   verticalCenter?: boolean;
 }
 
-export const Container = ({ className = "", withScrollRestoration = false, children }: Props) => {
-  if (withScrollRestoration === true) {
-    return (
-      <Fragment>
-        <ScrollRestoration />
-        <main className={`main ${className}`}>{children}</main>
-      </Fragment>
-    );
-  }
-
+export const Container = ({ className = "", children }: Props) => {
   return <main className={`main ${className}`}>{children}</main>;
 };

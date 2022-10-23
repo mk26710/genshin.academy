@@ -9,9 +9,11 @@ import {
   Meta,
   Outlet,
   Scripts,
+  ScrollRestoration,
   useCatch,
   useFetcher,
   useLoaderData,
+  useMatches,
   useTransition,
 } from "@remix-run/react";
 import Nprogress from "nprogress";
@@ -64,6 +66,11 @@ export default function App() {
   const transition = useTransition();
   const { messages, locale } = useLoaderData() as LoaderData;
 
+  const matches = useMatches();
+  const withScrollRestoration = matches.some(
+    (m) => (m.handle as RouteHandle)?.withScrollRestoration === true,
+  );
+
   const removeTransitionsRemoverClass = () => {
     if (!document) return;
     if (!document.body) return;
@@ -95,6 +102,10 @@ export default function App() {
     removeTransitionsRemoverClass();
   }, []);
 
+  useEffect(() => {
+    console.log({ withScrollRestoration });
+  }, [withScrollRestoration]);
+
   return (
     <html lang={locale}>
       <head>
@@ -112,6 +123,7 @@ export default function App() {
           </IntlProvider>
         </div>
 
+        {withScrollRestoration === true && <ScrollRestoration />}
         <Scripts />
         <LiveReload />
       </body>
