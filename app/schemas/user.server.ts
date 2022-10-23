@@ -1,3 +1,4 @@
+import { UserRole } from "@prisma/client";
 import { z } from "zod";
 
 export const UserName = z
@@ -27,3 +28,9 @@ export const PasswordNewPasswordRepeatNew = z
     message: "Repeated password doesn't match the new password.",
     path: ["newPasswordRepeat"],
   });
+
+export const UserRolesTitles = z.array(
+  z.custom<UserRole>(
+    (val) => typeof val === "string" && Object.values(UserRole).includes(val as UserRole),
+  ),
+);
