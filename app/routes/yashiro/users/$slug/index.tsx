@@ -2,10 +2,10 @@ import type { ContextType } from "../$slug";
 import type { ActionArgs } from "@remix-run/node";
 import type { ChangeEvent } from "react";
 
-import { UserRole, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { redirect, json } from "@remix-run/node";
-import { Form, useActionData, useFetcher, useOutletContext } from "@remix-run/react";
-import { Fragment, useRef, useEffect, useState } from "react";
+import { Form, useActionData, useOutletContext } from "@remix-run/react";
+import { useRef, useEffect, useState } from "react";
 
 import { prisma } from "~/db/prisma.server";
 import { deleteUserById, getUserById } from "~/models/user.server";
@@ -106,14 +106,11 @@ export const action = async ({ request }: ActionArgs) => {
 };
 
 export default function YashiroUsersSlugRoute() {
-  const fetcher = useFetcher();
-
   const { user } = useOutletContext<ContextType>();
   const actionData = useActionData<typeof action>();
 
   const [madeChanges, setMadeChanges] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState("");
-  const [newRoles, setNewRoles] = useState<Array<UserRole>>([]);
 
   const notificationRef = useRef<HTMLDivElement>(null);
 
@@ -132,50 +129,8 @@ export default function YashiroUsersSlugRoute() {
     }, 5000);
   }, [actionData?.date, actionData?.success, actionData?.errors]);
 
-  const newRoleInputRef = useRef<HTMLInputElement>(null);
-
-  const handleDeleteClick = () => {
-    const yesOrNo = confirm("you sure you wanna delete that user?");
-    if (yesOrNo === true) {
-      fetcher.submit({ "user.id": user.id }, { method: "delete", replace: true });
-    }
-  };
-
   const handleAvatarUrlChange = (e: ChangeEvent<HTMLInputElement>) => {
     setAvatarUrl(e.target.value);
-  };
-
-  const handleAddRoleClick = () => {
-    if (!newRoleInputRef.current) {
-      return;
-    }
-
-    const toAdd = newRoleInputRef.current.value.toUpperCase();
-
-    // if user already has the role we clear it out
-    if (newRoles.includes(toAdd as UserRole)) {
-      newRoleInputRef.current.value = "";
-      alert("User already has " + toAdd + " role");
-      return;
-    }
-
-    if (!Object.keys(UserRole).includes(toAdd)) {
-      alert(toAdd + " is invalid role");
-      return;
-    }
-
-    setNewRoles((roles) => [...new Set([...roles, toAdd as UserRole])]);
-    newRoleInputRef.current.value = "";
-  };
-
-  const handleRemoveRoleClick = (role: UserRole) => {
-    const toRemove = role.toUpperCase();
-    if (toRemove === "DEFAULT") {
-      alert("you cant remove default role");
-      return;
-    }
-
-    setNewRoles((roles) => roles.filter((r) => r.toUpperCase() !== toRemove));
   };
 
   // detect changes in form
@@ -188,7 +143,6 @@ export default function YashiroUsersSlugRoute() {
   // updates input value on initial load
   useEffect(() => {
     setAvatarUrl(user.avatarUrl ?? "");
-    setNewRoles([...user.roles.map((r) => r.title)]);
   }, []);
 
   return (
