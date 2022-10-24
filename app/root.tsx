@@ -16,8 +16,10 @@ import {
   useMatches,
   useTransition,
 } from "@remix-run/react";
+import clsx from "clsx";
+import { Provider as JotaiProvider } from "jotai";
 import Nprogress from "nprogress";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { IntlProvider } from "use-intl";
 
 import { Footer } from "~/components/Footer";
@@ -62,24 +64,15 @@ export async function loader({ request }: LoaderArgs) {
   });
 }
 
-export default function App() {
+function App({ locale }: { locale: string }) {
+  const [cssTransitionsState, setCssTransitionsState] = useState(false);
+
   const transition = useTransition();
-  const { messages, locale } = useLoaderData() as LoaderData;
 
   const matches = useMatches();
   const withScrollRestoration = matches.some(
     (m) => (m.handle as RouteHandle)?.withScrollRestoration === true,
   );
-
-  const removeTransitionsRemoverClass = () => {
-    if (!document) return;
-    if (!document.body) return;
-
-    setTimeout(() => {
-      document.body.classList.remove("transitions-be-gone");
-      console.log("CSS transitions are enabled again!");
-    }, 200);
-  };
 
   useEffect(() => {
     Nprogress.configure({
@@ -99,7 +92,10 @@ export default function App() {
   // on initial page loads for components with
   // transitions
   useEffect(() => {
-    removeTransitionsRemoverClass();
+    setTimeout(() => {
+      setCssTransitionsState(true);
+      console.info("CSS transitions are now enabled.");
+    }, 1000);
   }, []);
 
   useEffect(() => {
@@ -114,13 +110,11 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="transitions-be-gone h-full">
+      <body className={clsx("h-full", cssTransitionsState === false && "transitions-be-gone")}>
         <div className="app">
-          <IntlProvider locale={locale} messages={messages}>
-            <Header />
-            <Outlet />
-            <Footer />
-          </IntlProvider>
+          <Header />
+          <Outlet />
+          <Footer />
         </div>
 
         {withScrollRestoration === true && <ScrollRestoration />}
@@ -128,6 +122,18 @@ export default function App() {
         <LiveReload />
       </body>
     </html>
+  );
+}
+
+export default function Root() {
+  const { messages, locale } = useLoaderData() as LoaderData;
+
+  return (
+    <IntlProvider locale={locale} messages={messages}>
+      <JotaiProvider>
+        <App locale={locale} />
+      </JotaiProvider>
+    </IntlProvider>
   );
 }
 
