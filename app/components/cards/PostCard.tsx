@@ -3,6 +3,7 @@ import type { FunctionComponent } from "react";
 
 import { Link } from "@remix-run/react";
 
+import { useAfterHydration } from "~/hooks/use-hydrated";
 import { useVisitorLocale } from "~/hooks/use-visitor-locale";
 
 type PostCardProps = Pick<Post, "slug" | "thumbnailUrl" | "title" | "description" | "publishedAt">;
@@ -15,6 +16,7 @@ export const PostCard: FunctionComponent<PostCardProps> = ({
   publishedAt,
 }) => {
   const locale = useVisitorLocale();
+  const publishDate = useAfterHydration(new Date(publishedAt));
 
   return (
     <Link
@@ -30,8 +32,9 @@ export const PostCard: FunctionComponent<PostCardProps> = ({
         />
       )}
       <h3 className="mt-2 px-[var(--default-gap)] text-xl font-semibold">{title}</h3>
-      <p className="mb-[var(--default-gap)] px-[var(--default-gap)] text-sm hyphens-auto">
-        {description}
+      <p className="px-[var(--default-gap)] text-sm hyphens-auto">{description}</p>
+      <p className="mb-[var(--default-gap)] self-end px-[var(--default-gap)] text-sm italic opacity-70">
+        {publishDate?.toLocaleDateString(locale)}
       </p>
     </Link>
   );
