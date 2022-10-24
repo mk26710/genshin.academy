@@ -17,6 +17,7 @@ import { ContentsTable } from "~/components/ContentsTable";
 import { RoleBadge } from "~/components/RoleBadge";
 import { RouteLevelCatchBoundary } from "~/components/RouteLevelCatchBoundary";
 import { UserAvatar } from "~/components/UserAvatar";
+import { useAfterHydration } from "~/hooks/use-hydrated";
 import { useOptionalUser } from "~/hooks/use-optional-user";
 import { deletePostById, getPostBySlugWithAuthor } from "~/models/posts.server";
 import { orUndefined } from "~/utils/helpers";
@@ -115,6 +116,8 @@ const PostFooter: FunctionComponent<Pick<LoaderData, "post">> = ({ post }) => {
   const locale = useLocale();
   const t = useTranslations();
 
+  const publishDate = useAfterHydration(new Date(post.publishedAt));
+
   const fetcher = useFetcher();
   const maybeUser = useOptionalUser();
 
@@ -156,7 +159,7 @@ const PostFooter: FunctionComponent<Pick<LoaderData, "post">> = ({ post }) => {
       </div>
 
       <div className="text-sm italic">
-        <p>Published on {new Date(post.publishedAt).toLocaleString(locale)}</p>
+        <p>Published on {publishDate?.toLocaleString(locale)}</p>
       </div>
     </div>
   );
