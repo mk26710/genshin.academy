@@ -7,18 +7,15 @@ import type {
 } from "@remix-run/node";
 import type { FunctionComponent } from "react";
 
+import { PencilIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { redirect, json } from "@remix-run/node";
-import { useFetcher, useLoaderData, useNavigate } from "@remix-run/react";
-import { useEffect, useRef } from "react";
-import { useLocale, useTranslations } from "use-intl";
+import { Link, useFetcher, useLoaderData } from "@remix-run/react";
+import { useEffect } from "react";
 
 import { Container } from "~/components/Container";
-import { ContentsTable } from "~/components/ContentsTable";
-import { RoleBadge } from "~/components/RoleBadge";
 import { RouteLevelCatchBoundary } from "~/components/RouteLevelCatchBoundary";
-import { UserAvatar } from "~/components/UserAvatar";
 import { useAfterHydration } from "~/hooks/use-hydrated";
-import { useOptionalUser } from "~/hooks/use-optional-user";
+import { useVisitorLocale } from "~/hooks/use-visitor-locale";
 import { deletePostById, getPostBySlugWithAuthor } from "~/models/posts.server";
 import { orUndefined } from "~/utils/helpers";
 import { extractHeadings, markdownParser } from "~/utils/markdown.server";
@@ -38,9 +35,7 @@ export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: markdownCss }];
 };
 
-type LoaderData = SerializeFrom<typeof loader>;
-
-export const loader = async ({ params }: LoaderArgs) => {
+export const loader = async ({ request, params }: LoaderArgs) => {
   if (typeof params.slug !== "string") {
     throw text("Failed to obtain slug", { status: 500 });
   }
@@ -55,7 +50,13 @@ export const loader = async ({ params }: LoaderArgs) => {
   const html = vfile.toString();
   const headings = extractHeadings(html);
 
+  const user = await getUser(request);
+
   return json({
+    canUser: {
+      edit: canUserEditPost(user, post),
+      delete: canUserDeletePost(user, post),
+    },
     slug: params.slug,
     post: {
       ...post,
@@ -111,92 +112,89 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   });
 };
 
-const PostFooter: FunctionComponent<Pick<LoaderData, "post">> = ({ post }) => {
-  const navigate = useNavigate();
-  const locale = useLocale();
-  const t = useTranslations();
+type PostControlsProps = {
+  canDelete: boolean;
+  canEdit: boolean;
+};
 
-  const publishDate = useAfterHydration(new Date(post.publishedAt));
-
+const PostControls: FunctionComponent<PostControlsProps> = ({ canEdit, canDelete }) => {
   const fetcher = useFetcher();
-  const maybeUser = useOptionalUser();
 
-  const handlePostDelete = async () => {
-    const shouldDelete = confirm("Are you sure you want to delete this post?");
-    if (shouldDelete) {
-      fetcher.submit(new FormData(), { method: "delete" });
+  const handleDeleteClick = () => {
+    const firstConfirm = confirm("Are you sure you'd like to delete that post?");
+    if (!firstConfirm) {
+      return;
     }
-  };
 
-  const handlePostEdit = async () => {
-    navigate("./edit");
+    const secondConfirm = confirm("ARE YOU ABSOLUTELY SURE ABOUT DELETING THIS POST???");
+    if (!secondConfirm) {
+      return;
+    }
+
+    fetcher.submit(null, { method: "delete" });
   };
 
   return (
-    <div className="grid grid-flow-row grid-cols-1 flex-row flex-wrap gap-2 p-4 md:grid-cols-[1fr_auto] lg:p-8">
-      {maybeUser && (
-        <div className="mb-4 flex flex-row gap-2 md:col-span-2">
-          {canUserDeletePost(maybeUser, post) && (
-            <button onClick={handlePostDelete} className="button-danger">
-              {t("posts.delete-post")}
-            </button>
-          )}
-          {canUserEditPost(maybeUser, post) && (
-            <button onClick={handlePostEdit} className="button">
-              {t("posts.edit-post")}
-            </button>
-          )}
-        </div>
+    <div className="flex flex-row flex-wrap gap-2">
+      {canEdit && (
+        <Link to="./edit" role="button" className="button flex items-center justify-center gap-3">
+          <PencilIcon className="h-5 w-5" />
+          <span>Edit</span>
+        </Link>
       )}
-      <div className="flex flex-grow flex-row gap-x-2">
-        <UserAvatar avatarUrl={post.author?.avatarUrl} className="h-20 w-20" />
-        <div className="flex flex-col items-start justify-center">
-          <p className="text-xl font-semibold">{post.author?.name}</p>
-          {post.author?.roles.map(({ title }, i) => (
-            <RoleBadge role={title} key={i} />
-          ))}
-        </div>
-      </div>
 
-      <div className="text-sm italic">
-        <p>Published on {publishDate?.toLocaleString(locale)}</p>
-      </div>
+      {canDelete && (
+        <button
+          onClick={handleDeleteClick}
+          className="button flex items-center justify-center gap-3 border-rose-600 bg-rose-600 hover:text-rose-600"
+        >
+          <TrashIcon className="h-5 w-5" />
+          <span>Delete</span>
+        </button>
+      )}
     </div>
   );
 };
 
 const PostsSlugIndexRoute = () => {
-  const { post } = useLoaderData<typeof loader>();
+  const { post, canUser } = useLoaderData<typeof loader>();
 
-  const contentRoot = useRef<HTMLElement>(null);
+  const locale = useVisitorLocale();
+
+  const hydratedDate = useAfterHydration(new Date(post.publishedAt));
+  const hydratedPublishDate = hydratedDate?.toLocaleDateString(locale, {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 
   useEffect(() => {
-    console.log(post.content.headings);
-  }, [post]);
+    console.log({ canUserEditPost, post });
+  }, [post, canUserEditPost]);
 
   return (
-    <Container>
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_auto]">
-        <article className="flex flex-col gap-4">
-          <div className="card prose prose-purple flex w-full max-w-none flex-col py-8 px-4 dark:prose-invert lg:p-8">
-            <h1 className="mb-0">{post.title}</h1>
-            <p>{post.description}</p>
-          </div>
-          <div className="card flex max-w-none flex-col gap-4 divide-y bg-white p-0">
-            <section
-              ref={contentRoot}
-              className="markdown-content prose prose-purple w-full max-w-none px-4 py-6 text-justify text-base prose-thead:border-none prose-thead:border-gray-200 dark:prose-invert dark:prose-hr:border-neutral-700 xl:px-8 xl:py-8"
-              dangerouslySetInnerHTML={{ __html: post.content.html }}
-            />
+    <Container className="max-w-screen-xl px-[var(--default-gap)] lg:px-0">
+      <div className="grid w-full grid-flow-row grid-cols-12 gap-[var(--default-gap)]">
+        <div className="col-span-full mt-10 mb-10 md:col-span-10 md:col-start-2 md:mb-16 lg:col-span-8 lg:col-start-3">
+          <h1 className="text-4xl font-extrabold">{post.title}</h1>
+          {(canUser.edit === true || canUser.delete === true) && (
+            <PostControls canEdit={canUser.edit} canDelete={canUser.delete} />
+          )}
+          <h4 className="font-medium opacity-60">{hydratedPublishDate}</h4>
+        </div>
 
-            <PostFooter post={post} />
-          </div>
-        </article>
+        <div className="col-span-full mb-16 lg:col-span-10 lg:col-start-2">
+          <img className="rounded-md" src={orUndefined(post.thumbnailUrl)} />
+        </div>
 
-        <ContentsTable
-          headings={post.content.headings.filter((h) => h.level && h.level <= 2)}
-          containerClassName="hidden lg:block"
+        <article
+          className="markdown-content prose prose-blue col-span-full max-w-none md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3"
+          dangerouslySetInnerHTML={{ __html: post.content.html }}
         />
+
+        <div className="col-span-full my-16 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3">
+          :)
+        </div>
       </div>
     </Container>
   );
