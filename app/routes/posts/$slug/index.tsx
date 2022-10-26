@@ -1,19 +1,15 @@
-import type {
-  ActionArgs,
-  LinksFunction,
-  LoaderArgs,
-  MetaFunction,
-  SerializeFrom,
-} from "@remix-run/node";
+import type { ActionArgs, LinksFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
 import type { FunctionComponent } from "react";
 
 import { PencilIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { redirect, json } from "@remix-run/node";
 import { Link, useFetcher, useLoaderData } from "@remix-run/react";
 import { useEffect } from "react";
+import { useTranslations } from "use-intl";
 
 import { Container } from "~/components/Container";
 import { RouteLevelCatchBoundary } from "~/components/RouteLevelCatchBoundary";
+import { UserAvatar } from "~/components/UserAvatar";
 import { useAfterHydration } from "~/hooks/use-hydrated";
 import { useVisitorLocale } from "~/hooks/use-visitor-locale";
 import { deletePostById, getPostBySlugWithAuthor } from "~/models/posts.server";
@@ -160,6 +156,7 @@ const PostsSlugIndexRoute = () => {
   const { post, canUser } = useLoaderData<typeof loader>();
 
   const locale = useVisitorLocale();
+  const t = useTranslations();
 
   const hydratedDate = useAfterHydration(new Date(post.publishedAt));
   const hydratedPublishDate = hydratedDate?.toLocaleDateString(locale, {
@@ -193,7 +190,17 @@ const PostsSlugIndexRoute = () => {
         />
 
         <div className="col-span-full my-16 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3">
-          :)
+          <div className="grid w-full grid-cols-[auto_1fr] gap-4">
+            <UserAvatar className="h-24 w-24" avatarUrl={post.author?.avatarUrl} />
+            <div className="flex items-center">
+              <p className="text-lg italic">
+                {t.rich("posts.post-by", {
+                  name: post.author?.name,
+                  author: (chunk) => <span className="font-bold">{chunk}</span>,
+                })}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </Container>
