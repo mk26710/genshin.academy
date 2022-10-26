@@ -172,7 +172,7 @@ const PostsSlugIndexRoute = () => {
   return (
     <Container className="max-w-screen-xl px-[var(--default-gap)] lg:px-0">
       <div className="grid w-full grid-flow-row grid-cols-12 gap-[var(--default-gap)]">
-        <div className="col-span-full mt-10 mb-10 md:col-span-10 md:col-start-2 md:mb-16 lg:col-span-8 lg:col-start-3">
+        <div className="col-span-full mt-10 mb-10 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3">
           <h1 className="text-4xl font-extrabold">{post.title}</h1>
           {(canUser.edit === true || canUser.delete === true) && (
             <PostControls canEdit={canUser.edit} canDelete={canUser.delete} />
