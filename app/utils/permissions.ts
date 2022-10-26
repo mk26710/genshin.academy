@@ -36,7 +36,7 @@ type UserWithRolesAndId = UserWithRole & { id: User["id"] | null | undefined };
 type PostWithAuthorId = Record<string, unknown> & Pick<Post, "authorId">;
 
 /** Check if specified user has permissions to delete specified post */
-export const canUserDeletePost = (user?: UserWithRolesAndId, post?: PostWithAuthorId) => {
+export const canUserDeletePost = (user: Nil<UserWithRolesAndId>, post?: PostWithAuthorId) => {
   if (user == null || post == null) {
     return false;
   }
