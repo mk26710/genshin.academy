@@ -1,4 +1,5 @@
 {
   "delete-post": "Delete post",
-  "edit-post": "Edit post"
+  "edit-post": "Edit post",
+  "post-by": "The post was published by <author>{name}</author>"
 }
