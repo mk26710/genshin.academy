@@ -5,7 +5,7 @@
 }
 
 .markdown-content iframe + iframe {
-  margin-top: theme("spacing.4");
+  margin-top: 1rem;
 }
 
 .markdown-content p + ol,
@@ -21,21 +21,23 @@
   margin: 0;
 }
 
-.markdown-content tr th {
-  @apply even:bg-neutral-200/40 dark:even:bg-neutral-900;
+.markdown-content tr th:nth-child(even) {
+  background-color: hsla(0, 0, 0, 0.5);
 }
 
 .markdown-content details {
-  @apply rounded-lg border-l-4 border-primary-500 bg-white text-[#000];
-}
-
-.dark .markdown-content details {
-  background-color: theme("colors.neutral.900");
-  color: theme("colors.neutral.300");
+  color: #000;
+  background-color: white;
+  border-radius: 8px;
+  border-left-width: 4px;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+  border-color: #000;
 }
 
 .markdown-content details summary {
-  font-weight: theme("fontWeight.semibold");
+  font-weight: 600;
   cursor: pointer;
   list-style: none;
   padding-left: 1.5rem;
