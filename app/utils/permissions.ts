@@ -1,4 +1,40 @@
+import type { GetUser } from "./session.server";
 import type { Post, UserRole, User, UserRoles } from "@prisma/client";
+
+import { PermissionFlag } from "@prisma/client";
+
+import { isNil } from "./helpers";
+
+type UserWithPermissions = Record<string, unknown> & Pick<NonNullable<GetUser>, "permissions">;
+
+export function userHasAccess(user?: UserWithPermissions, ...flags: PermissionFlag[]) {
+  if (!user) return false;
+
+  const userFlags = user.permissions.map(({ value }) => value);
+  return hasAccess({ target: userFlags, allowed: flags });
+}
+
+type HasAccessOptions = {
+  target?: Array<PermissionFlag> | null;
+  allowed: Array<PermissionFlag>;
+};
+
+export function hasAccess(options?: HasAccessOptions) {
+  if (isNil(options)) {
+    return false;
+  }
+
+  const permissions = options.target;
+  if (isNil(permissions)) {
+    return false;
+  }
+
+  if (permissions.some((flag) => flag === PermissionFlag.ABSOLUTE_POWER)) {
+    return true;
+  }
+
+  return permissions.some((flag) => options.allowed.includes(flag));
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type UserWithRole = Record<any, unknown> & { roles: Array<Pick<UserRoles, "title">> };
