@@ -32,7 +32,7 @@ const YashiroUsersRoute = () => {
     <Container>
       <div className="flex w-full flex-wrap gap-2">
         {registeredUsers.map((user) => (
-          <UserCard key={user.id} {...user} to={`./${user.id}`} isLink />
+          <UserCard key={user.id} {...user} to={`./${user.id}/overview`} isLink />
         ))}
       </div>
     </Container>
