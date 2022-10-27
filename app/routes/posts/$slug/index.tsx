@@ -10,6 +10,7 @@ import { useTranslations } from "use-intl";
 import { Container } from "~/components/Container";
 import { RouteLevelCatchBoundary } from "~/components/RouteLevelCatchBoundary";
 import { UserAvatar } from "~/components/UserAvatar";
+import { UserFlair } from "~/components/UserFlair";
 import { useAfterHydration } from "~/hooks/use-hydrated";
 import { useVisitorLocale } from "~/hooks/use-visitor-locale";
 import { deletePostById, getPostBySlugWithAuthor } from "~/models/posts.server";
@@ -196,7 +197,16 @@ const PostsSlugIndexRoute = () => {
               <p className="text-lg italic">
                 {t.rich("posts.post-by", {
                   name: post.author?.name,
-                  author: (chunk) => <span className="font-bold">{chunk}</span>,
+                  author: (chunk) => (
+                    <span className="font-bold">
+                      <UserFlair
+                        text={post.author?.flair?.text}
+                        fgColor={post.author?.flair?.fgColor}
+                        bgColor={post.author?.flair?.bgColor}
+                      />{" "}
+                      {chunk}
+                    </span>
+                  ),
                 })}
               </p>
             </div>
