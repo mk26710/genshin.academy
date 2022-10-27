@@ -21,23 +21,6 @@ export const getPostBySlugWithAuthor = async (slug: string) =>
     },
   });
 
-export const getPostBySlugWithAuthorJsonSafe = async (slug: string) => {
-  const _post = await getPostBySlugWithAuthor(slug);
-  if (_post == null) {
-    return null;
-  }
-
-  // JSON can't have Date objects so conversion is needed
-  const { publishedAt, editedAt, ...post } = _post;
-  const safePost = {
-    ...post,
-    publishedAt: publishedAt.toISOString(),
-    editedAt: editedAt?.toISOString() ?? null,
-  };
-
-  return safePost;
-};
-
 type GetLatestPostOptions = Pick<Post, "lang">;
 
 export const getLatestPost = async (opts?: GetLatestPostOptions) =>
