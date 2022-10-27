@@ -5,6 +5,7 @@ import { PermissionFlag } from "@prisma/client";
 
 import { isNil } from "./helpers";
 
+type UserWithId = Record<string, unknown> & Pick<NonNullable<GetUser>, "id">;
 type UserWithPermissions = Record<string, unknown> & Pick<NonNullable<GetUser>, "permissions">;
 
 export function userHasAccess(user?: UserWithPermissions, ...flags: PermissionFlag[]) {
@@ -68,36 +69,37 @@ export const userHasAnyRole = (userWithRoles?: UserWithRole, ...allowedRoles: Us
   return userWithRoles.roles.some(({ title }) => allowedRoles.includes(title));
 };
 
-type UserWithRolesAndId = UserWithRole & { id: User["id"] | null | undefined };
 type PostWithAuthorId = Record<string, unknown> & Pick<Post, "authorId">;
 
 /** Check if specified user has permissions to delete specified post */
-export const canUserDeletePost = (user: Nil<UserWithRolesAndId>, post?: PostWithAuthorId) => {
+export const canUserDeletePost = (
+  user: Nil<UserWithId & UserWithPermissions>,
+  post?: PostWithAuthorId,
+) => {
   if (user == null || post == null) {
     return false;
   }
 
-  if (userHasAnyRole(user, "MODERATOR", "ADMIN")) {
-    return true;
-  }
-
   if (user.id === post.authorId) {
-    return true;
+    return userHasAccess(user, PermissionFlag.DELETE_MY_POST, PermissionFlag.DELETE_SOMEONES_POST);
   }
 
-  return false;
+  return userHasAccess(user, PermissionFlag.DELETE_SOMEONES_POST);
 };
 
 type PostLikeObject = Record<string, unknown> & Pick<Post, "authorId">;
 
-export const canUserEditPost = (user: Nil<UserWithRolesAndId>, post: Nil<PostLikeObject>) => {
+export const canUserEditPost = (
+  user: Nil<UserWithId & UserWithPermissions>,
+  post: Nil<PostLikeObject>,
+) => {
   if (user == null || post == null) {
     return false;
   }
 
-  if (user.id === post.authorId || userHasAnyRole(user, "ADMIN", "MODERATOR")) {
-    return true;
+  if (user.id === post.authorId) {
+    return userHasAccess(user, PermissionFlag.EDIT_MY_POST, PermissionFlag.EDIT_SOMEONES_POST);
   }
 
-  return false;
+  return userHasAccess(user, PermissionFlag.EDIT_SOMEONES_POST);
 };
