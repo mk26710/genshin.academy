@@ -7,7 +7,7 @@ import { UserAvatar } from "~/components/UserAvatar";
 import { getUserByNameOrId } from "~/models/user.server";
 import { orUndefined } from "~/utils/helpers";
 import { generateMeta } from "~/utils/meta-generator";
-import { userHasAnyRole } from "~/utils/permissions";
+import { userHasAccess } from "~/utils/permissions";
 import { text } from "~/utils/responses.server";
 import { ensureAuthorizedUser } from "~/utils/session.server";
 
@@ -17,7 +17,7 @@ export const handle: RouteHandle = {
 };
 
 export const loader = async ({ request, params }: LoaderArgs) => {
-  await ensureAuthorizedUser(request, async (user) => userHasAnyRole(user, "ADMIN"));
+  await ensureAuthorizedUser(request, async (user) => userHasAccess(user, "EDIT_USER"));
 
   if (typeof params?.slug !== "string") {
     throw text("Something went wrong with the slug.", { status: 500 });
@@ -59,16 +59,17 @@ export default function YashiroUsersSlugLayoutRoute() {
       <NavLink to="/yashiro/users">Browse users</NavLink>
       <div className="mt-4 flex h-12 flex-row divide-x divide-[var(--default-border-color)] border border-b-0 px-[var(--default-gap)] lg:rounded-t-md">
         <NavLink
-          to="./"
+          to="./overview"
           className={"flex items-center justify-center pr-4 text-sm font-semibold uppercase "}
         >
           Overview
         </NavLink>
+
         <NavLink
-          to="./roles"
+          to="./permissions"
           className={"flex items-center justify-center pl-4 text-sm font-semibold uppercase "}
         >
-          Roles
+          Permission Flags
         </NavLink>
       </div>
       <div className="card grid grid-cols-1 gap-2 rounded-t-none lg:grid-cols-[auto_1fr] lg:flex-row">

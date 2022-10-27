@@ -9,8 +9,8 @@ import { useRef, useEffect, useState } from "react";
 
 import { prisma } from "~/db/prisma.server";
 import { deleteUserById, getUserById } from "~/models/user.server";
-import { stringOrUndefined } from "~/utils/helpers";
-import { userHasAnyRole } from "~/utils/permissions";
+import { isNil, orUndefined, stringOrUndefined } from "~/utils/helpers";
+import { userHasAccess } from "~/utils/permissions";
 import { ensureAuthorizedUser } from "~/utils/session.server";
 
 export const handle: RouteHandle = {
@@ -27,7 +27,7 @@ type ActionData = {
 };
 
 export const action = async ({ request }: ActionArgs) => {
-  await ensureAuthorizedUser(request, async (user) => userHasAnyRole(user, "ADMIN"));
+  await ensureAuthorizedUser(request, async (user) => userHasAccess(user, "EDIT_USER"));
 
   const formData = await request.formData();
 
@@ -70,18 +70,61 @@ export const action = async ({ request }: ActionArgs) => {
   const newAvatarUrl = stringOrUndefined(formData.get("user.avatarUrl"));
   const newEnabled = formData.get("user.enabled") === "1" ? true : false;
 
+  const newFlairText = await Promise.resolve(formData.get("user.flair.text"))
+    .then((text) => text?.toString())
+    .then((text) => {
+      if (isNil(text)) {
+        return null;
+      }
+
+      if (text.length <= 0) {
+        return null;
+      }
+
+      return text;
+    });
+
+  const newFlairColor = await Promise.resolve(formData.get("user.flair.color"))
+    .then((text) => text?.toString())
+    .then((text) => {
+      if (isNil(text)) {
+        return null;
+      }
+
+      if (text.length <= 0) {
+        return null;
+      }
+
+      return text;
+    });
+
   const updatedAt = new Date();
 
   try {
-    await prisma.user.updateMany({
-      where: { id: targetId },
-      data: {
-        name: newName,
-        enabled: newEnabled,
-        avatarUrl: newAvatarUrl,
-        updatedAt: updatedAt,
-      },
-    });
+    await prisma.$transaction([
+      prisma.user.update({
+        include: { flair: true },
+        where: { id: targetId },
+        data: {
+          name: newName,
+          enabled: newEnabled,
+          avatarUrl: newAvatarUrl,
+          updatedAt: updatedAt,
+        },
+      }),
+      prisma.userFlairs.upsert({
+        where: { userId: targetId },
+        create: {
+          userId: target.id,
+          text: newFlairText,
+          color: newFlairColor,
+        },
+        update: {
+          text: newFlairText,
+          color: newFlairColor,
+        },
+      }),
+    ]);
   } catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
       return json<ActionData>(
@@ -204,6 +247,30 @@ export default function YashiroUsersSlugRoute() {
             <option value={1}>Enabled</option>
             <option value={0}>Disabled</option>
           </select>
+        </div>
+
+        <div className="flex flex-col gap-0.5">
+          <label htmlFor="user.flair.text" className="text-sm font-semibold uppercase opacity-70">
+            Flair Text
+          </label>
+          <input
+            id="user.flair.text"
+            name="user.flair.text"
+            className="input-field"
+            defaultValue={orUndefined(user.flair?.text)}
+          />
+        </div>
+
+        <div className="flex flex-col gap-0.5">
+          <label htmlFor="user.flair.color" className="text-sm font-semibold uppercase opacity-70">
+            Flair Color
+          </label>
+          <input
+            id="user.flair.color"
+            name="user.flair.color"
+            className="input-field"
+            defaultValue={orUndefined(user.flair?.color)}
+          />
         </div>
         {madeChanges && <button className="button mt-4 md:col-span-2 lg:col-span-3">Save</button>}
       </Form>
