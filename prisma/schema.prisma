@@ -62,10 +62,11 @@ model LinkedAccounts {
 }
 
 model UserFlairs {
-  id     String  @id @default(cuid())
-  userId String? @unique
-  text   String?
-  color  String? @db.VarChar(7)
+  id      String  @id @default(cuid())
+  userId  String? @unique
+  text    String?
+  bgColor String? @db.VarChar(7)
+  fgColor String? @db.VarChar(7)
 
   user User? @relation(fields: [userId], references: [id])
 }
