@@ -5,8 +5,8 @@ import { useFetcher, useLoaderData } from "@remix-run/react";
 import { useLocale } from "use-intl";
 
 import { Container } from "~/components/Container";
-import { RoleBadge } from "~/components/RoleBadge";
 import { UserAvatar } from "~/components/UserAvatar";
+import { UserFlair } from "~/components/UserFlair";
 import { useUser } from "~/hooks/use-user";
 import { getLinkedAccountsById, unlinkDiscordAccountByUserId } from "~/models/user.server";
 import { getDiscordLinkOAuthURL } from "~/utils/oauth/discord.server";
@@ -75,19 +75,17 @@ const MeRoute = () => {
         />
 
         <div className="flex flex-col items-center justify-center">
-          <h2 className="text-xl font-semibold">{user.name}</h2>
+          <h2 className="text-xl font-semibold">
+            <UserFlair
+              text={user.flair?.text}
+              fgColor={user.flair?.fgColor}
+              bgColor={user.flair?.bgColor}
+            />{" "}
+            {user.name}
+          </h2>
           <h6 className="text-xs opacity-40">ID: {user.id}</h6>
         </div>
         <div className="mt-4 grid auto-rows-min grid-cols-[auto_1fr] gap-x-2">
-          <h1 className="font-semibold">Roles:</h1>
-          <h2>
-            {user.roles.map((role, i) => (
-              <span key={i}>
-                <RoleBadge role={role.title} />{" "}
-              </span>
-            ))}
-          </h2>
-
           <h1 className="font-semibold">Joined:</h1>
           <h2>{new Date(user.createdAt).toLocaleString(locale)}</h2>
         </div>
