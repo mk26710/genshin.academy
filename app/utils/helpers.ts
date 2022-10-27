@@ -1,3 +1,10 @@
+export function isNil(value: unknown): value is undefined | null {
+  if (typeof value === "undefined" || value === null) {
+    return true;
+  }
+  return false;
+}
+
 /**
  * Builds url to character's avatar header
  */
