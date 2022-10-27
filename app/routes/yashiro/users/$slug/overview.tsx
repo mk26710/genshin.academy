@@ -84,7 +84,21 @@ export const action = async ({ request }: ActionArgs) => {
       return text;
     });
 
-  const newFlairColor = await Promise.resolve(formData.get("user.flair.color"))
+  const newFlairFgColor = await Promise.resolve(formData.get("user.flair.fgColor"))
+    .then((text) => text?.toString())
+    .then((text) => {
+      if (isNil(text)) {
+        return null;
+      }
+
+      if (text.length <= 0) {
+        return null;
+      }
+
+      return text;
+    });
+
+  const newFlairBgColor = await Promise.resolve(formData.get("user.flair.bgColor"))
     .then((text) => text?.toString())
     .then((text) => {
       if (isNil(text)) {
@@ -117,11 +131,13 @@ export const action = async ({ request }: ActionArgs) => {
         create: {
           userId: target.id,
           text: newFlairText,
-          color: newFlairColor,
+          fgColor: newFlairFgColor,
+          bgColor: newFlairBgColor,
         },
         update: {
           text: newFlairText,
-          color: newFlairColor,
+          fgColor: newFlairFgColor,
+          bgColor: newFlairBgColor,
         },
       }),
     ]);
@@ -262,14 +278,32 @@ export default function YashiroUsersSlugRoute() {
         </div>
 
         <div className="flex flex-col gap-0.5">
-          <label htmlFor="user.flair.color" className="text-sm font-semibold uppercase opacity-70">
-            Flair Color
+          <label
+            htmlFor="user.flair.bgColor"
+            className="text-sm font-semibold uppercase opacity-70"
+          >
+            Flair Background Color
           </label>
           <input
-            id="user.flair.color"
-            name="user.flair.color"
+            id="user.flair.bgColor"
+            name="user.flair.bgColor"
             className="input-field"
-            defaultValue={orUndefined(user.flair?.color)}
+            defaultValue={orUndefined(user.flair?.bgColor)}
+          />
+        </div>
+
+        <div className="flex flex-col gap-0.5">
+          <label
+            htmlFor="user.flair.fgColor"
+            className="text-sm font-semibold uppercase opacity-70"
+          >
+            Flair Foreground Color
+          </label>
+          <input
+            id="user.flair.fgColor"
+            name="user.flair.fgColor"
+            className="input-field"
+            defaultValue={orUndefined(user.flair?.fgColor)}
           />
         </div>
         {madeChanges && <button className="button mt-4 md:col-span-2 lg:col-span-3">Save</button>}
