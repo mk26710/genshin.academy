@@ -21,10 +21,11 @@ enum UserRole {
 model User {
   id String @id @default(cuid())
 
-  name        String  @unique @map("username")
-  enabled     Boolean @default(false)
+  name        String      @unique @map("username")
+  enabled     Boolean     @default(false)
   avatarUrl   String?
   accentColor String?
+  flair       UserFlairs?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -33,17 +34,11 @@ model User {
   password       Password?
   linkedAccounts LinkedAccounts[]
 
+  permissions               Permissions[] @relation("UserPermissions")
+  permissionsProvidedBySelf Permissions[] @relation("PermissionProvider")
+
   posts       Post[] @relation("AuthoredPosts")
   editedPosts Post[] @relation("EditedPosts")
-}
-
-model UserRoles {
-  userId String
-  title  UserRole @default(DEFAULT)
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([userId, title])
 }
 
 model Password {
@@ -64,6 +59,56 @@ model LinkedAccounts {
   User User? @relation(fields: [userId], references: [id])
 
   @@unique([userId, provider])
+}
+
+model UserFlairs {
+  id     String  @id @default(cuid())
+  userId String? @unique
+  text   String?
+  color  String? @db.VarChar(7)
+
+  user User? @relation(fields: [userId], references: [id])
+}
+
+model UserRoles {
+  userId String
+  title  UserRole @default(DEFAULT)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, title])
+}
+
+enum PermissionFlag {
+  ABSOLUTE_POWER
+
+  EDIT_USER
+  DELETE_USER
+
+  NEW_POST
+  EDIT_MY_POST
+  EDIT_SOMEONES_POST
+  DELETE_MY_POST
+  DELETE_SOMEONES_POST
+
+  NEW_CHARACTER
+  EDIT_CHARACTER
+  DELETE_CHARACTER
+
+  DEFAULT
+}
+
+model Permissions {
+  userId     String
+  providerId String?
+  value      PermissionFlag @default(DEFAULT)
+  grantedAt  DateTime       @default(now())
+
+  user           User  @relation(fields: [userId], references: [id], name: "UserPermissions")
+  providedByUser User? @relation(fields: [providerId], references: [id], name: "PermissionProvider")
+
+  @@unique([userId, value])
+  @@index([providerId])
 }
 
 // Posts
