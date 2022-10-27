@@ -1,4 +1,4 @@
-import { UserRole } from "@prisma/client";
+import { PermissionFlag, UserRole } from "@prisma/client";
 import { z } from "zod";
 
 export const UserName = z
@@ -32,5 +32,12 @@ export const PasswordNewPasswordRepeatNew = z
 export const UserRolesTitles = z.array(
   z.custom<UserRole>(
     (val) => typeof val === "string" && Object.values(UserRole).includes(val as UserRole),
+  ),
+);
+
+export const UserPermissions = z.array(
+  z.custom<PermissionFlag>(
+    (val) =>
+      typeof val === "string" && Object.values(PermissionFlag).includes(val as PermissionFlag),
   ),
 );
