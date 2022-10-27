@@ -1,12 +1,13 @@
 import type { LoaderArgs } from "@remix-run/node";
 
+import { PermissionFlag } from "@prisma/client";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
 import { UserCard } from "~/components/cards/UserCard";
 import { Container } from "~/components/Container";
 import { prisma } from "~/db/prisma.server";
-import { userHasAnyRole } from "~/utils/permissions";
+import { userHasAccess } from "~/utils/permissions";
 import { ensureAuthorizedUser } from "~/utils/session.server";
 
 export const handle: RouteHandle = {
@@ -15,7 +16,9 @@ export const handle: RouteHandle = {
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
-  await ensureAuthorizedUser(request, async (user) => userHasAnyRole(user, "ADMIN"));
+  await ensureAuthorizedUser(request, async (user) =>
+    userHasAccess(user, PermissionFlag.EDIT_USER),
+  );
 
   const registeredUsers = await prisma.user.findMany({
     include: { roles: true },
