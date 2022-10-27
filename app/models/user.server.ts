@@ -6,6 +6,8 @@ import bcrypt from "bcryptjs";
 import { prisma } from "~/db/prisma.server";
 
 export const includedWithUser = Prisma.validator<Prisma.UserInclude>()({
+  flair: true,
+  permissions: true,
   roles: {
     orderBy: {
       title: "asc",
