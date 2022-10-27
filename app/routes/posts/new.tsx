@@ -1,8 +1,6 @@
-import type { UserRole } from "@prisma/client";
 import type { ActionArgs, LoaderArgs } from "@remix-run/node";
-import type { ensureAuthenticatedUser } from "~/utils/session.server";
 
-import { PostType } from "@prisma/client";
+import { PermissionFlag, PostType } from "@prisma/client";
 import { redirect, json } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 
@@ -11,13 +9,9 @@ import { UserAvatar } from "~/components/UserAvatar";
 import { useUser } from "~/hooks/use-user";
 import { createPost, getPostBySlug } from "~/models/posts.server";
 import { PostsNewOrEditForm } from "~/schemas/posts";
+import { userHasAccess } from "~/utils/permissions";
 import { text } from "~/utils/responses.server";
 import { ensureAuthorizedUser } from "~/utils/session.server";
-
-const allowedRoles: UserRole[] = ["OWNER", "ADMIN", "WRITER"];
-
-const accessLevelPredicate = async (user: Awaited<ReturnType<typeof ensureAuthenticatedUser>>) =>
-  user.roles.some((role) => allowedRoles.includes(role.title));
 
 export const handle: RouteHandle = {
   id: "post.new",
@@ -25,12 +19,14 @@ export const handle: RouteHandle = {
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
-  await ensureAuthorizedUser(request, accessLevelPredicate);
+  await ensureAuthorizedUser(request, async (user) => userHasAccess(user, PermissionFlag.NEW_POST));
   return null;
 };
 
 export const action = async ({ request }: ActionArgs) => {
-  const user = await ensureAuthorizedUser(request, accessLevelPredicate);
+  const user = await ensureAuthorizedUser(request, async (user) =>
+    userHasAccess(user, PermissionFlag.NEW_POST),
+  );
 
   const formData = await request.formData();
   const parsedForm = await PostsNewOrEditForm.safeParseAsync(Object.fromEntries(formData));
