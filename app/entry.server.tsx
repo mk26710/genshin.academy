@@ -1,53 +1,32 @@
 import type { EntryContext } from "@remix-run/node";
 
-import { PassThrough } from "stream";
-
 import { Response } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
-import isbot from "isbot";
-import { renderToPipeableStream } from "react-dom/server";
+import { renderToString } from "react-dom/server";
 
-const ABORT_DELAY = 5000;
+import { tailwindStyles } from "./utils/tailwind.server";
 
-export default function handleRequest(
+export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext,
 ) {
-  const callbackName = isbot(request.headers.get("user-agent")) ? "onAllReady" : "onShellReady";
+  const markup = renderToString(<RemixServer context={remixContext} url={request.url} />);
 
-  return new Promise((resolve, reject) => {
-    let didError = false;
+  const headCloseTagAt = markup.indexOf("</head>");
+  const beforeHeadCloseTag = markup.substring(0, headCloseTagAt);
+  const afterHeadCloseTag = markup.substring(headCloseTagAt);
 
-    const { pipe, abort } = renderToPipeableStream(
-      <RemixServer context={remixContext} url={request.url} />,
-      {
-        [callbackName]: () => {
-          const body = new PassThrough();
+  const css = await tailwindStyles();
+  const styleTag = `<style>${css}</style>`;
 
-          responseHeaders.set("Content-Type", "text/html");
+  const newMarkup = `${beforeHeadCloseTag}${styleTag}${afterHeadCloseTag}`;
 
-          resolve(
-            new Response(body, {
-              headers: responseHeaders,
-              status: didError ? 500 : responseStatusCode,
-            }),
-          );
+  responseHeaders.set("Content-Type", "text/html");
 
-          pipe(body);
-        },
-        onShellError: (err: unknown) => {
-          reject(err);
-        },
-        onError: (error: unknown) => {
-          didError = true;
-
-          console.error(error);
-        },
-      },
-    );
-
-    setTimeout(abort, ABORT_DELAY);
+  return new Response("<!DOCTYPE html>" + newMarkup, {
+    status: responseStatusCode,
+    headers: responseHeaders,
   });
 }

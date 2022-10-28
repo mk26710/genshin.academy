@@ -1,5 +1,4 @@
 import type { LinksFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
-import type { AbstractIntlMessages } from "use-intl";
 
 import { json } from "@remix-run/node";
 import {
@@ -30,34 +29,24 @@ import { getUser } from "~/utils/session.server";
 import { Container } from "./components/Container";
 
 import nprogressStylesheetUrl from "~/styles/nprogress.css";
-import tailwindStylesheetUrl from "~/styles/tailwind.css";
 
 export const handle: RouteHandle = {
   id: "root",
 };
 
 export const links: LinksFunction = () => {
-  return [
-    { rel: "stylesheet", href: tailwindStylesheetUrl },
-    { rel: "stylesheet", href: nprogressStylesheetUrl },
-  ];
+  return [{ rel: "stylesheet", href: nprogressStylesheetUrl }];
 };
 
 export const meta: MetaFunction = () => ({
   title: "GENSHIN.ZENLESS",
 });
 
-type LoaderData = {
-  user: Awaited<ReturnType<typeof getUser>>;
-  locale: string;
-  messages: Record<string, AbstractIntlMessages>;
-};
-
 export async function loader({ request }: LoaderArgs) {
   const resolvedLocale = await resolveLocale(request);
   const messages = await getMessages(resolvedLocale, ["calc", "posts", "settings"]);
 
-  return json<LoaderData>({
+  return json({
     user: await getUser(request),
     locale: resolvedLocale,
     messages,
@@ -132,7 +121,7 @@ function App({ locale }: { locale: string }) {
 }
 
 export default function Root() {
-  const { messages, locale } = useLoaderData() as LoaderData;
+  const { messages, locale } = useLoaderData<typeof loader>();
 
   return (
     <IntlProvider locale={locale} messages={messages}>
