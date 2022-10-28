@@ -10,7 +10,12 @@ import { useEffect, useMemo, useState } from "react";
 
 import { prisma } from "~/db/prisma.server";
 import { UserPermissions } from "~/schemas/user.server";
-import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
+import {
+  isPermissionFlag,
+  permissions,
+  validateUserPermissions,
+  ValidationMode,
+} from "~/utils/permissions";
 import { ensureAuthorizedUser } from "~/utils/session.server";
 
 export const handle: RouteHandle = {
@@ -52,12 +57,12 @@ export default function YashiroUsersSlugPermissions() {
 
   const handleAdd = (value: PermissionFlag) => {
     const processedValue = value.trim().toUpperCase();
-    if (!Object.values(PermissionFlag).includes(processedValue as PermissionFlag)) {
+    if (!isPermissionFlag(processedValue)) {
       alert("invalid permission input bro, use these: " + Object.values(PermissionFlag).join(", "));
       return;
     }
 
-    setToAdd((flags) => [...new Set([...flags, processedValue as PermissionFlag])]);
+    setToAdd((flags) => [...new Set([...flags, processedValue])]);
   };
 
   const handleDelete = (value: PermissionFlag) => {
