@@ -1,10 +1,9 @@
 import type { LoaderArgs } from "@remix-run/node";
 
-import { PermissionFlag } from "@prisma/client";
 import { Link } from "@remix-run/react";
 
 import { Container } from "~/components/Container";
-import { userHasAccess } from "~/utils/permissions";
+import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { ensureAuthorizedUser } from "~/utils/session.server";
 
 export const handle: RouteHandle = {
@@ -14,7 +13,7 @@ export const handle: RouteHandle = {
 
 export const loader = async ({ request }: LoaderArgs) => {
   await ensureAuthorizedUser(request, async (user) =>
-    userHasAccess(user, PermissionFlag.EDIT_USER),
+    validateUserPermissions(user, permissions("EDIT_USER"), ValidationMode.SOFT),
   );
 
   return null;

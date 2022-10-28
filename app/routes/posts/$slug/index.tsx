@@ -4,7 +4,6 @@ import type { FunctionComponent } from "react";
 import { PencilIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { redirect, json } from "@remix-run/node";
 import { Link, useFetcher, useLoaderData } from "@remix-run/react";
-import { useEffect } from "react";
 import { useTranslations } from "use-intl";
 
 import { Container } from "~/components/Container";
@@ -17,7 +16,7 @@ import { deletePostById, getPostBySlugWithAuthor } from "~/models/posts.server";
 import { orUndefined } from "~/utils/helpers";
 import { extractHeadings, markdownParser } from "~/utils/markdown.server";
 import { generateMeta } from "~/utils/meta-generator";
-import { canUserDeletePost, canUserEditPost } from "~/utils/permissions";
+import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { text } from "~/utils/responses.server";
 import { getUser } from "~/utils/session.server";
 
@@ -51,8 +50,16 @@ export const loader = async ({ request, params }: LoaderArgs) => {
 
   return json({
     canUser: {
-      edit: canUserEditPost(user, post),
-      delete: canUserDeletePost(user, post),
+      edit: validateUserPermissions(
+        user,
+        permissions(post.authorId === user?.id && "EDIT_MY_POST", "EDIT_SOMEONES_POST"),
+        ValidationMode.SOFT,
+      ),
+      delete: validateUserPermissions(
+        user,
+        permissions(post.authorId === user?.id && "DELETE_MY_POST", "DELETE_SOMEONES_POST"),
+        ValidationMode.SOFT,
+      ),
     },
     slug: params.slug,
     post: {
@@ -83,7 +90,13 @@ export const action = async ({ request, params }: ActionArgs) => {
       return text("Post not found", { status: 404 });
     }
 
-    if (!canUserDeletePost(maybeUser, post)) {
+    if (
+      validateUserPermissions(
+        maybeUser,
+        permissions(post.authorId === maybeUser?.id && "DELETE_MY_POST", "DELETE_SOMEONES_POST"),
+        ValidationMode.SOFT,
+      )
+    ) {
       throw text("You are not allowed to delete this post", { status: 403 });
     }
 
@@ -165,10 +178,6 @@ const PostsSlugIndexRoute = () => {
     month: "long",
     year: "numeric",
   });
-
-  useEffect(() => {
-    console.log({ canUserEditPost, post });
-  }, [post, canUserEditPost]);
 
   return (
     <Container className="max-w-screen-xl px-[var(--default-gap)] lg:px-0">

@@ -7,7 +7,7 @@ import { UserAvatar } from "~/components/UserAvatar";
 import { getUserByNameOrId } from "~/models/user.server";
 import { orUndefined } from "~/utils/helpers";
 import { generateMeta } from "~/utils/meta-generator";
-import { userHasAccess } from "~/utils/permissions";
+import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { text } from "~/utils/responses.server";
 import { ensureAuthorizedUser } from "~/utils/session.server";
 
@@ -17,7 +17,9 @@ export const handle: RouteHandle = {
 };
 
 export const loader = async ({ request, params }: LoaderArgs) => {
-  await ensureAuthorizedUser(request, async (user) => userHasAccess(user, "EDIT_USER"));
+  await ensureAuthorizedUser(request, async (user) =>
+    validateUserPermissions(user, permissions("EDIT_USER"), ValidationMode.SOFT),
+  );
 
   if (typeof params?.slug !== "string") {
     throw text("Something went wrong with the slug.", { status: 500 });

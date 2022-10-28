@@ -10,7 +10,7 @@ import { useEffect, useMemo, useState } from "react";
 
 import { prisma } from "~/db/prisma.server";
 import { UserPermissions } from "~/schemas/user.server";
-import { userHasAccess } from "~/utils/permissions";
+import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { ensureAuthorizedUser } from "~/utils/session.server";
 
 export const handle: RouteHandle = {
@@ -136,7 +136,7 @@ export default function YashiroUsersSlugPermissions() {
 
 export async function action({ request }: ActionArgs) {
   const editor = await ensureAuthorizedUser(request, async (user) =>
-    userHasAccess(user, "EDIT_USER"),
+    validateUserPermissions(user, permissions("EDIT_USER"), ValidationMode.SOFT),
   );
 
   const formData = await request.formData();

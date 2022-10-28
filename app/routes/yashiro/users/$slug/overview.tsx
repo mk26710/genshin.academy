@@ -10,7 +10,7 @@ import { useRef, useEffect, useState } from "react";
 import { prisma } from "~/db/prisma.server";
 import { deleteUserById, getUserById } from "~/models/user.server";
 import { isNil, orUndefined, stringOrUndefined } from "~/utils/helpers";
-import { userHasAccess } from "~/utils/permissions";
+import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { ensureAuthorizedUser } from "~/utils/session.server";
 
 export const handle: RouteHandle = {
@@ -27,7 +27,9 @@ type ActionData = {
 };
 
 export const action = async ({ request }: ActionArgs) => {
-  await ensureAuthorizedUser(request, async (user) => userHasAccess(user, "EDIT_USER"));
+  await ensureAuthorizedUser(request, async (user) =>
+    validateUserPermissions(user, permissions("EDIT_USER"), ValidationMode.SOFT),
+  );
 
   const formData = await request.formData();
 

@@ -9,7 +9,7 @@ import { UserAvatar } from "~/components/UserAvatar";
 import { useUser } from "~/hooks/use-user";
 import { getPostBySlugWithAuthor, updatePostBySlug } from "~/models/posts.server";
 import { PostsNewOrEditForm } from "~/schemas/posts";
-import { canUserEditPost } from "~/utils/permissions";
+import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { text } from "~/utils/responses.server";
 import { ensureAuthorizedUser } from "~/utils/session.server";
 
@@ -31,7 +31,13 @@ export const loader = async ({ request, params }: LoaderArgs) => {
     throw text("Post not found", { status: 404 });
   }
 
-  await ensureAuthorizedUser(request, async (user) => canUserEditPost(user, post));
+  await ensureAuthorizedUser(request, async (user) =>
+    validateUserPermissions(
+      user,
+      permissions(post.authorId === user.id && "EDIT_MY_POST", "EDIT_SOMEONES_POST"),
+      ValidationMode.SOFT,
+    ),
+  );
 
   return json({ post });
 };
@@ -50,7 +56,11 @@ export const action = async ({ request, params }: ActionArgs) => {
   }
 
   const editorUser = await ensureAuthorizedUser(request, async (user) =>
-    canUserEditPost(user, post),
+    validateUserPermissions(
+      user,
+      permissions(post.authorId === user.id && "EDIT_MY_POST", "EDIT_SOMEONES_POST"),
+      ValidationMode.SOFT,
+    ),
   );
 
   const formData = await request.formData();
