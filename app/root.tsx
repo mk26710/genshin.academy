@@ -110,7 +110,13 @@ function App({ locale }: { locale: string }) {
         <Meta />
         <Links />
       </head>
-      <body className={clsx("h-full", cssTransitionsState === false && "transitions-be-gone")}>
+      <body
+        className={clsx(
+          "h-full",
+          "antialiased",
+          cssTransitionsState === false && "transitions-be-gone",
+        )}
+      >
         <div className="app">
           <Header />
           <Outlet />
