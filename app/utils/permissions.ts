@@ -1,40 +1,76 @@
 import type { GetUser } from "./session.server";
-import type { Post, UserRole, User, UserRoles } from "@prisma/client";
+import type { UserRole, UserRoles } from "@prisma/client";
 
 import { PermissionFlag } from "@prisma/client";
 
-import { isNil } from "./helpers";
+export function isPermissionFlag(value: unknown): value is PermissionFlag {
+  if (typeof value !== "string") {
+    return false;
+  }
+
+  if (value in PermissionFlag) {
+    return true;
+  }
+
+  return false;
+}
+
+export type PermissionValue = PermissionFlag | undefined | null | boolean;
+
+/**
+ * Generates an array of `PermissionFlag`s
+ */
+export function permissions(...input: PermissionValue[]) {
+  const result: PermissionFlag[] = [];
+
+  input.flat().forEach((value) => {
+    if (isPermissionFlag(value)) {
+      result.push(value);
+    }
+  });
+
+  return result;
+}
 
 type UserWithId = Record<string, unknown> & Pick<NonNullable<GetUser>, "id">;
 type UserWithPermissions = Record<string, unknown> & Pick<NonNullable<GetUser>, "permissions">;
 
-export function userHasAccess(user?: UserWithPermissions, ...flags: PermissionFlag[]) {
-  if (!user) return false;
-
-  const userFlags = user.permissions.map(({ value }) => value);
-  return hasAccess({ target: userFlags, allowed: flags });
+export enum ValidationMode {
+  STRICT = "STRICT",
+  SOFT = "SOFT",
 }
 
-type HasAccessOptions = {
-  target?: Array<PermissionFlag> | null;
-  allowed: Array<PermissionFlag>;
-};
+const DEFAULT_VALIDATION = ValidationMode.SOFT;
 
-export function hasAccess(options?: HasAccessOptions) {
-  if (isNil(options)) {
-    return false;
+export function validatePermissions(
+  permissions?: PermissionFlag[],
+  validFlags?: PermissionFlag[],
+  mode: ValidationMode = DEFAULT_VALIDATION,
+) {
+  if (typeof permissions === "undefined") return false;
+  if (permissions.includes(PermissionFlag.ABSOLUTE_POWER)) return true;
+  if (typeof validFlags === "undefined") return false;
+
+  if (mode === ValidationMode.SOFT) {
+    return permissions.some((flag) => validFlags.includes(flag));
   }
 
-  const permissions = options.target;
-  if (isNil(permissions)) {
-    return false;
+  if (mode === ValidationMode.STRICT) {
+    return validFlags.every((validFlag) => permissions.includes(validFlag));
   }
 
-  if (permissions.some((flag) => flag === PermissionFlag.ABSOLUTE_POWER)) {
-    return true;
-  }
+  return false;
+}
 
-  return permissions.some((flag) => options.allowed.includes(flag));
+export function validateUserPermissions(
+  user: UserWithPermissions | null | undefined,
+  validFlags: PermissionFlag[] = [],
+  mode: ValidationMode = DEFAULT_VALIDATION,
+) {
+  if (!user) return false;
+
+  const userPermissionFlags = user.permissions.map(({ value }) => value);
+  return validatePermissions(userPermissionFlags, validFlags, mode);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -67,39 +103,4 @@ export const userHasAnyRole = (userWithRoles?: UserWithRole, ...allowedRoles: Us
   }
 
   return userWithRoles.roles.some(({ title }) => allowedRoles.includes(title));
-};
-
-type PostWithAuthorId = Record<string, unknown> & Pick<Post, "authorId">;
-
-/** Check if specified user has permissions to delete specified post */
-export const canUserDeletePost = (
-  user: Nil<UserWithId & UserWithPermissions>,
-  post?: PostWithAuthorId,
-) => {
-  if (user == null || post == null) {
-    return false;
-  }
-
-  if (user.id === post.authorId) {
-    return userHasAccess(user, PermissionFlag.DELETE_MY_POST, PermissionFlag.DELETE_SOMEONES_POST);
-  }
-
-  return userHasAccess(user, PermissionFlag.DELETE_SOMEONES_POST);
-};
-
-type PostLikeObject = Record<string, unknown> & Pick<Post, "authorId">;
-
-export const canUserEditPost = (
-  user: Nil<UserWithId & UserWithPermissions>,
-  post: Nil<PostLikeObject>,
-) => {
-  if (user == null || post == null) {
-    return false;
-  }
-
-  if (user.id === post.authorId) {
-    return userHasAccess(user, PermissionFlag.EDIT_MY_POST, PermissionFlag.EDIT_SOMEONES_POST);
-  }
-
-  return userHasAccess(user, PermissionFlag.EDIT_SOMEONES_POST);
 };
