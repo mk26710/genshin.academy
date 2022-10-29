@@ -1,6 +1,6 @@
-![](https://img.shields.io/github/license/TenkoSpirit/genshin.zenless.club)
-![](https://img.shields.io/github/commit-activity/m/TenkoSpirit/genshin.zenless.club)
-![Discord](https://img.shields.io/discord/973472155595571220)
+![](https://img.shields.io/badge/MPL%202.0-000?style=for-the-badge&logo=mozilla&logoColor=FFF)
+![](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
 
 # GENSHIN.ZENLESS.CLUB
 
