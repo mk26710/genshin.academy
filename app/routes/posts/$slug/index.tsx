@@ -191,7 +191,12 @@ const PostsSlugIndexRoute = () => {
         </div>
 
         <div className="col-span-full mb-16 lg:col-span-10 lg:col-start-2">
-          <img className="rounded-md" src={orUndefined(post.thumbnailUrl)} />
+          <img
+            className="rounded-md"
+            src={orUndefined(post.thumbnailUrl)}
+            decoding="async"
+            loading="lazy"
+          />
         </div>
 
         <article
