@@ -1,3 +1,4 @@
+import type { ThrownErrorResponse } from "./utils/responses.server";
 import type { LinksFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
 import type { AbstractIntlMessages } from "use-intl";
 
@@ -144,7 +145,7 @@ export default function Root() {
 }
 
 export function CatchBoundary() {
-  const caught = useCatch();
+  const caught = useCatch<ThrownErrorResponse>();
 
   const fetcher = useFetcher();
 
@@ -173,17 +174,17 @@ export function CatchBoundary() {
             <div className="flex flex-col items-center gap-4">
               <div className="flex text-2xl">
                 <h2 className="mr-2 border-r border-black pr-2 font-bold">{caught.status}</h2>
-                <p>{caught.statusText}</p>
+                <p>{caught.data?.message || caught.statusText}</p>
               </div>
 
               <div className="flex flex-col items-center justify-center gap-2 md:flex-row ">
-                {caught?.data?.error?.code == null && (
+                {caught?.data?.code == null && (
                   <Link to="/" role="button" className="button w-fit text-center">
                     Go to home page
                   </Link>
                 )}
 
-                {caught?.data?.error?.code === "user.disabled" && (
+                {caught?.data?.code === "user.disabled" && (
                   <button onClick={handleLogOut} className="button w-fit text-center">
                     Log Out
                   </button>
