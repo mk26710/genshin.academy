@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 import { requiredServerEnv } from "~/utils/helpers.server";
-import { text } from "~/utils/responses.server";
+import { serverError } from "~/utils/responses.server";
 
 const DISCORD_API_ENDPOINT = "https://discord.com/api/v10";
 const DISCORD_CLIENT_ID = requiredServerEnv("DISCORD_CLIENT_ID");
@@ -49,7 +49,7 @@ export const exchageDiscordCode = async (code: string, opts: ExchageDiscordCodeO
 
   const parseResult = DiscordOAuthToken.passthrough().safeParse(await response.json());
   if (parseResult.success !== true) {
-    throw text("Discord responded without an access_token", { status: 500 });
+    throw serverError({ message: "Discord responded without an access_token" });
   }
 
   return parseResult.data;
@@ -65,7 +65,7 @@ export const getDiscordAccount = async (access_token: string) => {
 
   const parseAccountJson = DiscordOAuthMe.passthrough().safeParse(await accountResponse.json());
   if (parseAccountJson.success !== true) {
-    throw text("Failed to parse Discord API's /oauth2/@me reponse", { status: 500 });
+    throw serverError({ message: "Failed to parse Discord API's /oauth2/@me reponse" });
   }
 
   return parseAccountJson.data.user;
