@@ -1,12 +1,16 @@
+import type { ThrownResponse } from "@remix-run/react";
+
 import { json } from "@remix-run/node";
 
-export type TypedErrorResponse<Code = unknown, Message = string, Cause = Error> = {
+export type TypedErrorResponse<Code = string, Message = string, Cause = Error> = {
   code?: Code;
   message?: Message;
   cause?: Cause;
 };
 
-export const typedError = <Code = unknown, Message = string, Cause = Error>(
+export type ThrownErrorResponse = ThrownResponse<number, TypedErrorResponse>;
+
+export const typedError = <Code = string, Message = string, Cause = Error>(
   data: TypedErrorResponse<Code, Message, Cause>,
 ) => {
   return data;
