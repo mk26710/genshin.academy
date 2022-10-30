@@ -1,25 +1,33 @@
-import type { ResponseInit, SerializeFrom } from "@remix-run/node";
+import { json } from "@remix-run/node";
 
-import { json, Response } from "@remix-run/node";
-
-type TextResponseInit = Omit<ResponseInit, "statusText">;
-
-/** Plain text response generator */
-export const text = (body: string, options?: TextResponseInit) => {
-  return new Response(body, { ...options, statusText: body });
+export type TypedErrorResponse<Code = unknown, Message = string, Cause = Error> = {
+  code?: Code;
+  message?: Message;
+  cause?: Cause;
 };
 
-type ErrorData<ErrorType> = {
-  code?: string;
-  message: string;
-  cause?: ErrorType | string;
-};
-
-export const jsonError = <ErrorType>(
-  data: ErrorData<ErrorType>,
-  options?: Omit<ResponseInit, "statusText">,
+export const typedError = <Code = unknown, Message = string, Cause = Error>(
+  data: TypedErrorResponse<Code, Message, Cause>,
 ) => {
-  return json({ error: { ...data } }, { ...options, statusText: data.message });
+  return data;
 };
 
-export type JsonErrorResponse = SerializeFrom<typeof jsonError>;
+export function badRequest<T = TypedErrorResponse>(data: T) {
+  return json(data, { status: 401, statusText: "Bad Request" });
+}
+
+export function unauthorized<T = TypedErrorResponse>(data: T) {
+  return json(data, { status: 401, statusText: "Unauthorized" });
+}
+
+export function forbidden<T = TypedErrorResponse>(data: T) {
+  return json(data, { status: 403, statusText: "Forbidden" });
+}
+
+export function notFound<T = TypedErrorResponse>(data: T) {
+  return json(data, { status: 404, statusText: "Not Found" });
+}
+
+export function serverError<T = TypedErrorResponse>(data: T) {
+  return json(data, { status: 500, statusText: "Internal Server Error" });
+}
