@@ -17,7 +17,7 @@ import { orUndefined } from "~/utils/helpers";
 import { extractHeadings, markdownParser } from "~/utils/markdown.server";
 import { generateMeta } from "~/utils/meta-generator";
 import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
-import { text } from "~/utils/responses.server";
+import { badRequest, notFound, serverError, unauthorized } from "~/utils/responses.server";
 import { getUser } from "~/utils/session.server";
 
 import markdownCss from "~/styles/markdown.css";
@@ -33,12 +33,12 @@ export const links: LinksFunction = () => {
 
 export const loader = async ({ request, params }: LoaderArgs) => {
   if (typeof params.slug !== "string") {
-    throw text("Failed to obtain slug", { status: 500 });
+    throw serverError({ message: "Failed to obtain slug" });
   }
 
   const post = await getPostBySlugWithAuthor(params.slug);
   if (!post || !post.content) {
-    throw text(`Not found`, { status: 404 });
+    throw notFound({ message: "Couldn't find post or it's content" });
   }
 
   const vfile = await markdownParser.process(post.content.raw);
@@ -78,16 +78,16 @@ export const action = async ({ request, params }: ActionArgs) => {
   if (request.method.toLowerCase() === "delete") {
     const slug = params.slug;
     if (typeof slug !== "string") {
-      throw text("Bad Request (slug is not a string)", { status: 401 });
+      throw badRequest({ message: "slug is not a string for some reason" });
     }
 
     if (!maybeUser) {
-      return text("Unauthorized", { status: 401 });
+      return unauthorized({ message: "Failed to authorize request" });
     }
 
     const post = await getPostBySlugWithAuthor(slug);
     if (!post) {
-      return text("Post not found", { status: 404 });
+      throw notFound({ message: "Couldn't find requested post" });
     }
 
     if (
@@ -97,7 +97,7 @@ export const action = async ({ request, params }: ActionArgs) => {
         ValidationMode.SOFT,
       )
     ) {
-      throw text("You are not allowed to delete this post", { status: 403 });
+      throw unauthorized({ message: "You can not delete this post" });
     }
 
     await deletePostById(post.id);

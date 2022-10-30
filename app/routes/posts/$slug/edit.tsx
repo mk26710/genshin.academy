@@ -10,7 +10,7 @@ import { useUser } from "~/hooks/use-user";
 import { getPostBySlugWithAuthor, updatePostBySlug } from "~/models/posts.server";
 import { PostsNewOrEditForm } from "~/schemas/posts.server";
 import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
-import { text } from "~/utils/responses.server";
+import { badRequest, notFound, serverError } from "~/utils/responses.server";
 import { ensureAuthorizedUser } from "~/utils/session.server";
 
 type LoaderData = SerializeFrom<typeof loader>;
@@ -23,12 +23,12 @@ export const handle: RouteHandle = {
 export const loader = async ({ request, params }: LoaderArgs) => {
   const slug = params?.slug;
   if (typeof slug !== "string") {
-    throw text("Post slug is not a string somehow", { status: 500 });
+    throw serverError({ message: "Post slug is not a string somehow" });
   }
 
   const post = await getPostBySlugWithAuthor(slug);
   if (!post) {
-    throw text("Post not found", { status: 404 });
+    throw notFound({ message: "Couldn't find requested post" });
   }
 
   await ensureAuthorizedUser(request, async (user) =>
@@ -47,12 +47,12 @@ type ActionData = SerializeFrom<typeof action>;
 export const action = async ({ request, params }: ActionArgs) => {
   const slug = params?.slug;
   if (typeof slug !== "string") {
-    throw text("Post slug is not a string somehow", { status: 500 });
+    throw serverError({ message: "Post slug is not a string somehow" });
   }
 
   const post = await getPostBySlugWithAuthor(slug);
   if (!post) {
-    throw text("Post not found", { status: 404 });
+    throw notFound({ message: "Couldn't find requested post" });
   }
 
   const editorUser = await ensureAuthorizedUser(request, async (user) =>
@@ -70,7 +70,7 @@ export const action = async ({ request, params }: ActionArgs) => {
   });
 
   if (parsedForm.success !== true) {
-    return json({ error: parsedForm.error }, { status: 400 });
+    return badRequest({ cause: parsedForm.error });
   }
 
   const { lang, title, description, type, thumbnail, tags, text: contentRaw } = parsedForm.data;
@@ -108,7 +108,7 @@ const PostsSlugEditRoute = () => {
   const actionData = useActionData() as ActionData;
 
   const issueOf = (path: string) => {
-    return actionData?.error?.issues?.find((issue) => issue.path.includes(path));
+    return actionData?.cause?.issues?.find((issue) => issue.path.includes(path));
   };
 
   return (

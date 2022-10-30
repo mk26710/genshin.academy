@@ -1,7 +1,7 @@
 import type { ActionArgs, LoaderArgs } from "@remix-run/node";
 
 import { PostType } from "@prisma/client";
-import { redirect, json } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 
 import { Container } from "~/components/Container";
@@ -10,7 +10,7 @@ import { useUser } from "~/hooks/use-user";
 import { createPost, getPostBySlug } from "~/models/posts.server";
 import { PostsNewOrEditForm } from "~/schemas/posts.server";
 import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
-import { text } from "~/utils/responses.server";
+import { badRequest } from "~/utils/responses.server";
 import { ensureAuthorizedUser } from "~/utils/session.server";
 
 export const handle: RouteHandle = {
@@ -35,7 +35,7 @@ export const action = async ({ request }: ActionArgs) => {
   const parsedForm = await PostsNewOrEditForm.safeParseAsync(Object.fromEntries(formData));
 
   if (parsedForm.success !== true) {
-    return json({ error: parsedForm.error }, { status: 400 });
+    return badRequest({ cause: parsedForm.error });
   }
 
   const {
@@ -51,7 +51,7 @@ export const action = async ({ request }: ActionArgs) => {
 
   const post = await getPostBySlug(slug);
   if (post != null) {
-    throw text("Post already exists", { status: 400 });
+    throw badRequest({ message: "Post already exists" });
   }
 
   const createdPost = await createPost({
@@ -74,7 +74,7 @@ const PostsNewRoute = () => {
   const actionData = useActionData<typeof action>();
 
   const issueOf = (path: string) => {
-    return actionData?.error?.issues?.find((issue) => issue.path.includes(path));
+    return actionData?.cause?.issues?.find((issue) => issue.path.includes(path));
   };
 
   return (
