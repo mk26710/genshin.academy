@@ -5,7 +5,7 @@ import { Link, useCatch } from "@remix-run/react";
 import { Container } from "~/components/Container";
 import { getUserByDiscordAccount } from "~/models/user.server";
 import { exchageDiscordCode, getDiscordAccount } from "~/utils/oauth/discord.server";
-import { text } from "~/utils/responses.server";
+import { badRequest, unauthorized } from "~/utils/responses.server";
 import { createUserSession } from "~/utils/session.server";
 
 export async function loader({ request }: LoaderArgs) {
@@ -13,7 +13,7 @@ export async function loader({ request }: LoaderArgs) {
 
   const discordCode = url.searchParams.get("code");
   if (!discordCode) {
-    throw text("Discord OAuth code was not provided.", { status: 400 });
+    throw badRequest({ message: "Discord OAuth code was not provided" });
   }
 
   const tokenData = await exchageDiscordCode(discordCode, { type: "login" });
@@ -21,7 +21,9 @@ export async function loader({ request }: LoaderArgs) {
 
   const user = await getUserByDiscordAccount(discordAccount.id);
   if (!user) {
-    throw text("There's is no user account associated with your Discord account.", { status: 401 });
+    throw unauthorized({
+      message: "There's is no user account associated with your Discord account.",
+    });
   }
 
   return createUserSession({
