@@ -1,4 +1,5 @@
 import type { LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
+import type { ThrownErrorResponse } from "~/utils/responses.server";
 
 import { json } from "@remix-run/node";
 import { useCatch, useLoaderData, useSearchParams } from "@remix-run/react";
@@ -11,7 +12,7 @@ import { getCharacterById } from "~/models/characters.server";
 import { avatarPath } from "~/utils/helpers";
 import { resolveLocale } from "~/utils/i18n.server";
 import { generateMeta } from "~/utils/meta-generator";
-import { jsonError } from "~/utils/responses.server";
+import { notFound, serverError } from "~/utils/responses.server";
 
 export const handle: RouteHandle = {
   id: "character",
@@ -20,7 +21,7 @@ export const handle: RouteHandle = {
 
 export const loader = async ({ request, params }: LoaderArgs) => {
   if (typeof params?.id !== "string") {
-    throw jsonError({ message: "ID is somehow not a string" }, { status: 500 });
+    throw serverError({ message: "Character ID is not a string" });
   }
 
   const resolvedLocale = await resolveLocale(request);
@@ -29,20 +30,14 @@ export const loader = async ({ request, params }: LoaderArgs) => {
   });
 
   if (!characterData) {
-    throw jsonError(
-      { code: "character.notfound", message: "Character not found." },
-      { status: 404 },
-    );
+    throw serverError({ code: "character.notfound", message: "Character not found" });
   }
 
   if (!characterData.identity.some((cid) => cid.lang === resolvedLocale)) {
-    throw jsonError(
-      {
-        code: "untranslated",
-        message: "This page is not available in your language, please, try checking English.",
-      },
-      { status: 404 },
-    );
+    throw notFound({
+      code: "untranslated",
+      message: "This page is not available in your language, please, try checking English",
+    });
   }
 
   return json(characterData);
@@ -124,7 +119,7 @@ export const CatchBoundary = () => {
   const t = useTranslations();
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const caught = useCatch();
+  const caught = useCatch<ThrownErrorResponse>();
 
   const handleViewInEnglish = async () => {
     const newSearchParams = new URLSearchParams(searchParams);
@@ -137,9 +132,9 @@ export const CatchBoundary = () => {
     <Container className="flex items-center justify-center">
       <div className="flex flex-col items-center justify-center">
         <h3 className="text-8xl font-bold">{caught.status}</h3>
-        <p className="opacity-70">{caught.statusText}</p>
+        <p className="opacity-70">{caught.data?.message || caught.statusText}</p>
 
-        {caught?.data?.error?.code === "untranslated" && (
+        {caught?.data?.code === "untranslated" && (
           <button className="button mt-6" onClick={handleViewInEnglish}>
             {t("common.view-in-english")}
           </button>
