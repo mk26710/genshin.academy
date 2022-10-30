@@ -3,16 +3,15 @@ import type { ChangeEvent, FormEvent } from "react";
 import type { UserLocale } from "~/utils/locales";
 
 import { json, Response } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, useSearchParams } from "@remix-run/react";
 import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
 import { useTranslations } from "use-intl";
 
 import { PostCard } from "~/components/cards/PostCard";
 import { Container } from "~/components/Container";
 import { Paginator } from "~/components/Paginator";
 import { countSearchPostsPaginated, searchPostsPaginated } from "~/models/posts.server";
-import { PostsSearch } from "~/schemas/posts";
+import { PostsSearch } from "~/schemas/posts.server";
 import { orUndefined } from "~/utils/helpers";
 import { supportedLocales } from "~/utils/locales";
 

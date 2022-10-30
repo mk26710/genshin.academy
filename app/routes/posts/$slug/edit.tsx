@@ -8,7 +8,7 @@ import { Container } from "~/components/Container";
 import { UserAvatar } from "~/components/UserAvatar";
 import { useUser } from "~/hooks/use-user";
 import { getPostBySlugWithAuthor, updatePostBySlug } from "~/models/posts.server";
-import { PostsNewOrEditForm } from "~/schemas/posts";
+import { PostsNewOrEditForm } from "~/schemas/posts.server";
 import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { text } from "~/utils/responses.server";
 import { ensureAuthorizedUser } from "~/utils/session.server";
