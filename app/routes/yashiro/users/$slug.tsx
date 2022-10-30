@@ -1,4 +1,5 @@
 import type { LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
+import type { ThrownErrorResponse } from "~/utils/responses.server";
 
 import { NavLink, useCatch, useLoaderData, useOutlet } from "@remix-run/react";
 
@@ -8,7 +9,7 @@ import { getUserByNameOrId } from "~/models/user.server";
 import { orUndefined } from "~/utils/helpers";
 import { generateMeta } from "~/utils/meta-generator";
 import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
-import { text } from "~/utils/responses.server";
+import { notFound, serverError } from "~/utils/responses.server";
 import { ensureAuthorizedUser } from "~/utils/session.server";
 
 export const handle: RouteHandle = {
@@ -22,12 +23,12 @@ export const loader = async ({ request, params }: LoaderArgs) => {
   );
 
   if (typeof params?.slug !== "string") {
-    throw text("Something went wrong with the slug.", { status: 500 });
+    throw serverError({ message: "Something went wrong with the slug" });
   }
 
   const user = await getUserByNameOrId(params.slug);
   if (!user) {
-    throw text("User not found.", { status: 404 });
+    throw notFound({ message: "User not found" });
   }
 
   return { user };
@@ -93,13 +94,13 @@ export default function YashiroUsersSlugLayoutRoute() {
 }
 
 export const CatchBoundary = () => {
-  const caught = useCatch();
+  const caught = useCatch<ThrownErrorResponse>();
 
   return (
     <Container className="flex items-center justify-center">
       <div className="flex flex-col items-center justify-center">
         <h3 className="text-8xl font-bold">{caught.status}</h3>
-        <p className="opacity-70">{caught.statusText}</p>
+        <p className="opacity-70">{caught.data?.message || caught.statusText}</p>
       </div>
     </Container>
   );
