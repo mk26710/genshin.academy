@@ -6,15 +6,15 @@ import { redirect } from "@remix-run/node";
 import { safeRedirect } from "~/utils/helpers";
 import { localeCookie, safePickLocale } from "~/utils/i18n.server";
 import { supportedLocales } from "~/utils/locales";
-import { text } from "~/utils/responses.server";
+import { badRequest, serverError } from "~/utils/responses.server";
 
 export const action: ActionFunction = async ({ request, params }) => {
   if (typeof params.slug !== "string") {
-    return text("Slug is not a string", { status: 500 });
+    return serverError({ message: "Slug is not a string" });
   }
 
   if (!supportedLocales.includes(params.slug as UserLocale)) {
-    return text(`Unsupported locale was provided`, { status: 400 });
+    return badRequest({ message: "Unsupported locale was provided" });
   }
 
   const newLanguage = safePickLocale(params.slug);
