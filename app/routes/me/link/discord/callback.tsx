@@ -7,21 +7,21 @@ import { useLoaderData } from "@remix-run/react";
 import { Container } from "~/components/Container";
 import { getLinkedAccountsById, linkDiscordAccountByUserId } from "~/models/user.server";
 import { exchageDiscordCode, getDiscordAccount } from "~/utils/oauth/discord.server";
-import { text } from "~/utils/responses.server";
+import { badRequest } from "~/utils/responses.server";
 import { ensureAuthenticatedUser } from "~/utils/session.server";
 
 export async function loader({ request }: LoaderArgs) {
   const user = await ensureAuthenticatedUser(request);
   const linkedAccounts = await getLinkedAccountsById(user.id);
   if (linkedAccounts.some((record) => record.provider === "discord")) {
-    throw text("You have already linked your account with Discord", { status: 400 });
+    throw badRequest({ message: "You have already linked your account with Discord" });
   }
 
   const url = new URL(request.url);
   const discordCode = url.searchParams.get("code");
 
   if (!discordCode) {
-    throw text("Code was not provided", { status: 400 });
+    throw badRequest({ message: "Code was not provided" });
   }
 
   const tokenData = await exchageDiscordCode(discordCode, { type: "link" });
