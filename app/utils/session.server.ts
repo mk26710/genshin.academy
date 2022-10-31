@@ -128,7 +128,7 @@ export const getUser = async (request: Request) => {
 
 export type GetUser = Awaited<ReturnType<typeof getUser>>;
 
-export const ensureAuthenticatedUser = async (request: Request) => {
+export const getAuthenticatedUser = async (request: Request) => {
   const session = await getSession(request);
   const userId = session.get(SESSION_USER_KEY);
 
@@ -148,10 +148,10 @@ export const ensureAuthenticatedUser = async (request: Request) => {
 export const ensureAuthorizedUser = async (
   request: Request,
   predicate:
-    | ((user: Awaited<ReturnType<typeof ensureAuthenticatedUser>>) => Promise<boolean>)
+    | ((user: Awaited<ReturnType<typeof getAuthenticatedUser>>) => Promise<boolean>)
     | boolean,
 ) => {
-  const user = await ensureAuthenticatedUser(request);
+  const user = await getAuthenticatedUser(request);
 
   if (user.enabled !== true) {
     throw forbidden({
