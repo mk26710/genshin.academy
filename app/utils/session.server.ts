@@ -120,8 +120,6 @@ export const getUser = async (request: Request) => {
 
   const user = await getUserById(userId);
   if (user) {
-    if (user.enabled !== true)
-      throw forbidden(typedError({ code: "user.disabled", message: "Your account is disabled." }));
     return user;
   }
 
@@ -154,6 +152,14 @@ export const ensureAuthorizedUser = async (
     | boolean,
 ) => {
   const user = await ensureAuthenticatedUser(request);
+
+  if (user.enabled !== true) {
+    throw forbidden({
+      code: "user.disabled",
+      message: "Your account is currently disabled",
+      details: "For further details, please, contact website administrator about this",
+    });
+  }
 
   let result = false;
   if (typeof predicate === "boolean") {
