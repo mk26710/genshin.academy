@@ -1,3 +1,5 @@
+import type { Root } from "hast";
+
 import rehypeRaw from "rehype-raw";
 // import rehypeSanitize, { defaultSchema as sanitizeDefault } from "rehype-sanitize";
 import rehypeSlug from "rehype-slug";
@@ -19,7 +21,7 @@ export const markdownParser = unified()
   .use(rehypeRaw, { passThrough: ["details", "summary"] })
   .use(rehypeSlug)
   // Adds lazy loading and async decoding to img elements
-  .use(() => (root) => {
+  .use(() => (root: Root) => {
     visit(root, "element", (node) => {
       if (node.tagName === "img") {
         node.properties = { ...node.properties, decoding: "async", loading: "lazy" };
