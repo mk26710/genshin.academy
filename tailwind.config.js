@@ -85,6 +85,18 @@ const myColors = {
     ...colors.neutral,
     950: "#0c0c0c",
   },
+  gray: {
+    50: "#f8fbfc",
+    100: "#eef2f8",
+    200: "#d0d0d0",
+    300: "#b7bcbe",
+    400: "#828282",
+    500: "#6a726d",
+    600: "#3f3f3f",
+    700: "#292929",
+    800: "#1e1e1e",
+    900: "#121212",
+  },
 };
 
 const myScreens = {
@@ -107,6 +119,7 @@ module.exports = {
       },
       colors: {
         ...defaultTheme.colors,
+        gray: myColors.gray,
         primary: colors.purple,
         dark: myColors.neutral,
       },
