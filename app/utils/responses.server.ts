@@ -5,6 +5,7 @@ import { json } from "@remix-run/node";
 export type TypedErrorResponse<Code = string, Message = string, Cause = Error> = {
   code?: Code;
   message?: Message;
+  details?: Message;
   cause?: Cause;
 };
 
