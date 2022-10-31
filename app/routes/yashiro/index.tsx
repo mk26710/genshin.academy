@@ -4,7 +4,7 @@ import { Link } from "@remix-run/react";
 
 import { Container } from "~/components/Container";
 import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
-import { ensureAuthorizedUser } from "~/utils/session.server";
+import { getAuthorizedUser } from "~/utils/session.server";
 
 export const handle: RouteHandle = {
   id: "yashiro.home",
@@ -12,7 +12,7 @@ export const handle: RouteHandle = {
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
-  await ensureAuthorizedUser(request, async (user) =>
+  await getAuthorizedUser(request, async (user) =>
     validateUserPermissions(user, permissions("EDIT_USER"), ValidationMode.SOFT),
   );
 

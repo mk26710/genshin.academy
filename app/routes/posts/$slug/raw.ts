@@ -5,7 +5,7 @@ import { Response } from "@remix-run/node";
 import { getPostBySlugWithAuthor } from "~/models/posts.server";
 import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { notFound, serverError } from "~/utils/responses.server";
-import { ensureAuthorizedUser } from "~/utils/session.server";
+import { getAuthorizedUser } from "~/utils/session.server";
 
 export const loader = async ({ request, params }: LoaderArgs) => {
   const slug = params?.slug;
@@ -18,7 +18,7 @@ export const loader = async ({ request, params }: LoaderArgs) => {
     throw notFound({ message: "Post not found" });
   }
 
-  await ensureAuthorizedUser(request, async (user) =>
+  await getAuthorizedUser(request, async (user) =>
     validateUserPermissions(
       user,
       permissions("NEW_POST", "EDIT_MY_POST", "EDIT_SOMEONES_POST"),

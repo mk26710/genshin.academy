@@ -11,7 +11,7 @@ import { getPostBySlugWithAuthor, updatePostBySlug } from "~/models/posts.server
 import { PostsNewOrEditForm } from "~/schemas/posts.server";
 import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { badRequest, notFound, serverError } from "~/utils/responses.server";
-import { ensureAuthorizedUser } from "~/utils/session.server";
+import { getAuthorizedUser } from "~/utils/session.server";
 
 type LoaderData = SerializeFrom<typeof loader>;
 
@@ -31,7 +31,7 @@ export const loader = async ({ request, params }: LoaderArgs) => {
     throw notFound({ message: "Couldn't find requested post" });
   }
 
-  await ensureAuthorizedUser(request, async (user) =>
+  await getAuthorizedUser(request, async (user) =>
     validateUserPermissions(
       user,
       permissions(post.authorId === user.id && "EDIT_MY_POST", "EDIT_SOMEONES_POST"),
@@ -55,7 +55,7 @@ export const action = async ({ request, params }: ActionArgs) => {
     throw notFound({ message: "Couldn't find requested post" });
   }
 
-  const editorUser = await ensureAuthorizedUser(request, async (user) =>
+  const editorUser = await getAuthorizedUser(request, async (user) =>
     validateUserPermissions(
       user,
       permissions(post.authorId === user.id && "EDIT_MY_POST", "EDIT_SOMEONES_POST"),

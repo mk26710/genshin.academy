@@ -145,7 +145,7 @@ export const getAuthenticatedUser = async (request: Request) => {
   return user;
 };
 
-export const ensureAuthorizedUser = async (
+export const getAuthorizedUser = async (
   request: Request,
   predicate:
     | ((user: Awaited<ReturnType<typeof getAuthenticatedUser>>) => Promise<boolean>)

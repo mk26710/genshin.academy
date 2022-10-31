@@ -16,7 +16,7 @@ import {
   validateUserPermissions,
   ValidationMode,
 } from "~/utils/permissions";
-import { ensureAuthorizedUser } from "~/utils/session.server";
+import { getAuthorizedUser } from "~/utils/session.server";
 
 export const handle: RouteHandle = {
   id: "yashiro.user.permissions",
@@ -140,7 +140,7 @@ export default function YashiroUsersSlugPermissions() {
 }
 
 export async function action({ request }: ActionArgs) {
-  const editor = await ensureAuthorizedUser(request, async (user) =>
+  const editor = await getAuthorizedUser(request, async (user) =>
     validateUserPermissions(user, permissions("EDIT_USER"), ValidationMode.SOFT),
   );
 

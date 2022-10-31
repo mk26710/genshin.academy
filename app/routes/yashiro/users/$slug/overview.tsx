@@ -11,7 +11,7 @@ import { prisma } from "~/db/prisma.server";
 import { deleteUserById, getUserById } from "~/models/user.server";
 import { isNil, orUndefined, stringOrUndefined } from "~/utils/helpers";
 import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
-import { ensureAuthorizedUser } from "~/utils/session.server";
+import { getAuthorizedUser } from "~/utils/session.server";
 
 export const handle: RouteHandle = {
   id: "yashiro.user.general",
@@ -27,7 +27,7 @@ type ActionData = {
 };
 
 export const action = async ({ request }: ActionArgs) => {
-  await ensureAuthorizedUser(request, async (user) =>
+  await getAuthorizedUser(request, async (user) =>
     validateUserPermissions(user, permissions("EDIT_USER"), ValidationMode.SOFT),
   );
 
