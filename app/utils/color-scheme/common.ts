@@ -1,4 +1,4 @@
-export const SUPPORTED_COLOR_SCHEMES = ["system", "light", "dark"] as const;
+export const SUPPORTED_COLOR_SCHEMES = ["light", "dark"] as const;
 
 export type ColorScheme = typeof SUPPORTED_COLOR_SCHEMES[number];
 
