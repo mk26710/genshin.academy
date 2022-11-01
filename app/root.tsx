@@ -1,6 +1,5 @@
-import type { ThrownErrorResponse } from "./utils/responses.server";
-import type { LinksFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
-import type { AbstractIntlMessages } from "use-intl";
+import type { LinksFunction, LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
+import type { ThrownErrorResponse } from "~/utils/responses.server";
 
 import { json } from "@remix-run/node";
 import {
@@ -18,17 +17,18 @@ import {
   useTransition,
 } from "@remix-run/react";
 import clsx from "clsx";
-import { Provider as JotaiProvider } from "jotai";
+import { Provider as JotaiProvider, useAtom } from "jotai";
 import Nprogress from "nprogress";
 import { useEffect, useState } from "react";
 import { IntlProvider } from "use-intl";
 
+import { colorSchemeAtom, rawColorSchemeAtom } from "~/atoms/color-scheme";
+import { Container } from "~/components/Container";
 import { Footer } from "~/components/Footer";
 import { Header } from "~/components/Header";
+import { getColorScheme } from "~/utils/color-scheme/common.server";
 import { getMessages, resolveLocale } from "~/utils/i18n.server";
 import { getUser } from "~/utils/session.server";
-
-import { Container } from "./components/Container";
 
 import nprogressStylesheetUrl from "~/styles/nprogress.css";
 import tailwindStylesheetUrl from "~/styles/tailwind.css";
@@ -44,36 +44,39 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const meta: MetaFunction = () => ({
+export const meta: MetaFunction<typeof loader | undefined> = ({ data }) => ({
   title: "GENSHIN.ZENLESS",
+  "color-scheme": Boolean(data?.colorScheme) ? data?.colorScheme : "dark light",
 });
-
-type LoaderData = {
-  user: Awaited<ReturnType<typeof getUser>>;
-  locale: string;
-  messages: Record<string, AbstractIntlMessages>;
-};
 
 export async function loader({ request }: LoaderArgs) {
   const resolvedLocale = await resolveLocale(request);
   const messages = await getMessages(resolvedLocale, ["calc", "posts", "settings"]);
 
-  return json<LoaderData>({
+  return json({
+    colorScheme: await getColorScheme(request),
     user: await getUser(request),
     locale: resolvedLocale,
     messages,
   });
 }
 
-function App({ locale }: { locale: string }) {
-  const [cssTransitionsState, setCssTransitionsState] = useState(false);
+export type Loader = SerializeFrom<typeof loader>;
 
+function App({ locale }: { locale: string }) {
   const transition = useTransition();
 
   const matches = useMatches();
   const withScrollRestoration = matches.some(
     (m) => (m.handle as RouteHandle)?.withScrollRestoration === true,
   );
+
+  const [cssTransitionsState, setCssTransitionsState] = useState(false);
+  const [colorScheme] = useAtom(colorSchemeAtom);
+
+  useEffect(() => {
+    console.info(colorScheme);
+  }, [colorScheme]);
 
   useEffect(() => {
     Nprogress.configure({
@@ -104,7 +107,7 @@ function App({ locale }: { locale: string }) {
   }, [withScrollRestoration]);
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className={clsx(colorScheme)}>
       <head>
         <meta charSet="utf-8" />
         <meta content="width=device-width,initial-scale=1" name="viewport" />
@@ -133,11 +136,11 @@ function App({ locale }: { locale: string }) {
 }
 
 export default function Root() {
-  const { messages, locale } = useLoaderData() as LoaderData;
+  const { messages, locale, colorScheme } = useLoaderData<typeof loader>();
 
   return (
     <IntlProvider locale={locale} messages={messages}>
-      <JotaiProvider>
+      <JotaiProvider initialValues={[[rawColorSchemeAtom, colorScheme]]}>
         <App locale={locale} />
       </JotaiProvider>
     </IntlProvider>
@@ -161,7 +164,7 @@ export function CatchBoundary() {
   }, []);
 
   return (
-    <html>
+    <html className="dark">
       <head>
         <meta charSet="utf-8" />
         <meta content="width=device-width,initial-scale=1" name="viewport" />
