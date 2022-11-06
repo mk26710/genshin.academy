@@ -20,15 +20,9 @@ import { permissions, validateUserPermissions, ValidationMode } from "~/utils/pe
 import { badRequest, notFound, serverError, unauthorized } from "~/utils/responses.server";
 import { getUser } from "~/utils/session.server";
 
-import markdownCss from "~/styles/markdown.css";
-
 export const handle: RouteHandle = {
   id: "post",
   withScrollRestoration: false,
-};
-
-export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: markdownCss }];
 };
 
 export const loader = async ({ request, params }: LoaderArgs) => {
