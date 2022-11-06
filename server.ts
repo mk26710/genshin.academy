@@ -19,9 +19,23 @@ app.disable("x-powered-by");
 // Remix fingerprints its assets so we can cache forever.
 app.use("/build", express.static("public/build", { immutable: true, maxAge: "1y" }));
 
+// bit more aggressive caching for fonts
+app.use("/fonts", express.static("public/fonts", { maxAge: "30d" }));
+
+// swr for images (max 4 days stale 1 day)
+app.use(
+  "/img",
+  express.static("public/img", {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setHeaders(res, path, stat) {
+      res.setHeader("Cache-Control", "public, max-age=345600, stale-while-revalidate=86400");
+    },
+  }),
+);
+
 // Everything else (like favicon.ico) is cached for an hour. You may want to be
 // more aggressive with this caching.
-app.use(express.static("public", { maxAge: "1h" }));
+app.use(express.static("public", { maxAge: "3d" }));
 
 app.use(morgan(process.env?.MORGAN_FORMAT ?? "short"));
 
