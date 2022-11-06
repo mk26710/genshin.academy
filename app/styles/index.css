@@ -1,3 +1,6 @@
+@import url("./nprogress.css");
+@import url("./markdown.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,6 +8,10 @@
 
 * {
   text-rendering: optimizeLegibility;
+}
+
+html {
+  font-display: optional;
 }
 
 .transitions-be-gone * {
@@ -16,11 +23,11 @@
 }
 
 :root {
-  --header-height: theme("height.14");
+  --header-height: theme("height.16");
   --h-screen-without-header: calc(100vh - var(--header-height));
   --max-content-width: theme("maxWidth.screen-xl");
   --default-gap: 1rem;
-  --default-radius: 0.375rem;
+  --default-radius: 8px;
   --default-border-color: theme("colors.neutral.200");
 }
 
@@ -29,6 +36,11 @@
     min-height: 100vh;
     background-color: white;
     color: black;
+  }
+
+  .dark .app {
+    background-color: theme("colors.neutral.900");
+    color: theme("colors.neutral.200");
   }
 
   .header {
@@ -41,6 +53,15 @@
     background-color: white;
 
     border-bottom-width: 1px;
+    border-color: var(--default-border-color);
+  }
+
+  .dark .header {
+    @apply backdrop-blur-lg;
+
+    background: theme("colors.neutral.900" / 90%);
+    color: theme("colors.neutral.50");
+    border-color: theme("colors.neutral.800");
   }
 
   .header-scrolled {
@@ -72,6 +93,11 @@
     @apply transition-all duration-200;
   }
 
+  .dark .card {
+    background-color: theme("colors.neutral.800");
+    border-color: theme("colors.neutral.700");
+  }
+
   .card-shadow {
     @apply shadow-[0_8px_30px_rgba(0,0,0,.12)];
   }
@@ -87,7 +113,16 @@
   }
 
   .input-field::placeholder {
-    color: theme("colors.neutral.400");
+    color: theme("colors.neutral.500");
+  }
+
+  .dark .input-field {
+    border-color: theme("borderColor.neutral.700");
+    background-color: theme("backgroundColor.neutral.800");
+  }
+
+  .dark .input-field::placeholder {
+    color: theme("colors.neutral.500");
   }
 
   .select-field {
@@ -100,7 +135,12 @@
     font-size: theme("fontSize.sm");
     height: theme("height.10");
     padding-left: var(--default-gap);
-    padding-right: 2.5rem
+    padding-right: 2.5rem;
+  }
+
+  .dark .select-field {
+    border-color: theme("borderColor.neutral.700");
+    background-color: theme("backgroundColor.neutral.800");
   }
 
   .textarea-field {
@@ -111,10 +151,31 @@
     font-size: theme("fontSize.sm");
   }
 
+  .dark .textarea-field {
+    border-color: theme("borderColor.neutral.700");
+    background-color: theme("backgroundColor.neutral.800");
+  }
+
   .select-field:focus,
   .input-field:focus,
   .textarea-field:focus {
-    @apply border-black ring-black;
+    @apply border-black ring-black dark:border-white dark:ring-white;
+  }
+
+  .radio-field {
+    display: flex;
+    background-color: transparent;
+    border-radius: var(--default-border-color);
+    border-width: 2px;
+    padding-left: var(--default-gap);
+    padding-right: 2.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    @apply rounded-lg;
+  }
+
+  .radio-field:hover {
+    cursor: pointer;
   }
 
   .button {
@@ -131,10 +192,24 @@
     @apply text-sm font-medium transition-all duration-200;
   }
 
+  /* .dark .button {
+    box-sizing: border-box;
+    border-width: 2px;
+    border-color: theme(colors.blau.500);
+    background-color: theme(colors.blau.500);
+    color: white;
+  } */
+
   .button:hover {
     color: black;
     background-color: white;
   }
+
+  /* .dark .button:hover {
+    border-color: white;
+    background-color: transparent;
+    color: white;
+  } */
 
   .button-danger {
     @apply button;
