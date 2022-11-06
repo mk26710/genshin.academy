@@ -1,4 +1,4 @@
-import type { ActionArgs, LinksFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
+import type { ActionArgs, LoaderArgs, MetaFunction } from "@remix-run/node";
 import type { FunctionComponent } from "react";
 
 import { PencilIcon, TrashIcon } from "@heroicons/react/20/solid";
@@ -177,7 +177,7 @@ const PostsSlugIndexRoute = () => {
     <Container className="max-w-screen-xl px-[var(--default-gap)] lg:px-0">
       <div className="grid w-full grid-flow-row grid-cols-12 gap-[var(--default-gap)]">
         <div className="col-span-full mt-10 mb-10 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3">
-          <h1 className="text-4xl font-extrabold">{post.title}</h1>
+          <h1 className="text-4xl font-extrabold dark:text-white">{post.title}</h1>
           {(canUser.edit === true || canUser.delete === true) && (
             <PostControls canEdit={canUser.edit} canDelete={canUser.delete} />
           )}
@@ -186,7 +186,7 @@ const PostsSlugIndexRoute = () => {
 
         <div className="col-span-full mb-16 lg:col-span-10 lg:col-start-2">
           <img
-            className="rounded-md"
+            className="rounded-2xl"
             src={orUndefined(post.thumbnailUrl)}
             decoding="async"
             loading="lazy"
@@ -194,7 +194,7 @@ const PostsSlugIndexRoute = () => {
         </div>
 
         <article
-          className="markdown-content prose prose-blue col-span-full max-w-none md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3"
+          className="markdown-content prose prose-purple col-span-full max-w-none dark:prose-invert dark:prose-headings:text-white dark:prose-p:text-gray-200 dark:prose-thead:border-gray-800 dark:prose-tr:border-gray-800 dark:prose-hr:border-gray-800 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3"
           dangerouslySetInnerHTML={{ __html: post.content.html }}
         />
 
