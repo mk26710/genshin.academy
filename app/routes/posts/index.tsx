@@ -125,7 +125,7 @@ const PostsIndexRoute = () => {
                 id="search-query"
                 name="search-query"
                 placeholder={t("common.enter-query")}
-                className="input-field mb-2 w-full"
+                className="input-field mb-2 w-full dark:bg-neutral-900"
               />
             </div>
           </form>
@@ -138,7 +138,7 @@ const PostsIndexRoute = () => {
               id="search-language"
               defaultValue={searchLang}
               onChange={handleLanguageSelect}
-              className="select-field mb-2"
+              className="select-field mb-2 dark:bg-neutral-900"
             >
               <option value={undefined}>Any</option>
               <option value="en">English</option>
