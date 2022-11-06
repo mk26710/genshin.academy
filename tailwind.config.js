@@ -6,6 +6,18 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 const plugin = require("tailwindcss/plugin");
 
 const myColors = {
+  blau: {
+    50: "#F1F6FE",
+    100: "#E2EDFD",
+    200: "#C5DAFC",
+    300: "#A3C4FA",
+    400: "#7DACF7",
+    500: "#4285F4",
+    600: "#2B77F3",
+    700: "#0E63EC",
+    800: "#0B51C1",
+    900: "#083B8C",
+  },
   azure: {
     100: "#a5f6ff",
     200: "#88ddff",
