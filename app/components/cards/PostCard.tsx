@@ -31,7 +31,9 @@ export const PostCard: FunctionComponent<PostCardProps> = ({
           className="aspect-video w-full object-cover"
         />
       )}
-      <h3 className="mt-2 px-[var(--default-gap)] text-xl font-semibold">{title}</h3>
+      <h3 className="mt-2 px-[var(--default-gap)] text-xl font-semibold dark:text-white">
+        {title}
+      </h3>
       <p className="px-[var(--default-gap)] text-sm hyphens-auto">{description}</p>
       <p className="mb-[var(--default-gap)] self-end px-[var(--default-gap)] text-sm italic opacity-70">
         {publishDate?.toLocaleDateString(locale)}
