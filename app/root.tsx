@@ -25,7 +25,7 @@ import { IntlProvider } from "use-intl";
 import { colorSchemeAtom, rawColorSchemeAtom } from "~/atoms/color-scheme";
 import { Container } from "~/components/Container";
 import { Footer } from "~/components/Footer";
-import { Header } from "~/components/Header";
+import { Navbar } from "~/components/Navbar";
 import { getColorScheme } from "~/utils/color-scheme/common.server";
 import { getMessages, resolveLocale } from "~/utils/i18n.server";
 import { getUser } from "~/utils/session.server";
@@ -122,7 +122,7 @@ function App({ locale }: { locale: string }) {
         )}
       >
         <div className="app">
-          <Header />
+          <Navbar />
           <Outlet />
           <Footer />
         </div>
