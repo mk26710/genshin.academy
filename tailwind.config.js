@@ -119,7 +119,7 @@ module.exports = {
       },
       colors: {
         ...defaultTheme.colors,
-        gray: myColors.gray,
+        // gray: myColors.neutral,
         primary: colors.purple,
         dark: myColors.neutral,
       },
