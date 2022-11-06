@@ -40,6 +40,7 @@ export const handle: RouteHandle = {
 export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: tailwindStylesheetUrl },
+    { rel: "preload", href: interCssUrl, as: "style" },
     { rel: "stylesheet", href: interCssUrl },
   ];
 };
