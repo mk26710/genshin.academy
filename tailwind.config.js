@@ -134,6 +134,7 @@ module.exports = {
         // gray: myColors.neutral,
         primary: colors.purple,
         dark: myColors.neutral,
+        blau: myColors.blau,
       },
       screens: {
         ...myScreens,
