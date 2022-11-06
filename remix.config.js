@@ -5,6 +5,7 @@ module.exports = {
   cacheDirectory: "./.cache/remix",
   ignoredRouteFiles: ["**/.*", "**/*.css", "**/*.test.{js,jsx,ts,tsx}"],
   serverDependenciesToBundle: [
+    /github-slugger/,
     /^rehype.*/,
     /^remark.*/,
     /^unified.*/,
