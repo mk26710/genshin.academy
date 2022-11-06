@@ -10,8 +10,8 @@ export const Footer: FC = () => {
   const t = useTranslations();
 
   return (
-    <footer className="footer border-t">
-      <div className="mx-auto grid w-full max-w-[var(--max-content-width)] grid-cols-1 grid-rows-[auto_auto] border-gray-400 px-[var(--default-gap)] py-8 text-sm text-gray-400 lg:grid-cols-[1fr_auto]">
+    <footer className="footer border-t border-neutral-200 text-neutral-400 dark:border-neutral-800 dark:text-neutral-600">
+      <div className="mx-auto grid w-full max-w-[var(--max-content-width)] grid-cols-1 grid-rows-[auto_auto] border-neutral-400 px-[var(--default-gap)] py-8 text-sm lg:grid-cols-[1fr_auto]">
         <p>
           {t.rich("footer.affiliation", {
             officialWebsite: (children) => (
