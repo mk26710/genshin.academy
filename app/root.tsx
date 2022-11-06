@@ -30,7 +30,7 @@ import { getColorScheme } from "~/utils/color-scheme/common.server";
 import { getMessages, resolveLocale } from "~/utils/i18n.server";
 import { getUser } from "~/utils/session.server";
 
-import nprogressStylesheetUrl from "~/styles/nprogress.css";
+import interCssUrl from "~/styles/inter.css";
 import tailwindStylesheetUrl from "~/styles/tailwind.css";
 
 export const handle: RouteHandle = {
@@ -40,7 +40,7 @@ export const handle: RouteHandle = {
 export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: tailwindStylesheetUrl },
-    { rel: "stylesheet", href: nprogressStylesheetUrl },
+    { rel: "stylesheet", href: interCssUrl },
   ];
 };
 
