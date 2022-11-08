@@ -30,7 +30,7 @@ export const loader = async ({ request, params }: LoaderArgs) => {
   });
 
   if (!characterData) {
-    throw serverError({ code: "character.notfound", message: "Character not found" });
+    throw notFound({ code: "character.notfound", message: "Character not found" });
   }
 
   if (!characterData.identity.some((cid) => cid.lang === resolvedLocale)) {
