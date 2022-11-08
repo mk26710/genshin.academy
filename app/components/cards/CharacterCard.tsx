@@ -3,6 +3,7 @@ import type { FC } from "react";
 
 import { Link } from "@remix-run/react";
 
+import { Paper } from "~/components/Paper";
 import { StaticPicture } from "~/components/StaticPicture";
 
 interface Props {
@@ -33,9 +34,10 @@ export const CharacterCard: FC<Props> = ({ character, className }) => {
 
   return (
     <div className={`w-[calc(33.33%-0.75rem)] lg:w-28 ${className}`}>
-      <Link
-        className="card block p-0 transition-all duration-200 hover:shadow-lg "
+      <Paper
+        as={Link}
         to={`/characters/${character.id}`}
+        className="relative z-0 block p-0 before:absolute before:top-0 before:bottom-0 before:z-[-1] before:h-full before:w-full before:rounded-lg before:bg-inherit before:transition-all hover:shadow-lg dark:before:hover:brightness-125"
       >
         <div className="absolute -ml-[10px] -mt-[10px] box-border flex aspect-square w-8 items-center justify-center rounded-full bg-dark-900 dark:bg-black">
           <StaticPicture
@@ -55,7 +57,7 @@ export const CharacterCard: FC<Props> = ({ character, className }) => {
         <div className="flex h-full w-full items-center justify-center py-1 text-[.9rem] font-semibold">
           <p className="p-1 text-center leading-none">{character.identity.at(0)?.name}</p>
         </div>
-      </Link>
+      </Paper>
     </div>
   );
 };
