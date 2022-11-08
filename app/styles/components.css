@@ -1,0 +1,29 @@
+@layer components {
+  .paper {
+    @apply shadow-sm;
+
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-rows: min-content;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+
+    border-width: 1px;
+    border-radius: 8px;
+
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+
+    break-inside: avoid;
+
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+    transition-duration: 100ms;
+  }
+
+  .dark .paper { 
+    border-color: theme(colors.neutral.700);
+    background-color: theme(colors.neutral.800);
+  }
+}
