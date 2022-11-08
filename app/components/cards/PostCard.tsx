@@ -3,6 +3,7 @@ import type { FunctionComponent } from "react";
 
 import { Link } from "@remix-run/react";
 
+import { Paper } from "~/components/Paper";
 import { useAfterHydration } from "~/hooks/use-hydrated";
 import { useVisitorLocale } from "~/hooks/use-visitor-locale";
 
@@ -19,25 +20,24 @@ export const PostCard: FunctionComponent<PostCardProps> = ({
   const publishDate = useAfterHydration(new Date(publishedAt));
 
   return (
-    <Link
+    <Paper
+      as={Link}
       to={`/posts/${slug}`}
-      className="card hover:card-shadow flex break-inside-avoid flex-col overflow-hidden rounded-md border p-0"
+      className="relative flex break-inside-avoid flex-col overflow-hidden before:absolute before:top-0 before:left-0 before:z-[-1] before:h-full before:w-full before:transition-all before:duration-100 hover:scale-[1.01] hover:shadow-lg hover:before:bg-inherit hover:before:brightness-125"
     >
       {thumbnailUrl && (
         <img
           src={thumbnailUrl}
           loading="lazy"
           decoding="async"
-          className="aspect-video w-full object-cover"
+          className="z-0 aspect-video w-full rounded-lg object-cover"
         />
       )}
-      <h3 className="mt-2 px-[var(--default-gap)] text-xl font-semibold dark:text-white">
-        {title}
-      </h3>
-      <p className="px-[var(--default-gap)] text-sm hyphens-auto">{description}</p>
-      <p className="mb-[var(--default-gap)] self-end px-[var(--default-gap)] text-sm italic opacity-70">
+      <h3 className="mt-2 text-xl font-semibold dark:text-white">{title}</h3>
+      <p className="mb-2 text-sm hyphens-auto">{description}</p>
+      <p className="self-end text-sm italic opacity-70">
         {publishDate?.toLocaleDateString(locale)}
       </p>
-    </Link>
+    </Paper>
   );
 };
