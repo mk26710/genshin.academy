@@ -1,4 +1,5 @@
 import type { ChangeEvent } from "react";
+import type { RouteHandle } from "~/types/common";
 
 import { useFetcher, useLocation } from "@remix-run/react";
 import { useAtom } from "jotai";

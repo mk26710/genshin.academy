@@ -1,5 +1,6 @@
 import type { ContextType } from "../$slug";
 import type { ActionArgs } from "@remix-run/node";
+import type { RouteHandle } from "~/types/common";
 
 import { ArrowUturnLeftIcon, PlusIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import { PermissionFlag } from "@prisma/client";

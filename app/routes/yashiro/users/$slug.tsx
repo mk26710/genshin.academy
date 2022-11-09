@@ -1,4 +1,5 @@
 import type { LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
+import type { RouteHandle } from "~/types/common";
 import type { ThrownErrorResponse } from "~/utils/responses.server";
 
 import { NavLink, useCatch, useLoaderData, useOutlet } from "@remix-run/react";

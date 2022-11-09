@@ -1,5 +1,6 @@
 import type { ActionArgs, LoaderArgs, MetaFunction } from "@remix-run/node";
 import type { FunctionComponent } from "react";
+import type { RouteHandle } from "~/types/common";
 
 import { PencilIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { redirect, json } from "@remix-run/node";

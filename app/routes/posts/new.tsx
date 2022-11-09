@@ -1,4 +1,5 @@
 import type { ActionArgs, LoaderArgs } from "@remix-run/node";
+import type { RouteHandle } from "~/types/common";
 
 import { PostType } from "@prisma/client";
 import { redirect } from "@remix-run/node";

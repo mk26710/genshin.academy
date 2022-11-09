@@ -1,6 +1,7 @@
 import type { ContextType } from "../$slug";
 import type { ActionArgs } from "@remix-run/node";
 import type { ChangeEvent } from "react";
+import type { RouteHandle } from "~/types/common";
 
 import { Prisma } from "@prisma/client";
 import { redirect, json } from "@remix-run/node";

@@ -1,5 +1,6 @@
 import type { LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
 import type { ChangeEvent, FormEvent } from "react";
+import type { RouteHandle } from "~/types/common";
 import type { UserLocale } from "~/utils/locales";
 
 import { json, Response } from "@remix-run/node";

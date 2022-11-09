@@ -1,5 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import type { FunctionComponent } from "react";
+import type { RouteHandle } from "~/types/common";
 
 import { useAtom } from "jotai";
 import { useLocale, useTranslations } from "use-intl";

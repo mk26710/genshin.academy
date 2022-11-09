@@ -1,4 +1,5 @@
 import type { LoaderArgs } from "@remix-run/node";
+import type { RouteHandle } from "~/types/common";
 
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
