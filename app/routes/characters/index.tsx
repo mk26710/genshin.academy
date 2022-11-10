@@ -14,6 +14,7 @@ import {
   charactersFilterFourstarsAtom,
 } from "~/atoms/characterSearch";
 import { CharacterCard } from "~/components/cards/CharacterCard";
+import { Checkbox } from "~/components/Checkbox";
 import { Container } from "~/components/Container";
 import { Input } from "~/components/Input";
 import { getCharactersList } from "~/models/characters.server";
@@ -64,39 +65,10 @@ const SearchAndFilter: FunctionComponent = () => {
 
         <div
           role="radiogroup"
-          className="inline-flex border-collapse items-center -space-x-px rounded-md text-xs"
+          className="inline-flex border-collapse items-center gap-2 -space-x-px rounded-md text-xs"
         >
-          <span>
-            <input
-              id="fivestar-filter"
-              type="checkbox"
-              className="peer hidden"
-              onChange={handleFivestarsCheckboxChange}
-              checked={fivestars}
-            />
-            <label
-              htmlFor="fivestar-filter"
-              className="box-border h-10 rounded-l-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-[#000] peer-checked:border-primary-700 peer-checked:bg-primary-100 peer-checked:text-primary-700"
-            >
-              5*
-            </label>
-          </span>
-
-          <span>
-            <input
-              id="fourstar-filter"
-              type="checkbox"
-              className="peer hidden"
-              onChange={handleFourstarsCheckboxChange}
-              checked={fourstars}
-            />
-            <label
-              htmlFor="fourstar-filter"
-              className="box-border h-10 rounded-r-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-[#000] peer-checked:border-primary-700 peer-checked:bg-primary-100 peer-checked:text-primary-700"
-            >
-              4*
-            </label>
-          </span>
+          <Checkbox label="5*" checked={fivestars} onChange={handleFivestarsCheckboxChange} />
+          <Checkbox label="4*" checked={fourstars} onChange={handleFourstarsCheckboxChange} />
         </div>
       </div>
     </>
