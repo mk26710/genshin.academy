@@ -132,7 +132,7 @@ module.exports = {
       colors: {
         ...defaultTheme.colors,
         // gray: myColors.neutral,
-        primary: colors.purple,
+        primary: myColors.blau,
         dark: myColors.neutral,
         blau: myColors.blau,
       },
