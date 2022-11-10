@@ -26,4 +26,13 @@
     border-color: theme(colors.neutral.700);
     background-color: theme(colors.neutral.800);
   }
+
+  .checkbox {
+    @apply form-checkbox;
+
+    border-radius: 6px;
+    height: 24px;
+    width: 24px;
+  }
+
 }
