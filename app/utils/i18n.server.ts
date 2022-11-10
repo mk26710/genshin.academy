@@ -14,7 +14,7 @@ export const localeCookie = createCookie("ZENLESS_LOCALE", {
   secure: process.env.NODE_ENV === "production",
 });
 
-export const safePickLocale = (locale: Nil<string>) =>
+export const safePickLocale = (locale?: string | null) =>
   acceptLanguageParser.pick([...supportedLocales], locale || defaultLocale) || defaultLocale;
 
 export const resolveLocale = async (request: Request) => {
