@@ -65,7 +65,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 };
 
 const links = [
-  { href: "./overview", i18n: "common.overview" },
+  { href: ".", i18n: "common.overview" },
   { href: "./constellations", i18n: "characters.constellations" },
 ];
 
