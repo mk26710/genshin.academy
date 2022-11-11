@@ -3,14 +3,21 @@ import type { RouteHandle } from "~/types/common";
 import type { ThrownErrorResponse } from "~/utils/responses.server";
 
 import { json } from "@remix-run/node";
-import { useCatch, useLoaderData, useSearchParams } from "@remix-run/react";
-import { useEffect } from "react";
+import {
+  NavLink,
+  useCatch,
+  useLoaderData,
+  useLocation,
+  useOutlet,
+  useSearchParams,
+} from "@remix-run/react";
+import clsx from "clsx";
 import { useTranslations } from "use-intl";
 
 import { Container } from "~/components/Container";
+import { Paper } from "~/components/Paper";
 import { useVisitorLocale } from "~/hooks/use-visitor-locale";
 import { getCharacterById } from "~/models/characters.server";
-import { avatarPath } from "~/utils/helpers";
 import { resolveLocale } from "~/utils/i18n.server";
 import { generateMeta } from "~/utils/meta-generator";
 import { notFound, serverError } from "~/utils/responses.server";
@@ -44,7 +51,7 @@ export const loader = async ({ request, params }: LoaderArgs) => {
   return json(characterData);
 };
 
-type LoaderData = SerializeFrom<typeof loader>;
+export type Loader = SerializeFrom<typeof loader>;
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   if (!data?.character || !data?.identity) return { title: "Error" };
@@ -57,58 +64,51 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   });
 };
 
+const links = [
+  { href: "./overview", i18n: "common.overview" },
+  { href: "./constellations", i18n: "characters.constellations" },
+];
+
+export interface ContextType {
+  data: Loader["character"];
+  identity: Loader["identity"][number];
+  constellations: Loader["constellations"];
+}
+
 const CharactersIdRoute = () => {
   const locale = useVisitorLocale();
+  const { search } = useLocation();
 
-  const {
-    character,
-    identity: identityEntries,
-    constellations: constellationsEntries,
-  } = useLoaderData() as LoaderData;
+  const loaderData = useLoaderData() as Loader;
+  const identity = loaderData.identity.find((record) => record.lang === locale);
 
-  const identity = identityEntries.find((entry) => entry.lang === locale);
-  const constellations = constellationsEntries.filter((entry) => entry.lang === locale);
+  const outletContext = {
+    data: loaderData.character,
+    identity: identity as NonNullable<typeof identity>,
+    constellations: loaderData.constellations,
+  } as ContextType; // once TS4.9 is supported in ESLint, should replace with satisfies
 
-  const elementSrc = `/img/elements/${character.vision.toLowerCase()}/icon.webp`;
-
-  useEffect(() => {
-    console.log(identity);
-  }, []);
+  const outlet = useOutlet(outletContext);
 
   return (
     <Container>
-      <div className="card flex flex-col-reverse px-6 pt-6 pb-8 lg:flex-row">
-        <div className="flex-1 grow">
-          <div className="mb-4 flex items-center gap-[var(--default-gap)]">
-            <h2 className="align-middle text-4xl font-semibold">{identity?.name}</h2>
-            <img className="h-6 align-middle " src={elementSrc} alt="Element" />
-          </div>
-
-          <p id="description" className="whitespace-pre-line">
-            {identity?.description}
-          </p>
-
-          {constellations.length > 0 && (
-            <>
-              <h2 id="consteallations" className="mt-6 mb-4 text-2xl font-semibold">
-                Consteallations
-              </h2>
-
-              <ol className="list-decimal pl-4 marker:text-primary-500">
-                {constellations?.map(({ level, description, name }) => (
-                  <li key={`const-${level}`} id={`constellation-${level}`} className="[&+li]:mt-2">
-                    <h3 className="font-semibold00 text-lg">{name}</h3>
-                    <p className="whitespace-pre-line">{description}</p>
-                  </li>
-                ))}
-              </ol>
-            </>
-          )}
-        </div>
-
-        <div className="lg:max-w-xs xl:max-w-xl">
-          <img src={avatarPath(character.id, "webp")} alt={`${character.id} gacha image`} />
-        </div>
+      <div className="flex flex-col flex-wrap">
+        <Paper className="flex flex-row overflow-x-auto rounded-b-none border-b-0 py-0 px-2">
+          {links.map(({ href, i18n }) => (
+            <NavLink
+              key={i18n}
+              to={href + search}
+              className={({ isActive }) =>
+                clsx("mx-2 py-4", isActive && "opacity-100", !isActive && "opacity-60")
+              }
+            >
+              {i18n}
+            </NavLink>
+          ))}
+        </Paper>
+        <Paper className="grid grid-flow-row auto-rows-min grid-cols-1 rounded-t-none ">
+          {outlet}
+        </Paper>
       </div>
     </Container>
   );
