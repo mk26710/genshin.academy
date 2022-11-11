@@ -1,5 +1,6 @@
 import { PermissionFlag, UserRole } from "@prisma/client";
-import { z } from "zod";
+
+import { z } from "~/lib/zod.server";
 
 export const UserName = z
   .string()

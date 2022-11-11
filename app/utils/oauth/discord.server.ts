@@ -1,5 +1,4 @@
-import { z } from "zod";
-
+import { z } from "~/lib/zod.server";
 import { requiredServerEnv } from "~/utils/helpers.server";
 import { serverError } from "~/utils/responses.server";
 
