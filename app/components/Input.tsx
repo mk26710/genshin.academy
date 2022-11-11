@@ -1,20 +1,19 @@
+import type { ComponentPropsWithRef } from "react";
+
+import clsx from "clsx";
 import { forwardRef } from "react";
 
-type InputProps = JSX.IntrinsicElements["input"];
-
-interface Props extends InputProps {
+interface Props extends ComponentPropsWithRef<"input"> {
   fullWidth?: boolean;
 }
 
 export const Input = forwardRef<HTMLInputElement, Props>(
-  ({ fullWidth, className = "", type = "text", ...props }, ref) => {
-    const fullWidthClass = fullWidth === true ? "w-full" : "";
-
+  ({ fullWidth, className, type = "text", ...props }, ref) => {
     return (
       <input
         ref={ref}
         type={type}
-        className={`input-field ${fullWidthClass} ${className}`}
+        className={clsx("input-field", fullWidth && "w-full", className)}
         {...props}
       />
     );
