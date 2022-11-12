@@ -41,6 +41,10 @@ const userNavigation = [
     href: "/me",
   },
   {
+    i18nKey: "common.files",
+    href: "/files",
+  },
+  {
     i18nKey: "common.create-post",
     href: "/posts/new",
   },
