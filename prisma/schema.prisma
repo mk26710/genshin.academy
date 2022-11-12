@@ -190,6 +190,25 @@ model GenshinCharacter {
   weapon         GenshinWeapon
   identity       GenshinCharacterIdentity[]
   constellations GenshinCharacterConstellations[]
+  assets         GenshinCharacterAsset[]
+}
+
+enum CharacterAssetType {
+  ICON
+  CARD
+  GACHA
+  INGAME
+  UNKNOWN
+}
+
+model GenshinCharacterAsset {
+  characterId String
+  type        CharacterAssetType @default(UNKNOWN)
+  url         String
+
+  character GenshinCharacter @relation(fields: [characterId], references: [id])
+
+  @@unique([characterId, type])
 }
 
 model GenshinCharacterIdentity {
