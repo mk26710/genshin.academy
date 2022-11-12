@@ -39,6 +39,8 @@ model User {
 
   posts       Post[] @relation("AuthoredPosts")
   editedPosts Post[] @relation("EditedPosts")
+
+  files File[]
 }
 
 model Password {
@@ -116,6 +118,27 @@ model Permissions {
 
   @@unique([userId, value])
   @@index([providerId])
+}
+
+model File {
+  id         String   @id
+  uploaderId String?
+  s3Key      String
+  size       Int
+  uploadedAt DateTime @default(now())
+
+  uploader User?     @relation(fields: [uploaderId], references: [id])
+  tag      FileTag[]
+}
+
+model FileTag {
+  id     String @id @default(cuid())
+  fileId String
+  value  String
+
+  file File @relation(fields: [fileId], references: [id])
+
+  @@unique([fileId, value])
 }
 
 // Posts
