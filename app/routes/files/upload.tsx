@@ -29,7 +29,7 @@ export const meta: MetaFunction = () => {
 
 export const loader = async ({ request }: LoaderArgs) => {
   await getAuthorizedUser(request, (user) =>
-    validateUserPermissions(user, [PermissionFlag.NEW_POST], ValidationMode.STRICT),
+    validateUserPermissions(user, [PermissionFlag.NEW_ASSET], ValidationMode.STRICT),
   );
 
   return null;
@@ -87,7 +87,7 @@ interface ActionData extends TypedErrorResponse {
 
 export const action = async ({ request }: ActionArgs) => {
   const user = await getAuthorizedUser(request, (user) =>
-    validateUserPermissions(user, [PermissionFlag.NEW_POST], ValidationMode.STRICT),
+    validateUserPermissions(user, [PermissionFlag.NEW_ASSET], ValidationMode.STRICT),
   );
 
   const uploadHandler = unstable_createMemoryUploadHandler({
