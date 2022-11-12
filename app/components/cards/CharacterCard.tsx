@@ -1,27 +1,22 @@
-import type { GenshinCharacter, GenshinCharacterIdentity } from "@prisma/client";
-import type { FC } from "react";
+import type { FunctionComponent } from "react";
+import type { getCharactersList } from "~/models/characters.server";
 
 import { Link } from "@remix-run/react";
 
 import { Paper } from "~/components/Paper";
 import { StaticPicture } from "~/components/StaticPicture";
 
+type CharacterListEntry = Awaited<ReturnType<typeof getCharactersList>>[number];
 interface Props {
-  character: {
-    id: GenshinCharacter["id"];
-    rarity: GenshinCharacter["rarity"];
-    vision: GenshinCharacter["vision"];
-    identity: Array<{
-      name: GenshinCharacterIdentity["name"];
-    }>;
-    [key: string]: unknown;
-  };
+  character: CharacterListEntry;
   className?: string;
 }
 
-export const CharacterCard: FC<Props> = ({ character, className }) => {
+export const CharacterCard: FunctionComponent<Props> = ({ character, className }) => {
   const elementSrc = `/img/elements/${character.vision.toLowerCase()}/icon.webp`;
-  const iconSrc = `/img/characters/${character.id}/icon.webp`;
+
+  const iconObjectS3 = character.assets.find((entry) => entry.type === "ICON")?.url;
+  const iconSrc = iconObjectS3 ?? `/img/characters/${character.id}/icon.webp`;
 
   const iconBg = () => {
     if (character.rarity === 5) {
@@ -47,7 +42,7 @@ export const CharacterCard: FC<Props> = ({ character, className }) => {
           />
         </div>
         <div className={"aspect-square w-full rounded-t-lg bg-gradient-to-b " + iconBg()}>
-          <StaticPicture
+          <img
             className="card-thumbnail"
             src={iconSrc}
             alt={`${character.identity.at(0)?.name} icon`}
