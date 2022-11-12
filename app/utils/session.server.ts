@@ -8,7 +8,7 @@ import invariant from "tiny-invariant";
 import { redis } from "~/db/redis.server";
 import { getUserById } from "~/models/user.server";
 
-import { typedError, unauthorized } from "./responses.server";
+import { forbidden, typedError, unauthorized } from "./responses.server";
 
 invariant(process.env.SESSION_SECRET, "SESSION_SECRET must be set");
 
@@ -142,6 +142,14 @@ export const getAuthenticatedUser = async (request: Request) => {
     throw await logout(request);
   }
 
+  if (user.enabled !== true) {
+    throw forbidden({
+      message: "Your account is disabled",
+      details: "If this is a mistake, please, contact website administrator",
+      code: "user.disabled",
+    });
+  }
+
   return user;
 };
 
@@ -152,10 +160,6 @@ export const getAuthorizedUser = async (
     | boolean,
 ) => {
   const user = await getAuthenticatedUser(request);
-
-  if (user.enabled !== true) {
-    throw redirect("/me/account-disabled");
-  }
 
   let result = false;
   if (typeof predicate === "boolean") {
