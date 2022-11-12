@@ -33,5 +33,6 @@
 
   "view-in-english": "View in English",
 
-  "error-500": "Internal Server Error"
+  "error-500": "Internal Server Error",
+  "files": "Files"
 }
