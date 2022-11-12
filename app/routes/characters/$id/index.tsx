@@ -11,7 +11,9 @@ export default function CharacterOverview() {
   const locale = useVisitorLocale();
 
   const elementIcon = `/img/elements/${data.vision.toLowerCase()}/icon.webp`;
-  const gachaIcon = `/img/characters/${data.id}/avatar.webp`;
+
+  const gachaIconS3 = data.assets.find((entry) => entry.type === "GACHA")?.url;
+  const gachaIcon = gachaIconS3 ?? `/img/characters/${data.id}/avatar.webp`;
 
   const birthDate = new Date(`2000-${data.birthMonth}-${data.birthDay}`);
 
