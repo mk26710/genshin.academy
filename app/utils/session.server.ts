@@ -179,28 +179,3 @@ export const getAuthorizedUser = async (
 
   return user;
 };
-
-// export async function requireUserId(
-//   request: Request,
-//   redirectTo: string = new URL(request.url).pathname,
-// ) {
-//   const userId = await getUserId(request);
-//   if (!userId) {
-//     const searchParams = new URLSearchParams([["redirectTo", redirectTo]]);
-//     throw redirect(`/login?${searchParams}`, {
-//       headers: {
-//         "Set-Cookie": `${SESSION_COOKIE_NAME}=deleted; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`,
-//       },
-//     });
-//   }
-//   return userId;
-// }
-
-// export async function requireUser(request: Request) {
-//   const userId = await requireUserId(request);
-
-//   const user = await getUserById(userId);
-//   if (user) return user;
-
-//   throw await logout(request);
-// }
