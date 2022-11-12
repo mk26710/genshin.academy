@@ -1,15 +1,17 @@
 import type { ActionArgs, LoaderArgs, MetaFunction } from "@remix-run/node";
 import type { TypedErrorResponse } from "~/utils/responses.server";
 
+import { ChevronDoubleLeftIcon } from "@heroicons/react/20/solid";
 import { PermissionFlag } from "@prisma/client";
 import {
   json,
   unstable_createMemoryUploadHandler,
   unstable_parseMultipartFormData,
 } from "@remix-run/node";
-import { Form, useActionData } from "@remix-run/react";
+import { Form, Link, useActionData } from "@remix-run/react";
 
 import { Container } from "~/components/Container";
+import { Input } from "~/components/Input";
 import { Paper } from "~/components/Paper";
 import { useHydrated } from "~/hooks/use-hydrated";
 import { nanoid } from "~/lib/nanoid/async.server";
@@ -50,6 +52,12 @@ export default function FilesNew() {
 
   return (
     <Container className="flex max-w-lg flex-col justify-center">
+      <Link
+        to="/files"
+        className="mb-2 flex flex-row items-center text-sm font-semibold uppercase opacity-70"
+      >
+        <ChevronDoubleLeftIcon className="h-5 w-5" /> Back to browsing files
+      </Link>
       {actionData?.fileUrl && (
         <Paper className="mb-4 border-green-800 bg-green-400 text-green-800">
           <p>
@@ -68,9 +76,18 @@ export default function FilesNew() {
           <span>File will be converted and compressed to webp</span>
         </p>
 
-        <div className="mb-4">
-          <label className="text-xs font-bold uppercase opacity-60">File</label>
+        <div className="mb-1">
+          <label className="text-xs font-bold uppercase opacity-60">
+            File<span className="text-lg text-red-500">*</span>
+          </label>
           <input name="file" type="file" className="block overflow-hidden text-ellipsis" required />
+        </div>
+
+        <div className="mb-4">
+          <label className="text-xs font-bold uppercase opacity-60">
+            Tags (tag1, tag2, tag3, ...)
+          </label>
+          <Input name="tags" fullWidth />
         </div>
 
         <button className="button" type="submit">
@@ -98,6 +115,7 @@ export const action = async ({ request }: ActionArgs) => {
   const parseForm = await FileUpload.safeParseAsync({
     file: formData.get("file"),
     name: formData.get("filename"),
+    tags: formData.get("tags")?.toString().split(",") ?? [],
   });
 
   if (!parseForm.success) {
@@ -114,8 +132,14 @@ export const action = async ({ request }: ActionArgs) => {
   const arrayBuffer = await form.file.arrayBuffer();
   const webp = await arrayBufferToWebp(arrayBuffer);
 
-  const filename = (await nanoid(21)) + ".webp";
-  const [fileUrl] = await userUploadToBucket(user.id, webp, filename);
+  const fileId = await nanoid(21);
+  const filename = fileId + ".webp";
+  const [fileUrl] = await userUploadToBucket(webp, {
+    fileId,
+    filename,
+    tags: form.tags,
+    userId: user.id,
+  });
 
   return json<ActionData>({ fileUrl });
 };
