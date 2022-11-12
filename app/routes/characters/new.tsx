@@ -1,23 +1,17 @@
 import type { ActionArgs, LoaderArgs, MetaFunction } from "@remix-run/node";
+import type { TypedErrorResponse } from "~/utils/responses.server";
 
 import { GenshinVision, GenshinWeapon, PermissionFlag } from "@prisma/client";
-import {
-  json,
-  unstable_parseMultipartFormData,
-  unstable_createMemoryUploadHandler,
-} from "@remix-run/node";
-import { Form, useActionData } from "@remix-run/react";
-import { useEffect } from "react";
+import { redirect } from "@remix-run/node";
+import { Form } from "@remix-run/react";
 
 import { Container } from "~/components/Container";
 import { Input } from "~/components/Input";
 import { prisma } from "~/db/prisma.server";
 import { NewCharacter } from "~/schemas/character.server";
-import { arrayBufferToWebp } from "~/utils/image.server";
 import { generateMeta } from "~/utils/meta-generator";
 import { validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { badRequest } from "~/utils/responses.server";
-import { uploadToBucket } from "~/utils/s3.server";
 import { getAuthorizedUser } from "~/utils/session.server";
 
 export const meta: MetaFunction<typeof loader> = () => {
@@ -36,15 +30,9 @@ export async function loader({ request }: LoaderArgs) {
 }
 
 export default function CharacterNew() {
-  const actionData = useActionData<typeof action>();
-
-  useEffect(() => {
-    actionData;
-  }, []);
-
   return (
     <Container>
-      <Form method="post" encType="multipart/form-data">
+      <Form method="post" replace>
         <div>
           <label htmlFor="character.name" className="text-xs font-bold uppercase opacity-70">
             Name
@@ -187,45 +175,27 @@ export default function CharacterNew() {
         </div>
 
         <div>
-          <label htmlFor="character.blob.icon" className="text-xs font-bold uppercase opacity-70">
+          <label htmlFor="character.iconUrl" className="text-xs font-bold uppercase opacity-70">
             Icon
           </label>
 
-          <input
-            id="character.blob.icon"
-            name="character.blob.icon"
-            type="file"
-            className="block"
-            required
-          />
+          <Input id="character.iconUrl" name="character.iconUrl" fullWidth required />
         </div>
 
         <div>
-          <label htmlFor="character.blob.avatar" className="text-xs font-bold uppercase opacity-70">
-            Avatar
+          <label htmlFor="character.gachaUrl" className="text-xs font-bold uppercase opacity-70">
+            Gacha Image URL
           </label>
 
-          <input
-            id="character.blob.avatar"
-            name="character.blob.avatar"
-            type="file"
-            className="block"
-            required
-          />
+          <Input id="character.gachaUrl" name="character.gachaUrl" fullWidth required />
         </div>
 
         <div>
-          <label htmlFor="character.blob.card" className="text-xs font-bold uppercase opacity-70">
+          <label htmlFor="character.cardUrl" className="text-xs font-bold uppercase opacity-70">
             Card
           </label>
 
-          <input
-            id="character.blob.card"
-            name="character.blob.card"
-            type="file"
-            className="block"
-            required
-          />
+          <Input id="character.cardUrl" name="character.cardUrl" fullWidth required />
         </div>
 
         <button type="submit" className="button mt-6 w-full">
@@ -236,18 +206,20 @@ export default function CharacterNew() {
   );
 }
 
-export async function action({ request }: ActionArgs) {
+interface ActionData extends TypedErrorResponse {
+  created?: boolean;
+}
+
+export const action = async ({ request }: ActionArgs) => {
   await getAuthorizedUser(request, async (user) =>
     validateUserPermissions(user, [PermissionFlag.NEW_CHARACTER], ValidationMode.STRICT),
   );
 
-  const uploadHandler = unstable_createMemoryUploadHandler({
-    maxPartSize: 20_000_000,
-  });
+  const formData = await request.formData();
 
-  const formData = await unstable_parseMultipartFormData(request, uploadHandler);
+  console.log(Object.fromEntries(formData));
 
-  const parse = NewCharacter.safeParse({
+  const parse = await NewCharacter.safeParseAsync({
     id: formData.get("character.id"),
     name: formData.get("character.name"),
     description: formData.get("character.description"),
@@ -263,18 +235,18 @@ export async function action({ request }: ActionArgs) {
     birthMonth: await Promise.resolve(formData.get("character.birthMonth")).then((val) =>
       parseInt(`${val}`),
     ),
-    iconBlob: formData.get("character.blob.icon"),
-    avatarBlob: formData.get("character.blob.avatar"),
-    cardBlob: formData.get("character.blob.card"),
+    iconUrl: formData.get("character.iconUrl"),
+    gachaUrl: formData.get("character.gachaUrl"),
+    cardUrl: formData.get("character.cardUrl"),
   });
 
   if (!parse.success) {
-    return badRequest({ message: "Failed to validate form data", cause: parse.error });
+    return badRequest<ActionData>({ message: "Failed to validate form data", cause: parse.error });
   }
 
   const form = parse.data;
 
-  const [character, identity] = await prisma.$transaction([
+  await prisma.$transaction([
     prisma.genshinCharacter.create({
       data: {
         id: form.id,
@@ -294,49 +266,26 @@ export async function action({ request }: ActionArgs) {
         description: form.description,
       },
     }),
+    prisma.genshinCharacterAsset.createMany({
+      data: [
+        {
+          type: "ICON",
+          characterId: form.id,
+          url: form.iconUrl,
+        },
+        {
+          type: "CARD",
+          characterId: form.id,
+          url: form.cardUrl,
+        },
+        {
+          type: "GACHA",
+          characterId: form.id,
+          url: form.gachaUrl,
+        },
+      ],
+    }),
   ]);
 
-  const [iconBuffer, avatarBuffer, cardBuffer] = await Promise.all([
-    form.iconBlob.arrayBuffer(),
-    form.avatarBlob.arrayBuffer(),
-    form.cardBlob.arrayBuffer(),
-  ]);
-
-  const [iconWebp, avatarWebp, cardWebp] = await Promise.all([
-    arrayBufferToWebp(iconBuffer),
-    arrayBufferToWebp(avatarBuffer),
-    arrayBufferToWebp(cardBuffer),
-  ]);
-
-  await Promise.all([
-    uploadToBucket(iconWebp, `characters/${character.id}/icon.webp`),
-    uploadToBucket(avatarWebp, `characters/${character.id}/avatar.webp`),
-    uploadToBucket(cardWebp, `characters/${character.id}/card.webp`),
-  ]);
-
-  await prisma.genshinCharacterAsset.createMany({
-    skipDuplicates: true,
-    data: [
-      {
-        genshinCharacterId: character.id,
-        type: "ICON",
-        path: `characters/${character.id}/icon.webp`,
-      },
-      {
-        genshinCharacterId: character.id,
-        type: "AVATAR",
-        path: `characters/${character.id}/avatar.webp`,
-      },
-      {
-        genshinCharacterId: character.id,
-        type: "CARD",
-        path: `characters/${character.id}/card.webp`,
-      },
-    ],
-  });
-
-  return json({
-    character,
-    identity,
-  });
-}
+  return redirect("/characters/" + form.id);
+};

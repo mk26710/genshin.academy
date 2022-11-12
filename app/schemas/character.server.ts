@@ -19,7 +19,7 @@ export const NewCharacter = z.object({
   ),
   birthDay: z.number().int().min(1).max(31),
   birthMonth: z.number().int().min(1).max(12),
-  iconBlob: z.instanceof(Blob),
-  avatarBlob: z.instanceof(Blob),
-  cardBlob: z.instanceof(Blob),
+  iconUrl: z.string().url(),
+  gachaUrl: z.string().url(),
+  cardUrl: z.string().url(),
 });
