@@ -1,4 +1,5 @@
 import type { User } from "@prisma/client";
+import type { MaybePromise } from "~/types/common";
 
 import { createCookie, createSession, createSessionStorage, redirect } from "@remix-run/node";
 import cuid from "cuid";
@@ -153,11 +154,13 @@ export const getAuthenticatedUser = async (request: Request) => {
   return user;
 };
 
+type AuthorizationPredicate = (
+  user: Awaited<ReturnType<typeof getAuthenticatedUser>>,
+) => MaybePromise<boolean>;
+
 export const getAuthorizedUser = async (
   request: Request,
-  predicate:
-    | ((user: Awaited<ReturnType<typeof getAuthenticatedUser>>) => Promise<boolean>)
-    | boolean,
+  predicate: AuthorizationPredicate | boolean,
 ) => {
   const user = await getAuthenticatedUser(request);
 
