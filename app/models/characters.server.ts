@@ -22,6 +22,7 @@ export const getCharactersList = async (opts?: GetCharactersOptions) => {
           name: true,
         },
       },
+      assets: true,
     },
   });
 };
@@ -49,6 +50,7 @@ export const getCharactersByBirthday = async (
           name: true,
         },
       },
+      assets: true,
     },
   });
 };
@@ -58,32 +60,29 @@ type GetCharacterById = {
 };
 
 export const getCharacterById = async (id: string, opts?: GetCharacterById) => {
-  const character = await prisma.genshinCharacter.findUnique({ where: { id } });
+  const character = await prisma.genshinCharacter.findUnique({
+    where: { id },
+    include: {
+      assets: true,
+      constellations: {
+        where: {
+          lang: {
+            in: opts?.langs,
+          },
+        },
+      },
+      identity: {
+        where: {
+          lang: {
+            in: opts?.langs,
+          },
+        },
+      },
+    },
+  });
+
   if (!character) {
     return null;
   }
-
-  const identity = await prisma.genshinCharacterIdentity.findMany({
-    where: {
-      lang: {
-        in: opts?.langs,
-      },
-      genshinCharacterId: id,
-    },
-  });
-
-  // const identity = identityEntries.reduce((acc, current) => {
-  //   return { ...acc, [current.lang]: current };
-  // }, {} as Record<string, typeof identityEntries[number]>);
-
-  const constellations = await prisma.genshinCharacterConstellations.findMany({
-    where: {
-      lang: {
-        in: opts?.langs,
-      },
-      genshinCharacterId: id,
-    },
-  });
-
-  return { character, identity, constellations };
+  return character;
 };
