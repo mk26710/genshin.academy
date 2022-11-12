@@ -11,4 +11,5 @@ export const AllowedMimeTypes = z.union([
 export const FileUpload = z.object({
   file: z.instanceof(File),
   name: z.string().optional().nullish(),
+  tags: z.array(z.string().trim()),
 });
