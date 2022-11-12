@@ -39,10 +39,8 @@ export const action = async ({ request }: ActionArgs) => {
 };
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  const { user } = data;
-
   return {
-    title: `${user.name} - GENSHIN.ZENLESS`,
+    title: `${data?.user.name} - GENSHIN.ZENLESS`,
   };
 };
 
