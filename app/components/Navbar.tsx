@@ -134,7 +134,7 @@ export function Navbar() {
                         ))}
 
                         <Menu.Item>
-                          <Form>
+                          <Form action="/logout" method="post">
                             <button className="block px-4 py-2 text-sm text-neutral-700">
                               {t("common.logout")}
                             </button>
