@@ -181,16 +181,15 @@ enum GenshinWeapon {
 }
 
 model GenshinCharacter {
-  id                    String                           @id @default(cuid())
-  accentColor           String                           @db.VarChar(7)
-  birthDay              Int
-  birthMonth            Int
-  rarity                Int
-  vision                GenshinVision
-  weapon                GenshinWeapon
-  identity              GenshinCharacterIdentity[]
-  constellations        GenshinCharacterConstellations[]
-  GenshinCharacterAsset GenshinCharacterAsset[]
+  id             String                           @id @default(cuid())
+  accentColor    String                           @db.VarChar(7)
+  birthDay       Int
+  birthMonth     Int
+  rarity         Int
+  vision         GenshinVision
+  weapon         GenshinWeapon
+  identity       GenshinCharacterIdentity[]
+  constellations GenshinCharacterConstellations[]
 }
 
 model GenshinCharacterIdentity {
@@ -216,19 +215,4 @@ model GenshinCharacterConstellations {
   GenshinCharacter GenshinCharacter? @relation(fields: [genshinCharacterId], references: [id], onDelete: Cascade)
 
   @@unique([lang, level, genshinCharacterId])
-}
-
-enum CharacterAsset {
-  ICON
-  AVATAR
-  CARD
-}
-
-model GenshinCharacterAsset {
-  id                 String         @id @default(cuid())
-  genshinCharacterId String
-  type               CharacterAsset
-  path               String
-
-  character GenshinCharacter @relation(fields: [genshinCharacterId], references: [id])
 }
