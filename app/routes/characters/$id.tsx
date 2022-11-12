@@ -2,7 +2,6 @@ import type { LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
 import type { RouteHandle } from "~/types/common";
 import type { ThrownErrorResponse } from "~/utils/responses.server";
 
-import { json } from "@remix-run/node";
 import {
   NavLink,
   useCatch,
@@ -33,32 +32,32 @@ export const loader = async ({ request, params }: LoaderArgs) => {
   }
 
   const resolvedLocale = await resolveLocale(request);
-  const characterData = await getCharacterById(params.id, {
+  const character = await getCharacterById(params.id, {
     langs: [resolvedLocale],
   });
 
-  if (!characterData) {
+  if (!character) {
     throw notFound({ code: "character.notfound", message: "Character not found" });
   }
 
-  if (!characterData.identity.some((cid) => cid.lang === resolvedLocale)) {
+  if (!character.identity.some((cid) => cid.lang === resolvedLocale)) {
     throw notFound({
       code: "untranslated",
       message: "This page is not available in your language, please, try checking English",
     });
   }
 
-  return json(characterData);
+  return { character };
 };
 
 export type Loader = SerializeFrom<typeof loader>;
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  if (!data?.character || !data?.identity) return { title: "Error" };
+  if (!data?.character || !data?.character.identity) return { title: "Error" };
 
   return generateMeta({
-    title: data.identity.at(0)?.name,
-    description: data.identity.at(0)?.description,
+    title: data.character.identity.at(0)?.name,
+    description: data.character.identity.at(0)?.description,
     imageUrl: `/img/characters/${data.character.id}/icon.webp`,
     themeColor: data.character.accentColor,
   });
@@ -71,21 +70,21 @@ const links = [
 
 export interface ContextType {
   data: Loader["character"];
-  identity: Loader["identity"][number];
-  constellations: Loader["constellations"];
+  identity: Loader["character"]["identity"][number];
+  constellations: Loader["character"]["constellations"];
 }
 
 const CharactersIdRoute = () => {
   const locale = useVisitorLocale();
   const { search } = useLocation();
 
-  const loaderData = useLoaderData() as Loader;
-  const identity = loaderData.identity.find((record) => record.lang === locale);
+  const { character } = useLoaderData() as Loader;
+  const identity = character.identity.find((record) => record.lang === locale);
 
   const outletContext = {
-    data: loaderData.character,
+    data: character,
     identity: identity as NonNullable<typeof identity>,
-    constellations: loaderData.constellations,
+    constellations: character.constellations,
   } as ContextType; // once TS4.9 is supported in ESLint, should replace with satisfies
 
   const outlet = useOutlet(outletContext);
