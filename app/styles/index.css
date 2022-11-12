@@ -193,6 +193,10 @@ html {
     @apply text-sm font-medium transition-all duration-200;
   }
 
+  .button:focus-visible {
+    @apply outline outline-2 outline-black outline-offset-2;
+  }
+
   /* .dark .button {
     box-sizing: border-box;
     border-width: 2px;
