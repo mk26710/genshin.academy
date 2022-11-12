@@ -5,3 +5,5 @@ export type RouteHandle = {
   name?: string;
   withScrollRestoration?: boolean;
 } & Record<string, unknown>;
+
+export type MaybePromise<T> = Promise<T> | T;
