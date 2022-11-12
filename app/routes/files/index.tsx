@@ -9,6 +9,7 @@ import { Checkbox } from "~/components/Checkbox";
 import { Container } from "~/components/Container";
 import { useAfterHydration } from "~/hooks/use-hydrated";
 import { useVisitorLocale } from "~/hooks/use-visitor-locale";
+import { isNil } from "~/utils/helpers";
 import { generateMeta } from "~/utils/meta-generator";
 import { validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { getUserObjects } from "~/utils/s3.server";
@@ -32,7 +33,15 @@ export const loader = async ({ request }: LoaderArgs) => {
 
 export default function Files() {
   const locale = useVisitorLocale();
+
   const objects = useLoaderData<typeof loader>();
+  const sortedObjectes = [...objects].sort((a, b) => {
+    if (!isNil(b.lastModified) && !isNil(a.lastModified)) {
+      return Date.parse(b.lastModified) - Date.parse(a.lastModified);
+    }
+
+    return 1;
+  });
 
   return (
     <Container className="max-w-screen-md">
@@ -59,7 +68,7 @@ export default function Files() {
           </thead>
 
           <tbody className="divide-y divide-neutral-200 text-neutral-700 dark:text-neutral-200">
-            {objects.map((o, idx) => {
+            {sortedObjectes.map((o, idx) => {
               const [isOpen, setIsOpen] = useState(false);
               const date = useAfterHydration(new Date(o.lastModified ?? ""));
 
