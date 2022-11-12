@@ -4,6 +4,7 @@ import type { ThrownErrorResponse } from "~/utils/responses.server";
 
 import { json } from "@remix-run/node";
 import {
+  Form,
   Link,
   Links,
   LiveReload,
@@ -12,7 +13,6 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
-  useFetcher,
   useLoaderData,
   useMatches,
   useTransition,
@@ -152,19 +152,6 @@ export default function Root() {
 export function CatchBoundary() {
   const caught = useCatch<ThrownErrorResponse>();
 
-  const fetcher = useFetcher();
-
-  const handleLogOut = async () => {
-    fetcher.submit(null, {
-      action: "/logout",
-      method: "patch",
-    });
-  };
-
-  useEffect(() => {
-    Nprogress.done();
-  }, []);
-
   return (
     <html className="dark">
       <head>
@@ -190,9 +177,11 @@ export function CatchBoundary() {
                 )}
 
                 {caught?.data?.code === "user.disabled" && (
-                  <button onClick={handleLogOut} className="button w-fit text-center">
-                    Log Out
-                  </button>
+                  <Form action="/logout" method="post">
+                    <button type="submit" className="button w-fit text-center">
+                      Log Out
+                    </button>
+                  </Form>
                 )}
               </div>
             </div>
