@@ -1,5 +1,5 @@
 import type { ContextType } from "../$slug";
-import type { ActionArgs, LoaderArgs } from "@remix-run/node";
+import type { ActionArgs, HeadersFunction, LoaderArgs } from "@remix-run/node";
 
 import { PermissionFlag } from "@prisma/client";
 import { json } from "@remix-run/node";
@@ -14,6 +14,10 @@ import { UserPassword as PasswordValidator } from "~/schemas/user.server";
 import { validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { badRequest, notFound } from "~/utils/responses.server";
 import { getAuthorizedUser } from "~/utils/session.server";
+
+export const headers: HeadersFunction = () => ({
+  "X-Robots-Tag": "noindex",
+});
 
 // this is a very very dangerous route, must allow only owner here
 const REQUIRED_FLAGS = [PermissionFlag.ABSOLUTE_POWER];

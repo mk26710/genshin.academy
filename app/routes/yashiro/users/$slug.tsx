@@ -1,4 +1,4 @@
-import type { LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
+import type { HeadersFunction, LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
 import type { RouteHandle } from "~/types/common";
 import type { ThrownErrorResponse } from "~/utils/responses.server";
 
@@ -17,6 +17,10 @@ export const handle: RouteHandle = {
   id: "yashiro.user.parent",
   withScrollRestoration: true,
 };
+
+export const headers: HeadersFunction = () => ({
+  "X-Robots-Tag": "noindex",
+});
 
 export const loader = async ({ request, params }: LoaderArgs) => {
   await getAuthorizedUser(request, async (user) =>
@@ -47,6 +51,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return generateMeta({
     title: data.user.name,
     imageUrl: orUndefined(data.user.avatarUrl),
+    noIndex: true,
   });
 };
 

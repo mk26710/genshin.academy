@@ -1,5 +1,5 @@
 import type { ContextType } from "../$slug";
-import type { ActionArgs } from "@remix-run/node";
+import type { ActionArgs, HeadersFunction } from "@remix-run/node";
 import type { RouteHandle } from "~/types/common";
 
 import { ArrowUturnLeftIcon, PlusIcon, XMarkIcon } from "@heroicons/react/20/solid";
@@ -23,6 +23,10 @@ export const handle: RouteHandle = {
   id: "yashiro.user.permissions",
   withScrollRestoration: true,
 };
+
+export const headers: HeadersFunction = () => ({
+  "X-Robots-Tag": "noindex",
+});
 
 export default function YashiroUsersSlugPermissions() {
   const fetcher = useFetcher();

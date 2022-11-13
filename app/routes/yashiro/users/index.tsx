@@ -1,4 +1,4 @@
-import type { LoaderArgs } from "@remix-run/node";
+import type { HeadersFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
 import type { RouteHandle } from "~/types/common";
 
 import { json } from "@remix-run/node";
@@ -7,6 +7,7 @@ import { useLoaderData } from "@remix-run/react";
 import { UserCard } from "~/components/cards/UserCard";
 import { Container } from "~/components/Container";
 import { prisma } from "~/db/prisma.server";
+import { generateMeta } from "~/utils/meta-generator";
 import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { getAuthorizedUser } from "~/utils/session.server";
 
@@ -14,6 +15,16 @@ export const handle: RouteHandle = {
   id: "yashiro.users",
   withScrollRestoration: true,
 };
+
+export const meta: MetaFunction = () =>
+  generateMeta({
+    title: "Website Users",
+    noIndex: true,
+  });
+
+export const headers: HeadersFunction = () => ({
+  "X-Robots-Tag": "noindex",
+});
 
 export const loader = async ({ request }: LoaderArgs) => {
   await getAuthorizedUser(request, async (user) =>

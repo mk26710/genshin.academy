@@ -1,9 +1,10 @@
-import type { LoaderArgs } from "@remix-run/node";
+import type { HeadersFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
 import type { RouteHandle } from "~/types/common";
 
 import { Link } from "@remix-run/react";
 
 import { Container } from "~/components/Container";
+import { generateMeta } from "~/utils/meta-generator";
 import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { getAuthorizedUser } from "~/utils/session.server";
 
@@ -11,6 +12,17 @@ export const handle: RouteHandle = {
   id: "yashiro.home",
   withScrollRestoration: true,
 };
+
+export const meta: MetaFunction = () => {
+  return generateMeta({
+    title: "Yashiro",
+    noIndex: true,
+  });
+};
+
+export const headers: HeadersFunction = () => ({
+  "X-Robots-Tag": "noindex",
+});
 
 export const loader = async ({ request }: LoaderArgs) => {
   await getAuthorizedUser(request, async (user) =>

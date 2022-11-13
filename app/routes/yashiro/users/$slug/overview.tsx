@@ -1,5 +1,5 @@
 import type { ContextType } from "../$slug";
-import type { ActionArgs } from "@remix-run/node";
+import type { ActionArgs, HeadersFunction } from "@remix-run/node";
 import type { ChangeEvent } from "react";
 import type { RouteHandle } from "~/types/common";
 
@@ -26,6 +26,10 @@ type ActionData = {
     message: string;
   };
 };
+
+export const headers: HeadersFunction = () => ({
+  "X-Robots-Tag": "noindex",
+});
 
 export const action = async ({ request }: ActionArgs) => {
   await getAuthorizedUser(request, async (user) =>
