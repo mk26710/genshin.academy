@@ -59,6 +59,8 @@ interface UserUploadOptions {
   fileId: string;
   filename: string;
   tags?: string[];
+  sha256: string;
+  originalSha256: string;
 }
 
 export const userUploadToBucket = async (data: Buffer, opts: UserUploadOptions) => {
@@ -89,6 +91,8 @@ export const userUploadToBucket = async (data: Buffer, opts: UserUploadOptions) 
           data: tags,
         },
       },
+      sha256: opts.sha256,
+      originalSha256: opts.originalSha256,
     },
   });
 
