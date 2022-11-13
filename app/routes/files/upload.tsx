@@ -13,14 +13,16 @@ import { Form, Link, useActionData } from "@remix-run/react";
 import { Container } from "~/components/Container";
 import { Input } from "~/components/Input";
 import { Paper } from "~/components/Paper";
+import { prisma } from "~/db/prisma.server";
 import { useHydrated } from "~/hooks/use-hydrated";
 import { nanoid } from "~/lib/nanoid/async.server";
+import { sha256HexFromBuffer } from "~/lib/sha256.server";
 import { AllowedMimeTypes, FileUpload } from "~/schemas/file.server";
 import { arrayBufferToWebp } from "~/utils/image.server";
 import { generateMeta } from "~/utils/meta-generator";
 import { validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { badRequest } from "~/utils/responses.server";
-import { userUploadToBucket } from "~/utils/s3.server";
+import { S3_DOMAIN, userUploadToBucket } from "~/utils/s3.server";
 import { getAuthorizedUser } from "~/utils/session.server";
 
 export const meta: MetaFunction = () => {
@@ -68,6 +70,12 @@ export default function FilesNew() {
           </p>
         </Paper>
       )}
+      {actionData?.error && (
+        <Paper className="mb-4 border-red-800 bg-red-400 text-red-800">
+          <p>{actionData.error.message}</p>
+          <p>{actionData.error.details}</p>
+        </Paper>
+      )}
       <Paper as={Form} method="post" encType="multipart/form-data" className="flex flex-col">
         <h4 className="text-lg font-semibold">File Upload</h4>
         <p className="mb-6 opacity-60">
@@ -98,8 +106,9 @@ export default function FilesNew() {
   );
 }
 
-interface ActionData extends TypedErrorResponse {
+interface ActionData {
   fileUrl?: string;
+  error?: TypedErrorResponse;
 }
 
 export const action = async ({ request }: ActionArgs) => {
@@ -119,24 +128,54 @@ export const action = async ({ request }: ActionArgs) => {
   });
 
   if (!parseForm.success) {
-    return badRequest({ message: "Form validation failed", cause: parseForm.error });
+    return badRequest<ActionData>({
+      error: { message: "Form validation failed", cause: parseForm.error },
+    });
   }
 
   const form = parseForm.data;
 
   const parseMime = await AllowedMimeTypes.safeParseAsync(form.file.type);
   if (!parseMime.success) {
-    return badRequest({ message: "Unusupported file type provided", cause: parseMime.error });
+    return badRequest<ActionData>({
+      error: { message: "Unusupported file type provided", cause: parseMime.error },
+    });
   }
 
   const arrayBuffer = await form.file.arrayBuffer();
-  const webp = await arrayBufferToWebp(arrayBuffer);
+  const originalBuffer = Buffer.from(arrayBuffer);
+  const originalSha256 = await sha256HexFromBuffer(originalBuffer);
+
+  const maybeOriginalFile = await prisma.file.findUnique({ where: { originalSha256 } });
+  if (maybeOriginalFile != null) {
+    return badRequest<ActionData>({
+      error: {
+        message: "This file has already been uploaded",
+        details: `${S3_DOMAIN}/${maybeOriginalFile.s3Key}`,
+      },
+    });
+  }
+
+  const webpBuffer = await arrayBufferToWebp(arrayBuffer);
+  const webpSha256 = await sha256HexFromBuffer(webpBuffer);
+
+  const maybeWebpFile = await prisma.file.findUnique({ where: { sha256: webpSha256 } });
+  if (maybeWebpFile != null) {
+    return badRequest<ActionData>({
+      error: {
+        message: "This file has already been uploaded",
+        details: `${S3_DOMAIN}/${maybeWebpFile.s3Key}`,
+      },
+    });
+  }
 
   const fileId = await nanoid(21);
   const filename = fileId + ".webp";
-  const [fileUrl] = await userUploadToBucket(webp, {
+  const [fileUrl] = await userUploadToBucket(webpBuffer, {
     fileId,
     filename,
+    originalSha256,
+    sha256: webpSha256,
     tags: form.tags,
     userId: user.id,
   });
