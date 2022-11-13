@@ -71,9 +71,16 @@ export default function YashiroUsersSlugLayoutRoute() {
 
         <NavLink
           to="./permissions"
-          className={"flex items-center justify-center pl-4 text-sm font-semibold uppercase "}
+          className={"flex items-center justify-center pl-4 pr-4 text-sm font-semibold uppercase "}
         >
           Permission Flags
+        </NavLink>
+
+        <NavLink
+          to="./password"
+          className={"flex items-center justify-center pl-4 text-sm font-semibold uppercase "}
+        >
+          Change Password
         </NavLink>
       </div>
       <div className="card grid grid-cols-1 gap-2 rounded-t-none lg:grid-cols-[auto_1fr] lg:flex-row">
