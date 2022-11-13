@@ -1,6 +1,12 @@
 import type { User } from "@prisma/client";
 
-import { S3Client, PutObjectCommand, ListBucketsCommand } from "@aws-sdk/client-s3";
+import {
+  S3Client,
+  PutObjectCommand,
+  ListBucketsCommand,
+  DeleteObjectsCommand,
+  DeleteObjectCommand,
+} from "@aws-sdk/client-s3";
 
 import { prisma } from "~/db/prisma.server";
 import { requiredServerEnv } from "~/utils/helpers.server";
@@ -88,4 +94,27 @@ export const userUploadToBucket = async (data: Buffer, opts: UserUploadOptions) 
   });
 
   return [publicUrl, output] as const;
+};
+
+export const deleteFromBucket = async (...keys: string[]) => {
+  const deletedObjects = await Promise.all(
+    keys.map((Key) =>
+      s3.send(
+        new DeleteObjectCommand({
+          Bucket: S3_BUCKET,
+          Key,
+        }),
+      ),
+    ),
+  );
+
+  const query = await prisma.file.deleteMany({
+    where: {
+      s3Key: {
+        in: keys,
+      },
+    },
+  });
+
+  return [deletedObjects, query] as const;
 };
