@@ -104,7 +104,7 @@ enum PermissionFlag {
   DELETE_MY_ASSET
   DELETE_SOMEONES_ASSET
   VIEW_ALL_ASSETS
-  
+
   DEFAULT
 }
 
@@ -122,11 +122,13 @@ model Permissions {
 }
 
 model File {
-  id         String   @id
-  uploaderId String?
-  s3Key      String
-  size       Int
-  uploadedAt DateTime @default(now())
+  id             String   @id
+  uploaderId     String?
+  s3Key          String
+  size           Int
+  uploadedAt     DateTime @default(now())
+  sha256         String?  @unique
+  originalSha256 String?  @unique
 
   uploader User?     @relation(fields: [uploaderId], references: [id])
   tag      FileTag[]
