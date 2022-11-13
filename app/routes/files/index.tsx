@@ -5,7 +5,7 @@ import type { TypedErrorResponse } from "~/utils/responses.server";
 import { Dialog } from "@headlessui/react";
 import { PermissionFlag } from "@prisma/client";
 import { json } from "@remix-run/node";
-import { Link, useActionData, useFetcher, useLoaderData, useSearchParams } from "@remix-run/react";
+import { Link, useFetcher, useLoaderData, useSearchParams } from "@remix-run/react";
 import { useAtom } from "jotai";
 import { useResetAtom, atomWithReset } from "jotai/utils";
 import { useEffect, useId, useState } from "react";
@@ -181,10 +181,8 @@ const FileRow = ({ file }: FileRowProps) => {
 };
 
 export default function Files() {
-  const fetcher = useFetcher();
-
   const { files, page } = useLoaderData<typeof loader>();
-  const actionData = useActionData() as ActionData;
+  const fetcher = useFetcher<ActionData>();
 
   const [selectedFileIds] = useAtom(selectedFileIdsAtom);
   const resetSelectedFileIds = useResetAtom(selectedFileIdsAtom);
@@ -217,8 +215,10 @@ export default function Files() {
   };
 
   useEffect(() => {
-    resetSelectedFileIds();
-  }, [actionData?.output, actionData?.cause, actionData?.message]);
+    if (fetcher.state === "loading" && fetcher.type === "actionReload") {
+      resetSelectedFileIds();
+    }
+  }, [fetcher.state, fetcher.data?.output, fetcher.data?.cause, fetcher.data?.message]);
 
   return (
     <Container className="max-w-screen-md">
