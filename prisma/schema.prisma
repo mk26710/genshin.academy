@@ -103,7 +103,8 @@ enum PermissionFlag {
   EDIT_SOMEONES_ASSET
   DELETE_MY_ASSET
   DELETE_SOMEONES_ASSET
-
+  VIEW_ALL_ASSETS
+  
   DEFAULT
 }
 
@@ -136,7 +137,7 @@ model FileTag {
   fileId String
   value  String
 
-  file File @relation(fields: [fileId], references: [id])
+  file File @relation(fields: [fileId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@unique([fileId, value])
 }
