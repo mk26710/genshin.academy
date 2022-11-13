@@ -1,6 +1,7 @@
 import type { HtmlMetaDescriptor } from "@remix-run/node";
 
 type GenerateMetaOpts = {
+  noIndex?: boolean;
   title?: string;
   description?: string;
   imageUrl?: string;
@@ -32,6 +33,10 @@ export const generateMeta = (opts: GenerateMetaOpts): HtmlMetaDescriptor => {
 
   if (typeof opts.themeColor === "string") {
     metaTags = { ...metaTags, "theme-color": opts.themeColor };
+  }
+
+  if (typeof opts.noIndex === "boolean" && opts.noIndex === true) {
+    metaTags = { ...metaTags, robots: "noindex" };
   }
 
   return metaTags;
