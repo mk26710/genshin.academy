@@ -64,8 +64,8 @@ interface UserUploadOptions {
 }
 
 export const userUploadToBucket = async (data: Buffer, opts: UserUploadOptions) => {
-  const publicUrl = S3_DOMAIN + "/" + opts.filename;
   const key = userPrefix(opts.userId) + "/" + opts.filename;
+  const publicUrl = new URL(S3_DOMAIN + "/" + key);
 
   const tags =
     opts.tags?.map((value) => ({
