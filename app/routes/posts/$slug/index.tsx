@@ -151,7 +151,7 @@ const PostControls: FunctionComponent<PostControlsProps> = ({ canEdit, canDelete
       {canDelete && (
         <button
           onClick={handleDeleteClick}
-          className="button flex items-center justify-center gap-3 border-rose-600 bg-rose-600 hover:text-rose-600"
+          className="button button-danger flex items-center justify-center gap-3"
         >
           <TrashIcon className="h-5 w-5" />
           <span>Delete</span>

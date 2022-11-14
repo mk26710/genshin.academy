@@ -61,7 +61,12 @@ const SearchAndFilter: FunctionComponent = () => {
   return (
     <>
       <div className="mb-6 flex flex-row gap-4 lg:flex-row">
-        <Input placeholder={t(`common.search-by-name`)} onChange={handleChange} value={search} />
+        <input
+          placeholder={t(`common.search-by-name`)}
+          className="input"
+          onChange={handleChange}
+          value={search}
+        />
 
         <div
           role="radiogroup"

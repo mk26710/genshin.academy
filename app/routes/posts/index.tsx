@@ -11,6 +11,7 @@ import { useTranslations } from "use-intl";
 import { PostCard } from "~/components/cards/PostCard";
 import { Container } from "~/components/Container";
 import { Paginator } from "~/components/Paginator";
+import { Paper } from "~/components/Paper";
 import { countSearchPostsPaginated, searchPostsPaginated } from "~/models/posts.server";
 import { PostsSearch } from "~/schemas/posts.server";
 import { orUndefined } from "~/utils/helpers";
@@ -116,7 +117,7 @@ const PostsIndexRoute = () => {
   return (
     <Container className="px-0 pt-0 lg:px-[var(--default-gap)]">
       <div className="grid h-full grid-rows-[auto_auto] gap-[var(--default-gap)] lg:grid-cols-[1fr_auto] lg:grid-rows-1">
-        <div className="card sticky top-[var(--header-height)] z-[5] flex h-fit w-full flex-col rounded-none border-b border-t-0 bg-white lg:top-[calc(var(--header-height)_+_var(--default-gap))] lg:w-64 lg:rounded-md lg:border-r lg:border-l lg:border-t">
+        <Paper className="card sticky top-[var(--header-height)] z-[5] flex h-fit w-full flex-col rounded-none border-b border-t-0 bg-white lg:top-[calc(var(--header-height)_+_var(--default-gap))] lg:w-64 lg:rounded-md lg:border-r lg:border-l lg:border-t">
           <form onSubmit={handleSearchSubmit}>
             <div>
               <label htmlFor="search-query" className="text-xs font-bold uppercase opacity-60">
@@ -126,7 +127,7 @@ const PostsIndexRoute = () => {
                 id="search-query"
                 name="search-query"
                 placeholder={t("common.enter-query")}
-                className="input-field mb-2 w-full dark:bg-neutral-900"
+                className="input mb-2 w-full"
               />
             </div>
           </form>
@@ -139,7 +140,7 @@ const PostsIndexRoute = () => {
               id="search-language"
               defaultValue={searchLang}
               onChange={handleLanguageSelect}
-              className="select-field mb-2 dark:bg-neutral-900"
+              className="select mb-2"
             >
               <option value={undefined}>Any</option>
               <option value="en">English</option>
@@ -148,7 +149,7 @@ const PostsIndexRoute = () => {
           </div>
 
           <Paginator page={page} totalPages={totalPages} />
-        </div>
+        </Paper>
 
         {posts.length <= 0 && (
           <div className="flex h-full w-full items-center justify-center lg:row-end-1">

@@ -98,7 +98,7 @@ const MeRoute = () => {
           {discordAccount && (
             <button
               onClick={unlinkDiscordAccount}
-              className="button group disabled:cursor-not-allowed disabled:opacity-50"
+              className="button button-neutral group disabled:cursor-not-allowed"
             >
               <span className="inline group-hover:hidden group-focus:hidden group-active:hidden">
                 Linked

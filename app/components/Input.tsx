@@ -13,7 +13,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
       <input
         ref={ref}
         type={type}
-        className={clsx("input-field", fullWidth && "w-full", className)}
+        className={clsx("input", fullWidth && "w-full", className)}
         {...props}
       />
     );

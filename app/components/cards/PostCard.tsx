@@ -30,7 +30,7 @@ export const PostCard: FunctionComponent<PostCardProps> = ({
           src={thumbnailUrl}
           loading="lazy"
           decoding="async"
-          className="z-0 aspect-video w-full rounded-lg object-cover"
+          className="z-0 aspect-video w-full rounded-md object-cover"
         />
       )}
       <h3 className="mt-2 text-xl font-semibold dark:text-white">{title}</h3>

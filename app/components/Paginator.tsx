@@ -63,11 +63,11 @@ export const Paginator: FunctionComponent<PaginatorProps> = ({ page, totalPages 
 
   return (
     <div className="flex flex-row items-center justify-center gap-1">
-      <button onClick={handlePageFirst} className="button w-fit p-1.5">
+      <button onClick={handlePageFirst} className="button button-neutral w-fit p-1.5">
         <ChevronDoubleLeftIcon className="h-5 w-5" />
       </button>
 
-      <button onClick={handlePageDecrement} className="button w-fit p-1.5">
+      <button onClick={handlePageDecrement} className="button button-neutral w-fit p-1.5">
         <ChevronLeftIcon className="h-5 w-5" />
       </button>
 
@@ -75,11 +75,11 @@ export const Paginator: FunctionComponent<PaginatorProps> = ({ page, totalPages 
         {page} / {totalPages}
       </span>
 
-      <button onClick={handlePageIncrement} className="button w-fit p-1.5">
+      <button onClick={handlePageIncrement} className="button button-neutral w-fit p-1.5">
         <ChevronRightIcon className="h-5 w-5" />
       </button>
 
-      <button onClick={handlePageLast} className="button w-fit p-1.5">
+      <button onClick={handlePageLast} className="button button-neutral w-fit p-1.5">
         <ChevronDoubleRightIcon className="h-5 w-5" />
       </button>
     </div>
