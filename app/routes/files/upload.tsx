@@ -1,5 +1,6 @@
 import type { ActionArgs, LoaderArgs, MetaFunction } from "@remix-run/node";
-import type { TypedErrorResponse } from "~/utils/responses.server";
+import type { ZodError } from "zod";
+import type { TypedJsonError } from "~/utils/responses.server";
 
 import { ChevronDoubleLeftIcon } from "@heroicons/react/20/solid";
 import { PermissionFlag } from "@prisma/client";
@@ -9,6 +10,7 @@ import {
   unstable_parseMultipartFormData,
 } from "@remix-run/node";
 import { Form, Link, useActionData } from "@remix-run/react";
+import { useEffect } from "react";
 
 import { Container } from "~/components/Container";
 import { Input } from "~/components/Input";
@@ -40,7 +42,7 @@ export const loader = async ({ request }: LoaderArgs) => {
 };
 
 export default function FilesNew() {
-  const actionData = useActionData() as ActionData;
+  const actionData = useActionData<typeof action>();
 
   const isHydrated = useHydrated();
 
@@ -51,6 +53,10 @@ export default function FilesNew() {
 
     navigator.clipboard.writeText(actionData?.fileUrl ?? "");
   };
+
+  useEffect(() => {
+    console.debug(actionData);
+  }, [actionData]);
 
   return (
     <Container className="flex max-w-lg flex-col justify-center">
@@ -70,7 +76,7 @@ export default function FilesNew() {
           </p>
         </Paper>
       )}
-      {actionData?.error && (
+      {actionData?.error != null && (
         <Paper className="mb-4 border-red-800 bg-red-400 text-red-800">
           <p>{actionData.error.message}</p>
           <p>{actionData.error.details}</p>
@@ -107,8 +113,8 @@ export default function FilesNew() {
 }
 
 interface ActionData {
-  fileUrl?: string;
-  error?: TypedErrorResponse;
+  fileUrl: URL | null;
+  error: TypedJsonError<string, string, ZodError> | null;
 }
 
 export const action = async ({ request }: ActionArgs) => {
@@ -129,7 +135,13 @@ export const action = async ({ request }: ActionArgs) => {
 
   if (!parseForm.success) {
     return badRequest<ActionData>({
-      error: { message: "Form validation failed", cause: parseForm.error },
+      fileUrl: null,
+      error: {
+        code: null,
+        message: "Form validation failed",
+        details: null,
+        cause: parseForm.error,
+      },
     });
   }
 
@@ -138,7 +150,13 @@ export const action = async ({ request }: ActionArgs) => {
   const parseMime = await AllowedMimeTypes.safeParseAsync(form.file.type);
   if (!parseMime.success) {
     return badRequest<ActionData>({
-      error: { message: "Unusupported file type provided", cause: parseMime.error },
+      fileUrl: null,
+      error: {
+        code: null,
+        message: "Unusupported file type provided",
+        details: null,
+        cause: parseMime.error,
+      },
     });
   }
 
@@ -149,9 +167,12 @@ export const action = async ({ request }: ActionArgs) => {
   const maybeOriginalFile = await prisma.file.findUnique({ where: { originalSha256 } });
   if (maybeOriginalFile != null) {
     return badRequest<ActionData>({
+      fileUrl: null,
       error: {
+        code: null,
         message: "This file has already been uploaded",
         details: `${S3_DOMAIN}/${maybeOriginalFile.s3Key}`,
+        cause: null,
       },
     });
   }
@@ -162,9 +183,12 @@ export const action = async ({ request }: ActionArgs) => {
   const maybeWebpFile = await prisma.file.findUnique({ where: { sha256: webpSha256 } });
   if (maybeWebpFile != null) {
     return badRequest<ActionData>({
+      fileUrl: null,
       error: {
+        code: null,
         message: "This file has already been uploaded",
         details: `${S3_DOMAIN}/${maybeWebpFile.s3Key}`,
+        cause: null,
       },
     });
   }
@@ -180,5 +204,5 @@ export const action = async ({ request }: ActionArgs) => {
     userId: user.id,
   });
 
-  return json<ActionData>({ fileUrl });
+  return json<ActionData>({ fileUrl, error: null });
 };
