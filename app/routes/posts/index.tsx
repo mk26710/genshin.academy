@@ -68,7 +68,7 @@ type LoaderData = SerializeFrom<typeof loader>;
 
 export const meta: MetaFunction = () => {
   return {
-    title: "Posts - GENSHIN.ZENLESS",
+    title: "Posts - GENSHIN.ACADEMY",
   };
 };
 

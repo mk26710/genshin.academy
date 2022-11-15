@@ -117,7 +117,7 @@ export const handle: RouteHandle = {
 };
 
 export const meta: MetaFunction = () => ({
-  title: "Calculators - GENSHIN.ZENLESS",
+  title: "Calculators - GENSHIN.ACADEMY",
 });
 
 const CalcPage = () => {

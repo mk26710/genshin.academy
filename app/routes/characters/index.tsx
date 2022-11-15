@@ -27,7 +27,7 @@ export const handle: RouteHandle = {
 };
 
 export const meta: MetaFunction = ({}) => ({
-  title: "Characters - GENSHIN.ZENLESS",
+  title: "Characters - GENSHIN.ACADEMY",
 });
 
 type LoaderData = SerializeFrom<typeof loader>;

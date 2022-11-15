@@ -10,7 +10,7 @@ type GenerateMetaOpts = {
 };
 
 export const generateMeta = (opts: GenerateMetaOpts): HtmlMetaDescriptor => {
-  const titleTemplate = "GENSHIN.ZENLESS";
+  const titleTemplate = "GENSHIN.ACADEMY";
   const realTitle = titleTemplate != null ? `${opts.title} - ${titleTemplate}` : opts.title;
 
   let metaTags: HtmlMetaDescriptor = { title: realTitle, "og:title": realTitle };

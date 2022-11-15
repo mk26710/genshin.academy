@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === "production") {
   if (!global.__db__) {
     global.__db__ = new PrismaClient({
       errorFormat: "minimal",
-      log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
+      // log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
     });
     console.log("[DEV] Prisma client created");
   }

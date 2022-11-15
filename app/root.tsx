@@ -47,7 +47,7 @@ export const links: LinksFunction = () => {
 };
 
 export const meta: MetaFunction<typeof loader | undefined> = ({ data }) => ({
-  title: "GENSHIN.ZENLESS",
+  title: "GENSHIN.ACADEMY",
   "color-scheme": Boolean(data?.colorScheme) ? data?.colorScheme : "dark light",
 });
 
