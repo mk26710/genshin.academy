@@ -2,7 +2,7 @@
 ![](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
 
-# GENSHIN.ZENLESS.CLUB
+# GENSHIN.ACADEMY
 
 Tiny database, utilities and guides website for Genshin Impact players in multiple languages!
 
