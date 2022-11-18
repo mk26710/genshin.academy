@@ -7,12 +7,54 @@
 @tailwind utilities;
 @tailwind variants;
 
+:root {
+  --header-height: theme("height.16");
+  --h-screen-without-header: calc(100vh - var(--header-height));
+  --max-content-width: theme("maxWidth.screen-xl");
+  --default-gap: 1rem;
+  --default-radius: 6px;
+  --default-border-color: theme("colors.gray.300");
+}
+
 * {
   text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
 }
 
 html {
   font-display: optional;
+  display: block;
+}
+
+body {
+  overflow-y: overlay;
+  scrollbar-gutter: stable;
+}
+
+body::-webkit-scrollbar, body::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+body::-webkit-scrollbar {
+  width: calc(var(--default-gap) * 0.25);
+  height: 8px;
+}
+
+@screen lg {
+  body::-webkit-scrollbar {
+    width: calc(var(--default-gap) * 0.5);
+  }
+}
+
+body::-webkit-scrollbar-thumb {
+  border-width: 4px;
+  border-radius: 4px;
+  border-color: black;
+  background-color: rgba(0, 0, 0, 0.125);
+}
+
+body::-webkit-scrollbar-track {
+  margin-top: var(--header-height);
 }
 
 .transitions-be-gone * {
@@ -21,15 +63,6 @@ html {
   -moz-transition: none !important;
   -ms-transition: none !important;
   -o-transition: none !important;
-}
-
-:root {
-  --header-height: theme("height.16");
-  --h-screen-without-header: calc(100vh - var(--header-height));
-  --max-content-width: theme("maxWidth.screen-xl");
-  --default-gap: 1rem;
-  --default-radius: 6px;
-  --default-border-color: theme("colors.gray.300");
 }
 
 @layer base {
