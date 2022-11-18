@@ -12,7 +12,7 @@ import { NewCharacter } from "~/schemas/character.server";
 import { generateMeta } from "~/utils/meta-generator";
 import { validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { badRequest } from "~/utils/responses.server";
-import { getAuthorizedUser } from "~/utils/session.server";
+import { authorizeUser } from "~/utils/session.server";
 
 export const meta: MetaFunction<typeof loader> = () => {
   return generateMeta({
@@ -22,7 +22,7 @@ export const meta: MetaFunction<typeof loader> = () => {
 };
 
 export async function loader({ request }: LoaderArgs) {
-  await getAuthorizedUser(request, async (user) =>
+  await authorizeUser(request, async (user) =>
     validateUserPermissions(user, [PermissionFlag.NEW_CHARACTER], ValidationMode.STRICT),
   );
 
@@ -211,7 +211,7 @@ interface ActionData extends TypedErrorResponse {
 }
 
 export const action = async ({ request }: ActionArgs) => {
-  await getAuthorizedUser(request, async (user) =>
+  await authorizeUser(request, async (user) =>
     validateUserPermissions(user, [PermissionFlag.NEW_CHARACTER], ValidationMode.STRICT),
   );
 

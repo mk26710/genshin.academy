@@ -21,7 +21,7 @@ import { generateMeta } from "~/utils/meta-generator";
 import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { forbidden, badRequest } from "~/utils/responses.server";
 import { deleteFromBucket, S3_DOMAIN } from "~/utils/s3.server";
-import { requireUser, getAuthorizedUser } from "~/utils/session.server";
+import { requireUser, authorizeUser } from "~/utils/session.server";
 
 export const meta: MetaFunction = () => {
   return generateMeta({
@@ -30,7 +30,7 @@ export const meta: MetaFunction = () => {
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
-  await getAuthorizedUser(request, (user) =>
+  await authorizeUser(request, (user) =>
     validateUserPermissions(user, [PermissionFlag.VIEW_ALL_ASSETS], ValidationMode.STRICT),
   );
 

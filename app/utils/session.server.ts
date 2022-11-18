@@ -158,7 +158,7 @@ type AuthorizationPredicate = (
   user: Awaited<ReturnType<typeof requireUser>>,
 ) => MaybePromise<boolean>;
 
-export const getAuthorizedUser = async (
+export const authorizeUser = async (
   request: Request,
   predicate: AuthorizationPredicate | boolean,
 ) => {

@@ -11,7 +11,7 @@ import { orUndefined } from "~/utils/helpers";
 import { generateMeta } from "~/utils/meta-generator";
 import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { notFound, serverError } from "~/utils/responses.server";
-import { getAuthorizedUser } from "~/utils/session.server";
+import { authorizeUser } from "~/utils/session.server";
 
 export const handle: RouteHandle = {
   id: "yashiro.user.parent",
@@ -23,7 +23,7 @@ export const headers: HeadersFunction = () => ({
 });
 
 export const loader = async ({ request, params }: LoaderArgs) => {
-  await getAuthorizedUser(request, async (user) =>
+  await authorizeUser(request, async (user) =>
     validateUserPermissions(user, permissions("EDIT_USER"), ValidationMode.SOFT),
   );
 

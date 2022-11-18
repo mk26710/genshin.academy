@@ -13,7 +13,7 @@ import { changePasswordOfUser, getUserById } from "~/models/user.server";
 import { UserPassword as PasswordValidator } from "~/schemas/user.server";
 import { validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { badRequest, notFound } from "~/utils/responses.server";
-import { getAuthorizedUser } from "~/utils/session.server";
+import { authorizeUser } from "~/utils/session.server";
 
 export const headers: HeadersFunction = () => ({
   "X-Robots-Tag": "noindex",
@@ -23,7 +23,7 @@ export const headers: HeadersFunction = () => ({
 const REQUIRED_FLAGS = [PermissionFlag.ABSOLUTE_POWER];
 
 export const loader = async ({ request }: LoaderArgs) => {
-  await getAuthorizedUser(request, (user) =>
+  await authorizeUser(request, (user) =>
     validateUserPermissions(user, REQUIRED_FLAGS, ValidationMode.STRICT),
   );
 
@@ -75,7 +75,7 @@ export default function UserPassword() {
 }
 
 export const action = async ({ request }: ActionArgs) => {
-  await getAuthorizedUser(request, (user) =>
+  await authorizeUser(request, (user) =>
     validateUserPermissions(user, REQUIRED_FLAGS, ValidationMode.STRICT),
   );
 

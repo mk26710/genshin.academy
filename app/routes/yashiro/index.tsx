@@ -6,7 +6,7 @@ import { Link } from "@remix-run/react";
 import { Container } from "~/components/Container";
 import { generateMeta } from "~/utils/meta-generator";
 import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
-import { getAuthorizedUser } from "~/utils/session.server";
+import { authorizeUser } from "~/utils/session.server";
 
 export const handle: RouteHandle = {
   id: "yashiro.home",
@@ -25,7 +25,7 @@ export const headers: HeadersFunction = () => ({
 });
 
 export const loader = async ({ request }: LoaderArgs) => {
-  await getAuthorizedUser(request, async (user) =>
+  await authorizeUser(request, async (user) =>
     validateUserPermissions(user, permissions("EDIT_USER"), ValidationMode.SOFT),
   );
 

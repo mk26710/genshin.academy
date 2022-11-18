@@ -12,7 +12,7 @@ import { createPost, getPostBySlug } from "~/models/posts.server";
 import { PostsNewOrEditForm } from "~/schemas/posts.server";
 import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { badRequest } from "~/utils/responses.server";
-import { getAuthorizedUser } from "~/utils/session.server";
+import { authorizeUser } from "~/utils/session.server";
 
 export const handle: RouteHandle = {
   id: "post.new",
@@ -20,7 +20,7 @@ export const handle: RouteHandle = {
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
-  await getAuthorizedUser(request, async (user) =>
+  await authorizeUser(request, async (user) =>
     validateUserPermissions(user, permissions("NEW_POST"), ValidationMode.STRICT),
   );
 
@@ -28,7 +28,7 @@ export const loader = async ({ request }: LoaderArgs) => {
 };
 
 export const action = async ({ request }: ActionArgs) => {
-  const user = await getAuthorizedUser(request, async (user) =>
+  const user = await authorizeUser(request, async (user) =>
     validateUserPermissions(user, permissions("NEW_POST"), ValidationMode.STRICT),
   );
 

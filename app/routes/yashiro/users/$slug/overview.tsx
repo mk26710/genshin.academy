@@ -12,7 +12,7 @@ import { prisma } from "~/db/prisma.server";
 import { deleteUserById, getUserById } from "~/models/user.server";
 import { isNil, orUndefined, stringOrUndefined } from "~/utils/helpers";
 import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
-import { getAuthorizedUser } from "~/utils/session.server";
+import { authorizeUser } from "~/utils/session.server";
 
 export const handle: RouteHandle = {
   id: "yashiro.user.general",
@@ -32,7 +32,7 @@ export const headers: HeadersFunction = () => ({
 });
 
 export const action = async ({ request }: ActionArgs) => {
-  await getAuthorizedUser(request, async (user) =>
+  await authorizeUser(request, async (user) =>
     validateUserPermissions(user, permissions("EDIT_USER"), ValidationMode.SOFT),
   );
 

@@ -25,7 +25,7 @@ import { generateMeta } from "~/utils/meta-generator";
 import { validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { badRequest } from "~/utils/responses.server";
 import { S3_DOMAIN, userUploadToBucket } from "~/utils/s3.server";
-import { getAuthorizedUser } from "~/utils/session.server";
+import { authorizeUser } from "~/utils/session.server";
 
 export const meta: MetaFunction = () => {
   return generateMeta({
@@ -34,7 +34,7 @@ export const meta: MetaFunction = () => {
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
-  await getAuthorizedUser(request, (user) =>
+  await authorizeUser(request, (user) =>
     validateUserPermissions(user, [PermissionFlag.NEW_ASSET], ValidationMode.STRICT),
   );
 
@@ -118,7 +118,7 @@ interface ActionData {
 }
 
 export const action = async ({ request }: ActionArgs) => {
-  const user = await getAuthorizedUser(request, (user) =>
+  const user = await authorizeUser(request, (user) =>
     validateUserPermissions(user, [PermissionFlag.NEW_ASSET], ValidationMode.STRICT),
   );
 
