@@ -11,7 +11,7 @@ import { UserFlair } from "~/components/UserFlair";
 import { useUser } from "~/hooks/use-user";
 import { getLinkedAccountsById, unlinkDiscordAccountByUserId } from "~/models/user.server";
 import { getDiscordLinkOAuthURL } from "~/utils/oauth/discord.server";
-import { getAuthenticatedUser } from "~/utils/session.server";
+import { requireUser } from "~/utils/session.server";
 
 export const handle: RouteHandle = {
   id: "me",
@@ -19,14 +19,14 @@ export const handle: RouteHandle = {
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
-  const user = await getAuthenticatedUser(request);
+  const user = await requireUser(request);
   const linkedAccounts = await getLinkedAccountsById(user.id);
   const discordOauthUrl = getDiscordLinkOAuthURL();
   return json({ user, linkedAccounts, discordOauthUrl });
 };
 
 export const action = async ({ request }: ActionArgs) => {
-  const user = await getAuthenticatedUser(request);
+  const user = await requireUser(request);
 
   const formData = await request.formData();
   const action = formData.get("action");

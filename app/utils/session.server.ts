@@ -129,7 +129,7 @@ export const getUser = async (request: Request) => {
 
 export type GetUser = Awaited<ReturnType<typeof getUser>>;
 
-export const getAuthenticatedUser = async (request: Request) => {
+export const requireUser = async (request: Request) => {
   const session = await getSession(request);
   const userId = session.get(SESSION_USER_KEY);
 
@@ -155,14 +155,14 @@ export const getAuthenticatedUser = async (request: Request) => {
 };
 
 type AuthorizationPredicate = (
-  user: Awaited<ReturnType<typeof getAuthenticatedUser>>,
+  user: Awaited<ReturnType<typeof requireUser>>,
 ) => MaybePromise<boolean>;
 
 export const getAuthorizedUser = async (
   request: Request,
   predicate: AuthorizationPredicate | boolean,
 ) => {
-  const user = await getAuthenticatedUser(request);
+  const user = await requireUser(request);
 
   let result = false;
   if (typeof predicate === "boolean") {

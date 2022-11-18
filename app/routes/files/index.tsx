@@ -21,7 +21,7 @@ import { generateMeta } from "~/utils/meta-generator";
 import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { forbidden, badRequest } from "~/utils/responses.server";
 import { deleteFromBucket, S3_DOMAIN } from "~/utils/s3.server";
-import { getAuthenticatedUser, getAuthorizedUser } from "~/utils/session.server";
+import { requireUser, getAuthorizedUser } from "~/utils/session.server";
 
 export const meta: MetaFunction = () => {
   return generateMeta({
@@ -282,7 +282,7 @@ export const action = async ({ request }: ActionArgs) => {
     return json({ message: "Method not allowed" }, { status: 405 });
   }
 
-  const user = await getAuthenticatedUser(request);
+  const user = await requireUser(request);
   const formData = await request.formData();
 
   const validation = await z.array(z.string().min(1).max(50)).spa(formData.getAll("file-id"));
