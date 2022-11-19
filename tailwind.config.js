@@ -21,6 +21,7 @@ const myColors = {
 };
 
 const myScreens = {
+  xs: "400px",
   xmd: "896px",
 };
 
