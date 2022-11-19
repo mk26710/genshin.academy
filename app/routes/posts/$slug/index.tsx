@@ -86,7 +86,7 @@ export const action = async ({ request, params }: ActionArgs) => {
     }
 
     if (
-      validateUserPermissions(
+      !validateUserPermissions(
         maybeUser,
         permissions(post.authorId === maybeUser?.id && "DELETE_MY_POST", "DELETE_SOMEONES_POST"),
         ValidationMode.SOFT,
