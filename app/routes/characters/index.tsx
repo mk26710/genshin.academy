@@ -1,5 +1,6 @@
 import type { LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
 import type { ChangeEvent, FunctionComponent } from "react";
+import type { getCharactersList } from "~/models/characters.server";
 import type { RouteHandle } from "~/types/common";
 
 import { json } from "@remix-run/node";
@@ -16,8 +17,7 @@ import {
 import { CharacterCard } from "~/components/cards/CharacterCard";
 import { Checkbox } from "~/components/Checkbox";
 import { Container } from "~/components/Container";
-import { Input } from "~/components/Input";
-import { getCharactersList } from "~/models/characters.server";
+import { prisma } from "~/db/prisma.server";
 import { resolveLocale } from "~/utils/i18n.server";
 import { defaultLocale } from "~/utils/locales";
 
@@ -26,15 +26,41 @@ export const handle: RouteHandle = {
   withScrollRestoration: true,
 };
 
-export const meta: MetaFunction = ({}) => ({
-  title: "Characters - GENSHIN.ACADEMY",
-});
+export const meta: MetaFunction = ({}) => {
+  return {
+    title: "Characters - GENSHIN.ACADEMY",
+  };
+};
 
 type LoaderData = SerializeFrom<typeof loader>;
 
 export const loader = async ({ request }: LoaderArgs) => {
   const locale = await resolveLocale(request);
-  const characters = await getCharactersList({ langs: [locale, defaultLocale] });
+
+  const searchLocales = [...new Set([locale, defaultLocale])];
+
+  const characters = await prisma.genshinCharacter.findMany({
+    orderBy: {
+      id: "asc",
+    },
+    include: {
+      assets: true,
+      constellations: {
+        where: {
+          lang: {
+            in: searchLocales,
+          },
+        },
+      },
+      identity: {
+        where: {
+          lang: {
+            in: searchLocales,
+          },
+        },
+      },
+    },
+  });
 
   return json({ characters });
 };
