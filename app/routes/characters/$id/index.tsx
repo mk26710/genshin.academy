@@ -1,8 +1,10 @@
 import type { ContextType } from "../$id";
 
-import { CakeIcon } from "@heroicons/react/24/outline";
+import { CakeIcon, EyeIcon, SparklesIcon } from "@heroicons/react/20/solid";
 import { useOutletContext } from "@remix-run/react";
 
+import { OverviewIcon } from "~/components/character/OverviewIcon";
+import { Rarity } from "~/components/character/Rarity";
 import { useVisitorLocale } from "~/hooks/use-visitor-locale";
 
 export default function CharacterOverview() {
@@ -27,10 +29,22 @@ export default function CharacterOverview() {
         </span>
         <p className="mt-4">{identity.description}</p>
 
-        <div className="mt-6 flex flex-row flex-wrap gap-2">
-          <div className="flex w-[33.33%] items-center gap-2">
-            <CakeIcon className="h-6 w-6" />
+        <div className="mt-6 grid grid-flow-dense auto-rows-min grid-cols-1 gap-2 xs:grid-cols-2 md:grid-cols-3">
+          <div className="flex items-center gap-2">
+            <OverviewIcon as={CakeIcon} />
             <span>{birthDate.toLocaleDateString(locale, { day: "numeric", month: "long" })}</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <OverviewIcon as={SparklesIcon} />
+            <span>
+              <Rarity rarity={data.rarity} />
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <OverviewIcon as={EyeIcon} />
+            <span className="capitalize">{data.vision.toLowerCase()}</span>
           </div>
         </div>
       </div>
