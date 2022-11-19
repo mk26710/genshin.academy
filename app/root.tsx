@@ -53,7 +53,7 @@ export const meta: MetaFunction<typeof loader | undefined> = ({ data }) => ({
 
 export async function loader({ request }: LoaderArgs) {
   const resolvedLocale = await resolveLocale(request);
-  const messages = await getMessages(resolvedLocale, ["calc", "posts", "settings"]);
+  const messages = await getMessages(resolvedLocale, ["calc", "posts", "settings", "characters"]);
 
   return json({
     colorScheme: await getColorScheme(request),
