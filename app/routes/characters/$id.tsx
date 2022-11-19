@@ -75,6 +75,7 @@ export interface ContextType {
 }
 
 const CharactersIdRoute = () => {
+  const t = useTranslations();
   const locale = useVisitorLocale();
   const { search } = useLocation();
 
@@ -101,7 +102,7 @@ const CharactersIdRoute = () => {
                 clsx("mx-2 py-4", isActive && "opacity-100", !isActive && "opacity-60")
               }
             >
-              {i18n}
+              {t(i18n)}
             </NavLink>
           ))}
         </Paper>
