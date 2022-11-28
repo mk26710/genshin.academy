@@ -15,9 +15,7 @@ import { useTranslations } from "use-intl";
 
 import { Container } from "~/components/Container";
 import { Paper } from "~/components/Paper";
-import { useVisitorLocale } from "~/hooks/use-visitor-locale";
 import { getCharacterById } from "~/models/characters.server";
-import { resolveLocale } from "~/utils/i18n.server";
 import { generateMeta } from "~/utils/meta-generator";
 import { notFound, serverError } from "~/utils/responses.server";
 
@@ -26,39 +24,46 @@ export const handle: RouteHandle = {
   withScrollRestoration: true,
 };
 
-export const loader = async ({ request, params }: LoaderArgs) => {
+export const loader = async ({ params }: LoaderArgs) => {
   if (typeof params?.id !== "string") {
     throw serverError({ message: "Character ID is not a string" });
   }
 
-  const resolvedLocale = await resolveLocale(request);
-  const character = await getCharacterById(params.id, {
-    langs: [resolvedLocale],
+  const characterData = await getCharacterById(params.id, {
+    langs: ["en"],
   });
 
-  if (!character) {
+  if (!characterData) {
     throw notFound({ code: "character.notfound", message: "Character not found" });
   }
 
-  if (!character.identity.some((cid) => cid.lang === resolvedLocale)) {
-    throw notFound({
-      code: "untranslated",
-      message: "This page is not available in your language, please, try checking English",
-    });
-  }
+  const { constellations, identity: identities, ...character } = characterData;
+  const identity = identities.find((entry) => entry.lang === "en");
 
-  return { character };
+  // english is forced
+  // if (!identity) {
+  // throw notFound({
+  // code: "untranslated",
+  // message: "This page is not available in your language, please, try checking English",
+  // });
+  // }
+
+  return { character, constellations, identity };
 };
 
 export type Loader = SerializeFrom<typeof loader>;
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  if (!data?.character || !data?.character.identity) return { title: "Error" };
+  if (!data?.character || !data?.identity) return { title: "Error" };
+
+  const imageUrl =
+    data.character.assets.find((asset) => asset.type === "ICON")?.url ??
+    `/img/characters/${data.character.id}/icon.webp`;
 
   return generateMeta({
-    title: data.character.identity.at(0)?.name,
-    description: data.character.identity.at(0)?.description,
-    imageUrl: `/img/characters/${data.character.id}/icon.webp`,
+    title: data.identity.name,
+    description: data.identity.description,
+    imageUrl,
     themeColor: data.character.accentColor,
   });
 };
@@ -70,22 +75,20 @@ const links = [
 
 export interface ContextType {
   data: Loader["character"];
-  identity: Loader["character"]["identity"][number];
-  constellations: Loader["character"]["constellations"];
+  identity: Loader["identity"];
+  constellations: Loader["constellations"];
 }
 
 const CharactersIdRoute = () => {
   const t = useTranslations();
-  const locale = useVisitorLocale();
   const { search } = useLocation();
 
-  const { character } = useLoaderData() as Loader;
-  const identity = character.identity.find((record) => record.lang === locale);
+  const { character, identity, constellations } = useLoaderData() as Loader;
 
   const outletContext = {
     data: character,
-    identity: identity as NonNullable<typeof identity>,
-    constellations: character.constellations,
+    identity: identity,
+    constellations: constellations,
   } as ContextType; // once TS4.9 is supported in ESLint, should replace with satisfies
 
   const outlet = useOutlet(outletContext);
