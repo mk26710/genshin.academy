@@ -1,4 +1,10 @@
-import type { ActionArgs, LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
+import type {
+  ActionArgs,
+  HeadersFunction,
+  LoaderArgs,
+  MetaFunction,
+  SerializeFrom,
+} from "@remix-run/node";
 import type { ZodError } from "zod";
 import type { TypedErrorResponse } from "~/utils/responses.server";
 
@@ -26,8 +32,13 @@ import { requireUser, authorizeUser } from "~/utils/session.server";
 export const meta: MetaFunction = () => {
   return generateMeta({
     title: "File Manager",
+    noIndex: true,
   });
 };
+
+export const headers: HeadersFunction = () => ({
+  "X-Robots-Tag": "noindex",
+});
 
 export const loader = async ({ request }: LoaderArgs) => {
   await authorizeUser(request, (user) =>

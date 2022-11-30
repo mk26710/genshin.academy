@@ -1,4 +1,4 @@
-import type { LoaderArgs } from "@remix-run/node";
+import type { HeadersFunction, LoaderArgs } from "@remix-run/node";
 
 import { Link, useCatch } from "@remix-run/react";
 
@@ -7,6 +7,10 @@ import { getUserByDiscordAccount } from "~/models/user.server";
 import { exchageDiscordCode, getDiscordAccount } from "~/utils/oauth/discord.server";
 import { badRequest, unauthorized } from "~/utils/responses.server";
 import { createUserSession } from "~/utils/session.server";
+
+export const headers: HeadersFunction = () => ({
+  "X-Robots-Tag": "noindex",
+});
 
 export async function loader({ request }: LoaderArgs) {
   const url = new URL(request.url);

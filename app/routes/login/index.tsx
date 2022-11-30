@@ -1,4 +1,4 @@
-import type { ActionArgs, LoaderArgs, MetaFunction } from "@remix-run/node";
+import type { ActionArgs, HeadersFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
 import type { RouteHandle } from "~/types/common";
 
 import { json, redirect } from "@remix-run/node";
@@ -15,6 +15,10 @@ export const handle: RouteHandle = {
   id: "login",
   withScrollRestoration: true,
 };
+
+export const headers: HeadersFunction = () => ({
+  "X-Robots-Tag": "noindex",
+});
 
 export async function loader({ request }: LoaderArgs) {
   const userId = await getUserId(request);

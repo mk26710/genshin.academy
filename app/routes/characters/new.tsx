@@ -1,4 +1,4 @@
-import type { ActionArgs, LoaderArgs, MetaFunction } from "@remix-run/node";
+import type { ActionArgs, HeadersFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
 import type { TypedErrorResponse } from "~/utils/responses.server";
 
 import { GenshinVision, GenshinWeapon, PermissionFlag } from "@prisma/client";
@@ -18,8 +18,13 @@ export const meta: MetaFunction<typeof loader> = () => {
   return generateMeta({
     title: "New Character",
     description: "Create a new character data entry",
+    noIndex: true,
   });
 };
+
+export const headers: HeadersFunction = () => ({
+  "X-Robots-Tag": "noindex",
+});
 
 export async function loader({ request }: LoaderArgs) {
   await authorizeUser(request, async (user) =>

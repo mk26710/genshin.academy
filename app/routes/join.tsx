@@ -1,4 +1,4 @@
-import type { ActionArgs, LoaderArgs, MetaFunction } from "@remix-run/node";
+import type { ActionArgs, HeadersFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
 import type { RouteHandle } from "~/types/common";
 
 import { json, redirect } from "@remix-run/node";
@@ -9,11 +9,23 @@ import { Container } from "~/components/Container";
 import { createUser, getUserByName } from "~/models/user.server";
 import { UserNameAndPassword } from "~/schemas/user.server";
 import { safeRedirect } from "~/utils/helpers";
+import { generateMeta } from "~/utils/meta-generator";
 import { getUserId, createUserSession } from "~/utils/session.server";
 
 export const handle: RouteHandle = {
   id: "join",
   withScrollRestoration: true,
+};
+
+export const headers: HeadersFunction = () => ({
+  "X-Robots-Tag": "noindex",
+});
+
+export const meta: MetaFunction = () => {
+  return generateMeta({
+    title: "Registration",
+    noIndex: true,
+  });
 };
 
 export async function loader({ request }: LoaderArgs) {
@@ -67,12 +79,6 @@ export async function action({ request }: ActionArgs) {
     redirectTo,
   });
 }
-
-export const meta: MetaFunction = () => {
-  return {
-    title: "Sign Up",
-  };
-};
 
 export default function Join() {
   const [searchParams] = useSearchParams();

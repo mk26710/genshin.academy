@@ -1,8 +1,12 @@
-import type { ActionArgs, ActionFunction } from "@remix-run/node";
+import type { ActionArgs, ActionFunction, HeadersFunction } from "@remix-run/node";
 
 import { Response } from "@remix-run/node";
 
 import { logout } from "~/utils/session.server";
+
+export const headers: HeadersFunction = () => ({
+  "X-Robots-Tag": "noindex",
+});
 
 export const action: ActionFunction = async ({ request }: ActionArgs) => {
   return logout(request, null);
