@@ -38,9 +38,9 @@
   }
 
   .dark .markdown-content details {
-    color: theme("colors.neutral.200");
-    background-color: theme("colors.neutral.800");
-    border-color: theme("colors.neutral.600");
+    color: theme("colors.dark.200");
+    background-color: theme("colors.dark.600");
+    border-color: theme("colors.dark.600");
     border-left-width: 0;
     border-top-width: 0;
     border-bottom-width: 0;
@@ -50,7 +50,7 @@
   }
 
   .dark .markdown-content details:hover {
-    background-color: theme("colors.neutral.700");
+    background-color: theme("colors.dark.500");
   }
 
   .markdown-content details summary {

@@ -50,7 +50,9 @@ export const CharacterCard: FunctionComponent<Props> = ({ character, className }
         </div>
 
         <div className="flex h-full w-full items-center justify-center py-1 text-[.9rem] font-semibold">
-          <p className="p-1 text-center leading-none">{character.identity.at(0)?.name}</p>
+          <p className="p-1 text-center leading-none dark:text-dark-100">
+            {character.identity.at(0)?.name}
+          </p>
         </div>
       </Paper>
     </div>

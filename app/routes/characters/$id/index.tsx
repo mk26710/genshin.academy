@@ -25,9 +25,9 @@ export default function CharacterOverview() {
         <img src={gachaIcon} className="block h-auto w-auto lg:hidden" />
         <span className="flex flex-row items-center justify-center gap-2 lg:items-start lg:justify-start">
           <img src={elementIcon} alt={data.vision + " icon"} className="h-8 w-8 object-cover" />
-          <h2 className="text-4xl font-semibold ">{identity.name}</h2>
+          <h2 className="text-4xl font-semibold dark:text-dark-50">{identity?.name}</h2>
         </span>
-        <p className="mt-4">{identity.description}</p>
+        <p className="mt-4">{identity?.description}</p>
 
         <div className="mt-6 grid grid-flow-dense auto-rows-min grid-cols-1 gap-2 xs:grid-cols-2 md:grid-cols-3">
           <div className="flex items-center gap-2">

@@ -47,10 +47,13 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-thumb {
-  border-width: 4px;
+  border-width: 0px;
   border-radius: 4px;
-  border-color: black;
   background-color: rgba(0, 0, 0, 0.125);
+}
+
+.dark body::-webkit-scrollbar-thumb {
+  background-color: theme(colors.dark.600);
 }
 
 body::-webkit-scrollbar-track {
@@ -68,13 +71,13 @@ body::-webkit-scrollbar-track {
 @layer base {
   .app {
     min-height: 100vh;
-    background-color: white;
+    background-color: theme(colors.gray.50);
     color: black;
   }
 
   .dark .app {
     background-color: theme(colors.dark.700);
-    color: theme(colors.neutral.100);
+    color: theme(colors.dark.100);
   }
 
   .header {
@@ -93,7 +96,7 @@ body::-webkit-scrollbar-track {
   .dark .header {
     @apply backdrop-blur-lg;
 
-    background: theme("colors.neutral.900" / 90%);
+    background: theme(colors.dark.700 / 90%);
     color: theme("colors.neutral.50");
     border-color: theme("colors.neutral.800");
   }

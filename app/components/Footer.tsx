@@ -10,7 +10,7 @@ export const Footer: FC = () => {
   const t = useTranslations();
 
   return (
-    <footer className="footer bg-gray-50 shadow-inner">
+    <footer className="footer bg-white shadow-inner dark:bg-dark-800">
       <div className="mx-auto grid w-full max-w-[var(--max-content-width)] grid-cols-1 grid-rows-[auto_auto] px-[var(--default-gap)] py-8 text-sm text-gray-600 lg:grid-cols-[1fr_auto]">
         <p>
           {t.rich("footer.affiliation", {

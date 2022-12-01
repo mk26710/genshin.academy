@@ -9,7 +9,10 @@
 
     border-width: 1px;
     border-radius: 6px;
-    border-color: var(--default-border-color);
+    border-color: theme(colors.gray.300);
+
+    box-shadow: rgb(0 0 0 / 5%) 0px 1px 3px, rgb(0 0 0 / 5%) 0px 10px 15px -5px,
+      rgb(0 0 0 / 4%) 0px 7px 7px -5px;
 
     padding-left: 16px;
     padding-right: 16px;
@@ -18,22 +21,42 @@
 
     break-inside: avoid;
 
+    background-color: white;
+
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
     transition-duration: 100ms;
   }
 
-  .dark .paper { 
-    border-color: theme(colors.neutral.700);
-    background-color: theme(colors.neutral.800);
+  .dark .paper {
+    border-color: theme(colors.dark.400);
+    background-color: theme(colors.dark.600);
   }
 
   .checkbox {
     @apply form-checkbox;
 
-    border-radius: 6px;
+    border-radius: 4px;
     height: 24px;
     width: 24px;
+    background-color: transparent;
+    outline: unset;
+  }
+
+  .checkbox:focus,
+  .checkbox:focus-visible,
+  .checkbox:focus-within {
+    box-shadow: none;
+  }
+
+  .dark .checkbox {
+    border-color: theme(colors.dark.400);
+    background-color: theme(colors.dark.500);
+  }
+
+  .dark .checkbox:checked {
+    background-color: theme(colors.primary.500);
+    border-color: theme(colors.primary.500);
   }
 
   .button {
@@ -66,13 +89,14 @@
     transform: translateY(1px);
   }
 
-  .button:disabled, .button:disabled:hover {
+  .button:disabled,
+  .button:disabled:hover {
     --bg-color: theme(colors.neutral.200);
     color: theme(colors.neutral.400);
   }
 
   .button:disabled {
-    transform: none ;
+    transform: none;
   }
 
   .button-neutral {
@@ -110,7 +134,13 @@
     background-color: white;
   }
 
-  .input:focus, .input:focus-visible {
+  .dark .input {
+    border-color: theme(colors.dark.500);
+    background-color: theme(colors.dark.500);
+  }
+
+  .input:focus,
+  .input:focus-visible {
     outline: 0;
     border-color: theme(colors.primary.500);
   }

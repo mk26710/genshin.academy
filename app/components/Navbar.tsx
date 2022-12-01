@@ -57,7 +57,7 @@ export function Navbar() {
   const visitorLocale = useVisitorLocale();
 
   return (
-    <nav className="sticky top-0 z-50 h-[var(--header-height)] border-b border-gray-300 bg-white text-sm">
+    <nav className="sticky top-0 z-50 h-[var(--header-height)] border-b border-gray-300 bg-white text-sm dark:border-none dark:bg-dark-800  ">
       <div className="relative mx-auto flex h-full w-full max-w-[var(--max-content-width)] flex-row">
         <div className="flex h-full flex-1  lg:hidden">
           <Menu>
@@ -109,7 +109,9 @@ export function Navbar() {
                 className={({ isActive }) =>
                   clsx(
                     "self-center rounded-md py-1.5 px-3.5  font-semibold",
-                    isActive ? "bg-neutral-100 text-black" : "text-neutral-600",
+                    isActive
+                      ? "bg-neutral-100 text-black dark:bg-dark-600 dark:text-dark-100"
+                      : "text-neutral-600 dark:text-dark-200",
                   )
                 }
               >
