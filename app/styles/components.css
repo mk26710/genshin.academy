@@ -157,4 +157,50 @@
     padding-right: 30px;
     background-color: white;
   }
+
+  .button-base {
+    @apply active:translate-y-[1px];
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-style: solid;
+    font-weight: 600;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height: 36px;
+  }
+
+  .button-base:disabled {
+    background-color: theme(colors.gray.300) !important;
+    color: theme(colors.gray.600) !important;
+    cursor: not-allowed;
+  }
+
+  .dark .button-base:disabled {
+    background-color: theme(colors.gray.800) !important;
+    color: theme(colors.gray.900) !important;
+    cursor: not-allowed;
+  }
+
+  .button-red-base {
+    @apply border-red-500 bg-red-500 hover:border-red-600 hover:bg-red-600;
+  }
+
+  .button-blue-base {
+    @apply border-blue-500 bg-blue-500 hover:border-blue-600 hover:bg-blue-600;
+  }
+
+  .button-green-base {
+    @apply border-green-600 bg-green-600 hover:border-green-700 hover:bg-green-700;
+  }
+
+  .button-semiblack-base {
+    @apply border-gray-700 bg-gray-700 hover:border-gray-800 hover:bg-gray-800;
+  }
+
+  .button-primary-base {
+    @apply border-primary-500 bg-primary-500 hover:border-primary-600 hover:bg-primary-600;
+  }
 }
