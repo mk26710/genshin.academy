@@ -9,11 +9,15 @@ import { Paper } from "~/components/Paper";
 type BirthdayCardProps = {
   id: GenshinCharacter["id"];
   name: GenshinCharacterIdentity["name"];
+  iconUrl?: string;
 };
 
-export const BirthdayCard: FunctionComponent<BirthdayCardProps> = ({ id, name }) => {
+export const BirthdayCard: FunctionComponent<BirthdayCardProps> = ({
+  id,
+  name,
+  iconUrl = `/img/characters/${id}/icon.webp`,
+}) => {
   const t = useTranslations();
-  const iconUrl = `/img/characters/${id}/icon.webp`;
 
   return (
     <Paper

@@ -63,8 +63,13 @@ const IndexRoute = () => {
         )}
 
         {charactersWithBirthdays.map((c) => (
-          // @ts-expect-error - character identity always has at least one element
-          <BirthdayCard key={c.id} id={c.id} name={c.identity.at(0).name} />
+          <BirthdayCard
+            key={c.id}
+            id={c.id}
+            // @ts-expect-error - has at least one element in the array
+            name={c.identity.at(0)?.name}
+            iconUrl={c.assets.find((asset) => asset.type === "ICON")?.url}
+          />
         ))}
       </div>
     </Container>
