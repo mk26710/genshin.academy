@@ -50,7 +50,7 @@ export function CatchBoundary() {
       <h1 className="text-4xl font-bold">{caught.status}</h1>
       <h4 className="opacity-70">{caught.statusText ?? caught.data}</h4>
 
-      <Link to="/login" role="button" className="button mt-4">
+      <Link to="/login" role="button" className="mt-4">
         Back to login
       </Link>
     </Container>

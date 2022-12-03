@@ -5,6 +5,7 @@ import { json, redirect } from "@remix-run/node";
 import { Form, Link, useActionData, useLoaderData, useSearchParams } from "@remix-run/react";
 import * as React from "react";
 
+import { Button } from "~/components/Button";
 import { Container } from "~/components/Container";
 import { verifyLogin } from "~/models/user.server";
 import { safeRedirect } from "~/utils/helpers";
@@ -144,14 +145,20 @@ export default function LoginPage() {
           </div>
 
           <input type="hidden" name="redirectTo" value={redirectTo} />
-          <button type="submit" className="button w-full">
+          <Button variant="light" color="primary" type="submit" className="w-full">
             Log in
-          </button>
+          </Button>
 
           <div>
-            <button type="button" onClick={redirectToDiscord} className="button w-full">
+            <Button
+              variant="light"
+              color="primary"
+              type="button"
+              onClick={redirectToDiscord}
+              className="w-full"
+            >
               Login with Discord
-            </button>
+            </Button>
           </div>
 
           <div className="flex items-center justify-between">

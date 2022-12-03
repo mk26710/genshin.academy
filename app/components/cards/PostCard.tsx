@@ -4,6 +4,7 @@ import type { FunctionComponent } from "react";
 import { Link } from "@remix-run/react";
 import { useTranslations } from "use-intl";
 
+import { Button } from "~/components/Button";
 import { Paper } from "~/components/Paper";
 
 type PostCardProps = Pick<Post, "slug" | "thumbnailUrl" | "title" | "description" | "publishedAt">;
@@ -32,9 +33,9 @@ export const PostCard: FunctionComponent<PostCardProps> = ({
       )}
       <h3 className="mt-2 px-4 text-xl font-semibold dark:text-white">{title}</h3>
       <p className="mb-2 px-4 text-sm hyphens-auto">{description}</p>
-      <button className="button mx-4 mb-4 border-none bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-600/30 dark:text-blue-200 dark:hover:bg-blue-600/40">
+      <Button variant="light" color="primary" className="mx-4 mb-4">
         {t("common.read")}
-      </button>
+      </Button>
     </Paper>
   );
 };

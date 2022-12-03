@@ -9,6 +9,7 @@ import { useFetcher, useOutletContext } from "@remix-run/react";
 import clsx from "clsx";
 import { useEffect, useMemo, useState } from "react";
 
+import { Button } from "~/components/Button";
 import { prisma } from "~/db/prisma.server";
 import { UserPermissions } from "~/schemas/user.server";
 import {
@@ -136,9 +137,9 @@ export default function YashiroUsersSlugPermissions() {
           </button>
         ))}
 
-        <button onClick={save} className="button mt-2 w-full self-end">
+        <Button variant="filled" color="semiblack" onClick={save} className="mt-2 w-full self-end">
           Save
-        </button>
+        </Button>
       </div>
     </div>
   );

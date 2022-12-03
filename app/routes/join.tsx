@@ -5,6 +5,7 @@ import { json, redirect } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import * as React from "react";
 
+import { Button } from "~/components/Button";
 import { Container } from "~/components/Container";
 import { createUser, getUserByName } from "~/models/user.server";
 import { UserNameAndPassword } from "~/schemas/user.server";
@@ -140,9 +141,9 @@ export default function Join() {
           </div>
 
           <input type="hidden" name="redirectTo" value={redirectTo} />
-          <button type="submit" className="button w-full">
+          <Button color="primary" variant="light" type="submit" className="w-full">
             Create Account
-          </button>
+          </Button>
           <div className="flex justify-end">
             <div className="text-center text-sm text-gray-500">
               <Link

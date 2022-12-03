@@ -7,6 +7,7 @@ import { redirect, json } from "@remix-run/node";
 import { Link, useFetcher, useLoaderData } from "@remix-run/react";
 import { useTranslations } from "use-intl";
 
+import { Button } from "~/components/Button";
 import { Container } from "~/components/Container";
 import { RouteLevelCatchBoundary } from "~/components/RouteLevelCatchBoundary";
 import { UserAvatar } from "~/components/UserAvatar";
@@ -142,20 +143,17 @@ const PostControls: FunctionComponent<PostControlsProps> = ({ canEdit, canDelete
   return (
     <div className="flex flex-row flex-wrap gap-2">
       {canEdit && (
-        <Link to="./edit" role="button" className="button flex items-center justify-center gap-3">
+        <Button as={Link} color="semiblack" to="./edit" role="button" className="gap-3">
           <PencilIcon className="h-5 w-5" />
           <span>Edit</span>
-        </Link>
+        </Button>
       )}
 
       {canDelete && (
-        <button
-          onClick={handleDeleteClick}
-          className="button button-danger flex items-center justify-center gap-3"
-        >
+        <Button variant="filled" color="red" onClick={handleDeleteClick} className="gap-3">
           <TrashIcon className="h-5 w-5" />
           <span>Delete</span>
-        </button>
+        </Button>
       )}
     </div>
   );

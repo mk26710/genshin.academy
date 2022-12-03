@@ -12,6 +12,7 @@ import {
 import { Form, Link, useActionData } from "@remix-run/react";
 import { useEffect } from "react";
 
+import { Button } from "~/components/Button";
 import { Container } from "~/components/Container";
 import { Input } from "~/components/Input";
 import { Paper } from "~/components/Paper";
@@ -109,9 +110,9 @@ export default function FilesNew() {
           <Input name="tags" fullWidth />
         </div>
 
-        <button className="button" type="submit">
+        <Button variant="light" color="green" type="submit">
           Upload
-        </button>
+        </Button>
       </Paper>
     </Container>
   );

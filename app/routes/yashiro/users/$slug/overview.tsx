@@ -8,6 +8,7 @@ import { redirect, json } from "@remix-run/node";
 import { Form, useActionData, useOutletContext } from "@remix-run/react";
 import { useRef, useEffect, useState } from "react";
 
+import { Button } from "~/components/Button";
 import { prisma } from "~/db/prisma.server";
 import { deleteUserById, getUserById } from "~/models/user.server";
 import { isNil, orUndefined, stringOrUndefined } from "~/utils/helpers";
@@ -313,7 +314,11 @@ export default function YashiroUsersSlugRoute() {
             defaultValue={orUndefined(user.flair?.fgColor)}
           />
         </div>
-        {madeChanges && <button className="button mt-4 md:col-span-2 lg:col-span-3">Save</button>}
+        {madeChanges && (
+          <Button color="semiblack" variant="filled" className="mt-4 md:col-span-2 lg:col-span-3">
+            Save
+          </Button>
+        )}
       </Form>
     </div>
   );

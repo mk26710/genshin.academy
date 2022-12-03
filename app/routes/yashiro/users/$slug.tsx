@@ -4,6 +4,7 @@ import type { ThrownErrorResponse } from "~/utils/responses.server";
 
 import { NavLink, useCatch, useLoaderData, useOutlet } from "@remix-run/react";
 
+import { Button } from "~/components/Button";
 import { Container } from "~/components/Container";
 import { UserAvatar } from "~/components/UserAvatar";
 import { getUserByNameOrId } from "~/models/user.server";
@@ -95,9 +96,9 @@ export default function YashiroUsersSlugLayoutRoute() {
             className="aspect-square h-32 w-32 self-center border border-[var(--default-border-color)]"
           />
           <h3 className="self-center text-lg font-bold">{user.name}</h3>
-          <button className="button border-red-600 bg-red-600 hover:text-red-600">
+          <Button color="red" variant="light">
             Delete User (no workie)
-          </button>
+          </Button>
         </div>
 
         {outlet}

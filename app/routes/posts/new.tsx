@@ -5,6 +5,7 @@ import { PostType } from "@prisma/client";
 import { redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 
+import { Button } from "~/components/Button";
 import { Container } from "~/components/Container";
 import { UserAvatar } from "~/components/UserAvatar";
 import { useUser } from "~/hooks/use-user";
@@ -186,9 +187,9 @@ const PostsNewRoute = () => {
           {issueOf("text") && <div className="pt-1 text-red-700">{issueOf("text")?.message}</div>}
         </div>
 
-        <button type="submit" className="button">
+        <Button color="green" variant="light" type="submit">
           Submit
-        </button>
+        </Button>
       </Form>
     </Container>
   );

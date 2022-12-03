@@ -13,6 +13,7 @@ import {
 import clsx from "clsx";
 import { useTranslations } from "use-intl";
 
+import { Button } from "~/components/Button";
 import { Container } from "~/components/Container";
 import { Paper } from "~/components/Paper";
 import { getCharacterById } from "~/models/characters.server";
@@ -139,9 +140,9 @@ export const CatchBoundary = () => {
         <p className="opacity-70">{caught.data?.message || caught.statusText}</p>
 
         {caught?.data?.code === "untranslated" && (
-          <button className="button mt-6" onClick={handleViewInEnglish}>
+          <Button color="primary" variant="light" className="mt-6" onClick={handleViewInEnglish}>
             {t("common.view-in-english")}
-          </button>
+          </Button>
         )}
       </div>
     </Container>

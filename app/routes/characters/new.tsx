@@ -5,6 +5,7 @@ import { GenshinVision, GenshinWeapon, PermissionFlag } from "@prisma/client";
 import { redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
 
+import { Button } from "~/components/Button";
 import { Container } from "~/components/Container";
 import { Input } from "~/components/Input";
 import { prisma } from "~/db/prisma.server";
@@ -203,9 +204,9 @@ export default function CharacterNew() {
           <Input id="character.cardUrl" name="character.cardUrl" fullWidth required />
         </div>
 
-        <button type="submit" className="button mt-6 w-full">
+        <Button variant="light" color="primary" type="submit" className="mt-6 w-full">
           Send
-        </button>
+        </Button>
       </Form>
     </Container>
   );

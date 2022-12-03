@@ -6,6 +6,7 @@ import { json } from "@remix-run/node";
 import { useFetcher, useOutletContext } from "@remix-run/react";
 import { useEffect, useState } from "react";
 
+import { Button } from "~/components/Button";
 import { Checkbox } from "~/components/Checkbox";
 import { Input } from "~/components/Input";
 import { z } from "~/lib/zod.server";
@@ -66,9 +67,9 @@ export default function UserPassword() {
           </div>
         </div>
 
-        <button type="submit" className="button">
+        <Button variant="filled" color="semiblack" type="submit">
           Save
-        </button>
+        </Button>
       </fetcher.Form>
     </div>
   );

@@ -24,6 +24,7 @@ import { useEffect, useState } from "react";
 import { IntlProvider } from "use-intl";
 
 import { colorSchemeAtom, rawColorSchemeAtom } from "~/atoms/color-scheme";
+import { Button } from "~/components/Button";
 import { Container } from "~/components/Container";
 import { Footer } from "~/components/Footer";
 import { Navbar } from "~/components/Navbar";
@@ -171,16 +172,16 @@ export function CatchBoundary() {
 
               <div className="flex flex-col items-center justify-center gap-2 md:flex-row ">
                 {caught?.data?.code == null && (
-                  <Link to="/" role="button" className="button w-fit text-center">
+                  <Link to="/" role="button" className="w-fit text-center">
                     Go to home page
                   </Link>
                 )}
 
                 {caught?.data?.code === "user.disabled" && (
                   <Form action="/logout" method="post">
-                    <button type="submit" className="button w-fit text-center">
+                    <Button type="submit" className="w-fit text-center">
                       Log Out
-                    </button>
+                    </Button>
                   </Form>
                 )}
               </div>

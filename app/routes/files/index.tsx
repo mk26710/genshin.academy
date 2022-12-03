@@ -16,6 +16,7 @@ import { useAtom } from "jotai";
 import { useResetAtom, atomWithReset } from "jotai/utils";
 import { useEffect, useId, useState } from "react";
 
+import { Button } from "~/components/Button";
 import { Checkbox } from "~/components/Checkbox";
 import { Container } from "~/components/Container";
 import { prisma } from "~/db/prisma.server";
@@ -141,15 +142,16 @@ const FileRow = ({ file }: FileRowProps) => {
           <Dialog.Panel className="flex flex-col items-center justify-center gap-2">
             <img src={file.url} className="max-h-[calc(80vh)] max-w-screen-xl" />
 
-            <button
-              className="button"
+            <Button
+              variant="light"
+              color="primary"
               onClick={() => {
                 if (typeof navigator === "undefined") return;
                 navigator.clipboard.writeText(file.url);
               }}
             >
               Copy URL
-            </button>
+            </Button>
           </Dialog.Panel>
         </Dialog>
       </td>
@@ -235,25 +237,25 @@ export default function Files() {
     <Container className="max-w-screen-md">
       <div className="flex flex-row gap-4">
         <div className="flex flex-1 flex-row items-center gap-2">
-          <button className="button" onClick={previousPage}>
+          <Button color="semiblack" onClick={previousPage}>
             prev
-          </button>
+          </Button>
           <span>{page} / ?</span>
-          <button className="button" onClick={nextPage}>
+          <Button color="semiblack" onClick={nextPage}>
             next
-          </button>
+          </Button>
         </div>
 
         <div className="flex flex-row gap-2">
           {selectedFileIds.length > 0 && (
-            <button className="button-danger" onClick={deleteSelectedFiles}>
+            <Button color="red" onClick={deleteSelectedFiles}>
               Delete Selected
-            </button>
+            </Button>
           )}
 
-          <Link to="/files/upload" className="button" role="button">
+          <Button color="semiblack" as={Link} to="/files/upload" role="button">
             Upload
-          </Link>
+          </Button>
         </div>
       </div>
 
