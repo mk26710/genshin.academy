@@ -11,7 +11,7 @@ import { Checkbox } from "~/components/Checkbox";
 import { Input } from "~/components/Input";
 import { z } from "~/lib/zod.server";
 import { changePasswordOfUser, getUserById } from "~/models/user.server";
-import { UserPassword as PasswordValidator } from "~/schemas/user.server";
+import { PasswordSchema as PasswordValidator } from "~/schemas/user.server";
 import { validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { badRequest, notFound } from "~/utils/responses.server";
 import { authorizeUser } from "~/utils/session.server";
