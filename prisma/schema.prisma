@@ -223,7 +223,11 @@ enum Weapon {
 }
 
 enum Association {
+  MONDSTADT
   LIYUE
+  INAZUMA
+  SUMERU
+  SNEZHNAYA
 
   @@map("TeyvatAssociation")
 }
