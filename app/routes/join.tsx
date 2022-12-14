@@ -3,7 +3,7 @@ import type { RouteHandle } from "~/types/common";
 
 import { json, redirect } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
-import * as React from "react";
+import { useRef } from "react";
 
 import { Button } from "~/components/Button";
 import { Container } from "~/components/Container";
@@ -11,6 +11,7 @@ import { createUser, getUserByName } from "~/models/user.server";
 import { UserNameAndPassword } from "~/schemas/user.server";
 import { safeRedirect } from "~/utils/helpers";
 import { generateMeta } from "~/utils/meta-generator";
+import { badRequest } from "~/utils/responses.server";
 import { getUserId, createUserSession } from "~/utils/session.server";
 
 export const handle: RouteHandle = {
@@ -39,36 +40,32 @@ export async function action({ request }: ActionArgs) {
   const formData = await request.formData();
   const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
 
-  const safeParse = await UserNameAndPassword.safeParseAsync({
+  const validation = await UserNameAndPassword.safeParseAsync({
     name: formData.get("name"),
     password: formData.get("password"),
   });
 
-  if (!safeParse.success) {
-    return json(
-      {
-        errors: {
-          name: safeParse.error.format().name?._errors.at(0),
-          password: safeParse.error.format().password?._errors.at(0),
-        },
+  if (!validation.success) {
+    const formatted = validation.error.format();
+
+    return badRequest({
+      errors: {
+        name: formatted.name?._errors.map((s) => `\u2022 ${s}`).join("\n"),
+        password: formatted.password?._errors.map((s) => `\u2022 ${s}`).join("\n"),
       },
-      { status: 400 },
-    );
+    });
   }
 
-  const { name, password } = safeParse.data;
+  const { name, password } = validation.data;
 
   const existingUser = await getUserByName(name);
   if (existingUser) {
-    return json(
-      {
-        errors: {
-          name: "A user already exists with this name",
-          password: null,
-        },
+    return badRequest({
+      errors: {
+        name: "\u2022 This name is already taken.",
+        password: null,
       },
-      { status: 400 },
-    );
+    });
   }
 
   const user = await createUser(name, password);
@@ -82,16 +79,18 @@ export async function action({ request }: ActionArgs) {
 }
 
 export default function Join() {
+  const actionData = useActionData<typeof action>();
+
   const [searchParams] = useSearchParams();
   const redirectTo = searchParams.get("redirectTo") ?? undefined;
-  const actionData = useActionData<typeof action>();
-  const nameRef = React.useRef<HTMLInputElement>(null);
-  const passwordRef = React.useRef<HTMLInputElement>(null);
+
+  const nameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   return (
     <Container className="flex items-center justify-center">
       <div className="w-full max-w-md px-8">
-        <Form method="post" className="space-y-6">
+        <Form encType="multipart/form-data" method="post" className="space-y-6">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">
               Username
@@ -110,7 +109,7 @@ export default function Join() {
                 className="input-field w-full"
               />
               {actionData?.errors?.name && (
-                <div className="pt-1 text-red-700" id="name-error">
+                <div className="whitespace-pre-line pt-1 text-red-700" id="name-error">
                   {actionData.errors.name}
                 </div>
               )}
@@ -133,7 +132,7 @@ export default function Join() {
                 className="input-field w-full"
               />
               {actionData?.errors?.password && (
-                <div className="pt-1 text-red-700" id="password-error">
+                <div className="whitespace-pre-line pt-1 text-red-700" id="password-error">
                   {actionData.errors.password}
                 </div>
               )}
