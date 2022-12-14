@@ -23,7 +23,6 @@ import { prisma } from "~/db/prisma.server";
 import { useAfterHydration } from "~/hooks/use-hydrated";
 import { useVisitorLocale } from "~/hooks/use-visitor-locale";
 import { z } from "~/lib/zod.server";
-import { UIntNumericString } from "~/schemas/common.server";
 import { generateMeta } from "~/utils/meta-generator";
 import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { forbidden, badRequest } from "~/utils/responses.server";
@@ -48,10 +47,10 @@ export const loader = async ({ request }: LoaderArgs) => {
 
   const url = new URL(request.url);
 
-  const pageParse = UIntNumericString.refine(
-    (val) => val > 0,
-    "Provided value must be greater than 0",
-  ).safeParse(url.searchParams.get("page") ?? "1");
+  const pageParse = z.coerce
+    .number()
+    .min(1)
+    .safeParse(url.searchParams.get("page") ?? "1");
 
   if (!pageParse.success) {
     throw badRequest({ message: "Invalid page value" });
