@@ -1,19 +1,22 @@
+import type { CharacterAsset, Element as TeyvatElement } from "@prisma/client";
 import type { FunctionComponent } from "react";
-import type { getCharactersList } from "~/models/characters.server";
 
 import { Link } from "@remix-run/react";
 
 import { Paper } from "~/components/Paper";
 import { StaticPicture } from "~/components/StaticPicture";
 
-type CharacterListEntry = Awaited<ReturnType<typeof getCharactersList>>[number];
 interface Props {
-  character: CharacterListEntry;
   className?: string;
+  id: string;
+  name: string;
+  element: TeyvatElement | null;
+  rarity: number;
+  assets: CharacterAsset[];
 }
 
-export const CharacterCard: FunctionComponent<Props> = ({ character, className }) => {
-  const elementSrc = `/img/elements/${character.vision.toLowerCase()}/icon.webp`;
+export const CharacterCard: FunctionComponent<Props> = ({ className, ...character }) => {
+  const elementSrc = `/img/elements/${character.element}/icon.webp`.toLowerCase();
 
   const iconObjectS3 = character.assets.find((entry) => entry.type === "ICON")?.url;
   const iconSrc = iconObjectS3 ?? `/img/characters/${character.id}/icon.webp`;
@@ -42,17 +45,11 @@ export const CharacterCard: FunctionComponent<Props> = ({ character, className }
           />
         </div>
         <div className={"aspect-square w-full rounded-t-lg bg-gradient-to-b " + iconBg()}>
-          <img
-            className="card-thumbnail"
-            src={iconSrc}
-            alt={`${character.identity.at(0)?.name} icon`}
-          />
+          <img className="card-thumbnail" src={iconSrc} alt={`${character.name} icon`} />
         </div>
 
         <div className="flex h-full w-full items-center justify-center py-1 text-[.9rem] font-semibold">
-          <p className="p-1 text-center leading-none dark:text-dark-100">
-            {character.identity.at(0)?.name}
-          </p>
+          <p className="p-1 text-center leading-none dark:text-dark-100">{character.name}</p>
         </div>
       </Paper>
     </div>

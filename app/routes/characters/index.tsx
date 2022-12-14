@@ -1,6 +1,5 @@
 import type { LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
 import type { ChangeEvent, FunctionComponent } from "react";
-import type { getCharactersList } from "~/models/characters.server";
 import type { RouteHandle } from "~/types/common";
 
 import { json } from "@remix-run/node";
@@ -18,8 +17,6 @@ import { CharacterCard } from "~/components/cards/CharacterCard";
 import { Checkbox } from "~/components/Checkbox";
 import { Container } from "~/components/Container";
 import { prisma } from "~/db/prisma.server";
-import { resolveLocale } from "~/utils/i18n.server";
-import { defaultLocale } from "~/utils/locales";
 
 export const handle: RouteHandle = {
   id: "characters",
@@ -32,38 +29,29 @@ export const meta: MetaFunction = ({}) => {
   };
 };
 
-type LoaderData = SerializeFrom<typeof loader>;
-
-export const loader = async ({ request }: LoaderArgs) => {
-  const locale = await resolveLocale(request);
-
-  const searchLocales = [...new Set([locale, defaultLocale])];
-
-  const characters = await prisma.genshinCharacter.findMany({
-    orderBy: {
-      id: "asc",
-    },
+export const loader = async ({}: LoaderArgs) => {
+  const characters = await prisma.characterInfo.findMany({
     include: {
-      assets: true,
-      constellations: {
-        where: {
-          lang: {
-            in: searchLocales,
-          },
+      details: {
+        include: {
+          assets: true,
         },
       },
-      identity: {
-        where: {
-          lang: {
-            in: searchLocales,
-          },
-        },
+    },
+    orderBy: [
+      {
+        name: "asc",
       },
+    ],
+    where: {
+      entryLanguage: "en",
     },
   });
 
   return json({ characters });
 };
+
+export type Loader = SerializeFrom<typeof loader>;
 
 const SearchAndFilter: FunctionComponent = () => {
   const t = useTranslations();
@@ -107,7 +95,7 @@ const SearchAndFilter: FunctionComponent = () => {
 };
 
 const CharactersIndex = () => {
-  const { characters } = useLoaderData() as LoaderData;
+  const { characters } = useLoaderData() as Loader;
 
   const [search] = useAtom(characterSearchAtom);
   const deferredSearch = useDeferredValue(search);
@@ -120,14 +108,13 @@ const CharactersIndex = () => {
   }, []);
 
   const filteredCharacters = characters
-    .sort((a, b) => b.rarity - a.rarity)
-    .filter((c) => c.identity.at(0)?.name.toLowerCase().includes(deferredSearch.toLowerCase()))
-    .reduce<Awaited<ReturnType<typeof getCharactersList>>>((acc, current) => {
-      if (!showFivestars && current.rarity === 5) {
+    .filter((c) => c.name.toLowerCase().includes(deferredSearch.toLowerCase()))
+    .reduce<Loader["characters"]>((acc, current) => {
+      if (!showFivestars && current.details.rarity === 5) {
         return acc;
       }
 
-      if (!showFourstars && current.rarity === 4) {
+      if (!showFourstars && current.details.rarity === 4) {
         return acc;
       }
 
@@ -140,7 +127,14 @@ const CharactersIndex = () => {
 
       <div className="mt-4 flex flex-row flex-wrap justify-evenly gap-4 md:justify-start">
         {filteredCharacters.map((c) => (
-          <CharacterCard key={c.id} character={c} />
+          <CharacterCard
+            key={c.details.id}
+            id={c.characterId}
+            name={c.name}
+            assets={c.details.assets}
+            element={c.details.element}
+            rarity={c.details.rarity}
+          />
         ))}
       </div>
     </Container>

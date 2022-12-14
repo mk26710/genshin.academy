@@ -16,7 +16,7 @@ import { useTranslations } from "use-intl";
 import { Button } from "~/components/Button";
 import { Container } from "~/components/Container";
 import { Paper } from "~/components/Paper";
-import { getCharacterById } from "~/models/characters.server";
+import { prisma } from "~/db/prisma.server";
 import { generateMeta } from "~/utils/meta-generator";
 import { notFound, serverError } from "~/utils/responses.server";
 
@@ -30,42 +30,43 @@ export const loader = async ({ params }: LoaderArgs) => {
     throw serverError({ message: "Character ID is not a string" });
   }
 
-  const characterData = await getCharacterById(params.id, {
-    langs: ["en"],
+  const info = await prisma.characterInfo.findUnique({
+    where: {
+      entryLanguage_characterId: {
+        entryLanguage: "en",
+        characterId: params.id,
+      },
+    },
+    include: {
+      details: {
+        include: {
+          assets: true,
+        },
+      },
+    },
   });
 
-  if (!characterData) {
+  if (!info) {
     throw notFound({ code: "character.notfound", message: "Character not found" });
   }
 
-  const { constellations, identity: identities, ...character } = characterData;
-  const identity = identities.find((entry) => entry.lang === "en");
-
-  // english is forced
-  // if (!identity) {
-  // throw notFound({
-  // code: "untranslated",
-  // message: "This page is not available in your language, please, try checking English",
-  // });
-  // }
-
-  return { character, constellations, identity };
+  return { info };
 };
 
 export type Loader = SerializeFrom<typeof loader>;
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  if (!data?.character || !data?.identity) return { title: "Error" };
+  if (!data?.info) return { title: "Error" };
 
   const imageUrl =
-    data.character.assets.find((asset) => asset.type === "ICON")?.url ??
-    `/img/characters/${data.character.id}/icon.webp`;
+    data.info.details.assets.find((asset) => asset.type === "ICON")?.url ??
+    `/img/characters/${data.info.characterId}/icon.webp`;
 
   return generateMeta({
-    title: data.identity.name,
-    description: data.identity.description,
+    title: data.info.name,
+    description: data.info.description ?? undefined,
     imageUrl,
-    themeColor: data.character.accentColor,
+    themeColor: "#" + data.info.details.accentColor.toString(16).padStart(6, "0"),
   });
 };
 
@@ -74,24 +75,15 @@ const links = [
   { href: "./constellations", i18n: "characters.constellations" },
 ];
 
-export interface ContextType {
-  data: Loader["character"];
-  identity: Loader["identity"];
-  constellations: Loader["constellations"];
-}
+export type ContextType = Loader;
 
 const CharactersIdRoute = () => {
   const t = useTranslations();
   const { search } = useLocation();
 
-  const { character, identity, constellations } = useLoaderData() as Loader;
+  const { info } = useLoaderData() as Loader;
 
-  const outletContext = {
-    data: character,
-    identity: identity,
-    constellations: constellations,
-  } as ContextType; // once TS4.9 is supported in ESLint, should replace with satisfies
-
+  const outletContext = { info } as ContextType; // once TS4.9 is supported in ESLint, should replace with satisfies
   const outlet = useOutlet(outletContext);
 
   return (

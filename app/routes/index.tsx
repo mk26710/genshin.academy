@@ -8,18 +8,15 @@ import { useEffect } from "react";
 import { BirthdayCard } from "~/components/cards/BirthdayCard";
 import { PostCard } from "~/components/cards/PostCard";
 import { Container } from "~/components/Container";
-import { getCharactersByBirthday } from "~/models/characters.server";
+import { prisma } from "~/db/prisma.server";
 import { getLatestPost } from "~/models/posts.server";
 import { resolveLocale } from "~/utils/i18n.server";
-import { defaultLocale } from "~/utils/locales";
 import { generateMeta } from "~/utils/meta-generator";
 
 export const handle: RouteHandle = {
   id: "home",
   withScrollRestoration: true,
 };
-
-type LoaderData = SerializeFrom<typeof loader>;
 
 export const loader = async ({ request }: LoaderArgs) => {
   const resolvedLocale = await resolveLocale(request);
@@ -30,12 +27,26 @@ export const loader = async ({ request }: LoaderArgs) => {
   const nowDay = now.getUTCDate();
   const nowMonth = now.getUTCMonth() + 1;
 
-  const charactersWithBirthdays = await getCharactersByBirthday(nowDay, nowMonth, {
-    langs: [resolvedLocale, defaultLocale],
+  const birthdays = await prisma.characterInfo.findMany({
+    include: {
+      details: {
+        include: {
+          assets: true,
+        },
+      },
+    },
+    where: {
+      details: {
+        birthDay: nowDay,
+        birthMonth: nowMonth,
+      },
+    },
   });
 
-  return json({ latestPost, charactersWithBirthdays });
+  return json({ latestPost, birthdays });
 };
+
+export type Loader = SerializeFrom<typeof loader>;
 
 export const meta: MetaFunction = () =>
   generateMeta({
@@ -43,10 +54,10 @@ export const meta: MetaFunction = () =>
   });
 
 const IndexRoute = () => {
-  const { latestPost, charactersWithBirthdays } = useLoaderData() as LoaderData;
+  const { latestPost, birthdays } = useLoaderData() as Loader;
 
   useEffect(() => {
-    console.log(charactersWithBirthdays);
+    console.log(birthdays);
   }, []);
 
   return (
@@ -62,13 +73,12 @@ const IndexRoute = () => {
           />
         )}
 
-        {charactersWithBirthdays.map((c) => (
+        {birthdays.map((info) => (
           <BirthdayCard
-            key={c.id}
-            id={c.id}
-            // @ts-expect-error - has at least one element in the array
-            name={c.identity.at(0)?.name}
-            iconUrl={c.assets.find((asset) => asset.type === "ICON")?.url}
+            key={info.entryId}
+            id={info.characterId}
+            name={info.name}
+            iconUrl={info.details.assets.find((asset) => asset.type === "ICON")?.url}
           />
         ))}
       </div>

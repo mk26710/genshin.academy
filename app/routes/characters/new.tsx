@@ -1,18 +1,14 @@
 import type { ActionArgs, HeadersFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
 import type { TypedErrorResponse } from "~/utils/responses.server";
 
-import { GenshinVision, GenshinWeapon, PermissionFlag } from "@prisma/client";
-import { redirect } from "@remix-run/node";
+import { Element as TeyvatElement, Weapon, PermissionFlag } from "@prisma/client";
 import { Form } from "@remix-run/react";
 
 import { Button } from "~/components/Button";
 import { Container } from "~/components/Container";
 import { Input } from "~/components/Input";
-import { prisma } from "~/db/prisma.server";
-import { NewCharacter } from "~/schemas/character.server";
 import { generateMeta } from "~/utils/meta-generator";
 import { validateUserPermissions, ValidationMode } from "~/utils/permissions";
-import { badRequest } from "~/utils/responses.server";
 import { authorizeUser } from "~/utils/session.server";
 
 export const meta: MetaFunction<typeof loader> = () => {
@@ -95,38 +91,12 @@ export default function CharacterNew() {
           <label htmlFor="character.weapon" className="text-xs font-bold uppercase opacity-70">
             Weapon
           </label>
-
-          <select
-            id="character.weapon"
-            name="character.weapon"
-            className="select-field block w-full"
-            required
-          >
-            {Object.values(GenshinWeapon).map((weapon) => (
-              <option key={weapon} value={weapon}>
-                {weapon}
-              </option>
-            ))}
-          </select>
         </div>
 
         <div>
           <label htmlFor="character.vision" className="text-xs font-bold uppercase opacity-70">
             Vision
           </label>
-
-          <select
-            id="character.vision"
-            name="character.vision"
-            className="select-field block w-full"
-            required
-          >
-            {Object.values(GenshinVision).map((vision) => (
-              <option key={vision} value={vision}>
-                {vision}
-              </option>
-            ))}
-          </select>
         </div>
 
         <div>
@@ -221,77 +191,5 @@ export const action = async ({ request }: ActionArgs) => {
     validateUserPermissions(user, [PermissionFlag.NEW_CHARACTER], ValidationMode.STRICT),
   );
 
-  const formData = await request.formData();
-
-  console.log(Object.fromEntries(formData));
-
-  const parse = await NewCharacter.safeParseAsync({
-    id: formData.get("character.id"),
-    name: formData.get("character.name"),
-    description: formData.get("character.description"),
-    accentColor: formData.get("character.accentColor"),
-    rarity: await Promise.resolve(formData.get("character.rarity")).then((val) =>
-      parseInt(`${val}`),
-    ),
-    weapon: formData.get("character.weapon"),
-    vision: formData.get("character.vision"),
-    birthDay: await Promise.resolve(formData.get("character.birthDay")).then((val) =>
-      parseInt(`${val}`),
-    ),
-    birthMonth: await Promise.resolve(formData.get("character.birthMonth")).then((val) =>
-      parseInt(`${val}`),
-    ),
-    iconUrl: formData.get("character.iconUrl"),
-    gachaUrl: formData.get("character.gachaUrl"),
-    cardUrl: formData.get("character.cardUrl"),
-  });
-
-  if (!parse.success) {
-    return badRequest<ActionData>({ message: "Failed to validate form data", cause: parse.error });
-  }
-
-  const form = parse.data;
-
-  await prisma.$transaction([
-    prisma.genshinCharacter.create({
-      data: {
-        id: form.id,
-        rarity: form.rarity,
-        accentColor: form.accentColor,
-        weapon: form.weapon,
-        vision: form.vision,
-        birthDay: form.birthDay,
-        birthMonth: form.birthMonth,
-      },
-    }),
-    prisma.genshinCharacterIdentity.create({
-      data: {
-        genshinCharacterId: form.id,
-        lang: "en",
-        name: form.name,
-        description: form.description,
-      },
-    }),
-    prisma.genshinCharacterAsset.createMany({
-      data: [
-        {
-          type: "ICON",
-          characterId: form.id,
-          url: form.iconUrl,
-        },
-        {
-          type: "CARD",
-          characterId: form.id,
-          url: form.cardUrl,
-        },
-        {
-          type: "GACHA",
-          characterId: form.id,
-          url: form.gachaUrl,
-        },
-      ],
-    }),
-  ]);
-
-  return redirect("/characters/" + form.id);
+  return null;
 };
