@@ -1,3 +1,9 @@
+-- CreateExtension
+CREATE EXTENSION IF NOT EXISTS "citext";
+
+-- CreateExtension
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
 -- CreateEnum
 CREATE TYPE "UserRole" AS ENUM ('OWNER', 'ADMIN', 'MODERATOR', 'DEVELOPER', 'WRITER', 'SUPPORTER', 'DEFAULT');
 
@@ -11,18 +17,21 @@ CREATE TYPE "PostType" AS ENUM ('CHARACTER_GUIDE', 'GENERAL_GUIDE', 'GENERAL');
 CREATE TYPE "PostStatus" AS ENUM ('PUBLISHED', 'AWAITING_APPROVAL', 'HIDDEN');
 
 -- CreateEnum
-CREATE TYPE "GenshinVision" AS ENUM ('PYRO', 'HYDRO', 'ELECTRO', 'CRYO', 'DENDRO', 'ANEMO', 'GEO');
+CREATE TYPE "GenshinElement" AS ENUM ('PYRO', 'HYDRO', 'ELECTRO', 'CRYO', 'DENDRO', 'ANEMO', 'GEO');
 
 -- CreateEnum
 CREATE TYPE "GenshinWeapon" AS ENUM ('SWORD', 'CLAYMORE', 'BOW', 'CATALYST', 'POLEARM');
 
 -- CreateEnum
-CREATE TYPE "CharacterAssetType" AS ENUM ('ICON', 'CARD', 'GACHA', 'INGAME', 'UNKNOWN');
+CREATE TYPE "TeyvatAssociation" AS ENUM ('LIYUE');
+
+-- CreateEnum
+CREATE TYPE "GenshinCharacterAssetType" AS ENUM ('ICON', 'CARD', 'GACHA', 'INGAME', 'UNKNOWN');
 
 -- CreateTable
 CREATE TABLE "User" (
-    "id" TEXT NOT NULL,
-    "username" TEXT NOT NULL,
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
+    "username" CITEXT NOT NULL,
     "enabled" BOOLEAN NOT NULL DEFAULT false,
     "avatarUrl" TEXT,
     "accentColor" TEXT,
@@ -34,14 +43,14 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Password" (
-    "userId" TEXT NOT NULL,
+    "userId" UUID NOT NULL,
     "hash" TEXT NOT NULL
 );
 
 -- CreateTable
 CREATE TABLE "LinkedAccounts" (
-    "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
+    "userId" UUID NOT NULL,
     "provider" TEXT NOT NULL,
     "providerAccountId" TEXT NOT NULL,
     "providerAccountName" TEXT,
@@ -52,8 +61,8 @@ CREATE TABLE "LinkedAccounts" (
 
 -- CreateTable
 CREATE TABLE "UserFlairs" (
-    "id" TEXT NOT NULL,
-    "userId" TEXT,
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
+    "userId" UUID,
     "text" TEXT,
     "bgColor" VARCHAR(7),
     "fgColor" VARCHAR(7),
@@ -63,14 +72,14 @@ CREATE TABLE "UserFlairs" (
 
 -- CreateTable
 CREATE TABLE "UserRoles" (
-    "userId" TEXT NOT NULL,
+    "userId" UUID NOT NULL,
     "title" "UserRole" NOT NULL DEFAULT 'DEFAULT'
 );
 
 -- CreateTable
 CREATE TABLE "Permissions" (
-    "userId" TEXT NOT NULL,
-    "providerId" TEXT,
+    "userId" UUID NOT NULL,
+    "providerId" UUID,
     "value" "PermissionFlag" NOT NULL DEFAULT 'DEFAULT',
     "grantedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -78,7 +87,7 @@ CREATE TABLE "Permissions" (
 -- CreateTable
 CREATE TABLE "File" (
     "id" TEXT NOT NULL,
-    "uploaderId" TEXT,
+    "uploaderId" UUID,
     "s3Key" TEXT NOT NULL,
     "size" INTEGER NOT NULL,
     "uploadedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -90,7 +99,7 @@ CREATE TABLE "File" (
 
 -- CreateTable
 CREATE TABLE "FileTag" (
-    "id" TEXT NOT NULL,
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "fileId" TEXT NOT NULL,
     "value" TEXT NOT NULL,
 
@@ -99,14 +108,14 @@ CREATE TABLE "FileTag" (
 
 -- CreateTable
 CREATE TABLE "Post" (
-    "id" TEXT NOT NULL,
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "slug" TEXT NOT NULL,
-    "authorId" TEXT,
+    "authorId" UUID,
     "type" "PostType" NOT NULL DEFAULT 'GENERAL',
     "status" "PostStatus" NOT NULL DEFAULT 'PUBLISHED',
     "publishedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "editedAt" TIMESTAMP(3),
-    "editorId" TEXT,
+    "editorId" UUID,
     "title" TEXT NOT NULL,
     "description" TEXT,
     "tags" TEXT NOT NULL,
@@ -118,8 +127,8 @@ CREATE TABLE "Post" (
 
 -- CreateTable
 CREATE TABLE "PostContent" (
-    "id" TEXT NOT NULL,
-    "postId" TEXT NOT NULL,
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
+    "postId" UUID NOT NULL,
     "raw" TEXT NOT NULL,
 
     CONSTRAINT "PostContent_pkey" PRIMARY KEY ("id")
@@ -127,45 +136,39 @@ CREATE TABLE "PostContent" (
 
 -- CreateTable
 CREATE TABLE "GenshinCharacter" (
-    "id" TEXT NOT NULL,
-    "accentColor" VARCHAR(7) NOT NULL,
-    "birthDay" INTEGER NOT NULL,
-    "birthMonth" INTEGER NOT NULL,
+    "id" CITEXT NOT NULL,
+    "accent_color" INTEGER NOT NULL,
+    "birthDay" INTEGER,
+    "birthMonth" INTEGER,
     "rarity" INTEGER NOT NULL,
-    "vision" "GenshinVision" NOT NULL,
+    "element" "GenshinElement",
+    "has_vision" BOOLEAN,
     "weapon" "GenshinWeapon" NOT NULL,
+    "association" "TeyvatAssociation",
 
     CONSTRAINT "GenshinCharacter_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
+CREATE TABLE "GenshinCharacterInfo" (
+    "enrty_id" UUID NOT NULL DEFAULT gen_random_uuid(),
+    "entryLanguage" VARCHAR(2) NOT NULL DEFAULT 'en',
+    "character_id" CITEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "title" TEXT,
+    "description" TEXT,
+
+    CONSTRAINT "GenshinCharacterInfo_pkey" PRIMARY KEY ("enrty_id")
+);
+
+-- CreateTable
 CREATE TABLE "GenshinCharacterAsset" (
-    "characterId" TEXT NOT NULL,
-    "type" "CharacterAssetType" NOT NULL DEFAULT 'UNKNOWN',
-    "url" TEXT NOT NULL
-);
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
+    "character_id" CITEXT NOT NULL,
+    "type" "GenshinCharacterAssetType" NOT NULL DEFAULT 'UNKNOWN',
+    "url" TEXT NOT NULL,
 
--- CreateTable
-CREATE TABLE "GenshinCharacterIdentity" (
-    "id" TEXT NOT NULL,
-    "lang" VARCHAR(2) NOT NULL,
-    "genshinCharacterId" TEXT,
-    "name" TEXT NOT NULL,
-    "description" TEXT NOT NULL,
-
-    CONSTRAINT "GenshinCharacterIdentity_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "GenshinCharacterConstellations" (
-    "id" TEXT NOT NULL,
-    "lang" VARCHAR(2) NOT NULL,
-    "genshinCharacterId" TEXT,
-    "level" INTEGER NOT NULL,
-    "name" TEXT NOT NULL,
-    "description" TEXT NOT NULL,
-
-    CONSTRAINT "GenshinCharacterConstellations_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "GenshinCharacterAsset_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -205,13 +208,10 @@ CREATE UNIQUE INDEX "Post_slug_key" ON "Post"("slug");
 CREATE UNIQUE INDEX "PostContent_postId_key" ON "PostContent"("postId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "GenshinCharacterAsset_characterId_type_key" ON "GenshinCharacterAsset"("characterId", "type");
+CREATE UNIQUE INDEX "GenshinCharacterInfo_entryLanguage_character_id_key" ON "GenshinCharacterInfo"("entryLanguage", "character_id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "GenshinCharacterIdentity_lang_genshinCharacterId_key" ON "GenshinCharacterIdentity"("lang", "genshinCharacterId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "GenshinCharacterConstellations_lang_level_genshinCharacterI_key" ON "GenshinCharacterConstellations"("lang", "level", "genshinCharacterId");
+CREATE UNIQUE INDEX "GenshinCharacterAsset_character_id_type_key" ON "GenshinCharacterAsset"("character_id", "type");
 
 -- AddForeignKey
 ALTER TABLE "Password" ADD CONSTRAINT "Password_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -247,10 +247,7 @@ ALTER TABLE "Post" ADD CONSTRAINT "Post_authorId_fkey" FOREIGN KEY ("authorId") 
 ALTER TABLE "PostContent" ADD CONSTRAINT "PostContent_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "GenshinCharacterAsset" ADD CONSTRAINT "GenshinCharacterAsset_characterId_fkey" FOREIGN KEY ("characterId") REFERENCES "GenshinCharacter"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "GenshinCharacterInfo" ADD CONSTRAINT "GenshinCharacterInfo_character_id_fkey" FOREIGN KEY ("character_id") REFERENCES "GenshinCharacter"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "GenshinCharacterIdentity" ADD CONSTRAINT "GenshinCharacterIdentity_genshinCharacterId_fkey" FOREIGN KEY ("genshinCharacterId") REFERENCES "GenshinCharacter"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "GenshinCharacterConstellations" ADD CONSTRAINT "GenshinCharacterConstellations_genshinCharacterId_fkey" FOREIGN KEY ("genshinCharacterId") REFERENCES "GenshinCharacter"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "GenshinCharacterAsset" ADD CONSTRAINT "GenshinCharacterAsset_character_id_fkey" FOREIGN KEY ("character_id") REFERENCES "GenshinCharacter"("id") ON DELETE CASCADE ON UPDATE CASCADE;
