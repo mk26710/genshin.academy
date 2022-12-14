@@ -1,25 +1,43 @@
-import { GenshinVision, GenshinWeapon } from "@prisma/client";
-
 import { z } from "~/lib/zod.server";
+import {
+  AssociationSchema,
+  ElementSchema,
+  HexColorSchema,
+  RaritySchema,
+  WeaponShema,
+} from "~/schemas/common.server";
 
-export const NewCharacter = z.object({
-  id: z
+export const CharacterIdSchema = z.coerce
+  .string()
+  .transform((s) => s.toLowerCase())
+  .pipe(
+    z
+      .string()
+      .trim()
+      .regex(/^[a-z-_]+$/i, "ID must contain only latin characters, - or _"),
+  );
+
+export const CharacterSchema = z.object({
+  id: CharacterIdSchema,
+  accentColor: HexColorSchema.transform((s) => s.substring(1))
+    .transform((s) => parseInt(s, 16))
+    .pipe(z.number().positive().max(16_777_215)),
+  birthDay: z.coerce.number().min(1).max(31).nullable(),
+  birthMonth: z.coerce.number().min(1).max(12).nullable(),
+  rarity: RaritySchema,
+  association: AssociationSchema.nullable(),
+  element: ElementSchema.nullable(),
+  hasVision: z.coerce.boolean().nullable(),
+  weapon: WeaponShema,
+});
+
+export const CharacterInfoSchema = z.object({
+  entryLanguage: z
     .string()
-    .min(3)
-    .regex(/[\Sa-z_-]+/gi, "ID must contain lower case, latin and non whitespace characters only."),
-  name: z.string().min(1),
-  description: z.string().min(1),
-  accentColor: z.string().min(7).max(7),
-  rarity: z.number().int().min(1).max(5),
-  weapon: z.custom<GenshinWeapon>(
-    (val) => Object.values(GenshinWeapon).findIndex((entry) => entry === val) !== -1,
-  ),
-  vision: z.custom<GenshinVision>(
-    (val) => Object.values(GenshinVision).findIndex((entry) => entry === val) !== -1,
-  ),
-  birthDay: z.number().int().min(1).max(31),
-  birthMonth: z.number().int().min(1).max(12),
-  iconUrl: z.string().url(),
-  gachaUrl: z.string().url(),
-  cardUrl: z.string().url(),
+    .length(2)
+    .transform((s) => s.toLowerCase()),
+  characterId: CharacterIdSchema,
+  name: z.string(),
+  title: z.string().nullable(),
+  description: z.string().nullable(),
 });
