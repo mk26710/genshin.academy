@@ -1,11 +1,12 @@
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [citext, pgcrypto]
 }
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch"]
+  previewFeatures = ["fullTextSearch", "postgresqlExtensions"]
 }
 
 enum UserRole {
@@ -19,9 +20,9 @@ enum UserRole {
 }
 
 model User {
-  id String @id @default(cuid())
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 
-  name        String      @unique @map("username")
+  name        String      @unique @map("username") @db.Citext
   enabled     Boolean     @default(false)
   avatarUrl   String?
   accentColor String?
@@ -44,15 +45,15 @@ model User {
 }
 
 model Password {
-  userId String @unique
+  userId String @unique @db.Uuid
   hash   String
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model LinkedAccounts {
-  id                  String   @id @default(cuid())
-  userId              String
+  id                  String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId              String   @db.Uuid
   provider            String
   providerAccountId   String
   providerAccountName String?
@@ -64,8 +65,8 @@ model LinkedAccounts {
 }
 
 model UserFlairs {
-  id      String  @id @default(cuid())
-  userId  String? @unique
+  id      String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId  String? @unique @db.Uuid
   text    String?
   bgColor String? @db.VarChar(7)
   fgColor String? @db.VarChar(7)
@@ -74,7 +75,7 @@ model UserFlairs {
 }
 
 model UserRoles {
-  userId String
+  userId String   @db.Uuid
   title  UserRole @default(DEFAULT)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -109,8 +110,8 @@ enum PermissionFlag {
 }
 
 model Permissions {
-  userId     String
-  providerId String?
+  userId     String         @db.Uuid
+  providerId String?        @db.Uuid
   value      PermissionFlag @default(DEFAULT)
   grantedAt  DateTime       @default(now())
 
@@ -123,7 +124,7 @@ model Permissions {
 
 model File {
   id             String   @id
-  uploaderId     String?
+  uploaderId     String?  @db.Uuid
   s3Key          String
   size           Int
   uploadedAt     DateTime @default(now())
@@ -135,7 +136,7 @@ model File {
 }
 
 model FileTag {
-  id     String @id @default(cuid())
+  id     String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   fileId String
   value  String
 
@@ -159,14 +160,14 @@ enum PostStatus {
 }
 
 model Post {
-  id           String       @id @default(cuid())
+  id           String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   slug         String       @unique
-  authorId     String?
+  authorId     String?      @db.Uuid
   type         PostType     @default(GENERAL)
   status       PostStatus   @default(PUBLISHED)
   publishedAt  DateTime     @default(now())
   editedAt     DateTime?
-  editorId     String?
+  editorId     String?      @db.Uuid
   title        String
   description  String?
   tags         String
@@ -179,16 +180,27 @@ model Post {
 }
 
 model PostContent {
-  id     String @id @default(cuid())
-  postId String @unique
+  id     String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  postId String @unique @db.Uuid
   raw    String
 
   post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 }
 
-// Genshin specific models
+////////////////////////////////////////////////////////////////////////////////////
+//                                                                                //
+//    _____                _     _         _____                            _     //
+//   / ____|              | |   (_)       |_   _|                          | |    //
+//  | |  __  ___ _ __  ___| |__  _ _ __     | |  _ __ ___  _ __   __ _  ___| |_   //
+//  | | |_ |/ _ \ '_ \/ __| '_ \| | '_ \    | | | '_ ` _ \| '_ \ / _` |/ __| __|  //
+//  | |__| |  __/ | | \__ \ | | | | | | |  _| |_| | | | | | |_) | (_| | (__| |_   //
+//   \_____|\___|_| |_|___/_| |_|_|_| |_| |_____|_| |_| |_| .__/ \__,_|\___|\__|  //
+//                                                        | |                     //
+//                                                        |_|                     //
+//                                                                                //
+////////////////////////////////////////////////////////////////////////////////////                 
 
-enum GenshinVision {
+enum Element {
   PYRO
   HYDRO
   ELECTRO
@@ -196,27 +208,53 @@ enum GenshinVision {
   DENDRO
   ANEMO
   GEO
+
+  @@map("GenshinElement")
 }
 
-enum GenshinWeapon {
+enum Weapon {
   SWORD
   CLAYMORE
   BOW
   CATALYST
   POLEARM
+
+  @@map("GenshinWeapon")
 }
 
-model GenshinCharacter {
-  id             String                           @id @default(cuid())
-  accentColor    String                           @db.VarChar(7)
-  birthDay       Int
-  birthMonth     Int
-  rarity         Int
-  vision         GenshinVision
-  weapon         GenshinWeapon
-  identity       GenshinCharacterIdentity[]
-  constellations GenshinCharacterConstellations[]
-  assets         GenshinCharacterAsset[]
+enum Association {
+  LIYUE
+
+  @@map("TeyvatAssociation")
+}
+
+model Character {
+  id          String           @id @db.Citext
+  accentColor Int              @map("accent_color")
+  birthDay    Int?
+  birthMonth  Int?
+  rarity      Int
+  element     Element?
+  hasVision   Boolean?         @map("has_vision")
+  weapon      Weapon
+  association Association?
+  info        CharacterInfo[]
+  assets      CharacterAsset[]
+
+  @@map("GenshinCharacter")
+}
+
+model CharacterInfo {
+  entryId       String    @id @default(dbgenerated("gen_random_uuid()")) @map("enrty_id") @db.Uuid
+  entryLanguage String    @default("en") @db.VarChar(2)
+  characterId   String    @map("character_id") @db.Citext
+  details       Character @relation(fields: [characterId], references: [id], onUpdate: Cascade, onDelete: Restrict)
+  name          String
+  title         String?
+  description   String?
+
+  @@unique([entryLanguage, characterId])
+  @@map("GenshinCharacterInfo")
 }
 
 enum CharacterAssetType {
@@ -225,39 +263,17 @@ enum CharacterAssetType {
   GACHA
   INGAME
   UNKNOWN
+
+  @@map("GenshinCharacterAssetType")
 }
 
-model GenshinCharacterAsset {
-  characterId String
+model CharacterAsset {
+  id          String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  characterId String             @map("character_id") @db.Citext
+  character   Character          @relation(fields: [characterId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   type        CharacterAssetType @default(UNKNOWN)
   url         String
 
-  character GenshinCharacter @relation(fields: [characterId], references: [id])
-
   @@unique([characterId, type])
-}
-
-model GenshinCharacterIdentity {
-  id                 String  @id @default(cuid())
-  lang               String  @db.VarChar(2)
-  genshinCharacterId String?
-  name               String
-  description        String
-
-  GenshinCharacter GenshinCharacter? @relation(fields: [genshinCharacterId], references: [id], onDelete: Cascade)
-
-  @@unique([lang, genshinCharacterId])
-}
-
-model GenshinCharacterConstellations {
-  id                 String  @id @default(cuid())
-  lang               String  @db.VarChar(2)
-  genshinCharacterId String?
-  level              Int
-  name               String
-  description        String
-
-  GenshinCharacter GenshinCharacter? @relation(fields: [genshinCharacterId], references: [id], onDelete: Cascade)
-
-  @@unique([lang, level, genshinCharacterId])
+  @@map("GenshinCharacterAsset")
 }

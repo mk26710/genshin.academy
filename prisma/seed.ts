@@ -32,19 +32,19 @@ async function seed() {
   });
 
   charactersArray.forEach(async (character) => {
-    await prisma.genshinCharacter
+    await prisma.character
       .create({
         data: {
           id: character.id,
-          accentColor: character.accentColor,
+          accentColor: parseInt(character.accentColor.substring(1), 16),
           birthDay: character.birthday[0],
           birthMonth: character.birthday[1],
           rarity: character.rarity,
-          vision: character.vision,
+          element: character.vision,
           weapon: character.weapon,
-          identity: {
+          info: {
             create: {
-              lang: "en",
+              entryLanguage: "en",
               name: character.name,
               description: character.description,
             },
