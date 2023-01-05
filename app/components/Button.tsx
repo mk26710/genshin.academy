@@ -1,8 +1,8 @@
-import type { VariantProps } from "cva";
+import type { VariantProps } from "class-variance-authority";
 import type { ButtonHTMLAttributes, ElementType, ReactNode } from "react";
 import type { PolymorphicProps } from "~/types/react";
 
-import { cva } from "cva";
+import { cva } from "class-variance-authority";
 
 // look at components.css for the base style definition
 
