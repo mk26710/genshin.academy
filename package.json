@@ -30,7 +30,7 @@
     "/public/build"
   ],
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.231.0",
+    "@aws-sdk/client-s3": "^3.234.0",
     "@formatjs/intl": "^2.6.3",
     "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.13",
