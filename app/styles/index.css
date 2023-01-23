@@ -16,48 +16,17 @@
   --default-border-color: theme("colors.gray.300");
 }
 
+.dark {
+  color-scheme: dark;
+}
+
 * {
   text-rendering: optimizeLegibility;
-  scroll-behavior: smooth;
 }
 
 html {
   font-display: optional;
   display: block;
-}
-
-body {
-  overflow-y: overlay;
-  scrollbar-gutter: stable;
-}
-
-body::-webkit-scrollbar, body::-webkit-scrollbar-corner {
-  background-color: transparent;
-}
-
-body::-webkit-scrollbar {
-  width: calc(var(--default-gap) * 0.25);
-  height: 8px;
-}
-
-@screen lg {
-  body::-webkit-scrollbar {
-    width: calc(var(--default-gap) * 0.5);
-  }
-}
-
-body::-webkit-scrollbar-thumb {
-  border-width: 0px;
-  border-radius: 4px;
-  background-color: rgba(0, 0, 0, 0.125);
-}
-
-.dark body::-webkit-scrollbar-thumb {
-  background-color: theme(colors.dark.600);
-}
-
-body::-webkit-scrollbar-track {
-  margin-top: var(--header-height);
 }
 
 .transitions-be-gone * {
