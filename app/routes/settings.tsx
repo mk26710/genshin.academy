@@ -1,16 +1,22 @@
 import type { ChangeEvent } from "react";
 import type { RouteHandle } from "~/types/common";
 
+import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import { useFetcher, useLocation } from "@remix-run/react";
 import { useAtom } from "jotai";
-import { generatePath } from "react-router";
+import { useId } from "react";
 import { useTranslations } from "use-intl";
 
 import { colorSchemeAtom } from "~/atoms/color-scheme";
-import { Container } from "~/components/Container";
+import { Main } from "~/components/Main";
 import { useVisitorLocale } from "~/hooks/use-visitor-locale";
-import { isColorScheme, SUPPORTED_COLOR_SCHEMES } from "~/utils/color-scheme/common";
+import { isColorScheme } from "~/utils/color-scheme/common";
 import { supportedLocales } from "~/utils/locales";
+
+const LANG_CODE_TO_NAME = {
+  ru: "Русский",
+  en: "English",
+};
 
 export const handle: RouteHandle = {
   id: "settings",
@@ -18,6 +24,8 @@ export const handle: RouteHandle = {
 };
 
 const SettingsRoute = () => {
+  const id = useId();
+
   const t = useTranslations();
   const locale = useVisitorLocale();
 
@@ -53,58 +61,81 @@ const SettingsRoute = () => {
   };
 
   return (
-    <Container>
-      <div className="w-full">
-        <h1 className="mb-2 font-semibold">Color Scheme</h1>
+    <Main>
+      <Main.Container>
+        <div className="grid grid-cols-1 grid-rows-1 gap-4 sm:grid-cols-2 md:grid-cols-3  ">
+          <div className="rounded-box border border-gray-200 bg-white px-4 py-5 shadow sm:p-6">
+            <h3 className="mb-2 text-lg font-semibold text-gray-700">Color Scheme</h3>
 
-        <fieldset role="radiogroup" className="flex flex-col gap-1">
-          {SUPPORTED_COLOR_SCHEMES.map((cs) => (
-            <div key={cs}>
-              <input
-                id={`${cs}-btn`}
-                type="radio"
-                name="color-scheme"
-                value={cs}
-                checked={colorScheme === cs}
-                onChange={handleColorSchemeChange}
-                className="peer sr-only"
-              />
-              <label
-                htmlFor={`${cs}-btn`}
-                className="radio-field text-neutral-600 peer-checked:border-neutral-900 peer-checked:text-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:peer-checked:border-white dark:peer-checked:text-white"
-              >
-                <div className="font-medium">{cs}</div>
-              </label>
-            </div>
-          ))}
-        </fieldset>
+            <fieldset role="radiogroup" className="flex gap-2">
+              <div>
+                <input
+                  id={id + "dark:"}
+                  type="radio"
+                  name="color-scheme"
+                  className="peer sr-only"
+                  value="dark"
+                  checked={colorScheme === "dark"}
+                  onChange={handleColorSchemeChange}
+                />
+                <label
+                  htmlFor={id + "dark:"}
+                  className="flex cursor-pointer items-center justify-center gap-2 rounded-box border-2 border-gray-400 p-2 font-medium text-gray-400 peer-checked:border-primary-500 peer-checked:text-primary-500"
+                >
+                  <MoonIcon className="h-6 w-6" />
+                  <span>Dark</span>
+                </label>
+              </div>
 
-        <h1 className="mb-2 mt-4 font-semibold">{t("settings.language")}</h1>
+              <div>
+                <input
+                  id={id + "light:"}
+                  type="radio"
+                  name="color-scheme"
+                  className="peer sr-only"
+                  value="light"
+                  checked={colorScheme === "light"}
+                  onChange={handleColorSchemeChange}
+                />
+                <label
+                  htmlFor={id + "light:"}
+                  className="flex cursor-pointer items-center justify-center gap-2 rounded-box border-2 border-gray-400 p-2 font-medium text-gray-400 peer-checked:border-primary-500 peer-checked:text-primary-500"
+                >
+                  <SunIcon className="h-6 w-6" />
+                  <span>Light</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
 
-        <fieldset role="radiogroup" className="flex flex-col gap-1">
-          {supportedLocales.map((code) => (
-            <div key={code}>
-              <input
-                id={`${code}-btn`}
-                type="radio"
-                name="locales"
-                value={code}
-                checked={locale === code}
-                onChange={handleLocaleChange}
-                className="peer sr-only"
-              />
-              <label
-                htmlFor={`${code}-btn`}
-                className="radio-field gap-2 text-neutral-600 peer-checked:border-neutral-900 peer-checked:text-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:peer-checked:border-white dark:peer-checked:text-white"
-              >
-                <div className="align-middle">*flag here*</div>
-                <div className="font-medium">{code}</div>
-              </label>
-            </div>
-          ))}
-        </fieldset>
-      </div>
-    </Container>
+          <div className="rounded-box border border-gray-200 bg-white px-4 py-5 shadow sm:p-6">
+            <h3 className="mb-2 text-lg font-semibold text-gray-700">{t("settings.language")}</h3>
+
+            <fieldset role="radiogroup" className="flex gap-2">
+              {supportedLocales.map((code, idx) => (
+                <div key={idx}>
+                  <input
+                    id={id + code + ":"}
+                    type="radio"
+                    name="locale"
+                    className="peer sr-only"
+                    value={code}
+                    checked={locale === code}
+                    onChange={handleLocaleChange}
+                  />
+                  <label
+                    htmlFor={id + code + ":"}
+                    className="flex cursor-pointer items-center justify-center gap-2 rounded-box border-2 border-gray-400 p-2 font-medium text-gray-400 peer-checked:border-primary-500 peer-checked:text-primary-500"
+                  >
+                    <span>{LANG_CODE_TO_NAME[code]}</span>
+                  </label>
+                </div>
+              ))}
+            </fieldset>
+          </div>
+        </div>
+      </Main.Container>
+    </Main>
   );
 };
 
