@@ -124,38 +124,35 @@
   }
 
   .input {
-    min-height: theme(height.9);
-    font-size: theme(fontSize.sm);
-    border-color: theme(colors.gray.400);
-    border-width: 1px;
-    border-radius: var(--default-radius);
-    padding-left: 12px;
-    padding-right: 12px;
-    background-color: white;
-  }
-
-  .dark .input {
-    border-color: theme(colors.dark.500);
-    background-color: theme(colors.dark.500);
-  }
-
-  .input:focus,
-  .input:focus-visible {
-    outline: 0;
-    border-color: theme(colors.primary.500);
-  }
-
-  .input::placeholder {
-    color: theme(colors.gray.500);
+    @apply form-input shadow-sm sm:text-sm;
+    display: block;
+    border-radius: theme(borderRadius.box);
+    border-color: theme(colors.gray.300);
   }
 
   .select {
-    @apply input;
+    @apply form-select shadow-sm sm:text-sm;
 
     appearance: none;
     padding-left: 12px;
-    padding-right: 30px;
+    padding-right: 32px;
     background-color: white;
+    border-radius: theme(borderRadius.box);
+    border-color: theme(colors.gray.300);
+  }
+
+  .textarea {
+    @apply form-textarea shadow-sm sm:text-sm;
+    background-color: white;
+    border-radius: theme(borderRadius.box);
+    border-color: theme(colors.gray.300);
+  }
+
+  .textarea:focus,
+  .input:focus,
+  .select:focus {
+    @apply ring-primary-500;
+    border-color: theme(colors.primary.500);
   }
 
   .button-base {
