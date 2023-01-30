@@ -1,7 +1,13 @@
 import type { User } from "@prisma/client";
 import type { MaybePromise } from "~/types/common";
 
-import { createCookie, createSession, createSessionStorage, redirect } from "@remix-run/node";
+import {
+  createCookie,
+  createSession,
+  createSessionStorage,
+  redirect,
+  Response,
+} from "@remix-run/node";
 import cuid from "cuid";
 import dayjs from "dayjs";
 import invariant from "tiny-invariant";
@@ -9,7 +15,7 @@ import invariant from "tiny-invariant";
 import { redis } from "~/db/redis.server";
 import { getUserById } from "~/models/user.server";
 
-import { forbidden, typedError, unauthorized } from "./responses.server";
+import { typedError, unauthorized } from "./responses.server";
 
 invariant(process.env.SESSION_SECRET, "SESSION_SECRET must be set");
 
@@ -47,7 +53,6 @@ export const sessionStorage = createSessionStorage({
 
     return { userId };
   },
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   updateData: async (id, data, expires) => {
     const now = dayjs();
     const seconds = Math.abs(now.diff(expires, "seconds"));
@@ -121,6 +126,13 @@ export const getUser = async (request: Request) => {
 
   const user = await getUserById(userId);
   if (user) {
+    if (user.enabled !== true) {
+      throw new Response("Disabled Account", {
+        status: 403,
+        statusText: "Disabled Account",
+      });
+    }
+
     return user;
   }
 
@@ -144,10 +156,9 @@ export const requireUser = async (request: Request) => {
   }
 
   if (user.enabled !== true) {
-    throw forbidden({
-      message: "Your account is disabled",
-      details: "If this is a mistake, please, contact website administrator",
-      code: "user.disabled",
+    throw new Response("Disabled Account", {
+      status: 403,
+      statusText: "Disabled Account",
     });
   }
 
