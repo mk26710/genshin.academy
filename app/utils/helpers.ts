@@ -65,3 +65,10 @@ export function stringOrUndefined<T>(val: T) {
   }
   return undefined;
 }
+
+export const isString = (v: unknown): v is string => typeof v === "string";
+
+export const isObjectValue = <T>(target: unknown, obj: Record<string, T>): target is T => {
+  const idx = Object.values(obj).findIndex((v) => v === target);
+  return idx === -1 ? false : true;
+};
