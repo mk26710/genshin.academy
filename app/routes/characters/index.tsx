@@ -17,6 +17,7 @@ import { CharacterCard } from "~/components/cards/CharacterCard";
 import { Checkbox } from "~/components/Checkbox";
 import { Container } from "~/components/Container";
 import { prisma } from "~/db/prisma.server";
+import { resolveLocale } from "~/utils/i18n.server";
 
 export const handle: RouteHandle = {
   id: "characters",
@@ -29,26 +30,47 @@ export const meta: MetaFunction = ({}) => {
   };
 };
 
-export const loader = async ({}: LoaderArgs) => {
-  const characters = await prisma.characterInfo.findMany({
-    include: {
-      details: {
-        include: {
-          assets: true,
-        },
-      },
-    },
+export const loader = async ({ request }: LoaderArgs) => {
+  const locale = await resolveLocale(request);
+
+  const entries = await prisma.characterEntry.findMany({
     orderBy: [
       {
         name: "asc",
       },
     ],
     where: {
-      entryLanguage: "en",
+      AND: [
+        {
+          locale: locale,
+        },
+        {
+          NOT: {
+            meta: null,
+          },
+        },
+      ],
+    },
+    include: {
+      meta: {
+        select: {
+          id: true,
+          element: true,
+          rarity: true,
+          association: true,
+          releaseDate: true,
+          weapon: true,
+          assets: {
+            where: {
+              isPublic: true,
+            },
+          },
+        },
+      },
     },
   });
 
-  return json({ characters });
+  return json({ entries });
 };
 
 export type Loader = SerializeFrom<typeof loader>;
@@ -95,7 +117,7 @@ const SearchAndFilter: FunctionComponent = () => {
 };
 
 const CharactersIndex = () => {
-  const { characters } = useLoaderData() as Loader;
+  const { entries } = useLoaderData() as Loader;
 
   const [search] = useAtom(characterSearchAtom);
   const deferredSearch = useDeferredValue(search);
@@ -104,17 +126,17 @@ const CharactersIndex = () => {
   const [showFourstars] = useAtom(charactersFilterFourstarsAtom);
 
   useEffect(() => {
-    console.log(characters);
+    console.log(entries);
   }, []);
 
-  const filteredCharacters = characters
-    .filter((c) => c.name.toLowerCase().includes(deferredSearch.toLowerCase()))
-    .reduce<Loader["characters"]>((acc, current) => {
-      if (!showFivestars && current.details.rarity === 5) {
+  const filteredEntries = entries
+    .filter((entry) => entry.name.toLowerCase().includes(deferredSearch.toLowerCase()))
+    .reduce<Loader["entries"]>((acc, current) => {
+      if (!showFivestars && current.meta?.rarity === 5) {
         return acc;
       }
 
-      if (!showFourstars && current.details.rarity === 4) {
+      if (!showFourstars && current.meta?.rarity === 4) {
         return acc;
       }
 
@@ -126,14 +148,14 @@ const CharactersIndex = () => {
       <SearchAndFilter />
 
       <div className="mt-4 flex flex-row flex-wrap justify-evenly gap-4 md:justify-start">
-        {filteredCharacters.map((c) => (
+        {filteredEntries.map((entry) => (
           <CharacterCard
-            key={c.details.id}
-            id={c.characterId}
-            name={c.name}
-            assets={c.details.assets}
-            element={c.details.element}
-            rarity={c.details.rarity}
+            key={entry.id}
+            id={entry.meta?.id ?? "unknown"}
+            name={entry.name}
+            assets={entry.meta?.assets}
+            element={entry.meta?.element}
+            rarity={entry.meta?.rarity}
           />
         ))}
       </div>
