@@ -10,15 +10,15 @@ interface Props {
   className?: string;
   id: string;
   name: string;
-  element: TeyvatElement | null;
-  rarity: number;
-  assets: CharacterAsset[];
+  element?: TeyvatElement | null;
+  rarity?: number;
+  assets?: CharacterAsset[] | null;
 }
 
 export const CharacterCard: FunctionComponent<Props> = ({ className, ...character }) => {
   const elementSrc = `/img/elements/${character.element}/icon.webp`.toLowerCase();
 
-  const iconObjectS3 = character.assets.find((entry) => entry.type === "ICON")?.url;
+  const iconObjectS3 = character.assets?.find((entry) => entry.type === "ICON")?.url;
   const iconSrc = iconObjectS3 ?? `/img/characters/${character.id}/icon.webp`;
 
   const iconBg = () => {
