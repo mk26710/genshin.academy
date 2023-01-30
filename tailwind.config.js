@@ -207,9 +207,15 @@ module.exports = {
     "./app/components/**/*.{js,ts,jsx,tsx}",
   ],
   // darkMode: ["class", '[data-colour="dark"]'],
-  darkMode: "class",
+  darkMode: ["class"],
   theme: {
     extend: {
+      borderRadius: {
+        box: "0.375rem",
+      },
+      maxWidth: {
+        content: "1280px",
+      },
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
       },
@@ -239,6 +245,12 @@ module.exports = {
           "-webkit-hyphens": "auto",
           "-ms-hyphens": "auto",
           hyphens: "auto",
+        },
+        ".min-h-screen-available": {
+          "min-height": "calc(100vh - var(--header-height))",
+        },
+        ".h-screen-available": {
+          height: "calc(100vh - var(--header-height))",
         },
       });
     }),
