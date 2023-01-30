@@ -27,13 +27,8 @@ const SettingsRoute = () => {
   const [colorScheme, setColorScheme] = useAtom(colorSchemeAtom);
 
   const handleLocaleChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    const actionPath = generatePath("/set-locale/:locale?redirect=:redirect", {
-      locale: e.target.value,
-      redirect: location.pathname,
-    });
-
     fetcher.submit(null, {
-      action: actionPath,
+      action: `/set-locale/${e.target.value}?redirect=${location.pathname}`,
       method: "patch",
     });
   };
