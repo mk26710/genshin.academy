@@ -17,5 +17,9 @@
   },
   "tailwindCSS.experimental.classRegex": [
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
-  ]
+  ],
+  "html-css-class-completion.excludeGlobPattern": "*tailwind.css",
+  "files.associations": {
+    "*.css": "tailwindcss"
+}
 }
