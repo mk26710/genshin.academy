@@ -1,22 +1,27 @@
+import type { VariantProps } from "class-variance-authority";
 import type { ComponentPropsWithRef } from "react";
 
-import clsx from "clsx";
+import { cva } from "class-variance-authority";
 import { forwardRef } from "react";
 
-interface Props extends ComponentPropsWithRef<"input"> {
-  fullWidth?: boolean;
-}
+type InputVariantProps = VariantProps<typeof inputCva>;
 
-export const Input = forwardRef<HTMLInputElement, Props>(
-  ({ fullWidth, className, type = "text", ...props }, ref) => {
-    return (
-      <input
-        ref={ref}
-        type={type}
-        className={clsx("input", fullWidth && "w-full", className)}
-        {...props}
-      />
-    );
+const inputCva = cva("input", {
+  variants: {
+    width: {
+      auto: "w-auto",
+      full: "w-full",
+    },
+  },
+});
+
+type InputProps = ComponentPropsWithRef<"input"> & InputVariantProps;
+
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ width, className, type = "text", ...props }, ref) => {
+    const cls = inputCva({ width, className });
+
+    return <input ref={ref} type={type} className={cls} {...props} />;
   },
 );
 
