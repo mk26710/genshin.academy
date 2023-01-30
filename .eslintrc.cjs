@@ -13,6 +13,14 @@ module.exports = {
     es6: true,
   },
   rules: {
+    "@typescript-eslint/no-unused-vars": [
+      "warn", // or "error"
+      {
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
+        caughtErrorsIgnorePattern: "^_",
+      },
+    ],
     "@typescript-eslint/consistent-type-imports": 2,
     quotes: [2, "double", { avoidEscape: true, allowTemplateLiterals: true }],
     "@typescript-eslint/require-await": "off",
