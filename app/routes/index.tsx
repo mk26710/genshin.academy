@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 import { BirthdayCard } from "~/components/cards/BirthdayCard";
 import { PostCard } from "~/components/cards/PostCard";
-import { Container } from "~/components/Container";
+import { Main } from "~/components/Main";
 import { prisma } from "~/db/prisma.server";
 import { getLatestPost } from "~/models/posts.server";
 import { resolveLocale } from "~/utils/i18n.server";
@@ -27,18 +27,23 @@ export const loader = async ({ request }: LoaderArgs) => {
   const nowDay = now.getUTCDate();
   const nowMonth = now.getUTCMonth() + 1;
 
-  const birthdays = await prisma.characterInfo.findMany({
-    include: {
-      details: {
-        include: {
-          assets: true,
-        },
-      },
-    },
+  const birthdays = await prisma.characterEntry.findMany({
     where: {
-      details: {
+      locale: resolvedLocale,
+      meta: {
         birthDay: nowDay,
         birthMonth: nowMonth,
+      },
+    },
+    include: {
+      meta: {
+        include: {
+          assets: {
+            where: {
+              type: "ICON",
+            },
+          },
+        },
       },
     },
   });
@@ -61,28 +66,30 @@ const IndexRoute = () => {
   }, []);
 
   return (
-    <Container>
-      <div className="columns-1 space-y-[var(--default-gap)] md:columns-2 lg:columns-3">
-        {latestPost && (
-          <PostCard
-            slug={latestPost.slug}
-            title={latestPost.title}
-            description={latestPost.description}
-            publishedAt={new Date(latestPost.publishedAt)}
-            thumbnailUrl={latestPost.thumbnailUrl}
-          />
-        )}
+    <Main>
+      <Main.Container>
+        <div className="columns-1 space-y-[var(--default-gap)] md:columns-2 lg:columns-3">
+          {latestPost && (
+            <PostCard
+              slug={latestPost.slug}
+              title={latestPost.title}
+              description={latestPost.description}
+              publishedAt={new Date(latestPost.publishedAt)}
+              thumbnailUrl={latestPost.thumbnailUrl}
+            />
+          )}
 
-        {birthdays.map((info) => (
-          <BirthdayCard
-            key={info.entryId}
-            id={info.characterId}
-            name={info.name}
-            iconUrl={info.details.assets.find((asset) => asset.type === "ICON")?.url}
-          />
-        ))}
-      </div>
-    </Container>
+          {birthdays.map((entry) => (
+            <BirthdayCard
+              key={entry.id}
+              id={entry.meta?.id ?? "unknown"}
+              name={entry.name}
+              iconUrl={entry.meta?.assets.find((asset) => asset.type === "ICON")?.url}
+            />
+          ))}
+        </div>
+      </Main.Container>
+    </Main>
   );
 };
 
