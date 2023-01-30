@@ -171,18 +171,16 @@ export function CatchBoundary() {
               </div>
 
               <div className="flex flex-col items-center justify-center gap-2 md:flex-row ">
-                {caught?.data?.code == null && (
-                  <Link to="/" role="button" className="w-fit text-center">
-                    Go to home page
-                  </Link>
-                )}
-
-                {caught?.data?.code === "user.disabled" && (
+                {caught?.status === 403 || caught?.status === 401 ? (
                   <Form action="/logout" method="post">
                     <Button type="submit" className="w-fit text-center">
                       Log Out
                     </Button>
                   </Form>
+                ) : (
+                  <Link to="/" role="button" className="w-fit text-center">
+                    Go to home page
+                  </Link>
                 )}
               </div>
             </div>
