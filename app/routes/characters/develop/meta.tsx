@@ -1,7 +1,7 @@
 import type { CharacterMeta } from "@prisma/client";
 import type { ActionArgs, HeadersFunction, LoaderArgs } from "@remix-run/node";
 import type { ChangeEvent, FormEvent } from "react";
-import type { CharacterMetaForm as FormKeys } from "~/schemas/character.server";
+import type { CharacterMetaForm as FormKeys } from "~/schemas/forms/new-character-meta.server";
 
 import { PencilSquareIcon, PlusCircleIcon } from "@heroicons/react/20/solid";
 import { StarIcon } from "@heroicons/react/24/solid";
@@ -16,7 +16,7 @@ import { Button } from "~/components/Button";
 import { Input } from "~/components/Input";
 import { Label } from "~/components/Label";
 import { prisma } from "~/db/prisma.server";
-import { characterMetaFormSchema } from "~/schemas/character.server";
+import { CharacterMetaFormSchema } from "~/schemas/forms/new-character-meta.server";
 import { permissions, validateUserPermissions, ValidationMode } from "~/utils/permissions";
 import { badRequest } from "~/utils/responses.server";
 import { authorizeUser } from "~/utils/session.server";
@@ -96,7 +96,8 @@ export default function NewCharacterMeta() {
   const [hasVision, setHasVision] = useState(false);
   const [isArchon, setIsArchon] = useState(false);
   const [association, setAssociation] = useState<string>("INAZUMA");
-  const [birthDate, setBirthDate] = useState<string>("");
+  const [birthDay, setBirthDay] = useState<number>(1);
+  const [birthMonth, setBirthMonth] = useState<number>(1);
   const [releaseDate, setReleaseDate] = useState<string>("");
   const [versionReleased, setVersionReleased] = useState<FormKeys["versionReleased"]>("");
 
@@ -318,18 +319,39 @@ export default function NewCharacterMeta() {
           </select>
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor={htmlId("birthDate")} className="text-sm font-semibold">
-            Birth date
-          </label>
-          <Input
-            name={formName("birthDate")}
-            id={htmlId("birthDate")}
-            placeholder="Character birth date"
-            type="date"
-            value={birthDate}
-            onChange={(e) => setBirthDate(e.target.value)}
-          />
+        <div className="flex flex-col gap-2 lg:flex-row">
+          <div className="flex flex-col gap-1">
+            <label htmlFor={htmlId("birthDay")} className="text-sm font-semibold">
+              Birth day
+            </label>
+            <Input
+              name={formName("birthDay")}
+              id={htmlId("birthDay")}
+              placeholder="Character birth day"
+              type="number"
+              min={1}
+              max={31}
+              step={1}
+              value={birthDay}
+              onChange={(e) => setBirthDay(e.target.valueAsNumber)}
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label htmlFor={htmlId("birthDay")} className="text-sm font-semibold">
+              Birth day
+            </label>
+            <Input
+              name={formName("birthMonth")}
+              id={htmlId("birthMonth")}
+              placeholder="Character birth month"
+              type="number"
+              min={1}
+              max={12}
+              step={1}
+              value={birthMonth}
+              onChange={(e) => setBirthMonth(e.target.valueAsNumber)}
+            />
+          </div>
         </div>
 
         <div className="flex flex-col gap-1">
@@ -373,16 +395,13 @@ export const action = async ({ request }: ActionArgs) => {
   );
 
   const formData = await request.formData();
-  const validation = await characterMetaFormSchema.safeParseAsync(Object.fromEntries(formData));
+  const validation = await CharacterMetaFormSchema.safeParseAsync(Object.fromEntries(formData));
 
   if (!validation.success) {
-    const errors = validation.error.format()._errors;
-    console.log(errors);
-
     return badRequest({
       success: false,
       error: {
-        message: null,
+        message: "Validation Failure",
         cause: validation.error,
       },
     });
@@ -396,7 +415,8 @@ export const action = async ({ request }: ActionArgs) => {
         rarity,
         element,
         weapon,
-        birthDate,
+        birthDay,
+        birthMonth,
         association,
         hasVision,
         isArchon,
@@ -412,7 +432,8 @@ export const action = async ({ request }: ActionArgs) => {
             rarity,
             element,
             weapon,
-            birthDate,
+            birthDay,
+            birthMonth,
             association,
             hasVision,
             isArchon,
@@ -432,7 +453,8 @@ export const action = async ({ request }: ActionArgs) => {
             rarity,
             element,
             weapon,
-            birthDate,
+            birthDay,
+            birthMonth,
             association,
             hasVision,
             isArchon,

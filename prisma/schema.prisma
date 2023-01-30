@@ -241,7 +241,8 @@ model CharacterMeta {
   hasVision       Boolean?         @map("has_vision")
   isArchon        Boolean?         @map("is_archon")
   association     Association?
-  birthDate       DateTime?        @map("birth_date") @db.Date
+  birthDay        Int              @db.SmallInt
+  birthMonth      Int              @db.SmallInt
   releaseDate     DateTime         @map("release_date") @db.Date
   versionReleased String           @map("version_released")
   entries         CharacterEntry[]
@@ -276,7 +277,6 @@ model CharacterEntry {
   description   String?
   affiliation   String?
   constellation String?
-
 
   @@unique([metaId, locale])
 }
