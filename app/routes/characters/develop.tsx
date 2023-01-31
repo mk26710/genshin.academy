@@ -28,7 +28,7 @@ export default function NewCharacterLayout() {
               </NavLink>
             ))}
           </nav>
-          <div className="flex flex-1 flex-col p-4">
+          <div className="flex flex-1 flex-col pl-4">
             <Outlet />
           </div>
         </div>
