@@ -18,7 +18,7 @@ import { CalculatorDetails } from "~/components/calculator/CalculatorDetails";
 import { CalculatorInput } from "~/components/calculator/CalculatorInput";
 import { CalculatorRoot } from "~/components/calculator/CalculatorRoot";
 import { CalculatorTitle } from "~/components/calculator/CalculatorTitle";
-import { Container } from "~/components/Container";
+import { Main } from "~/components/Main";
 
 const CritValueResult = ({ critValue }: { critValue: number }) => {
   const color = () => {
@@ -52,7 +52,7 @@ const CrtitValueCalculator: FunctionComponent = () => {
   const [critValue] = useAtom(critValueAtom);
 
   return (
-    <CalculatorRoot className="break-inside-avoid overflow-y-auto">
+    <CalculatorRoot className="break-inside-avoid overflow-y-auto bg-white shadow">
       <CalculatorTitle>
         <span className="flex-1">{t(`calc.crit-value`)}</span>
         {critValue > 0 && <CritValueResult critValue={critValue} />}
@@ -85,7 +85,7 @@ const ResinCalculator: FunctionComponent = () => {
   const [resinReplenishTime] = useAtom(resinReplenishTimeAtom);
 
   return (
-    <CalculatorRoot className="break-inside-avoid overflow-y-auto">
+    <CalculatorRoot className="break-inside-avoid overflow-y-auto bg-white shadow">
       <CalculatorTitle className="!flex-col lg:!flex-row">
         <span className="flex-1">{t(`calc.resin`)}</span>
         {resinDelta > 0 && (
@@ -122,12 +122,14 @@ export const meta: MetaFunction = () => ({
 
 const CalcPage = () => {
   return (
-    <Container>
-      <div className="columns-1 gap-4 space-y-4 md:columns-2">
-        <CrtitValueCalculator />
-        <ResinCalculator />
-      </div>
-    </Container>
+    <Main>
+      <Main.Container>
+        <div className="columns-1 gap-4 space-y-4 md:columns-2">
+          <CrtitValueCalculator />
+          <ResinCalculator />
+        </div>
+      </Main.Container>
+    </Main>
   );
 };
 
