@@ -31,32 +31,25 @@ async function seed() {
     },
   });
 
-  charactersArray.forEach(async (character) => {
-    await prisma.character
-      .create({
-        data: {
-          id: character.id,
-          accentColor: parseInt(character.accentColor.substring(1), 16),
-          birthDay: character.birthday[0],
-          birthMonth: character.birthday[1],
-          rarity: character.rarity,
-          element: character.vision,
-          weapon: character.weapon,
-          info: {
-            create: {
-              entryLanguage: "en",
-              name: character.name,
-              description: character.description,
-            },
-          },
-        },
-      })
-      .catch((e) => {
-        if (e instanceof Prisma.PrismaClientKnownRequestError) {
-          console.log(`Error ${e.code} while isnerting ${character.id} data`);
-        }
-      });
-  });
+  // charactersArray.forEach(async (character) => {
+  //   await prisma.characterEntry
+  //     .create({
+  //       include: { meta: true },
+  //       data: {
+  //         accentColor: parseInt(character.accentColor.substring(1), 16),
+  //         meta: {
+  //           create: {
+  //             create: {},
+  //           },
+  //         },
+  //       },
+  //     })
+  //     .catch((e) => {
+  //       if (e instanceof Prisma.PrismaClientKnownRequestError) {
+  //         console.log(`Error ${e.code} while isnerting ${character.id} data`);
+  //       }
+  //     });
+  // });
 
   console.log("Database has been seeded. 🌱");
 }
