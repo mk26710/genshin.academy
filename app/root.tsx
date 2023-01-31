@@ -18,16 +18,17 @@ import {
   useTransition,
 } from "@remix-run/react";
 import clsx from "clsx";
-import { Provider as JotaiProvider, useAtom } from "jotai";
+import { Provider as JotaiProvider } from "jotai";
 import Nprogress from "nprogress";
 import { useEffect, useState } from "react";
 import { IntlProvider } from "use-intl";
 
-import { colorSchemeAtom, rawColorSchemeAtom } from "~/atoms/color-scheme";
+import { jotaiStore } from "~/atoms/store";
 import { Button } from "~/components/Button";
 import { Container } from "~/components/Container";
 import { Footer } from "~/components/Footer";
 import { Navbar } from "~/components/Navbar";
+import { useColorScheme } from "~/hooks/use-color-scheme";
 import { getColorScheme } from "~/utils/color-scheme/common.server";
 import { getMessages, resolveLocale } from "~/utils/i18n.server";
 import { getUser } from "~/utils/session.server";
@@ -67,6 +68,8 @@ export async function loader({ request }: LoaderArgs) {
 export type Loader = SerializeFrom<typeof loader>;
 
 function App({ locale }: { locale: string }) {
+  const colorScheme = useColorScheme();
+
   const transition = useTransition();
 
   const matches = useMatches();
@@ -75,7 +78,6 @@ function App({ locale }: { locale: string }) {
   );
 
   const [cssTransitionsState, setCssTransitionsState] = useState(false);
-  const [colorScheme] = useAtom(colorSchemeAtom);
 
   useEffect(() => {
     console.info(colorScheme);
@@ -139,11 +141,11 @@ function App({ locale }: { locale: string }) {
 }
 
 export default function Root() {
-  const { messages, locale, colorScheme } = useLoaderData<typeof loader>();
+  const { messages, locale } = useLoaderData<typeof loader>();
 
   return (
     <IntlProvider locale={locale} messages={messages}>
-      <JotaiProvider initialValues={[[rawColorSchemeAtom, colorScheme]]}>
+      <JotaiProvider store={jotaiStore}>
         <App locale={locale} />
       </JotaiProvider>
     </IntlProvider>

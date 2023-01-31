@@ -3,12 +3,11 @@ import type { RouteHandle } from "~/types/common";
 
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import { useFetcher, useLocation } from "@remix-run/react";
-import { useAtom } from "jotai";
 import { useId } from "react";
 import { useTranslations } from "use-intl";
 
-import { colorSchemeAtom } from "~/atoms/color-scheme";
 import { Main } from "~/components/Main";
+import { useColorScheme } from "~/hooks/use-color-scheme";
 import { useVisitorLocale } from "~/hooks/use-visitor-locale";
 import { isColorScheme } from "~/utils/color-scheme/common";
 import { supportedLocales } from "~/utils/locales";
@@ -28,11 +27,10 @@ const SettingsRoute = () => {
 
   const t = useTranslations();
   const locale = useVisitorLocale();
+  const colorScheme = useColorScheme();
 
   const location = useLocation();
   const fetcher = useFetcher();
-
-  const [colorScheme, setColorScheme] = useAtom(colorSchemeAtom);
 
   const handleLocaleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     fetcher.submit(null, {
@@ -46,8 +44,6 @@ const SettingsRoute = () => {
       console.warn("Tried to set color scheme to an unsupported theme");
       return;
     }
-
-    setColorScheme(e.target.value);
 
     const formData = new FormData();
 

@@ -1,10 +1,5 @@
 import { atom } from "jotai";
 
-export const characterSearchInit = "";
-export const characterSearchAtom = atom(characterSearchInit);
-
-export const charactersFilterFivestarsInit = true;
-export const charactersFilterFivestarsAtom = atom(charactersFilterFivestarsInit);
-
-export const charactersFilterFourstarsInit = true;
-export const charactersFilterFourstarsAtom = atom(charactersFilterFourstarsInit);
+export const characterSearchAtom = atom<string>("");
+export const charactersFilterFivestarsAtom = atom<boolean>(true);
+export const charactersFilterFourstarsAtom = atom<boolean>(true);
