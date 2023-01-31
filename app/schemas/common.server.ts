@@ -2,6 +2,8 @@ import { Association, Element, Weapon } from "@prisma/client";
 
 import { z } from "~/lib/zod.server";
 
+export const PageNumSchema = z.coerce.number().min(1).int().nullish();
+
 export const HexColorSchema = z
   .string()
   .length(7)
