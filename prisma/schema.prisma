@@ -258,8 +258,8 @@ enum CharacterAssetType {
 
 model CharacterAsset {
   id              String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  characterMetaId String?
-  characterMeta   CharacterMeta?      @relation(fields: [characterMetaId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  characterMetaId String
+  characterMeta   CharacterMeta       @relation(fields: [characterMetaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   type            CharacterAssetType?
   name            String
   description     String?
