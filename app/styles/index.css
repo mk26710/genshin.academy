@@ -40,7 +40,7 @@ html {
 @layer base {
   .app {
     min-height: 100vh;
-    background-color: theme(colors.gray.100);
+    background-color: theme(colors.gray.50);
     color: black;
   }
 
