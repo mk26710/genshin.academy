@@ -28,7 +28,7 @@ export const CalculatorInput: FC<Props> = ({
       step={step}
       placeholder={placeholder}
       onChange={handleChange}
-      fullWidth
+      width="full"
       className={`dark:bg-neutral-900 [&:input]:mt-2 ${className} `}
     />
   );
