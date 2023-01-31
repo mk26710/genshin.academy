@@ -25,13 +25,14 @@ import { IntlProvider } from "use-intl";
 
 import { jotaiStore } from "~/atoms/store";
 import { Button } from "~/components/Button";
-import { Container } from "~/components/Container";
 import { Footer } from "~/components/Footer";
 import { Navbar } from "~/components/Navbar";
 import { useColorScheme } from "~/hooks/use-color-scheme";
 import { getColorScheme } from "~/utils/color-scheme/common.server";
 import { getMessages, resolveLocale } from "~/utils/i18n.server";
 import { getUser } from "~/utils/session.server";
+
+import { Main } from "./components/Main";
 
 import interCssUrl from "~/styles/inter.css";
 import tailwindStylesheetUrl from "~/styles/tailwind.css";
@@ -165,28 +166,30 @@ export function CatchBoundary() {
       </head>
       <body className="transitions-be-gone h-full">
         <div className="app">
-          <Container className="flex flex-wrap items-center justify-center px-2">
-            <div className="flex flex-col items-center gap-4">
-              <div className="flex text-2xl">
-                <h2 className="mr-2 border-r border-black pr-2 font-bold">{caught.status}</h2>
-                <p>{caught.data?.message || caught.statusText}</p>
-              </div>
+          <Main>
+            <Main.Container display="flex" className="flex-wrap items-center justify-center px-2">
+              <div className="flex flex-col items-center gap-4">
+                <div className="flex text-2xl">
+                  <h2 className="mr-2 border-r border-black pr-2 font-bold">{caught.status}</h2>
+                  <p>{caught.data?.message || caught.statusText}</p>
+                </div>
 
-              <div className="flex flex-col items-center justify-center gap-2 md:flex-row ">
-                {caught?.status === 403 || caught?.status === 401 ? (
-                  <Form action="/logout" method="post">
-                    <Button type="submit" className="w-fit text-center">
-                      Log Out
+                <div className="flex flex-col items-center justify-center gap-2 md:flex-row ">
+                  {caught?.status === 403 || caught?.status === 401 ? (
+                    <Form action="/logout" method="post">
+                      <Button type="submit" className="w-fit text-center">
+                        Log Out
+                      </Button>
+                    </Form>
+                  ) : (
+                    <Button as={Link} to="/">
+                      Go to home page
                     </Button>
-                  </Form>
-                ) : (
-                  <Link to="/" role="button" className="w-fit text-center">
-                    Go to home page
-                  </Link>
-                )}
+                  )}
+                </div>
               </div>
-            </div>
-          </Container>
+            </Main.Container>
+          </Main>
         </div>
       </body>
     </html>
