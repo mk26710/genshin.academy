@@ -15,7 +15,7 @@ import {
 } from "~/atoms/characterSearch";
 import { CharacterCard } from "~/components/cards/CharacterCard";
 import { Checkbox } from "~/components/Checkbox";
-import { Container } from "~/components/Container";
+import { Main } from "~/components/Main";
 import { prisma } from "~/db/prisma.server";
 import { resolveLocale } from "~/utils/i18n.server";
 
@@ -144,22 +144,24 @@ const CharactersIndex = () => {
     }, []);
 
   return (
-    <Container>
-      <SearchAndFilter />
+    <Main>
+      <Main.Container>
+        <SearchAndFilter />
 
-      <div className="mt-4 flex flex-row flex-wrap justify-evenly gap-4 md:justify-start">
-        {filteredEntries.map((entry) => (
-          <CharacterCard
-            key={entry.id}
-            id={entry.meta?.id ?? "unknown"}
-            name={entry.name}
-            assets={entry.meta?.assets}
-            element={entry.meta?.element}
-            rarity={entry.meta?.rarity}
-          />
-        ))}
-      </div>
-    </Container>
+        <div className="mt-4 flex flex-row flex-wrap justify-evenly gap-4 md:justify-start">
+          {filteredEntries.map((entry) => (
+            <CharacterCard
+              key={entry.id}
+              id={entry.meta?.id ?? "unknown"}
+              name={entry.name}
+              assets={entry.meta?.assets}
+              element={entry.meta?.element}
+              rarity={entry.meta?.rarity}
+            />
+          ))}
+        </div>
+      </Main.Container>
+    </Main>
   );
 };
 
