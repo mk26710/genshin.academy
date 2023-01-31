@@ -94,96 +94,67 @@ export default function LoginPage() {
 
   return (
     <Container className="flex items-center justify-center">
-      <div className="w-full max-w-md px-8">
-        <Form method="post" className="space-y-4">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-              Username
-            </label>
-            <div className="mt-1">
+      <div className="w-full max-w-md space-y-8">
+        <div>
+          <h1 className="mx-auto text-center text-lg font-semibold text-gray-700">
+            genshins.academy
+          </h1>
+          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+            Sign in to your account
+          </h2>
+          <p className="mt-2 text-center text-sm text-gray-600">
+            Or{" "}
+            <Link to="/join" className="font-medium text-primary-600 hover:text-primary-500">
+              create an account
+            </Link>
+          </p>
+        </div>
+
+        <Form method="post" className="mt-8 space-y-6">
+          <input type="hidden" name="remember" defaultValue="true" />
+
+          <div className="-space-y-px rounded-md shadow-sm">
+            <div>
+              <label htmlFor="name" className="sr-only">
+                Username
+              </label>
               <input
                 ref={nameRef}
                 id="name"
-                required
-                autoFocus={true}
                 name="name"
                 type="name"
-                autoComplete="name"
-                aria-invalid={actionData?.errors?.name ? true : undefined}
-                aria-describedby="name-error"
-                className="input-field w-full"
+                required
+                className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
+                placeholder="Username"
               />
-              {actionData?.errors?.name && (
-                <div className="pt-1 text-red-700" id="name-error">
-                  {actionData.errors.name}
-                </div>
-              )}
             </div>
-          </div>
 
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-              Password
-            </label>
-            <div className="mt-1">
+            <div>
+              <label htmlFor="password" className="sr-only">
+                Password
+              </label>
               <input
                 id="password"
-                ref={passwordRef}
                 name="password"
                 type="password"
                 autoComplete="current-password"
-                aria-invalid={actionData?.errors?.password ? true : undefined}
-                aria-describedby="password-error"
-                className="input-field w-full"
+                required
+                className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
+                placeholder="Password"
               />
-              {actionData?.errors?.password && (
-                <div className="pt-1 text-red-700" id="password-error">
-                  {actionData.errors.password}
-                </div>
-              )}
             </div>
           </div>
 
           <input type="hidden" name="redirectTo" value={redirectTo} />
-          <Button variant="light" color="primary" type="submit" className="w-full">
-            Log in
-          </Button>
 
           <div>
-            <Button
-              variant="light"
-              color="primary"
-              type="button"
-              onClick={redirectToDiscord}
-              className="w-full"
-            >
-              Login with Discord
+            <Button type="button" onClick={redirectToDiscord} className="w-full rounded-b-none">
+              Use Discord
             </Button>
-          </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember"
-                name="remember"
-                type="checkbox"
-                className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-              />
-              <label htmlFor="remember" className="ml-2 block text-sm text-gray-900">
-                Remember me
-              </label>
-            </div>
-            <div className="text-center text-sm text-gray-500">
-              <Link
-                className="text-blue-500 underline"
-                to={{
-                  pathname: "/join",
-                  search: searchParams.toString(),
-                }}
-              >
-                Sign up
-              </Link>
-            </div>
+            <Button type="submit" className="w-full rounded-t-none">
+              Sign in
+            </Button>
           </div>
         </Form>
       </div>
