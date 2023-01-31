@@ -6,6 +6,7 @@ import { Main } from "~/components/Main";
 const links = [
   { to: "./", title: "Published metas" },
   { to: "./meta", title: "Create meta" },
+  { to: "./assets", title: "Manage assets" },
   { to: "./entry-new", title: "Create entry" },
   { to: "./entry-edit", title: "Edit entry" },
 ];
