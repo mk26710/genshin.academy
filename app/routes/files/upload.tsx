@@ -3,6 +3,7 @@ import type { ZodError } from "zod";
 import type { TypedJsonError } from "~/utils/responses.server";
 
 import { ChevronDoubleLeftIcon } from "@heroicons/react/20/solid";
+import { DocumentArrowUpIcon, PhotoIcon } from "@heroicons/react/24/outline";
 import { PermissionFlag } from "@prisma/client";
 import {
   json,
@@ -10,11 +11,11 @@ import {
   unstable_parseMultipartFormData,
 } from "@remix-run/node";
 import { Form, Link, useActionData } from "@remix-run/react";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Button } from "~/components/Button";
-import { Container } from "~/components/Container";
 import { Input } from "~/components/Input";
+import { Main } from "~/components/Main";
 import { Paper } from "~/components/Paper";
 import { prisma } from "~/db/prisma.server";
 import { useHydrated } from "~/hooks/use-hydrated";
@@ -49,8 +50,10 @@ export const loader = async ({ request }: LoaderArgs) => {
 
 export default function FilesNew() {
   const actionData = useActionData<typeof action>();
-
   const isHydrated = useHydrated();
+
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [file, setFile] = useState<File | null | undefined>(null);
 
   const copyFileUrl = () => {
     if (!isHydrated) {
@@ -65,56 +68,71 @@ export default function FilesNew() {
   }, [actionData]);
 
   return (
-    <Container className="flex max-w-lg flex-col justify-center">
-      <Link
-        to="/files"
-        className="mb-2 flex flex-row items-center text-sm font-semibold uppercase opacity-70"
-      >
-        <ChevronDoubleLeftIcon className="h-5 w-5" /> Back to browsing files
-      </Link>
-      {actionData?.fileUrl && (
-        <Paper className="mb-4 border-green-800 bg-green-400 text-green-800">
-          <p>
-            File uploaded,{" "}
-            <span onClick={copyFileUrl} className="underline hover:cursor-pointer">
-              click to copy url
-            </span>
+    <Main>
+      <Main.Container display="flex" maxW={null} className="max-w-lg flex-col justify-center">
+        <Link
+          to="/files"
+          className="mb-2 flex flex-row items-center text-sm font-semibold uppercase opacity-70"
+        >
+          <ChevronDoubleLeftIcon className="h-5 w-5" /> Back to browsing files
+        </Link>
+        {actionData?.fileUrl && (
+          <Paper className="mb-4 border-green-800 bg-green-400 text-green-800">
+            <p>
+              File uploaded,{" "}
+              <span onClick={copyFileUrl} className="underline hover:cursor-pointer">
+                click to copy url
+              </span>
+            </p>
+          </Paper>
+        )}
+        {actionData?.error != null && (
+          <Paper className="mb-4 border-red-800 bg-red-400 text-red-800">
+            <p>{actionData.error.message}</p>
+            <p>{actionData.error.details}</p>
+          </Paper>
+        )}
+        <Paper as={Form} method="post" encType="multipart/form-data" className="flex flex-col">
+          <h4 className="text-lg font-semibold">File Upload</h4>
+          <p className="mb-6 opacity-60">
+            <span>Filename will be randomly generated</span>
+            <br />
+            <span>File will be converted and compressed to webp</span>
           </p>
+
+          <div className="mb-6">
+            <input
+              ref={fileRef}
+              id="file-upload"
+              name="file"
+              type="file"
+              className="peer sr-only"
+              accept="image/*"
+              onChange={(e) => setFile(e.target.files?.item(0))}
+              required
+            />
+            <label
+              htmlFor="file-upload"
+              className="flex h-full min-h-[9.375rem] w-full cursor-pointer items-center justify-center gap-2 rounded-box border-2 border-dashed border-primary-500 bg-primary-50 p-4 text-primary-500"
+            >
+              {file == null && <DocumentArrowUpIcon className="h-10 w-10" />}
+              {file != null && <PhotoIcon className="h-10 w-10" />}
+              {file == null && <span className="font-semibold">Drop an image here</span>}
+              {file != null && <span className="font-semibold">{file.name}</span>}
+            </label>
+          </div>
+
+          <div className="mb-4">
+            <label className="text-xs font-bold uppercase opacity-60">
+              Tags (tag1, tag2, tag3, ...)
+            </label>
+            <Input name="tags" width="full" />
+          </div>
+
+          <Button type="submit">Upload</Button>
         </Paper>
-      )}
-      {actionData?.error != null && (
-        <Paper className="mb-4 border-red-800 bg-red-400 text-red-800">
-          <p>{actionData.error.message}</p>
-          <p>{actionData.error.details}</p>
-        </Paper>
-      )}
-      <Paper as={Form} method="post" encType="multipart/form-data" className="flex flex-col">
-        <h4 className="text-lg font-semibold">File Upload</h4>
-        <p className="mb-6 opacity-60">
-          <span>Filename will be randomly generated</span>
-          <br />
-          <span>File will be converted and compressed to webp</span>
-        </p>
-
-        <div className="mb-1">
-          <label className="text-xs font-bold uppercase opacity-60">
-            File<span className="text-lg text-red-500">*</span>
-          </label>
-          <input name="file" type="file" className="block overflow-hidden text-ellipsis" required />
-        </div>
-
-        <div className="mb-4">
-          <label className="text-xs font-bold uppercase opacity-60">
-            Tags (tag1, tag2, tag3, ...)
-          </label>
-          <Input name="tags" fullWidth />
-        </div>
-
-        <Button variant="light" color="green" type="submit">
-          Upload
-        </Button>
-      </Paper>
-    </Container>
+      </Main.Container>
+    </Main>
   );
 }
 
