@@ -2,7 +2,7 @@ import type { HeadersFunction, LoaderArgs } from "@remix-run/node";
 
 import { Link, useCatch } from "@remix-run/react";
 
-import { Container } from "~/components/Container";
+import { Main } from "~/components/Main";
 import { getUserByDiscordAccount } from "~/models/user.server";
 import { exchageDiscordCode, getDiscordAccount } from "~/utils/oauth/discord.server";
 import { badRequest, unauthorized } from "~/utils/responses.server";
@@ -39,20 +39,22 @@ export async function loader({ request }: LoaderArgs) {
 }
 
 export default function LoginDiscordCallbackRoute() {
-  return <Container>Logging in...</Container>;
+  return <div>Logging in...</div>;
 }
 
 export function CatchBoundary() {
   const caught = useCatch();
 
   return (
-    <Container className="flex flex-col items-center justify-center" withScrollRestoration>
-      <h1 className="text-4xl font-bold">{caught.status}</h1>
-      <h4 className="opacity-70">{caught.statusText ?? caught.data}</h4>
+    <Main>
+      <Main.Container display="flex" className="flex-col items-center justify-center">
+        <h1 className="text-4xl font-bold">{caught.status}</h1>
+        <h4 className="opacity-70">{caught.statusText ?? caught.data}</h4>
 
-      <Link to="/login" role="button" className="mt-4">
-        Back to login
-      </Link>
-    </Container>
+        <Link to="/login" role="button" className="mt-4">
+          Back to login
+        </Link>
+      </Main.Container>
+    </Main>
   );
 }
