@@ -18,7 +18,7 @@ import { useEffect, useId, useState } from "react";
 
 import { Button } from "~/components/Button";
 import { Checkbox } from "~/components/Checkbox";
-import { Container } from "~/components/Container";
+import { Main } from "~/components/Main";
 import { prisma } from "~/db/prisma.server";
 import { useAfterHydration } from "~/hooks/use-hydrated";
 import { useVisitorLocale } from "~/hooks/use-visitor-locale";
@@ -233,52 +233,54 @@ export default function Files() {
   }, [fetcher.state, fetcher.data?.output, fetcher.data?.cause, fetcher.data?.message]);
 
   return (
-    <Container className="max-w-screen-md">
-      <div className="flex flex-row gap-4">
-        <div className="flex flex-1 flex-row items-center gap-2">
-          <Button color="semiblack" onClick={previousPage}>
-            prev
-          </Button>
-          <span>{page} / ?</span>
-          <Button color="semiblack" onClick={nextPage}>
-            next
-          </Button>
-        </div>
-
-        <div className="flex flex-row gap-2">
-          {selectedFileIds.length > 0 && (
-            <Button color="red" onClick={deleteSelectedFiles}>
-              Delete Selected
+    <Main>
+      <Main.Container display="flex">
+        <div className="flex flex-row gap-4">
+          <div className="flex flex-1 flex-row items-center gap-2">
+            <Button color="semiblack" onClick={previousPage}>
+              prev
             </Button>
-          )}
+            <span>{page} / ?</span>
+            <Button color="semiblack" onClick={nextPage}>
+              next
+            </Button>
+          </div>
 
-          <Button color="semiblack" as={Link} to="/files/upload" role="button">
-            Upload
-          </Button>
+          <div className="flex flex-row gap-2">
+            {selectedFileIds.length > 0 && (
+              <Button color="red" onClick={deleteSelectedFiles}>
+                Delete Selected
+              </Button>
+            )}
+
+            <Button color="semiblack" as={Link} to="/files/upload" role="button">
+              Upload
+            </Button>
+          </div>
         </div>
-      </div>
 
-      <div className="mt-4 overflow-hidden overflow-x-auto rounded-lg border border-neutral-200">
-        <table className="min-w-full divide-y divide-neutral-200 text-sm">
-          <thead className="bg-neutral-100">
-            <tr>
-              <th className="whitespace-nowrap px-4 py-2 text-left font-medium">Select</th>
-              <th className="whitespace-nowrap px-4 py-2 text-left font-medium">View</th>
-              <th className="whitespace-nowrap px-4 py-2 text-left font-medium">Uploader</th>
-              <th className="whitespace-nowrap px-4 py-2 text-left font-medium">Size</th>
-              <th className="whitespace-nowrap px-4 py-2 text-left font-medium">Upload Date</th>
-              <th className="whitespace-nowrap px-4 py-2 text-left font-medium">URL</th>
-            </tr>
-          </thead>
+        <div className="mt-4 overflow-hidden overflow-x-auto rounded-lg border border-neutral-200 bg-white">
+          <table className="min-w-full divide-y divide-neutral-200 text-sm">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="whitespace-nowrap px-4 py-2 text-left font-medium">Select</th>
+                <th className="whitespace-nowrap px-4 py-2 text-left font-medium">View</th>
+                <th className="whitespace-nowrap px-4 py-2 text-left font-medium">Uploader</th>
+                <th className="whitespace-nowrap px-4 py-2 text-left font-medium">Size</th>
+                <th className="whitespace-nowrap px-4 py-2 text-left font-medium">Upload Date</th>
+                <th className="whitespace-nowrap px-4 py-2 text-left font-medium">URL</th>
+              </tr>
+            </thead>
 
-          <tbody className="divide-y divide-neutral-200 text-neutral-700 dark:text-neutral-200">
-            {files.map((file, idx) => (
-              <FileRow key={idx} file={file} />
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </Container>
+            <tbody className="divide-y divide-neutral-200 text-neutral-700 dark:text-neutral-200">
+              {files.map((file, idx) => (
+                <FileRow key={idx} file={file} />
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Main.Container>
+    </Main>
   );
 }
 
