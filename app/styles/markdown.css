@@ -1,4 +1,8 @@
 @layer base {
+  .markdown-content img {
+    border-radius: theme(borderRadius.box);
+  }
+
   .markdown-content iframe {
     width: 100%;
     height: 100%;
