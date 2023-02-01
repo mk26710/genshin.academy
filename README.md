@@ -40,31 +40,11 @@ That's pretty straight forward! Clone the repo, run `yarn install` and feel free
             <b>TenkoSpirit</b>
         </a>
     </td>
-    <td align="center">
-        <a href="https://github.com/Pikachupsik">
-            <img src="https://github.com/Pikachupsik.png" width="100px;" alt=""/>
-            <br />
-            <b>Pikachupsik</b>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/GetMads">
-            <img src="https://github.com/GetMads.png" width="100px;" alt=""/>
-            <br />
-            <b>GetMads</b>
-        </a>
-    </td>
     </tr>
     <tr>
     <td align="center">
-        Owner<br/>
         Developer<br/>
-        Translator
-    </td>
-    <td align="center">
-        Writer
-    </td>
-    <td align="center">
+        Translator<br/>
         Writer
     </td>
     </tr>
