@@ -228,6 +228,8 @@ enum Association {
   INAZUMA
   SUMERU
   SNEZHNAYA
+  FONTAINE
+  NATLAN
 
   @@map("TeyvatAssociation")
 }
@@ -253,6 +255,7 @@ model CharacterMeta {
 enum CharacterAssetType {
   ICON
   AVATAR
+  WISH
   CARD
 }
 
@@ -268,9 +271,9 @@ model CharacterAsset {
 }
 
 model CharacterEntry {
-  id            String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  metaId        String?        @map("meta_id")
-  meta          CharacterMeta? @relation(fields: [metaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  id            String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  metaId        String        @map("meta_id")
+  meta          CharacterMeta @relation(fields: [metaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   locale        String
   name          String
   title         String?
