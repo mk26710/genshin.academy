@@ -46,7 +46,7 @@ export const loader = async ({ request }: LoaderArgs) => {
         },
         {
           NOT: {
-            meta: null,
+            meta: undefined,
           },
         },
       ],
@@ -152,11 +152,11 @@ const CharactersIndex = () => {
           {filteredEntries.map((entry) => (
             <CharacterCard
               key={entry.id}
-              id={entry.meta?.id ?? "unknown"}
+              id={entry.meta.id ?? "unknown"}
               name={entry.name}
-              assets={entry.meta?.assets}
-              element={entry.meta?.element}
-              rarity={entry.meta?.rarity}
+              assets={entry.meta.assets}
+              element={entry.meta.element}
+              rarity={entry.meta.rarity}
             />
           ))}
         </div>
