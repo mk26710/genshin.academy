@@ -6,6 +6,15 @@ import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useTranslations } from "use-intl";
 
+import {
+  AnemoIcon,
+  CryoIcon,
+  DendroIcon,
+  ElectroIcon,
+  GeoIcon,
+  HydroIcon,
+  PyroIcon,
+} from "~/components/icons/genshin/elements";
 import { Main } from "~/components/Main";
 import { prisma } from "~/db/prisma.server";
 import { useVisitorLocale } from "~/hooks/use-visitor-locale";
@@ -68,14 +77,10 @@ export default function CharacterInfo() {
   const locale = useVisitorLocale();
   const t = useTranslations();
 
-  const { characterData } = useLoaderData<typeof loader>();
-  const birthdayDate = new Date(
-    `1700-${characterData.meta.birthMonth}-${characterData.meta.birthDay}`,
-  );
+  const { characterData: character } = useLoaderData<typeof loader>();
+  const birthdayDate = new Date(`1700-${character.meta.birthMonth}-${character.meta.birthDay}`);
 
-  const elementSrc = `/img/elements/${characterData.meta?.element?.toLowerCase()}/icon.webp`;
-
-  const avatarSrc = characterData.meta.assets.find((asset) => asset.type === "AVATAR")?.url;
+  const avatarSrc = character.meta.assets.find((asset) => asset.type === "AVATAR")?.url;
 
   return (
     <Main>
@@ -83,13 +88,31 @@ export default function CharacterInfo() {
         <div className="flex w-full flex-1 flex-row rounded-box border-gray-300 bg-white px-4 py-5 shadow sm:p-6">
           <div className="flex flex-col space-y-6">
             <div className="inline-grid grid-cols-[auto_1fr] gap-2">
-              <h3 className="text-3xl font-semibold">{characterData.name}</h3>
-              <img
-                src={elementSrc}
-                className="inline h-6 w-6 place-self-center justify-self-start"
-              />
+              <h3 className="text-3xl font-semibold">{character.name}</h3>
 
-              <p className="col-span-full">{characterData.description}</p>
+              {character.meta.element === "ANEMO" && (
+                <AnemoIcon className="h-6 w-6 self-center text-[#a4f2cb]" />
+              )}
+              {character.meta.element === "CRYO" && (
+                <CryoIcon className="h-6 w-6 self-center text-[#bef7f9]" />
+              )}
+              {character.meta.element === "DENDRO" && (
+                <DendroIcon className="h-6 w-6 self-center text-[#aee42f]" />
+              )}
+              {character.meta.element === "ELECTRO" && (
+                <ElectroIcon className="h-6 w-6 self-center text-[#debaff]" />
+              )}
+              {character.meta.element === "GEO" && (
+                <GeoIcon className="h-6 w-6 self-center text-[#f0cb50]" />
+              )}
+              {character.meta.element === "HYDRO" && (
+                <HydroIcon className="h-6 w-6 self-center text-[#09e5ff]" />
+              )}
+              {character.meta.element === "PYRO" && (
+                <PyroIcon className="h-6 w-6 self-center text-[#ffa870]" />
+              )}
+
+              <p className="col-span-full">{character.description}</p>
             </div>
 
             <div className="block md:hidden">
@@ -102,7 +125,7 @@ export default function CharacterInfo() {
                   <SparklesIcon className="h-5 w-5" />
                 </div>
                 <span className="flex flex-row">
-                  {Array(characterData.meta.rarity)
+                  {Array(character.meta.rarity)
                     .fill(null)
                     .map((_, idx) => (
                       <StarIcon key={idx} className="h-5 w-5 text-orange-500" />
@@ -115,7 +138,7 @@ export default function CharacterInfo() {
                   <GlobeAsiaAustraliaIcon className="h-5 w-5" />
                 </div>
                 <span className="flex flex-row">
-                  {t("genshin." + characterData.meta.association?.toLowerCase())}
+                  {t("genshin." + character.meta.association?.toLowerCase())}
                 </span>
               </div>
 
@@ -124,7 +147,7 @@ export default function CharacterInfo() {
                   <InformationCircleIcon className="h-5 w-5" />
                 </div>
                 <span className="flex flex-row">
-                  {t("genshin." + characterData.meta.weapon?.toLowerCase())}
+                  {t("genshin." + character.meta.weapon?.toLowerCase())}
                 </span>
               </div>
 
