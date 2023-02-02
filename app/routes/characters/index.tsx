@@ -40,16 +40,14 @@ export const loader = async ({ request }: LoaderArgs) => {
       },
     ],
     where: {
-      AND: [
-        {
-          locale: locale,
-        },
-        {
-          NOT: {
-            meta: undefined,
+      locale: locale,
+      meta: {
+        id: {
+          not: {
+            equals: undefined,
           },
         },
-      ],
+      },
     },
     include: {
       meta: {
