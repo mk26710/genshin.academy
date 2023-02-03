@@ -55,7 +55,7 @@
     "ioredis": "^5.3.0",
     "isbot": "^3.6.5",
     "jotai": "^2.0.0",
-    "lucide-react": "^0.108.0",
+    "lucide-react": "^0.109.0",
     "morgan": "^1.10.0",
     "nanoid": "^4.0.0",
     "nprogress": "^0.2.0",
@@ -74,7 +74,7 @@
     "unified": "^10.1.2",
     "unist-util-visit": "^4.1.2",
     "use-intl": "^2.10.2",
-    "validator": "^13.7.0",
+    "validator": "^13.9.0",
     "zod": "^3.20.2"
   },
   "devDependencies": {
@@ -83,7 +83,7 @@
     "@tailwindcss/typography": "^0.5.9",
     "@types/accept-language-parser": "^1.5.3",
     "@types/bcryptjs": "^2.4.2",
-    "@types/eslint": "^8.4.10",
+    "@types/eslint": "^8.21.0",
     "@types/node": "^18.11.18",
     "@types/nprogress": "^0.2.0",
     "@types/react": "^18.0.27",
