@@ -152,10 +152,12 @@ const CharactersIndex = () => {
               key={entry.id}
               id={entry.meta.id ?? "unknown"}
               name={entry.name}
-              assets={entry.meta.assets}
               element={entry.meta.element}
               rarity={entry.meta.rarity}
-            />
+              to={`./${entry.meta.id}`}
+            >
+              <CharacterCard.Icon assets={entry.meta.assets} />
+            </CharacterCard>
           ))}
         </div>
       </Main.Container>
