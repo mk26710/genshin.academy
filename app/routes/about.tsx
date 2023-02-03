@@ -1,4 +1,18 @@
+import type { HeadersFunction, MetaFunction } from "@remix-run/node";
+
 import { Main } from "~/components/Main";
+import { generateMeta } from "~/utils/meta-generator";
+
+export const meta: MetaFunction = () => {
+  return generateMeta({
+    title: "About",
+    noIndex: true,
+  });
+};
+
+export const headers: HeadersFunction = () => ({
+  "X-Robots-Tag": "noindex",
+});
 
 const WALLETS = [
   ["BCH", "qrelh4lam4rrt6peqzxypl7jllceyhc6es2dpvxw42"],
