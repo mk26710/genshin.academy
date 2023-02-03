@@ -10,15 +10,11 @@ import {
 } from "~/schemas/common.server";
 import { isObjectValue, isString } from "~/utils/helpers";
 
-export const CharacterIdSchema = z.coerce
+export const CharacterIdSchema = z
   .string()
-  .transform((s) => s.toLowerCase())
-  .pipe(
-    z
-      .string()
-      .trim()
-      .regex(/^[a-z-_]+$/i, "ID must contain only latin characters, - or _"),
-  );
+  .trim()
+  .transform((arg) => arg.toLowerCase().replaceAll(/[\s_]+/gi, "-"))
+  .pipe(z.string().regex(/^[a-z-_]+$/i, "ID must contain only latin characters, - or _"));
 
 export const CharacterSchema = z.object({
   id: CharacterIdSchema,
