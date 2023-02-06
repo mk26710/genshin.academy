@@ -6,6 +6,7 @@ import { useLoaderData } from "@remix-run/react";
 import { Main } from "~/components/main";
 import { PostCard } from "~/components/post-card";
 import { prisma } from "~/db/prisma.server";
+import { usePaginator } from "~/hooks/use-paginator";
 import { PageNumSchema } from "~/schemas/common.server";
 import { resolveLocale } from "~/utils/i18n.server";
 
@@ -28,22 +29,34 @@ export const loader = async ({ request }: LoaderArgs) => {
   const skip = (page - 1) * POSTS_PER_PAGE;
   const take = POSTS_PER_PAGE;
 
-  const posts = await prisma.post.findMany({
-    skip,
-    take,
-    where: {
-      lang,
-    },
-    orderBy: {
-      publishedAt: "desc",
-    },
-  });
+  const [posts, postsAggregation] = await Promise.all([
+    prisma.post.findMany({
+      skip,
+      take,
+      where: {
+        lang,
+      },
+      orderBy: {
+        publishedAt: "desc",
+      },
+    }),
+    prisma.post.aggregate({
+      _count: true,
+      where: {
+        lang,
+      },
+    }),
+  ]);
 
-  return json({ posts });
+  const maxPages = Math.ceil(postsAggregation._count / POSTS_PER_PAGE);
+
+  return json({ posts, pages: { max: maxPages, current: page } });
 };
 
 export default function PostsHome() {
-  const { posts } = useLoaderData() satisfies Loader;
+  const { posts, pages } = useLoaderData() satisfies Loader;
+
+  const {} = usePaginator({ max: pages.max, current: pages.current });
 
   return (
     <Main>
