@@ -2,7 +2,7 @@ import type { HeadersFunction, LoaderArgs } from "@remix-run/node";
 
 import { Link, useCatch } from "@remix-run/react";
 
-import { Main } from "~/components/Main";
+import { Main } from "~/components/main";
 import { getUserByDiscordAccount } from "~/models/user.server";
 import { exchageDiscordCode, getDiscordAccount } from "~/utils/oauth/discord.server";
 import { badRequest, unauthorized } from "~/utils/responses.server";

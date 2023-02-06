@@ -13,3 +13,4 @@ node_modules
 .old
 .cache
 /prisma/lib
+.stash
