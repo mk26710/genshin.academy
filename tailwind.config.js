@@ -23,6 +23,7 @@ const myColors = {
 const myScreens = {
   xs: "400px",
   xmd: "896px",
+  desktop: "1000px",
 };
 
 /** Dark colors of Mantine - https://mantine.dev/guides/dark-theme/ */
@@ -210,11 +211,26 @@ module.exports = {
   darkMode: ["class"],
   theme: {
     extend: {
-      borderRadius: {
-        box: "0.375rem",
+      height: {
+        navbar: "var(--header-height)",
+        "screen-available": "calc(100vh - var(--header-height))",
+      },
+      minHeight: {
+        navbar: "var(--header-height)",
+        "screen-available": "calc(100vh - var(--header-height))",
+      },
+      maxHeight: {
+        navbar: "var(--header-height)",
+        "screen-available": "calc(100vh - var(--header-height))",
+      },
+      width: {
+        content: "var(--max-content-width)",
       },
       maxWidth: {
-        content: "1280px",
+        content: "var(--max-content-width)",
+      },
+      borderRadius: {
+        box: "0.375rem",
       },
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
@@ -245,12 +261,6 @@ module.exports = {
           "-webkit-hyphens": "auto",
           "-ms-hyphens": "auto",
           hyphens: "auto",
-        },
-        ".min-h-screen-available": {
-          "min-height": "calc(100vh - var(--header-height))",
-        },
-        ".h-screen-available": {
-          height: "calc(100vh - var(--header-height))",
         },
       });
     }),
