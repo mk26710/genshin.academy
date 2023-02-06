@@ -15,7 +15,7 @@ const PostCardRoot: FC<PostCardRootProps> = ({ to, children }) => {
   const t = useTranslations();
 
   return (
-    <div className="flex break-inside-avoid flex-col rounded-box bg-white shadow transition-shadow hover:shadow-lg">
+    <div className="flex break-inside-avoid flex-col rounded-box bg-white shadow transition-shadow">
       {children}
 
       <Button as={Link} to={to} className="mx-6 mb-6 justify-self-end">
