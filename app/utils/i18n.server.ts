@@ -27,6 +27,7 @@ export const resolveLocale = async (request: Request) => {
     acceptLanguageParser.pick(
       [...supportedLocales],
       url.searchParams.get("locale") ||
+        url.searchParams.get("lang") ||
         userLocale ||
         request.headers.get("accept-language") ||
         defaultLocale,
