@@ -40,39 +40,7 @@ html {
 @layer base {
   .app {
     min-height: 100vh;
-    background-color: theme(colors.gray.50);
-    color: black;
-  }
-
-  .dark .app {
-    background-color: theme(colors.dark.700);
-    color: theme(colors.dark.100);
-  }
-
-  .header {
-    z-index: 10;
-    position: sticky;
-    top: 0;
-
-    height: var(--header-height);
-    width: 100%;
-    background-color: white;
-
-    border-bottom-width: 1px;
-    border-color: var(--default-border-color);
-  }
-
-  .dark .header {
-    @apply backdrop-blur-lg;
-
-    background: theme(colors.dark.700 / 90%);
-    color: theme("colors.neutral.50");
-    border-color: theme("colors.neutral.800");
-  }
-
-  .header-scrolled {
-    border: none;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 15px 0px;
+    background-color: theme(backgroundColor.gray.100);
   }
 
   .main {
@@ -84,98 +52,5 @@ html {
     padding-bottom: var(--default-gap);
     padding-left: var(--default-gap);
     padding-right: var(--default-gap);
-  }
-
-  .card {
-    padding-left: var(--default-gap);
-    padding-right: var(--default-gap);
-    padding-top: var(--default-gap);
-    padding-bottom: var(--default-gap);
-
-    border-width: 1px;
-    border-radius: var(--default-radius);
-    border-color: var(--default-border-color);
-
-    @apply transition-all duration-200;
-  }
-
-  .dark .card {
-    background-color: theme("colors.neutral.800");
-    border-color: theme("colors.neutral.700");
-  }
-
-  .card-shadow {
-    @apply shadow-[0_8px_30px_rgba(0,0,0,.12)];
-  }
-
-  .input-field {
-    @apply form-input border-neutral-200;
-    border-width: 1px;
-    border-radius: var(--default-radius);
-    font-size: theme("fontSize.sm");
-    height: theme("height.10");
-    padding-left: var(--default-gap);
-    padding-right: var(--default-gap);
-  }
-
-  .input-field::placeholder {
-    color: theme("colors.neutral.500");
-  }
-
-  .dark .input-field {
-    border-color: theme("borderColor.neutral.700");
-    background-color: theme("backgroundColor.neutral.800");
-  }
-
-  .dark .input-field::placeholder {
-    color: theme("colors.neutral.500");
-  }
-
-  .select-field {
-    @apply form-select border-neutral-200;
-    text-transform: uppercase;
-    font-weight: 600;
-    background-color: whtie;
-    border-width: 1px;
-    border-radius: var(--default-radius);
-    font-size: theme("fontSize.sm");
-    height: theme("height.10");
-    padding-left: var(--default-gap);
-    padding-right: 2.5rem;
-  }
-
-  .dark .select-field {
-    border-color: theme("borderColor.neutral.700");
-    background-color: theme("backgroundColor.neutral.800");
-  }
-
-  .textarea-field {
-    @apply form-textarea border-neutral-200;
-    background-color: whtie;
-    border-width: 1px;
-    border-radius: var(--default-radius);
-    font-size: theme("fontSize.sm");
-  }
-
-  .select-field:focus,
-  .input-field:focus,
-  .textarea-field:focus {
-    @apply border-black ring-black dark:border-white dark:ring-white;
-  }
-
-  .radio-field {
-    display: flex;
-    background-color: transparent;
-    border-radius: var(--default-border-color);
-    border-width: 2px;
-    padding-left: var(--default-gap);
-    padding-right: 2.5rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    @apply rounded-lg;
-  }
-
-  .radio-field:hover {
-    cursor: pointer;
   }
 }

@@ -1,5 +1,5 @@
 :root {
-  --bar-color: theme(colors.blau.500);
+  --bar-color: theme(colors.primary.500);
 }
 
 /* Make clicks pass-through */
