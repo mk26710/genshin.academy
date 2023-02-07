@@ -56,7 +56,10 @@ export const loader = async ({ request }: LoaderArgs) => {
 export default function PostsHome() {
   const { posts, pages } = useLoaderData() satisfies Loader;
 
-  const {} = usePaginator({ max: pages.max, current: pages.current });
+  const { currentPage, firstPage, prevPage, nextPage, lastPage } = usePaginator({
+    max: pages.max,
+    current: pages.current,
+  });
 
   return (
     <Main>

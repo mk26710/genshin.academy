@@ -23,8 +23,13 @@ export const markdownParser = unified()
   // Adds lazy loading and async decoding to img elements
   .use(() => (root: Root) => {
     visit(root, "element", (node) => {
-      if (node.tagName === "img") {
-        node.properties = { ...node.properties, decoding: "async", loading: "lazy" };
+      if (node.type === "element" && node.tagName === "img") {
+        node.properties = {
+          ...node.properties,
+          decoding: "async",
+          loading: "lazy",
+          "data-viewable-image": "true",
+        };
       }
     });
   })
@@ -39,3 +44,8 @@ export const extractHeadings = (content: string) =>
     id: match.groups?.id,
     value: match.groups?.value,
   }));
+
+export const parseMarkdown = async (s: string) => {
+  const vfile = await markdownParser.process(s);
+  return `${vfile}`;
+};

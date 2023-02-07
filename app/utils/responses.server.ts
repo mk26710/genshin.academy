@@ -43,3 +43,9 @@ export function notFound<T = TypedErrorResponse>(data: T) {
 export function serverError<T = TypedErrorResponse>(data: T) {
   return json(data, { status: 500, statusText: "Internal Server Error" });
 }
+
+export const plainNotFound = () =>
+  new Response("Not Found", {
+    status: 404,
+    statusText: "Not Found",
+  });

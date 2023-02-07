@@ -5,6 +5,12 @@ import { PostType } from "@prisma/client";
 import { z } from "~/lib/zod.server";
 import { supportedLocales } from "~/utils/locales";
 
+export const PostSlugSchema = z
+  .string()
+  .trim()
+  .min(3, "Slug must have at least 3 characters.")
+  .regex(/^[\w\d]+(?:-[\w\d]+)*$/gi, 'Slug must contain only latin characters and dashes ("-").');
+
 export const PostsNewOrEditForm = z.object({
   title: z.string().min(3),
   description: z.string().min(3),
