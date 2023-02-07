@@ -241,7 +241,7 @@ module.exports = {
         blau: myColors.blau,
         dark: mantineDark,
         neutral: openColor.gray,
-        primary: openColor.blue,
+        primary: openColor.indigo,
       },
       screens: {
         ...myScreens,
