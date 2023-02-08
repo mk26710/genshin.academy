@@ -1,5 +1,6 @@
 {
   "delete-post": "Удалить публикацию",
   "edit-post": "Отредактировать публикацию",
-  "post-by": "Пост опубликовал(а) <author>{name}</author>"
+  "post-by": "Пост опубликовал(а) <author>{name}</author>",
+  "author": "Автор"
 }
