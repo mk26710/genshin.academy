@@ -105,6 +105,7 @@ export default function PostsHome() {
 
           {activePages.map((page) => (
             <Link
+              key={`pagination:${page}`}
               to={`?page=${page}`}
               className={clsx(
                 page === currentPage
