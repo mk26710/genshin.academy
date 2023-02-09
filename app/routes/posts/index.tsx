@@ -84,7 +84,7 @@ export default function PostsHome() {
         </div>
 
         <nav
-          className="isolate mt-6 inline-flex -space-x-px self-center rounded-md"
+          className="isolate mt-6 mb-4 inline-flex -space-x-px self-center rounded-md"
           aria-label="Pagination"
         >
           <button
