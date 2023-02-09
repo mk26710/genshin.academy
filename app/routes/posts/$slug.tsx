@@ -1,4 +1,4 @@
-import type { LoaderArgs } from "@remix-run/node";
+import type { LoaderArgs, MetaFunction } from "@remix-run/node";
 
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
@@ -10,6 +10,7 @@ import { useAvatarUrl } from "~/hooks/use-avatar-url";
 import { useVisitorLocale } from "~/hooks/use-visitor-locale";
 import { PostSlugSchema } from "~/schemas/posts.server";
 import { parseMarkdown } from "~/utils/markdown.server";
+import { generateTitle } from "~/utils/meta-generator";
 import { plainNotFound } from "~/utils/responses.server";
 
 export const loader = async ({ params }: LoaderArgs) => {
@@ -38,6 +39,21 @@ export const loader = async ({ params }: LoaderArgs) => {
   const html = await parseMarkdown(post.content.raw);
 
   return json({ post, html });
+};
+
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  return {
+    title: generateTitle(data?.post.title),
+    "og:title": generateTitle(data?.post.title),
+    description: data?.post.description,
+    "og:description": data?.post.description,
+    "og:type": "article",
+    "og:image": data?.post.thumbnailUrl,
+    "og:locale": data?.post.lang,
+    author: data?.post.author?.name,
+    "og:article:author": data?.post.author?.name,
+    keywords: data?.post.tags,
+  };
 };
 
 export default function MarkdownPost() {
