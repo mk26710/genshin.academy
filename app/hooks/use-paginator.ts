@@ -1,5 +1,4 @@
 import { useSearchParams } from "@remix-run/react";
-import { useMemo } from "react";
 
 type UsePageOptions = {
   current?: number | null;
@@ -9,8 +8,22 @@ type UsePageOptions = {
 export const usePaginator = (opts: UsePageOptions = {}) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const parsedPage = useMemo(() => Number(searchParams.get("page")), [searchParams]);
+  const parsedPage = Number(searchParams.get("page"));
   const currentPage = opts?.current ?? parsedPage;
+
+  const activePages = [
+    currentPage - 2,
+    currentPage - 1,
+    currentPage,
+    currentPage + 1,
+    currentPage + 2,
+  ].filter((n) => {
+    if (typeof opts.max === "number") {
+      return n >= 1 && n <= opts.max;
+    }
+
+    return n >= 1;
+  });
 
   const firstPage = () => {
     if (currentPage === 1) {
@@ -54,5 +67,19 @@ export const usePaginator = (opts: UsePageOptions = {}) => {
     setSearchParams(newSearchParams);
   };
 
-  return { currentPage, firstPage, prevPage, nextPage, lastPage };
+  const selectPage = (num: number) => {
+    if (typeof opts.max === "number") {
+      if (num > opts.max) return;
+    }
+
+    if (num < 1 || num === currentPage) {
+      return;
+    }
+
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set("page", `${num}`);
+    setSearchParams(newSearchParams);
+  };
+
+  return { currentPage, firstPage, prevPage, nextPage, lastPage, selectPage, activePages };
 };
