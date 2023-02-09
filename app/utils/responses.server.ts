@@ -1,6 +1,7 @@
+import type { ValidHttpStatusCode } from "./http/status-codes.server";
 import type { ThrownResponse } from "@remix-run/react";
 
-import { json } from "@remix-run/node";
+import { json, Response } from "@remix-run/node";
 
 export type TypedJsonError<Code = string, Message = string, Cause = Error> = {
   code: Code | null;
@@ -49,3 +50,10 @@ export const plainNotFound = () =>
     status: 404,
     statusText: "Not Found",
   });
+
+export const txt = (content: string, status: ValidHttpStatusCode) => {
+  return new Response(content, {
+    status: status,
+    statusText: content,
+  });
+};
