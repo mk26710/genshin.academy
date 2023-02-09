@@ -70,6 +70,7 @@ function App({ locale }: { locale: string }) {
       <head>
         <meta charSet="utf-8" />
         <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta property="og:site_name" content="GENSHIN.ACADEMY" />
         <Meta />
         <Links />
       </head>
