@@ -1,5 +1,11 @@
 import type { HtmlMetaDescriptor } from "@remix-run/node";
 
+const TITLE_TEMPLATE = "GENSHIN.ACADEMY";
+
+export const generateTitle = (s: string) => {
+  return TITLE_TEMPLATE != null ? `${s} - ${TITLE_TEMPLATE}` : s;
+};
+
 type GenerateMetaOpts = {
   noIndex?: boolean;
   title?: string;
@@ -10,8 +16,7 @@ type GenerateMetaOpts = {
 };
 
 export const generateMeta = (opts: GenerateMetaOpts): HtmlMetaDescriptor => {
-  const titleTemplate = "GENSHIN.ACADEMY";
-  const realTitle = titleTemplate != null ? `${opts.title} - ${titleTemplate}` : opts.title;
+  const realTitle = TITLE_TEMPLATE != null ? `${opts.title} - ${TITLE_TEMPLATE}` : opts.title;
 
   let metaTags: HtmlMetaDescriptor = { title: realTitle, "og:title": realTitle };
 
