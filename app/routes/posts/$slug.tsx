@@ -12,7 +12,7 @@ import { PostSlugSchema } from "~/schemas/posts.server";
 import { parseMarkdown } from "~/utils/markdown.server";
 import { plainNotFound } from "~/utils/responses.server";
 
-export const loader = async ({ request, params }: LoaderArgs) => {
+export const loader = async ({ params }: LoaderArgs) => {
   const slug = await PostSlugSchema.parseAsync(params.slug);
   const post = await prisma.post.findFirst({
     where: {
@@ -93,7 +93,7 @@ export default function MarkdownPost() {
 
         <article
           dangerouslySetInnerHTML={{ __html: html }}
-          className="markdown-content prose prose-gray w-full max-w-4xl self-center rounded-box bg-white p-6 shadow prose-p:text-justify"
+          className="markdown-content prose prose-gray w-full max-w-4xl self-center rounded-box bg-white p-6 shadow prose-p:text-justify prose-a:no-underline"
         />
       </Main.Container>
     </Main>
