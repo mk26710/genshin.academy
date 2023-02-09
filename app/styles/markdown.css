@@ -3,6 +3,15 @@
     border-radius: theme(borderRadius.box);
   }
 
+  .markdown-content .icon-link::after {
+    content: "# ";
+  }
+
+  .markdown-content .icon-link {
+    color: theme(textColor.gray.600);
+    @apply no-underline;  
+  }
+
   .markdown-content iframe {
     width: 100%;
     height: 100%;

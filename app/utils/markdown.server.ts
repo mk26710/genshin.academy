@@ -1,5 +1,6 @@
 import type { Root } from "hast";
 
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeRaw from "rehype-raw";
 // import rehypeSanitize, { defaultSchema as sanitizeDefault } from "rehype-sanitize";
 import rehypeSlug from "rehype-slug";
@@ -20,6 +21,7 @@ export const markdownParser = unified()
   .use(remark2Rehype, { allowDangerousHtml: true })
   .use(rehypeRaw, { passThrough: ["details", "summary"] })
   .use(rehypeSlug)
+  .use(rehypeAutolinkHeadings, { properties: { ariaHidden: false } })
   // Adds lazy loading and async decoding to img elements
   .use(() => (root: Root) => {
     visit(root, "element", (node) => {
