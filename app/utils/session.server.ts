@@ -173,7 +173,7 @@ export const requireUserWithEveryFlag = async (
 
   // project owner can do anything
   if (user.permissions.some(({ value }) => value === "ABSOLUTE_POWER")) {
-    return true;
+    return user;
   }
 
   // user permissions must contant every single flag from opts.flags array
