@@ -1,4 +1,4 @@
-import type { User } from "@prisma/client";
+import type { PermissionFlag, User } from "@prisma/client";
 import type { MaybePromise } from "~/types/common";
 
 import {
@@ -15,7 +15,7 @@ import invariant from "tiny-invariant";
 import { redis } from "~/db/redis.server";
 import { getUserById } from "~/models/user.server";
 
-import { typedError, unauthorized } from "./responses.server";
+import { txt, typedError, unauthorized } from "./responses.server";
 
 invariant(process.env.SESSION_SECRET, "SESSION_SECRET must be set");
 
@@ -160,6 +160,26 @@ export const requireUser = async (request: Request) => {
       status: 403,
       statusText: "Disabled Account",
     });
+  }
+
+  return user;
+};
+
+export const requireUserWithEveryFlag = async (
+  request: Request,
+  requiredFlags: PermissionFlag[],
+) => {
+  const user = await requireUser(request);
+
+  // project owner can do anything
+  if (user.permissions.some(({ value }) => value === "ABSOLUTE_POWER")) {
+    return true;
+  }
+
+  // user permissions must contant every single flag from opts.flags array
+  const isAllowed = requiredFlags.every((rf) => user.permissions.some(({ value }) => value === rf));
+  if (!isAllowed) {
+    throw txt("Forbidden", 403);
   }
 
   return user;
