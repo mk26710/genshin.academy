@@ -14,6 +14,7 @@ import {
 } from "~/atoms/characterSearch";
 import { CharacterCard } from "~/components/character-card";
 import { Main } from "~/components/main";
+import { Input } from "~/components/ui/input";
 import { prisma } from "~/db/prisma.server";
 import { resolveLocale } from "~/utils/i18n.server";
 
@@ -89,11 +90,11 @@ const SearchAndFilter: FunctionComponent = () => {
   return (
     <>
       <div className="mb-6 flex flex-row gap-4 lg:flex-row">
-        <input
+        <Input
           placeholder={t(`common.search-by-name`)}
-          className="input"
           onChange={handleChange}
           value={search}
+          className="lg:max-w-xs"
         />
 
         <div
