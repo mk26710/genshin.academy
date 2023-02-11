@@ -1,6 +1,13 @@
 import type { FC } from "react";
 
 import { Menu } from "@headlessui/react";
+import {
+  CalculatorIcon,
+  Cog6ToothIcon,
+  DocumentTextIcon,
+  HomeIcon,
+  UsersIcon,
+} from "@heroicons/react/20/solid";
 import { NavLink, useFetcher } from "@remix-run/react";
 import { clsx } from "clsx";
 import { useTranslations } from "use-intl";
@@ -12,22 +19,27 @@ const NAV_ROUTES = [
   {
     to: "/",
     i18n: { key: "common.home" },
+    Icon: HomeIcon,
   },
   {
     to: "/posts",
     i18n: { key: "common.posts" },
+    Icon: DocumentTextIcon,
   },
   {
     to: "/characters",
     i18n: { key: "common.characters" },
+    Icon: UsersIcon,
   },
   {
     to: "/calculators",
     i18n: { key: "common.calculators" },
+    Icon: CalculatorIcon,
   },
   {
     to: "/settings",
     i18n: { key: "common.settings" },
+    Icon: Cog6ToothIcon,
   },
 ];
 
@@ -125,7 +137,25 @@ export const DesktopNavigator: FC = () => {
 };
 
 export const MobileNavigator: FC = () => {
+  const t = useTranslations();
+
   return (
-    <nav className="fixed bottom-0 left-0 flex h-navbar w-screen flex-row bg-gray-300 desktop:hidden"></nav>
+    <nav className="fixed bottom-0 left-0 flex h-navbar w-screen flex-row justify-evenly overflow-y-auto bg-white px-2 shadow-[0_0_6px_-1px_rgb(0_0_0_/_0.1),_0_0_4px_-2px_rgb(0_0_0_/_0.1)] overflow-overlay desktop:hidden">
+      {NAV_ROUTES.map(({ to, i18n, Icon }, idx) => (
+        <NavLink
+          key={idx + ":mobilenav"}
+          to={to}
+          className={({ isActive }) =>
+            clsx(
+              "flex flex-col items-center justify-center px-2 ",
+              isActive ? "text-primary-500" : "text-gray-600",
+            )
+          }
+        >
+          <Icon className="h-5 w-5" />
+          <h4 className="text-sm font-medium">{t(i18n.key, { count: 99 })}</h4>
+        </NavLink>
+      ))}
+    </nav>
   );
 };
