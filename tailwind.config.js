@@ -2,6 +2,7 @@
 /* eslint-env node */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 
+const defaultColors = require("tailwindcss/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
 const plugin = require("tailwindcss/plugin");
 
@@ -236,12 +237,12 @@ module.exports = {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        ...defaultTheme.colors,
-        ...openColor,
-        blau: myColors.blau,
+        ...defaultColors,
+        // ...openColor,
+        // blau: myColors.blau,
         dark: mantineDark,
-        neutral: openColor.gray,
-        primary: openColor.indigo,
+        gray: defaultColors.neutral,
+        primary: defaultColors.indigo,
       },
       screens: {
         ...myScreens,
@@ -261,6 +262,9 @@ module.exports = {
           "-webkit-hyphens": "auto",
           "-ms-hyphens": "auto",
           hyphens: "auto",
+        },
+        ".overflow-overlay": {
+          overflow: "overlay",
         },
       });
     }),
