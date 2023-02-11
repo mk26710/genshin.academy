@@ -16,6 +16,43 @@
   --default-border-color: theme("colors.gray.300");
 }
 
+body {
+  overflow: overlay;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px
+}
+
+*::-webkit-scrollbar,
+*::-webkit-scrollbar-corner {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: theme(colors.gray.800 / 20%);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: theme(colors.primary.800 / 30%);
+  border-color: theme(colors.primary.800 / 10%);
+  border-width: 1px;
+  border-style: solid;
+}
+
+body::-webkit-scrollbar-track {
+  margin-bottom: var(--header-height);
+}
+
+@screen desktop {
+  body::-webkit-scrollbar-track {
+    margin-top: var(--header-height);
+    margin-bottom: 0;
+  }
+}
+
 .dark {
   color-scheme: dark;
 }

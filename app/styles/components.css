@@ -1,4 +1,56 @@
 @layer components {
+  .input {
+    @apply form-input text-sm;
+    width: 100%;
+    border-radius: theme(borderRadius.box);
+    border-color: theme(colors.gray.300);
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .input:focus {
+    @apply focus:ring-primary-500;
+    border-color: theme(colors.primary.500);
+  }
+
+  .label {
+    @apply text-sm;
+    display: block;
+    font-weight: 500;
+    color: theme(colors.gray.700)
+  }
+
+  .textarea {
+    @apply form-textarea text-sm shadow-sm;
+    display: block;
+    width: 100%;
+    border-radius: theme(borderRadius.box);
+    border-color: theme(colors.gray.300);
+  }
+
+  .textarea:focus {
+    @apply ring-primary-500;
+    border-color: theme(colors.primary.500);
+  }
+
+  .select {
+    @apply form-select shadow-sm text-sm;
+
+    display: block;
+    width: 100%;
+    border-radius: theme(borderRadius.box);
+    border-color: theme(colors.gray.300);
+    background-color: white;
+    padding-top: theme(padding.2);
+    padding-bottom: theme(padding.2);
+    padding-left: theme(padding.3);
+    padding-right: theme(padding.3);
+  }
+
+  .select:focus {
+    @apply border-primary-500 outline-none ring-primary-500;
+  }
+
   .paper {
     @apply shadow-sm;
 
@@ -121,38 +173,6 @@
 
   .button-danger:hover {
     --bg-color: theme(colors.red.900);
-  }
-
-  .input {
-    @apply form-input shadow-sm sm:text-sm;
-    display: block;
-    border-radius: theme(borderRadius.box);
-    border-color: theme(colors.gray.300);
-  }
-
-  .select {
-    @apply form-select shadow-sm sm:text-sm;
-
-    appearance: none;
-    padding-left: 12px;
-    padding-right: 32px;
-    background-color: white;
-    border-radius: theme(borderRadius.box);
-    border-color: theme(colors.gray.300);
-  }
-
-  .textarea {
-    @apply form-textarea shadow-sm sm:text-sm;
-    background-color: white;
-    border-radius: theme(borderRadius.box);
-    border-color: theme(colors.gray.300);
-  }
-
-  .textarea:focus,
-  .input:focus,
-  .select:focus {
-    @apply ring-primary-500;
-    border-color: theme(colors.primary.500);
   }
 
   .button-base {
