@@ -165,19 +165,31 @@ export const requireUser = async (request: Request) => {
   return user;
 };
 
+type VerifyFlagsOptions = {
+  flags: PermissionFlag[];
+  required: PermissionFlag[];
+};
+
+export const verifyEveryFlag = (opts: VerifyFlagsOptions) => {
+  if (opts.flags.includes("ABSOLUTE_POWER")) {
+    return true;
+  }
+
+  return opts.required.every((rf) => opts.flags.some((cf) => cf === rf));
+};
+
 export const requireUserWithEveryFlag = async (
   request: Request,
   requiredFlags: PermissionFlag[],
 ) => {
   const user = await requireUser(request);
+  const userFlags = user.permissions.map(({ value }) => value);
 
-  // project owner can do anything
-  if (user.permissions.some(({ value }) => value === "ABSOLUTE_POWER")) {
-    return user;
-  }
+  const isAllowed = verifyEveryFlag({
+    flags: userFlags,
+    required: requiredFlags,
+  });
 
-  // user permissions must contant every single flag from opts.flags array
-  const isAllowed = requiredFlags.every((rf) => user.permissions.some(({ value }) => value === rf));
   if (!isAllowed) {
     throw txt("Forbidden", 403);
   }
