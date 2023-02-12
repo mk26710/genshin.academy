@@ -2,5 +2,7 @@
   "delete-post": "Delete post",
   "edit-post": "Edit post",
   "post-by": "The post was published by <author>{name}</author>",
-  "author": "Author"
+  "author": "Author",
+  "manage-post": "Manage Post",
+  "delete-warning": "Are you sure about removing this post?"
 }
