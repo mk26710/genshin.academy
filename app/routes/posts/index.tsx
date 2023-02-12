@@ -16,12 +16,13 @@ import { prisma } from "~/db/prisma.server";
 import { usePaginator } from "~/hooks/use-paginator";
 import { PageNumSchema } from "~/schemas/common.server";
 import { resolveLocale } from "~/utils/i18n.server";
+import { generateTitle } from "~/utils/meta-generator";
 
 const POSTS_PER_PAGE = 6;
 
 export const meta: MetaFunction = () => {
   return {
-    title: "Posts",
+    title: generateTitle("Posts"),
   };
 };
 
