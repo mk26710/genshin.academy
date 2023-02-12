@@ -1,10 +1,11 @@
 import type { MetaFunction } from "@remix-run/node";
 
 import { Main } from "~/components/main";
+import { generateTitle } from "~/utils/meta-generator";
 
 export const meta: MetaFunction = () => {
   return {
-    title: "Home",
+    title: generateTitle("Home"),
   };
 };
 
