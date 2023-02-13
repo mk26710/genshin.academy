@@ -8,7 +8,7 @@ import { useTranslations } from "use-intl";
 
 import { Main } from "~/components/main";
 import { Button } from "~/components/ui/button";
-import { prisma } from "~/db/prisma.server";
+import { db } from "~/db/prisma.server";
 import { useAvatarUrl } from "~/hooks/use-avatar-url";
 import { useHydrated } from "~/hooks/use-hydrated";
 import { useOptionalUser } from "~/hooks/use-optional-user";
@@ -22,7 +22,7 @@ import { getUser, verifyEveryFlag } from "~/utils/session.server";
 
 export const loader = async ({ params }: LoaderArgs) => {
   const slug = await PostSlugSchema.parseAsync(params.slug);
-  const post = await prisma.post.findFirst({
+  const post = await db.post.findFirst({
     where: {
       slug,
       content: {
@@ -168,7 +168,7 @@ export const action = async ({ request, params }: ActionArgs) => {
     return txt(statusPhrase(400), 400);
   }
 
-  const post = await prisma.post.findUnique({
+  const post = await db.post.findUnique({
     where: {
       slug: params.slug,
     },
@@ -193,7 +193,7 @@ export const action = async ({ request, params }: ActionArgs) => {
     return txt("Missing Permissions", 403);
   }
 
-  await prisma.post.delete({
+  await db.post.delete({
     where: {
       id: post.id,
     },

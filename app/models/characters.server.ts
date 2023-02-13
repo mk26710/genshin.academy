@@ -1,11 +1,11 @@
-import { prisma } from "~/db/prisma.server";
+import { db } from "~/db/prisma.server";
 
 interface GetCharactersOptions {
   langs?: string[];
 }
 
 export const getCharactersList = async (opts?: GetCharactersOptions) => {
-  return await prisma.genshinCharacter.findMany({
+  return await db.genshinCharacter.findMany({
     select: {
       id: true,
       rarity: true,
@@ -32,7 +32,7 @@ export const getCharactersByBirthday = async (
   month: number,
   opts?: GetCharactersOptions,
 ) => {
-  return await prisma.genshinCharacter.findMany({
+  return await db.genshinCharacter.findMany({
     where: {
       birthDay: day,
       birthMonth: month,
@@ -60,7 +60,7 @@ type GetCharacterById = {
 };
 
 export const getCharacterById = async (id: string, opts?: GetCharacterById) => {
-  const character = await prisma.genshinCharacter.findUnique({
+  const character = await db.genshinCharacter.findUnique({
     where: { id },
     include: {
       assets: true,

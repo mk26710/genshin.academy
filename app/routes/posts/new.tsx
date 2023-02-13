@@ -10,7 +10,7 @@ import { Main } from "~/components/main";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
-import { prisma } from "~/db/prisma.server";
+import { db } from "~/db/prisma.server";
 import { NewPostSchema } from "~/schemas/forms/new-post.server";
 import { generateTitle } from "~/utils/meta-generator";
 import { requireUserWithEveryFlag } from "~/utils/session.server";
@@ -187,7 +187,7 @@ export const action = async ({ request }: LoaderArgs) => {
     });
   }
 
-  const createdPost = await prisma.$transaction(async (tx) => {
+  const createdPost = await db.$transaction(async (tx) => {
     const { title, description, lang, slug, thumbnail, type, tags, text } = validation.data;
 
     return await tx.post.create({

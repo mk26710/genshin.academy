@@ -12,7 +12,7 @@ import clsx from "clsx";
 
 import { Main } from "~/components/main";
 import { PostCard } from "~/components/post-card";
-import { prisma } from "~/db/prisma.server";
+import { db } from "~/db/prisma.server";
 import { usePaginator } from "~/hooks/use-paginator";
 import { PageNumSchema } from "~/schemas/common.server";
 import { resolveLocale } from "~/utils/i18n.server";
@@ -38,7 +38,7 @@ export const loader = async ({ request }: LoaderArgs) => {
   const take = POSTS_PER_PAGE;
 
   const [posts, postsAggregation] = await Promise.all([
-    prisma.post.findMany({
+    db.post.findMany({
       skip,
       take,
       where: {
@@ -48,7 +48,7 @@ export const loader = async ({ request }: LoaderArgs) => {
         publishedAt: "desc",
       },
     }),
-    prisma.post.aggregate({
+    db.post.aggregate({
       _count: true,
       where: {
         lang,

@@ -7,7 +7,7 @@ import {
   DeleteObjectCommand,
 } from "@aws-sdk/client-s3";
 
-import { prisma } from "~/db/prisma.server";
+import { db } from "~/db/prisma.server";
 import { requiredServerEnv } from "~/utils/helpers.server";
 
 export const S3_DOMAIN = requiredServerEnv("S3_DOMAIN");
@@ -80,7 +80,7 @@ export const userUploadToBucket = async (data: Buffer, opts: UserUploadOptions) 
     }),
   );
 
-  await prisma.file.create({
+  await db.file.create({
     data: {
       id: opts.fileId,
       s3Key: key,
@@ -111,7 +111,7 @@ export const deleteFromBucket = async (...keys: string[]) => {
     ),
   );
 
-  const query = await prisma.file.deleteMany({
+  const query = await db.file.deleteMany({
     where: {
       s3Key: {
         in: keys,

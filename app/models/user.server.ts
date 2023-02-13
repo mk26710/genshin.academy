@@ -3,7 +3,7 @@ import type { Password, User, UserRole } from "@prisma/client";
 import { Prisma } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
-import { prisma } from "~/db/prisma.server";
+import { db } from "~/db/prisma.server";
 
 export const includedWithUser = Prisma.validator<Prisma.UserInclude>()({
   flair: true,
@@ -19,21 +19,21 @@ export const includedWithUser = Prisma.validator<Prisma.UserInclude>()({
 });
 
 export const getUserById = async (id: User["id"]) => {
-  return prisma.user.findUnique({
+  return db.user.findUnique({
     where: { id },
     include: includedWithUser,
   });
 };
 
 export const getUserByName = async (name: User["name"]) => {
-  return prisma.user.findUnique({
+  return db.user.findUnique({
     where: { name },
     include: includedWithUser,
   });
 };
 
 export const getUserByNameOrId = async (nameOrId: string) =>
-  await prisma.user.findFirst({
+  await db.user.findFirst({
     where: {
       OR: [{ id: nameOrId }, { name: nameOrId }],
     },
@@ -42,7 +42,7 @@ export const getUserByNameOrId = async (nameOrId: string) =>
 
 export const createUser = async (name: User["name"], password: string) => {
   const hashedPassword = await bcrypt.hash(password, 10);
-  return prisma.user.create({
+  return db.user.create({
     data: {
       name,
       password: {
@@ -60,15 +60,15 @@ export const createUser = async (name: User["name"], password: string) => {
 };
 
 export const deleteUserById = async (id: User["id"]) => {
-  return await prisma.user.delete({ where: { id } });
+  return await db.user.delete({ where: { id } });
 };
 
 export const deleteUserByName = async (name: User["name"]) => {
-  return await prisma.user.delete({ where: { name } });
+  return await db.user.delete({ where: { name } });
 };
 
 export const verifyLogin = async (name: User["name"], password: Password["hash"]) => {
-  const userWithPassword = await prisma.user.findUnique({
+  const userWithPassword = await db.user.findUnique({
     where: { name },
     include: {
       password: true,
@@ -94,7 +94,7 @@ export const verifyLogin = async (name: User["name"], password: Password["hash"]
 export const changePasswordOfUser = async (userId: User["id"], newPassword: string) => {
   const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-  await prisma.password.update({
+  await db.password.update({
     where: { userId },
     data: {
       hash: hashedPassword,
@@ -112,7 +112,7 @@ type UpdateUserOptions = {
 };
 
 export const updateUserById = async (id: string, opts?: UpdateUserOptions) => {
-  return await prisma.user.updateMany({
+  return await db.user.updateMany({
     where: { id },
     data: {
       name: opts?.name,
@@ -129,7 +129,7 @@ type LinkDiscordAccountOptions = {
 };
 
 export const linkDiscordAccountByUserId = async (id: string, options: LinkDiscordAccountOptions) =>
-  prisma.linkedAccounts.create({
+  db.linkedAccounts.create({
     data: {
       userId: id,
       provider: "discord",
@@ -139,7 +139,7 @@ export const linkDiscordAccountByUserId = async (id: string, options: LinkDiscor
   });
 
 export const unlinkDiscordAccountByUserId = async (id: string) =>
-  prisma.linkedAccounts.deleteMany({
+  db.linkedAccounts.deleteMany({
     where: {
       userId: id,
       provider: "discord",
@@ -147,7 +147,7 @@ export const unlinkDiscordAccountByUserId = async (id: string) =>
   });
 
 export const getUserByDiscordAccount = async (discordUserId: string) =>
-  prisma.user.findFirst({
+  db.user.findFirst({
     where: {
       linkedAccounts: {
         some: {
@@ -159,14 +159,14 @@ export const getUserByDiscordAccount = async (discordUserId: string) =>
   });
 
 export const getLinkedAccountsById = async (id: string) =>
-  prisma.linkedAccounts.findMany({
+  db.linkedAccounts.findMany({
     where: {
       userId: id,
     },
   });
 
 export const addUserRolesById = async (id: string, roles: UserRole[]) =>
-  prisma.userRoles.createMany({
+  db.userRoles.createMany({
     data: roles.map((role) => ({
       userId: id,
       title: role,
@@ -174,7 +174,7 @@ export const addUserRolesById = async (id: string, roles: UserRole[]) =>
   });
 
 export const deleteUserRolesById = async (id: string, roles: UserRole[]) =>
-  prisma.userRoles.deleteMany({
+  db.userRoles.deleteMany({
     where: {
       userId: id,
       title: {
@@ -189,14 +189,14 @@ type EditUserRolesOptions = {
 };
 
 export const editUserRolesById = async (id: string, options: EditUserRolesOptions) =>
-  prisma.$transaction([
-    prisma.userRoles.createMany({
+  db.$transaction([
+    db.userRoles.createMany({
       data: options.toAdd.map((role) => ({
         userId: id,
         title: role,
       })),
     }),
-    prisma.userRoles.deleteMany({
+    db.userRoles.deleteMany({
       where: {
         userId: id,
         title: {

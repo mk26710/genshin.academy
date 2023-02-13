@@ -31,4 +31,4 @@ if (process.env.NODE_ENV === "production") {
   console.log("[DEV] Prisma client connected");
 }
 
-export { prisma };
+export { prisma as db };

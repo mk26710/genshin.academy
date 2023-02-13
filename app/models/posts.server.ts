@@ -1,12 +1,12 @@
 import type { Post, PostContent, PostType } from "@prisma/client";
 
-import { prisma } from "~/db/prisma.server";
+import { db } from "~/db/prisma.server";
 
 export const getPostBySlug = async (slug: string) =>
-  await prisma.post.findUnique({ where: { slug }, include: { content: true } });
+  await db.post.findUnique({ where: { slug }, include: { content: true } });
 
 export const getPostBySlugWithAuthor = async (slug: string) =>
-  await prisma.post.findUnique({
+  await db.post.findUnique({
     where: { slug },
     include: {
       content: true,
@@ -25,7 +25,7 @@ export const getPostBySlugWithAuthor = async (slug: string) =>
 type GetLatestPostOptions = Pick<Post, "lang">;
 
 export const getLatestPost = async (opts?: GetLatestPostOptions) =>
-  await prisma.post.findFirst({
+  await db.post.findFirst({
     orderBy: {
       publishedAt: "desc",
     },
@@ -63,7 +63,7 @@ interface SearchPostsPaginatedOptions {
 export const countSearchPostsPaginated = async (
   options: Exclude<SearchPostsPaginatedOptions, "skip" | "take">,
 ) =>
-  await prisma.post.count({
+  await db.post.count({
     where: {
       type: options.type,
       lang: options.lang,
@@ -83,7 +83,7 @@ export const searchPostsPaginated = async ({
   order = "desc",
   ...options
 }: SearchPostsPaginatedOptions) =>
-  await prisma.post.findMany({
+  await db.post.findMany({
     skip,
     take,
     where: {
@@ -133,7 +133,7 @@ type CreatePostOptions = {
 };
 
 export const createPost = async (opts: CreatePostOptions) =>
-  await prisma.post.create({
+  await db.post.create({
     data: {
       slug: opts.slug,
       lang: opts.lang,
@@ -156,7 +156,7 @@ type UpdatePostOptions = Omit<CreatePostOptions, "slug" | "authorId"> & {
 };
 
 export const updatePostBySlug = async (slug: string, opts: UpdatePostOptions) =>
-  await prisma.post.update({
+  await db.post.update({
     where: {
       slug,
     },
@@ -183,6 +183,6 @@ export const updatePostBySlug = async (slug: string, opts: UpdatePostOptions) =>
   });
 
 export const deletePostBySlug = async (slug: string) =>
-  await prisma.post.delete({ where: { slug } });
+  await db.post.delete({ where: { slug } });
 
-export const deletePostById = async (id: string) => await prisma.post.delete({ where: { id } });
+export const deletePostById = async (id: string) => await db.post.delete({ where: { id } });

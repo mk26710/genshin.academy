@@ -15,7 +15,7 @@ import {
 import { CharacterCard } from "~/components/character-card";
 import { Main } from "~/components/main";
 import { Input } from "~/components/ui/input";
-import { prisma } from "~/db/prisma.server";
+import { db } from "~/db/prisma.server";
 import { resolveLocale } from "~/utils/i18n.server";
 
 export const meta: MetaFunction = () => {
@@ -27,7 +27,7 @@ export const meta: MetaFunction = () => {
 export const loader = async ({ request }: LoaderArgs) => {
   const locale = await resolveLocale(request);
 
-  const entries = await prisma.characterEntry.findMany({
+  const entries = await db.characterEntry.findMany({
     orderBy: [
       {
         name: "asc",
