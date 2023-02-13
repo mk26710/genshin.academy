@@ -3,6 +3,7 @@ import type { UserLocale } from "~/utils/locales";
 import { PostType } from "@prisma/client";
 
 import { z } from "~/lib/zod.server";
+import { isString } from "~/utils/helpers";
 import { supportedLocales } from "~/utils/locales";
 
 export const PostSlugSchema = z
@@ -28,13 +29,14 @@ export const PostsNewOrEditForm = z.object({
 const langValidator = (val: unknown) =>
   typeof val === "string" && supportedLocales.includes(val as UserLocale);
 const typeValidator = (val: unknown) => typeof val === "string" && val in PostType;
-const queryTransformer = (val: unknown) =>
-  typeof val === "string" && val.length > 0 ? val : undefined;
+const queryTransformer = (val: unknown) => (isString(val) && val.length > 0 ? val : undefined);
+
+export const PostQuerySchema = z.string().nullish().transform(queryTransformer).optional();
 
 export const PostsSearch = z.object({
   skip: z.number().int().min(0),
   take: z.number().int().min(1),
-  query: z.string().transform(queryTransformer).optional(),
+  query: PostQuerySchema,
   lang: z.custom<UserLocale>(langValidator, { message: "Incorrect language provided" }).optional(),
   order: z.union([z.literal("asc"), z.literal("desc")]).default("desc"),
   authorName: z.string().optional(),
