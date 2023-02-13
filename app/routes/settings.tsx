@@ -1,6 +1,7 @@
 import type { HeadersFunction, MetaFunction } from "@remix-run/node";
 import type { ChangeEvent } from "react";
 
+import { ArrowPathIcon } from "@heroicons/react/20/solid";
 import { useFetcher } from "@remix-run/react";
 
 import { Main } from "~/components/main";
@@ -35,7 +36,14 @@ export default function SettingsRoute() {
     <Main>
       <Main.Container className="grid grid-flow-dense auto-rows-min grid-cols-3 gap-4">
         <div className="flex flex-col gap-2 rounded-box bg-white p-4 py-5 shadow sm:p-6">
-          <h3 className="text-lg font-semibold">Display Language</h3>
+          <h3 className="flex flex-row gap-2 text-lg font-semibold">
+            <span>Display Language</span>
+            {fetcher.type === "actionSubmission" && (
+              <span className="text-primary-500">
+                <ArrowPathIcon className="h-5 w-5 animate-spin" />
+              </span>
+            )}
+          </h3>
 
           <select
             onChange={onChangeLocale}
