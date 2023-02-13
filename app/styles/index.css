@@ -18,6 +18,7 @@
 
 body {
   overflow: overlay;
+  color: theme(textColor.black);
 }
 
 *::-webkit-scrollbar {
