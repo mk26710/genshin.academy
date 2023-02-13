@@ -6,7 +6,7 @@ import acceptLanguageParser from "accept-language-parser";
 
 import { defaultLocale, supportedLocales } from "./locales";
 
-export const localeCookie = createCookie("ZENLESS_LOCALE", {
+export const localeCookie = createCookie("i18n-locale", {
   maxAge: 2_592_000, // 30 days
   path: "/",
   httpOnly: false,
