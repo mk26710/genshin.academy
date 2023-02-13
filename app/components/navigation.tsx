@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import { Menu } from "@headlessui/react";
+import { Menu, Transition } from "@headlessui/react";
 import {
   CalculatorIcon,
   Cog6ToothIcon,
@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { NavLink, useFetcher } from "@remix-run/react";
 import { clsx } from "clsx";
+import { Fragment } from "react";
 import { useTranslations } from "use-intl";
 
 import { useAvatarUrl } from "~/hooks/use-avatar-url";
@@ -83,23 +84,33 @@ export const UserAccount: FC = () => {
           <img src={avatarUrl} className=" h-10 w-10 rounded-full" />
         </Menu.Button>
 
-        <Menu.Items
-          as="div"
-          className="absolute right-0 top-full mt-2 flex w-max origin-top-right flex-col rounded-box bg-white py-2 text-sm shadow"
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
         >
-          {USER_NAV_ROUTES.map((route, idx) => (
-            <Menu.Item key={idx}>
-              <NavLink to={route.to} className={"py-2 px-4 hover:bg-gray-100"}>
-                {t(route.i18n.key)}
-              </NavLink>
+          <Menu.Items
+            as="div"
+            className="absolute right-0 top-full mt-2 flex w-max origin-top-right flex-col rounded-box bg-white py-2 text-sm shadow"
+          >
+            {USER_NAV_ROUTES.map((route, idx) => (
+              <Menu.Item key={idx}>
+                <NavLink to={route.to} className={"py-2 px-4 hover:bg-gray-100"}>
+                  {t(route.i18n.key)}
+                </NavLink>
+              </Menu.Item>
+            ))}
+            <Menu.Item>
+              <button onClick={onLogoutClick} className="flex items-start py-2 px-4">
+                {t("common.logout")}
+              </button>
             </Menu.Item>
-          ))}
-          <Menu.Item>
-            <button onClick={onLogoutClick} className="flex items-start py-2 px-4">
-              {t("common.logout")}
-            </button>
-          </Menu.Item>
-        </Menu.Items>
+          </Menu.Items>
+        </Transition>
       </Menu>
     </div>
   );
