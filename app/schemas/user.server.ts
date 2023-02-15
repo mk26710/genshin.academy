@@ -21,17 +21,6 @@ export const UserNameAndPassword = z.object({
   password: PasswordSchema,
 });
 
-export const PasswordNewPasswordRepeatNew = z
-  .object({
-    currentPassword: PasswordSchema,
-    newPassword: PasswordSchema,
-    newPasswordRepeat: PasswordSchema,
-  })
-  .refine((obj) => obj.newPassword === obj.newPasswordRepeat, {
-    message: "Repeated password doesn't match the new password.",
-    path: ["newPasswordRepeat"],
-  });
-
 export const UserRolesTitles = z.array(
   z.custom<UserRole>(
     (val) => typeof val === "string" && Object.values(UserRole).includes(val as UserRole),
