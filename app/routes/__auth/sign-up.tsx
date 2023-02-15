@@ -1,6 +1,6 @@
 import type { ActionFunction, HeadersFunction } from "@remix-run/node";
 
-import { Form, useActionData } from "@remix-run/react";
+import { Form, Link, useActionData } from "@remix-run/react";
 
 import { Main } from "~/components/main";
 import { Button } from "~/components/ui/button";
@@ -33,6 +33,12 @@ export default function Signup() {
             <h2 className="mt-2 text-center text-3xl font-bold tracking-tight text-gray-900">
               Create an account
             </h2>
+            <p className="mt-2 text-center text-sm text-gray-600">
+              Or{" "}
+              <Link to="/sign-in" className="font-medium text-primary-600 hover:text-primary-500">
+                sign in
+              </Link>
+            </p>
           </div>
 
           <Form method="post" className="mt-8 space-y-6">
