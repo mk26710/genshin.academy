@@ -22,8 +22,8 @@ import { getColorScheme } from "~/utils/color-scheme/common.server";
 import { getMessages, resolveLocale } from "~/utils/i18n.server";
 import { getUser } from "~/utils/session.server";
 
+import rootCss from "~/styles/index.css";
 import interCssUrl from "~/styles/inter.css";
-import tailwindStylesheetUrl from "~/styles/tailwind.css";
 
 export const handle: RouteHandle = {
   id: "root",
@@ -31,9 +31,9 @@ export const handle: RouteHandle = {
 
 export const links: LinksFunction = () => {
   return [
-    { rel: "stylesheet", href: tailwindStylesheetUrl },
     { rel: "preload", href: interCssUrl, as: "style" },
     { rel: "stylesheet", href: interCssUrl },
+    { rel: "stylesheet", href: rootCss },
   ];
 };
 

@@ -2,6 +2,10 @@
  * @type {import('@remix-run/dev').AppConfig}
  */
 module.exports = {
+  future: {
+    unstable_postcss: true,
+    unstable_tailwind: true,
+  },
   cacheDirectory: "./.cache/remix",
   ignoredRouteFiles: ["**/.*", "**/*.css", "**/*.test.{js,jsx,ts,tsx}"],
   serverDependenciesToBundle: [
