@@ -6,6 +6,7 @@ module.exports = {
     unstable_postcss: true,
     unstable_tailwind: true,
   },
+  serverMinify: true,
   cacheDirectory: "./.cache/remix",
   ignoredRouteFiles: ["**/.*", "**/*.css", "**/*.test.{js,jsx,ts,tsx}"],
   serverDependenciesToBundle: [
