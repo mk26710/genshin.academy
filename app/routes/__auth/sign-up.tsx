@@ -104,23 +104,6 @@ export default function Signup() {
             </div>
 
             <div>
-              <label htmlFor="invite-code" className="sr-only">
-                Invite code
-              </label>
-              <input
-                id="invite-code"
-                name="invite-code"
-                type="text"
-                required
-                className="relative block w-full appearance-none rounded-box border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
-                placeholder="Invite code (e.g. S0M3C0D3)"
-              />
-              {actionData?.error?.confirm != null && (
-                <p className="whitespace-pre-line text-red-500">{actionData.error.confirm}</p>
-              )}
-            </div>
-
-            <div>
               <Button type="submit" className="w-full rounded-box">
                 Sign up
               </Button>
