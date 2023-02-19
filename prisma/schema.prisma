@@ -20,7 +20,7 @@ enum UserRole {
 }
 
 model User {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id String @id @default(dbgenerated("fn_uuid_time_ordered()")) @db.Uuid
 
   name        String      @unique @map("username") @db.Citext
   enabled     Boolean     @default(false)
@@ -33,6 +33,7 @@ model User {
 
   roles          UserRoles[]
   password       Password?
+  inviteCode     InviteCode?
   linkedAccounts LinkedAccounts[]
 
   permissions               Permissions[] @relation("UserPermissions")
@@ -52,7 +53,7 @@ model Password {
 }
 
 model LinkedAccounts {
-  id                  String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id                  String   @id @default(dbgenerated("fn_uuid_time_ordered()")) @db.Uuid
   userId              String   @db.Uuid
   provider            String
   providerAccountId   String
@@ -65,7 +66,7 @@ model LinkedAccounts {
 }
 
 model UserFlairs {
-  id      String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id      String  @id @default(dbgenerated("fn_uuid_time_ordered()")) @db.Uuid
   userId  String? @unique @db.Uuid
   text    String?
   bgColor String? @db.VarChar(7)
@@ -122,6 +123,15 @@ model Permissions {
   @@index([providerId])
 }
 
+model InviteCode {
+  id        String   @id @default(dbgenerated("fn_uuid_time_ordered()")) @db.Uuid
+  code      String   @unique
+  expiresAt DateTime
+  usedById  String?  @unique @db.Uuid
+
+  usedBy User? @relation(references: [id], fields: [usedById])
+}
+
 model File {
   id             String   @id
   uploaderId     String?  @db.Uuid
@@ -136,7 +146,7 @@ model File {
 }
 
 model FileTag {
-  id     String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id     String @id @default(dbgenerated("fn_uuid_time_ordered()")) @db.Uuid
   fileId String
   value  String
 
@@ -160,7 +170,7 @@ enum PostStatus {
 }
 
 model Post {
-  id           String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id           String       @id @default(dbgenerated("fn_uuid_time_ordered()")) @db.Uuid
   slug         String       @unique
   authorId     String?      @db.Uuid
   type         PostType     @default(GENERAL)
@@ -180,7 +190,7 @@ model Post {
 }
 
 model PostContent {
-  id     String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id     String @id @default(dbgenerated("fn_uuid_time_ordered()")) @db.Uuid
   postId String @unique @db.Uuid
   raw    String
 
@@ -260,7 +270,7 @@ enum CharacterAssetType {
 }
 
 model CharacterAsset {
-  id              String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id              String              @id @default(dbgenerated("fn_uuid_time_ordered()")) @db.Uuid
   characterMetaId String
   characterMeta   CharacterMeta       @relation(fields: [characterMetaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   type            CharacterAssetType?
@@ -271,7 +281,7 @@ model CharacterAsset {
 }
 
 model CharacterEntry {
-  id            String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id            String        @id @default(dbgenerated("fn_uuid_time_ordered()")) @db.Uuid
   metaId        String        @map("meta_id")
   meta          CharacterMeta @relation(fields: [metaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   locale        String
@@ -285,7 +295,7 @@ model CharacterEntry {
 }
 
 model VoiceActor {
-  id              String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id              String         @id @default(dbgenerated("fn_uuid_time_ordered()")) @db.Uuid
   lang            String
   name            String
   characterMetaId String?
