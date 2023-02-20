@@ -86,29 +86,7 @@
   }
 
   .checkbox {
-    @apply form-checkbox;
-
-    border-radius: 4px;
-    height: 24px;
-    width: 24px;
-    background-color: transparent;
-    outline: unset;
-  }
-
-  .checkbox:focus,
-  .checkbox:focus-visible,
-  .checkbox:focus-within {
-    box-shadow: none;
-  }
-
-  .dark .checkbox {
-    border-color: theme(colors.dark.400);
-    background-color: theme(colors.dark.500);
-  }
-
-  .dark .checkbox:checked {
-    background-color: theme(colors.primary.500);
-    border-color: theme(colors.primary.500);
+    @apply form-checkbox h-6 w-6 rounded border-gray-300 text-primary-600 focus:ring-primary-500;
   }
 
   .button {
