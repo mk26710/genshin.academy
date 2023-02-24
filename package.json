@@ -33,7 +33,7 @@
     "@aws-sdk/client-s3": "^3.261.0",
     "@formatjs/intl": "^2.6.5",
     "@formkit/auto-animate": "^1.0.0-beta.6",
-    "@headlessui/react": "^1.7.8",
+    "@headlessui/react": "^1.7.9",
     "@heroicons/react": "^2.0.14",
     "@prisma/client": "4.9.0",
     "@remix-run/css-bundle": "^1.12.0",
