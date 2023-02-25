@@ -1,16 +1,18 @@
 import type { FC } from "react";
 
-import { Menu, Transition } from "@headlessui/react";
+import { Menu, Popover, Transition } from "@headlessui/react";
 import {
+  Bars3Icon,
   CalculatorIcon,
   Cog6ToothIcon,
   DocumentTextIcon,
   HomeIcon,
   UsersIcon,
+  XMarkIcon,
 } from "@heroicons/react/20/solid";
 import { NavLink, useFetcher } from "@remix-run/react";
 import { clsx } from "clsx";
-import { Fragment } from "react";
+import { useState, Fragment } from "react";
 import { useTranslations } from "use-intl";
 
 import { useAvatarUrl } from "~/hooks/use-avatar-url";
@@ -150,23 +152,45 @@ export const DesktopNavigator: FC = () => {
 export const MobileNavigator: FC = () => {
   const t = useTranslations();
 
+  const [open, setOpen] = useState(false);
+
+  const closePopover = () => {
+    setOpen(false);
+  }
+
   return (
-    <nav className="fixed bottom-0 left-0 flex h-navbar w-screen flex-row justify-evenly overflow-y-auto bg-white px-2 shadow-[0_0_6px_-1px_rgb(0_0_0_/_0.1),_0_0_4px_-2px_rgb(0_0_0_/_0.1)] overflow-overlay desktop:hidden">
-      {NAV_ROUTES.map(({ to, i18n, Icon }, idx) => (
-        <NavLink
-          key={idx + ":mobilenav"}
-          to={to}
-          className={({ isActive }) =>
-            clsx(
-              "flex flex-col items-center justify-center px-2 ",
-              isActive ? "text-primary-500" : "text-gray-600",
-            )
-          }
-        >
-          <Icon className="h-5 w-5" />
-          <h4 className="text-sm font-medium">{t(i18n.key, { count: 99 })}</h4>
-        </NavLink>
-      ))}
-    </nav>
+    <Popover className="fixed right-4 bottom-4 flex flex-col-reverse lg:hidden">
+      <Popover.Button className="w-fit self-end rounded-full bg-primary-500 p-4 opacity-50 shadow-lg transition-opacity hover:opacity-100 focus:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-75 active:opacity-100 ui-open:opacity-100">
+        <Bars3Icon className="h-5 w-5 text-white ui-open:hidden" />
+        <XMarkIcon className="h-5 w-5 text-white ui-not-open:hidden" />
+      </Popover.Button>
+
+      <Transition
+        as={Fragment}
+        enter="transition ease-out duration-200"
+        enterFrom="opacity-0 translate-y-1"
+        enterTo="opacity-100 translate-y-0"
+        leave="transition ease-in duration-150"
+        leaveFrom="opacity-100 translate-y-0"
+        leaveTo="opacity-0 translate-y-1"
+      >
+        <Popover.Panel className="z-10 mb-2 w-max rounded-box bg-primary-500 shadow">
+          <div className="grid grid-cols-1 gap-0 px-2 py-2 text-sm font-semibold">
+            {NAV_ROUTES.map((r) => (
+              <NavLink
+                key={r.to}
+                to={r.to}
+                className={({ isActive }) =>
+                  clsx("rounded-box px-2 py-2 text-white flex flex-row gap-2", isActive && "bg-primary-600")
+                }
+              >
+                <r.Icon className="h-5 w-5" />
+                <span>{t(r.i18n.key, { count: 99 })}</span>
+              </NavLink>
+            ))}
+          </div>
+        </Popover.Panel>
+      </Transition>
+    </Popover>
   );
 };
