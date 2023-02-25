@@ -109,7 +109,7 @@ export const logout = async (request: Request, redirectTo?: string | null) => {
     ["redirectTo", redirectTo === null ? "/" : new URL(request.url).pathname],
   ]);
 
-  return redirect(`/sign-in?${searchParams}`, { headers: headers });
+  return redirect(`/signin?${searchParams}`, { headers: headers });
 };
 
 export const getUserId = async (request: Request): Promise<User["id"] | undefined> => {

@@ -69,7 +69,7 @@ export const UserAccount: FC = () => {
   const onLogoutClick = () => {
     fetcher.submit(null, {
       method: "post",
-      action: "/sign-out",
+      action: "/signout",
     });
   };
 

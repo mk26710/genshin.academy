@@ -65,7 +65,7 @@ export default function AuthLogin() {
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
               Or{" "}
-              <Link to="/sign-up" className="font-medium text-primary-600 hover:text-primary-500">
+              <Link to="/signup" className="font-medium text-primary-600 hover:text-primary-500">
                 create an account
               </Link>
             </p>

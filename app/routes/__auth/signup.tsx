@@ -6,7 +6,7 @@ import { Main } from "~/components/main";
 import { Button } from "~/components/ui/button";
 import { db } from "~/db/prisma.server";
 import { createUser } from "~/models/user.server";
-import { SignUpForm } from "~/schemas/forms/sign-up.server";
+import { SignUpForm } from "~/schemas/forms/signup.server";
 import { badRequest } from "~/utils/responses.server";
 import { createUserSession } from "~/utils/session.server";
 
@@ -35,7 +35,7 @@ export default function Signup() {
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
               Or{" "}
-              <Link to="/sign-in" className="font-medium text-primary-600 hover:text-primary-500">
+              <Link to="/signin" className="font-medium text-primary-600 hover:text-primary-500">
                 sign in
               </Link>
             </p>
