@@ -128,7 +128,7 @@ export default function PostsHome() {
           </button>
         </form>
 
-        <div className="flex flex-col space-y-4 desktop:block desktop:columns-2">
+        <div className="flex flex-1 flex-col space-y-4 desktop:block desktop:columns-2">
           {posts.map(({ id, slug, thumbnailUrl, title, description }) => (
             <PostCard key={id} to={`./${slug}`}>
               <PostCard.Image src={thumbnailUrl ?? ""} />
