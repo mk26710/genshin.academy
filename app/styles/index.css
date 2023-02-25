@@ -77,18 +77,26 @@ html {
 
 @layer base {
   .app {
-    min-height: 100vh;
     background-color: theme(backgroundColor.gray.100);
   }
 
   .main {
-    min-height: var(--h-screen-without-header);
-    max-width: var(--max-content-width);
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: var(--default-gap);
-    padding-bottom: var(--default-gap);
-    padding-left: var(--default-gap);
-    padding-right: var(--default-gap);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;  
+    min-height: 100vh;
+    max-width: 100vw;
+    height: 100%;
+    width: 100%;
+    padding-left: theme(padding.4);
+    padding-right: theme(padding.4);
+    padding-top: theme(padding.4);
+    padding-bottom: theme(padding.4);
+  }
+
+  @screen lg {
+    .main {
+      min-height: var(--h-screen-without-header);
+    }
   }
 }
