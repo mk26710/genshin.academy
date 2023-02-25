@@ -31,6 +31,7 @@
     "@formatjs/intl": "^2.6.7",
     "@formkit/auto-animate": "^1.0.0-beta.6",
     "@headlessui/react": "^1.7.12",
+    "@headlessui/tailwindcss": "^0.1.2",
     "@heroicons/react": "^2.0.16",
     "@prisma/client": "4.10.1",
     "@remix-run/css-bundle": "^1.13.0",

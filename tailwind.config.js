@@ -249,6 +249,7 @@ module.exports = {
     },
   },
   plugins: [
+    require("@headlessui/tailwindcss"),
     require("@tailwindcss/typography"),
     require("@tailwindcss/forms")({
       strategy: "class",
