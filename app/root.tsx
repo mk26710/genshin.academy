@@ -74,7 +74,7 @@ function App({ locale }: { locale: string }) {
         <Meta />
         <Links />
       </head>
-      <body className={clsx("h-full", "antialiased", "mb-[var(--header-height)] desktop:mb-0")}>
+      <body className={clsx("h-full", "antialiased")}>
         <div className="app">
           <DesktopNavigator />
           <Outlet />
