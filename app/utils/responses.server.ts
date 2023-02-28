@@ -11,10 +11,12 @@ export type TypedJsonError<Code = string, Message = string, Cause = Error> = {
 };
 
 export type TypedErrorResponse<Code = string, Message = string, Cause = Error> = {
-  code?: Code;
-  message?: Message;
-  details?: Message;
-  cause?: Cause;
+  error?: {
+    code?: Code;
+    message?: Message;
+    details?: Message;
+    cause?: Cause;
+  };
 };
 
 export type ThrownErrorResponse = ThrownResponse<number, TypedErrorResponse>;
