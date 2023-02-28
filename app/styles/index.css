@@ -78,13 +78,19 @@ html {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;  
-    min-height: var(--h-screen-without-header);
     max-width: 100vw;
+    min-height: 100vh;
     height: 100%;
     width: 100%;
     padding-left: theme(padding.4);
     padding-right: theme(padding.4);
     padding-top: theme(padding.4);
     padding-bottom: theme(padding.4);
+  }
+
+  @screen lg {
+    .main {
+      min-height: var(--h-screen-without-header);
+    }
   }
 }
