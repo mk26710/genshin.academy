@@ -3,7 +3,7 @@ import type { ColorScheme } from "~/utils/color-scheme/common";
 import { createCookie, redirect } from "@remix-run/node";
 
 import { isColorScheme } from "~/utils/color-scheme/common";
-import { safeRedirect } from "~/utils/helpers";
+import { isString, safeRedirect } from "~/utils/helpers";
 
 export const colorSchemeCookie = createCookie("color-scheme", {
   path: "/",
@@ -22,15 +22,22 @@ export const getColorScheme = async (request: Request) => {
   return data;
 };
 
-export const setColorScheme = async (setTo: ColorScheme, redirectTo = "/") => {
+export const setColorScheme = async (setTo: ColorScheme, redirectTo?: string) => {
   if (!isColorScheme(setTo)) {
     throw TypeError(`Tried to set color scheme to an invalid one`);
   }
 
-  const safeRedirectTo = safeRedirect(redirectTo);
-
   const headers = new Headers();
   headers.set("Set-Cookie", await colorSchemeCookie.serialize(setTo));
 
-  return redirect(safeRedirectTo, { headers });
+  if (isString(redirectTo)) {
+    const safeRedirectTo = safeRedirect(redirectTo);
+    return redirect(safeRedirectTo, { headers });
+  }
+
+  return new Response("OK", {
+    status: 200,
+    statusText: "OK",
+    headers,
+  });
 };
