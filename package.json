@@ -35,7 +35,7 @@
     "@formkit/auto-animate": "^1.0.0-beta.6",
     "@headlessui/react": "^1.7.8",
     "@heroicons/react": "^2.0.14",
-    "@prisma/client": "4.9.0",
+    "@prisma/client": "4.10.1",
     "@remix-run/css-bundle": "^1.12.0",
     "@remix-run/express": "^1.12.0",
     "@remix-run/node": "^1.12.0",
