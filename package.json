@@ -75,7 +75,7 @@
     "unist-util-visit": "^4.1.2",
     "use-intl": "^2.10.2",
     "validator": "^13.9.0",
-    "zod": "^3.20.2"
+    "zod": "^3.20.6"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.12.0",
