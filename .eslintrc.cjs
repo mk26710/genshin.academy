@@ -28,40 +28,6 @@ module.exports = {
     "@typescript-eslint/restrict-template-expressions": "off",
     "@next/next/no-img-element": "off",
     "react-hooks/exhaustive-deps": "off",
-    "import/no-named-as-default": 0,
-    "import/no-named-as-default-member": 0,
-    "import/order": [
-      "error",
-      {
-        groups: [
-          "type",
-          "builtin",
-          "external",
-          "internal",
-          ["parent", "sibling", "index"],
-          "object",
-          "unknown",
-        ],
-        pathGroups: [
-          {
-            pattern: "**/*.css",
-            group: "unknown",
-            position: "after",
-          },
-          {
-            pattern: "**/*.scss",
-            group: "unknown",
-            position: "after",
-          },
-        ],
-        "newlines-between": "always",
-        alphabetize: {
-          order: "asc",
-          caseInsensitive: true,
-        },
-        warnOnUnassignedImports: true,
-      },
-    ],
   },
   settings: {
     "import/resolver": {
