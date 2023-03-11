@@ -7,13 +7,12 @@ import {
 } from "@prisma/client";
 import { Form } from "@remix-run/react";
 import { useId } from "react";
-import { badRequest } from "remix-utils";
-
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { db } from "~/db/prisma.server";
 import { CharacterMetaFormSchema } from "~/schemas/forms/new-character-meta.server";
+import { badRequest } from "~/utils/responses.server";
 import { requireUserWithEveryFlag } from "~/utils/session.server";
 
 export async function loader({ request }: LoaderArgs) {

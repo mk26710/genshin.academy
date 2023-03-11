@@ -6,7 +6,6 @@ import { useLoaderData } from "@remix-run/react";
 import { useAtom } from "jotai";
 import { useId, useEffect, useDeferredValue } from "react";
 import { useTranslations } from "use-intl";
-
 import {
   characterSearchAtom,
   charactersFilterFivestarsAtom,

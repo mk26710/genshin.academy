@@ -11,9 +11,8 @@ import {
 } from "@heroicons/react/20/solid";
 import { json } from "@remix-run/node";
 import { Link, useLoaderData, useSearchParams } from "@remix-run/react";
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { useState } from "react";
-
 import { Main } from "~/components/main";
 import { PostCard } from "~/components/post-card";
 import { Input } from "~/components/ui/input";

@@ -5,6 +5,7 @@ module.exports = {
   future: {
     unstable_postcss: true,
     unstable_tailwind: true,
+    v2_routeConvention: true,
   },
   serverMinify: true,
   cacheDirectory: "./.cache/remix",

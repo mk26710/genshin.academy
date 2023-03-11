@@ -16,7 +16,7 @@ import { Provider as JotaiProvider } from "jotai";
 import { IntlProvider } from "use-intl";
 
 import { jotaiStore } from "~/atoms/store";
-import { DesktopNavigator, MobileNavigator } from "~/components/navigation";
+import { HaderAndDesktopNav, MobileNavigator } from "~/components/navigation";
 import { useColorScheme } from "~/hooks/use-color-scheme";
 import { getColorScheme } from "~/utils/color-scheme/common.server";
 import { getMessages, resolveLocale } from "~/utils/i18n.server";
@@ -76,7 +76,7 @@ function App({ locale }: { locale: string }) {
       </head>
       <body className={clsx("h-full", "antialiased")}>
         <div className="app">
-          <DesktopNavigator />
+          <HaderAndDesktopNav />
           <Outlet />
           <MobileNavigator />
           {/* <Footer /> */}

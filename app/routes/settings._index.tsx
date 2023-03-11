@@ -24,14 +24,14 @@ export default function SettingsRoute() {
   const fetcher = useFetcher();
 
   const currentLocale = useVisitorLocale();
-  const currentColorScheme = useColorScheme()
+  const currentColorScheme = useColorScheme();
 
   const onChangeLocale = (e: ChangeEvent<HTMLSelectElement>) => {
     e.preventDefault();
 
     fetcher.submit(
       { locale: e.target.value },
-      { action: "/set-locale", method: "patch", replace: true, preventScrollReset: true },
+      { action: "/settings/locale", method: "patch", replace: true, preventScrollReset: true },
     );
   };
 
@@ -40,7 +40,12 @@ export default function SettingsRoute() {
 
     fetcher.submit(
       { "color-scheme": e.target.value },
-      { action: "/set-color-scheme", method: "patch", replace: true, preventScrollReset: true },
+      {
+        action: "/settings/color-scheme",
+        method: "patch",
+        replace: true,
+        preventScrollReset: true,
+      },
     );
   };
 

@@ -1,6 +1,5 @@
 import { NavLink, Outlet } from "@remix-run/react";
 import clsx from "clsx";
-
 import { Main } from "~/components/main";
 
 export const EDITOR_LINKS = [

@@ -10,7 +10,7 @@ import {
   UsersIcon,
   XMarkIcon,
 } from "@heroicons/react/20/solid";
-import { NavLink, useFetcher } from "@remix-run/react";
+import { Link, NavLink, useFetcher } from "@remix-run/react";
 import { clsx } from "clsx";
 import { useState, Fragment } from "react";
 import { useTranslations } from "use-intl";
@@ -118,13 +118,13 @@ export const UserAccount: FC = () => {
   );
 };
 
-export const DesktopNavigator: FC = () => {
+export const HaderAndDesktopNav: FC = () => {
   const t = useTranslations();
 
   return (
-    <nav className="sticky top-0 hidden h-navbar flex-col bg-white px-4 shadow desktop:flex">
-      <div className="mx-auto flex w-full max-w-content flex-1 flex-row">
-        <ul className="flex flex-1 flex-row gap-6">
+    <header className="sticky top-0 flex h-navbar flex-col bg-white px-4 shadow">
+      <nav className="mx-auto flex w-full max-w-content flex-1 flex-row">
+        <ul className="hidden flex-1 flex-row gap-6 lg:flex">
           {NAV_ROUTES.map((route, idx) => (
             <li key={idx} className="flex max-w-fit flex-1">
               <NavLink
@@ -143,9 +143,13 @@ export const DesktopNavigator: FC = () => {
           ))}
         </ul>
 
+        <div className="flex-1 flex lg:hidden justify-center items-center">
+          <Link to="/" className="text-xl font-bold">genshin<span className="text-primary-700">.academy</span></Link>
+        </div>
+
         <UserAccount />
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 };
 
@@ -156,7 +160,7 @@ export const MobileNavigator: FC = () => {
 
   const closePopover = () => {
     setOpen(false);
-  }
+  };
 
   return (
     <Popover className="fixed right-4 bottom-4 flex flex-col-reverse lg:hidden">
@@ -181,7 +185,10 @@ export const MobileNavigator: FC = () => {
                 key={r.to}
                 to={r.to}
                 className={({ isActive }) =>
-                  clsx("rounded-box px-2 py-2 text-white flex flex-row gap-2", isActive && "bg-primary-600")
+                  clsx(
+                    "flex flex-row gap-2 rounded-box px-2 py-2 text-white",
+                    isActive && "bg-primary-600",
+                  )
                 }
               >
                 <r.Icon className="h-5 w-5" />
