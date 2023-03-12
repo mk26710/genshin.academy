@@ -6,7 +6,7 @@ type ElementIconProps = ComponentPropsWithRef<"svg">;
 
 export const AnemoIcon: FC<ElementIconProps> = ({
   xmlns = "http://www.w3.org/2000/svg",
-  viewBox = "0 0 14 14",
+  viewBox = "0 0 14 13.86",
   ...props
 }) => {
   return (
@@ -27,7 +27,7 @@ export const AnemoIcon: FC<ElementIconProps> = ({
 
 export const CryoIcon: FC<ElementIconProps> = ({
   xmlns = "http://www.w3.org/2000/svg",
-  viewBox = "0 0 14 14",
+  viewBox = "0 0 12.09 14",
   ...props
 }) => {
   return (
@@ -48,7 +48,7 @@ export const CryoIcon: FC<ElementIconProps> = ({
 
 export const DendroIcon: FC<ElementIconProps> = ({
   xmlns = "http://www.w3.org/2000/svg",
-  viewBox = "0 0 14 14",
+  viewBox = "0 0 14 13.31",
   ...props
 }) => {
   return (
@@ -69,7 +69,7 @@ export const DendroIcon: FC<ElementIconProps> = ({
 
 export const ElectroIcon: FC<ElementIconProps> = ({
   xmlns = "http://www.w3.org/2000/svg",
-  viewBox = "0 0 14 14",
+  viewBox = "0 0 14 13.98",
   ...props
 }) => {
   return (
@@ -111,7 +111,7 @@ export const GeoIcon: FC<ElementIconProps> = ({
 
 export const HydroIcon: FC<ElementIconProps> = ({
   xmlns = "http://www.w3.org/2000/svg",
-  viewBox = "0 0 14 14",
+  viewBox = "0 0 14 13.95",
   ...props
 }) => {
   return (
