@@ -12,7 +12,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { Link, NavLink, useFetcher } from "@remix-run/react";
 import { clsx } from "clsx";
-import { useState, Fragment } from "react";
+import { Fragment } from "react";
 import { useTranslations } from "use-intl";
 
 import { useAvatarUrl } from "~/hooks/use-avatar-url";
@@ -143,8 +143,10 @@ export const HaderAndDesktopNav: FC = () => {
           ))}
         </ul>
 
-        <div className="flex-1 flex lg:hidden justify-center items-center">
-          <Link to="/" className="text-xl font-bold">genshin<span className="text-primary-700">.academy</span></Link>
+        <div className="flex flex-1 items-center justify-center lg:hidden">
+          <Link to="/" className="text-xl font-bold">
+            genshin<span className="text-primary-700">.academy</span>
+          </Link>
         </div>
 
         <UserAccount />
@@ -156,11 +158,11 @@ export const HaderAndDesktopNav: FC = () => {
 export const MobileNavigator: FC = () => {
   const t = useTranslations();
 
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
 
-  const closePopover = () => {
-    setOpen(false);
-  };
+  // const closePopover = () => {
+  //   setOpen(false);
+  // };
 
   return (
     <Popover className="fixed right-4 bottom-4 flex flex-col-reverse lg:hidden">
