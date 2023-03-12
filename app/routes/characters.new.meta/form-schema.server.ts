@@ -1,9 +1,9 @@
 import { Association, Element as GenshinElement, Weapon } from "@prisma/client";
-import { z } from "zod";
+import { z } from "~/lib/zod.server";
 
 import { isObjectValue, isString } from "~/utils/helpers";
 
-export const CharacterMetaFormSchema = z.object({
+export const NewCharacterMetaSchema = z.object({
   id: z
     .string()
     .trim()
@@ -41,4 +41,4 @@ export const CharacterMetaFormSchema = z.object({
     .regex(/^(\d{1,2}\.\d{1,2})(\.\d{1,2})?$/gi, "Invalid genshin release version"),
 });
 
-export type CharacterMetaForm = z.infer<typeof CharacterMetaFormSchema>;
+export type CharacterMetaForm = z.infer<typeof NewCharacterMetaSchema>;

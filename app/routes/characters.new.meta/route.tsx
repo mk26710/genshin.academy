@@ -1,16 +1,13 @@
 import type { ActionArgs, HeadersFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
-
-import { Association, Element as GenshinElement, Weapon as GenshinWeapon } from "@prisma/client";
-import { Form } from "@remix-run/react";
-import { useId, useState } from "react";
+import { json } from "@remix-run/node";
 
 import { CharacterMetaForm } from "~/components/forms/character-meta";
 import { Main } from "~/components/main";
-import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
-import { Label } from "~/components/ui/label";
 import { generateTitle } from "~/utils/meta-generator";
 import { requireUserWithEveryFlag } from "~/utils/session.server";
+import { NewCharacterMetaSchema } from "./form-schema.server";
+import { badRequest } from "~/utils/responses.server";
+import { db } from "~/db/prisma.server";
 
 export const headers: HeadersFunction = () => ({
   "X-Robots-Tag": "noindex",
@@ -27,11 +24,7 @@ export const meta: MetaFunction = () => {
   };
 };
 
-export default function CharacterNew() {
-  const id = useId();
-
-  const [accentColor, setAccentColor] = useState("#8e60f2");
-
+export default function CharacterNewFlat() {
   return (
     <Main>
       <Main.Container>
@@ -183,5 +176,50 @@ export default function CharacterNew() {
 }
 
 export async function action({ request }: ActionArgs) {
-  return null;
+  const formData = await request.formData();
+  const formObj = Object.fromEntries(formData.entries());
+
+  const validation = await NewCharacterMetaSchema.safeParseAsync(formObj);
+  if (validation.success !== true) {
+    return badRequest({
+      success: false,
+      error: { message: "Validation Failure", cause: validation.error },
+    });
+  }
+
+  const newEntry = await db.$transaction(async (tx) => {
+    const {
+      id,
+      rarity,
+      element,
+      weapon,
+      accentColor,
+      association,
+      hasVision,
+      isArchon,
+      birthDay,
+      birthMonth,
+      releaseDate,
+      versionReleased,
+    } = validation.data;
+
+    return await tx.characterMeta.create({
+      data: {
+        id,
+        rarity,
+        element,
+        weapon,
+        accentColor,
+        association,
+        hasVision,
+        isArchon,
+        birthDay,
+        birthMonth,
+        releaseDate,
+        versionReleased,
+      },
+    });
+  });
+
+  return json({ success: true, data: newEntry });
 }
