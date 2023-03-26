@@ -6,6 +6,7 @@ import { Main } from "~/components/main";
 import { db } from "~/db/prisma.server";
 import { CharacterIdSchema } from "~/schemas/character.server";
 import { resolveLocale } from "~/utils/i18n.server";
+import { notFound } from "~/utils/responses.server";
 
 export const loader = async ({ request, params }: LoaderArgs) => {
   const id = await CharacterIdSchema.parseAsync(params.id);
@@ -27,6 +28,10 @@ export const loader = async ({ request, params }: LoaderArgs) => {
       },
     },
   });
+
+  if (entry == null) {
+    throw notFound({});
+  }
 
   return json({ entry });
 };
