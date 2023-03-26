@@ -1,5 +1,6 @@
 import type { LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
 import type { ChangeEvent, FunctionComponent } from "react";
+import type { RouteHandle } from "~/types/common";
 
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
@@ -13,9 +14,12 @@ import {
 } from "~/atoms/characterSearch";
 import { CharacterCard } from "~/components/character-card";
 import { Main } from "~/components/main";
-import { Input } from "~/components/ui/input";
 import { db } from "~/db/prisma.server";
 import { resolveLocale } from "~/utils/i18n.server";
+
+export const handle: RouteHandle = {
+  hasSearch: true,
+};
 
 export const meta: MetaFunction = () => {
   return {
@@ -89,11 +93,11 @@ const SearchAndFilter: FunctionComponent = () => {
   return (
     <>
       <div className="mb-6 flex flex-row gap-4 lg:flex-row">
-        <Input
+        <input
           placeholder={t(`common.search-by-name`)}
           onChange={handleChange}
           value={search}
-          className="lg:max-w-xs"
+          className="daisy-input-bordered daisy-input w-full lg:max-w-xs"
         />
 
         <div
@@ -104,7 +108,7 @@ const SearchAndFilter: FunctionComponent = () => {
             <input
               id={`${id}:fivestars`}
               type="checkbox"
-              className="form-checkbox h-6 w-6 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+              className="daisy-checkbox-primary daisy-checkbox"
               checked={fivestars}
               onChange={handleFivestarsCheckboxChange}
             />
@@ -117,7 +121,7 @@ const SearchAndFilter: FunctionComponent = () => {
             <input
               id={`${id}:fourstars`}
               type="checkbox"
-              className="form-checkbox h-6 w-6 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+              className="daisy-checkbox-primary daisy-checkbox"
               checked={fourstars}
               onChange={handleFourstarsCheckboxChange}
             />
@@ -175,7 +179,7 @@ const CharactersIndex = () => {
                 rarity={entry.meta.rarity}
                 to={`./${entry.meta.id}`}
                 iconUrl={iconUrl}
-                className="max-w-[112px]"
+                className="w-full max-w-[112px]"
               />
             );
           })}
