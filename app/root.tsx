@@ -11,12 +11,12 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { Provider as JotaiProvider } from "jotai";
 import { IntlProvider } from "use-intl";
 
 import { jotaiStore } from "~/atoms/store";
-import { HaderAndDesktopNav, MobileNavigator } from "~/components/navigation";
+import { MobileNavigator, Navbar } from "~/components/navigator";
 import { useColorScheme } from "~/hooks/use-color-scheme";
 import { getColorScheme } from "~/utils/color-scheme/common.server";
 import { getMessages, resolveLocale } from "~/utils/i18n.server";
@@ -24,6 +24,7 @@ import { getUser } from "~/utils/session.server";
 
 import rootCss from "~/styles/index.css";
 import interCssUrl from "~/styles/inter.css";
+import { useEffect, useState } from "react";
 
 export const handle: RouteHandle = {
   id: "root",
@@ -64,9 +65,20 @@ export type Loader = SerializeFrom<typeof loader>;
 
 function App({ locale }: { locale: string }) {
   const colorScheme = useColorScheme();
+  const [areTransitionsEnabled, setAreTransitionsEnabled] = useState(false);
+
+  // i sure love the web dev and its perls
+  useEffect(() => {
+    setTimeout(() => {
+      setAreTransitionsEnabled(true);
+    }, 1000);
+  }, []);
 
   return (
-    <html lang={locale} className={clsx(colorScheme)}>
+    <html
+      lang={locale}
+      className={clsx(colorScheme, areTransitionsEnabled === false ? "notransition" : null)}
+    >
       <head>
         <meta charSet="utf-8" />
         <meta content="width=device-width,initial-scale=1" name="viewport" />
@@ -74,9 +86,16 @@ function App({ locale }: { locale: string }) {
         <Meta />
         <Links />
       </head>
-      <body className={clsx("h-full", "antialiased")}>
+      <body
+        className={clsx(
+          "h-full",
+          "antialiased",
+          areTransitionsEnabled === false ? "notransition" : null,
+        )}
+      >
         <div className="app">
-          <HaderAndDesktopNav />
+          {/* <HaderAndDesktopNav /> */}
+          <Navbar />
           <Outlet />
           <MobileNavigator />
           {/* <Footer /> */}
