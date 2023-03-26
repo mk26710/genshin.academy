@@ -2,7 +2,7 @@ import type { VariantProps } from "class-variance-authority";
 import type { ComponentPropsWithRef, FC, HTMLAttributes } from "react";
 
 import { cva } from "class-variance-authority";
-import clsx from "clsx";
+import { clsx } from "clsx";
 
 // Root <main>
 type MainRootProps = ComponentPropsWithRef<"main">;
