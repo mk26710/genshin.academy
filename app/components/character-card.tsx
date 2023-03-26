@@ -4,9 +4,17 @@ import type { FC } from "react";
 import type { Nil } from "~/types/common";
 
 import { Link } from "@remix-run/react";
-import clsx from "clsx";
+import { clsx } from "clsx";
 
-import { AnemoIcon, ElectroIcon } from "./icons/genshin/elements";
+import {
+  AnemoIcon,
+  CryoIcon,
+  DendroIcon,
+  ElectroIcon,
+  GeoIcon,
+  HydroIcon,
+  PyroIcon,
+} from "./icons/genshin/elements";
 
 type CharacterCardProps = {
   to?: To;
@@ -30,12 +38,17 @@ export const CharacterCard: FC<CharacterCardProps> = ({
   return (
     <Wrapper
       to={to ?? ""}
-      className={clsx("relative flex flex-col rounded-box bg-white shadow", className)}
+      className={clsx("daisy-card relative rounded-box bg-base-200", className)}
     >
       {element != null && (
         <div className="absolute -top-[10px] -left-[10px] flex h-8 w-8 items-center justify-center rounded-full bg-black">
-          {element === "ANEMO" && <AnemoIcon className="h-5 w-5" />}
-          {element === "ELECTRO" && <ElectroIcon className="h-5 w-5 text-purple-400" />}
+          {element === "ANEMO" && <AnemoIcon className="h-5 w-5 text-[#33d7a0]" />}
+          {element === "ELECTRO" && <ElectroIcon className="h-5 w-5 text-[#cc80ff]" />}
+          {element === "CRYO" && <CryoIcon className="h-5 w-5 text-[#7af2f2]" />}
+          {element === "DENDRO" && <DendroIcon className="h-5 w-5 text-[#9be53d]" />}
+          {element === "PYRO" && <PyroIcon className="h-5 w-5 text-[#ff6640]" />}
+          {element === "HYDRO" && <HydroIcon className="h-5 w-5 text-[#00c0ff]" />}
+          {element === "GEO" && <GeoIcon className="h-5 w-5 text-[#ffb00d]" />}
         </div>
       )}
 
@@ -52,8 +65,8 @@ export const CharacterCard: FC<CharacterCardProps> = ({
         <img src={iconUrl} className="aspect-square" />
       </figure>
 
-      <div className="flex h-6 items-center justify-center">
-        <h4 className="text-sm font-semibold">{name}</h4>
+      <div className="daisy-card-body grid place-items-center p-0">
+        <h4 className="p-0.5 text-sm font-semibold">{name}</h4>
       </div>
     </Wrapper>
   );
