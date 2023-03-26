@@ -1,5 +1,6 @@
 import type { LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
 import type { FormEvent } from "react";
+import type { RouteHandle } from "~/types/common";
 
 import {
   ChevronRightIcon,
@@ -14,8 +15,6 @@ import { Link, useLoaderData, useSearchParams } from "@remix-run/react";
 import { clsx } from "clsx";
 import { useState } from "react";
 import { Main } from "~/components/main";
-import { PostCard } from "~/components/post-card";
-import { Input } from "~/components/ui/input";
 import { db } from "~/db/prisma.server";
 import { usePaginator } from "~/hooks/use-paginator";
 import { PageNumSchema } from "~/schemas/common.server";
@@ -24,6 +23,10 @@ import { resolveLocale } from "~/utils/i18n.server";
 import { generateTitle } from "~/utils/meta-generator";
 
 const POSTS_PER_PAGE = 6;
+
+export const handle: RouteHandle = {
+  hasSearch: true,
+};
 
 export const meta: MetaFunction = () => {
   return {
@@ -104,57 +107,60 @@ export default function PostsHome() {
   return (
     <Main>
       <Main.Container>
-        <form onSubmit={onSubmitQuery} className="mb-4 flex gap-2">
-          <button
-            onClick={onClearQuery}
-            type="button"
-            className="flex items-center justify-center rounded-box bg-gray-800 px-2 shadow"
-          >
-            <XMarkIcon className="h-5 w-5 text-white" />
-          </button>
-
-          <Input
-            placeholder="I like pineapples on pizza..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-
-          <button
-            type="submit"
-            className="flex items-center justify-center rounded-box bg-primary-500 px-2 shadow"
-          >
-            <MagnifyingGlassIcon className="h-5 w-5 text-white" />
-          </button>
+        <form onSubmit={onSubmitQuery} className="daisy-form-control mb-4">
+          <div className="daisy-input-group">
+            <button
+              onClick={onClearQuery}
+              type="button"
+              className="daisy-btn-square daisy-btn bg-base-200 hover:bg-base-100"
+            >
+              <XMarkIcon className="h-5 w-5" />
+            </button>
+            <input
+              type="text"
+              placeholder="Search…"
+              className="daisy-input-bordered daisy-input w-full"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            <button className="daisy-btn-square daisy-btn bg-base-200 hover:bg-base-100">
+              <MagnifyingGlassIcon className="h-5 w-5" />
+            </button>
+          </div>
         </form>
 
-        <div className="flex flex-1 flex-col space-y-4 desktop:block desktop:columns-2">
+        <div className="flex flex-1 flex-col space-y-4 md:block md:columns-2 desktop:block desktop:columns-3">
           {posts.map(({ id, slug, thumbnailUrl, title, description }) => (
-            <PostCard key={id} to={`./${slug}`}>
-              <PostCard.Image src={thumbnailUrl ?? ""} />
-              <PostCard.Title>{title}</PostCard.Title>
-              <PostCard.Body>
+            <Link
+              key={id}
+              to={`./${slug}`}
+              className="daisy-card break-inside-avoid overflow-y-hidden bg-base-200 shadow-xl "
+            >
+              <figure className="px-10 pt-10">
+                <img src={thumbnailUrl ?? ""} className="aspect-video rounded-box object-cover" />
+              </figure>
+
+              <div className="daisy-card-body items-center text-center">
+                <h2 className="daisy-card-title">{title}</h2>
                 <p>{description}</p>
-              </PostCard.Body>
-            </PostCard>
+                <div className="daisy-card-actions mt-2">
+                  <button className="daisy-btn-primary daisy-btn">Read Now</button>
+                </div>
+              </div>
+            </Link>
           ))}
         </div>
 
         <nav
-          className="isolate mt-6 mb-4 inline-flex -space-x-px self-center rounded-md"
+          className="isolate mt-6 mb-4 inline-flex gap-x-1  self-center rounded-md"
           aria-label="Pagination"
         >
-          <button
-            onClick={firstPage}
-            className="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
-          >
+          <button onClick={firstPage} className="daisy-btn-circle daisy-btn relative">
             <span className="sr-only">First</span>
             <ChevronDoubleLeftIcon className="h-5 w-5" aria-hidden="true" />
           </button>
 
-          <button
-            onClick={prevPage}
-            className="relative inline-flex items-center border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
-          >
+          <button onClick={prevPage} className="daisy-btn-circle daisy-btn relative">
             <span className="sr-only">Previous</span>
             <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
           </button>
@@ -164,27 +170,20 @@ export default function PostsHome() {
               key={`pagination:${page}`}
               to={`?page=${page}`}
               className={clsx(
-                page === currentPage
-                  ? "relative z-10 inline-flex items-center border border-indigo-500 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-600 focus:z-20"
-                  : "relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20",
+                "daisy-btn-circle daisy-btn relative",
+                page === currentPage ? "daisy-btn-primary text-primary-content" : null,
               )}
             >
               {page}
             </Link>
           ))}
 
-          <button
-            onClick={nextPage}
-            className="relative inline-flex items-center border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
-          >
+          <button onClick={nextPage} className="daisy-btn-circle daisy-btn relative">
             <span className="sr-only">Next</span>
             <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
           </button>
 
-          <button
-            onClick={lastPage}
-            className="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
-          >
+          <button onClick={lastPage} className="daisy-btn-circle daisy-btn relative">
             <span className="sr-only">Last</span>
             <ChevronDoubleRightIcon className="h-5 w-5" aria-hidden="true" />
           </button>
