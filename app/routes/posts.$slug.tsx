@@ -92,7 +92,7 @@ export default function MarkdownPost() {
     <Main>
       <Main.Container>
         {maybeUser != null && (
-          <div className="mb-4 flex w-full max-w-4xl flex-col gap-2 self-center rounded-box bg-white p-6 shadow prose-p:text-justify">
+          <div className="mb-4 flex w-full max-w-4xl flex-col gap-2 self-center rounded-box bg-base-200 p-6 shadow prose-p:text-justify">
             <h2 className="text-lg font-semibold text-gray-700">{t("posts.manage-post")}</h2>
             <div className="flex flex-row gap-2">
               <Button as={Link} to="./edit" color="semiblack">
@@ -105,52 +105,58 @@ export default function MarkdownPost() {
           </div>
         )}
 
-        <div className="mb-4 w-full max-w-4xl self-center rounded-box bg-white p-6 shadow prose-p:text-justify">
+        <div className="daisy-card z-0 mb-4 w-full max-w-4xl self-center bg-base-200">
           {post.thumbnailUrl && (
-            <figure className="mb-4">
-              <img src={post.thumbnailUrl} className="aspect-video rounded-box" />
+            <figure className="mb-4 px-10 pt-10">
+              <img src={post.thumbnailUrl} className="w-full rounded-box object-cover" />
             </figure>
           )}
-          <h1 className="text-4xl font-bold">{post.title}</h1>
-          {post.description && (
-            <p className="mt-4 text-justify text-gray-800">{post.description}</p>
-          )}
-        </div>
-
-        <div className="mb-4 flex w-full max-w-4xl flex-row items-center self-center rounded-box bg-white p-6 shadow prose-p:text-justify">
-          <div className="flex flex-1 flex-row gap-2">
-            <figure>
-              <img
-                src={authorAvatarUrl}
-                className="aspect-square h-12 w-12 rounded-full object-contain"
-              />
-            </figure>
-
-            <div className="flex flex-col items-center">
-              <h3 className="text-lg font-bold">{post.author?.name}</h3>
-              <span className="text-sm italic text-gray-700">{t("posts.author")}</span>
-            </div>
+          <div className="daisy-card-body">
+            <h1 className="daisy-card-title">{post.title}</h1>
+            {post.description && <p className="mt-4 text-justify">{post.description}</p>}
           </div>
-
-          <p className="hidden text-sm italic text-gray-700 md:inline-block">
-            {isHydrated && (
-              <Fragment>
-                {Intl.DateTimeFormat(locale, {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                }).format(publishDate)}
-              </Fragment>
-            )}
-          </p>
         </div>
 
-        <article
-          dangerouslySetInnerHTML={{ __html: html }}
-          className="markdown-content prose prose-gray w-full max-w-4xl self-center rounded-box bg-white p-6 shadow prose-p:text-justify prose-a:no-underline"
-        />
+        <div className="daisy-card z-0 mb-4 w-full max-w-4xl self-center bg-base-200">
+          <div className="daisy-card-body grid grid-cols-[1fr_auto] items-center">
+            <div className="flex flex-1 flex-row gap-2">
+              <figure>
+                <img
+                  src={authorAvatarUrl}
+                  className="aspect-square h-12 w-12 rounded-full object-cover"
+                />
+              </figure>
+
+              <div className="flex flex-col items-center place-self-end self-end">
+                <h3 className="text-lg font-bold">{post.author?.name}</h3>
+                <span className="text-sm">{t("posts.author")}</span>
+              </div>
+            </div>
+
+            <p className="hidden text-sm italic md:inline-block">
+              {isHydrated && (
+                <Fragment>
+                  {Intl.DateTimeFormat(locale, {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  }).format(publishDate)}
+                </Fragment>
+              )}
+            </p>
+          </div>
+        </div>
+
+        <div className="daisy-card w-full max-w-4xl self-center bg-base-200">
+          <div className="daisy-card-body">
+            <article
+              dangerouslySetInnerHTML={{ __html: html }}
+              className="markdown-content prose daisy-prose max-w-none prose-p:text-justify prose-a:no-underline"
+            />
+          </div>
+        </div>
       </Main.Container>
     </Main>
   );
