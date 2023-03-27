@@ -17,7 +17,7 @@ export const PostCard: FC<PostCardProps> = ({ slug, title, description, thumbnai
 
   return (
     <Link
-      to={`./${slug}`}
+      to={`/posts/${slug}`}
       className="daisy-card break-inside-avoid overflow-y-hidden bg-base-200 shadow-xl "
     >
       <figure className="aspect-video px-10 pt-10">
