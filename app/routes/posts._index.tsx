@@ -21,8 +21,7 @@ import { PageNumSchema } from "~/schemas/common.server";
 import { PostQuerySchema } from "~/schemas/posts.server";
 import { resolveLocale } from "~/utils/i18n.server";
 import { generateTitle } from "~/utils/meta-generator";
-import { useTranslations } from "use-intl";
-import { LazyImage } from "~/components/lazy-image";
+import { PostCard } from "~/components/cards/post-card";
 
 const POSTS_PER_PAGE = 6;
 
@@ -82,8 +81,6 @@ export const loader = async ({ request }: LoaderArgs) => {
 export default function PostsHome() {
   const { posts, pages } = useLoaderData() satisfies Loader;
 
-  const t = useTranslations();
-
   const { currentPage, firstPage, prevPage, nextPage, lastPage, activePages } = usePaginator({
     max: pages.max,
     current: pages.current,
@@ -135,26 +132,13 @@ export default function PostsHome() {
 
         <div className="flex flex-1 flex-col space-y-4 md:block md:columns-2 desktop:block desktop:columns-3">
           {posts.map(({ id, slug, thumbnailUrl, title, description }) => (
-            <Link
+            <PostCard
               key={id}
-              to={`./${slug}`}
-              className="daisy-card break-inside-avoid overflow-y-hidden bg-base-200 shadow-xl "
-            >
-              <figure className="aspect-video px-10 pt-10">
-                <LazyImage
-                  src={thumbnailUrl ?? ""}
-                  className="aspect-video rounded-box object-cover"
-                />
-              </figure>
-
-              <div className="daisy-card-body items-center text-center">
-                <h2 className="daisy-card-title">{title}</h2>
-                <p>{description}</p>
-                <div className="daisy-card-actions mt-2">
-                  <button className="daisy-btn-primary daisy-btn">{t("common.read")}</button>
-                </div>
-              </div>
-            </Link>
+              slug={slug}
+              thumbnailUrl={thumbnailUrl}
+              title={title}
+              description={description}
+            />
           ))}
         </div>
 
