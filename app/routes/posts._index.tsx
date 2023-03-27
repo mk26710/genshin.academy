@@ -22,6 +22,7 @@ import { PostQuerySchema } from "~/schemas/posts.server";
 import { resolveLocale } from "~/utils/i18n.server";
 import { generateTitle } from "~/utils/meta-generator";
 import { useTranslations } from "use-intl";
+import { LazyImage } from "~/components/lazy-image";
 
 const POSTS_PER_PAGE = 6;
 
@@ -139,8 +140,11 @@ export default function PostsHome() {
               to={`./${slug}`}
               className="daisy-card break-inside-avoid overflow-y-hidden bg-base-200 shadow-xl "
             >
-              <figure className="px-10 pt-10">
-                <img src={thumbnailUrl ?? ""} className="aspect-video rounded-box object-cover" />
+              <figure className="aspect-video px-10 pt-10">
+                <LazyImage
+                  src={thumbnailUrl ?? ""}
+                  className="aspect-video rounded-box object-cover"
+                />
               </figure>
 
               <div className="daisy-card-body items-center text-center">
