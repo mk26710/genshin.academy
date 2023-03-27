@@ -38,112 +38,150 @@ export default function NewPost() {
   return (
     <Main>
       <Main.Container>
-        <Form
-          method="post"
-          className="flex flex-col gap-2 rounded-box bg-white p-4 py-5 shadow sm:p-6 "
-        >
-          <h2 className="font-semibold text-gray-900">New Post</h2>
-          <p className="mb-4 text-sm text-gray-700">
-            This form will create a new post on the website, once created it will be publicly
-            available!
-          </p>
+        <Form method="post" className="daisy-card flex flex-col gap-2 bg-base-200 shadow">
+          <div className="daisy-card-body">
+            <h2 className="font-semibold">New Post</h2>
+            <p className="mb-4 text-sm">
+              This form will create a new post on the website, once created it will be publicly
+              available!
+            </p>
 
-          <div className="flex flex-col gap-0.5">
-            <Label htmlFor={`${id}:title`}>Post Title</Label>
-            <Input
-              name="title"
-              id={`${id}:title`}
-              placeholder="Some very clickbaity title..."
-              required
-            />
-            {actionData?.error?.title != null && (
-              <p className="text-sm text-red-500">{actionData.error.title}</p>
-            )}
+            <div className="daisy-form-control">
+              <label htmlFor={`${id}:title`} className="daisy-label">
+                <span className="daisy-label-text">Post Title</span>
+              </label>
+              <input
+                name="title"
+                id={`${id}:title`}
+                placeholder="Some very clickbaity title..."
+                className="daisy-input-bordered daisy-input"
+                required
+              />
+              {actionData?.error?.title != null && (
+                <p className="text-sm text-red-500">{actionData.error.title}</p>
+              )}
+            </div>
+
+            <div className="daisy-form-control">
+              <label htmlFor={`${id}:description`} className="daisy-label">
+                <span className="daisy-label-text">Description</span>
+              </label>
+              <textarea
+                name="description"
+                id={`${id}:description`}
+                placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit."
+                className="daisy-textarea-bordered daisy-textarea"
+              />
+              {actionData?.error?.description != null && (
+                <p className="text-sm text-red-500">{actionData.error.description}</p>
+              )}
+            </div>
+
+            <div className="daisy-form-control">
+              <label htmlFor={`${id}:lang`} className="daisy-label">
+                <span className="daisy-label-text">Language</span>
+              </label>
+              <select
+                name="lang"
+                id={`${id}:lang`}
+                className="daisy-select-bordered daisy-select"
+                required
+              >
+                <option value="ru">Русский</option>
+                <option value="en">English</option>
+              </select>
+              {actionData?.error?.lang != null && (
+                <p className="text-sm text-red-500">{actionData.error.lang}</p>
+              )}
+            </div>
+
+            <div className="daisy-form-control">
+              <label htmlFor={`${id}:slug`} className="daisy-label">
+                <span className="daisy-label-text">Slug</span>
+              </label>
+              <input
+                name="slug"
+                id={`${id}:slug`}
+                placeholder="nice-url"
+                required
+                className="daisy-input-bordered daisy-input"
+              />
+              {actionData?.error?.slug != null && (
+                <p className="text-sm text-red-500">{actionData.error.slug}</p>
+              )}
+            </div>
+
+            <div className="daisy-form-control">
+              <label htmlFor={`${id}:type`} className="daisy-label">
+                <span className="daisy-label-text">Type</span>
+              </label>
+              <select
+                name="type"
+                id={`${id}:type`}
+                className="daisy-select-bordered daisy-select"
+                required
+              >
+                {Object.values(PostType).map((pt) => (
+                  <option key={pt} value={pt}>
+                    {pt}
+                  </option>
+                ))}
+              </select>
+              {actionData?.error?.type != null && (
+                <p className="text-sm text-red-500">{actionData.error.type}</p>
+              )}
+            </div>
+
+            <div className="daisy-form-control">
+              <label htmlFor={`${id}:tags`} className="daisy-label">
+                <span className="daisy-label-text">Tags</span>
+              </label>
+              <input
+                name="tags"
+                id={`${id}:tags`}
+                placeholder="Tag1, tag2, tag3, ..."
+                className="daisy-input-bordered daisy-input"
+              />
+              {actionData?.error?.tags != null && (
+                <p className="text-sm text-red-500">{actionData.error.tags}</p>
+              )}
+            </div>
+
+            <div className="daisy-form-control">
+              <label htmlFor={`${id}:thumbnail`} className="daisy-label">
+                <span className="daisy-label-text">Thumbnail URL</span>
+              </label>
+              <input
+                name="thumbnail"
+                id={`${id}:thumbnail`}
+                placeholder="https://s3.genshin.academy/picture.png"
+                className="daisy-input-bordered daisy-input"
+              />
+              {actionData?.error?.thumbnail != null && (
+                <p className="text-sm text-red-500">{actionData.error.thumbnail}</p>
+              )}
+            </div>
+
+            <div className="daisy-form-control">
+              <label htmlFor={`${id}:text`} className="daisy-label">
+                <span className="daisy-label-text">Content (Markdown)</span>
+              </label>
+              <textarea
+                name="text"
+                id={`${id}:text`}
+                placeholder="**Lorem** _ipsum_ dolor *sit* amet `consectetur adipisicing` elit."
+                className="daisy-textarea-bordered daisy-textarea"
+                required
+              />
+              {actionData?.error?.text != null && (
+                <p className="text-sm text-red-500">{actionData.error.text}</p>
+              )}
+            </div>
+
+            <button type="submit" className="daisy-btn-primary daisy-btn mt-4">
+              Create
+            </button>
           </div>
-
-          <div className="flex flex-col gap-0.5">
-            <Label htmlFor={`${id}:description`}>Description</Label>
-            <textarea
-              name="description"
-              id={`${id}:description`}
-              placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-              className="textarea"
-            />
-            {actionData?.error?.description != null && (
-              <p className="text-sm text-red-500">{actionData.error.description}</p>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-0.5">
-            <Label htmlFor={`${id}:lang`}>Language</Label>
-            <select name="lang" id={`${id}:lang`} className="select" required>
-              <option value="ru">Русский</option>
-              <option value="en">English</option>
-            </select>
-            {actionData?.error?.lang != null && (
-              <p className="text-sm text-red-500">{actionData.error.lang}</p>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-0.5">
-            <Label htmlFor={`${id}:slug`}>Slug</Label>
-            <Input name="slug" id={`${id}:slug`} placeholder="nice-url" required />
-            {actionData?.error?.slug != null && (
-              <p className="text-sm text-red-500">{actionData.error.slug}</p>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-0.5">
-            <Label htmlFor={`${id}:type`}>Type</Label>
-            <select name="type" id={`${id}:type`} className="select" required>
-              {Object.values(PostType).map((pt) => (
-                <option key={pt} value={pt}>
-                  {pt}
-                </option>
-              ))}
-            </select>
-            {actionData?.error?.type != null && (
-              <p className="text-sm text-red-500">{actionData.error.type}</p>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-0.5">
-            <Label htmlFor={`${id}:tags`}>Tags</Label>
-            <Input name="tags" id={`${id}:tags`} placeholder="Tag1, tag2, tag3, ..." />
-            {actionData?.error?.tags != null && (
-              <p className="text-sm text-red-500">{actionData.error.tags}</p>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-0.5">
-            <Label htmlFor={`${id}:thumbnail`}>Thumbnail URL</Label>
-            <Input
-              name="thumbnail"
-              id={`${id}:thumbnail`}
-              placeholder="https://s3.genshin.academy/picture.png"
-            />
-            {actionData?.error?.thumbnail != null && (
-              <p className="text-sm text-red-500">{actionData.error.thumbnail}</p>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-0.5">
-            <Label htmlFor={`${id}:text`}>Content (Markdown)</Label>
-            <textarea
-              name="text"
-              id={`${id}:text`}
-              placeholder="**Lorem** _ipsum_ dolor *sit* amet `consectetur adipisicing` elit."
-              className="textarea"
-              required
-            />
-            {actionData?.error?.text != null && (
-              <p className="text-sm text-red-500">{actionData.error.text}</p>
-            )}
-          </div>
-
-          <Button type="submit" className="mt-4">
-            Create
-          </Button>
         </Form>
       </Main.Container>
     </Main>
