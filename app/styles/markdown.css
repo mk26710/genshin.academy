@@ -1,6 +1,6 @@
 @layer base {
   .markdown-content img {
-    border-radius: theme(borderRadius.box);
+    border-radius: theme(borderRadius.xl);
   }
 
   .markdown-content .icon-link::after {
