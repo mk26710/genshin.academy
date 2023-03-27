@@ -19,6 +19,7 @@ import { parseMarkdown } from "~/utils/markdown.server";
 import { generateTitle } from "~/utils/meta-generator";
 import { plainNotFound, txt } from "~/utils/responses.server";
 import { getUser, verifyEveryFlag } from "~/utils/session.server";
+import { LazyImage } from "~/components/lazy-image";
 
 export const loader = async ({ params }: LoaderArgs) => {
   const slug = await PostSlugSchema.parseAsync(params.slug);
@@ -107,8 +108,8 @@ export default function MarkdownPost() {
 
         <div className="daisy-card z-0 mb-4 w-full max-w-4xl self-center bg-base-200">
           {post.thumbnailUrl && (
-            <figure className="mb-4 px-10 pt-10">
-              <img src={post.thumbnailUrl} className="w-full rounded-box object-cover" />
+            <figure className="mb-4 aspect-video px-10 pt-10">
+              <LazyImage src={post.thumbnailUrl} className="w-full rounded-xl object-cover" />
             </figure>
           )}
           <div className="daisy-card-body">
