@@ -21,6 +21,7 @@ import { PageNumSchema } from "~/schemas/common.server";
 import { PostQuerySchema } from "~/schemas/posts.server";
 import { resolveLocale } from "~/utils/i18n.server";
 import { generateTitle } from "~/utils/meta-generator";
+import { useTranslations } from "use-intl";
 
 const POSTS_PER_PAGE = 6;
 
@@ -79,6 +80,8 @@ export const loader = async ({ request }: LoaderArgs) => {
 
 export default function PostsHome() {
   const { posts, pages } = useLoaderData() satisfies Loader;
+
+  const t = useTranslations();
 
   const { currentPage, firstPage, prevPage, nextPage, lastPage, activePages } = usePaginator({
     max: pages.max,
@@ -144,7 +147,7 @@ export default function PostsHome() {
                 <h2 className="daisy-card-title">{title}</h2>
                 <p>{description}</p>
                 <div className="daisy-card-actions mt-2">
-                  <button className="daisy-btn-primary daisy-btn">Read Now</button>
+                  <button className="daisy-btn-primary daisy-btn">{t("common.read")}</button>
                 </div>
               </div>
             </Link>
