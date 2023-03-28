@@ -4,12 +4,18 @@ import { getUserByDiscordAccount } from "~/models/user.server";
 import { exchageDiscordCode, getDiscordAccount } from "~/utils/oauth/discord.server";
 import { badRequest, unauthorized } from "~/utils/responses.server";
 import { createUserSession } from "~/utils/session.server";
+import { OAuathTypeSchema as OAuthTypeSchema } from "./validator.server";
 
 export const headers: HeadersFunction = () => ({
   "X-Robots-Tag": "noindex",
 });
 
-export async function loader({ request }: LoaderArgs) {
+async function link_loader({ request }: LoaderArgs) {
+  // TODO
+  return null;
+}
+
+async function sigin({ request }: LoaderArgs) {
   const url = new URL(request.url);
 
   const discordCode = url.searchParams.get("code");
@@ -31,6 +37,21 @@ export async function loader({ request }: LoaderArgs) {
     request,
     userId: user.id,
     remember: true,
-    redirectTo: "/me",
+    redirectTo: "/",
   });
+}
+
+export async function loader({ request, context, params }: LoaderArgs) {
+  const url = new URL(request.url);
+  const searchParams = url.searchParams;
+
+  const oauthType = await OAuthTypeSchema.parseAsync(searchParams.get("type"));
+
+  if (oauthType === "signin") {
+    return await sigin({ request, context, params });
+  } else if (oauthType === "link") {
+    return await link_loader({ request, context, params });
+  }
+
+  return null;
 }
