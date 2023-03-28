@@ -5,7 +5,6 @@ import { Form, Link, useActionData, useLoaderData, useSearchParams } from "@remi
 import { useEffect, useRef } from "react";
 
 import { Main } from "~/components/main";
-import { Button } from "~/components/ui/button";
 import { verifyLogin } from "~/models/user.server";
 import { safeRedirect } from "~/utils/helpers";
 import { getDiscordLoginOAuthURL } from "~/utils/oauth/discord.server";
@@ -56,28 +55,21 @@ export default function AuthLogin() {
         className="items-center justify-center"
       >
         <div className="w-full max-w-md space-y-8">
-          <div>
-            <h1 className="mx-auto text-center text-lg font-semibold text-gray-700">
-              genshins.academy
-            </h1>
-            <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-              Sign in with your account
-            </h2>
-            <p className="mt-2 text-center text-sm text-gray-600">
-              Or{" "}
-              <Link to="/signup" className="font-medium text-primary-600 hover:text-primary-500">
-                create an account
-              </Link>
-            </p>
-          </div>
+          <Form method="post" className="daisy-card mt-8 bg-base-200">
+            <div className="daisy-card-body">
+              <h2 className="self-center text-xl font-bold">Sigin In</h2>
+              <p className="mt-2 text-center text-sm text-gray-600">
+                Or{" "}
+                <Link to="/signup" className="daisy-link-primary font-medium">
+                  create an account
+                </Link>
+              </p>
 
-          <Form method="post" className="mt-8 space-y-6">
-            <input type="hidden" name="remember" defaultValue="true" />
+              <input type="hidden" name="remember" defaultValue="true" />
 
-            <div className="-space-y-px rounded-md shadow-sm">
-              <div>
-                <label htmlFor="name" className="sr-only">
-                  Username
+              <div className="daisy-form-control">
+                <label htmlFor="name" className="diasy-label">
+                  <span className="daisy-label-text">Username</span>
                 </label>
                 <input
                   ref={nameRef}
@@ -85,14 +77,14 @@ export default function AuthLogin() {
                   name="name"
                   type="name"
                   required
-                  className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
-                  placeholder="Username"
+                  className="daisy-input-bordered daisy-input relative block w-full"
+                  placeholder="coolname123"
                 />
               </div>
 
-              <div>
-                <label htmlFor="password" className="sr-only">
-                  Password
+              <div className="daisy-form-control">
+                <label htmlFor="password" className="daisy-label">
+                  <span className="daisy-label-text">Password</span>
                 </label>
                 <input
                   id="password"
@@ -100,22 +92,25 @@ export default function AuthLogin() {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
-                  placeholder="Password"
+                  className="daisy-input-bordered daisy-input relative block w-full"
+                  placeholder="superpassword0123"
                 />
               </div>
-            </div>
+              <input type="hidden" name="redirectTo" value={redirectTo} />
 
-            <input type="hidden" name="redirectTo" value={redirectTo} />
+              <div className="daisy-btn-group daisy-btn-group-vertical mt-6">
+                <button
+                  type="button"
+                  onClick={redirectToDiscord}
+                  className="daisy-btn-primary daisy-btn w-full"
+                >
+                  Sign in with Discord
+                </button>
 
-            <div>
-              <Button type="button" onClick={redirectToDiscord} className="w-full rounded-b-none">
-                Use Discord
-              </Button>
-
-              <Button type="submit" className="w-full rounded-t-none">
-                Sign in
-              </Button>
+                <button type="submit" className="daisy-btn-primary daisy-btn w-full">
+                  Sign in
+                </button>
+              </div>
             </div>
           </Form>
         </div>
