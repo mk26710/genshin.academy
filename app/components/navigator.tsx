@@ -82,7 +82,7 @@ export const UserAccount: FC = () => {
     <div className="flex max-w-fit flex-1 flex-row items-center">
       <Menu as="div" className="relative flex h-full flex-1">
         <Menu.Button>
-          <img src={avatarUrl} className="h-10 w-10 rounded-full" />
+          <img src={avatarUrl} className="h-10 w-10 rounded-full object-cover" />
         </Menu.Button>
 
         <Transition
@@ -151,7 +151,7 @@ export const Navbar: FC = () => {
             ))}
           </div>
 
-          <div className="flex-none gap-2">
+          <div className="flex-none gap-4">
             <div
               className={clsx(
                 "daisy-form-control hidden lg:flex",
