@@ -138,6 +138,7 @@ export default function PostsHome() {
               thumbnailUrl={thumbnailUrl}
               title={title}
               description={description}
+              className="duration-150 hover:-translate-y-1"
             />
           ))}
         </div>
