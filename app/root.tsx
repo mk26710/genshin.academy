@@ -1,4 +1,4 @@
-import type { LinksFunction, LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
+import type { LinksFunction, LoaderArgs, SerializeFrom, V2_MetaFunction } from "@remix-run/node";
 import type { RouteHandle } from "~/types/common";
 
 import { json } from "@remix-run/node";
@@ -38,10 +38,10 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const meta: MetaFunction<typeof loader | undefined> = ({ data }) => ({
-  title: "GENSHIN.ACADEMY",
-  "color-scheme": Boolean(data?.colorScheme) ? data?.colorScheme : "dark light",
-});
+export const meta: V2_MetaFunction<typeof loader | undefined> = ({ data }) => [
+  { title: "GENSHIN.ACADEMY" },
+  { "color-scheme": Boolean(data?.colorScheme) ? data?.colorScheme : "dark light" },
+];
 
 export async function loader({ request }: LoaderArgs) {
   const resolvedLocale = await resolveLocale(request);

@@ -1,4 +1,4 @@
-import type { HeadersFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
+import type { HeadersFunction, LoaderArgs, V2_MetaFunction } from "@remix-run/node";
 
 import { PostType } from "@prisma/client";
 import { json } from "@remix-run/node";
@@ -7,9 +7,6 @@ import { useId } from "react";
 import { redirect } from "react-router";
 
 import { Main } from "~/components/main";
-import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
-import { Label } from "~/components/ui/label";
 import { db } from "~/db/prisma.server";
 import { NewPostSchema } from "~/schemas/forms/new-post.server";
 import { generateTitle } from "~/utils/meta-generator";
@@ -19,10 +16,10 @@ export const headers: HeadersFunction = () => ({
   "X-Robots-Tag": "noindex",
 });
 
-export const meta: MetaFunction = () => ({
-  robots: "noindex",
-  title: generateTitle("New Post"),
-});
+export const meta: V2_MetaFunction = () => [
+  { name: "robots", content: "noindex" },
+  { title: generateTitle("New Post") },
+];
 
 export const loader = async ({ request }: LoaderArgs) => {
   await requireUserWithEveryFlag(request, ["NEW_POST"]);

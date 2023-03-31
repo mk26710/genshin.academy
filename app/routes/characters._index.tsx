@@ -1,4 +1,4 @@
-import type { LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
+import type { LoaderArgs, V2_MetaFunction, SerializeFrom } from "@remix-run/node";
 import type { ChangeEvent, FunctionComponent } from "react";
 import type { RouteHandle } from "~/types/common";
 
@@ -21,11 +21,7 @@ export const handle: RouteHandle = {
   hasSearch: true,
 };
 
-export const meta: MetaFunction = () => {
-  return {
-    title: "Characters - GENSHIN.ACADEMY",
-  };
-};
+export const meta: V2_MetaFunction = () => [{ title: "Characters - GENSHIN.ACADEMY" }];
 
 export const loader = async ({ request }: LoaderArgs) => {
   const locale = await resolveLocale(request);

@@ -1,4 +1,4 @@
-import type { LoaderArgs, MetaFunction, SerializeFrom } from "@remix-run/node";
+import type { LoaderArgs, V2_MetaFunction, SerializeFrom } from "@remix-run/node";
 import type { FormEvent } from "react";
 import type { RouteHandle } from "~/types/common";
 
@@ -29,11 +29,7 @@ export const handle: RouteHandle = {
   hasSearch: true,
 };
 
-export const meta: MetaFunction = () => {
-  return {
-    title: generateTitle("Posts"),
-  };
-};
+export const meta: V2_MetaFunction = () => [{ title: generateTitle("Posts") }];
 
 type Loader = SerializeFrom<typeof loader>;
 
@@ -144,7 +140,7 @@ export default function PostsHome() {
         </div>
 
         <nav
-          className="isolate mt-6 mb-4 inline-flex gap-x-1  self-center rounded-md"
+          className="isolate mb-4 mt-6 inline-flex gap-x-1  self-center rounded-md"
           aria-label="Pagination"
         >
           <button onClick={firstPage} className="daisy-btn-circle daisy-btn relative">

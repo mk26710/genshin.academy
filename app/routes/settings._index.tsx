@@ -1,4 +1,4 @@
-import type { HeadersFunction, MetaFunction } from "@remix-run/node";
+import type { HeadersFunction, V2_MetaFunction } from "@remix-run/node";
 import type { ChangeEvent } from "react";
 
 import { ArrowPathIcon } from "@heroicons/react/20/solid";
@@ -15,10 +15,10 @@ export const headers: HeadersFunction = () => ({
   "X-Robots-Tag": "noindex",
 });
 
-export const meta: MetaFunction = () => ({
-  robots: "noindex",
-  title: generateTitle("New Post"),
-});
+export const meta: V2_MetaFunction = () => [
+  { name: "robots", content: "noindex" },
+  { title: generateTitle("New Post") },
+];
 
 export default function SettingsRoute() {
   const fetcher = useFetcher();

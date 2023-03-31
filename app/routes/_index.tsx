@@ -1,4 +1,4 @@
-import type { LoaderArgs, MetaFunction } from "@remix-run/node";
+import type { LoaderArgs, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { PostCard } from "~/components/cards/post-card";
@@ -8,11 +8,7 @@ import { db } from "~/db/prisma.server";
 import { resolveLocale } from "~/utils/i18n.server";
 import { generateTitle } from "~/utils/meta-generator";
 
-export const meta: MetaFunction = () => {
-  return {
-    title: generateTitle("Home"),
-  };
-};
+export const meta: V2_MetaFunction = () => [{ title: generateTitle("Home") }];
 
 export const loader = async ({ request }: LoaderArgs) => {
   const userLocale = await resolveLocale(request);

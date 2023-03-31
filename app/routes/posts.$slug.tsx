@@ -1,4 +1,4 @@
-import type { ActionArgs, LoaderArgs, MetaFunction } from "@remix-run/node";
+import type { ActionArgs, LoaderArgs, V2_MetaFunction } from "@remix-run/node";
 import type { MouseEvent } from "react";
 
 import { redirect, json } from "@remix-run/node";
@@ -49,19 +49,19 @@ export const loader = async ({ params }: LoaderArgs) => {
   return json({ post, html });
 };
 
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  return {
-    title: generateTitle(data?.post.title),
-    "og:title": generateTitle(data?.post.title),
-    description: data?.post.description,
-    "og:description": data?.post.description,
-    "og:type": "article",
-    "og:image": data?.post.thumbnailUrl,
-    "og:locale": data?.post.lang,
-    author: data?.post.author?.name,
-    "og:article:author": data?.post.author?.name,
-    keywords: data?.post.tags,
-  };
+export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
+  return [
+    { title: generateTitle(data?.post.title) },
+    { property: "og:title", content: generateTitle(data?.post.title) },
+    { name: "description", content: data?.post.description },
+    { property: "og:description", content: data?.post.description },
+    { property: "og:type", content: "article" },
+    { property: "og:image", content: data?.post.thumbnailUrl },
+    { property: "og:locale", content: data?.post.lang },
+    { name: "author", content: data?.post.author?.name },
+    { property: "og:article:author", content: data?.post.author?.name },
+    { name: "keywords", content: data?.post.tags },
+  ];
 };
 
 export default function MarkdownPost() {

@@ -1,4 +1,4 @@
-import type { ActionArgs, HeadersFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
+import type { ActionArgs, HeadersFunction, LoaderArgs, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 
 import { CharacterMetaForm } from "~/components/forms/character-meta";
@@ -18,10 +18,8 @@ export async function loader({ request }: LoaderArgs) {
   return null;
 }
 
-export const meta: MetaFunction = () => {
-  return {
-    title: generateTitle("New Character Meta"),
-  };
+export const meta: V2_MetaFunction = () => {
+  return [{ title: generateTitle("New Character Meta") }];
 };
 
 export default function CharacterNewFlat() {
