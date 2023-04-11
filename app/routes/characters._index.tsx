@@ -175,7 +175,7 @@ const CharactersIndex = () => {
                 rarity={entry.meta.rarity}
                 to={`./${entry.meta.id}`}
                 iconUrl={iconUrl}
-                className="w-full max-w-[112px]"
+                className="h-fit w-full max-w-[112px] transition-all hover:brightness-110"
               />
             );
           })}
