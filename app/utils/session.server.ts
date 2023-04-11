@@ -17,11 +17,12 @@ import { getUserById } from "~/models/user.server";
 
 import { txt, typedError, unauthorized } from "./responses.server";
 
+// Credits to https://github.com/remix-run/remix/pull/5949
+
 invariant(process.env.SESSION_SECRET, "SESSION_SECRET must be set");
 
 const SESSION_MAX_AGE = 172800; // 2 days
 const SESSION_USER_KEY = "userId";
-const SESSION_REDIS_PREFIX = "zenless:session:";
 const SESSION_COOKIE_NAME = "__session";
 
 export const sessionCookie = createCookie(SESSION_COOKIE_NAME, {
@@ -33,35 +34,41 @@ export const sessionCookie = createCookie(SESSION_COOKIE_NAME, {
   secure: process.env.NODE_ENV === "production",
 });
 
+const withPrefix = (arg: unknown) => {
+  return `session:${arg}`;
+};
+
+const generateSessionId = () => {
+  const id = createId();
+  return withPrefix(id);
+};
+
 export const sessionStorage = createSessionStorage({
   cookie: sessionCookie,
   createData: async (data, expires = dayjs().add(SESSION_MAX_AGE, "seconds").toDate()) => {
-    const sessionId = createId();
+    const id = generateSessionId();
 
-    const now = dayjs();
-    const seconds = Math.abs(now.diff(expires, "seconds"));
+    await redis.set(id, JSON.stringify(data));
+    await redis.expireat(id, Math.floor(expires.getTime() / 1000));
 
-    await redis.setex(SESSION_REDIS_PREFIX + sessionId, seconds, data.userId);
-
-    return sessionId;
+    return id;
   },
   readData: async (id) => {
-    const userId = await redis.get(SESSION_REDIS_PREFIX + id);
-    if (!userId) {
+    const data = await redis.get(withPrefix(id));
+    if (!data) {
       return null;
     }
-
-    return { userId };
+    return JSON.parse(data);
   },
   updateData: async (id, data, expires) => {
-    const now = dayjs();
-    const seconds = Math.abs(now.diff(expires, "seconds"));
+    await redis.set(withPrefix(id), JSON.stringify(data));
 
-    await redis.setex(SESSION_REDIS_PREFIX + id, seconds, data.userId);
+    if (expires) {
+      await redis.expireat(withPrefix(id), Math.floor(expires.getTime() / 1000));
+    }
   },
   deleteData: async (id) => {
-    console.log("deleting session " + id);
-    await redis.del(SESSION_REDIS_PREFIX + id);
+    await redis.del(withPrefix(id));
   },
 });
 
