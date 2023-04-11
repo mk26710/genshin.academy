@@ -8,7 +8,7 @@ import {
   redirect,
   Response,
 } from "@remix-run/node";
-import cuid from "cuid";
+import { createId } from "@paralleldrive/cuid2";
 import dayjs from "dayjs";
 import invariant from "tiny-invariant";
 
@@ -36,7 +36,7 @@ export const sessionCookie = createCookie(SESSION_COOKIE_NAME, {
 export const sessionStorage = createSessionStorage({
   cookie: sessionCookie,
   createData: async (data, expires = dayjs().add(SESSION_MAX_AGE, "seconds").toDate()) => {
-    const sessionId = cuid();
+    const sessionId = createId();
 
     const now = dayjs();
     const seconds = Math.abs(now.diff(expires, "seconds"));
@@ -87,7 +87,7 @@ export const createUserSession = async ({
     console.log("> Visitor had a cookie with terminated session data, attempted to destroy it.");
   }
 
-  const newSession = createSession({ [SESSION_USER_KEY]: userId }, cuid());
+  const newSession = createSession({ [SESSION_USER_KEY]: userId }, createId());
   const setCookie = await sessionStorage.commitSession(newSession, {
     maxAge: remember ? SESSION_MAX_AGE : undefined,
   });
