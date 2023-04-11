@@ -38,10 +38,10 @@ export const CharacterCard: FC<CharacterCardProps> = ({
   return (
     <Wrapper
       to={to ?? ""}
-      className={clsx("daisy-card relative rounded-box bg-base-200", className)}
+      className={clsx("relative flex flex-col rounded-box bg-base-100", className)}
     >
       {element != null && (
-        <div className="absolute -top-[10px] -left-[10px] flex h-8 w-8 items-center justify-center rounded-full bg-black">
+        <div className="absolute -left-[10px] -top-[10px] flex h-8 w-8 items-center justify-center rounded-full bg-black">
           {element === "ANEMO" && <AnemoIcon className="h-5 w-5 text-[#33d7a0]" />}
           {element === "ELECTRO" && <ElectroIcon className="h-5 w-5 text-[#cc80ff]" />}
           {element === "CRYO" && <CryoIcon className="h-5 w-5 text-[#7af2f2]" />}
@@ -65,8 +65,8 @@ export const CharacterCard: FC<CharacterCardProps> = ({
         <img src={iconUrl} className="aspect-square" />
       </figure>
 
-      <div className="daisy-card-body grid place-items-center p-0">
-        <h4 className="p-0.5 text-sm font-semibold">{name}</h4>
+      <div className="mx-2 my-1.5 flex flex-col items-center justify-center">
+        <h4 className="text-center text-sm font-semibold">{name}</h4>
       </div>
     </Wrapper>
   );
