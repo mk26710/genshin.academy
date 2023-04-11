@@ -1,10 +1,12 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-env node */
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+import type { Config } from "tailwindcss";
 
-const defaultColors = require("tailwindcss/colors");
-const defaultTheme = require("tailwindcss/defaultTheme");
-const plugin = require("tailwindcss/plugin");
+import defaultColors from "tailwindcss/colors";
+import defaultTheme from "tailwindcss/defaultTheme";
+import plugin from "tailwindcss/plugin";
+import headlessui from "@headlessui/tailwindcss";
+import typography from "@tailwindcss/typography";
+import forms from "@tailwindcss/forms";
+import daisyui from "daisyui";
 
 const myColors = {
   perfume: {
@@ -42,8 +44,7 @@ const mantineDark = {
   900: "#101113",
 };
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
     "./app/root.tsx",
     "./app/routes/**/*.{js,ts,jsx,tsx}",
@@ -94,12 +95,12 @@ module.exports = {
     },
   },
   plugins: [
-    require("@headlessui/tailwindcss"),
-    require("@tailwindcss/typography"),
-    require("@tailwindcss/forms")({
+    headlessui,
+    typography,
+    forms({
       strategy: "class",
     }),
-    require("daisyui"),
+    daisyui,
     plugin(({ addVariant, addUtilities }) => {
       // Add a `active` variant, ie. `active:pb-0`
       addVariant("data-active", "&[data-active=true]");
@@ -137,4 +138,4 @@ module.exports = {
       },
     ],
   },
-};
+} satisfies Config;
