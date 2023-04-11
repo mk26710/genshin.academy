@@ -1,6 +1,7 @@
 import type { LinksFunction, LoaderArgs, SerializeFrom, V2_MetaFunction } from "@remix-run/node";
 import type { RouteHandle } from "~/types/common";
 
+import { useEffect, useState } from "react";
 import { json } from "@remix-run/node";
 import {
   Links,
@@ -22,9 +23,8 @@ import { getColorScheme } from "~/utils/color-scheme/common.server";
 import { getMessages, resolveLocale } from "~/utils/i18n.server";
 import { getUser } from "~/utils/session.server";
 
-import rootCss from "~/styles/index.css";
+import rootCss from "~/styles/main.css";
 import interCssUrl from "~/styles/inter.css";
-import { useEffect, useState } from "react";
 
 export const handle: RouteHandle = {
   id: "root",

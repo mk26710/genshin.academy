@@ -3,8 +3,6 @@
  */
 module.exports = {
   future: {
-    unstable_postcss: true,
-    unstable_tailwind: true,
     v2_routeConvention: true,
     v2_normalizeFormMethod: true,
     v2_meta: true,
