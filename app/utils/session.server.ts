@@ -217,7 +217,7 @@ export const authorizeUser = async (
   }
 
   if (result === false) {
-    throw unauthorized(typedError({ message: "Authorization failed" }));
+    throw unauthorized(typedError({ error: { message: "Authorization failed" } }));
   }
 
   return user;
