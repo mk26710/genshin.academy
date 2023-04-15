@@ -1,6 +1,9 @@
 // Source - https://github.com/Sacr3d/genshin-icons
 
+import type { Element as TeyvatElement } from "@prisma/client";
 import type { ComponentPropsWithRef, FC } from "react";
+
+import { clsx } from "clsx";
 
 type ElementIconProps = ComponentPropsWithRef<"svg">;
 
@@ -148,5 +151,39 @@ export const PyroIcon: FC<ElementIconProps> = ({
         </g>
       </g>
     </svg>
+  );
+};
+
+type AutoElementIconProps = {
+  elementName: TeyvatElement;
+} & ElementIconProps;
+
+export const AutoElementIcon: FC<AutoElementIconProps> = ({ elementName, className, ...props }) => {
+  if (!elementName) return null;
+
+  return (
+    <>
+      {elementName === "ANEMO" && (
+        <AnemoIcon {...props} className={clsx(className, "text-[#33d7a0]")} />
+      )}
+      {elementName === "ELECTRO" && (
+        <ElectroIcon {...props} className={clsx(className, "text-[#cc80ff]")} />
+      )}
+      {elementName === "CRYO" && (
+        <CryoIcon {...props} className={clsx(className, "text-[#7af2f2]")} />
+      )}
+      {elementName === "DENDRO" && (
+        <DendroIcon {...props} className={clsx(className, "text-[#9be53d]")} />
+      )}
+      {elementName === "PYRO" && (
+        <PyroIcon {...props} className={clsx(className, "text-[#ff6640]")} />
+      )}
+      {elementName === "HYDRO" && (
+        <HydroIcon {...props} className={clsx(className, "text-[#00c0ff]")} />
+      )}
+      {elementName === "GEO" && (
+        <GeoIcon {...props} className={clsx(className, "text-[#ffb00d]")} />
+      )}
+    </>
   );
 };
