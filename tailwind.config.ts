@@ -51,7 +51,7 @@ export default {
     "./app/components/**/*.{js,ts,jsx,tsx}",
   ],
   // darkMode: ["class", '[data-colour="dark"]'],
-  darkMode: ["class"],
+  darkMode: ["class", '[data-theme]="dark'],
   theme: {
     extend: {
       height: {
@@ -118,9 +118,11 @@ export default {
   ],
   daisyui: {
     prefix: "daisy-",
+    darkTheme: "dark",
     themes: [
+      "light",
       {
-        academy: {
+        dark: {
           "color-scheme": "dark",
           primary: "#C8A5FA",
           secondary: "#8161AD",

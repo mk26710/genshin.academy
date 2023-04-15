@@ -40,7 +40,7 @@ export const links: LinksFunction = () => {
 
 export const meta: V2_MetaFunction<typeof loader | undefined> = ({ data }) => [
   { title: "GENSHIN.ACADEMY" },
-  { "color-scheme": Boolean(data?.colorScheme) ? data?.colorScheme : "dark light" },
+  { "color-scheme": data?.colorScheme ? data?.colorScheme : "dark light" },
 ];
 
 export async function loader({ request }: LoaderArgs) {
@@ -78,6 +78,7 @@ function App({ locale }: { locale: string }) {
     <html
       lang={locale}
       className={clsx(colorScheme, areTransitionsEnabled === false ? "notransition" : null)}
+      data-theme={colorScheme}
     >
       <head>
         <meta charSet="utf-8" />
