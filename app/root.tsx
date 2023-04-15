@@ -76,6 +76,7 @@ function App({ locale }: { locale: string }) {
 
   return (
     <html
+      prefix="og: https://ogp.me/ns#"
       lang={locale}
       className={clsx(colorScheme, areTransitionsEnabled === false ? "notransition" : null)}
       data-theme={colorScheme}
