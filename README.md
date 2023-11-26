@@ -10,11 +10,7 @@ Tiny database, utilities and guides website for Genshin Impact players in multip
 
 ### Regular issues
 
-If you have found a bug, please, open an issue on this GitHub repository or contact us on [Discord](https://discord.gg/TgyFNhthCK).
-
-### Security issues
-
-To report a security vulnerability, please, contact **TenkoSpirit** on [Discord](https://discord.gg/TgyFNhthCK) or [Telegram](https://t.me/TenkoSpirit). Emails are unavailable for now, sorry for the inconvenience.
+If you have found a bug, please, open an issue on this GitHub repository.
 
 ## How to contribute
 
@@ -27,17 +23,17 @@ That's pretty straight forward! Clone the repo, run `yarn install` and feel free
  - Make sure added features/content doesn't use getServerSideProps or getInitialProps.
  - Don't forget about ESLint! We are using it for both formatting and linting purposes. VSCode is highly recommended.
  - If you want to add more static images, please, check out `StaticPicture` component and see how it works. Before doing anything with static images, you should run `node generatePublicWebpImages.mjs -o` to create optimized versions of added images. 
- - Feel free to ask questions on [Discord](https://discord.gg/TgyFNhthCK) or through GitHub Issues!
+ - Feel free to ask questions through GitHub Issues!
 
 ## Team
 
 <table>
     <tr>
     <td align="center">
-        <a href="https://github.com/TenkoSpirit">
-            <img src="https://github.com/TenkoSpirit.png" width="100px;" alt=""/>
+        <a href="https://github.com/LunarMelody">
+            <img src="https://github.com/LunarMelody" width="100px;" alt=""/>
             <br />
-            <b>TenkoSpirit</b>
+            <b>LunarMelody</b>
         </a>
     </td>
     </tr>
